@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>VocalIQ — Find Your Songs</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #08060F;
+    --surface: #12101A;
+    --surface2: #1C1926;
+    --accent: #A855F7;
+    --accent2: #7C3AED;
+    --gold: #F59E0B;
+    --green: #22C55E;
+    --text1: #FFFFFF;
+    --text2: rgba(255,255,255,0.65);
+    --text3: rgba(255,255,255,0.35);
+  }
+  html, body { height: 100%; background: var(--bg); color: var(--text1);
+    font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; overflow: hidden; }
+
+  .screen { display: none; flex-direction: column; align-items: center;
+    justify-content: center; min-height: 100vh; padding: 28px 24px;
+    text-align: center; position: fixed; inset: 0; overflow-y: auto; }
+  .screen.active { display: flex; }
+
+  /* ── WELCOME ── */
+  .logo { font-size: 2.8rem; margin-bottom: 8px; }
+  .app-name { font-size: 2rem; font-weight: 900; letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #A855F7, #EC4899); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; background-clip: text; }
+  .app-tagline { font-size: 0.95rem; color: var(--text2); margin: 10px 0 32px; line-height: 1.5; max-width: 280px; }
+
+  .cta-btn { background: linear-gradient(135deg, #A855F7, #7C3AED);
+    color: #fff; border: none; border-radius: 50px; padding: 18px 48px;
+    font-size: 1.05rem; font-weight: 800; cursor: pointer; letter-spacing: 0.02em;
+    box-shadow: 0 0 40px rgba(168,85,247,0.35); transition: transform 0.15s, box-shadow 0.15s; }
+  .cta-btn:active { transform: scale(0.97); box-shadow: 0 0 20px rgba(168,85,247,0.2); }
+  .cta-btn.secondary { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: none; color: var(--text2); font-size: 0.9rem; padding: 14px 36px; margin-top: 12px; }
+
+  .how-it-works { display: flex; gap: 12px; margin: 28px 0; max-width: 320px; }
+  .step { flex: 1; background: var(--surface); border-radius: 14px; padding: 16px 10px;
+    border: 1px solid rgba(255,255,255,0.07); }
+  .step-num { font-size: 1.3rem; margin-bottom: 6px; }
+  .step-txt { font-size: 0.68rem; color: var(--text2); line-height: 1.4; }
+
+  /* ── HUM TEST ── */
+  #screen-test { justify-content: flex-start; padding-top: 60px; }
+  .test-phase { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .test-title { font-size: 1.7rem; font-weight: 900; margin-bottom: 6px; line-height: 1.2; }
+  .test-sub { font-size: 0.88rem; color: var(--text2); line-height: 1.5; max-width: 280px; margin-bottom: 28px; }
+
+  .pitch-display { width: 100%; max-width: 360px; background: var(--surface);
+    border-radius: 20px; padding: 20px; margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.08); }
+  .pitch-note { font-size: 3.5rem; font-weight: 900; line-height: 1;
+    color: var(--accent); min-height: 60px; display: flex; align-items: center; justify-content: center; }
+  .pitch-hz { font-size: 0.8rem; color: var(--text3); margin-top: 4px; }
+  .pitch-bar-wrap { width: 100%; height: 8px; background: rgba(255,255,255,0.08);
+    border-radius: 4px; margin-top: 14px; overflow: hidden; }
+  .pitch-bar { height: 100%; background: linear-gradient(90deg, #7C3AED, #A855F7, #EC4899);
+    border-radius: 4px; transition: width 0.1s; width: 0%; }
+
+  .waveform-canvas { width: 100%; max-width: 360px; height: 60px;
+    border-radius: 12px; background: var(--surface); display: block; margin-bottom: 20px; }
+
+  .range-summary { width: 100%; max-width: 360px; display: flex; gap: 10px; margin-bottom: 20px; }
+  .range-box { flex: 1; background: var(--surface); border-radius: 14px; padding: 14px 10px;
+    border: 1px solid rgba(255,255,255,0.08); }
+  .range-box-label { font-size: 0.65rem; color: var(--text3); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 4px; }
+  .range-box-value { font-size: 1.3rem; font-weight: 900; color: var(--accent); min-height: 28px; }
+
+  .mic-btn { width: 88px; height: 88px; border-radius: 50%;
+    background: linear-gradient(135deg, #A855F7, #7C3AED);
+    border: none; cursor: pointer; font-size: 2rem;
+    box-shadow: 0 0 0 0 rgba(168,85,247,0.5);
+    transition: transform 0.15s; display: flex; align-items: center; justify-content: center;
+    position: relative; }
+  .mic-btn.recording { animation: pulse-ring 1.2s ease-out infinite; }
+  .mic-btn:active { transform: scale(0.95); }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(168,85,247,0.6); }
+    70% { box-shadow: 0 0 0 24px rgba(168,85,247,0); }
+    100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); }
+  }
+  .mic-label { font-size: 0.75rem; color: var(--text2); margin-top: 10px; }
+
+  .phase-dots { display: flex; gap: 8px; margin: 20px 0; }
+  .phase-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.3s; }
+  .phase-dot.done { background: var(--green); }
+  .phase-dot.active { background: var(--accent); }
+
+  /* ── RESULTS ── */
+  #screen-results { justify-content: flex-start; padding-top: 44px; padding-bottom: 60px; }
+  .results-header { width: 100%; max-width: 400px; }
+  .voice-badge { display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(124,58,237,0.2));
+    border: 1px solid rgba(168,85,247,0.4); border-radius: 50px;
+    padding: 8px 20px; font-size: 0.9rem; font-weight: 800;
+    color: var(--accent); margin-bottom: 16px; }
+  .artist-match { width: 100%; max-width: 400px; background: var(--surface);
+    border-radius: 20px; padding: 20px; margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.08); }
+  .artist-match-label { font-size: 0.65rem; color: var(--text3); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 10px; }
+  .artist-match-name { font-size: 1.5rem; font-weight: 900; }
+  .artist-match-sub { font-size: 0.78rem; color: var(--text2); margin-top: 4px; line-height: 1.4; }
+  .artist-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .artist-chip { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3);
+    border-radius: 50px; padding: 4px 12px; font-size: 0.72rem; color: var(--accent); font-weight: 600; }
+
+  .section-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--text3); margin: 20px 0 10px; width: 100%; max-width: 400px; text-align: left; }
+
+  .comparison-grid { width: 100%; max-width: 400px; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+  .comp-card { background: var(--surface); border-radius: 16px; padding: 14px;
+    border: 1px solid rgba(255,255,255,0.07); }
+  .comp-card.yours { border-color: rgba(168,85,247,0.4); background: rgba(168,85,247,0.06); }
+  .comp-card-title { font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 10px; }
+  .comp-card.yours .comp-card-title { color: var(--accent); }
+  .comp-card.generic .comp-card-title { color: var(--text3); }
+
+  .song-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .song-item { display: flex; flex-direction: column; padding: 8px 10px;
+    background: rgba(255,255,255,0.04); border-radius: 10px; }
+  .song-title { font-size: 0.75rem; font-weight: 700; line-height: 1.2; }
+  .song-artist { font-size: 0.65rem; color: var(--text3); margin-top: 2px; }
+  .song-match { font-size: 0.6rem; color: var(--green); font-weight: 700; margin-top: 2px; }
+  .song-item.generic .song-match { color: #EF4444; }
+
+  .range-bar-wrap { width: 100%; max-width: 400px; background: var(--surface);
+    border-radius: 16px; padding: 16px; margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.07); }
+  .range-bar-label { font-size: 0.65rem; color: var(--text3); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 10px; }
+  .range-bar-track { position: relative; height: 28px; background: rgba(255,255,255,0.05);
+    border-radius: 8px; overflow: visible; margin-bottom: 8px; }
+  .range-bar-fill { position: absolute; top: 4px; bottom: 4px; border-radius: 6px;
+    background: linear-gradient(90deg, #7C3AED, #A855F7, #EC4899); transition: left 0.6s, width 0.6s; }
+  .range-bar-ticks { display: flex; justify-content: space-between;
+    font-size: 0.58rem; color: var(--text3); }
+
+  .retry-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text2); border-radius: 50px; padding: 14px 36px;
+    font-size: 0.88rem; font-weight: 700; cursor: pointer; margin-top: 8px; }
+
+  .confetti-emoji { font-size: 2.5rem; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: WELCOME -->
+<div id="screen-welcome" class="screen active">
+  <div class="logo">🎤</div>
+  <div class="app-name">VocalIQ</div>
+  <div class="app-tagline">Hum 3 notes. We map your voice.<br>Get the exact songs you'll sound great on.</div>
+
+  <div class="how-it-works">
+    <div class="step">
+      <div class="step-num">🎵</div>
+      <div class="step-txt">Hum low, mid, and high for 3 seconds each</div>
+    </div>
+    <div class="step">
+      <div class="step-num">🧬</div>
+      <div class="step-txt">We analyze your range and vocal color</div>
+    </div>
+    <div class="step">
+      <div class="step-num">🎯</div>
+      <div class="step-txt">Get matched to songs and artists made for your voice</div>
+    </div>
+  </div>
+
+  <button class="cta-btn" onclick="startTest()">Find My Songs →</button>
+  <button class="cta-btn secondary" onclick="showScreen('screen-results-demo')">See a Demo</button>
+</div>
+
+<!-- SCREEN 2: HUM TEST -->
+<div id="screen-test" class="screen">
+  <div class="test-phase" id="phase-label">PHASE 1 OF 3</div>
+  <div class="test-title" id="phase-title">Hum your lowest note</div>
+  <div class="test-sub" id="phase-sub">Go as low as you comfortably can and hold it steady</div>
+
+  <div class="pitch-display">
+    <div class="pitch-note" id="pitch-note">—</div>
+    <div class="pitch-hz" id="pitch-hz">waiting for signal…</div>
+    <div class="pitch-bar-wrap"><div class="pitch-bar" id="pitch-bar"></div></div>
+  </div>
+
+  <canvas class="waveform-canvas" id="waveform-canvas" width="360" height="60"></canvas>
+
+  <div class="range-summary">
+    <div class="range-box">
+      <div class="range-box-label">Lowest</div>
+      <div class="range-box-value" id="low-note">—</div>
+    </div>
+    <div class="range-box">
+      <div class="range-box-label">Middle</div>
+      <div class="range-box-value" id="mid-note">—</div>
+    </div>
+    <div class="range-box">
+      <div class="range-box-label">Highest</div>
+      <div class="range-box-value" id="high-note">—</div>
+    </div>
+  </div>
+
+  <div class="phase-dots">
+    <div class="phase-dot active" id="dot-0"></div>
+    <div class="phase-dot" id="dot-1"></div>
+    <div class="phase-dot" id="dot-2"></div>
+  </div>
+
+  <button class="mic-btn" id="mic-btn" onclick="toggleCapture()">🎤</button>
+  <div class="mic-label" id="mic-label">Tap to start humming</div>
+</div>
+
+<!-- SCREEN 3: RESULTS -->
+<div id="screen-results" class="screen">
+  <div class="results-header">
+    <div class="confetti-emoji" id="result-emoji">🎉</div>
+    <div class="voice-badge" id="voice-badge">⚡ Loading…</div>
+    <div style="font-size:0.9rem;color:var(--text2);margin-bottom:4px;" id="range-text"></div>
+  </div>
+
+  <div class="range-bar-wrap" id="range-bar-section">
+    <div class="range-bar-label">Your Vocal Range</div>
+    <div class="range-bar-track">
+      <div class="range-bar-fill" id="range-bar-fill" style="left:20%;width:40%;"></div>
+    </div>
+    <div class="range-bar-ticks">
+      <span>E1</span><span>A2</span><span>E3</span><span>A4</span><span>E5</span><span>C7</span>
+    </div>
+  </div>
+
+  <div class="artist-match" id="artist-match-card">
+    <div class="artist-match-label">🎙 Your Closest Artist Match</div>
+    <div class="artist-match-name" id="match-name">—</div>
+    <div class="artist-match-sub" id="match-sub">—</div>
+    <div class="artist-chips" id="match-chips"></div>
+  </div>
+
+  <div class="section-title">YOUR PICKS VS A GENERIC LIST</div>
+  <div class="comparison-grid">
+    <div class="comp-card yours">
+      <div class="comp-card-title">✅ Your Songs</div>
+      <ul class="song-list" id="your-songs"></ul>
+    </div>
+    <div class="comp-card generic">
+      <div class="comp-card-title">❌ Typical List</div>
+      <ul class="song-list" id="generic-songs"></ul>
+    </div>
+  </div>
+  <div style="font-size:0.68rem;color:var(--text3);max-width:360px;line-height:1.5;margin-top:4px;">
+    Red = songs likely outside your range. Green = matched to your voice.
+  </div>
+
+  <button class="retry-btn" onclick="resetTest()" style="margin-top:24px;">🔄 Test Again</button>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// ARTIST DATABASE — range + timbre profile
+// Fields: name, emoji, lowNote (MIDI), highNote (MIDI), brightness (0-100, higher=brighter/lighter), tags
+// MIDI note: C4=60, A2=45, etc.
+// ════════════════════════════════════════════════════════════
+const ARTISTS = [
+  { name:'Barry White',    emoji:'🕺', low:36, high:55, brightness:18, type:'Bass',           tags:['soulful','warm','smooth'],     songs:['Can\'t Get Enough','Never Never Gonna Give Ya Up','You\'re the First'] },
+  { name:'Johnny Cash',    emoji:'🤠', low:38, high:57, brightness:22, type:'Bass-Baritone',  tags:['country','iconic','deep'],      songs:['Ring of Fire','Walk the Line','Hurt (NIN cover)'] },
+  { name:'Elvis Presley',  emoji:'👑', low:40, high:65, brightness:38, type:'Baritone',       tags:['rock','classic','smooth'],      songs:['Can\'t Help Falling in Love','Suspicious Minds','Jailhouse Rock'] },
+  { name:'Frank Sinatra',  emoji:'🎩', low:40, high:64, brightness:35, type:'Baritone',       tags:['jazz','classic','storyteller'], songs:['My Way','Fly Me to the Moon','New York New York'] },
+  { name:'Leonard Cohen',  emoji:'📖', low:36, high:56, brightness:20, type:'Bass-Baritone',  tags:['poetic','dark','indie'],        songs:['Hallelujah','Suzanne','Everybody Knows'] },
+  { name:'Chris Stapleton',emoji:'🎸', low:40, high:67, brightness:42, type:'Baritone',       tags:['country','soulful','gritty'],   songs:['Tennessee Whiskey','Broken Halos','Fire Away'] },
+  { name:'Ed Sheeran',     emoji:'🎶', low:43, high:74, brightness:55, type:'Tenor',          tags:['pop','folk','intimate'],        songs:['Shape of You','Thinking Out Loud','Perfect'] },
+  { name:'Bruno Mars',     emoji:'🌟', low:45, high:76, brightness:68, type:'Tenor',          tags:['pop','funk','smooth'],          songs:['Just the Way You Are','Uptown Funk','Grenade'] },
+  { name:'John Legend',    emoji:'🎹', low:43, high:72, brightness:60, type:'Tenor',          tags:['R&B','soulful','smooth'],       songs:['All of Me','Ordinary People','Love Me Now'] },
+  { name:'Freddie Mercury',emoji:'🎭', low:44, high:77, brightness:72, type:'Tenor',          tags:['rock','operatic','theatrical'], songs:['Bohemian Rhapsody','Don\'t Stop Me Now','Somebody to Love'] },
+  { name:'Justin Timberlake',emoji:'💃',low:45, high:76, brightness:70, type:'Tenor',         tags:['pop','R&B','falsetto'],         songs:['Mirrors','Can\'t Stop the Feeling','SexyBack'] },
+  { name:'Michael Jackson',emoji:'🕺', low:46, high:76, brightness:73, type:'Tenor',          tags:['pop','iconic','energetic'],     songs:['Billie Jean','Thriller','Man in the Mirror'] },
+  { name:'Amy Winehouse',  emoji:'🍷', low:50, high:72, brightness:48, type:'Contralto',      tags:['jazz','soul','raw'],            songs:['Rehab','Back to Black','Valerie'] },
+  { name:'Adele',          emoji:'🔥', low:50, high:74, brightness:52, type:'Mezzo-soprano',  tags:['power','emotional','soulful'],  songs:['Hello','Rolling in the Deep','Someone Like You'] },
+  { name:'Amy Lee',        emoji:'🖤', low:48, high:76, brightness:45, type:'Mezzo-soprano',  tags:['rock','dark','operatic'],       songs:['Bring Me to Life','My Immortal','Lithium'] },
+  { name:'P!nk',           emoji:'💥', low:49, high:76, brightness:62, type:'Mezzo-soprano',  tags:['rock','pop','powerful'],        songs:['Just Give Me a Reason','Try','Raise Your Glass'] },
+  { name:'Taylor Swift',   emoji:'✨', low:52, high:77, brightness:65, type:'Mezzo-soprano',  tags:['pop','country','storyteller'],  songs:['Love Story','Anti-Hero','Shake It Off'] },
+  { name:'Katy Perry',     emoji:'🎪', low:51, high:76, brightness:67, type:'Mezzo-soprano',  tags:['pop','upbeat','fun'],           songs:['Roar','Firework','Dark Horse'] },
+  { name:'Kelly Clarkson', emoji:'🏆', low:52, high:80, brightness:70, type:'Mezzo-soprano',  tags:['pop','powerhouse','clear'],     songs:['Since U Been Gone','Stronger','Piece by Piece'] },
+  { name:'Celine Dion',    emoji:'🌹', low:52, high:83, brightness:75, type:'Soprano',        tags:['power','romantic','operatic'],  songs:['My Heart Will Go On','The Power of Love','Because You Loved Me'] },
+  { name:'Ariana Grande',  emoji:'🌙', low:54, high:90, brightness:85, type:'Soprano',        tags:['pop','whistle','light'],        songs:['Thank U Next','Problem','Into You'] },
+  { name:'Whitney Houston',emoji:'👸', low:52, high:83, brightness:78, type:'Soprano',        tags:['power','gospel','iconic'],      songs:['I Will Always Love You','Greatest Love of All','I Wanna Dance'] },
+  { name:'Billie Eilish',  emoji:'🌿', low:50, high:72, brightness:40, type:'Mezzo-soprano',  tags:['indie','whispery','dark'],      songs:['Bad Guy','Happier Than Ever','Ocean Eyes'] },
+  { name:'Lizzo',          emoji:'💜', low:52, high:80, brightness:75, type:'Mezzo-soprano',  tags:['pop','powerful','joyful'],      songs:['Truth Hurts','Juice','Good as Hell'] },
+];
+
+// ════════════════════════════════════════════════════════════
+// SONG DATABASE — title, artist, loNote (MIDI), hiNote (MIDI), brightness
+// ════════════════════════════════════════════════════════════
+const SONGS = [
+  // Bass / Deep Baritone
+  { title:'Ring of Fire',            artist:'Johnny Cash',       lo:38, hi:57, brightness:22 },
+  { title:'Hurt',                    artist:'Johnny Cash',       lo:38, hi:55, brightness:20 },
+  { title:'Walk the Line',           artist:'Johnny Cash',       lo:40, hi:55, brightness:22 },
+  { title:'Can\'t Get Enough',       artist:'Barry White',       lo:36, hi:53, brightness:18 },
+  { title:'My Way',                  artist:'Frank Sinatra',     lo:40, hi:62, brightness:35 },
+  { title:'Fly Me to the Moon',      artist:'Frank Sinatra',     lo:42, hi:62, brightness:35 },
+  { title:'New York New York',       artist:'Frank Sinatra',     lo:42, hi:64, brightness:36 },
+  { title:'Hallelujah',              artist:'Leonard Cohen',     lo:36, hi:56, brightness:20 },
+  { title:'Everybody Knows',         artist:'Leonard Cohen',     lo:38, hi:56, brightness:20 },
+  { title:'Can\'t Help Falling in Love', artist:'Elvis Presley', lo:42, hi:62, brightness:38 },
+  { title:'Suspicious Minds',        artist:'Elvis Presley',     lo:40, hi:63, brightness:38 },
+  // Baritone
+  { title:'Tennessee Whiskey',       artist:'Chris Stapleton',   lo:40, hi:67, brightness:42 },
+  { title:'Broken Halos',            artist:'Chris Stapleton',   lo:41, hi:65, brightness:40 },
+  { title:'Fire Away',               artist:'Chris Stapleton',   lo:42, hi:66, brightness:42 },
+  { title:'Fast Car',                artist:'Tracy Chapman',     lo:47, hi:67, brightness:45 },
+  { title:'Hotel California',        artist:'Eagles',            lo:44, hi:67, brightness:40 },
+  { title:'Sweet Home Alabama',      artist:'Lynyrd Skynyrd',    lo:42, hi:65, brightness:38 },
+  { title:'Country Roads',           artist:'John Denver',       lo:44, hi:67, brightness:50 },
+  { title:'With or Without You',     artist:'U2',                lo:43, hi:67, brightness:45 },
+  { title:'Wonderwall',              artist:'Oasis',             lo:44, hi:66, brightness:45 },
+  // Tenor
+  { title:'Shape of You',            artist:'Ed Sheeran',        lo:45, hi:70, brightness:55 },
+  { title:'Thinking Out Loud',       artist:'Ed Sheeran',        lo:45, hi:72, brightness:56 },
+  { title:'Perfect',                 artist:'Ed Sheeran',        lo:45, hi:72, brightness:55 },
+  { title:'Just the Way You Are',    artist:'Bruno Mars',        lo:46, hi:72, brightness:68 },
+  { title:'Grenade',                 artist:'Bruno Mars',        lo:46, hi:72, brightness:67 },
+  { title:'Uptown Funk',             artist:'Bruno Mars',        lo:46, hi:74, brightness:70 },
+  { title:'All of Me',               artist:'John Legend',       lo:43, hi:70, brightness:60 },
+  { title:'Ordinary People',         artist:'John Legend',       lo:43, hi:69, brightness:58 },
+  { title:'Shallow',                 artist:'A Star is Born',    lo:46, hi:74, brightness:60 },
+  { title:'Stay With Me',            artist:'Sam Smith',         lo:47, hi:74, brightness:60 },
+  { title:'In the Air Tonight',      artist:'Phil Collins',      lo:44, hi:68, brightness:45 },
+  { title:'Bohemian Rhapsody',       artist:'Queen',             lo:44, hi:77, brightness:72 },
+  { title:'Don\'t Stop Me Now',      artist:'Queen',             lo:45, hi:76, brightness:73 },
+  { title:'Billie Jean',             artist:'Michael Jackson',   lo:47, hi:72, brightness:73 },
+  { title:'Thriller',                artist:'Michael Jackson',   lo:46, hi:71, brightness:72 },
+  { title:'Man in the Mirror',       artist:'Michael Jackson',   lo:47, hi:72, brightness:73 },
+  { title:'Can\'t Stop the Feeling', artist:'Justin Timberlake', lo:47, hi:74, brightness:72 },
+  { title:'Mirrors',                 artist:'Justin Timberlake', lo:46, hi:75, brightness:70 },
+  { title:'Levitating',              artist:'Dua Lipa',          lo:50, hi:73, brightness:68 },
+  { title:'Blinding Lights',         artist:'The Weeknd',        lo:47, hi:76, brightness:68 },
+  // Mezzo / Alto
+  { title:'Rolling in the Deep',     artist:'Adele',             lo:50, hi:74, brightness:52 },
+  { title:'Someone Like You',        artist:'Adele',             lo:50, hi:72, brightness:50 },
+  { title:'Hello',                   artist:'Adele',             lo:50, hi:74, brightness:52 },
+  { title:'Rehab',                   artist:'Amy Winehouse',     lo:50, hi:70, brightness:48 },
+  { title:'Back to Black',           artist:'Amy Winehouse',     lo:50, hi:68, brightness:46 },
+  { title:'Valerie',                 artist:'Amy Winehouse',     lo:50, hi:70, brightness:48 },
+  { title:'Since U Been Gone',       artist:'Kelly Clarkson',    lo:52, hi:78, brightness:70 },
+  { title:'Stronger',                artist:'Kelly Clarkson',    lo:52, hi:79, brightness:70 },
+  { title:'Roar',                    artist:'Katy Perry',        lo:52, hi:76, brightness:67 },
+  { title:'Firework',                artist:'Katy Perry',        lo:52, hi:76, brightness:67 },
+  { title:'Love Story',              artist:'Taylor Swift',      lo:52, hi:74, brightness:65 },
+  { title:'Anti-Hero',               artist:'Taylor Swift',      lo:52, hi:73, brightness:63 },
+  { title:'Shake It Off',            artist:'Taylor Swift',      lo:52, hi:74, brightness:66 },
+  { title:'Raise Your Glass',        artist:'P!nk',              lo:50, hi:76, brightness:62 },
+  { title:'Just Give Me a Reason',   artist:'P!nk',              lo:50, hi:76, brightness:62 },
+  { title:'Bad Guy',                 artist:'Billie Eilish',     lo:50, hi:68, brightness:40 },
+  { title:'Ocean Eyes',              artist:'Billie Eilish',     lo:50, hi:70, brightness:42 },
+  { title:'Good as Hell',            artist:'Lizzo',             lo:52, hi:78, brightness:75 },
+  { title:'Truth Hurts',             artist:'Lizzo',             lo:52, hi:76, brightness:73 },
+  // Soprano
+  { title:'My Heart Will Go On',     artist:'Celine Dion',       lo:52, hi:80, brightness:75 },
+  { title:'The Power of Love',       artist:'Celine Dion',       lo:52, hi:82, brightness:75 },
+  { title:'I Will Always Love You',  artist:'Whitney Houston',   lo:52, hi:82, brightness:78 },
+  { title:'I Wanna Dance',           artist:'Whitney Houston',   lo:53, hi:80, brightness:77 },
+  { title:'Thank U Next',            artist:'Ariana Grande',     lo:54, hi:84, brightness:85 },
+  { title:'Into You',                artist:'Ariana Grande',     lo:54, hi:82, brightness:84 },
+  { title:'Problem',                 artist:'Ariana Grande',     lo:54, hi:80, brightness:83 },
+  // Crowd-pleasers / wide range
+  { title:'Livin\' on a Prayer',     artist:'Bon Jovi',          lo:45, hi:74, brightness:60 },
+  { title:'Don\'t Stop Believin\'',  artist:'Journey',           lo:46, hi:74, brightness:60 },
+  { title:'Sweet Caroline',          artist:'Neil Diamond',      lo:44, hi:68, brightness:50 },
+  { title:'Piano Man',               artist:'Billy Joel',        lo:43, hi:68, brightness:48 },
+  { title:'Brown Eyed Girl',         artist:'Van Morrison',      lo:44, hi:67, brightness:50 },
+  { title:'Africa',                  artist:'Toto',              lo:45, hi:70, brightness:55 },
+  { title:'Total Eclipse of the Heart', artist:'Bonnie Tyler',   lo:49, hi:76, brightness:55 },
+  { title:'Roxanne',                 artist:'The Police',        lo:46, hi:72, brightness:58 },
+];
+
+// Generic karaoke list (what a typical random shuffle gives you)
+const GENERIC_LIST = [
+  { title:'Bohemian Rhapsody',        artist:'Queen' },
+  { title:'I Will Always Love You',   artist:'Whitney Houston' },
+  { title:'Don\'t Stop Believin\'',   artist:'Journey' },
+  { title:'Livin\' on a Prayer',      artist:'Bon Jovi' },
+  { title:'Total Eclipse of the Heart', artist:'Bonnie Tyler' },
+  { title:'Shallow',                  artist:'A Star is Born' },
+  { title:'My Heart Will Go On',      artist:'Celine Dion' },
+  { title:'Thank U Next',             artist:'Ariana Grande' },
+  { title:'Bohemian Rhapsody',        artist:'Queen' },
+  { title:'Rolling in the Deep',      artist:'Adele' },
+];
+
+// ════════════════════════════════════════════════════════════
+// MIDI helpers
+// ════════════════════════════════════════════════════════════
+const NOTE_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+function midiToName(midi) {
+  const oct = Math.floor(midi / 12) - 1;
+  return NOTE_NAMES[midi % 12] + oct;
+}
+function freqToMidi(hz) {
+  return Math.round(12 * Math.log2(hz / 440) + 69);
+}
+
+// ════════════════════════════════════════════════════════════
+// PITCH DETECTION — autocorrelation
+// ════════════════════════════════════════════════════════════
+function detectPitch(buf, sampleRate) {
+  const SIZE = buf.length;
+  const MAX_SAMPLES = Math.floor(SIZE / 2);
+  let best = -1, bestCorr = 0, lastCorr = 1;
+  let found = false;
+
+  for (let t = 0; t < MAX_SAMPLES; t++) {
+    let corr = 0;
+    for (let i = 0; i < MAX_SAMPLES; i++) corr += buf[i] * buf[i + t];
+    corr = corr / MAX_SAMPLES;
+    if (lastCorr > 0.9 && corr < lastCorr) {
+      if (!found) found = true;
+    }
+    if (found && corr > bestCorr) { bestCorr = corr; best = t; }
+    lastCorr = corr;
+    if (found && bestCorr > 0.97) break;
+  }
+  if (!found || best < 1) return -1;
+  // Refine with parabolic interpolation
+  const prev = best - 1 < 0 ? 0 : best - 1;
+  const next = best + 1 >= MAX_SAMPLES ? MAX_SAMPLES - 1 : best + 1;
+  const a = lastCorr, b = bestCorr;
+  const refined = best + (0.5 * (a - (buf[next] || 0)) / (a - 2 * b + (buf[next] || 0)));
+  return sampleRate / refined;
+}
+
+// Spectral centroid — proxy for brightness/timbre
+function spectralCentroid(freqData) {
+  let num = 0, denom = 0;
+  for (let i = 0; i < freqData.length; i++) {
+    const mag = freqData[i] / 255;
+    num += i * mag;
+    denom += mag;
+  }
+  return denom > 0 ? num / denom : 0;
+}
+
+// ════════════════════════════════════════════════════════════
+// APP STATE
+// ════════════════════════════════════════════════════════════
+let audioCtx = null, analyser = null, source = null, stream = null;
+let phase = 0; // 0=low, 1=mid, 2=high
+let capturing = false;
+let captureTimer = null;
+let capturedNotes = [null, null, null];        // MIDI notes
+let capturedBrightness = [null, null, null];   // 0-100
+let waveRaf = null;
+
+const PHASES = [
+  { label:'PHASE 1 OF 3', title:'Hum your lowest note', sub:'Go as low as you comfortably can and hold it steady for 3 seconds' },
+  { label:'PHASE 2 OF 3', title:'Hum a comfortable middle note', sub:'Just hum at your most natural, relaxed pitch' },
+  { label:'PHASE 3 OF 3', title:'Hum your highest note', sub:'Reach as high as you comfortably can and hold it for 3 seconds' },
+];
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+async function startTest() {
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch(e) {
+    alert('Microphone access is required. Please allow mic access and try again.');
+    return;
+  }
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 4096;
+  source = audioCtx.createMediaStreamSource(stream);
+  source.connect(analyser);
+
+  phase = 0;
+  capturedNotes = [null, null, null];
+  capturedBrightness = [null, null, null];
+  capturing = false;
+
+  updatePhaseUI();
+  showScreen('screen-test');
+  startWaveform();
+}
+
+function updatePhaseUI() {
+  const p = PHASES[phase];
+  document.getElementById('phase-label').textContent = p.label;
+  document.getElementById('phase-title').textContent = p.title;
+  document.getElementById('phase-sub').textContent = p.sub;
+  document.getElementById('mic-label').textContent = 'Tap to start humming';
+  document.getElementById('mic-btn').classList.remove('recording');
+  [0,1,2].forEach(i => {
+    const dot = document.getElementById('dot-'+i);
+    dot.classList.remove('active','done');
+    if (i < phase) dot.classList.add('done');
+    if (i === phase) dot.classList.add('active');
+  });
+}
+
+function toggleCapture() {
+  if (capturing) return; // prevent double tap
+  capturing = true;
+  document.getElementById('mic-btn').classList.add('recording');
+  document.getElementById('mic-label').textContent = 'Hold steady… 3 seconds';
+
+  const pitches = [];
+  const brightnesses = [];
+  const buf = new Float32Array(analyser.fftSize);
+  const freqBuf = new Uint8Array(analyser.frequencyBinCount);
+
+  const interval = setInterval(() => {
+    analyser.getFloatTimeDomainData(buf);
+    analyser.getByteFrequencyData(freqBuf);
+
+    // Check signal level
+    let rms = 0;
+    for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
+    rms = Math.sqrt(rms / buf.length);
+    if (rms < 0.01) return; // too quiet
+
+    const freq = detectPitch(buf, audioCtx.sampleRate);
+    if (freq > 60 && freq < 1400) {
+      const midi = freqToMidi(freq);
+      pitches.push(midi);
+      brightnesses.push(spectralCentroid(freqBuf));
+
+      const note = midiToName(midi);
+      document.getElementById('pitch-note').textContent = note;
+      document.getElementById('pitch-hz').textContent = Math.round(freq) + ' Hz';
+      // Bar: map 36-90 MIDI to 0-100%
+      const pct = Math.min(100, Math.max(0, ((midi - 36) / 54) * 100));
+      document.getElementById('pitch-bar').style.width = pct + '%';
+    }
+  }, 100);
+
+  captureTimer = setTimeout(() => {
+    clearInterval(interval);
+    capturing = false;
+    document.getElementById('mic-btn').classList.remove('recording');
+
+    if (pitches.length < 3) {
+      document.getElementById('mic-label').textContent = 'Couldn\'t detect pitch — try again';
+      document.getElementById('pitch-note').textContent = '?';
+      return;
+    }
+
+    // Median pitch for stability
+    pitches.sort((a, b) => a - b);
+    const median = pitches[Math.floor(pitches.length / 2)];
+    capturedNotes[phase] = median;
+
+    const avgBrightness = brightnesses.reduce((a, b) => a + b, 0) / brightnesses.length;
+    // Normalize centroid to 0-100 scale (centroid is 0-analyser.frequencyBinCount/2)
+    const normBrightness = Math.min(100, Math.round((avgBrightness / (analyser.frequencyBinCount / 8)) * 100));
+    capturedBrightness[phase] = normBrightness;
+
+    // Update range display
+    const ids = ['low-note', 'mid-note', 'high-note'];
+    document.getElementById(ids[phase]).textContent = midiToName(median);
+
+    if (phase < 2) {
+      phase++;
+      document.getElementById('mic-label').textContent = '✓ Got it! Next phase ready';
+      setTimeout(updatePhaseUI, 700);
+    } else {
+      // All 3 phases done
+      document.getElementById('mic-label').textContent = '🎉 All done! Computing results…';
+      setTimeout(showResults, 900);
+    }
+  }, 3000);
+}
+
+function startWaveform() {
+  const canvas = document.getElementById('waveform-canvas');
+  const ctx = canvas.getContext('2d');
+  const buf = new Float32Array(analyser ? analyser.fftSize : 512);
+
+  function draw() {
+    waveRaf = requestAnimationFrame(draw);
+    if (!analyser) return;
+    analyser.getFloatTimeDomainData(buf);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(168,85,247,0.7)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    const sliceW = canvas.width / buf.length;
+    let x = 0;
+    for (let i = 0; i < buf.length; i++) {
+      const y = (buf[i] + 1) / 2 * canvas.height;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      x += sliceW;
+    }
+    ctx.stroke();
+  }
+  draw();
+}
+
+function showResults() {
+  if (waveRaf) { cancelAnimationFrame(waveRaf); waveRaf = null; }
+  if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+  if (audioCtx) { audioCtx.close(); audioCtx = null; }
+
+  // Determine user's range
+  const notes = capturedNotes.filter(n => n !== null);
+  if (notes.length < 2) { showScreen('screen-welcome'); return; }
+
+  const userLow  = Math.min(...notes) - 2;  // a little buffer
+  const userHigh = Math.max(...notes) + 2;
+  const userBrightness = capturedBrightness.filter(b => b !== null).reduce((a, b) => a + b, 0) /
+                         capturedBrightness.filter(b => b !== null).length;
+
+  // Determine voice type
+  let voiceType = 'Baritone';
+  const span = userHigh - userLow;
+  if (userLow <= 40 && userHigh <= 62) voiceType = 'Bass';
+  else if (userLow <= 43 && userHigh <= 68) voiceType = 'Bass-Baritone';
+  else if (userLow <= 47 && userHigh <= 72) voiceType = 'Baritone';
+  else if (userLow <= 51 && userHigh <= 76) voiceType = 'Tenor';
+  else if (userLow >= 48 && userLow <= 54 && userHigh <= 72) voiceType = 'Alto/Contralto';
+  else if (userLow >= 50 && userHigh <= 76) voiceType = 'Mezzo-soprano';
+  else if (userLow >= 52 && userHigh >= 76) voiceType = 'Soprano';
+  else if (userHigh >= 74) voiceType = 'Tenor';
+
+  const typeEmoji = { 'Bass':'🔊','Bass-Baritone':'🎸','Baritone':'🎭','Tenor':'🌟','Alto/Contralto':'🍷','Mezzo-soprano':'🔥','Soprano':'✨' };
+
+  // Find closest artist match (range overlap + brightness similarity)
+  const scored = ARTISTS.map(a => {
+    const overlapLo = Math.max(userLow, a.low);
+    const overlapHi = Math.min(userHigh, a.high);
+    const overlap = Math.max(0, overlapHi - overlapLo);
+    const rangeCover = overlap / Math.max(1, a.high - a.low);
+    const brightnessDiff = Math.abs(userBrightness - a.brightness) / 100;
+    const score = rangeCover * 0.7 + (1 - brightnessDiff) * 0.3;
+    return { ...a, score };
+  }).sort((a, b) => b.score - a.score);
+
+  const topArtist = scored[0];
+  const topArtists = scored.slice(0, 4);
+
+  // Match songs to user range + brightness
+  const matchedSongs = SONGS
+    .map(s => {
+      const overlapLo = Math.max(userLow, s.lo);
+      const overlapHi = Math.min(userHigh, s.hi);
+      const overlap = Math.max(0, overlapHi - overlapLo);
+      const rangeFit = overlap / Math.max(1, s.hi - s.lo);
+      const brightFit = 1 - Math.abs(userBrightness - s.brightness) / 100;
+      return { ...s, score: rangeFit * 0.65 + brightFit * 0.35 };
+    })
+    .filter(s => s.score > 0.45)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8);
+
+  // Evaluate generic list against user range
+  const genericEval = GENERIC_LIST.map(gs => {
+    const found = SONGS.find(s => s.title === gs.title);
+    if (!found) return { ...gs, fits: false };
+    const overlapLo = Math.max(userLow, found.lo);
+    const overlapHi = Math.min(userHigh, found.hi);
+    const overlap = Math.max(0, overlapHi - overlapLo);
+    const fits = overlap / Math.max(1, found.hi - found.lo) > 0.5;
+    return { ...gs, fits };
+  }).slice(0, 6);
+
+  // ── RENDER ──
+  document.getElementById('voice-badge').innerHTML = `${typeEmoji[voiceType] || '🎤'} ${voiceType}`;
+  document.getElementById('result-emoji').textContent = topArtist.emoji || '🎉';
+  document.getElementById('range-text').textContent =
+    `${midiToName(userLow)} – ${midiToName(userHigh)} · ${span} semitone range`;
+
+  // Range bar
+  const fullSpan = 90 - 36;
+  const leftPct = ((userLow - 36) / fullSpan * 100).toFixed(1);
+  const widthPct = (((userHigh - userLow)) / fullSpan * 100).toFixed(1);
+  document.getElementById('range-bar-fill').style.left = leftPct + '%';
+  document.getElementById('range-bar-fill').style.width = widthPct + '%';
+
+  // Artist match
+  document.getElementById('match-name').textContent = topArtist.name;
+  document.getElementById('match-sub').textContent =
+    `Your range and vocal color most closely match ${topArtist.name}'s profile. ` +
+    `${Math.round(topArtist.score * 100)}% voice compatibility.`;
+  const chipsEl = document.getElementById('match-chips');
+  chipsEl.innerHTML = topArtists.map(a =>
+    `<span class="artist-chip">${a.emoji} ${a.name}</span>`).join('');
+
+  // Your songs
+  const yourSongsEl = document.getElementById('your-songs');
+  yourSongsEl.innerHTML = matchedSongs.slice(0, 6).map(s =>
+    `<li class="song-item"><span class="song-title">${s.title}</span>
+     <span class="song-artist">${s.artist}</span>
+     <span class="song-match">✓ ${Math.round(s.score * 100)}% match</span></li>`).join('');
+
+  // Generic list
+  const genericEl = document.getElementById('generic-songs');
+  genericEl.innerHTML = genericEval.map(s =>
+    `<li class="song-item ${s.fits ? '' : 'generic'}">
+      <span class="song-title">${s.title}</span>
+      <span class="song-artist">${s.artist}</span>
+      <span class="song-match" style="color:${s.fits ? 'var(--green)' : '#EF4444'}">
+        ${s.fits ? '✓ In your range' : '✗ Out of range'}
+      </span></li>`).join('');
+
+  showScreen('screen-results');
+}
+
+function resetTest() {
+  phase = 0;
+  capturedNotes = [null, null, null];
+  capturedBrightness = [null, null, null];
+  document.getElementById('low-note').textContent = '—';
+  document.getElementById('mid-note').textContent = '—';
+  document.getElementById('high-note').textContent = '—';
+  document.getElementById('pitch-note').textContent = '—';
+  document.getElementById('pitch-hz').textContent = 'waiting for signal…';
+  document.getElementById('pitch-bar').style.width = '0%';
+  startTest();
+}
+</script>
+</body>
+</html>
