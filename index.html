@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>VocalIQ — Find Your Songs</title>
+<title>HumMatch — Find Your Songs</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   :root {
@@ -54,7 +54,7 @@
   /* ── HUM TEST ── */
   #screen-test { justify-content: flex-start; padding-top: 60px; padding-bottom: 60px; }
   .mic-footer { display: flex; flex-direction: column; align-items: center;
-    padding: 28px 0 0; width: 100%; }
+    padding: 24px 0 0; width: 100%; gap: 8px; }
   .test-phase { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
   .test-title { font-size: 1.7rem; font-weight: 900; margin-bottom: 6px; line-height: 1.2; }
@@ -94,7 +94,7 @@
     70% { box-shadow: 0 0 0 24px rgba(168,85,247,0); }
     100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); }
   }
-  .mic-label { font-size: 0.75rem; color: var(--text2); margin-top: 10px; }
+  .mic-label { font-size: 0.75rem; color: var(--text2); margin-top: 0; }
 
   .phase-dots { display: flex; gap: 8px; margin: 20px 0; }
   .phase-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.3s; }
@@ -226,6 +226,7 @@
   <div class="mic-footer">
     <button class="mic-btn" id="mic-btn" onclick="toggleCapture()">🎤</button>
     <div class="mic-label" id="mic-label">Tap and hum</div>
+
   </div>
 </div>
 
@@ -469,9 +470,9 @@ let capturedBrightness = [null, null, null];   // 0-100
 let waveRaf = null;
 
 const PHASES = [
-  { label:'PHASE 1 OF 3', title:'Hum your lowest note', sub:'Go as low as you comfortably can and hold it steady for 3 seconds' },
+  { label:'PHASE 1 OF 3', title:'Hum your lowest note', sub:'Go as low as you comfortably can and hold it steady' },
   { label:'PHASE 2 OF 3', title:'Hum a comfortable middle note', sub:'Just hum at your most natural, relaxed pitch' },
-  { label:'PHASE 3 OF 3', title:'Hum your highest note', sub:'Reach as high as you comfortably can and hold it for 3 seconds' },
+  { label:'PHASE 3 OF 3', title:'Hum your highest note', sub:'Reach as high as you comfortably can and hold it steady' },
 ];
 
 function showScreen(id) {
