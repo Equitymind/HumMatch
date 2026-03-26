@@ -670,6 +670,11 @@ function showResults() {
     })
     .filter(s => s.score > 0.45)
     .sort((a, b) => b.score - a.score)
+    .reduce((acc, s) => {
+      const artistCount = acc.filter(x => x.artist === s.artist).length;
+      if (artistCount < 2) acc.push(s);
+      return acc;
+    }, [])
     .slice(0, 8);
 
   // Evaluate generic list against user range
