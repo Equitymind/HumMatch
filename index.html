@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>VocalIQ — Find Your Songs</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -19,7 +19,8 @@
     --text3: rgba(255,255,255,0.35);
   }
   html, body { min-height: 100%; background: var(--bg); color: var(--text1);
-    font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; overflow-y: auto; }
+    font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; overflow-y: auto;
+    -webkit-overflow-scrolling: touch; }
 
   .screen { display: none; flex-direction: column; align-items: center;
     justify-content: flex-start; min-height: 100vh; padding: 48px 24px 60px;
