@@ -222,7 +222,7 @@
 
   <div class="mic-footer">
     <button class="mic-btn" id="mic-btn" onclick="toggleCapture()">🎤</button>
-    <div class="mic-label" id="mic-label">TAP, THEN HOLD &amp; HUM</div>
+    <div class="mic-label" id="mic-label">Tap and hum</div>
   </div>
 </div>
 
@@ -504,7 +504,7 @@ function updatePhaseUI() {
   document.getElementById('phase-label').textContent = p.label;
   document.getElementById('phase-title').textContent = p.title;
   document.getElementById('phase-sub').textContent = p.sub;
-  document.getElementById('mic-label').textContent = 'Tap to start humming';
+  document.getElementById('mic-label').textContent = 'Tap and hum';
   document.getElementById('mic-btn').classList.remove('recording');
   [0,1,2].forEach(i => {
     const dot = document.getElementById('dot-'+i);
