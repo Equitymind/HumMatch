@@ -549,7 +549,7 @@ function toggleCapture() {
     capturing = false;
     document.getElementById('mic-btn').classList.remove('recording');
 
-    if (pitches.length < 3) {
+    if (pitches.length < 1) {
       document.getElementById('mic-label').textContent = 'Couldn\'t detect pitch — try again';
       document.getElementById('pitch-note').textContent = '?';
       return;
