@@ -18,11 +18,10 @@
     --text2: rgba(255,255,255,0.65);
     --text3: rgba(255,255,255,0.35);
   }
-  html { height: 100%; }
-  body { min-height: 100%; height: auto; background: var(--bg); color: var(--text1);
-    font-family: -apple-system, 'SF Pro Display', Arial, sans-serif;
-    overflow-y: scroll; -webkit-overflow-scrolling: touch;
-    position: relative; }
+  html, body { height: 100%; overflow: hidden; background: var(--bg); }
+  body { color: var(--text1); font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; }
+  #scroll-root { height: 100%; overflow-y: scroll; -webkit-overflow-scrolling: touch;
+    background: var(--bg); }
 
   .screen { display: none; flex-direction: column; align-items: center;
     justify-content: flex-start;
@@ -162,6 +161,7 @@
 </style>
 </head>
 <body>
+<div id="scroll-root">
 
 <!-- SCREEN 1: WELCOME -->
 <div id="screen-welcome" class="screen active">
@@ -737,5 +737,6 @@ function resetTest() {
   startTest();
 }
 </script>
+</div><!-- /scroll-root -->
 </body>
 </html>
