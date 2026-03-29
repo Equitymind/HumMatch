@@ -7,6 +7,12 @@ services:
     pullRequestPreviewsEnabled: false
     routes:
       - type: rewrite
+        source: /blog/find-songs-you-can-nail
+        destination: /blog/find-songs-you-can-nail.html
+      - type: rewrite
+        source: /blog/how-hummatch-works
+        destination: /blog/how-hummatch-works.html
+      - type: rewrite
         source: /blog/how-hummatch-was-built
         destination: /blog/how-hummatch-was-built.html
       - type: rewrite

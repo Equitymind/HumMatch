@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Find Songs You Can Actually Nail (and Export Them to Spotify) | HumMatch Blog</title>
+  <meta name="description" content="A practical guide to getting the most out of HumMatch — finding your best songs, using the filters, exporting your playlist, and the best use cases for every type of singer." />
+  <meta property="og:title" content="How to Find Songs You Can Actually Nail (and Export Them to Spotify)" />
+  <meta property="og:description" content="A practical guide to getting the most out of HumMatch — finding your best songs, using the filters, exporting your playlist, and great use cases for every type of singer." />
+  <meta property="og:image" content="/hummatch-logo-full.png" />
+  <meta property="og:url" content="https://hummatch.me/blog/find-songs-you-can-nail" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/hummatch-logo.png" />
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --surface: #1a1a2e;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+      --text1: #f0e6ff;
+      --text2: #b39ddb;
+      --text3: #7b6fa0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.75;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,26,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: var(--text1); letter-spacing: -0.02em; }
+    .nav-cta {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .hero {
+      max-width: 740px;
+      margin: 60px auto 0;
+      padding: 0 24px;
+    }
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #f0e6ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text3);
+      font-size: 0.875rem;
+      margin-bottom: 36px;
+    }
+    .hero-meta .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text2);
+      font-weight: 600;
+    }
+    .hero-meta .author-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 900; color: white;
+    }
+    article {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    article p {
+      font-size: 1.075rem;
+      color: var(--text1);
+      margin-bottom: 24px;
+    }
+    article h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      margin: 48px 0 16px;
+    }
+    article h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 32px 0 10px;
+    }
+    article blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 32px 0;
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: var(--text2);
+      font-size: 1.1rem;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(124,58,237,0.08));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 36px 0;
+    }
+    .highlight-box p { margin-bottom: 0; }
+    .highlight-box strong { color: var(--accent); }
+    .use-case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .use-case-card {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 16px;
+      padding: 20px 22px;
+    }
+    .use-case-card .uc-emoji { font-size: 1.6rem; margin-bottom: 10px; display: block; }
+    .use-case-card .uc-title { font-weight: 800; color: var(--text1); font-size: 1rem; margin-bottom: 6px; }
+    .use-case-card .uc-desc { font-size: 0.875rem; color: var(--text2); line-height: 1.55; }
+    @media (max-width: 520px) { .use-case-grid { grid-template-columns: 1fr; } }
+    .filter-list {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .filter-tag {
+      background: rgba(168,85,247,0.15);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .step-block {
+      border-left: 2px solid rgba(168,85,247,0.3);
+      padding-left: 20px;
+      margin: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .step-item { display: flex; gap: 14px; align-items: flex-start; }
+    .step-n {
+      min-width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 900; color: white;
+      margin-top: 2px;
+    }
+    .step-t { font-size: 1rem; color: var(--text1); line-height: 1.65; }
+    .step-t strong { color: var(--accent); }
+    .cta-block {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      margin: 56px 0 0;
+    }
+    .cta-block h3 { font-size: 1.4rem; font-weight: 800; margin: 0 0 10px; color: var(--text1); }
+    .cta-block p { color: var(--text2); margin-bottom: 24px; font-size: 0.975rem; }
+    .cta-block a {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 24px;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text3);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text3);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(168,85,247,0.1);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/hummatch-logo.png" alt="HumMatch" />
+    <span>HumMatch</span>
+  </a>
+  <a class="nav-cta" href="/">Try It Free</a>
+</nav>
+
+<header class="hero">
+  <a class="back-link" href="/blog">← Blog</a>
+  <p class="hero-label">User Guide</p>
+  <h1>How to Find Songs You Can Actually Nail (and Export Them to Spotify)</h1>
+  <div class="hero-meta">
+    <div class="author">
+      <div class="author-dot">JM</div>
+      Joe Morin
+    </div>
+    <span>March 29, 2026</span>
+    <span>6 min read</span>
+  </div>
+</header>
+
+<article>
+
+  <p>Most people open HumMatch, hum three times, look at the results, and feel something click. "That's the song. That's my voice." Then they close the tab and forget to do anything with it.</p>
+
+  <p>This post is for everyone who wants to get more out of it. The filters, the playlist export, the dismiss flow, and the use cases that make HumMatch genuinely useful beyond the first five minutes.</p>
+
+  <h2>Start Here: Getting a Clean Match</h2>
+
+  <p>Your results are only as good as your hums. A few things make a real difference.</p>
+
+  <p><strong>Find a quiet-ish space.</strong> You do not need a recording studio. You just need a room where you are not competing with a TV or a loud conversation. Background noise throws off the spectral analysis and you will get a less accurate voice type read.</p>
+
+  <p><strong>Hum at a comfortable volume.</strong> The mic signal indicator will tell you if you are too quiet. You want a solid signal, not a whisper. Do not strain. If the note is uncomfortable, back off the pitch slightly. HumMatch is measuring your natural voice, not your maximum range.</p>
+
+  <p><strong>Three different pitches.</strong> Low, middle, high. Each hum adds data. The combination of all three gives HumMatch enough to build a reliable profile of both your range and your tonal character. One hum is not enough for a confident classification. Three is the sweet spot.</p>
+
+  <blockquote>"Think of it like a fingerprint scan. One pass gets something. Three passes gets a lock."</blockquote>
+
+  <h2>Reading Your Results</h2>
+
+  <p>Your results are organized into confidence tiers. Here is what each one means in plain terms.</p>
+
+  <p><strong>Best Match (78% and above).</strong> These are the songs your voice was built for. The pitch range fits, the tonal character matches, and the song was written for a voice that sounds like yours. Start your karaoke list here. These are the ones you will sound best on without having to warm up, rehearse, or fight the key.</p>
+
+  <p><strong>Strong Fit (60 to 77%).</strong> Great songs for your voice. You might need to warm up first or find the right key, but these will feel natural once you settle in. Good choices for practice songs or the second half of a karaoke night when your voice is loose.</p>
+
+  <p><strong>Stretch (below 60%).</strong> These sit outside your comfort zone. Not impossible, but they will take work. If a Stretch song shows up and you love it, treat it as a goal, not a tonight song.</p>
+
+  <h2>Using the Filters</h2>
+
+  <p>The filter bar at the top of your results is where HumMatch gets genuinely useful. Here are the filters available and when to reach for each one.</p>
+
+  <div class="filter-list">
+    <span class="filter-tag">✅ Best Match</span>
+    <span class="filter-tag">🚗 Car Songs</span>
+    <span class="filter-tag">🎤 Group Karaoke</span>
+    <span class="filter-tag">🎧 Sing Alone</span>
+    <span class="filter-tag">🎵 Know This</span>
+    <span class="filter-tag">🎸 Rock</span>
+    <span class="filter-tag">🎵 Pop</span>
+    <span class="filter-tag">📀 Classics</span>
+    <span class="filter-tag">🔥 Stretch</span>
+    <span class="filter-tag">🕺 80s</span>
+    <span class="filter-tag">💿 90s</span>
+    <span class="filter-tag">🌟 Recent</span>
+    <span class="filter-tag">🎉 Crowd Pleasers</span>
+    <span class="filter-tag">🎵 Español</span>
+  </div>
+
+  <p><strong>Car Songs</strong> surfaces tracks that sit in a comfortable solo range, easy to sing along to without needing to project. Perfect for the commute.</p>
+
+  <p><strong>Group Karaoke</strong> filters for crowd-pleaser songs that audiences know and love to sing along with. If you want the room involved, start here.</p>
+
+  <p><strong>Sing Alone</strong> surfaces songs that reward a solo performance. These are not singalong tracks. They are showstoppers when done right.</p>
+
+  <p><strong>Know This</strong> is the filter that often surprises people most. It surfaces songs that are well within your voice type but that you might not have thought of as karaoke songs. Familiar enough that you know the words, but not so obvious that everyone picks them. These are the ones that make people say "oh wow, great choice."</p>
+
+  <h2>The Dismiss Flow</h2>
+
+  <p>Every song card has a small X button in the corner. Tap it if you do not know the song, do not like it, or just want it out of your results. HumMatch will animate the next best match in from a 30-song backup pool. The dismissed songs stay hidden until you reset your profile.</p>
+
+  <p>This is useful at a karaoke bar when you are scanning for something to pick tonight. Dismiss anything you do not want, and your list tightens down to songs you actually want to sing.</p>
+
+  <h2>Exporting to Spotify</h2>
+
+  <p>This is the feature people get most excited about once they discover it. Your HumMatch results can be exported directly to a Spotify playlist in about 10 seconds.</p>
+
+  <div class="step-block">
+    <div class="step-item">
+      <div class="step-n">1</div>
+      <div class="step-t"><strong>Get your results.</strong> Hum your three notes and let HumMatch generate your song list.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">2</div>
+      <div class="step-t"><strong>Tap "Export to Spotify"</strong> at the bottom of your results. You will be prompted to connect your Spotify account via OAuth. This is a secure, one-time login. HumMatch only requests permission to create playlists. It cannot access your listening history, payment info, or anything else.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">3</div>
+      <div class="step-t"><strong>Authorize and return.</strong> Spotify redirects you back to HumMatch and the export begins automatically.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">4</div>
+      <div class="step-t"><strong>Your playlist appears in Spotify</strong> titled "My HumMatch Songs — [Your Voice Type]". Every song HumMatch matched to your voice is in there, ready to play. Use it to learn the ones you do not know yet, practice the ones you want to perform, or just have a playlist that fits your voice instead of someone else's.</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Pro tip:</strong> Run HumMatch on a day when your voice feels good and export that playlist. That becomes your reference. Then run it again on a tired evening and see how the results shift. Your best songs will still be there. But the "Strong Fit" tier will often narrow. That is your voice telling you something useful about what it can handle when it is not at full capacity.</p>
+  </div>
+
+  <h2>The Best Use Cases for HumMatch</h2>
+
+  <div class="use-case-grid">
+    <div class="use-case-card">
+      <span class="uc-emoji">🎤</span>
+      <div class="uc-title">Karaoke Night</div>
+      <div class="uc-desc">The original use case. Stop picking songs that fight your voice. Show up knowing exactly which two or three songs you can absolutely own. That confidence is the whole difference.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🚗</span>
+      <div class="uc-title">Car Singing</div>
+      <div class="uc-desc">Build a playlist of songs that fit your actual voice and let it run. You will stop skipping tracks because they are the wrong key. Every song on the list was chosen for you specifically.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🎉</span>
+      <div class="uc-title">Wedding / Party</div>
+      <div class="uc-desc">You know there will be a moment when someone hands you a mic. HumMatch means you already know your song. No deer-in-headlights. Just confidence and a great choice.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🎼</span>
+      <div class="uc-title">Vocal Warm-Up</div>
+      <div class="uc-desc">Singing coaches use HumMatch to give students an immediate answer to "what should I be practicing?" The results are a roadmap, not a verdict. Nail It songs are your foundation. Stretch songs are your growth.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🎸</span>
+      <div class="uc-title">Learning to Sing</div>
+      <div class="uc-desc">Beginners who try to learn with songs outside their voice type get discouraged and quit. HumMatch gives you songs where early success is achievable. Success builds habit. Habit builds skill.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🌟</span>
+      <div class="uc-title">Discovering Songs</div>
+      <div class="uc-desc">Most people have about 12 songs they know they can sing. HumMatch surfaces 50 or 100 songs that fit their voice. A lot of them will be songs they have never thought of as karaoke songs. That is the discovery.</div>
+    </div>
+  </div>
+
+  <h2>For Singing Coaches and KJs</h2>
+
+  <p>Two groups of people keep coming back to HumMatch professionally: singing coaches and karaoke jockeys.</p>
+
+  <p>For vocal coaches, HumMatch solves a real first-session problem. A new student sits down and the first thing they ask is "what songs should I be working on?" The honest answer takes time to figure out. HumMatch gives you a data-backed starting point in three minutes, so the lesson can start with actual singing instead of theory.</p>
+
+  <p>For karaoke jockeys, the use case is helping newcomers who freeze at the song list. HumMatch on a tablet at the KJ booth gives hesitant singers a confident answer fast. They pick a song they know they can handle, they sound good, the crowd responds well, and they come back next week. That is a repeat customer. That is the whole business.</p>
+
+  <p>If you run karaoke nights or teach voice lessons and want to offer HumMatch to your audience, our affiliate program pays you every time one of your referrals upgrades to Premium. The details are at the bottom of the HumMatch homepage.</p>
+
+  <h2>Premium: What You Get</h2>
+
+  <p>The free tier gives you 20 hums to explore your voice. Premium removes all limits and adds the full Spotify export feature, unlimited playlist saves, and priority access to new features as they ship.</p>
+
+  <p>Premium is $5.99 per month or $39.99 per year. If you are using HumMatch more than a couple of times a month, the annual plan is an easy decision.</p>
+
+  <div class="cta-block">
+    <h3>Find your songs tonight. 🎤</h3>
+    <p>Three hums. Your voice type. Songs that actually fit.</p>
+    <a href="/">Try HumMatch Free</a>
+  </div>
+
+</article>
+
+<footer>
+  <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a> &nbsp;|&nbsp; <a href="/blog">Blog</a></p>
+</footer>
+
+</body>
+</html>

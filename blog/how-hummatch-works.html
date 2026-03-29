@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How HumMatch Actually Works | HumMatch Blog</title>
+  <meta name="description" content="The real science behind HumMatch — why pitch alone is not enough, what spectral centroid is, and how three hums tells us more about your voice than you think." />
+  <meta property="og:title" content="How HumMatch Actually Works" />
+  <meta property="og:description" content="The real science behind HumMatch — why pitch alone is not enough, what spectral centroid is, and how three hums tells us more about your voice than you think." />
+  <meta property="og:image" content="/hummatch-logo-full.png" />
+  <meta property="og:url" content="https://hummatch.me/blog/how-hummatch-works" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/hummatch-logo.png" />
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --surface: #1a1a2e;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+      --text1: #f0e6ff;
+      --text2: #b39ddb;
+      --text3: #7b6fa0;
+      --card: #16213e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.75;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,26,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: var(--text1); letter-spacing: -0.02em; }
+    .nav-cta {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .hero {
+      max-width: 740px;
+      margin: 60px auto 0;
+      padding: 0 24px;
+    }
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #f0e6ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text3);
+      font-size: 0.875rem;
+      margin-bottom: 36px;
+    }
+    .hero-meta .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text2);
+      font-weight: 600;
+    }
+    .hero-meta .author-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 900; color: white;
+    }
+    article {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    article p {
+      font-size: 1.075rem;
+      color: var(--text1);
+      margin-bottom: 24px;
+    }
+    article h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      margin: 48px 0 16px;
+    }
+    article blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 32px 0;
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: var(--text2);
+      font-size: 1.1rem;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(124,58,237,0.08));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 36px 0;
+    }
+    .highlight-box p { margin-bottom: 0; }
+    .highlight-box strong { color: var(--accent); }
+    .step-list {
+      list-style: none;
+      margin: 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .step-list li {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .step-num {
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: white;
+      margin-top: 2px;
+    }
+    .step-text { font-size: 1rem; color: var(--text1); line-height: 1.65; }
+    .step-text strong { color: var(--accent); }
+    .voice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 28px 0;
+    }
+    .voice-card {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .voice-card .voice-name { font-weight: 800; color: var(--accent); font-size: 0.95rem; margin-bottom: 4px; }
+    .voice-card .voice-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.5; }
+    @media (max-width: 500px) { .voice-grid { grid-template-columns: 1fr; } }
+    .cta-block {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      margin: 56px 0 0;
+    }
+    .cta-block h3 { font-size: 1.4rem; font-weight: 800; margin: 0 0 10px; color: var(--text1); }
+    .cta-block p { color: var(--text2); margin-bottom: 24px; font-size: 0.975rem; }
+    .cta-block a {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 24px;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text3);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text3);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(168,85,247,0.1);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/hummatch-logo.png" alt="HumMatch" />
+    <span>HumMatch</span>
+  </a>
+  <a class="nav-cta" href="/">Try It Free</a>
+</nav>
+
+<header class="hero">
+  <a class="back-link" href="/blog">← Blog</a>
+  <p class="hero-label">Under the Hood</p>
+  <h1>How HumMatch Actually Works</h1>
+  <div class="hero-meta">
+    <div class="author">
+      <div class="author-dot">JM</div>
+      Joe Morin
+    </div>
+    <span>March 29, 2026</span>
+    <span>7 min read</span>
+  </div>
+</header>
+
+<article>
+
+  <p>Most voice apps measure pitch. They listen to you sing, figure out the range of notes you can reach, and use that to tell you something about your voice. That is a reasonable start. But it misses the most important thing about how a voice actually sounds.</p>
+
+  <p>Pitch tells you which notes you can hit. It does not tell you what you sound like when you hit them. And what you sound like is everything.</p>
+
+  <p>Here is a simple way to hear the difference. Barry White and Elvis Presley can both sing in the same range of notes. But they sound nothing alike. Barry White is dark, warm, and low in the frequency spectrum. Elvis is bright, clear, and higher in the mix even when he is hitting low notes. If you only measured their pitch ranges you would think they were similar voices. They are not. And you should not be singing the same songs.</p>
+
+  <p>That gap between pitch range and actual vocal character is what HumMatch was built to close.</p>
+
+  <h2>The Thing Nobody Else Measures: Timbre</h2>
+
+  <p>The quality that makes your voice sound like you, and nobody else, is called timbre. Audio engineers sometimes call it tone color. It is the reason a violin and a guitar playing the same note at the same volume sound completely different. Same pitch, same loudness, completely different character.</p>
+
+  <p>Every voice has a timbre signature. It is shaped by the size and shape of your vocal tract, the density of your vocal cords, the resonance of your chest and head, and dozens of other physical factors that are entirely unique to you. You cannot change your timbre by practicing. It is not a skill. It is who you are.</p>
+
+  <blockquote>"Pitch tells you which notes you can hit. Timbre tells you what you sound like when you hit them. Songs are written for specific voices, not just specific ranges."</blockquote>
+
+  <p>When a song was written for a warm, dark baritone, it is going to feel wrong coming out of a bright, cutting tenor. The notes might technically be in range. But something will be off. The song will fight your voice instead of sitting inside it.</p>
+
+  <p>HumMatch measures timbre. That is the core of what makes it different.</p>
+
+  <h2>How We Measure It: Spectral Centroid</h2>
+
+  <p>When you hum, your voice produces a complex sound wave made up of many different frequencies layered on top of each other. The lowest frequency is your fundamental pitch, the actual note you are humming. Everything above it is called overtones, and the pattern of overtones is what gives your voice its character.</p>
+
+  <p>The spectral centroid is the center of gravity of all those frequencies combined. Think of it as a single number that describes where the energy in your voice lives. A voice with a low spectral centroid has most of its energy in the lower frequencies. It sounds dark, warm, and full. A voice with a high spectral centroid has most of its energy in the upper frequencies. It sounds bright, clear, and cutting.</p>
+
+  <div class="highlight-box">
+    <p><strong>In plain terms:</strong> The spectral centroid is the single most predictive number we have found for matching a voice to songs it will actually sound good on. More predictive than range alone. More predictive than any self-reported description. Your voice produces this number automatically every time you hum. You cannot fake it and you cannot game it.</p>
+  </div>
+
+  <p>HumMatch captures your spectral centroid across three hums at different pitches, low, middle, and high, and averages them to build a stable profile. Three data points are enough to get a reliable read. We do not need you to sing an entire song.</p>
+
+  <h2>The Six Voice Types</h2>
+
+  <p>Based on the combination of your pitch range and your spectral centroid, HumMatch classifies your voice into one of six types. These map directly to the traditional voice classification system used in classical vocal training, which has been refined over centuries and holds up remarkably well for popular music matching.</p>
+
+  <div class="voice-grid">
+    <div class="voice-card">
+      <div class="voice-name">Bass-Baritone</div>
+      <div class="voice-desc">Deep, dark, full-bodied. Low centroid, low range. Johnny Cash, Barry White, Leonard Cohen.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Baritone</div>
+      <div class="voice-desc">The most common male voice type. Mid centroid, mid-low range. Elvis, Frank Sinatra, Freddie Mercury.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Tenor</div>
+      <div class="voice-desc">Bright, powerful, soaring highs. Higher centroid, wider range. Michael Jackson, Chris Martin, Bruno Mars.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Alto</div>
+      <div class="voice-desc">Warm, rich, distinctive. Lower female range. Adele, Amy Winehouse, Tina Turner.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Mezzo-Soprano</div>
+      <div class="voice-desc">Balanced, versatile, expressive. Mid female range. Beyoncé, Whitney Houston, Madonna.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Soprano</div>
+      <div class="voice-desc">Bright, clear, upper register. Mariah Carey, Celine Dion, Christina Aguilera.</div>
+    </div>
+  </div>
+
+  <p>Each voice type maps to a curated set of songs where that voice type will sound its best. Not songs that are technically singable. Songs that will feel natural, comfortable, and good from the first line.</p>
+
+  <h2>The Full Pipeline: What Happens in Three Seconds</h2>
+
+  <p>From the moment you tap the mic to the moment your results appear, here is exactly what HumMatch does.</p>
+
+  <ul class="step-list">
+    <li>
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Capture:</strong> Your browser's Web Audio API opens a direct stream from your microphone. We capture raw PCM audio at 44.1kHz, the same sample rate used in professional recording. No compression, no processing, no filtering at this stage.</div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Signal check:</strong> Before analysis begins, HumMatch checks that your signal is strong enough to be useful. If you are humming too quietly or there is too much background noise, the app tells you. Bad input produces bad results. We would rather you re-hum than give you a confident wrong answer.</div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Frequency analysis:</strong> The audio buffer runs through a Fast Fourier Transform (FFT), which breaks your hum into its component frequencies. This happens entirely in your browser using the Web Audio API's AnalyserNode. Your audio never leaves your device.</div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Fundamental frequency detection:</strong> We identify the dominant frequency in your hum, the note you are actually humming, and convert it to Hz. This gives us your pitch data for that hum.</div>
+    </li>
+    <li>
+      <div class="step-num">5</div>
+      <div class="step-text"><strong>Spectral centroid calculation:</strong> We compute the weighted average of all frequencies present in your hum, weighted by their amplitude. This is your timbre signature for that hum.</div>
+    </li>
+    <li>
+      <div class="step-num">6</div>
+      <div class="step-text"><strong>Profile building:</strong> After three hums, we average your pitch range and spectral centroid readings into a single vocal profile. The profile is stored locally on your device so future matches are instant.</div>
+    </li>
+    <li>
+      <div class="step-num">7</div>
+      <div class="step-text"><strong>Confidence scoring:</strong> Every song in the catalog has a defined pitch range and target spectral centroid. We score your profile against each song and assign a confidence percentage. 78% and above earns a Best Match. 60 to 77% is a Strong Fit. Below 60% is a Stretch.</div>
+    </li>
+    <li>
+      <div class="step-num">8</div>
+      <div class="step-text"><strong>Results:</strong> Songs are sorted by confidence and filtered by your preferences. You see what your voice can actually nail, right now, tonight.</div>
+    </li>
+  </ul>
+
+  <h2>Why Humming and Not Singing</h2>
+
+  <p>We get this question a lot. If you want to know how someone sings, why not just have them sing?</p>
+
+  <p>Two reasons. One is technical and one is human.</p>
+
+  <p>The technical reason: humming produces a cleaner, more stable signal for spectral analysis than open singing does. When you sing with open vowels, consonants, and lyrics, the signal gets noisy. Humming isolates the pure tonal character of your voice without interference. The data we extract from a hum is more accurate than the data we would get from a sung phrase.</p>
+
+  <p>The human reason: most people will not sing in front of an app. Or in front of anyone. Singing feels like a performance. Humming does not. Humming is something you do without thinking, in the car, in the shower, walking down a hallway. When we ask people to hum, they do it immediately and unselfconsciously. When we ask them to sing, they freeze.</p>
+
+  <p>The psychology of the input is just as important as the acoustics. HumMatch works precisely because it does not ask you to perform.</p>
+
+  <h2>What We Are Building Next</h2>
+
+  <p>The current HumMatch measures your voice at a single point in time. We are building toward longitudinal tracking, the ability to understand how your voice changes across different days, times, environments, and energy levels. Most singers know their voice is different at 10 AM than at 10 PM. HumMatch will eventually capture that profile and surface the right songs for where your voice actually is right now, not just where it sits on average.</p>
+
+  <p>Group matching is also coming. The idea: a room full of people each hum their profiles, and HumMatch finds songs the whole group can sing together. For karaoke bars, wedding parties, or just a living room full of people who all want to actually sound good.</p>
+
+  <p>The foundation for all of it is the same three-second hum you do today. We built the measurement layer right. Everything else builds on top of it.</p>
+
+  <div class="cta-block">
+    <h3>Hear what your voice can do. 🎤</h3>
+    <p>Three hums. Real results. No singing required.</p>
+    <a href="/">Try HumMatch Free</a>
+  </div>
+
+</article>
+
+<footer>
+  <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a> &nbsp;|&nbsp; <a href="/blog">Blog</a></p>
+</footer>
+
+</body>
+</html>
