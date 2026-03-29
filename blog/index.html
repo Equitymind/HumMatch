@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | HumMatch</title>
+  <meta name="description" content="Stories, updates, and the thinking behind HumMatch — the vocal intelligence app that matches your voice to songs you can actually nail." />
+  <link rel="icon" href="/hummatch-logo.png" />
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --surface: #1a1a2e;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+      --text1: #f0e6ff;
+      --text2: #b39ddb;
+      --text3: #7b6fa0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.6;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,26,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: var(--text1); letter-spacing: -0.02em; }
+    .nav-cta {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .page-header {
+      max-width: 740px;
+      margin: 60px auto 40px;
+      padding: 0 24px;
+    }
+    .page-header p {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .page-header h1 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #f0e6ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .posts {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .post-card {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 20px;
+      padding: 28px 32px;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .post-card:hover {
+      border-color: rgba(168,85,247,0.45);
+      transform: translateY(-2px);
+    }
+    .post-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .post-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .post-excerpt {
+      font-size: 0.95rem;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .post-meta {
+      font-size: 0.8rem;
+      color: var(--text3);
+      display: flex;
+      gap: 12px;
+    }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text3);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(168,85,247,0.1);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/hummatch-logo.png" alt="HumMatch" />
+    <span>HumMatch</span>
+  </a>
+  <a class="nav-cta" href="/">Try It Free</a>
+</nav>
+
+<header class="page-header">
+  <p>From the team</p>
+  <h1>Blog</h1>
+</header>
+
+<main class="posts">
+  <a class="post-card" href="/blog/how-hummatch-was-built">
+    <p class="post-label">Origin Story</p>
+    <h2 class="post-title">How HumMatch Was Built in One Night</h2>
+    <p class="post-excerpt">A Madonna song on the 405, a name that almost was not, and the night an AI agent matched Elvis on the very first try. The full story behind HumMatch.</p>
+    <div class="post-meta">
+      <span>Joe Morin</span>
+      <span>March 2026</span>
+      <span>8 min read</span>
+    </div>
+  </a>
+</main>
+
+<footer>
+  <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a></p>
+</footer>
+
+</body>
+</html>

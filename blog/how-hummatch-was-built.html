@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How HumMatch Was Built in One Night | HumMatch Blog</title>
+  <meta name="description" content="The story behind HumMatch — how a Madonna song, a vocal coach joke, and an AI agent turned into a vocal intelligence app overnight." />
+  <meta property="og:title" content="How HumMatch Was Built in One Night" />
+  <meta property="og:description" content="The story behind HumMatch — how a Madonna song, a vocal coach joke, and an AI agent turned into a vocal intelligence app overnight." />
+  <meta property="og:image" content="/hummatch-logo-full.png" />
+  <meta property="og:url" content="https://hummatch.me/blog/how-hummatch-was-built" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/hummatch-logo.png" />
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --surface: #1a1a2e;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+      --text1: #f0e6ff;
+      --text2: #b39ddb;
+      --text3: #7b6fa0;
+      --card: #16213e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.75;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,26,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: var(--text1); letter-spacing: -0.02em; }
+    .nav-cta {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 740px;
+      margin: 60px auto 0;
+      padding: 0 24px;
+    }
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #f0e6ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text3);
+      font-size: 0.875rem;
+      margin-bottom: 36px;
+    }
+    .hero-meta .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text2);
+      font-weight: 600;
+    }
+    .hero-meta .author-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 900; color: white;
+    }
+
+    /* ARTICLE */
+    article {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    article p {
+      font-size: 1.075rem;
+      color: var(--text1);
+      margin-bottom: 24px;
+    }
+    article h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      margin: 48px 0 16px;
+    }
+    article h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 32px 0 12px;
+    }
+    article blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 32px 0;
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: var(--text2);
+      font-size: 1.1rem;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(124,58,237,0.08));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 36px 0;
+    }
+    .highlight-box p {
+      margin-bottom: 0;
+      color: var(--text1);
+    }
+    .highlight-box strong {
+      color: var(--accent);
+    }
+    .emoji-pull {
+      font-size: 3rem;
+      text-align: center;
+      display: block;
+      margin: 36px 0 12px;
+    }
+    .cta-block {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      margin: 56px 0 0;
+    }
+    .cta-block h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin: 0 0 10px;
+      color: var(--text1);
+    }
+    .cta-block p {
+      color: var(--text2);
+      margin-bottom: 24px;
+      font-size: 0.975rem;
+    }
+    .cta-block a {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 24px;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text3);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(168,85,247,0.1);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/hummatch-logo.png" alt="HumMatch" />
+    <span>HumMatch</span>
+  </a>
+  <a class="nav-cta" href="/">Try It Free</a>
+</nav>
+
+<header class="hero">
+  <p class="hero-label">Origin Story</p>
+  <h1>How HumMatch Was Built in One Night</h1>
+  <div class="hero-meta">
+    <div class="author">
+      <div class="author-dot">JM</div>
+      Joe Morin
+    </div>
+    <span>March 2026</span>
+    <span>8 min read</span>
+  </div>
+</header>
+
+<article>
+
+  <p>I have a confession. I am not a musician. I cannot read sheet music, I do not play an instrument, and I have never taken a single vocal lesson. But I have been humming the same 12 songs in the car for 30 years, and I can absolutely destroy "Can't Help Falling in Love" at karaoke if the conditions are right.</p>
+
+  <p>That last part matters more than it sounds. Because the whole idea for HumMatch started exactly there, on the freeway, car singing at full volume, when a thought floated up that I could not shake.</p>
+
+  <h2>The Song That Started It</h2>
+
+  <p>I was driving north on the 405, somewhere between Irvine and the 10, and Madonna's "Take a Bow" came on. I know every word. I have known every word since 1994. And when that song plays, I do not hum along politely. I commit.</p>
+
+  <p>Somewhere in the second verse, mid-performance, I started thinking about karaoke. Specifically about the problem everyone has with karaoke: you get up there with a song you love and your voice lands somewhere completely wrong. The key is off. The range is wrong. You know the words but your voice does not know the song.</p>
+
+  <p>That is the real problem. It is not about how well you can sing. It is about whether the song fits your actual voice.</p>
+
+  <blockquote>"What if you could hum a few notes and the app just told you: here are the songs your voice can actually nail?"</blockquote>
+
+  <p>I pulled over at the next exit and typed a note into my phone. Seven words. "Song matching app based on how you hum." That was the whole idea. I did not know it would turn into something I would build that same night.</p>
+
+  <h2>The Name That Almost Was Not</h2>
+
+  <p>I called the app Vocal IQ at first. It felt right. Intelligent voice matching. It had a clean ring to it.</p>
+
+  <p>Then I checked the trademark database.</p>
+
+  <p>Vocal IQ was taken. Claimed. Already someone else's. I went back to zero on the name and spent about 20 minutes in a dark place where nothing felt right. VocalFit. HumSong. TuneMatch. All of them had problems. Too generic. Too clinical. Too on-the-nose.</p>
+
+  <p>I was talking through options with my daughter Olivia, who studies film at Chapman and has very strong opinions about branding, when she said something that cut right through it.</p>
+
+  <p>"It's literally about humming. Just call it HumMatch."</p>
+
+  <span class="emoji-pull">🎤</span>
+
+  <p>Simple. Obvious. Immediately right. I checked the domain. hummatch.me was available. hummatch.com was available. Both of them, sitting there, unclaimed.</p>
+
+  <p>I registered them within the hour.</p>
+
+  <h2>One Night, One App</h2>
+
+  <p>I work best at night. No meetings, no texts, no noise. Just focus. So at around 9 PM on March 19th I sat down with my AI agent, Clayton, and said: let's build this.</p>
+
+  <p>What I described was simple in concept and genuinely complicated in execution. The app needed to capture a user humming three notes, analyze their vocal range and the characteristic tone of their voice (what audio engineers call timbre, which is the spectral quality that makes a baritone sound different from a tenor even on the same pitch), and then match that profile against a catalog of songs and artists.</p>
+
+  <p>The hard part is that pitch alone does not tell you what songs you can sing. Two people can hit the same note and sound completely different, because their voices have different warmth, brightness, and resonance. HumMatch had to measure that quality, not just the range.</p>
+
+  <div class="highlight-box">
+    <p><strong>The technical breakthrough:</strong> Spectral centroid analysis. Every voice has a brightness signature, a center of gravity in the frequency spectrum. A dark, warm Bass-Baritone sits low. A bright, cutting Soprano sits high. By measuring spectral centroid alongside fundamental frequency, HumMatch can distinguish voice types that sit in the same pitch range but sound nothing alike.</p>
+  </div>
+
+  <p>By 2 AM we had a working prototype. I hummed three notes into my phone, the app processed my audio, and it returned a match: Elvis Presley, "Can't Help Falling in Love," 75% confidence.</p>
+
+  <p>That is my actual go-to karaoke song. The one I always choose. The one I have sung at least 40 times in 15 years of karaoke nights.</p>
+
+  <p>The algorithm found it on the first try.</p>
+
+  <h2>The Bobby Test</h2>
+
+  <p>I have a friend I will call Bobby. Bobby loves music. Bobby has a good voice. Bobby refuses, under any circumstances, to sing in front of other men. This is not unusual. A lot of men are exactly like Bobby.</p>
+
+  <p>But here is the thing about Bobby. Bobby hums constantly. In the car, walking through the grocery store, watching a game. He hums without thinking about it because humming does not feel like performing. It is just something you do.</p>
+
+  <p>When I showed Bobby the app and told him to hum three notes, he did it immediately, no hesitation, no self-consciousness. He looked at the results on the screen and said, out loud, "How does it know that?"</p>
+
+  <p>That reaction told me something important. The humming input is not just a technical choice. It is a psychological one. Singing in front of someone feels exposed. Humming does not. HumMatch gets the data it needs precisely because it does not ask you to perform.</p>
+
+  <h2>What My Dad Said</h2>
+
+  <p>I called my dad after we had the prototype working. He is not a tech person but he understands people, and I have learned to run ideas past him when I think I have something.</p>
+
+  <p>I explained it as simply as I could: you hum three notes, the app tells you which songs your voice can actually nail.</p>
+
+  <p>He was quiet for a second. Then he said: "Women are going to love that."</p>
+
+  <p>I asked him why he said women specifically.</p>
+
+  <p>"Because women actually want to sing. They just need to know they're not going to embarrass themselves."</p>
+
+  <p>He was right. The confidence angle, knowing ahead of time that a song is in your range before you pick up the microphone, removes the risk. And the person who most wants to remove that risk before stepping up to the mic is usually the woman who loves music but has not quite trusted her voice enough to commit to a song in front of a crowd.</p>
+
+  <p>We reframed the whole value proposition the next morning: not "what artist do I sound like," but "what songs can you confidently nail." The word confidently is doing a lot of work in that sentence. It is the whole point.</p>
+
+  <h2>Where It Lives Now</h2>
+
+  <p>HumMatch is a PWA. You open it in your browser, you hum, you get results. No app store. No download. It works on iPhone, Android, and desktop.</p>
+
+  <p>The song catalog has grown to over 1,200 tracks across English and Spanish, spanning pop, rock, classics, 80s, 90s, contemporary, karaoke staples, and crowd pleasers. The app surfaces songs by confidence tier: songs you can nail, strong fits, and stretch goals for when you are feeling ambitious.</p>
+
+  <p>Spotify integration is live. After you get your matches, you can export the whole list directly to a playlist in your account.</p>
+
+  <p>A second provisional patent covering group matching, transposition, and longitudinal voice tracking is in progress. Those features will come after the patent is filed.</p>
+
+  <div class="highlight-box">
+    <p>The real exit story, the thing that makes this interesting to acquirers like Spotify or SoundHound, is not the app itself. It is the voice biometric data. Every hum, every match, every song a real person confirmed they can sing. That is a proprietary training dataset that no competitor can replicate. <strong>HumMatch is building the world's first vocal confidence intelligence layer, one hum at a time.</strong></p>
+  </div>
+
+  <h2>Why I Am Building This in Public</h2>
+
+  <p>I have been in this industry for 25 years. I was there at the beginning of SEO, when the whole field was being invented in real time, and the people who understood what was actually happening built things that lasted. The people who chased shortcuts did not.</p>
+
+  <p>AI in 2026 feels exactly like SEO in 1999. The same noise, the same hype, the same window of genuine opportunity for the people who are paying close attention and building something real.</p>
+
+  <p>HumMatch started with a Madonna song on a Los Angeles freeway, a name my daughter came up with in about three seconds, and a night of building with an AI agent. It is not finished. The best parts are still being built.</p>
+
+  <p>But the algorithm matched Elvis on the first try. That is good enough to keep going.</p>
+
+  <div class="cta-block">
+    <h3>Find your songs. 🎤</h3>
+    <p>Hum three notes. HumMatch does the rest.</p>
+    <a href="/">Try HumMatch Free</a>
+  </div>
+
+</article>
+
+<footer>
+  <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a></p>
+</footer>
+
+</body>
+</html>

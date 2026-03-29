@@ -23,7 +23,7 @@
   #scroll-root { height: 100%; overflow-y: scroll; -webkit-overflow-scrolling: touch;
     background: var(--bg); }
 
-  .screen { display: none; flex-direction: column; align-items: center;
+  .screen { display: none; flex-direction: column; align-items: center; position: relative;
     justify-content: flex-start;
     min-height: calc(100vh + 1px);
     padding: env(safe-area-inset-top, 48px) 24px calc(env(safe-area-inset-bottom, 0px) + 80px);
@@ -158,6 +158,37 @@
     font-size: 0.88rem; font-weight: 700; cursor: pointer; margin-top: 8px; }
 
   .confetti-emoji { font-size: 2.5rem; margin-bottom: 4px; }
+
+  /* ── FREEMIUM ── */
+  .hum-badge { position: absolute; top: 16px; right: 16px;
+    background: var(--surface2); border: 1px solid rgba(168,85,247,0.3);
+    border-radius: 50px; padding: 6px 14px; font-size: 0.7rem;
+    font-weight: 700; color: var(--accent); z-index: 10; white-space: nowrap; }
+  .upsell-banner { width: 100%; max-width: 400px; background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(124,58,237,0.12));
+    border: 1px solid rgba(168,85,247,0.3); border-radius: 16px;
+    padding: 16px 20px; margin-top: 20px; text-align: center; }
+  .upsell-banner p { font-size: 0.82rem; color: var(--text2); margin-bottom: 10px; line-height: 1.4; }
+  .upsell-banner a { color: var(--accent); font-weight: 700; text-decoration: none; font-size: 0.85rem; }
+  .paywall-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    display: none; align-items: center; justify-content: center; z-index: 9999;
+    padding: 24px; }
+  .paywall-modal { background: var(--surface); border: 1px solid rgba(168,85,247,0.3);
+    border-radius: 24px; padding: 36px 28px; max-width: 380px; width: 100%;
+    text-align: center; }
+  .paywall-modal h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px;
+    background: linear-gradient(135deg, #A855F7, #EC4899); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; background-clip: text; }
+  .paywall-modal p { font-size: 0.88rem; color: var(--text2); line-height: 1.5; margin-bottom: 24px; }
+  .paywall-btn { display: block; width: 100%; padding: 16px; border: none;
+    border-radius: 50px; font-size: 0.95rem; font-weight: 800; cursor: pointer;
+    margin-bottom: 10px; transition: transform 0.15s; text-decoration: none; text-align: center; }
+  .paywall-btn:active { transform: scale(0.97); }
+  .paywall-btn.primary { background: linear-gradient(135deg, #A855F7, #7C3AED);
+    color: #fff; box-shadow: 0 0 30px rgba(168,85,247,0.3); }
+  .paywall-btn.secondary { background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15); color: var(--text2); }
+  .paywall-dismiss { background: none; border: none; color: var(--text3);
+    font-size: 0.75rem; cursor: pointer; margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -190,6 +221,7 @@
 
 <!-- SCREEN 2: HUM TEST -->
 <div id="screen-test" class="screen">
+  <div class="hum-badge" id="hum-badge"></div>
   <div class="test-phase" id="phase-label">PHASE 1 OF 3</div>
   <div class="test-title" id="phase-title">Hum your lowest note</div>
   <div class="test-sub" id="phase-sub">Go as low as you comfortably can and hold it steady</div>
@@ -271,9 +303,46 @@
   </div>
 
   <button class="retry-btn" onclick="resetTest()" style="margin-top:24px;">🔄 Test Again</button>
+  <div class="upsell-banner" id="upsell-banner" style="display:none;">
+    <p id="upsell-text"></p>
+    <a href="https://hummatch.me/upgrade">Get Premium — $5.99/mo →</a>
+  </div>
+</div>
+
+<!-- PAYWALL MODAL -->
+<div class="paywall-overlay" id="paywall-overlay">
+  <div class="paywall-modal">
+    <div style="font-size:2.5rem;margin-bottom:12px;">🔒</div>
+    <h2>You're Out of Free Hums</h2>
+    <p>You have used all 20 free hums. Unlock unlimited hums, playlist saves, and exports with HumMatch Premium.</p>
+    <a href="https://hummatch.me/upgrade" class="paywall-btn primary">Get Premium — $5.99/mo</a>
+    <a href="https://hummatch.me/upgrade" class="paywall-btn secondary">Try Annual — $39.99/yr</a>
+    <button class="paywall-dismiss" onclick="dismissPaywall()">Maybe later</button>
+  </div>
 </div>
 
 <script>
+// ════════════════════════════════════════════════════════════
+// FREEMIUM USAGE TRACKING
+// ════════════════════════════════════════════════════════════
+const FREE_HUM_LIMIT = 20;
+function getHumsUsed() { return parseInt(localStorage.getItem('hm_hums_used') || '0', 10); }
+function setHumsUsed(n) { localStorage.setItem('hm_hums_used', String(n)); }
+function isPremium() { return localStorage.getItem('hm_premium') === 'true'; }
+function getHumsRemaining() { return Math.max(0, FREE_HUM_LIMIT - getHumsUsed()); }
+function updateHumBadge() {
+  const badge = document.getElementById('hum-badge');
+  if (!badge) return;
+  if (isPremium()) { badge.style.display = 'none'; return; }
+  const r = getHumsRemaining();
+  badge.textContent = r + ' free hum' + (r !== 1 ? 's' : '') + ' left';
+  badge.style.display = '';
+}
+function dismissPaywall() {
+  document.getElementById('paywall-overlay').style.display = 'none';
+  showScreen('screen-welcome');
+}
+
 // ════════════════════════════════════════════════════════════
 // ARTIST DATABASE — range + timbre profile
 // Fields: name, emoji, lowNote (MIDI), highNote (MIDI), brightness (0-100, higher=brighter/lighter), tags
@@ -499,6 +568,7 @@ async function startTest() {
   capturing = false;
 
   updatePhaseUI();
+  updateHumBadge();
   showScreen('screen-test');
   startWaveform();
 }
@@ -621,6 +691,12 @@ function showResults() {
   if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
   if (audioCtx) { audioCtx.close(); audioCtx = null; }
 
+  // Paywall check — if out of free hums, block results
+  if (!isPremium() && getHumsRemaining() <= 0) {
+    document.getElementById('paywall-overlay').style.display = 'flex';
+    return;
+  }
+
   // Determine user's range
   const notes = capturedNotes.filter(n => n !== null);
   if (notes.length < 2) { showScreen('screen-welcome'); return; }
@@ -728,6 +804,25 @@ function showResults() {
       </span></li>`).join('');
 
   showScreen('screen-results');
+
+  // ── Freemium: increment usage + show upsell if needed ──
+  if (!isPremium()) {
+    setHumsUsed(getHumsUsed() + 1);
+    updateHumBadge();
+    const remaining = getHumsRemaining();
+    const upsell = document.getElementById('upsell-banner');
+    if (remaining <= 5) {
+      const txt = remaining > 0
+        ? 'You have ' + remaining + ' free hum' + (remaining !== 1 ? 's' : '') + ' left. Go Premium for unlimited. $5.99/mo'
+        : 'That was your last free hum! Go Premium for unlimited. $5.99/mo';
+      document.getElementById('upsell-text').textContent = txt;
+      upsell.style.display = '';
+    } else {
+      upsell.style.display = 'none';
+    }
+  } else {
+    document.getElementById('upsell-banner').style.display = 'none';
+  }
 }
 
 function resetTest() {
@@ -742,6 +837,9 @@ function resetTest() {
   document.getElementById('pitch-bar').style.width = '0%';
   startTest();
 }
+
+// Init badge on load
+updateHumBadge();
 </script>
 </div><!-- /scroll-root -->
 </body>
