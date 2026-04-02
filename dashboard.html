@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>HumMatch Dashboard</title>
+<meta name="description" content="Your premium HumMatch dashboard - playlists, stats, SquadMatch & more"/>
+<link rel="icon" href="/hummatch-icon-bug-2x.png"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0b1a;color:#e2e0f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh}
+a{color:#a78bfa;text-decoration:none}
+a:hover{color:#c084fc}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(124,58,237,0.3);border-radius:3px}
+
+/* Login */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px}
+#login-screen .logo-wrap{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+#login-screen h1{font-size:1.5rem;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#login-screen p{color:rgba(255,255,255,0.4);font-size:0.85rem;max-width:300px;text-align:center}
+.login-input{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.3);color:#fff;padding:14px 20px;border-radius:12px;font-size:1rem;width:300px;outline:none;transition:border 0.2s}
+.login-input:focus{border-color:#7c3aed}
+.login-btn{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:12px 32px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(124,58,237,0.4)}
+.login-error{color:#ef4444;font-size:0.82rem;min-height:20px}
+
+/* Free User Upgrade Gate */
+#upgrade-gate{display:none;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:24px;padding:20px}
+.upgrade-card{background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:40px;max-width:480px;text-align:center;backdrop-filter:blur(12px)}
+.upgrade-card h2{font-size:1.4rem;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.upgrade-card .preview{background:rgba(255,255,255,0.02);border-radius:12px;padding:20px;margin:20px 0;filter:blur(2px);opacity:0.4;pointer-events:none}
+.upgrade-features{list-style:none;text-align:left;margin:20px 0}
+.upgrade-features li{padding:8px 0;font-size:0.9rem;color:rgba(255,255,255,0.7)}
+.upgrade-features li::before{content:'';margin-right:10px;color:#22C55E}
+.upgrade-btn{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:14px 40px;border-radius:14px;font-size:1.05rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:inline-block;margin-top:12px}
+.upgrade-btn:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(124,58,237,0.5)}
+
+/* Dashboard */
+#dashboard{display:none;max-width:1200px;margin:0 auto;padding:20px 20px 60px}
+#dashboard.active{display:block}
+
+/* Header */
+.dash-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(124,58,237,0.15)}
+.dash-header .logo-wrap{display:flex;align-items:center;gap:10px}
+.dash-header h1{font-size:1.3rem;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.dash-header .user-info{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.user-email{color:rgba(255,255,255,0.5);font-size:0.82rem}
+.premium-badge{background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;font-size:0.65rem;font-weight:800;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px}
+.settings-btn,.logout-btn{background:none;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:6px 12px;border-radius:8px;font-size:0.72rem;cursor:pointer;transition:all 0.2s}
+.settings-btn:hover{border-color:#7c3aed;color:#a78bfa}
+.logout-btn:hover{border-color:#ef4444;color:#ef4444}
+
+/* Section headers */
+.section-title{font-size:1rem;font-weight:700;color:#c084fc;margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+
+/* Stat cards */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+.stat-card{background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:18px 16px;position:relative;overflow:hidden;backdrop-filter:blur(12px);transition:border-color 0.2s}
+.stat-card:hover{border-color:rgba(124,58,237,0.3)}
+.stat-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(124,58,237,0.04) 0%,transparent 70%);pointer-events:none}
+.stat-card .label{font-size:0.68rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.stat-card .value{font-size:1.6rem;font-weight:800;color:#fff}
+.stat-card .sub{font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:4px}
+.stat-card .icon{position:absolute;top:14px;right:14px;font-size:1.3rem;opacity:0.3}
+
+/* Cards (general) */
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:20px;backdrop-filter:blur(12px);margin-bottom:14px}
+.card h3{font-size:0.88rem;color:#c084fc;margin-bottom:14px;font-weight:600}
+
+/* SquadMatch */
+.squad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.squad-member{background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.1);border-radius:12px;padding:14px;text-align:center;transition:all 0.2s}
+.squad-member:hover{border-color:rgba(168,85,247,0.3);transform:translateY(-1px)}
+.squad-member .name{font-weight:700;font-size:0.88rem;margin-bottom:4px}
+.squad-member .voice{font-size:0.7rem;color:#a78bfa;margin-bottom:4px}
+.squad-member .shared{font-size:0.72rem;color:rgba(255,255,255,0.35)}
+.squad-songs{background:rgba(168,85,247,0.06);border-radius:10px;padding:14px;margin-top:12px}
+.squad-songs .highlight{color:#F59E0B;font-weight:700;font-size:0.88rem;margin-bottom:8px}
+.squad-song-item{font-size:0.82rem;color:rgba(255,255,255,0.6);padding:4px 0}
+
+/* Friend Codes */
+.code-display{background:rgba(124,58,237,0.1);border:1px dashed rgba(124,58,237,0.3);border-radius:10px;padding:16px;text-align:center;margin:12px 0}
+.code-display .code{font-size:1.3rem;font-weight:800;color:#A855F7;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
+.code-remaining{font-size:0.78rem;color:rgba(255,255,255,0.4);margin-top:8px}
+.code-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.btn-sm{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;padding:8px 16px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.btn-sm:hover{background:rgba(124,58,237,0.15);border-color:#7c3aed}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:10px 20px;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,0.3)}
+.converted-list{margin-top:14px}
+.converted-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.8rem;color:rgba(255,255,255,0.5)}
+.converted-item .check{color:#22C55E}
+
+/* Song Requests */
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:0.72rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.form-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.2);color:#fff;padding:10px 14px;border-radius:8px;font-size:0.88rem;outline:none;transition:border 0.2s}
+.form-input:focus{border-color:#7c3aed}
+textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
+.request-list{margin-top:16px}
+.request-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:0.82rem}
+.request-item .status-icon{font-size:1rem}
+.request-item .info{flex:1;color:rgba(255,255,255,0.6)}
+.request-item .status-label{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;padding:3px 8px;border-radius:6px}
+.status-pending{background:rgba(245,158,11,0.15);color:#F59E0B}
+.status-added{background:rgba(34,197,94,0.15);color:#22C55E}
+.status-declined{background:rgba(239,68,68,0.15);color:#ef4444}
+
+/* Playlist */
+.playlist-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.playlist-search{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.2);color:#fff;padding:8px 14px;border-radius:8px;font-size:0.82rem;outline:none;flex:1;min-width:180px;transition:border 0.2s}
+.playlist-search:focus{border-color:#7c3aed}
+.filter-chip{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.15);color:rgba(255,255,255,0.5);padding:6px 12px;border-radius:8px;font-size:0.72rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.filter-chip.active,.filter-chip:hover{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border-color:transparent}
+.song-card{background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.08);border-radius:12px;padding:14px 16px;margin-bottom:10px;transition:all 0.2s;display:flex;align-items:center;gap:14px}
+.song-card:hover{border-color:rgba(168,85,247,0.25);background:rgba(255,255,255,0.05)}
+.song-card .song-info{flex:1}
+.song-card .song-title{font-weight:700;font-size:0.9rem;margin-bottom:3px}
+.song-card .song-artist{font-size:0.78rem;color:rgba(255,255,255,0.4)}
+.song-card .song-meta{font-size:0.7rem;color:rgba(255,255,255,0.25);margin-top:4px}
+.song-card .confidence{text-align:center;min-width:52px}
+.song-card .confidence .score{font-size:1.2rem;font-weight:800;color:#A855F7}
+.song-card .confidence .max{font-size:0.6rem;color:rgba(255,255,255,0.25)}
+.song-card .stars{color:#F59E0B;font-size:0.7rem;letter-spacing:1px}
+.song-card .actions{display:flex;gap:6px}
+.song-card .actions button{background:none;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:0.78rem;transition:all 0.2s;display:flex;align-items:center;justify-content:center}
+.song-card .actions button:hover{border-color:#7c3aed;color:#a78bfa}
+.song-card .actions .delete-btn:hover{border-color:#ef4444;color:#ef4444}
+
+/* Hum History */
+.hum-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:0.82rem}
+.hum-item:last-child{border-bottom:none}
+.hum-item .date{color:rgba(255,255,255,0.3);font-size:0.72rem;min-width:70px}
+.hum-item .song{flex:1;color:rgba(255,255,255,0.7)}
+.hum-item .score{font-weight:800;color:#c084fc;min-width:32px;text-align:right}
+
+/* Spotify */
+.spotify-section{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.spotify-section .spotify-icon{font-size:2rem}
+.spotify-section .spotify-info{flex:1}
+.spotify-section .spotify-info .title{font-weight:700;font-size:0.9rem;color:#1DB954;margin-bottom:4px}
+.spotify-section .spotify-info .desc{font-size:0.78rem;color:rgba(255,255,255,0.4)}
+.btn-spotify{background:#1DB954;color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.btn-spotify:hover{background:#1ed760;transform:translateY(-1px);box-shadow:0 4px 16px rgba(29,185,84,0.3)}
+
+/* Account Settings */
+.settings-panel{display:none}
+.settings-panel.active{display:block}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.settings-row .label{font-size:0.82rem;color:rgba(255,255,255,0.5)}
+.settings-row .val{font-size:0.88rem;font-weight:600}
+.settings-row .val.premium{color:#F59E0B}
+.settings-row .val.active{color:#22C55E}
+.cancel-link{color:rgba(255,255,255,0.3);font-size:0.75rem;cursor:pointer;transition:color 0.2s}
+.cancel-link:hover{color:#ef4444}
+
+/* Two column layout */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* Toast notification */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(124,58,237,0.95);color:#fff;padding:12px 24px;border-radius:12px;font-size:0.85rem;font-weight:600;opacity:0;transition:all 0.3s;pointer-events:none;z-index:100;backdrop-filter:blur(12px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Empty state */
+.empty-state{text-align:center;padding:30px;color:rgba(255,255,255,0.2);font-size:0.85rem}
+
+/* Responsive */
+@media(max-width:768px){
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr}
+  .squad-grid{grid-template-columns:repeat(2,1fr)}
+  .dash-header{flex-direction:column;align-items:flex-start}
+  .playlist-controls{flex-direction:column;align-items:stretch}
+  .song-card{flex-direction:column;align-items:flex-start;gap:10px}
+  .song-card .confidence{align-self:flex-end}
+}
+@media(max-width:480px){
+  .stat-row{grid-template-columns:1fr 1fr}
+  .squad-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div id="login-screen">
+  <div class="logo-wrap">
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+      <defs><linearGradient id="lg1" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#EC4899"/></linearGradient></defs>
+      <rect x="19" y="4" width="14" height="22" rx="7" fill="url(#lg1)"/>
+      <path d="M10 24 Q10 38 26 38 Q42 38 42 24" stroke="url(#lg1)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <line x1="26" y1="38" x2="26" y2="47" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="18" y1="47" x2="34" y2="47" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M6 20 Q4 26 6 32" stroke="#A855F7" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+      <path d="M2 17 Q-1 26 2 35" stroke="#A855F7" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.35"/>
+      <path d="M46 20 Q48 26 46 32" stroke="#EC4899" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+      <path d="M50 17 Q53 26 50 35" stroke="#EC4899" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.35"/>
+    </svg>
+    <h1>HumMatch Dashboard</h1>
+  </div>
+  <p>Sign in with your email to access your dashboard</p>
+  <input type="email" class="login-input" id="login-email" placeholder="your@email.com" autocomplete="email" onkeydown="if(event.key==='Enter')doLogin()"/>
+  <button class="login-btn" onclick="doLogin()">Sign In</button>
+  <div class="login-error" id="login-error"></div>
+</div>
+
+<!-- Free User Upgrade Gate -->
+<div id="upgrade-gate">
+  <div class="upgrade-card">
+    <h2>Unlock Your Full HumMatch Dashboard</h2>
+    <div class="preview">
+      <div style="height:40px;background:rgba(255,255,255,0.05);border-radius:8px;margin-bottom:8px"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="height:60px;background:rgba(255,255,255,0.04);border-radius:8px"></div>
+        <div style="height:60px;background:rgba(255,255,255,0.04);border-radius:8px"></div>
+        <div style="height:60px;background:rgba(255,255,255,0.04);border-radius:8px"></div>
+        <div style="height:60px;background:rgba(255,255,255,0.04);border-radius:8px"></div>
+      </div>
+    </div>
+    <ul class="upgrade-features">
+      <li>Unlimited voice matches</li>
+      <li>Full playlist history & Spotify export</li>
+      <li>SquadMatch - group song finder</li>
+      <li>Song request priority</li>
+      <li>5 friend discount codes/month</li>
+      <li>Voice insights & stats</li>
+    </ul>
+    <button class="upgrade-btn" onclick="window.open('/')">Upgrade to Premium &mdash; $5.99/mo</button>
+    <div style="margin-top:12px">
+      <button class="btn-sm" onclick="doLogout()">Sign out</button>
+    </div>
+  </div>
+</div>
+
+<!-- Premium Dashboard -->
+<div id="dashboard">
+  <!-- Header -->
+  <div class="dash-header">
+    <div class="logo-wrap">
+      <img src="/hummatch-icon-bug-2x.png" alt="HumMatch" style="height:36px;width:36px;border-radius:8px" onerror="this.style.display='none'"/>
+      <h1>HumMatch Dashboard</h1>
+    </div>
+    <div class="user-info">
+      <span class="user-email" id="user-email"></span>
+      <span class="premium-badge">Premium</span>
+      <button class="settings-btn" onclick="toggleSettings()">Settings</button>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="icon">🎤</div>
+      <div class="label">Total Hums</div>
+      <div class="value" id="s-total-hums">-</div>
+      <div class="sub">lifetime</div>
+    </div>
+    <div class="stat-card">
+      <div class="icon">📅</div>
+      <div class="label">This Week</div>
+      <div class="value" id="s-week-hums">-</div>
+      <div class="sub">last 7 days</div>
+    </div>
+    <div class="stat-card">
+      <div class="icon">⭐</div>
+      <div class="label">Best Match</div>
+      <div class="value" id="s-best-match">-</div>
+      <div class="sub">highest confidence</div>
+    </div>
+    <div class="stat-card">
+      <div class="icon">🎵</div>
+      <div class="label">Playlist Size</div>
+      <div class="value" id="s-playlist-size">-</div>
+      <div class="sub">saved songs</div>
+    </div>
+  </div>
+
+  <!-- SquadMatch -->
+  <div class="section-title">🎤 Your SquadMatch</div>
+  <div class="card" id="squad-section">
+    <h3>Find songs your whole group can nail</h3>
+    <div class="squad-grid" id="squad-members">
+      <!-- Populated by JS -->
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <button class="btn-sm" onclick="showAddFriend()">+ Add Friend</button>
+      <button class="btn-sm" onclick="createSquad()">+ New Squad</button>
+    </div>
+    <div id="add-friend-form" style="display:none;margin-bottom:14px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input class="form-input" id="friend-name" placeholder="Friend's name" style="flex:1;min-width:120px"/>
+        <select class="form-input" id="friend-voice" style="width:120px">
+          <option value="">Voice type</option>
+          <option>Soprano</option>
+          <option>Alto</option>
+          <option>Tenor</option>
+          <option>Baritone</option>
+          <option>Bass</option>
+        </select>
+        <button class="btn-primary" onclick="addFriend()">Invite</button>
+      </div>
+    </div>
+    <div class="squad-songs" id="squad-songs">
+      <div class="highlight" id="squad-match-count">Squad Matches: calculating...</div>
+      <div id="squad-song-list">
+        <div class="empty-state">Add friends to discover songs you can all sing together!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Two Column: Friend Codes + Song Requests -->
+  <div class="two-col">
+    <!-- Friend Codes -->
+    <div class="card" id="friend-codes-section">
+      <h3>🎁 Premium Friend Invites</h3>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:12px">Share HumMatch with friends &mdash; they get 20% off forever!</p>
+      <div class="code-display">
+        <div class="code" id="current-code">---</div>
+        <div class="code-remaining" id="codes-remaining">Loading...</div>
+      </div>
+      <div class="code-actions">
+        <button class="btn-sm" onclick="copyCode()">Copy Code</button>
+        <button class="btn-primary" onclick="generateCode()">Generate New</button>
+      </div>
+      <div class="converted-list" id="converted-list">
+        <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Conversions</div>
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- Song Requests -->
+    <div class="card" id="song-requests-section">
+      <h3>🎵 Suggest a Song</h3>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:14px">Can't find a song? Request it and we'll add it!</p>
+      <div class="form-group">
+        <label>Song Title</label>
+        <input class="form-input" id="req-title" placeholder="e.g. Purple Rain"/>
+      </div>
+      <div class="form-group">
+        <label>Artist</label>
+        <input class="form-input" id="req-artist" placeholder="e.g. Prince"/>
+      </div>
+      <div class="form-group">
+        <label>Your Notes <span style="color:rgba(255,255,255,0.2)">(optional)</span></label>
+        <textarea class="form-input" id="req-notes" placeholder="Why this song? Any details..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="submitSongRequest()" style="width:100%">Submit Request</button>
+      <div class="request-list" id="request-list">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- My Playlist -->
+  <div class="section-title">🎵 My Playlist</div>
+  <div class="card">
+    <div class="playlist-controls">
+      <input class="playlist-search" id="playlist-search" placeholder="Search songs..." oninput="filterPlaylist()"/>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="filter-chip active" data-sort="date" onclick="sortPlaylist('date',this)">Recent</button>
+        <button class="filter-chip" data-sort="confidence" onclick="sortPlaylist('confidence',this)">Top Rated</button>
+        <button class="filter-chip" data-sort="artist" onclick="sortPlaylist('artist',this)">Artist</button>
+        <button class="filter-chip" data-sort="genre" onclick="sortPlaylist('genre',this)">Genre</button>
+      </div>
+    </div>
+    <div id="playlist-container">
+      <div class="empty-state">Your saved matches will appear here</div>
+    </div>
+  </div>
+
+  <!-- Recent Hum History -->
+  <div class="section-title">📊 Recent Hums</div>
+  <div class="card">
+    <div id="hum-history">
+      <div class="empty-state">Your recent hum history will appear here</div>
+    </div>
+  </div>
+
+  <!-- Spotify Export -->
+  <div class="section-title">🎧 Spotify Integration</div>
+  <div class="card">
+    <div class="spotify-section">
+      <div class="spotify-icon">🟢</div>
+      <div class="spotify-info">
+        <div class="title">Export to Spotify</div>
+        <div class="desc">Send your entire playlist to a new Spotify playlist in one click</div>
+      </div>
+      <button class="btn-spotify" onclick="exportSpotify()">Export All to Spotify</button>
+    </div>
+  </div>
+
+  <!-- Account Settings (Collapsible) -->
+  <div class="settings-panel" id="settings-panel">
+    <div class="section-title">⚙️ Account Settings</div>
+    <div class="card">
+      <div class="settings-row">
+        <div class="label">Email Address</div>
+        <div class="val" id="set-email">-</div>
+      </div>
+      <div class="settings-row">
+        <div class="label">Subscription</div>
+        <div class="val premium" id="set-sub">Premium</div>
+      </div>
+      <div class="settings-row">
+        <div class="label">Member Since</div>
+        <div class="val" id="set-since">-</div>
+      </div>
+      <div class="settings-row">
+        <div class="label">Billing</div>
+        <div class="val active">Active</div>
+      </div>
+      <div class="settings-row">
+        <div class="label">Language</div>
+        <div class="val">English</div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn-sm" onclick="changeEmail()">Change Email</button>
+        <span class="cancel-link" onclick="if(confirm('Are you sure you want to cancel your subscription?'))toast('Cancellation request submitted')">Cancel Subscription</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ---------------------------------------------------------------------------
+// State
+// ---------------------------------------------------------------------------
+let token = localStorage.getItem('hm_dash_token');
+let userEmail = '';
+let isPremium = false;
+let playlistData = [];
+let currentSort = 'date';
+
+// ---------------------------------------------------------------------------
+// Auth
+// ---------------------------------------------------------------------------
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  if (!email) return;
+  const errEl = document.getElementById('login-error');
+  errEl.textContent = '';
+
+  try {
+    const res = await fetch('/api/hummatch/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (data.error) { errEl.textContent = data.error; return; }
+
+    token = data.token;
+    localStorage.setItem('hm_dash_token', token);
+    userEmail = data.email;
+    isPremium = data.is_premium;
+    showDashboard();
+  } catch (e) {
+    errEl.textContent = 'Connection error. Please try again.';
+  }
+}
+
+function doLogout() {
+  localStorage.removeItem('hm_dash_token');
+  token = null;
+  document.getElementById('dashboard').classList.remove('active');
+  document.getElementById('upgrade-gate').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-email').value = '';
+}
+
+async function checkAuth() {
+  if (!token) {
+    document.getElementById('login-screen').style.display = 'flex';
+    return;
+  }
+  try {
+    const res = await fetch('/api/hummatch/auth/me?token=' + token);
+    if (!res.ok) { doLogout(); return; }
+    const data = await res.json();
+    userEmail = data.email;
+    isPremium = data.is_premium;
+    showDashboard();
+  } catch (e) {
+    doLogout();
+  }
+}
+
+function showDashboard() {
+  document.getElementById('login-screen').style.display = 'none';
+  if (!isPremium) {
+    document.getElementById('upgrade-gate').style.display = 'flex';
+    return;
+  }
+  document.getElementById('upgrade-gate').style.display = 'none';
+  document.getElementById('dashboard').classList.add('active');
+  document.getElementById('user-email').textContent = userEmail;
+  loadAll();
+}
+
+// ---------------------------------------------------------------------------
+// API helpers
+// ---------------------------------------------------------------------------
+function api(path, opts = {}) {
+  const headers = { 'Content-Type': 'application/json', 'X-HM-Token': token, ...(opts.headers || {}) };
+  return fetch(path, { ...opts, headers });
+}
+
+// ---------------------------------------------------------------------------
+// Load all data
+// ---------------------------------------------------------------------------
+async function loadAll() {
+  await Promise.all([
+    loadStats(),
+    loadPlaylist(),
+    loadHumHistory(),
+    loadSquad(),
+    loadFriendCodes(),
+    loadSongRequests()
+  ]);
+}
+
+// ---------------------------------------------------------------------------
+// Stats
+// ---------------------------------------------------------------------------
+async function loadStats() {
+  try {
+    const res = await api('/api/hummatch/dashboard');
+    if (!res.ok) return;
+    const d = await res.json();
+
+    document.getElementById('s-total-hums').textContent = fmt(d.stats.totalHums);
+    document.getElementById('s-week-hums').textContent = fmt(d.stats.weekHums);
+    document.getElementById('s-best-match').textContent = d.stats.bestMatch ? d.stats.bestMatch + '/100' : '-';
+    document.getElementById('s-playlist-size').textContent = fmt(d.stats.playlistSize);
+
+    // Account settings
+    document.getElementById('set-email').textContent = d.user.email;
+    document.getElementById('set-sub').textContent = d.user.is_premium ? 'Premium' : 'Free';
+    if (d.user.created_at) {
+      document.getElementById('set-since').textContent = new Date(d.user.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    }
+  } catch (e) { console.error('Stats load failed', e); }
+}
+
+// ---------------------------------------------------------------------------
+// Playlist
+// ---------------------------------------------------------------------------
+async function loadPlaylist() {
+  try {
+    const res = await api('/api/hummatch/playlist');
+    if (!res.ok) return;
+    const d = await res.json();
+    playlistData = d.songs || [];
+    renderPlaylist();
+  } catch (e) { console.error('Playlist load failed', e); }
+}
+
+function renderPlaylist() {
+  const container = document.getElementById('playlist-container');
+  const search = (document.getElementById('playlist-search').value || '').toLowerCase();
+  let songs = [...playlistData];
+
+  if (search) {
+    songs = songs.filter(s =>
+      (s.song_title || '').toLowerCase().includes(search) ||
+      (s.artist || '').toLowerCase().includes(search) ||
+      (s.genre || '').toLowerCase().includes(search)
+    );
+  }
+
+  // Sort
+  if (currentSort === 'confidence') songs.sort((a, b) => (b.confidence || 0) - (a.confidence || 0));
+  else if (currentSort === 'artist') songs.sort((a, b) => (a.artist || '').localeCompare(b.artist || ''));
+  else if (currentSort === 'genre') songs.sort((a, b) => (a.genre || '').localeCompare(b.genre || ''));
+  // default: date (already sorted by matched_at DESC from server)
+
+  if (!songs.length) {
+    container.innerHTML = '<div class="empty-state">No songs found</div>';
+    return;
+  }
+
+  container.innerHTML = songs.map(s => {
+    const stars = s.confidence >= 90 ? '★★★★★' : s.confidence >= 75 ? '★★★★☆' : s.confidence >= 60 ? '★★★☆☆' : s.confidence >= 40 ? '★★☆☆☆' : '★☆☆☆☆';
+    const date = s.matched_at ? new Date(s.matched_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+    const meta = [s.genre, s.song_key ? 'Key: ' + s.song_key : '', s.voice_type].filter(Boolean).join(' | ');
+    return `<div class="song-card">
+      <div class="confidence"><div class="score">${s.confidence || 0}</div><div class="max">/100</div></div>
+      <div class="song-info">
+        <div class="song-title">"${esc(s.song_title)}" &mdash; ${esc(s.artist)}</div>
+        <div class="stars">${stars}</div>
+        <div class="song-meta">${date}${meta ? ' | ' + esc(meta) : ''}</div>
+      </div>
+      <div class="actions">
+        <button title="Remove" class="delete-btn" onclick="removeSong(${s.id})">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterPlaylist() { renderPlaylist(); }
+
+function sortPlaylist(sort, el) {
+  currentSort = sort;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderPlaylist();
+}
+
+async function removeSong(id) {
+  if (!confirm('Remove this song from your playlist?')) return;
+  try {
+    await api('/api/hummatch/playlist/' + id, { method: 'DELETE' });
+    playlistData = playlistData.filter(s => s.id !== id);
+    renderPlaylist();
+    loadStats();
+    toast('Song removed');
+  } catch (e) { toast('Failed to remove'); }
+}
+
+// ---------------------------------------------------------------------------
+// Hum History
+// ---------------------------------------------------------------------------
+async function loadHumHistory() {
+  try {
+    const res = await api('/api/hummatch/dashboard');
+    if (!res.ok) return;
+    const d = await res.json();
+    const hums = d.recentHums || [];
+    const container = document.getElementById('hum-history');
+
+    if (!hums.length) {
+      container.innerHTML = '<div class="empty-state">No hums recorded yet. Start humming!</div>';
+      return;
+    }
+
+    container.innerHTML = hums.map(h => {
+      const date = h.hummed_at ? new Date(h.hummed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+      return `<div class="hum-item">
+        <div class="date">${date}</div>
+        <div class="song">"${esc(h.song_title)}" &mdash; ${esc(h.artist)}</div>
+        <div class="score">${h.confidence || 0}</div>
+      </div>`;
+    }).join('');
+  } catch (e) { console.error('History load failed', e); }
+}
+
+// ---------------------------------------------------------------------------
+// SquadMatch
+// ---------------------------------------------------------------------------
+let squads = [];
+
+async function loadSquad() {
+  try {
+    const res = await api('/api/hummatch/squad');
+    if (!res.ok) return;
+    const d = await res.json();
+    squads = d.squads || [];
+    renderSquad();
+  } catch (e) { console.error('Squad load failed', e); }
+}
+
+function renderSquad() {
+  const membersEl = document.getElementById('squad-members');
+  const songsEl = document.getElementById('squad-song-list');
+  const countEl = document.getElementById('squad-match-count');
+
+  if (!squads.length || !squads[0].members || !squads[0].members.length) {
+    membersEl.innerHTML = '<div class="empty-state" style="grid-column:1/-1">No squad members yet. Add friends to get started!</div>';
+    countEl.textContent = 'Squad Matches: Add friends to find shared songs!';
+    songsEl.innerHTML = '';
+    return;
+  }
+
+  const members = squads[0].members;
+  membersEl.innerHTML = members.map(m => `
+    <div class="squad-member">
+      <div class="name">${esc(m.display_name || 'Friend')}</div>
+      <div class="voice">${esc(m.voice_type || 'Unknown')}</div>
+      <div class="shared">${m.status === 'accepted' ? 'Connected' : 'Pending'}</div>
+    </div>
+  `).join('');
+
+  // Placeholder squad match songs
+  const demoSongs = ['Don\'t Stop Believin\' - Journey', 'Shallow - Lady Gaga', 'Sweet Caroline - Neil Diamond'];
+  countEl.textContent = `Squad Matches: ${demoSongs.length} songs all can nail! ⭐`;
+  songsEl.innerHTML = demoSongs.map(s => `<div class="squad-song-item">🎵 "${s}"</div>`).join('');
+}
+
+function showAddFriend() {
+  const form = document.getElementById('add-friend-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+async function createSquad() {
+  try {
+    const res = await api('/api/hummatch/squad', {
+      method: 'POST',
+      body: JSON.stringify({ squad_name: 'My SquadMatch' })
+    });
+    if (!res.ok) return;
+    await loadSquad();
+    toast('Squad created!');
+  } catch (e) { toast('Failed to create squad'); }
+}
+
+async function addFriend() {
+  const name = document.getElementById('friend-name').value.trim();
+  const voice = document.getElementById('friend-voice').value;
+  if (!name) { toast('Enter a name'); return; }
+
+  // Create squad if none exists
+  if (!squads.length) {
+    const createRes = await api('/api/hummatch/squad', {
+      method: 'POST',
+      body: JSON.stringify({ squad_name: 'My SquadMatch' })
+    });
+    if (!createRes.ok) { toast('Failed to create squad'); return; }
+    const createData = await createRes.json();
+    squads = [{ id: createData.id, members: [] }];
+  }
+
+  try {
+    const res = await api('/api/hummatch/squad/' + squads[0].id + '/invite', {
+      method: 'POST',
+      body: JSON.stringify({ display_name: name, voice_type: voice })
+    });
+    if (!res.ok) return;
+    document.getElementById('friend-name').value = '';
+    document.getElementById('friend-voice').value = '';
+    document.getElementById('add-friend-form').style.display = 'none';
+    await loadSquad();
+    toast('Friend invited!');
+  } catch (e) { toast('Failed to invite friend'); }
+}
+
+// ---------------------------------------------------------------------------
+// Friend Codes
+// ---------------------------------------------------------------------------
+async function loadFriendCodes() {
+  try {
+    const res = await api('/api/hummatch/friend-codes');
+    if (!res.ok) return;
+    const d = await res.json();
+
+    // Show latest code
+    const codeEl = document.getElementById('current-code');
+    if (d.codes && d.codes.length) {
+      codeEl.textContent = d.codes[0].code;
+    } else {
+      codeEl.textContent = 'Generate your first code!';
+      codeEl.style.fontSize = '0.9rem';
+    }
+
+    // Remaining
+    const remaining = document.getElementById('codes-remaining');
+    const resetDate = d.resetDate ? new Date(d.resetDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'next month';
+    remaining.textContent = `Codes remaining: ${d.remaining}/${d.total} | Resets: ${resetDate}`;
+
+    // Conversions
+    const convEl = document.getElementById('converted-list');
+    const converted = (d.codes || []).filter(c => c.converted);
+    if (converted.length) {
+      convEl.innerHTML = `<div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Friends Converted: ${converted.length} 🚀</div>` +
+        converted.map(c => `<div class="converted-item"><span class="check">✅</span>${esc(c.used_by_email || 'Friend')} &mdash; ${new Date(c.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>`).join('');
+    } else {
+      convEl.innerHTML = `<div style="font-size:0.75rem;color:rgba(255,255,255,0.2);margin-top:10px">No conversions yet. Share your code!</div>`;
+    }
+  } catch (e) { console.error('Friend codes load failed', e); }
+}
+
+function copyCode() {
+  const code = document.getElementById('current-code').textContent;
+  if (!code || code.includes('Generate')) { toast('Generate a code first'); return; }
+  navigator.clipboard.writeText(code).then(() => toast('Code copied!')).catch(() => toast('Copy failed'));
+}
+
+async function generateCode() {
+  try {
+    const res = await api('/api/hummatch/friend-codes', { method: 'POST' });
+    const d = await res.json();
+    if (d.error) { toast(d.error); return; }
+    await loadFriendCodes();
+    toast('New code generated: ' + d.code);
+  } catch (e) { toast('Failed to generate code'); }
+}
+
+// ---------------------------------------------------------------------------
+// Song Requests
+// ---------------------------------------------------------------------------
+async function loadSongRequests() {
+  try {
+    const res = await api('/api/hummatch/song-requests');
+    if (!res.ok) return;
+    const d = await res.json();
+    const list = document.getElementById('request-list');
+
+    if (!d.requests || !d.requests.length) {
+      list.innerHTML = '<div class="empty-state" style="padding:10px 0">No requests yet</div>';
+      return;
+    }
+
+    list.innerHTML = d.requests.map(r => {
+      const icon = r.status === 'added' ? '✅' : r.status === 'declined' ? '❌' : '⏳';
+      const statusClass = 'status-' + r.status;
+      return `<div class="request-item">
+        <div class="status-icon">${icon}</div>
+        <div class="info">"${esc(r.song_title)}" &mdash; ${esc(r.artist)}</div>
+        <span class="status-label ${statusClass}">${r.status}</span>
+      </div>`;
+    }).join('');
+  } catch (e) { console.error('Song requests load failed', e); }
+}
+
+async function submitSongRequest() {
+  const title = document.getElementById('req-title').value.trim();
+  const artist = document.getElementById('req-artist').value.trim();
+  const notes = document.getElementById('req-notes').value.trim();
+  if (!title) { toast('Song title is required'); return; }
+
+  try {
+    const res = await api('/api/hummatch/song-requests', {
+      method: 'POST',
+      body: JSON.stringify({ song_title: title, artist, notes })
+    });
+    const d = await res.json();
+    if (d.error) { toast(d.error); return; }
+    document.getElementById('req-title').value = '';
+    document.getElementById('req-artist').value = '';
+    document.getElementById('req-notes').value = '';
+    await loadSongRequests();
+    toast('Song request submitted!');
+  } catch (e) { toast('Failed to submit request'); }
+}
+
+// ---------------------------------------------------------------------------
+// Spotify Export
+// ---------------------------------------------------------------------------
+async function exportSpotify() {
+  try {
+    const res = await api('/api/hummatch/spotify/export', { method: 'POST' });
+    const d = await res.json();
+    toast(d.message || 'Export complete!');
+  } catch (e) { toast('Export failed'); }
+}
+
+// ---------------------------------------------------------------------------
+// Account Settings
+// ---------------------------------------------------------------------------
+function toggleSettings() {
+  const panel = document.getElementById('settings-panel');
+  panel.classList.toggle('active');
+  if (panel.classList.contains('active')) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+async function changeEmail() {
+  const newEmail = prompt('Enter new email address:');
+  if (!newEmail) return;
+  try {
+    const res = await api('/api/hummatch/account', {
+      method: 'PUT',
+      body: JSON.stringify({ email: newEmail })
+    });
+    const d = await res.json();
+    if (d.error) { toast(d.error); return; }
+    userEmail = newEmail;
+    document.getElementById('user-email').textContent = newEmail;
+    document.getElementById('set-email').textContent = newEmail;
+    toast('Email updated!');
+  } catch (e) { toast('Failed to update email'); }
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+function fmt(n) {
+  if (n === null || n === undefined) return '-';
+  if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+  return n.toLocaleString();
+}
+
+function esc(s) {
+  if (!s) return '';
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ---------------------------------------------------------------------------
+// Init
+// ---------------------------------------------------------------------------
+checkAuth();
+</script>
+</body>
+</html>

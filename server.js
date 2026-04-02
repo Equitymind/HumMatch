@@ -73,10 +73,92 @@ db.exec(`
     created_at TEXT DEFAULT (datetime('now'))
   );
 
+  CREATE TABLE IF NOT EXISTS user_playlists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    song_title TEXT,
+    artist TEXT,
+    confidence INTEGER,
+    genre TEXT,
+    song_key TEXT,
+    voice_type TEXT,
+    language TEXT DEFAULT 'en',
+    matched_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS hum_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    song_title TEXT,
+    artist TEXT,
+    confidence INTEGER,
+    hummed_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS squad_matches (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    owner_user_id INTEGER,
+    squad_name TEXT DEFAULT 'My SquadMatch',
+    created_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY(owner_user_id) REFERENCES users(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS squad_members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    squad_id INTEGER,
+    user_id INTEGER,
+    display_name TEXT,
+    voice_type TEXT,
+    status TEXT DEFAULT 'pending',
+    joined_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY(squad_id) REFERENCES squad_matches(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS song_requests (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    song_title TEXT,
+    artist TEXT,
+    notes TEXT,
+    status TEXT DEFAULT 'pending',
+    admin_notes TEXT,
+    requested_at TEXT DEFAULT (datetime('now')),
+    reviewed_at TEXT,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS friend_codes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    code TEXT UNIQUE NOT NULL,
+    used_by_email TEXT,
+    converted INTEGER DEFAULT 0,
+    created_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS friend_code_tracker (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER UNIQUE,
+    codes_issued INTEGER DEFAULT 0,
+    reset_date TEXT,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
   CREATE INDEX IF NOT EXISTS idx_events_created ON events(created_at);
   CREATE INDEX IF NOT EXISTS idx_events_event ON events(event);
   CREATE INDEX IF NOT EXISTS idx_users_token ON users(token);
   CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+  CREATE INDEX IF NOT EXISTS idx_playlists_user ON user_playlists(user_id);
+  CREATE INDEX IF NOT EXISTS idx_hum_history_user ON hum_history(user_id);
+  CREATE INDEX IF NOT EXISTS idx_squad_owner ON squad_matches(owner_user_id);
+  CREATE INDEX IF NOT EXISTS idx_squad_members_squad ON squad_members(squad_id);
+  CREATE INDEX IF NOT EXISTS idx_song_requests_user ON song_requests(user_id);
+  CREATE INDEX IF NOT EXISTS idx_friend_codes_user ON friend_codes(user_id);
+  CREATE INDEX IF NOT EXISTS idx_friend_codes_code ON friend_codes(code);
 `);
 
 // Prepared statements for performance
@@ -98,6 +180,71 @@ const stmts = {
   ),
   insertGeo: db.prepare(
     'INSERT INTO geo (lat, lng, city, country) VALUES (?, ?, ?, ?)'
+  ),
+  // Dashboard tables
+  insertPlaylistSong: db.prepare(
+    'INSERT INTO user_playlists (user_id, song_title, artist, confidence, genre, song_key, voice_type, language) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+  ),
+  getPlaylist: db.prepare(
+    'SELECT * FROM user_playlists WHERE user_id = ? ORDER BY matched_at DESC'
+  ),
+  deletePlaylistSong: db.prepare(
+    'DELETE FROM user_playlists WHERE id = ? AND user_id = ?'
+  ),
+  insertHumHistory: db.prepare(
+    'INSERT INTO hum_history (user_id, song_title, artist, confidence) VALUES (?, ?, ?, ?)'
+  ),
+  getHumHistory: db.prepare(
+    'SELECT * FROM hum_history WHERE user_id = ? ORDER BY hummed_at DESC LIMIT 10'
+  ),
+  getHumCount: db.prepare(
+    'SELECT COUNT(*) as cnt FROM hum_history WHERE user_id = ?'
+  ),
+  getWeekHumCount: db.prepare(
+    `SELECT COUNT(*) as cnt FROM hum_history WHERE user_id = ? AND hummed_at >= datetime('now', '-7 days')`
+  ),
+  getBestMatch: db.prepare(
+    'SELECT MAX(confidence) as best FROM hum_history WHERE user_id = ?'
+  ),
+  // Squad
+  insertSquad: db.prepare(
+    'INSERT INTO squad_matches (owner_user_id, squad_name) VALUES (?, ?)'
+  ),
+  getSquads: db.prepare(
+    'SELECT * FROM squad_matches WHERE owner_user_id = ?'
+  ),
+  insertSquadMember: db.prepare(
+    'INSERT INTO squad_members (squad_id, user_id, display_name, voice_type, status) VALUES (?, ?, ?, ?, ?)'
+  ),
+  getSquadMembers: db.prepare(
+    'SELECT * FROM squad_members WHERE squad_id = ?'
+  ),
+  updateSquadMemberStatus: db.prepare(
+    'UPDATE squad_members SET status = ? WHERE id = ?'
+  ),
+  // Song requests
+  insertSongRequest: db.prepare(
+    'INSERT INTO song_requests (user_id, song_title, artist, notes) VALUES (?, ?, ?, ?)'
+  ),
+  getSongRequests: db.prepare(
+    'SELECT * FROM song_requests WHERE user_id = ? ORDER BY requested_at DESC'
+  ),
+  // Friend codes
+  insertFriendCode: db.prepare(
+    'INSERT INTO friend_codes (user_id, code) VALUES (?, ?)'
+  ),
+  getFriendCodes: db.prepare(
+    'SELECT * FROM friend_codes WHERE user_id = ? ORDER BY created_at DESC'
+  ),
+  getCodeTracker: db.prepare(
+    'SELECT * FROM friend_code_tracker WHERE user_id = ?'
+  ),
+  upsertCodeTracker: db.prepare(
+    `INSERT INTO friend_code_tracker (user_id, codes_issued, reset_date) VALUES (?, 1, ?)
+     ON CONFLICT(user_id) DO UPDATE SET codes_issued = codes_issued + 1`
+  ),
+  resetCodeTracker: db.prepare(
+    'UPDATE friend_code_tracker SET codes_issued = 0, reset_date = ? WHERE user_id = ?'
   )
 };
 
@@ -345,6 +492,236 @@ app.post('/api/hummatch/contact', (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// Helper: auth middleware (token-based)
+// ---------------------------------------------------------------------------
+function requireAuth(req, res, next) {
+  const token = req.headers['x-hm-token'] || req.query.token;
+  if (!token) return res.status(401).json({ error: 'Missing token' });
+  const user = stmts.getUserByToken.get(token);
+  if (!user) return res.status(401).json({ error: 'Invalid token' });
+  req.user = user;
+  next();
+}
+
+function requirePremium(req, res, next) {
+  if (!req.user.is_premium) return res.status(403).json({ error: 'Premium required' });
+  next();
+}
+
+// ---------------------------------------------------------------------------
+// API: Dashboard - Stats overview
+// ---------------------------------------------------------------------------
+app.get('/api/hummatch/dashboard', requireAuth, (req, res) => {
+  const uid = req.user.id;
+  const totalHums = stmts.getHumCount.get(uid).cnt;
+  const weekHums = stmts.getWeekHumCount.get(uid).cnt;
+  const bestMatch = stmts.getBestMatch.get(uid).best || 0;
+  const playlist = stmts.getPlaylist.all(uid);
+  const recentHums = stmts.getHumHistory.all(uid);
+
+  res.json({
+    stats: {
+      totalHums,
+      weekHums,
+      bestMatch,
+      playlistSize: playlist.length
+    },
+    recentHums,
+    user: {
+      email: req.user.email,
+      is_premium: !!req.user.is_premium,
+      created_at: req.user.created_at
+    }
+  });
+});
+
+// ---------------------------------------------------------------------------
+// API: Playlist CRUD
+// ---------------------------------------------------------------------------
+app.get('/api/hummatch/playlist', requireAuth, (req, res) => {
+  const songs = stmts.getPlaylist.all(req.user.id);
+  res.json({ songs });
+});
+
+app.post('/api/hummatch/playlist/add', requireAuth, (req, res) => {
+  const { song_title, artist, confidence, genre, song_key, voice_type, language } = req.body;
+  if (!song_title) return res.status(400).json({ error: 'Song title required' });
+  try {
+    const info = stmts.insertPlaylistSong.run(
+      req.user.id, song_title, artist || '', confidence || 0,
+      genre || '', song_key || '', voice_type || '', language || 'en'
+    );
+    res.json({ ok: true, id: info.lastInsertRowid });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to add song' });
+  }
+});
+
+app.delete('/api/hummatch/playlist/:id', requireAuth, (req, res) => {
+  const result = stmts.deletePlaylistSong.run(parseInt(req.params.id), req.user.id);
+  res.json({ ok: true, deleted: result.changes });
+});
+
+// ---------------------------------------------------------------------------
+// API: Hum History
+// ---------------------------------------------------------------------------
+app.post('/api/hummatch/hum', requireAuth, (req, res) => {
+  const { song_title, artist, confidence } = req.body;
+  if (!song_title) return res.status(400).json({ error: 'Song title required' });
+  try {
+    stmts.insertHumHistory.run(req.user.id, song_title, artist || '', confidence || 0);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to record hum' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// API: SquadMatch (Premium)
+// ---------------------------------------------------------------------------
+app.get('/api/hummatch/squad', requireAuth, requirePremium, (req, res) => {
+  const squads = stmts.getSquads.all(req.user.id);
+  const result = squads.map(s => ({
+    ...s,
+    members: stmts.getSquadMembers.all(s.id)
+  }));
+  res.json({ squads: result });
+});
+
+app.post('/api/hummatch/squad', requireAuth, requirePremium, (req, res) => {
+  const { squad_name } = req.body;
+  try {
+    const info = stmts.insertSquad.run(req.user.id, squad_name || 'My SquadMatch');
+    res.json({ ok: true, id: info.lastInsertRowid });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to create squad' });
+  }
+});
+
+app.post('/api/hummatch/squad/:id/invite', requireAuth, requirePremium, (req, res) => {
+  const { display_name, voice_type } = req.body;
+  const squadId = parseInt(req.params.id);
+  try {
+    const info = stmts.insertSquadMember.run(squadId, null, display_name || '', voice_type || '', 'pending');
+    res.json({ ok: true, id: info.lastInsertRowid });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to invite member' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// API: Song Requests (Premium)
+// ---------------------------------------------------------------------------
+app.get('/api/hummatch/song-requests', requireAuth, requirePremium, (req, res) => {
+  const requests = stmts.getSongRequests.all(req.user.id);
+  res.json({ requests });
+});
+
+app.post('/api/hummatch/song-requests', requireAuth, requirePremium, (req, res) => {
+  const { song_title, artist, notes } = req.body;
+  if (!song_title) return res.status(400).json({ error: 'Song title required' });
+  try {
+    const info = stmts.insertSongRequest.run(req.user.id, song_title, artist || '', notes || '');
+    res.json({ ok: true, id: info.lastInsertRowid });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to submit request' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// API: Friend Codes (Premium)
+// ---------------------------------------------------------------------------
+app.get('/api/hummatch/friend-codes', requireAuth, requirePremium, (req, res) => {
+  const codes = stmts.getFriendCodes.all(req.user.id);
+  let tracker = stmts.getCodeTracker.get(req.user.id);
+
+  // Auto-reset if past reset date
+  if (tracker && tracker.reset_date && new Date(tracker.reset_date) <= new Date()) {
+    const nextReset = new Date();
+    nextReset.setMonth(nextReset.getMonth() + 1, 1);
+    nextReset.setHours(0, 0, 0, 0);
+    stmts.resetCodeTracker.run(nextReset.toISOString(), req.user.id);
+    tracker = stmts.getCodeTracker.get(req.user.id);
+  }
+
+  const codesIssued = tracker ? tracker.codes_issued : 0;
+  const conversions = codes.filter(c => c.converted).length;
+
+  res.json({
+    codes,
+    remaining: Math.max(0, 5 - codesIssued),
+    total: 5,
+    conversions,
+    resetDate: tracker ? tracker.reset_date : null
+  });
+});
+
+app.post('/api/hummatch/friend-codes', requireAuth, requirePremium, (req, res) => {
+  let tracker = stmts.getCodeTracker.get(req.user.id);
+
+  // Auto-reset if past reset date
+  if (tracker && tracker.reset_date && new Date(tracker.reset_date) <= new Date()) {
+    const nextReset = new Date();
+    nextReset.setMonth(nextReset.getMonth() + 1, 1);
+    nextReset.setHours(0, 0, 0, 0);
+    stmts.resetCodeTracker.run(nextReset.toISOString(), req.user.id);
+    tracker = stmts.getCodeTracker.get(req.user.id);
+  }
+
+  const codesIssued = tracker ? tracker.codes_issued : 0;
+  if (codesIssued >= 5) {
+    return res.status(400).json({ error: 'Monthly code limit reached (5/5)' });
+  }
+
+  // Generate code from email prefix
+  const prefix = req.user.email.split('@')[0].replace(/[^a-zA-Z]/g, '').toUpperCase().slice(0, 8);
+  const code = prefix + 'MUSIC20' + Math.floor(Math.random() * 100);
+
+  try {
+    stmts.insertFriendCode.run(req.user.id, code);
+    const nextReset = new Date();
+    nextReset.setMonth(nextReset.getMonth() + 1, 1);
+    nextReset.setHours(0, 0, 0, 0);
+    stmts.upsertCodeTracker.run(req.user.id, nextReset.toISOString());
+    res.json({ ok: true, code, remaining: Math.max(0, 4 - codesIssued) });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to generate code' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// API: Spotify Export (placeholder)
+// ---------------------------------------------------------------------------
+app.post('/api/hummatch/spotify/export', requireAuth, (req, res) => {
+  const songs = stmts.getPlaylist.all(req.user.id);
+  // Placeholder — real Spotify integration would use OAuth + Spotify Web API
+  res.json({
+    ok: true,
+    exported: songs.length,
+    message: `${songs.length} songs ready for Spotify export. Connect your Spotify account to complete.`
+  });
+});
+
+// ---------------------------------------------------------------------------
+// API: Account Settings
+// ---------------------------------------------------------------------------
+app.put('/api/hummatch/account', requireAuth, (req, res) => {
+  const { email } = req.body;
+  if (email) {
+    const trimmed = email.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      return res.status(400).json({ error: 'Invalid email' });
+    }
+    try {
+      db.prepare('UPDATE users SET email = ?, updated_at = datetime(\'now\') WHERE id = ?').run(trimmed, req.user.id);
+    } catch (e) {
+      return res.status(400).json({ error: 'Email already in use' });
+    }
+  }
+  res.json({ ok: true });
+});
+
+// ---------------------------------------------------------------------------
 // Static files & SPA routing
 // ---------------------------------------------------------------------------
 app.use(express.static(path.join(__dirname), {
@@ -364,6 +741,11 @@ app.get('/blog/how-hummatch-was-built', (_req, res) => {
 });
 app.get('/blog', (_req, res) => {
   res.sendFile(path.join(__dirname, 'blog', 'index.html'));
+});
+
+// Dashboard page
+app.get('/dashboard', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'dashboard.html'));
 });
 
 // Contact page (serves index.html, handled client-side)
