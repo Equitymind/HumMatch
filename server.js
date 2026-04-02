@@ -224,7 +224,7 @@ db.exec(`
       for (const g of rows) insertGeo.run(g.lat, g.lng, g.city, g.country, g.cnt);
     });
 
-    const geoResults = [];
+    const perIpResults = [];
     let resolved = 0, failed = 0;
 
     for (let i = 0; i < allIps.length; i += BATCH_SIZE) {
@@ -238,7 +238,7 @@ db.exec(`
         const results = await res.json();
         for (const r of results) {
           if (r.status === 'success' && r.lat && r.lon) {
-            geoResults.push({ lat: r.lat, lng: r.lon, city: r.city || 'Unknown', country: r.country || 'Unknown', cnt: ipCounts[r.query] || 1 });
+            perIpResults.push({ lat: r.lat, lng: r.lon, city: r.city || 'Unknown', country: r.country || 'Unknown', cnt: ipCounts[r.query] || 1 });
             resolved++;
           } else { failed++; }
         }
@@ -249,8 +249,19 @@ db.exec(`
       if (i + BATCH_SIZE < allIps.length) await new Promise(r => setTimeout(r, RATE_LIMIT_MS));
     }
 
+    // Cluster by city+country to reduce map pins
+    const cityMap = {};
+    for (const r of perIpResults) {
+      const key = `${r.city}|${r.country}`;
+      if (!cityMap[key]) {
+        cityMap[key] = { lat: r.lat, lng: r.lng, city: r.city, country: r.country, cnt: 0 };
+      }
+      cityMap[key].cnt += r.cnt;
+    }
+    const geoResults = Object.values(cityMap);
+
     if (geoResults.length > 0) insertAll(geoResults);
-    console.log(`Auto-populated geo table: ${resolved} locations resolved, ${failed} failed`);
+    console.log(`Auto-populated geo table: ${resolved} IPs resolved → ${geoResults.length} city clusters, ${failed} failed`);
   })().catch(err => console.error('Geo auto-populate failed:', err.message));
 })();
 
