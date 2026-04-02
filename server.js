@@ -161,6 +161,39 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_friend_codes_code ON friend_codes(code);
 `);
 
+// ---------------------------------------------------------------------------
+// Auto-import analytics backup if events table is empty (for fresh deploys)
+// ---------------------------------------------------------------------------
+(function autoImportEvents() {
+  const count = db.prepare('SELECT COUNT(*) AS cnt FROM events').get().cnt;
+  if (count > 0) return;
+
+  const backupPath = path.join(__dirname, 'hummatch-analytics-backup.json');
+  const fs = require('fs');
+  if (!fs.existsSync(backupPath)) return;
+
+  try {
+    const backup = JSON.parse(fs.readFileSync(backupPath, 'utf8'));
+    if (!backup.events || !backup.events.length) return;
+
+    const insert = db.prepare(
+      'INSERT INTO events (event, lang, data, ip, user_agent, created_at) VALUES (?, ?, ?, ?, ?, ?)'
+    );
+    const importAll = db.transaction((events) => {
+      for (const e of events) {
+        const ts = typeof e.created_at === 'number'
+          ? new Date(e.created_at * 1000).toISOString().replace('T', ' ').slice(0, 19)
+          : e.created_at;
+        insert.run(e.event, e.lang || 'en', e.data || '{}', e.ip || null, e.ua || null, ts);
+      }
+    });
+    importAll(backup.events);
+    console.log(`Auto-imported ${backup.events.length} analytics events from backup`);
+  } catch (err) {
+    console.error('Failed to auto-import analytics backup:', err.message);
+  }
+})();
+
 // Prepared statements for performance
 const stmts = {
   insertEvent: db.prepare(
