@@ -174,4 +174,100 @@ console.log(`    Share events (share):             ${shareEvents}`);
 console.log(`    Install/signup events:            ${installEvents}`);
 console.log('========================================\n');
 
-db.close();
+// ---------------------------------------------------------------------------
+// 7. Geocode unique IPs → populate geo table via ip-api.com batch API
+//    Free tier: 45 requests/minute, batch endpoint handles up to 100 IPs/request
+// ---------------------------------------------------------------------------
+async function populateGeo() {
+  // Extract unique non-empty IPs from imported events
+  const rows = db.prepare(
+    "SELECT ip, COUNT(*) as cnt FROM events WHERE ip IS NOT NULL AND ip != '' GROUP BY ip"
+  ).all();
+
+  if (rows.length === 0) {
+    console.log('No IPs found in events — skipping geo population.');
+    return;
+  }
+
+  console.log(`\nGeocoding ${rows.length} unique IPs via ip-api.com…`);
+
+  const ipCounts = {};
+  for (const r of rows) ipCounts[r.ip] = r.cnt;
+  const allIps = Object.keys(ipCounts);
+
+  const insertGeo = db.prepare(
+    'INSERT INTO geo (lat, lng, city, country, cnt) VALUES (?, ?, ?, ?, ?)'
+  );
+  const insertAll = db.transaction((geoRows) => {
+    for (const g of geoRows) insertGeo.run(g.lat, g.lng, g.city, g.country, g.cnt);
+  });
+
+  const BATCH_SIZE = 100;
+  const RATE_LIMIT_MS = Math.ceil(60000 / 45); // ~1334ms between requests (45 req/min)
+  const geoResults = [];
+  let resolved = 0;
+  let failed = 0;
+
+  for (let i = 0; i < allIps.length; i += BATCH_SIZE) {
+    const batch = allIps.slice(i, i + BATCH_SIZE);
+
+    // ip-api.com batch endpoint: POST http://ip-api.com/batch
+    const body = JSON.stringify(batch.map(ip => ({ query: ip, fields: 'status,lat,lon,city,country,query' })));
+
+    try {
+      const res = await fetch('http://ip-api.com/batch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+      });
+      const results = await res.json();
+
+      for (const r of results) {
+        if (r.status === 'success' && r.lat && r.lon) {
+          geoResults.push({
+            lat: r.lat,
+            lng: r.lon,
+            city: r.city || 'Unknown',
+            country: r.country || 'Unknown',
+            cnt: ipCounts[r.query] || 1,
+          });
+          resolved++;
+        } else {
+          failed++;
+        }
+      }
+    } catch (err) {
+      console.error(`  Batch ${Math.floor(i / BATCH_SIZE) + 1} failed:`, err.message);
+      failed += batch.length;
+    }
+
+    // Rate-limit: wait between batches
+    if (i + BATCH_SIZE < allIps.length) {
+      await new Promise(r => setTimeout(r, RATE_LIMIT_MS));
+    }
+
+    const batchNum = Math.floor(i / BATCH_SIZE) + 1;
+    const totalBatches = Math.ceil(allIps.length / BATCH_SIZE);
+    console.log(`  Batch ${batchNum}/${totalBatches} — ${resolved} resolved, ${failed} failed`);
+  }
+
+  // Insert all geo results in one transaction
+  if (geoResults.length > 0) {
+    insertAll(geoResults);
+  }
+
+  const geoCount = db.prepare('SELECT COUNT(*) as cnt FROM geo').get().cnt;
+  console.log('\n========================================');
+  console.log('  GEO IMPORT COMPLETE');
+  console.log('========================================');
+  console.log(`  Unique IPs:      ${allIps.length}`);
+  console.log(`  Resolved:        ${resolved}`);
+  console.log(`  Failed:          ${failed}`);
+  console.log(`  Geo rows in DB:  ${geoCount}`);
+  console.log('========================================\n');
+}
+
+// Run geo population, then close DB
+populateGeo()
+  .catch(err => console.error('Geo population failed:', err.message))
+  .finally(() => db.close());

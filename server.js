@@ -194,6 +194,66 @@ db.exec(`
   }
 })();
 
+// ---------------------------------------------------------------------------
+// Auto-populate geo table from event IPs if empty (for fresh deploys)
+// Uses ip-api.com batch endpoint; runs in background so it doesn't block startup
+// ---------------------------------------------------------------------------
+(function autoPopulateGeo() {
+  const geoCount = db.prepare('SELECT COUNT(*) AS cnt FROM geo').get().cnt;
+  if (geoCount > 0) return;
+
+  const ipRows = db.prepare(
+    "SELECT ip, COUNT(*) as cnt FROM events WHERE ip IS NOT NULL AND ip != '' GROUP BY ip"
+  ).all();
+  if (ipRows.length === 0) return;
+
+  console.log(`Geo table empty — geocoding ${ipRows.length} unique IPs in background…`);
+
+  const ipCounts = {};
+  for (const r of ipRows) ipCounts[r.ip] = r.cnt;
+  const allIps = Object.keys(ipCounts);
+
+  const BATCH_SIZE = 100;
+  const RATE_LIMIT_MS = Math.ceil(60000 / 45); // 45 req/min free tier
+
+  (async () => {
+    const insertGeo = db.prepare(
+      'INSERT INTO geo (lat, lng, city, country, cnt) VALUES (?, ?, ?, ?, ?)'
+    );
+    const insertAll = db.transaction((rows) => {
+      for (const g of rows) insertGeo.run(g.lat, g.lng, g.city, g.country, g.cnt);
+    });
+
+    const geoResults = [];
+    let resolved = 0, failed = 0;
+
+    for (let i = 0; i < allIps.length; i += BATCH_SIZE) {
+      const batch = allIps.slice(i, i + BATCH_SIZE);
+      try {
+        const res = await fetch('http://ip-api.com/batch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(batch.map(ip => ({ query: ip, fields: 'status,lat,lon,city,country,query' }))),
+        });
+        const results = await res.json();
+        for (const r of results) {
+          if (r.status === 'success' && r.lat && r.lon) {
+            geoResults.push({ lat: r.lat, lng: r.lon, city: r.city || 'Unknown', country: r.country || 'Unknown', cnt: ipCounts[r.query] || 1 });
+            resolved++;
+          } else { failed++; }
+        }
+      } catch (err) {
+        console.error(`  Geo batch failed:`, err.message);
+        failed += batch.length;
+      }
+      if (i + BATCH_SIZE < allIps.length) await new Promise(r => setTimeout(r, RATE_LIMIT_MS));
+    }
+
+    if (geoResults.length > 0) insertAll(geoResults);
+    console.log(`Auto-populated geo table: ${resolved} locations resolved, ${failed} failed`);
+  })().catch(err => console.error('Geo auto-populate failed:', err.message));
+})();
+
 // Prepared statements for performance
 const stmts = {
   insertEvent: db.prepare(
