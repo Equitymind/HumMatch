@@ -19,10 +19,10 @@
     "@type": "TechArticle",
     "headline": "How HumMatch Works: Finding Songs That Match Your Voice Type by Humming",
     "description": "The science of spectral centroid, vocal timbre, and how HumMatch matches your voice type to songs you can confidently nail in 3 seconds.",
-    "author": { "@type": "Person", "name": "Joe Morin", "url": "https://equitymind.com" },
+    "author": { "@type": "Organization", "name": "The HumMatch Team", "url": "https://hummatch.me" },
     "publisher": { "@type": "Organization", "name": "HumMatch", "url": "https://hummatch.me", "logo": { "@type": "ImageObject", "url": "https://hummatch.me/hummatch-logo.png" } },
     "datePublished": "2026-03-29",
-    "dateModified": "2026-03-29",
+    "dateModified": "2026-04-02",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hummatch.me/blog/how-hummatch-works" },
     "image": "https://hummatch.me/hummatch-logo-full.png",
     "keywords": ["find songs that match your voice type", "vocal timbre matching", "voice type test by humming", "spectral centroid", "what songs can I sing", "songs for my voice type"]
@@ -77,13 +77,34 @@
       margin: 60px auto 0;
       padding: 0 24px;
     }
-    .hero-label {
-      font-size: 0.75rem;
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text3);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); }
+    .hero-emoji {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
       font-weight: 800;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 16px;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(168,85,247,0.25), 0 0 4px rgba(168,85,247,0.15);
     }
     .hero h1 {
       font-size: clamp(2rem, 5vw, 3.2rem);
@@ -116,7 +137,7 @@
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 900; color: white;
+      font-size: 0.65rem; font-weight: 900; color: white;
     }
     article {
       max-width: 740px;
@@ -216,16 +237,32 @@
       font-size: 1rem;
       font-weight: 800;
     }
-    .back-link {
+    .bottom-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      margin-top: 48px;
+      border-top: 1px solid rgba(168,85,247,0.1);
+      color: var(--text3);
+      font-size: 0.85rem;
+    }
+    .bottom-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .bottom-meta-arrow {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: var(--text3);
-      text-decoration: none;
-      font-size: 0.875rem;
-      margin-bottom: 32px;
     }
-    .back-link:hover { color: var(--accent); }
+    .bottom-meta-arrow:hover { transform: translateX(4px); }
     footer {
       text-align: center;
       padding: 32px 24px;
@@ -248,12 +285,13 @@
 
 <header class="hero">
   <a class="back-link" href="/blog">← Blog</a>
-  <p class="hero-label">Under the Hood</p>
+  <span class="hero-emoji">⚙️</span>
+  <span class="hero-tag">Under the Hood</span>
   <h1>How HumMatch Actually Works</h1>
   <div class="hero-meta">
     <div class="author">
-      <div class="author-dot">JM</div>
-      Joe Morin
+      <div class="author-dot">HM</div>
+      The HumMatch Team
     </div>
     <span>March 29, 2026</span>
     <span>7 min read</span>
@@ -317,7 +355,7 @@
     </div>
     <div class="voice-card">
       <div class="voice-name">Mezzo-Soprano</div>
-      <div class="voice-desc">Balanced, versatile, expressive. Mid female range. Beyoncé, Whitney Houston, Madonna.</div>
+      <div class="voice-desc">Balanced, versatile, expressive. Mid female range. Beyonce, Whitney Houston, Madonna.</div>
     </div>
     <div class="voice-card">
       <div class="voice-name">Soprano</div>
@@ -390,6 +428,14 @@
     <h3>Hear what your voice can do. 🎤</h3>
     <p>Three hums. Real results. No singing required.</p>
     <a href="/">Try HumMatch Free</a>
+  </div>
+
+  <div class="bottom-meta">
+    <div class="bottom-meta-left">
+      <span>March 29, 2026</span>
+      <span>7 min read</span>
+    </div>
+    <a class="bottom-meta-arrow" href="/blog/find-songs-you-can-nail">Next →</a>
   </div>
 
 </article>

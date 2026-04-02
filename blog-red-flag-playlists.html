@@ -29,12 +29,47 @@
 html, body { background: var(--bg); color: var(--text1); font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; line-height: 1.6; }
 body { padding: 0; }
 .blog-container { max-width: 720px; margin: 0 auto; padding: 40px 20px; }
-.blog-header { margin-bottom: 40px; text-align: center; }
-.back-link { display: inline-block; color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 20px; font-weight: 600; }
-.back-link:hover { text-decoration: underline; }
-.publish-date { color: var(--text3); font-size: 0.85rem; margin-bottom: 12px; }
-h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 12px; line-height: 1.2; }
-.read-time { color: var(--text3); font-size: 0.85rem; margin-bottom: 20px; }
+.blog-header { margin-bottom: 40px; }
+.back-link { display: inline-block; color: var(--text3); text-decoration: none; font-size: 0.875rem; margin-bottom: 24px; font-weight: 600; }
+.back-link:hover { color: var(--accent); }
+.hero-emoji { font-size: 3.5rem; display: block; margin-bottom: 20px; }
+.hero-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-transform: uppercase;
+  background: rgba(168,85,247,0.12);
+  border: 1px solid rgba(168,85,247,0.3);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 12px rgba(168,85,247,0.25), 0 0 4px rgba(168,85,247,0.15);
+}
+h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--text3);
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+}
+.hero-meta .author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text2);
+  font-weight: 600;
+}
+.hero-meta .author-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; font-weight: 900; color: white;
+}
 .blog-content { color: var(--text2); font-size: 1.05rem; line-height: 1.8; }
 .blog-content p { margin-bottom: 1.5em; }
 .blog-content h2 { font-size: 1.8rem; font-weight: 800; color: var(--text1); margin-top: 2em; margin-bottom: 1em; }
@@ -49,16 +84,49 @@ h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 12px; line-height: 1.2;
 .cta-section h2 { font-size: 1.6rem; margin-top: 0; margin-bottom: 0.8em; }
 .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; padding: 14px 36px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 1rem; margin-top: 12px; transition: transform 0.2s; }
 .cta-btn:hover { transform: scale(1.05); }
-.author-section { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; margin-top: 40px; color: var(--text3); font-size: 0.9rem; }
+.bottom-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  margin-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: var(--text3);
+  font-size: 0.85rem;
+}
+.bottom-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.bottom-meta-arrow {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: transform 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.bottom-meta-arrow:hover { transform: translateX(4px); }
 </style>
 </head>
 <body>
 <div class="blog-container">
   <div class="blog-header">
-    <a href="index.html" class="back-link">← Back to HumMatch</a>
-    <p class="publish-date">April 1, 2026</p>
+    <a href="/blog" class="back-link">← Blog</a>
+    <span class="hero-emoji">🚩</span>
+    <span class="hero-tag">Culture</span>
     <h1>Red Flag Playlists: What His Spotify Says About Him</h1>
-    <p class="read-time">5 min read</p>
+    <div class="hero-meta">
+      <div class="author">
+        <div class="author-dot">HM</div>
+        The HumMatch Team
+      </div>
+      <span>April 1, 2026</span>
+      <span>5 min read</span>
+    </div>
   </div>
 
   <div class="blog-content">
@@ -153,9 +221,12 @@ h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 12px; line-height: 1.2;
     </div>
   </div>
 
-  <div class="author-section">
-    <p><strong>The HumMatch Team</strong></p>
-    <p>We help you find the songs that match your voice and the people who match your vibe. Because real connection starts with understanding who you actually are.</p>
+  <div class="bottom-meta">
+    <div class="bottom-meta-left">
+      <span>April 1, 2026</span>
+      <span>5 min read</span>
+    </div>
+    <a class="bottom-meta-arrow" href="/blog">All Posts →</a>
   </div>
 </div>
 </body>

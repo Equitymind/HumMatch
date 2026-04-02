@@ -19,15 +19,15 @@
     "@type": "HowTo",
     "name": "How to Find Songs You Can Actually Nail and Export Them to Spotify",
     "description": "Find songs that match your voice type in 3 hums, filter by confidence tier, and export a personalized Spotify playlist.",
-    "author": { "@type": "Person", "name": "Joe Morin", "url": "https://equitymind.com" },
+    "author": { "@type": "Organization", "name": "The HumMatch Team", "url": "https://hummatch.me" },
     "publisher": { "@type": "Organization", "name": "HumMatch", "url": "https://hummatch.me", "logo": { "@type": "ImageObject", "url": "https://hummatch.me/hummatch-logo.png" } },
     "datePublished": "2026-03-29",
-    "dateModified": "2026-03-29",
+    "dateModified": "2026-04-02",
     "image": "https://hummatch.me/hummatch-logo-full.png",
     "step": [
       { "@type": "HowToStep", "name": "Hum three notes", "text": "Find a quiet space and hum a low, middle, and high note into HumMatch. Three hums builds your vocal profile." },
       { "@type": "HowToStep", "name": "Read your confidence tiers", "text": "Best Match (78%+), Strong Fit (60-77%), and Stretch songs. Start with Best Match for karaoke." },
-      { "@type": "HowToStep", "name": "Use the filters", "text": "Filter by Car Songs, Group Karaoke, 80s, 90s, Rock, Pop, Español and more to narrow your list." },
+      { "@type": "HowToStep", "name": "Use the filters", "text": "Filter by Car Songs, Group Karaoke, 80s, 90s, Rock, Pop, Espanol and more to narrow your list." },
       { "@type": "HowToStep", "name": "Export to Spotify", "text": "Tap Export to Spotify, authorize once, and your matched songs appear as a personalized playlist titled My HumMatch Songs." }
     ],
     "keywords": ["find songs that match my voice", "export karaoke playlist to Spotify", "best songs for my voice type", "what songs can I sing", "hum to find your song"]
@@ -81,13 +81,34 @@
       margin: 60px auto 0;
       padding: 0 24px;
     }
-    .hero-label {
-      font-size: 0.75rem;
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text3);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); }
+    .hero-emoji {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
       font-weight: 800;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 16px;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(168,85,247,0.25), 0 0 4px rgba(168,85,247,0.15);
     }
     .hero h1 {
       font-size: clamp(1.8rem, 4.5vw, 3rem);
@@ -120,7 +141,7 @@
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 900; color: white;
+      font-size: 0.65rem; font-weight: 900; color: white;
     }
     article {
       max-width: 740px;
@@ -238,16 +259,32 @@
       font-size: 1rem;
       font-weight: 800;
     }
-    .back-link {
+    .bottom-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      margin-top: 48px;
+      border-top: 1px solid rgba(168,85,247,0.1);
+      color: var(--text3);
+      font-size: 0.85rem;
+    }
+    .bottom-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .bottom-meta-arrow {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: var(--text3);
-      text-decoration: none;
-      font-size: 0.875rem;
-      margin-bottom: 32px;
     }
-    .back-link:hover { color: var(--accent); }
+    .bottom-meta-arrow:hover { transform: translateX(4px); }
     footer {
       text-align: center;
       padding: 32px 24px;
@@ -270,12 +307,13 @@
 
 <header class="hero">
   <a class="back-link" href="/blog">← Blog</a>
-  <p class="hero-label">User Guide</p>
+  <span class="hero-emoji">📖</span>
+  <span class="hero-tag">User Guide</span>
   <h1>How to Find Songs You Can Actually Nail (and Export Them to Spotify)</h1>
   <div class="hero-meta">
     <div class="author">
-      <div class="author-dot">JM</div>
-      Joe Morin
+      <div class="author-dot">HM</div>
+      The HumMatch Team
     </div>
     <span>March 29, 2026</span>
     <span>6 min read</span>
@@ -427,6 +465,14 @@
     <h3>Find your songs tonight. 🎤</h3>
     <p>Three hums. Your voice type. Songs that actually fit.</p>
     <a href="/">Try HumMatch Free</a>
+  </div>
+
+  <div class="bottom-meta">
+    <div class="bottom-meta-left">
+      <span>March 29, 2026</span>
+      <span>6 min read</span>
+    </div>
+    <a class="bottom-meta-arrow" href="/blog">All Posts →</a>
   </div>
 
 </article>

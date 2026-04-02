@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog | HumMatch</title>
-  <meta name="description" content="Stories, updates, and the thinking behind HumMatch — the vocal intelligence app that matches your voice to songs you can actually nail." />
+  <meta name="description" content="Stories, updates, and the thinking behind HumMatch -- the vocal intelligence app that matches your voice to songs you can actually nail." />
   <link rel="icon" href="/hummatch-logo.png" />
   <link rel="canonical" href="https://hummatch.me/blog" />
   <style>
@@ -93,13 +93,24 @@
       border-color: rgba(168,85,247,0.45);
       transform: translateY(-2px);
     }
-    .post-label {
-      font-size: 0.7rem;
+    .post-emoji {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 14px;
+    }
+    .post-tag {
+      display: inline-block;
+      font-size: 0.65rem;
       font-weight: 800;
       letter-spacing: 0.1em;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 10px;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 3px 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 12px rgba(168,85,247,0.25), 0 0 4px rgba(168,85,247,0.15);
     }
     .post-title {
       font-size: 1.4rem;
@@ -113,13 +124,28 @@
       font-size: 0.95rem;
       color: var(--text2);
       line-height: 1.65;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
-    .post-meta {
-      font-size: 0.8rem;
-      color: var(--text3);
+    .post-bottom {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text3);
+      font-size: 0.8rem;
+    }
+    .post-bottom-left {
+      display: flex;
+      align-items: center;
       gap: 12px;
+    }
+    .post-bottom-arrow {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: transform 0.2s;
+    }
+    .post-card:hover .post-bottom-arrow {
+      transform: translateX(4px);
     }
     footer {
       text-align: center;
@@ -148,35 +174,58 @@
 
 <main class="posts">
   <a class="post-card" href="/blog/find-songs-you-can-nail">
-    <p class="post-label">User Guide</p>
+    <span class="post-emoji">📖</span>
+    <span class="post-tag">User Guide</span>
     <h2 class="post-title">How to Find Songs You Can Actually Nail (and Export Them to Spotify)</h2>
     <p class="post-excerpt">The filters, the playlist export, the dismiss flow, and the best use cases for every type of singer. Get more out of HumMatch from day one.</p>
-    <div class="post-meta">
-      <span>Joe Morin</span>
-      <span>March 29, 2026</span>
-      <span>6 min read</span>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>March 29, 2026</span>
+        <span>6 min read</span>
+      </div>
+      <span class="post-bottom-arrow">→</span>
     </div>
   </a>
 
   <a class="post-card" href="/blog/how-hummatch-works">
-    <p class="post-label">Under the Hood</p>
+    <span class="post-emoji">⚙️</span>
+    <span class="post-tag">Under the Hood</span>
     <h2 class="post-title">How HumMatch Actually Works</h2>
     <p class="post-excerpt">The real science behind spectral centroid analysis, why pitch alone is not enough, and what happens in the three seconds between your hum and your results.</p>
-    <div class="post-meta">
-      <span>Joe Morin</span>
-      <span>March 29, 2026</span>
-      <span>7 min read</span>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>March 29, 2026</span>
+        <span>7 min read</span>
+      </div>
+      <span class="post-bottom-arrow">→</span>
     </div>
   </a>
 
   <a class="post-card" href="/blog/how-hummatch-was-built">
-    <p class="post-label">Origin Story</p>
+    <span class="post-emoji">🏗️</span>
+    <span class="post-tag">Origin Story</span>
     <h2 class="post-title">How HumMatch Was Built in One Night</h2>
-    <p class="post-excerpt">A Madonna song on the 405, a name that almost was not, and the night an AI agent matched Elvis on the very first try. The full story behind HumMatch.</p>
-    <div class="post-meta">
-      <span>Joe Morin</span>
-      <span>March 28, 2026</span>
-      <span>8 min read</span>
+    <p class="post-excerpt">A Madonna song on the 405, an AI agent named Clayton, and the night a voice matching app matched Elvis on the very first try. The full story behind HumMatch.</p>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>March 28, 2026</span>
+        <span>8 min read</span>
+      </div>
+      <span class="post-bottom-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="post-card" href="/blog-red-flag-playlists.html">
+    <span class="post-emoji">🚩</span>
+    <span class="post-tag">Culture</span>
+    <h2 class="post-title">Red Flag Playlists: What His Spotify Says About Him</h2>
+    <p class="post-excerpt">Your date's Spotify playlist just revealed everything. Discover 10 red flag music patterns that say way more than his bio ever could.</p>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>April 1, 2026</span>
+        <span>5 min read</span>
+      </div>
+      <span class="post-bottom-arrow">→</span>
     </div>
   </a>
 </main>
