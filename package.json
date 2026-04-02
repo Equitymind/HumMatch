@@ -1,0 +1,29 @@
+{
+  "name": "hummatch",
+  "version": "1.0.0",
+  "description": "HumMatch - Find songs that match your voice",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "cors": "^2.8.5",
+    "better-sqlite3": "^11.6.0",
+    "uuid": "^10.0.0",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "hummatch",
+    "karaoke",
+    "vocal-range",
+    "voice-matching"
+  ],
+  "license": "UNLICENSED",
+  "private": true
+}
