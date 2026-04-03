@@ -22,6 +22,8 @@ services:
         sync: false
       - key: HUMMATCH_EMAIL_PASS
         sync: false
+      - key: DB_PATH
+        value: /data/hummatch.db
     disk:
       name: hummatch-data
       mountPath: /data

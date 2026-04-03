@@ -52,7 +52,11 @@ async function sendEmail(to, subject, html) {
 // Guarded welcome email — only sends once per user, checks DB flag every time
 function trySendWelcomeEmail(userId, email) {
   const row = db.prepare('SELECT welcome_email_sent FROM users WHERE id = ?').get(userId);
-  if (row && row.welcome_email_sent) return; // already sent
+  if (row && row.welcome_email_sent) {
+    console.log(`Welcome email already sent to ${email} (user ${userId}) — skipping`);
+    return;
+  }
+  console.log(`Sending welcome email to ${email} (user ${userId})`);
   db.prepare('UPDATE users SET welcome_email_sent = 1 WHERE id = ?').run(userId);
   sendEmail(email, 'Welcome to HumMatch!', emailWelcome(email));
 }
@@ -427,7 +431,10 @@ try {
 // Add welcome_email_sent column to users if missing (migration for existing DBs)
 try {
   db.exec(`ALTER TABLE users ADD COLUMN welcome_email_sent INTEGER DEFAULT 0`);
-} catch (_) { /* column already exists */ }
+  console.log('[migration] Added welcome_email_sent column to users table');
+} catch (_) {
+  console.log('[migration] welcome_email_sent column already exists — OK');
+}
 
 // ---------------------------------------------------------------------------
 // Auto-import analytics backup if events table is empty (for fresh deploys)
@@ -1015,6 +1022,7 @@ app.post('/api/hummatch/hum', requireAuth, (req, res) => {
 // Log a completed hum session + sync hum_count immediately
 app.post('/api/hummatch/hum/session', requireAuth, (req, res) => {
   const { low_note, normal_note, high_note, voice_type, top_song, top_artist, match_score, hum_count } = req.body;
+  console.log(`[hum/session] user=${req.user.id} (${req.user.email}) song="${top_song}" score=${match_score}`);
   try {
     stmts.insertHumSession.run(
       req.user.id,
@@ -1026,9 +1034,10 @@ app.post('/api/hummatch/hum/session', requireAuth, (req, res) => {
       db.prepare(`UPDATE users SET hum_count = ?, updated_at = datetime('now') WHERE id = ?`)
         .run(hum_count, req.user.id);
     }
+    console.log(`[hum/session] logged successfully for user ${req.user.id}`);
     res.json({ ok: true });
   } catch (e) {
-    console.error('Hum session log error:', e.message);
+    console.error('[hum/session] ERROR:', e.message, e.stack);
     res.status(500).json({ error: 'Failed to log hum session' });
   }
 });
@@ -1223,6 +1232,7 @@ app.post('/api/checkout', async (req, res) => {
 
   const sessionOpts = {
     mode: 'subscription',
+    payment_method_types: ['card', 'us_bank_account'],
     line_items: [{ price: priceId, quantity: 1 }],
     success_url: `${req.protocol}://${req.get('host')}/api/hummatch/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${req.protocol}://${req.get('host')}/`
@@ -1251,6 +1261,7 @@ app.get('/api/hummatch/checkout/:plan', async (req, res) => {
 
   const sessionOpts = {
     mode: 'subscription',
+    payment_method_types: ['card', 'us_bank_account'],
     line_items: [{ price: priceId, quantity: 1 }],
     success_url: `${req.protocol}://${req.get('host')}/api/hummatch/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${req.protocol}://${req.get('host')}/`
@@ -1471,4 +1482,23 @@ app.listen(PORT, () => {
   console.log(`  Static files: ${__dirname}`);
   console.log(`  Database: ${DB_PATH}`);
   console.log(`  Build version: ${BUILD_VERSION}`);
+
+  // Startup diagnostics — verify critical tables and columns exist
+  try {
+    const humsCount = db.prepare('SELECT COUNT(*) as cnt FROM hums').get().cnt;
+    console.log(`  [diag] hums table: OK (${humsCount} rows)`);
+  } catch (e) {
+    console.error('  [diag] hums table: MISSING or ERROR —', e.message);
+  }
+  try {
+    const cols = db.pragma('table_info(users)').map(c => c.name);
+    const hasWelcomeFlag = cols.includes('welcome_email_sent');
+    console.log(`  [diag] users.welcome_email_sent column: ${hasWelcomeFlag ? 'OK' : 'MISSING'}`);
+    if (hasWelcomeFlag) {
+      const sentCount = db.prepare('SELECT COUNT(*) as cnt FROM users WHERE welcome_email_sent = 1').get().cnt;
+      console.log(`  [diag] users with welcome_email_sent=1: ${sentCount}`);
+    }
+  } catch (e) {
+    console.error('  [diag] users table check error:', e.message);
+  }
 });
