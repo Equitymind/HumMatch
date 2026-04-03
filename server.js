@@ -840,18 +840,35 @@ app.get('/api/hummatch/songs', (_req, res) => {
 // ---------------------------------------------------------------------------
 // API: Contact form
 // ---------------------------------------------------------------------------
-app.post('/api/hummatch/contact', (req, res) => {
+app.post('/api/hummatch/contact', async (req, res) => {
   const { name, email, message } = req.body;
   if (!message || !message.trim()) {
     return res.status(400).json({ error: 'Message is required' });
   }
   try {
     stmts.insertContact.run(name || '', email || '', message.trim());
-    res.json({ ok: true });
   } catch (e) {
     console.error('Contact insert error:', e.message);
-    res.status(500).json({ error: 'Failed to save message' });
+    return res.status(500).json({ error: 'Failed to save message' });
   }
+
+  // Send notification email to Joe (don't fail if email fails)
+  try {
+    await sendEmail('joe@hummatch.com', 'New HumMatch Contact Form Submission', `
+      <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:0 auto;background:#0d0b1a;color:#e2e0f0;padding:32px;border-radius:14px;">
+        <h2 style="margin:0 0 24px;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">New Contact Form Submission</h2>
+        <p style="margin:0 0 8px;"><strong style="color:#A855F7;">Name:</strong> ${(name || 'Not provided').replace(/</g, '&lt;')}</p>
+        <p style="margin:0 0 8px;"><strong style="color:#A855F7;">Email:</strong> ${(email || 'Not provided').replace(/</g, '&lt;')}</p>
+        <hr style="border:none;border-top:1px solid rgba(124,58,237,0.2);margin:16px 0;">
+        <p style="margin:0;"><strong style="color:#A855F7;">Message:</strong></p>
+        <p style="margin:8px 0 0;white-space:pre-wrap;">${message.trim().replace(/</g, '&lt;').replace(/\n/g, '<br>')}</p>
+      </div>
+    `);
+  } catch (e) {
+    console.error('Contact notification email error:', e.message);
+  }
+
+  res.json({ ok: true });
 });
 
 // ---------------------------------------------------------------------------
