@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introducing SquadMatch: Find Songs Your Whole Group Can Nail | HumMatch</title>
+  <meta name="description" content="SquadMatch analyzes every voice in your group and finds songs everyone can actually sing together. Perfect for karaoke nights, road trips, pregames, and duets." />
+  <meta name="keywords" content="group karaoke songs, songs for multiple voices, find duet songs, karaoke group playlist, group singing app, karaoke night playlist, songs everyone can sing, vocal matching for groups" />
+  <meta property="og:title" content="Introducing SquadMatch: Find Songs Your Whole Group Can Nail" />
+  <meta property="og:description" content="SquadMatch analyzes every voice in your group and finds songs everyone can actually sing together. Perfect for karaoke nights, road trips, pregames, and duets." />
+  <meta property="og:image" content="/hummatch-logo-full.png" />
+  <meta property="og:url" content="https://hummatch.me/blog/introducing-squadmatch" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/hummatch-logo.png" />
+  <link rel="canonical" href="https://hummatch.me/blog/introducing-squadmatch" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Introducing SquadMatch: Find Songs Your Whole Group Can Nail",
+    "description": "SquadMatch analyzes every voice in your group and finds songs everyone can actually sing together. Perfect for karaoke nights, road trips, pregames, and duets.",
+    "author": { "@type": "Organization", "name": "The HumMatch Team", "url": "https://hummatch.me" },
+    "publisher": { "@type": "Organization", "name": "HumMatch", "url": "https://hummatch.me", "logo": { "@type": "ImageObject", "url": "https://hummatch.me/hummatch-logo.png" } },
+    "datePublished": "2026-04-02",
+    "image": "https://hummatch.me/hummatch-logo-full.png",
+    "keywords": ["group karaoke songs", "songs for multiple voices", "find duet songs", "karaoke group playlist", "group singing app"]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --surface: #1a1a2e;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+      --text1: #f0e6ff;
+      --text2: #b39ddb;
+      --text3: #7b6fa0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.75;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,26,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: var(--text1); letter-spacing: -0.02em; }
+    .nav-cta {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .hero {
+      max-width: 740px;
+      margin: 60px auto 0;
+      padding: 0 24px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text3);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); }
+    .hero-emoji {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(168,85,247,0.25), 0 0 4px rgba(168,85,247,0.15);
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #f0e6ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text3);
+      font-size: 0.875rem;
+      margin-bottom: 36px;
+    }
+    .hero-meta .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text2);
+      font-weight: 600;
+    }
+    .hero-meta .author-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 900; color: white;
+    }
+    article {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    article p {
+      font-size: 1.075rem;
+      color: var(--text1);
+      margin-bottom: 24px;
+    }
+    article h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      margin: 48px 0 16px;
+    }
+    article h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 32px 0 10px;
+    }
+    article blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 32px 0;
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: var(--text2);
+      font-size: 1.1rem;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(124,58,237,0.08));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 36px 0;
+    }
+    .highlight-box p { margin-bottom: 0; }
+    .highlight-box strong { color: var(--accent); }
+    .use-case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .use-case-card {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 16px;
+      padding: 20px 22px;
+    }
+    .use-case-card .uc-emoji { font-size: 1.6rem; margin-bottom: 10px; display: block; }
+    .use-case-card .uc-title { font-weight: 800; color: var(--text1); font-size: 1rem; margin-bottom: 6px; }
+    .use-case-card .uc-desc { font-size: 0.875rem; color: var(--text2); line-height: 1.55; }
+    @media (max-width: 520px) { .use-case-grid { grid-template-columns: 1fr; } }
+    .step-block {
+      border-left: 2px solid rgba(168,85,247,0.3);
+      padding-left: 20px;
+      margin: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .step-item { display: flex; gap: 14px; align-items: flex-start; }
+    .step-n {
+      min-width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 900; color: white;
+      margin-top: 2px;
+    }
+    .step-t { font-size: 1rem; color: var(--text1); line-height: 1.65; }
+    .step-t strong { color: var(--accent); }
+    .benefit-list {
+      list-style: none;
+      margin: 24px 0;
+      padding: 0;
+    }
+    .benefit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+      color: var(--text1);
+    }
+    .benefit-list li span {
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+    .cta-block {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      margin: 56px 0 0;
+    }
+    .cta-block h3 { font-size: 1.4rem; font-weight: 800; margin: 0 0 10px; color: var(--text1); }
+    .cta-block p { color: var(--text2); margin-bottom: 24px; font-size: 0.975rem; }
+    .cta-block a {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 24px;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .bottom-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      margin-top: 48px;
+      border-top: 1px solid rgba(168,85,247,0.1);
+      color: var(--text3);
+      font-size: 0.85rem;
+    }
+    .bottom-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .bottom-meta-arrow {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .bottom-meta-arrow:hover { transform: translateX(4px); }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text3);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(168,85,247,0.1);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/"><span>HumMatch</span></a>
+  <a class="nav-cta" href="/">Try It Free</a>
+</nav>
+
+<header class="hero">
+  <a class="back-link" href="/blog">← Blog</a>
+  <span class="hero-emoji">🎤</span>
+  <span class="hero-tag">Product Update</span>
+  <h1>Introducing SquadMatch: Find Songs Your Whole Group Can Actually Nail</h1>
+  <div class="hero-meta">
+    <div class="author">
+      <div class="author-dot">HM</div>
+      The HumMatch Team
+    </div>
+    <span>April 2, 2026</span>
+    <span>6 min read</span>
+  </div>
+</header>
+
+<article>
+
+  <p>You know the moment. Someone pulls up the karaoke song list and the group goes quiet. Not because nobody wants to sing. Because nobody can agree on a song they can all handle. One person is a baritone. Another barely leaves their chest voice. Someone else only knows Taylor Swift. And the one friend who actually sings well just picks something nobody else can follow.</p>
+
+  <p>Picking group karaoke songs has always been a guessing game. You scroll through a list, someone throws out "Bohemian Rhapsody," and three people quietly know they cannot hit a single note in the chorus. The song gets picked anyway. Half the group mumbles through it. Nobody sounds great.</p>
+
+  <p>That problem is why we built SquadMatch.</p>
+
+  <h2>What Is SquadMatch?</h2>
+
+  <p>SquadMatch is a new feature in HumMatch that analyzes every voice in your group and finds songs that everyone can actually sing together. Not just songs where the ranges overlap on paper, but songs where the vocal character of each person in the group fits the track.</p>
+
+  <p>Think of it as HumMatch for groups. Each person hums three notes, SquadMatch builds a composite vocal profile for the whole squad, and then it returns a playlist of songs that work for everyone. Not compromises. Not "close enough." Songs your group will genuinely sound good on.</p>
+
+  <blockquote>"Solo singing is great. But the best karaoke moments happen when the whole room is in it together."</blockquote>
+
+  <h2>Why This Matters</h2>
+
+  <p>Most karaoke apps treat singing as a solo activity. You find your songs, you sing your songs. But real life is not like that. Karaoke is social. Road trips are social. Pregames are social. The moments people remember are the ones where the whole group was singing together and it actually sounded good.</p>
+
+  <p>The problem is that finding songs for multiple voices is genuinely hard. Every person has a different range, a different tone, and a different comfort zone. What works for a tenor does not work for an alto. What works for a soprano does not work for a baritone. And "just pick something everyone knows" ignores the fact that knowing a song and being able to sing it are two completely different things.</p>
+
+  <p>SquadMatch solves this by building a group vocal profile that accounts for every member. It does not just find the lowest common denominator. It finds songs where each voice in the group has something to contribute.</p>
+
+  <h2>How It Works</h2>
+
+  <div class="step-block">
+    <div class="step-item">
+      <div class="step-n">1</div>
+      <div class="step-t"><strong>Squad Leader creates a session.</strong> Open SquadMatch from your dashboard, name your squad, and share the invite link with your group. No app downloads required. Everyone joins from their phone's browser.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">2</div>
+      <div class="step-t"><strong>Everyone hums three notes.</strong> Each member records a low, mid, and high hum. Takes about 30 seconds per person. HumMatch analyzes each voice individually and builds a composite group profile from the combined data.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">3</div>
+      <div class="step-t"><strong>Get your group playlist.</strong> SquadMatch returns songs ranked by how well they fit the whole group. Filter by genre, decade, or vibe. Export the list and you have a ready-made group karaoke playlist that everyone can actually sing.</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>The key difference:</strong> SquadMatch does not just look for overlapping ranges. It uses the same spectral analysis that powers individual HumMatch results to find songs where the combined tonal character of your group fits the track. A group of three baritones gets different results than a mixed group with a soprano, a tenor, and an alto. That is the whole point.</p>
+  </div>
+
+  <h2>Where SquadMatch Shines</h2>
+
+  <div class="use-case-grid">
+    <div class="use-case-card">
+      <span class="uc-emoji">🎤</span>
+      <div class="uc-title">Karaoke Night</div>
+      <div class="uc-desc">Stop arguing over the song list. SquadMatch gives your group a playlist of songs you can all own together. Show up to the bar with your setlist already decided.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🚗</span>
+      <div class="uc-title">Road Trips</div>
+      <div class="uc-desc">Build a car playlist where nobody has to sit out a song. Every track fits every voice in the car. Four hours, zero skips, and everyone singing along.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🎉</span>
+      <div class="uc-title">Pregames</div>
+      <div class="uc-desc">The playlist at a pregame sets the energy. SquadMatch builds one where everyone in the room can sing along. That is how you start a night right.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🎵</span>
+      <div class="uc-title">Duets</div>
+      <div class="uc-desc">Finding duet songs that fit both voices is harder than it looks. SquadMatch with two people surfaces duets and harmonies that actually work for your specific pair.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🎼</span>
+      <div class="uc-title">Choir and Vocal Groups</div>
+      <div class="uc-desc">Directors and small vocal groups use SquadMatch to find repertoire that fits their specific mix of voices. No more transposing every arrangement to fit.</div>
+    </div>
+  </div>
+
+  <h2>What Squad Leaders Get</h2>
+
+  <p>SquadMatch is available to Squad Leaders, the premium tier of HumMatch. Here is what you unlock.</p>
+
+  <ul class="benefit-list">
+    <li><span>&#10003;</span> <strong>Unlimited SquadMatch sessions.</strong> Create as many squads as you want. Invite as many members as you need. No caps.</li>
+    <li><span>&#10003;</span> <strong>Group playlist export.</strong> Copy or download your squad's playlist to share with everyone. Works with any music app.</li>
+    <li><span>&#10003;</span> <strong>Unlimited personal hums.</strong> No limits on your own voice analysis. Hum as many times as you want to refine your personal results.</li>
+    <li><span>&#10003;</span> <strong>Saved playlists.</strong> Keep your favorite personal and group playlists in your dashboard. Come back to them anytime.</li>
+    <li><span>&#10003;</span> <strong>Priority access to new features.</strong> Squad Leaders get every new feature first as it ships.</li>
+  </ul>
+
+  <p>Squad Leader is $5.99/month or $39.99/year (save 45%). Your squad members join for free. They just need the invite link and 30 seconds to hum.</p>
+
+  <div class="highlight-box">
+    <p><strong>Your friends sing free.</strong> Only the Squad Leader needs a subscription. Everyone else joins your session at no cost. One person pays, the whole group benefits. That is how it should work.</p>
+  </div>
+
+  <h2>Built for Real Groups</h2>
+
+  <p>We tested SquadMatch with groups of two, groups of six, and everything in between. A couple picking duets for their wedding reception. A group of college friends building a karaoke pregame playlist. A barbershop quartet looking for new songs that fit their four-part blend. A family road trip where the kids and parents actually agreed on something.</p>
+
+  <p>The common thread was always the same. People were surprised by how many songs worked for their specific group that they never would have thought to try. That is the value. SquadMatch does not just confirm what you already know. It surfaces songs you would never have found on your own.</p>
+
+  <p>Groups sing better together when every voice fits the song. That is not a slogan. It is just what happens when you stop guessing and start matching.</p>
+
+  <div class="cta-block">
+    <h3>Your group has a sound. Find songs that fit it.</h3>
+    <p>Become a Squad Leader and build your first group playlist tonight.</p>
+    <a href="/">Try SquadMatch Free</a>
+  </div>
+
+  <div class="bottom-meta">
+    <div class="bottom-meta-left">
+      <span>April 2, 2026</span>
+      <span>6 min read</span>
+    </div>
+    <a class="bottom-meta-arrow" href="/blog">All Posts →</a>
+  </div>
+
+</article>
+
+<footer>
+  <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a> &nbsp;|&nbsp; <a href="/blog">Blog</a></p>
+</footer>
+
+</body>
+</html>
