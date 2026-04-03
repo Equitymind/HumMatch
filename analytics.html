@@ -175,9 +175,9 @@ tr:hover td{background:rgba(124,58,237,0.05)}
 
     <!-- Age Estimation Note -->
   <div class="chart-card wide" style="margin-bottom:14px;background:rgba(245,158,11,0.04);border-color:rgba(245,158,11,0.2);">
-    <h3 style="color:#F59E0B;">🧬 Vocal Age Estimation — Coming Soon</h3>
+    <h3 style="color:#F59E0B;">🧬 Vocal Age Estimation: Coming Soon</h3>
     <p style="font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.6;margin-top:6px;">
-      Research shows vocal characteristics do correlate with age ranges — formant frequencies, pitch range, and brightness tend to shift with age. 
+      Research shows vocal characteristics do correlate with age ranges. Formant frequencies, pitch range, and brightness tend to shift with age.
       HumMatch already captures brightness (spectral centroid) and range data on every hum. 
       With enough training data, a rough age bracket (teen / 20s / 30s-40s / 50s+) could be estimated. 
       This will be added as a future analytics dimension once the dataset is large enough to validate accuracy.
@@ -279,7 +279,7 @@ async function loadGeoData() {
         radius: r, fillColor: '#A855F7', fillOpacity: 0.75,
         color: '#EC4899', weight: 1.5, opacity: 0.9
       }).addTo(humMap);
-      circle.bindTooltip(`${p.city ? p.city + ', ' : ''}${p.country} — ${p.cnt} hum${p.cnt > 1 ? 's' : ''}`, { className: 'hm-tooltip' });
+      circle.bindTooltip(`${p.city ? p.city + ', ' : ''}${p.country} · ${p.cnt} hum${p.cnt > 1 ? 's' : ''}`, { className: 'hm-tooltip' });
       mapMarkers.push(circle);
     });
     if (points.length === 0) {
