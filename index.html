@@ -573,6 +573,7 @@
     <div class="filter-chip" data-filter="recent" onclick="setFilter('recent',this)">🔥 Recent</div>
     <div class="filter-chip" data-filter="90s" onclick="setFilter('90s',this)">📼 90s</div>
     <div class="filter-chip" data-filter="80s" onclick="setFilter('80s',this)">🕹 80s</div>
+    <div class="filter-chip" data-filter="en" onclick="setFilter('en',this)">🇺🇸 English</div>
     <div class="filter-chip" data-filter="es" onclick="setFilter('es',this)">🇪🇸 Español</div>
     </div>
   </div><!-- end results-sticky-top -->
@@ -4081,6 +4082,12 @@ function showResults() {
   const topScore = confidentSongs[0] ? Math.round((confidentSongs[0].score || 0) * 100) : 0;
   hmTrack('results_view', { voice_type: voiceType, score: topScore });
   showScreen('screen-results');
+  // Restore saved language filter
+  const savedLangFilter = (() => { try { return localStorage.getItem('hm_lang_filter'); } catch(e) { return null; } })();
+  if (savedLangFilter && ['en','es'].includes(savedLangFilter)) {
+    const chip = document.querySelector(`.filter-chip[data-filter="${savedLangFilter}"]`);
+    if (chip) setTimeout(() => setFilter(savedLangFilter, chip), 50);
+  }
   saveProfile();
   checkSavedProfile(); // refresh welcome screen button
   setTimeout(() => { restorePlaylistChecks(); updateExportCount(); }, 100);
@@ -4117,9 +4124,11 @@ function setFilter(filter, el) {
     recent:   '🔥 RECENT SONGS YOU CAN NAIL',
     '90s':    '📼 90s SONGS IN YOUR RANGE',
     '80s':    '🕹 80s SONGS IN YOUR RANGE',
+    en:       '🇺🇸 ENGLISH SONGS IN YOUR RANGE',
     es:       '🇪🇸 CANCIONES EN TU RANGO'
   };
   if (titleEl) titleEl.textContent = titles[filter] || 'YOUR SONGS';
+  try { localStorage.setItem('hm_lang_filter', filter); } catch(e) {}
 
   // Show/hide stretch section
   const stretchSec = document.getElementById('stretch-section');
@@ -4173,6 +4182,7 @@ function setFilter(filter, el) {
     else if (filter === 'recent')   show = era === 'recent' || era === '2000s';
     else if (filter === '90s')      show = era === '90s';
     else if (filter === '80s')      show = era === '80s';
+    else if (filter === 'en')       show = lang !== 'es' && !(item.dataset.tags && item.dataset.tags.includes('latin'));
     else if (filter === 'es')       show = lang === 'es' || (item.dataset.tags && item.dataset.tags.includes('latin'));
     item.style.display = show ? '' : 'none';
   });
