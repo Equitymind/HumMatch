@@ -771,11 +771,11 @@ app.post('/api/hummatch/squad/:id/invite', requireAuth, (req, res) => {
   const { display_name, voice_type } = req.body;
   const squadId = parseInt(req.params.id);
 
-  // Free users: 3-member limit
+  // Free users: 4-member limit
   if (!req.user.is_premium) {
     const members = stmts.getSquadMembers.all(squadId);
-    if (members.length >= 3) {
-      return res.status(403).json({ error: 'Free plan allows 3 squad members. Upgrade for unlimited!' });
+    if (members.length >= 4) {
+      return res.status(403).json({ error: 'Free plan allows 4 squad members. Upgrade for unlimited!' });
     }
   }
 

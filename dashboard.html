@@ -852,9 +852,9 @@ async function addFriend() {
   const squad = squads.find(s => s.id === activeSquadId);
   if (!squad) return;
 
-  // Free users: 3-friend limit
-  if (!isPremium && squad.members && squad.members.length >= 3) {
-    toast('Free plan allows 3 friends max. Upgrade for up to 4 per session!');
+  // Free users: 4-friend limit
+  if (!isPremium && squad.members && squad.members.length >= 4) {
+    toast('Free plan allows 4 friends max. Upgrade for more features!');
     return;
   }
 
