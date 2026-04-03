@@ -475,6 +475,21 @@ db.exec(`CREATE TABLE IF NOT EXISTS squad_name_votes (
 )`);
 console.log('[migration] SquadMatch viral loop tables ready');
 
+/// Backfill: any squad missing an invite_token gets a permanent one generated now
+(function backfillInviteTokens() {
+  const missing = db.prepare("SELECT id FROM squad_matches WHERE invite_token IS NULL OR invite_token = ''").all();
+  if (missing.length === 0) return;
+  const update = db.prepare('UPDATE squad_matches SET invite_token = ? WHERE id = ?');
+  const fill = db.transaction(() => {
+    for (const s of missing) {
+      const token = require('crypto').randomBytes(5).toString('hex'); // 10-char hex
+      update.run(token, s.id);
+    }
+  });
+  fill();
+  console.log(`[migration] Backfilled invite tokens for ${missing.length} squad(s)`);
+})();
+
 // ---------------------------------------------------------------------------
 // Auto-import analytics backup if events table is empty (for fresh deploys)
 // ---------------------------------------------------------------------------
@@ -1271,6 +1286,25 @@ app.post('/api/hummatch/squad/:id/invite', requireAuth, (req, res) => {
   } catch (e) {
     res.status(500).json({ error: 'Failed to invite member' });
   }
+});
+
+// Admin: look up or regenerate invite token for a squad by name
+app.get('/api/hummatch/admin/squad-invite', requireAdmin, (req, res) => {
+  const { name } = req.query;
+  if (!name) return res.status(400).json({ error: 'Pass ?name=SquadName' });
+  const squads = db.prepare('SELECT * FROM squad_matches WHERE LOWER(squad_name) LIKE LOWER(?)').all(`%${name}%`);
+  if (!squads.length) return res.status(404).json({ error: 'No squad found matching that name' });
+  res.json({ squads: squads.map(s => ({ id: s.id, squad_name: s.squad_name, invite_token: s.invite_token, invite_url: s.invite_token ? `/squadmatch?join=${s.invite_token}` : null, status: s.status })) });
+});
+
+app.post('/api/hummatch/admin/squad-invite/regen', requireAdmin, (req, res) => {
+  const { squad_id } = req.body;
+  if (!squad_id) return res.status(400).json({ error: 'Pass squad_id in body' });
+  const squad = db.prepare('SELECT * FROM squad_matches WHERE id = ?').get(squad_id);
+  if (!squad) return res.status(404).json({ error: 'Squad not found' });
+  const token = require('crypto').randomBytes(5).toString('hex');
+  db.prepare('UPDATE squad_matches SET invite_token = ? WHERE id = ?').run(token, squad_id);
+  res.json({ ok: true, squad_name: squad.squad_name, invite_token: token, invite_url: `/squadmatch?join=${token}` });
 });
 
 // Get squad by invite token (for join page — no auth)

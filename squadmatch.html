@@ -601,9 +601,9 @@ async function loadJoin(tok) {
   try {
     const d = await api('/api/hummatch/squad/join/'+tok);
     if (d.error) {
-      document.getElementById('join-headline').textContent = 'Invite Not Found';
+      document.getElementById('join-headline').textContent = 'Squad Not Found';
       document.getElementById('join-btn').disabled = true;
-      document.getElementById('join-info').textContent = 'This invite may have expired.';
+      document.getElementById('join-info').textContent = 'This invite link is invalid or the squad was deleted. Ask your friend to share a fresh link.';
       return;
     }
     S.squadId = d.squad_id; S.squadName = d.squad_name; S.inviteToken = tok;
