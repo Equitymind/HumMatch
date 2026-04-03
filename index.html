@@ -4110,12 +4110,11 @@ function showResults() {
   const topScore = confidentSongs[0] ? Math.round((confidentSongs[0].score || 0) * 100) : 0;
   hmTrack('results_view', { voice_type: voiceType, score: topScore });
   showScreen('screen-results');
-  // Restore saved language filter
+  // Restore saved language filter (default to English for new users)
   const savedLangFilter = (() => { try { return localStorage.getItem('hm_lang_filter'); } catch(e) { return null; } })();
-  if (savedLangFilter && ['en','es'].includes(savedLangFilter)) {
-    const chip = document.querySelector(`.filter-chip[data-filter="${savedLangFilter}"]`);
-    if (chip) setTimeout(() => setFilter(savedLangFilter, chip), 50);
-  }
+  const langToApply = (savedLangFilter && ['en','es','all'].includes(savedLangFilter)) ? savedLangFilter : 'en';
+  const langChip = document.querySelector(`.filter-chip[data-filter="${langToApply}"]`);
+  if (langChip) setTimeout(() => setFilter(langToApply, langChip), 50);
   saveProfile();
   checkSavedProfile(); // refresh welcome screen button
   setTimeout(() => { restorePlaylistChecks(); updateExportCount(); }, 100);
