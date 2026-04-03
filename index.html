@@ -261,6 +261,44 @@
   .hm-account-dot.premium { background:#22c55e; }
   .hm-account-dot.free { background:rgba(255,255,255,0.3); }
 
+  /* ── PRIMER SCREEN ── */
+  #screen-primer { justify-content: center; gap: 0; padding: 24px 24px max(40px, env(safe-area-inset-bottom, 40px)); }
+  .primer-icon { font-size: 4rem; margin-bottom: 24px; }
+  .primer-title { font-size: 1.6rem; font-weight: 900; line-height: 1.25; margin-bottom: 10px; max-width: 280px; }
+  .primer-sub { font-size: 0.92rem; color: var(--text2); line-height: 1.6; max-width: 280px; margin-bottom: 28px; }
+  .primer-steps { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 300px; margin-bottom: 32px; }
+  .primer-step { display: flex; align-items: center; gap: 14px; text-align: left; }
+  .primer-step-num { width: 36px; height: 36px; border-radius: 50%; background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+  .primer-step-text { font-size: 0.88rem; color: var(--text2); line-height: 1.4; }
+  .primer-step-text strong { color: #fff; }
+  .primer-ready-btn { width: 100%; max-width: 300px; padding: 18px; background: linear-gradient(135deg, #A855F7, #7C3AED); color: #fff; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; letter-spacing: 0.02em; box-shadow: 0 0 40px rgba(168,85,247,0.35); }
+  .primer-ready-btn:active { transform: scale(0.97); }
+  .primer-tip { font-size: 0.72rem; color: var(--text3); margin-top: 16px; max-width: 260px; line-height: 1.5; }
+
+  /* ── COUNTDOWN RING (SVG) ── */
+  .countdown-ring-wrap { position: relative; width: 120px; height: 120px; margin: 0 auto; }
+  .countdown-ring-svg { width: 120px; height: 120px; transform: rotate(-90deg); }
+  .countdown-ring-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 6; }
+  .countdown-ring-progress { fill: none; stroke: url(#ring-grad); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 339.292; stroke-dashoffset: 0; transition: stroke-dashoffset 0.1s linear; }
+  .countdown-ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .countdown-ring-number { font-size: 2.2rem; font-weight: 900; color: #fff; line-height: 1; }
+  .countdown-ring-label { font-size: 0.65rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+  /* ── AUTO-FLOW TEST SCREEN ── */
+  .auto-phase-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .auto-phase-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; line-height: 1.2; }
+  .auto-phase-sub { font-size: 0.85rem; color: var(--text2); line-height: 1.5; max-width: 280px; margin-bottom: 24px; }
+  .auto-phase-emoji { font-size: 3rem; margin-bottom: 16px; transition: transform 0.3s; }
+  .auto-status { font-size: 0.82rem; color: var(--text2); margin-top: 16px; min-height: 24px; font-weight: 600; }
+  .auto-status.listening { color: var(--accent); }
+  .auto-status.success { color: var(--green); }
+
+  /* Phase success flash */
+  .phase-success-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 500; pointer-events: none; opacity: 0; transition: opacity 0.2s; background: rgba(8,6,15,0.85); }
+  .phase-success-overlay.show { opacity: 1; }
+  .phase-success-check { font-size: 4rem; margin-bottom: 8px; }
+  .phase-success-text { font-size: 1.3rem; font-weight: 800; color: #22C55E; }
+
   /* ── Login bottom sheet ── */
   .hm-login-sheet { position:fixed; bottom:0; left:0; right:0; z-index:2500; background:rgba(18,16,26,0.98); backdrop-filter:blur(16px); border-top:1px solid rgba(168,85,247,0.25); border-radius:20px 20px 0 0; padding:24px 24px max(24px, env(safe-area-inset-bottom, 24px)); transform:translateY(100%); transition:transform 0.35s cubic-bezier(.4,0,.2,1); }
   .hm-login-sheet.show { transform:translateY(0); }
@@ -331,21 +369,21 @@
 <!-- SCREEN 1: WELCOME -->
 <div id="screen-welcome" class="screen active">
   <div style="text-align:center;"><img src="/hummatch-logo.png" alt="HumMatch" style="height:100px;display:inline-block;"/></div>
-  <div class="app-tagline" style="font-size:1.05rem;color:var(--text1);font-weight:800;max-width:300px;">Hum 3 notes. We'll tell you what songs fit your voice.</div>
-  <div style="font-size:0.78rem;color:var(--text3);max-width:280px;line-height:1.5;margin-bottom:10px;">Find songs you can actually sing well — for karaoke, the car, or anywhere.</div>
+  <div class="app-tagline" style="font-size:1.05rem;color:var(--text1);font-weight:800;max-width:300px;">Hum for 15 seconds. Find songs made for your voice.</div>
+  <div style="font-size:0.78rem;color:var(--text3);max-width:280px;line-height:1.5;margin-bottom:10px;">No singing required. Just hum — we do the rest.</div>
 
   <div class="how-it-works">
     <div class="step">
-      <div class="step-num">🎵</div>
-      <div class="step-txt">Hum low, mid, and high for 3 seconds each</div>
+      <div class="step-num">🎤</div>
+      <div class="step-txt">Tap once and hum 3 notes (we walk you through it)</div>
     </div>
     <div class="step">
       <div class="step-num">🧬</div>
-      <div class="step-txt">We analyze your range and vocal color</div>
+      <div class="step-txt">We map your vocal range and tone in real time</div>
     </div>
     <div class="step">
       <div class="step-num">🎯</div>
-      <div class="step-txt">Get matched to songs and artists made for your voice</div>
+      <div class="step-txt">Get a list of songs you can actually nail</div>
     </div>
   </div>
 
@@ -420,52 +458,71 @@
 
 </div>
 
-<!-- SCREEN 2: HUM TEST -->
-<div class="phase-flash" id="phase-flash"><div class="phase-flash-text" id="phase-flash-text"></div></div>
+<!-- SCREEN: PRIMER (drunk-proof prep screen) -->
+<div id="screen-primer" class="screen">
+  <div class="primer-icon">🎤</div>
+  <div class="primer-title">Quick voice check — takes 15 seconds</div>
+  <div class="primer-sub">You'll hum 3 times. No singing, no skill needed. Just make a "hmmmm" sound.</div>
+
+  <div class="primer-steps">
+    <div class="primer-step">
+      <div class="primer-step-num">1</div>
+      <div class="primer-step-text"><strong>Low hum</strong> — as deep as you can go</div>
+    </div>
+    <div class="primer-step">
+      <div class="primer-step-num">2</div>
+      <div class="primer-step-text"><strong>Normal voice</strong> — your everyday hum</div>
+    </div>
+    <div class="primer-step">
+      <div class="primer-step-num">3</div>
+      <div class="primer-step-text"><strong>High hum</strong> — as high as you can go</div>
+    </div>
+  </div>
+
+  <button class="primer-ready-btn" onclick="beginAutoCapture()">I'm Ready →</button>
+  <div class="primer-tip">We only listen to the pitch — no audio is recorded or stored.</div>
+</div>
+
+<!-- SCREEN 2: HUM TEST (auto-flow) -->
+<div class="phase-success-overlay" id="phase-success"><div class="phase-success-check">✅</div><div class="phase-success-text" id="phase-success-text">Got it!</div></div>
 
 <div id="screen-test" class="screen">
-  <div class="test-phase" id="phase-label">PHASE 1 OF 3</div>
-  <div class="test-title" id="phase-title">Hum your lowest note</div>
-  <div class="test-sub" id="phase-sub">Go as low as you comfortably can and hold it steady</div>
-  <div style="font-size:0.72rem;color:var(--text3);margin-bottom:16px;">Don't worry about being perfect. Just hum naturally.</div>
+  <div class="auto-phase-label" id="phase-label">HUM 1 OF 3</div>
+  <div class="auto-phase-emoji" id="phase-emoji">⬇️</div>
+  <div class="auto-phase-title" id="phase-title">Hum your lowest note</div>
+  <div class="auto-phase-sub" id="phase-sub">Go as deep as you comfortably can. Hold it steady.</div>
 
-  <div class="pitch-display">
-    <div class="pitch-note" id="pitch-note">—</div>
-    <div class="pitch-hz" id="pitch-hz">waiting for signal…</div>
-    <div class="pitch-bar-wrap"><div class="pitch-bar" id="pitch-bar"></div></div>
-    <div id="signal-status" style="font-size:0.72rem;margin-top:10px;min-height:18px;color:var(--text3);">🎤 Listening...</div>
-  </div>
-
-  <canvas class="waveform-canvas" id="waveform-canvas" width="360" height="60"></canvas>
-
-  <div class="range-summary">
-    <div class="range-box">
-      <div class="range-box-label">Lowest</div>
-      <div class="range-box-value" id="low-note">—</div>
-    </div>
-    <div class="range-box">
-      <div class="range-box-label">Middle</div>
-      <div class="range-box-value" id="mid-note">—</div>
-    </div>
-    <div class="range-box">
-      <div class="range-box-label">Highest</div>
-      <div class="range-box-value" id="high-note">—</div>
+  <div class="countdown-ring-wrap" id="countdown-ring-wrap">
+    <svg class="countdown-ring-svg" viewBox="0 0 120 120">
+      <defs><linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#EC4899"/></linearGradient></defs>
+      <circle class="countdown-ring-bg" cx="60" cy="60" r="54"/>
+      <circle class="countdown-ring-progress" id="countdown-ring" cx="60" cy="60" r="54"/>
+    </svg>
+    <div class="countdown-ring-center">
+      <div class="countdown-ring-number" id="ring-number">3</div>
+      <div class="countdown-ring-label" id="ring-label">seconds</div>
     </div>
   </div>
 
-  <div class="phase-dots">
+  <div class="auto-status" id="auto-status">🎤 Listening…</div>
+
+  <div class="phase-dots" style="margin-top:20px;">
     <div class="phase-dot active" id="dot-0"></div>
     <div class="phase-dot" id="dot-1"></div>
     <div class="phase-dot" id="dot-2"></div>
   </div>
-  <div id="phase-progress-text" style="font-size:0.9rem;font-weight:700;color:#A855F7;margin-bottom:8px;min-height:22px;"></div>
 
-  <div class="hum-step-banner" id="hum-step-banner">👇 Tap the button to start humming</div>
-
-  <div class="mic-btn-wrap ready" id="mic-btn-wrap">
-    <button class="mic-btn ready" id="mic-btn" onclick="toggleCapture()" style="font-size:1rem;font-weight:900;letter-spacing:0.05em;">🎤<span class="mic-countdown" id="mic-countdown"></span></button>
+  <!-- Hidden elements for pitch detection (still needed by audio engine) -->
+  <div style="display:none;">
+    <div id="pitch-note">—</div>
+    <div id="pitch-hz"></div>
+    <div id="pitch-bar"></div>
+    <div id="signal-status"></div>
+    <canvas id="waveform-canvas" width="360" height="60"></canvas>
+    <div id="low-note">—</div>
+    <div id="mid-note">—</div>
+    <div id="high-note">—</div>
   </div>
-  <div class="mic-label" id="mic-label">TAP TO START</div>
 </div>
 
 <!-- SCREEN 3: RESULTS -->
@@ -2445,9 +2502,9 @@ let shareTopSong = null;
 let waveRaf = null;
 
 const PHASES = [
-  { label:'HUM 1 OF 3', title:'Hum your lowest note', sub:'Go as low as you can and hold it steady' },
-  { label:'HUM 2 OF 3', title:'Hum a comfortable middle note', sub:'Hum at your most natural, relaxed pitch' },
-  { label:'HUM 3 OF 3', title:'Hum your highest note', sub:'Go as high as you can and hold it steady' },
+  { label:'HUM 1 OF 3', title:'Hum your lowest note',  sub:'Go as deep as you comfortably can. Hold it steady.', emoji:'⬇️' },
+  { label:'HUM 2 OF 3', title:'Now your normal voice',  sub:'Just hum like you\'re humming a song to yourself.', emoji:'🎵' },
+  { label:'HUM 3 OF 3', title:'Now go high',            sub:'As high as you comfortably can. Hold it steady.', emoji:'⬆️' },
 ];
 
 function showScreen(id) {
@@ -2482,12 +2539,12 @@ function applyPromoCode() {
   }
 }
 
+// ── startTest: route to primer screen (checks hum limit first) ──
 async function startTest() {
   // Check free hum limit (10 hums per month for non-premium)
   const isPremium = localStorage.getItem('hm_premium') === 'true';
   if (!isPremium) {
-    const now = Date.now();
-    const monthKey = new Date().toISOString().slice(0,7); // YYYY-MM
+    const monthKey = new Date().toISOString().slice(0,7);
     const storedMonth = localStorage.getItem('hm_hum_month');
     if (storedMonth !== monthKey) {
       localStorage.setItem('hm_hum_month', monthKey);
@@ -2496,7 +2553,6 @@ async function startTest() {
     const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
     if (humCount >= 10) {
       showScreen('screen-welcome');
-      // Show upgrade prompt
       const modal = document.createElement('div');
       modal.id = 'limit-modal';
       modal.style.cssText = 'position:fixed;inset:0;z-index:3000;background:rgba(8,6,15,0.96);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;';
@@ -2524,9 +2580,14 @@ async function startTest() {
     localStorage.setItem('hm_hum_count', humCount + 1);
     if (typeof hmSyncCounts === 'function') hmSyncCounts();
   }
-  // Create AudioContext first (must happen inside gesture handler on iOS)
+  // Show primer screen instead of jumping straight to test
+  showScreen('screen-primer');
+}
+
+// ── beginAutoCapture: the drunk-proof tap-once auto-flow ──
+async function beginAutoCapture() {
+  // Create AudioContext (must be inside gesture handler on iOS)
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  // iOS Safari starts AudioContext in 'suspended' — resume immediately
   if (audioCtx.state === 'suspended') {
     try { await audioCtx.resume(); } catch(e) {}
   }
@@ -2537,10 +2598,9 @@ async function startTest() {
     return;
   }
   analyser = audioCtx.createAnalyser();
-  analyser.fftSize = 4096;  // 4096 works better on mobile (8192 can stall)
+  analyser.fftSize = 4096;
   source = audioCtx.createMediaStreamSource(stream);
   source.connect(analyser);
-  // Resume again after stream connect (some iOS versions need this)
   if (audioCtx.state === 'suspended') {
     try { await audioCtx.resume(); } catch(e) {}
   }
@@ -2552,81 +2612,124 @@ async function startTest() {
 
   updatePhaseUI();
   showScreen('screen-test');
-  startWaveform();
+
+  // Auto-start first capture after a brief pause to let user see the instruction
+  setTimeout(() => runPhaseCapture(), 800);
 }
 
-const PHASE_WORDS = ['LOW', 'MID', 'HIGH'];
-function flashPhaseWord(word) {
-  const flash = document.getElementById('phase-flash');
-  const txt = document.getElementById('phase-flash-text');
-  if (!flash || !txt) return;
-  txt.textContent = word;
-  flash.classList.add('show');
-  setTimeout(() => flash.classList.remove('show'), 700);
+// ── Countdown ring animation ──
+const RING_CIRCUMFERENCE = 2 * Math.PI * 54; // ~339.292
+let ringAnimFrame = null;
+
+function animateRing(durationMs, onComplete) {
+  const ring = document.getElementById('countdown-ring');
+  const numEl = document.getElementById('ring-number');
+  const labelEl = document.getElementById('ring-label');
+  if (!ring) return;
+
+  ring.style.strokeDasharray = RING_CIRCUMFERENCE;
+  ring.style.strokeDashoffset = '0';
+  ring.style.transition = 'none';
+
+  const startTime = performance.now();
+  let lastSecond = Math.ceil(durationMs / 1000);
+  if (numEl) numEl.textContent = lastSecond;
+  if (labelEl) labelEl.textContent = 'seconds';
+
+  function tick(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / durationMs, 1);
+    const offset = progress * RING_CIRCUMFERENCE;
+    ring.style.strokeDashoffset = offset;
+
+    // Update countdown number
+    const remaining = Math.ceil((durationMs - elapsed) / 1000);
+    if (remaining !== lastSecond && remaining >= 0) {
+      lastSecond = remaining;
+      if (numEl) numEl.textContent = remaining <= 0 ? '✓' : remaining;
+    }
+
+    if (progress < 1) {
+      ringAnimFrame = requestAnimationFrame(tick);
+    } else {
+      if (numEl) numEl.textContent = '✓';
+      if (labelEl) labelEl.textContent = '';
+      if (onComplete) onComplete();
+    }
+  }
+  ringAnimFrame = requestAnimationFrame(tick);
 }
 
+function resetRing() {
+  if (ringAnimFrame) { cancelAnimationFrame(ringAnimFrame); ringAnimFrame = null; }
+  const ring = document.getElementById('countdown-ring');
+  if (ring) { ring.style.strokeDashoffset = '0'; ring.style.transition = 'none'; }
+  const numEl = document.getElementById('ring-number');
+  if (numEl) numEl.textContent = '3';
+}
+
+// ── Phase success flash ──
+function showPhaseSuccess(text) {
+  return new Promise(resolve => {
+    const overlay = document.getElementById('phase-success');
+    const textEl = document.getElementById('phase-success-text');
+    if (textEl) textEl.textContent = text || 'Got it!';
+    if (overlay) overlay.classList.add('show');
+    setTimeout(() => {
+      if (overlay) overlay.classList.remove('show');
+      resolve();
+    }, 900);
+  });
+}
+
+// ── Update phase UI for auto-flow ──
 function updatePhaseUI() {
   const p = PHASES[phase];
   document.getElementById('phase-label').textContent = p.label;
   document.getElementById('phase-title').textContent = p.title;
   document.getElementById('phase-sub').textContent = p.sub;
-  document.getElementById('mic-label').textContent = 'TAP TO START';
-  const banner = document.getElementById('hum-step-banner');
-  if (banner) banner.textContent = '👇 Tap the button to hum ' + (phase === 0 ? 'your lowest note' : phase === 1 ? 'your middle note' : 'your highest note');
-  const btn = document.getElementById('mic-btn');
-  btn.classList.remove('recording');
-  btn.classList.add('ready');
-  document.getElementById('mic-btn-wrap').classList.add('ready');
-  // Reset countdown
-  const cd = document.getElementById('mic-countdown');
-  if (cd) { cd.classList.remove('visible'); cd.textContent = ''; }
-  // Flash the phase word
-  if (phase < 3) flashPhaseWord(PHASE_WORDS[phase]);
+  const emojiEl = document.getElementById('phase-emoji');
+  if (emojiEl) emojiEl.textContent = p.emoji || '🎵';
+  const statusEl = document.getElementById('auto-status');
+  if (statusEl) { statusEl.textContent = '🎤 Listening…'; statusEl.className = 'auto-status listening'; }
+  resetRing();
   [0,1,2].forEach(i => {
     const dot = document.getElementById('dot-'+i);
+    if (!dot) return;
     dot.classList.remove('active','done');
     if (i < phase) dot.classList.add('done');
     if (i === phase) dot.classList.add('active');
   });
 }
 
-function toggleCapture() {
-  if (capturing) return; // prevent double tap
+// ── Run a single phase capture (auto-flow: no tap needed) ──
+function runPhaseCapture() {
+  if (capturing) return;
   hmTrack('hum_start', { phase: phase });
   capturing = true;
-  const btn = document.getElementById('mic-btn');
-  btn.classList.remove('ready');
-  btn.classList.add('recording');
-  document.getElementById('mic-btn-wrap').classList.remove('ready');
-  document.getElementById('mic-label').textContent = 'HUMMING… KEEP GOING!';
-  const banner = document.getElementById('hum-step-banner');
-  if (banner) banner.textContent = '🎙️ Hold your hum steady…';
 
-  // Countdown inside button
-  const cd = document.getElementById('mic-countdown');
-  if (cd) { cd.classList.add('visible'); cd.textContent = '3'; }
-  let countdown = 3;
-  const cdInterval = setInterval(() => {
-    countdown--;
-    if (cd && countdown > 0) cd.textContent = countdown;
-    else if (cd && countdown <= 0) { cd.textContent = '✓'; clearInterval(cdInterval); }
-  }, 1000);
+  const statusEl = document.getElementById('auto-status');
+  if (statusEl) { statusEl.innerHTML = '<span style="color:#A855F7;">Humming… hold it steady</span>'; statusEl.className = 'auto-status listening'; }
 
   const pitches = [];
   const brightnesses = [];
   const buf = new Float32Array(analyser.fftSize);
   const freqBuf = new Uint8Array(analyser.frequencyBinCount);
 
-  const sigEl = document.getElementById('signal-status');
+  // Start the countdown ring
+  animateRing(3000, null);
+
   const interval = setInterval(() => {
     analyser.getFloatTimeDomainData(buf);
     analyser.getByteFrequencyData(freqBuf);
 
-    // Check signal level
     let rms = 0;
     for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
     rms = Math.sqrt(rms / buf.length);
-    if (rms < 0.001) { if (sigEl) sigEl.innerHTML = '🎤 Listening...'; return; } // too quiet
+    if (rms < 0.001) {
+      if (statusEl) statusEl.innerHTML = '🎤 Listening… hum now!';
+      return;
+    }
 
     const freq = detectPitch(buf, audioCtx.sampleRate);
     if (freq > 50 && freq < 1400) {
@@ -2634,34 +2737,30 @@ function toggleCapture() {
       pitches.push(midi);
       brightnesses.push(spectralCentroid(freqBuf));
 
-      const note = midiToName(midi);
-      document.getElementById('pitch-note').textContent = note;
+      // Update hidden elements (still used by results engine)
+      document.getElementById('pitch-note').textContent = midiToName(midi);
       document.getElementById('pitch-hz').textContent = Math.round(freq) + ' Hz';
-      // Bar: map 36-90 MIDI to 0-100%
       const pct = Math.min(100, Math.max(0, ((midi - 36) / 54) * 100));
       document.getElementById('pitch-bar').style.width = pct + '%';
-      // Signal feedback
-      if (sigEl) {
-        if (rms > 0.02) { sigEl.innerHTML = '<span style="color:#22C55E;">✓ Good signal — keep humming!</span>'; }
-        else { sigEl.innerHTML = '<span style="color:#F59E0B;">📢 Hum a bit louder</span>'; }
+
+      if (statusEl) {
+        if (rms > 0.02) { statusEl.innerHTML = '<span style="color:#22C55E;">✓ Good — keep humming!</span>'; }
+        else { statusEl.innerHTML = '<span style="color:#F59E0B;">Hum a bit louder</span>'; }
       }
     } else {
-      if (sigEl && rms > 0.001) sigEl.innerHTML = '<span style="color:#F59E0B;">📢 Hum a bit louder</span>';
+      if (statusEl && rms > 0.001) statusEl.innerHTML = '<span style="color:#F59E0B;">Hum a bit louder</span>';
     }
   }, 100);
 
-  captureTimer = setTimeout(() => {
+  captureTimer = setTimeout(async () => {
     clearInterval(interval);
-    clearInterval(cdInterval);
     capturing = false;
-    document.getElementById('mic-btn').classList.remove('recording');
-    // Hide countdown
-    if (cd) { cd.classList.remove('visible'); cd.textContent = ''; }
 
     if (pitches.length < 3) {
-      document.getElementById('mic-label').textContent = 'NOT DETECTED — TAP TO TRY AGAIN';
-      if (banner) banner.textContent = '🔄 Hum louder this time! Tap the button again.';
-      document.getElementById('pitch-note').textContent = '?';
+      // Not enough signal — retry this phase automatically
+      if (statusEl) { statusEl.innerHTML = '<span style="color:#F59E0B;">Didn\'t catch that — trying again…</span>'; }
+      resetRing();
+      setTimeout(() => runPhaseCapture(), 1200);
       return;
     }
 
@@ -2671,33 +2770,24 @@ function toggleCapture() {
     capturedNotes[phase] = median;
 
     const avgBrightness = brightnesses.reduce((a, b) => a + b, 0) / brightnesses.length;
-    // Normalize centroid to 0-100 scale (centroid is 0-analyser.frequencyBinCount/2)
     const normBrightness = Math.min(100, Math.round((avgBrightness / (analyser.frequencyBinCount / 8)) * 100));
     capturedBrightness[phase] = normBrightness;
 
-    // Update range display
     const ids = ['low-note', 'mid-note', 'high-note'];
     document.getElementById(ids[phase]).textContent = midiToName(median);
 
-    // Update phase progress text
-    const progEl = document.getElementById('phase-progress-text');
-    // Reset signal status
-    const sigReset = document.getElementById('signal-status');
-    if (sigReset) sigReset.innerHTML = '🎤 Listening...';
-
     if (phase < 2) {
-      const nextNum = phase + 2;
-      if (progEl) progEl.textContent = 'Hum ' + (phase + 1) + ' of 3 done ✓';
-      document.getElementById('mic-label').textContent = '✓ GOT IT!';
-      if (banner) banner.textContent = '✅ Hum ' + (phase + 1) + ' complete! Tap for hum ' + nextNum;
+      // Show success flash, then auto-advance
+      await showPhaseSuccess('Got it! ' + midiToName(median));
       phase++;
-      setTimeout(updatePhaseUI, 1200);
+      updatePhaseUI();
+      // Auto-start next phase after a brief breath
+      setTimeout(() => runPhaseCapture(), 600);
     } else {
       // All 3 phases done
-      if (progEl) progEl.textContent = 'All 3 hums complete ✓';
-      document.getElementById('mic-label').textContent = '🎉 ALL DONE!';
-      if (banner) banner.textContent = '🔍 Analyzing your voice…';
-      setTimeout(showResults, 900);
+      await showPhaseSuccess('All done!');
+      if (statusEl) { statusEl.innerHTML = '<span style="color:#22C55E;">🔍 Analyzing your voice…</span>'; }
+      setTimeout(showResults, 500);
     }
   }, 3000);
 }
@@ -3504,12 +3594,14 @@ function resetTest() {
   document.getElementById('mid-note').textContent = '—';
   document.getElementById('high-note').textContent = '—';
   document.getElementById('pitch-note').textContent = '—';
-  document.getElementById('pitch-hz').textContent = 'waiting for signal…';
+  document.getElementById('pitch-hz').textContent = '';
   document.getElementById('pitch-bar').style.width = '0%';
+  resetRing();
   // Re-test doesn't count against the free hum limit — it's the same session
   const prev = parseInt(localStorage.getItem('hm_hum_count') || '0');
   if (prev > 0) localStorage.setItem('hm_hum_count', prev - 1);
-  startTest();
+  // Go straight to primer (skip limit check — already passed)
+  showScreen('screen-primer');
 }
 
 // ── SHARE FUNCTIONS ──────────────────────────────────────────────
