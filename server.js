@@ -49,6 +49,14 @@ async function sendEmail(to, subject, html) {
   }
 }
 
+// Guarded welcome email — only sends once per user, checks DB flag every time
+function trySendWelcomeEmail(userId, email) {
+  const row = db.prepare('SELECT welcome_email_sent FROM users WHERE id = ?').get(userId);
+  if (row && row.welcome_email_sent) return; // already sent
+  db.prepare('UPDATE users SET welcome_email_sent = 1 WHERE id = ?').run(userId);
+  sendEmail(email, 'Welcome to HumMatch!', emailWelcome(email));
+}
+
 // ---------------------------------------------------------------------------
 // Email Templates
 // ---------------------------------------------------------------------------
@@ -676,8 +684,8 @@ app.post('/api/hummatch/auth/register', (req, res) => {
   const token = uuidv4();
   try {
     stmts.insertUser.run(email, token, monthKey());
-    db.prepare('UPDATE users SET welcome_email_sent = 1 WHERE email = ?').run(email);
-    sendEmail(email, 'Welcome to HumMatch!', emailWelcome(email));
+    const newUser = stmts.getUserByEmail.get(email);
+    trySendWelcomeEmail(newUser.id, email);
     return res.json({ token, email, is_premium: false, isNew: true });
   } catch (e) {
     console.error('Register error:', e.message);
@@ -1277,10 +1285,9 @@ app.post('/api/hummatch/playlist/save', (req, res) => {
     // Send playlist email (async, don't block response)
     sendEmail(email, 'Your HumMatch Playlist is Ready!', emailPlaylistSaved(songs, shareUrl));
 
-    // Send welcome email if new user and not already sent
-    if (isNew && !user.welcome_email_sent) {
-      db.prepare('UPDATE users SET welcome_email_sent = 1 WHERE id = ?').run(user.id);
-      sendEmail(email, 'Welcome to HumMatch!', emailWelcome(email));
+    // Send welcome email if new user (guarded — only sends once)
+    if (isNew) {
+      trySendWelcomeEmail(user.id, email);
     }
 
     res.json({ ok: true, shareToken, shareUrl, isNew });
