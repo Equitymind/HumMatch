@@ -681,9 +681,9 @@ app.post('/api/hummatch/hum', requireAuth, (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
-// API: SquadMatch (Premium)
+// API: SquadMatch (Free + Premium)
 // ---------------------------------------------------------------------------
-app.get('/api/hummatch/squad', requireAuth, requirePremium, (req, res) => {
+app.get('/api/hummatch/squad', requireAuth, (req, res) => {
   const squads = stmts.getSquads.all(req.user.id);
   const result = squads.map(s => ({
     ...s,
@@ -692,7 +692,7 @@ app.get('/api/hummatch/squad', requireAuth, requirePremium, (req, res) => {
   res.json({ squads: result });
 });
 
-app.post('/api/hummatch/squad', requireAuth, requirePremium, (req, res) => {
+app.post('/api/hummatch/squad', requireAuth, (req, res) => {
   const { squad_name } = req.body;
   try {
     const info = stmts.insertSquad.run(req.user.id, squad_name || 'My SquadMatch');
@@ -702,9 +702,18 @@ app.post('/api/hummatch/squad', requireAuth, requirePremium, (req, res) => {
   }
 });
 
-app.post('/api/hummatch/squad/:id/invite', requireAuth, requirePremium, (req, res) => {
+app.post('/api/hummatch/squad/:id/invite', requireAuth, (req, res) => {
   const { display_name, voice_type } = req.body;
   const squadId = parseInt(req.params.id);
+
+  // Free users: 3-member limit
+  if (!req.user.is_premium) {
+    const members = stmts.getSquadMembers.all(squadId);
+    if (members.length >= 3) {
+      return res.status(403).json({ error: 'Free plan allows 3 squad members. Upgrade for unlimited!' });
+    }
+  }
+
   try {
     const info = stmts.insertSquadMember.run(squadId, null, display_name || '', voice_type || '', 'pending');
     res.json({ ok: true, id: info.lastInsertRowid });
@@ -850,6 +859,11 @@ app.get('/blog', (_req, res) => {
 // Dashboard page
 app.get('/dashboard', (_req, res) => {
   res.sendFile(path.join(__dirname, 'dashboard.html'));
+});
+
+// SquadMatch landing page
+app.get('/squadmatch', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'squadmatch.html'));
 });
 
 // Contact page (serves index.html, handled client-side)

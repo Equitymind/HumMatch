@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SquadMatch - Find Songs Your Whole Squad Can Sing | HumMatch</title>
+  <meta name="description" content="Invite your friends, compare vocal ranges, and discover songs everyone in your group can sing together. Karaoke nights, duets, band jams — SquadMatch makes it easy.">
+  <link rel="icon" type="image/png" href="/hummatch-icon-180.png">
+  <meta name="theme-color" content="#a855f7">
+  <meta property="og:title" content="SquadMatch - Find Songs Your Whole Squad Can Sing | HumMatch">
+  <meta property="og:description" content="Invite your friends, compare vocal ranges, and discover songs everyone in your group can sing together.">
+  <meta property="og:url" content="https://hummatch.me/squadmatch">
+  <meta property="og:type" content="website">
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0d0b1a;
+      --surface: #14111f;
+      --surface-border: rgba(124,58,237,0.12);
+      --purple: #A855F7;
+      --purple-hover: #C084FC;
+      --pink: #EC4899;
+      --white: #ffffff;
+      --text: #e2e0f0;
+      --text-muted: rgba(255,255,255,0.4);
+      --radius: 14px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--bg);
+      border-bottom: 1px solid var(--surface-border);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      text-decoration: none;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 32px;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--purple);
+    }
+
+    .new-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-left: 6px;
+      text-transform: uppercase;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .squadmatch-text {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .squadmatch-text span:first-child {
+      color: var(--white);
+    }
+
+    .squadmatch-text span:last-child {
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .new-badge-badge {
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(168,85,247,0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--white);
+      border: 1px solid var(--surface-border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--purple);
+    }
+
+    /* SECTION */
+    section {
+      padding: 80px 0;
+    }
+
+    section.alt {
+      background: var(--surface);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .section-intro {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    /* SOCIAL PROOF HOOK */
+    .social-hook {
+      background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(236,72,153,0.05));
+      text-align: center;
+    }
+
+    .callout-box {
+      background: var(--surface);
+      border-left: 4px solid var(--purple);
+      padding: 24px 32px;
+      margin: 32px auto;
+      max-width: 600px;
+      text-align: left;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .callout-box strong {
+      color: var(--purple);
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .callout-box p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* STEPS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .step {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: rgba(168,85,247,0.15);
+      border: 2px solid var(--purple);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--purple);
+      margin: 0 auto 20px;
+    }
+
+    /* USE CASES */
+    .use-case {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 40px;
+      margin-bottom: 32px;
+    }
+
+    .use-case-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .quote {
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      border-left: 3px solid var(--purple);
+      padding-left: 20px;
+    }
+
+    .use-cases-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .use-cases-list li {
+      padding-left: 28px;
+      margin-bottom: 12px;
+      position: relative;
+      color: var(--text-muted);
+    }
+
+    .use-cases-list li::before {
+      content: "\2022";
+      position: absolute;
+      left: 0;
+      color: var(--purple);
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    /* FEATURE CARDS */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .feature-card h3 {
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    /* PRICING BANNER */
+    .pricing-banner {
+      text-align: center;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 700px;
+      margin: 40px auto 0;
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--purple);
+      position: relative;
+    }
+
+    .pricing-card.featured::before {
+      content: "POPULAR";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+    }
+
+    .pricing-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .pricing-price {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .pricing-price span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .pricing-features li {
+      padding: 8px 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .pricing-features li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: var(--purple);
+      font-weight: 700;
+    }
+
+    /* FINAL CTA */
+    .final-cta {
+      text-align: center;
+      padding: 80px 0;
+      background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(236,72,153,0.05));
+    }
+
+    .final-cta h2 {
+      margin-bottom: 20px;
+    }
+
+    .final-cta p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--surface-border);
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <a href="/" class="logo">HumMatch</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/blog">Blog</a>
+      <a href="/squadmatch">SquadMatch <span class="new-badge">New</span></a>
+      <a href="/dashboard">Dashboard</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <div class="new-badge-badge">NEW!</div>
+      <div class="squadmatch-text">
+        <span>Squad</span><span>Match</span>
+      </div>
+    </div>
+    <h1>Find songs your whole<br/>squad can sing</h1>
+    <p>Invite your friends, compare vocal ranges, and discover the songs everyone in your group can nail together.</p>
+    <div class="cta-buttons">
+      <a href="/dashboard" class="btn btn-primary">Start Your Squad — Free</a>
+      <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL HOOK -->
+<section class="social-hook">
+  <div class="container">
+    <h2>Everyone matched on<br/>the same songs</h2>
+    <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">Not just one person. The whole group overlapped on the exact same tracks.</p>
+
+    <div class="callout-box">
+      <strong>🎤 4 out of 5 friends matched on 12 songs</strong>
+      <p>All vocal ranges overlapped on "Don't Stop Believin'" and 11 more</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="container">
+    <h2 style="text-align: center;">How SquadMatch Works</h2>
+    <p class="section-intro">Three simple steps to find your group's shared songbook</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Create your squad</h3>
+        <p>Name your group and invite friends by sharing a link. Free tier includes up to 3 friends.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Everyone hums their range</h3>
+        <p>Each friend does a quick 30-second vocal test. No signup needed for invited friends.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>See your shared songs</h3>
+        <p>SquadMatch finds every song that fits everyone's vocal range and shows them ranked by match quality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSENSUS -->
+<section class="alt">
+  <div class="container">
+    <h2 style="text-align: center;">When every voice overlaps,<br/>that's your setlist</h2>
+    <p style="text-align: center; max-width: 700px; margin: 20px auto 0;">If your whole group can hit the same notes, those are the songs you were meant to sing together.</p>
+  </div>
+</section>
+
+<!-- FEATURE CARDS -->
+<section>
+  <div class="container">
+    <h2 style="text-align: center;">Your voice + their voice<br/>= the perfect song</h2>
+    <p style="text-align: center;">HumMatch already knows your vocal range. SquadMatch compares it with everyone in your group.</p>
+    <p style="text-align: center;">When multiple ranges overlap on the same song, that's a guaranteed crowd-pleaser.</p>
+    <p style="text-align: center; margin-bottom: 60px;">No more awkward key changes or songs nobody can reach.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Smart range comparison</h3>
+        <p>We compare the lowest and highest notes each person can comfortably sing, then find the sweet spot where everyone overlaps.</p>
+        <p style="margin-bottom: 0;">The result: songs that actually sound good when you all sing them.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Built for real groups, not algorithms</h3>
+        <p>SquadMatch doesn't guess what you'd like — it measures what your voices can actually do together.</p>
+        <p style="margin-bottom: 0;"><strong style="color: var(--white);">Real ranges. Real overlap. Real songs.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY GROUPS WIN -->
+<section class="alt">
+  <div class="container">
+    <h2 style="text-align: center;">One voice picks a song.<br/>Five voices pick the right song.</h2>
+    <p style="text-align: center; max-width: 700px; margin: 20px auto 40px;">Everyone has different strengths.</p>
+    <p style="text-align: center; max-width: 700px; margin: 0 auto 60px;">But when several friends can all comfortably sing the same track, that's the one you put on the karaoke queue.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Multiple Vocal Ranges</h3>
+        <p style="margin-bottom: 0;">Different voices bring different ranges. Together, you find the overlap.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Shared Setlists</h3>
+        <p style="margin-bottom: 0;">When the same songs fit everyone's range, those are the ones you save for next time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-banner">
+  <div class="container">
+    <h2>Free to start. Unlimited with Premium.</h2>
+    <p style="text-align: center; max-width: 700px; margin: 20px auto 0;">SquadMatch is free for small groups. Go premium for unlimited squad members.</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Free</h3>
+        <div class="pricing-price">$0</div>
+        <ul class="pricing-features">
+          <li>Up to 3 friends per squad</li>
+          <li>Shared song results</li>
+          <li>Unlimited vocal tests</li>
+          <li>Save your setlist</li>
+        </ul>
+        <a href="/dashboard" class="btn btn-secondary" style="width: 100%; text-align: center;">Get Started</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <h3>Premium</h3>
+        <div class="pricing-price">$4.99 <span>/ month</span></div>
+        <ul class="pricing-features">
+          <li>Unlimited squad members</li>
+          <li>Unlimited squads</li>
+          <li>Priority song requests</li>
+          <li>Friend invite codes</li>
+          <li>Spotify playlist export</li>
+        </ul>
+        <a href="/dashboard" class="btn btn-primary" style="width: 100%; text-align: center;">Go Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section>
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 60px;">Who Uses SquadMatch</h2>
+
+    <div class="use-case">
+      <div class="use-case-icon">🎤</div>
+      <h3>Karaoke Night Crews</h3>
+      <p class="quote">"We used to argue over what to sing. Now we just check SquadMatch and the whole group agrees in seconds."</p>
+      <ul class="use-cases-list">
+        <li>Find group karaoke songs everyone can sing</li>
+        <li>No more awkward key mismatches</li>
+        <li>Save setlists for next time</li>
+        <li>Works for groups of any size</li>
+      </ul>
+    </div>
+
+    <div class="use-case">
+      <div class="use-case-icon">🎸</div>
+      <h3>Band Formation</h3>
+      <p class="quote">"We found 30+ songs we could all cover before we even had our first rehearsal."</p>
+      <ul class="use-cases-list">
+        <li>Discover cover songs your band can actually play</li>
+        <li>Match vocalist range to the rest of the group</li>
+        <li>Build a setlist before your first gig</li>
+        <li>Find songs in every member's comfort zone</li>
+      </ul>
+    </div>
+
+    <div class="use-case">
+      <div class="use-case-icon">🎶</div>
+      <h3>Duet Partners</h3>
+      <p class="quote">"I finally found someone whose range matches mine perfectly. We've been doing duets every weekend."</p>
+      <ul class="use-cases-list">
+        <li>Find duet songs that fit both voices</li>
+        <li>Compare ranges side by side</li>
+        <li>Discover harmony opportunities</li>
+        <li>Perfect for couples and best friends</li>
+      </ul>
+    </div>
+
+    <div class="use-case">
+      <div class="use-case-icon">👨‍👩‍👧‍👦</div>
+      <h3>Family Singalongs</h3>
+      <p class="quote">"Road trips got way better. The kids, my wife, and I all have songs we can actually sing together now."</p>
+      <ul class="use-cases-list">
+        <li>Find family-friendly songs everyone can join</li>
+        <li>Mix adult and kid vocal ranges</li>
+        <li>Great for road trips and holidays</li>
+        <li>Create family playlists that stick</li>
+      </ul>
+    </div>
+
+    <div class="use-case">
+      <div class="use-case-icon">🎵</div>
+      <h3>Choir Harmonies</h3>
+      <p class="quote">"Our choir director uses SquadMatch to figure out which songs work for every section. Game changer."</p>
+      <ul class="use-cases-list">
+        <li>Map vocal ranges across sections</li>
+        <li>Find songs that span soprano to bass</li>
+        <li>Plan repertoire around actual ranges</li>
+        <li>Onboard new members faster</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DECISION -->
+<section class="alt">
+  <div class="container">
+    <h2 style="text-align: center;">Better setlists, faster</h2>
+    <p style="text-align: center; max-width: 700px; margin: 20px auto 0;">When you don't know what everyone can sing, you guess. Stop guessing. Get your squad's ranges and find the songs that actually work.</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Stop guessing what to sing</h2>
+    <p>Invite your friends and find the songs you were all meant to sing together.</p>
+    <a href="/dashboard" class="btn btn-primary">Start Your Squad</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo">HumMatch</a>
+        <p>Vocal matching for everyone. A product of Equitymind Ventures.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/squadmatch"><span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;padding:2px 6px;border-radius:3px;font-size:0.65rem;font-weight:700;margin-right:4px;">NEW!</span> SquadMatch</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

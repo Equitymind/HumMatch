@@ -222,7 +222,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
     <ul class="upgrade-features">
       <li>Unlimited voice matches</li>
       <li>Full playlist history & Spotify export</li>
-      <li>SquadMatch - group song finder</li>
+      <li>Unlimited SquadMatch members</li>
       <li>Song request priority</li>
       <li>5 friend discount codes/month</li>
       <li>Voice insights & stats</li>
@@ -276,6 +276,15 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
       <div class="value" id="s-playlist-size">-</div>
       <div class="sub">saved songs</div>
     </div>
+  </div>
+
+  <!-- Free user upgrade banner -->
+  <div id="free-upgrade-banner" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(219,39,119,0.1));border:1px solid rgba(124,58,237,0.25);border-radius:14px;padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:0.9rem;font-weight:700;margin-bottom:2px">You're on the Free plan</div>
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.45)">Upgrade for unlimited squad members, Spotify export, song requests &amp; more</div>
+    </div>
+    <button class="btn-primary" onclick="window.open('/')" style="white-space:nowrap">Upgrade — $5.99/mo</button>
   </div>
 
   <!-- SquadMatch -->
@@ -493,13 +502,21 @@ async function checkAuth() {
 
 function showDashboard() {
   document.getElementById('login-screen').style.display = 'none';
-  if (!isPremium) {
-    document.getElementById('upgrade-gate').style.display = 'flex';
-    return;
-  }
   document.getElementById('upgrade-gate').style.display = 'none';
   document.getElementById('dashboard').classList.add('active');
   document.getElementById('user-email').textContent = userEmail;
+
+  // Premium-only sections: hide for free users
+  const premiumSections = ['friend-codes-section', 'song-requests-section'];
+  premiumSections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = isPremium ? '' : 'none';
+  });
+
+  // Show upgrade banner for free users
+  const banner = document.getElementById('free-upgrade-banner');
+  if (banner) banner.style.display = isPremium ? 'none' : 'block';
+
   loadAll();
 }
 
@@ -713,6 +730,12 @@ async function addFriend() {
   const name = document.getElementById('friend-name').value.trim();
   const voice = document.getElementById('friend-voice').value;
   if (!name) { toast('Enter a name'); return; }
+
+  // Free users: 3-friend limit
+  if (!isPremium && squads.length && squads[0].members && squads[0].members.length >= 3) {
+    toast('Free plan allows 3 friends max. Upgrade for unlimited!');
+    return;
+  }
 
   // Create squad if none exists
   if (!squads.length) {
