@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Log In | HumMatch</title>
+<meta name="description" content="Log in or sign up for HumMatch."/>
+<link rel="icon" href="/hummatch-icon-bug-2x.png"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0b1a;color:#e2e0f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+a{color:#a78bfa;text-decoration:none}
+a:hover{color:#c084fc}
+
+.auth-container{width:100%;max-width:380px;padding:24px;text-align:center}
+.logo-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px}
+.logo-wrap h1{font-size:1.5rem;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.auth-subtitle{color:rgba(255,255,255,0.4);font-size:0.85rem;margin-bottom:24px}
+
+.auth-tabs{display:flex;gap:0;margin-bottom:24px;border-radius:12px;overflow:hidden;border:1px solid rgba(124,58,237,0.2)}
+.auth-tab{flex:1;padding:12px;background:transparent;border:none;color:rgba(255,255,255,0.4);font-size:0.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s}
+.auth-tab.active{background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(219,39,119,0.2));color:#fff}
+
+.auth-form{display:flex;flex-direction:column;gap:0}
+.auth-form.hidden{display:none}
+
+.auth-input{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.3);color:#fff;padding:14px 20px;border-radius:12px;font-size:1rem;width:100%;outline:none;transition:border 0.2s;font-family:inherit;margin-bottom:10px}
+.auth-input:focus{border-color:#7c3aed}
+.auth-input.error{border-color:#ef4444}
+
+.field-error{color:#ef4444;font-size:0.75rem;text-align:left;margin:-6px 0 8px 4px;display:none}
+.form-error{color:#ef4444;font-size:0.82rem;min-height:20px;margin-bottom:8px}
+
+.auth-btn{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:14px 32px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;font-family:inherit;width:100%}
+.auth-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(124,58,237,0.4)}
+.auth-btn:disabled{opacity:0.5;cursor:default;transform:none;box-shadow:none}
+
+.auth-footer{margin-top:24px;font-size:0.82rem;color:rgba(255,255,255,0.3)}
+.auth-footer a{color:#a78bfa}
+
+/* Set-password form (for legacy users) */
+.set-pw-section{display:none}
+.set-pw-section .set-pw-note{color:rgba(255,255,255,0.5);font-size:0.82rem;margin-bottom:16px;line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="auth-container">
+  <a href="/" style="text-decoration:none">
+    <div class="logo-wrap">
+      <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+        <defs><linearGradient id="lg1" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#EC4899"/></linearGradient></defs>
+        <rect x="19" y="4" width="14" height="22" rx="7" fill="url(#lg1)"/>
+        <path d="M10 24 Q10 38 26 38 Q42 38 42 24" stroke="url(#lg1)" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <line x1="26" y1="38" x2="26" y2="47" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round"/>
+        <line x1="18" y1="47" x2="34" y2="47" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M6 20 Q4 26 6 32" stroke="#A855F7" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M2 17 Q-1 26 2 35" stroke="#A855F7" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.35"/>
+        <path d="M46 20 Q48 26 46 32" stroke="#EC4899" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M50 17 Q53 26 50 35" stroke="#EC4899" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.35"/>
+      </svg>
+      <h1>HumMatch</h1>
+    </div>
+  </a>
+
+  <!-- Tabs -->
+  <div class="auth-tabs" id="auth-tabs">
+    <button class="auth-tab active" id="tab-login" onclick="showTab('login')">Log In</button>
+    <button class="auth-tab" id="tab-signup" onclick="showTab('signup')">Sign Up</button>
+  </div>
+
+  <!-- Login Form -->
+  <form class="auth-form" id="form-login" onsubmit="handleLogin(event)">
+    <input type="email" class="auth-input" id="login-email" placeholder="Email" autocomplete="email" autocapitalize="off" required/>
+    <input type="password" class="auth-input" id="login-password" placeholder="Password" autocomplete="current-password" required/>
+    <div class="form-error" id="login-error"></div>
+    <button type="submit" class="auth-btn" id="login-btn">Log In</button>
+  </form>
+
+  <!-- Signup Form -->
+  <form class="auth-form hidden" id="form-signup" onsubmit="handleSignup(event)">
+    <input type="email" class="auth-input" id="signup-email" placeholder="Email" autocomplete="email" autocapitalize="off" required/>
+    <input type="password" class="auth-input" id="signup-password" placeholder="Password (8+ characters)" autocomplete="new-password" minlength="8" required/>
+    <div class="field-error" id="signup-pw-error"></div>
+    <input type="password" class="auth-input" id="signup-password-confirm" placeholder="Confirm password" autocomplete="new-password" minlength="8" required/>
+    <div class="field-error" id="signup-confirm-error"></div>
+    <div class="form-error" id="signup-error"></div>
+    <button type="submit" class="auth-btn" id="signup-btn">Create Account</button>
+  </form>
+
+  <!-- Set Password Form (legacy users) -->
+  <div class="set-pw-section" id="set-pw-section">
+    <div class="set-pw-note">Your account was created before we added passwords. Please set a password to continue.</div>
+    <form class="auth-form" id="form-set-pw" onsubmit="handleSetPassword(event)">
+      <input type="password" class="auth-input" id="setpw-password" placeholder="New password (8+ characters)" autocomplete="new-password" minlength="8" required/>
+      <div class="field-error" id="setpw-pw-error"></div>
+      <input type="password" class="auth-input" id="setpw-password-confirm" placeholder="Confirm password" autocomplete="new-password" minlength="8" required/>
+      <div class="field-error" id="setpw-confirm-error"></div>
+      <div class="form-error" id="setpw-error"></div>
+      <button type="submit" class="auth-btn" id="setpw-btn">Set Password & Log In</button>
+    </form>
+  </div>
+
+  <div class="auth-footer">
+    <a href="/">Back to HumMatch</a>
+  </div>
+</div>
+
+<script>
+let legacyEmail = '';
+
+// Check if already logged in
+(function() {
+  const token = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
+  if (token) {
+    window.location.href = '/dashboard';
+    return;
+  }
+  // Show signup tab if ?signup=1
+  if (new URLSearchParams(window.location.search).get('signup') === '1') {
+    showTab('signup');
+  }
+})();
+
+function showTab(tab) {
+  document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+  document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+  document.getElementById('form-login').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('form-signup').classList.toggle('hidden', tab !== 'signup');
+  document.getElementById('set-pw-section').style.display = 'none';
+  document.getElementById('auth-tabs').style.display = '';
+  // Clear errors
+  document.querySelectorAll('.form-error, .field-error').forEach(el => { el.textContent = ''; el.style.display = 'none'; });
+  document.querySelectorAll('.auth-input').forEach(el => el.classList.remove('error'));
+}
+
+async function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-error');
+  const btn = document.getElementById('login-btn');
+  errEl.textContent = '';
+
+  btn.disabled = true;
+  btn.textContent = 'Logging in…';
+  try {
+    const res = await fetch('/api/hummatch/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      if (data.needsPasswordReset) {
+        legacyEmail = email;
+        document.getElementById('auth-tabs').style.display = 'none';
+        document.getElementById('form-login').classList.add('hidden');
+        document.getElementById('form-signup').classList.add('hidden');
+        document.getElementById('set-pw-section').style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Log In';
+        return;
+      }
+      errEl.textContent = data.error || 'Login failed';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Log In';
+      return;
+    }
+    localStorage.setItem('hm_dash_token', data.token);
+    localStorage.setItem('hm_token', data.token);
+    localStorage.setItem('hm_user_email', data.email);
+    if (data.is_premium) localStorage.setItem('hm_premium', 'true');
+    window.location.href = '/dashboard';
+  } catch (err) {
+    errEl.textContent = 'Connection error. Please try again.';
+    errEl.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Log In';
+}
+
+async function handleSignup(e) {
+  e.preventDefault();
+  const email = document.getElementById('signup-email').value.trim();
+  const password = document.getElementById('signup-password').value;
+  const confirm = document.getElementById('signup-password-confirm').value;
+  const errEl = document.getElementById('signup-error');
+  const pwErr = document.getElementById('signup-pw-error');
+  const confirmErr = document.getElementById('signup-confirm-error');
+  const btn = document.getElementById('signup-btn');
+
+  // Reset
+  errEl.textContent = '';
+  pwErr.style.display = 'none';
+  confirmErr.style.display = 'none';
+  document.querySelectorAll('#form-signup .auth-input').forEach(el => el.classList.remove('error'));
+
+  if (password.length < 8) {
+    document.getElementById('signup-password').classList.add('error');
+    pwErr.textContent = 'Password must be at least 8 characters';
+    pwErr.style.display = 'block';
+    return;
+  }
+  if (password !== confirm) {
+    document.getElementById('signup-password-confirm').classList.add('error');
+    confirmErr.textContent = 'Passwords do not match';
+    confirmErr.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Creating account…';
+  try {
+    const res = await fetch('/api/hummatch/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Registration failed';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Create Account';
+      return;
+    }
+    localStorage.setItem('hm_dash_token', data.token);
+    localStorage.setItem('hm_token', data.token);
+    localStorage.setItem('hm_user_email', data.email);
+    if (data.is_premium) localStorage.setItem('hm_premium', 'true');
+    window.location.href = '/dashboard';
+  } catch (err) {
+    errEl.textContent = 'Connection error. Please try again.';
+    errEl.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Create Account';
+}
+
+async function handleSetPassword(e) {
+  e.preventDefault();
+  const password = document.getElementById('setpw-password').value;
+  const confirm = document.getElementById('setpw-password-confirm').value;
+  const errEl = document.getElementById('setpw-error');
+  const pwErr = document.getElementById('setpw-pw-error');
+  const confirmErr = document.getElementById('setpw-confirm-error');
+  const btn = document.getElementById('setpw-btn');
+
+  pwErr.style.display = 'none';
+  confirmErr.style.display = 'none';
+  errEl.textContent = '';
+
+  if (password.length < 8) {
+    document.getElementById('setpw-password').classList.add('error');
+    pwErr.textContent = 'Password must be at least 8 characters';
+    pwErr.style.display = 'block';
+    return;
+  }
+  if (password !== confirm) {
+    document.getElementById('setpw-password-confirm').classList.add('error');
+    confirmErr.textContent = 'Passwords do not match';
+    confirmErr.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Setting password…';
+  try {
+    const res = await fetch('/api/hummatch/auth/set-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: legacyEmail, password })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Failed to set password';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Set Password & Log In';
+      return;
+    }
+    localStorage.setItem('hm_dash_token', data.token);
+    localStorage.setItem('hm_token', data.token);
+    localStorage.setItem('hm_user_email', data.email);
+    if (data.is_premium) localStorage.setItem('hm_premium', 'true');
+    window.location.href = '/dashboard';
+  } catch (err) {
+    errEl.textContent = 'Connection error. Please try again.';
+    errEl.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Set Password & Log In';
+}
+</script>
+</body>
+</html>

@@ -297,16 +297,18 @@
   .phase-success-check { font-size: 4rem; margin-bottom: 8px; }
   .phase-success-text { font-size: 1.3rem; font-weight: 800; color: #22C55E; }
 
-  /* ── Login bottom sheet ── */
-  .hm-login-sheet { position:fixed; bottom:0; left:0; right:0; z-index:2500; background:rgba(18,16,26,0.98); backdrop-filter:blur(16px); border-top:1px solid rgba(168,85,247,0.25); border-radius:20px 20px 0 0; padding:24px 24px max(24px, env(safe-area-inset-bottom, 24px)); transform:translateY(100%); transition:transform 0.35s cubic-bezier(.4,0,.2,1); }
+  /* ── Signup bottom sheet ── */
+  .hm-login-sheet { position:fixed; bottom:0; left:0; right:0; z-index:2500; background:rgba(18,16,26,0.98); backdrop-filter:blur(16px); border-top:1px solid rgba(168,85,247,0.25); border-radius:20px 20px 0 0; padding:24px 24px max(24px, env(safe-area-inset-bottom, 24px)); transform:translateY(100%); transition:transform 0.35s cubic-bezier(.4,0,.2,1); max-height:90vh; overflow-y:auto; }
   .hm-login-sheet.show { transform:translateY(0); }
   .hm-login-sheet h3 { font-size:1.05rem; font-weight:800; margin-bottom:8px; }
   .hm-login-sheet p { font-size:0.82rem; color:var(--text2); line-height:1.5; margin-bottom:16px; }
-  .hm-login-sheet input[type="email"] { width:100%; padding:14px 16px; background:rgba(255,255,255,0.07); border:1px solid rgba(168,85,247,0.3); border-radius:12px; color:#fff; font-size:0.95rem; outline:none; font-family:inherit; margin-bottom:10px; }
-  .hm-login-sheet input[type="email"]:focus { border-color:rgba(168,85,247,0.7); }
+  .hm-login-sheet input { width:100%; padding:14px 16px; background:rgba(255,255,255,0.07); border:1px solid rgba(168,85,247,0.3); border-radius:12px; color:#fff; font-size:0.95rem; outline:none; font-family:inherit; margin-bottom:10px; }
+  .hm-login-sheet input:focus { border-color:rgba(168,85,247,0.7); }
   .hm-login-sheet .hm-login-btn { width:100%; padding:14px; background:linear-gradient(135deg,#7c3aed,#a855f7); color:#fff; border:none; border-radius:12px; font-size:0.95rem; font-weight:800; cursor:pointer; font-family:inherit; }
   .hm-login-sheet .hm-login-btn:disabled { opacity:0.5; cursor:default; }
   .hm-login-dismiss { background:none; border:none; color:rgba(255,255,255,0.3); font-size:0.82rem; cursor:pointer; margin-top:10px; width:100%; text-align:center; font-family:inherit; }
+  .hm-login-sheet .hm-field-error { color:#ef4444; font-size:0.75rem; margin:-6px 0 8px 4px; display:none; }
+  .hm-login-sheet .hm-sheet-link { color:#a78bfa; font-size:0.82rem; text-align:center; display:block; margin-top:8px; cursor:pointer; background:none; border:none; font-family:inherit; }
 
 </style>
 <!-- Google tag (gtag.js) -->
@@ -357,7 +359,8 @@
   <a class="hm-nav-item" href="/blog">Blog</a>
   <a class="hm-nav-item" href="/contact">Contact</a>
   <div class="hm-nav-divider"></div>
-  <a class="hm-nav-item" href="/dashboard" id="navLoginItem">Log In</a>
+  <a class="hm-nav-item" href="/login" id="navLoginItem">Log In</a>
+  <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Sign Up</a>
 </nav>
 
 
@@ -443,7 +446,7 @@
       <a href="/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contact</a>
       <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
       <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
-      <a href="/dashboard" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Log In</a>
+      <a href="/login" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Log In</a>
     </div>
     <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.2);">&copy; 2026 HumMatch</div>
   </footer>
@@ -3876,24 +3879,31 @@ function closeNav() {
   document.getElementById('navDrawer').classList.remove('open');
   document.getElementById('navOverlay').classList.remove('open');
 }
-// Swap Log In → My HQ if logged in
+// Swap Log In / Sign Up → My HQ if logged in
 (function(){
-  var t = localStorage.getItem('hm_dash_token');
+  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
   if(t){
     var nav = document.getElementById('navLoginItem');
     var foot = document.getElementById('footerLoginItem');
-    if(nav){ nav.textContent='🎯 My HQ'; }
-    if(foot){ foot.textContent='My HQ'; }
+    var signup = document.getElementById('navSignupItem');
+    if(nav){ nav.textContent='🎯 My HQ'; nav.href='/dashboard'; }
+    if(foot){ foot.textContent='My HQ'; foot.href='/dashboard'; }
+    if(signup){ signup.style.display='none'; }
   }
 })();
 </script>
 
-<!-- Login Bottom Sheet -->
+<!-- Signup Bottom Sheet -->
 <div class="hm-login-sheet" id="hm-login-sheet">
-  <h3>Save your playlist across devices</h3>
-  <p>Enter your email to create a free account. Your song list will sync everywhere.</p>
-  <input type="email" id="hm-login-email" placeholder="your@email.com" autocomplete="email" autocapitalize="off" onkeydown="if(event.key==='Enter')hmSubmitLogin()"/>
-  <button class="hm-login-btn" id="hm-login-submit" onclick="hmSubmitLogin()">Save My Playlist</button>
+  <h3>Create your free account</h3>
+  <p>Sign up to save your playlist across devices.</p>
+  <input type="email" id="hm-login-email" placeholder="your@email.com" autocomplete="email" autocapitalize="off"/>
+  <input type="password" id="hm-login-password" placeholder="Password (8+ characters)" autocomplete="new-password" minlength="8"/>
+  <div class="hm-field-error" id="hm-pw-error"></div>
+  <input type="password" id="hm-login-password-confirm" placeholder="Confirm password" autocomplete="new-password" minlength="8"/>
+  <div class="hm-field-error" id="hm-pw-confirm-error"></div>
+  <button class="hm-login-btn" id="hm-login-submit" onclick="hmSubmitLogin()">Create Account</button>
+  <button class="hm-sheet-link" onclick="window.location.href='/login'">Already have an account? Log in</button>
   <button class="hm-login-dismiss" onclick="hmDismissLogin()">Not now</button>
 </div>
 
@@ -3912,23 +3922,56 @@ function closeNav() {
   // ── Auth: register/login ──
   window.hmSubmitLogin = async function() {
     const input = document.getElementById('hm-login-email');
+    const pwInput = document.getElementById('hm-login-password');
+    const pwConfirm = document.getElementById('hm-login-password-confirm');
+    const pwError = document.getElementById('hm-pw-error');
+    const pwConfirmError = document.getElementById('hm-pw-confirm-error');
     const btn = document.getElementById('hm-login-submit');
+
+    // Reset errors
+    [input, pwInput, pwConfirm].forEach(el => el.style.borderColor = '');
+    pwError.style.display = 'none';
+    pwConfirmError.style.display = 'none';
+
     const email = (input.value || '').trim();
+    const password = pwInput.value || '';
+    const confirm = pwConfirm.value || '';
+
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       input.style.borderColor = '#ef4444';
       return;
     }
+    if (password.length < 8) {
+      pwInput.style.borderColor = '#ef4444';
+      pwError.textContent = 'Password must be at least 8 characters';
+      pwError.style.display = 'block';
+      return;
+    }
+    if (password !== confirm) {
+      pwConfirm.style.borderColor = '#ef4444';
+      pwConfirmError.textContent = 'Passwords do not match';
+      pwConfirmError.style.display = 'block';
+      return;
+    }
+
     btn.disabled = true;
-    btn.textContent = 'Saving…';
+    btn.textContent = 'Creating account…';
     try {
       const r = await fetch('/api/hummatch/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, password })
       });
       const data = await r.json();
+      if (!r.ok) {
+        showToast(data.error || 'Registration failed');
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+        return;
+      }
       if (data.token) {
         localStorage.setItem(TOKEN_KEY, data.token);
+        localStorage.setItem('hm_dash_token', data.token);
         localStorage.setItem(EMAIL_KEY, data.email || email.toLowerCase());
         if (data.is_premium) localStorage.setItem('hm_premium', 'true');
 
@@ -3944,8 +3987,16 @@ function closeNav() {
 
         hmHideLoginSheet();
         hmUpdateAccountBadge();
-        showToast(data.isNew ? 'Account created! Playlist synced.' : 'Logged in! Playlist synced.');
-        hmTrack('account_register', { isNew: data.isNew });
+        showToast('Account created! Playlist synced.');
+        hmTrack('account_register', { isNew: true });
+
+        // Update nav links
+        var nav = document.getElementById('navLoginItem');
+        var foot = document.getElementById('footerLoginItem');
+        var signupNav = document.getElementById('navSignupItem');
+        if(nav){ nav.textContent='🎯 My HQ'; nav.href='/dashboard'; }
+        if(foot){ foot.textContent='My HQ'; foot.href='/dashboard'; }
+        if(signupNav){ signupNav.style.display='none'; }
       } else {
         showToast('Something went wrong. Try again.');
       }
@@ -3953,7 +4004,7 @@ function closeNav() {
       showToast('Connection error. Try again.');
     }
     btn.disabled = false;
-    btn.textContent = 'Save My Playlist';
+    btn.textContent = 'Create Account';
   };
 
   // ── Dismiss login for 7 days ──

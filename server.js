@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const path = require('path');
 const Database = require('better-sqlite3');
 const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 
 const app = express();
@@ -436,6 +437,14 @@ try {
   console.log('[migration] welcome_email_sent column already exists — OK');
 }
 
+// Add password_hash column to users if missing (migration for existing DBs)
+try {
+  db.exec(`ALTER TABLE users ADD COLUMN password_hash TEXT`);
+  console.log('[migration] Added password_hash column to users table');
+} catch (_) {
+  console.log('[migration] password_hash column already exists — OK');
+}
+
 // ---------------------------------------------------------------------------
 // Auto-import analytics backup if events table is empty (for fresh deploys)
 // ---------------------------------------------------------------------------
@@ -546,7 +555,7 @@ const stmts = {
     'INSERT INTO events (event, lang, data, ip, user_agent) VALUES (?, ?, ?, ?, ?)'
   ),
   insertUser: db.prepare(
-    'INSERT INTO users (email, token, month_key) VALUES (?, ?, ?)'
+    'INSERT INTO users (email, token, month_key, password_hash) VALUES (?, ?, ?, ?)'
   ),
   getUserByEmail: db.prepare('SELECT * FROM users WHERE email = ?'),
   getUserByToken: db.prepare('SELECT * FROM users WHERE token = ?'),
@@ -709,31 +718,106 @@ app.post('/api/hummatch/event', (req, res) => {
 // ---------------------------------------------------------------------------
 // API: Auth - Register / Login
 // ---------------------------------------------------------------------------
-app.post('/api/hummatch/auth/register', (req, res) => {
+app.post('/api/hummatch/auth/register', async (req, res) => {
   const email = (req.body.email || '').trim().toLowerCase();
+  const password = req.body.password || '';
+
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Invalid email' });
   }
-
-  let existing = stmts.getUserByEmail.get(email);
-  if (existing) {
-    return res.json({
-      token: existing.token,
-      email: existing.email,
-      is_premium: !!existing.is_premium,
-      isNew: false
-    });
+  if (password.length < 8) {
+    return res.status(400).json({ error: 'Password must be at least 8 characters' });
   }
 
-  const token = uuidv4();
+  const existing = stmts.getUserByEmail.get(email);
+  if (existing) {
+    return res.status(409).json({ error: 'An account with this email already exists. Please log in.' });
+  }
+
   try {
-    stmts.insertUser.run(email, token, monthKey());
+    const hash = await bcrypt.hash(password, 10);
+    const token = uuidv4();
+    stmts.insertUser.run(email, token, monthKey(), hash);
     const newUser = stmts.getUserByEmail.get(email);
     trySendWelcomeEmail(newUser.id, email);
     return res.json({ token, email, is_premium: false, isNew: true });
   } catch (e) {
     console.error('Register error:', e.message);
     return res.status(500).json({ error: 'Registration failed' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// API: Auth - Login with email + password
+// ---------------------------------------------------------------------------
+app.post('/api/hummatch/auth/login', async (req, res) => {
+  const email = (req.body.email || '').trim().toLowerCase();
+  const password = req.body.password || '';
+
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required' });
+  }
+
+  const user = stmts.getUserByEmail.get(email);
+  if (!user) {
+    return res.status(401).json({ error: 'Invalid email or password' });
+  }
+
+  // Legacy user without password — prompt them to set one
+  if (!user.password_hash) {
+    return res.status(401).json({ error: 'Please set a password for your account.', needsPasswordReset: true });
+  }
+
+  try {
+    const valid = await bcrypt.compare(password, user.password_hash);
+    if (!valid) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+    return res.json({
+      token: user.token,
+      email: user.email,
+      is_premium: !!user.is_premium,
+      isNew: false
+    });
+  } catch (e) {
+    console.error('Login error:', e.message);
+    return res.status(500).json({ error: 'Login failed' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// API: Auth - Set password (for legacy users who registered without one)
+// ---------------------------------------------------------------------------
+app.post('/api/hummatch/auth/set-password', async (req, res) => {
+  const email = (req.body.email || '').trim().toLowerCase();
+  const password = req.body.password || '';
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: 'Invalid email' });
+  }
+  if (password.length < 8) {
+    return res.status(400).json({ error: 'Password must be at least 8 characters' });
+  }
+
+  const user = stmts.getUserByEmail.get(email);
+  if (!user) {
+    return res.status(404).json({ error: 'No account found with this email' });
+  }
+  if (user.password_hash) {
+    return res.status(400).json({ error: 'Password already set. Use login instead.' });
+  }
+
+  try {
+    const hash = await bcrypt.hash(password, 10);
+    db.prepare('UPDATE users SET password_hash = ?, updated_at = datetime(\'now\') WHERE email = ?').run(hash, email);
+    return res.json({
+      token: user.token,
+      email: user.email,
+      is_premium: !!user.is_premium
+    });
+  } catch (e) {
+    console.error('Set-password error:', e.message);
+    return res.status(500).json({ error: 'Failed to set password' });
   }
 });
 
@@ -1463,6 +1547,11 @@ app.get('/privacy', (_req, res) => {
 });
 app.get('/terms', (_req, res) => {
   res.sendFile(path.join(__dirname, 'terms.html'));
+});
+
+// Login page
+app.get('/login', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'login.html'));
 });
 
 // SPA fallback: serve index.html for unmatched routes

@@ -206,10 +206,12 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
     </svg>
     <h1>My HQ</h1>
   </div>
-  <p>Sign in with your email to access your HQ</p>
-  <input type="email" class="login-input" id="login-email" placeholder="your@email.com" autocomplete="email" onkeydown="if(event.key==='Enter')doLogin()"/>
-  <button class="login-btn" onclick="doLogin()">Sign In</button>
+  <p>Sign in to access your HQ</p>
+  <input type="email" class="login-input" id="login-email" placeholder="Email" autocomplete="email" style="margin-bottom:10px"/>
+  <input type="password" class="login-input" id="login-password" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+  <button class="login-btn" onclick="doLogin()" style="margin-top:10px">Log In</button>
   <div class="login-error" id="login-error"></div>
+  <div style="margin-top:12px"><a href="/login?signup=1" style="font-size:0.82rem;color:#a78bfa">Don't have an account? Sign up</a></div>
 </div>
 
 <div id="dashboard">
@@ -384,14 +386,18 @@ const FREE_HUM_LIMIT=10;
 
 async function doLogin(){
   const email=document.getElementById('login-email').value.trim();
-  if(!email)return;
+  const password=document.getElementById('login-password').value;
+  if(!email||!password)return;
   const errEl=document.getElementById('login-error');
   errEl.textContent='';
   try{
-    const res=await fetch('/api/hummatch/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const res=await fetch('/api/hummatch/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
     const data=await res.json();
-    if(data.error){errEl.textContent=data.error;return}
-    token=data.token;localStorage.setItem('hm_dash_token',token);userEmail=data.email;isPremium=data.is_premium;showDashboard();
+    if(!res.ok){
+      if(data.needsPasswordReset){window.location.href='/login';return}
+      errEl.textContent=data.error||'Login failed';return;
+    }
+    token=data.token;localStorage.setItem('hm_dash_token',token);localStorage.setItem('hm_token',token);userEmail=data.email;isPremium=data.is_premium;showDashboard();
   }catch(e){errEl.textContent='Connection error. Please try again.'}
 }
 
