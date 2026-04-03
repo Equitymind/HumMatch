@@ -361,6 +361,19 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
       </div>
     </div>
   </div>
+
+  <!-- A2HS install prompt — subtle bottom card -->
+  <div id="a2hs-dash-banner" style="display:none;margin-top:20px;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:1.3rem;flex-shrink:0;">📲</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:0.8rem;font-weight:700;color:#e2e0f0;">Install HumMatch</div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.4);margin-top:1px;">Get instant access from your home screen</div>
+      </div>
+      <button onclick="installHumMatch()" style="flex-shrink:0;padding:7px 13px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.7rem;font-weight:700;cursor:pointer;">Install</button>
+      <button onclick="dismissA2HS('dash')" style="flex-shrink:0;background:none;border:none;color:rgba(255,255,255,0.25);font-size:1rem;cursor:pointer;padding:0 2px;">✕</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -594,7 +607,7 @@ function showCreateSquad(){const f=document.getElementById('create-squad-form');
 
 async function createSquad(){
   const ni=document.getElementById('new-squad-name'),name=ni.value.trim()||'My SquadMatch';
-  try{const res=await api('/api/hummatch/squad',{method:'POST',body:JSON.stringify({session_name:name})});if(!res.ok)return;ni.value='';document.getElementById('create-squad-form').style.display='none';await loadSquadOnly();toast('Squad "'+name+'" created!')}catch(e){toast('Failed to create squad')}
+  try{const res=await api('/api/hummatch/squad',{method:'POST',body:JSON.stringify({session_name:name})});if(!res.ok)return;ni.value='';document.getElementById('create-squad-form').style.display='none';await loadSquadOnly();toast('Squad "'+name+'" created!');setTimeout(()=>showA2HSBanner('dash'),1500)}catch(e){toast('Failed to create squad')}
 }
 
 async function addFriend(){
@@ -701,6 +714,33 @@ function toast(msg){const el=document.getElementById('toast');el.textContent=msg
 function startCheckout(plan){plan=plan||'monthly';window.location.href='/api/hummatch/checkout/'+plan+(token?'?token='+token:'')}
 
 checkAuth();
+
+// PWA install prompt — high-intent moments only
+let deferredInstallPrompt=null;
+const _a2hsInstalled=window.navigator.standalone||window.matchMedia('(display-mode: standalone)').matches;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;});
+window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;const el=document.getElementById('a2hs-dash-banner');if(el)el.style.display='none';});
+function showA2HSBanner(key){
+  if(_a2hsInstalled)return;
+  if(localStorage.getItem('hm_a2hs_dismiss_'+key))return;
+  const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  if(!deferredInstallPrompt&&!isIOS)return;
+  const el=document.getElementById('a2hs-'+key+'-banner');
+  if(el)el.style.display='block';
+}
+function dismissA2HS(key){
+  localStorage.setItem('hm_a2hs_dismiss_'+key,'1');
+  const el=document.getElementById('a2hs-'+key+'-banner');
+  if(el)el.style.display='none';
+}
+function installHumMatch(){
+  if(deferredInstallPrompt){deferredInstallPrompt.prompt();deferredInstallPrompt.userChoice.then(()=>{deferredInstallPrompt=null})}
+  else if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.navigator.standalone){alert('Tap the Share button ⬆ at the bottom of Safari, then tap "Add to Home Screen" to save HumMatch.')}
+  else if(window.navigator.standalone){alert('HumMatch is already on your home screen! ✅')}
+  else{alert('To save HumMatch: in Chrome tap the menu (⋮) and choose "Add to Home Screen".')}
+}
+// Show dash A2HS after auth loads
+setTimeout(()=>showA2HSBanner('dash'),2000);
 </script>
 </body>
 </html>

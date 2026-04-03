@@ -392,9 +392,6 @@
   <a href="/pricing.html" style="display:inline-block;margin-top:12px;font-size:0.78rem;text-decoration:none;letter-spacing:0.03em;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
     ✦ Become a Squad Leader — $5.99/mo: Unlimited hums &amp; more
   </a>
-  <button id="install-btn" onclick="installHumMatch()" style="display:block;margin-top:8px;background:none;border:1px solid rgba(168,85,247,0.35);border-radius:20px;color:rgba(168,85,247,0.8);font-size:0.8rem;font-weight:600;padding:8px 20px;cursor:pointer;">
-    📲 Add to Home Screen
-  </button>
 
   <!-- SquadMatch Feature Section -->
   <div style="width:100%;max-width:380px;margin-top:32px;padding:0 4px;">
@@ -606,6 +603,19 @@
     </button>
   </div>
 
+
+  <!-- A2HS prompt — shown after first successful result -->
+  <div id="a2hs-results-banner" style="display:none;width:100%;max-width:400px;margin-top:16px;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:1.4rem;flex-shrink:0;">📲</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:0.82rem;font-weight:700;color:#e2e0f0;">Keep HumMatch one tap away</div>
+        <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:2px;">Add to Home Screen for faster access next time</div>
+      </div>
+      <button onclick="installHumMatch()" style="flex-shrink:0;padding:8px 14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.72rem;font-weight:700;cursor:pointer;">Add</button>
+      <button onclick="dismissA2HS('results')" style="flex-shrink:0;background:none;border:none;color:rgba(255,255,255,0.25);font-size:1rem;cursor:pointer;padding:0 2px;">✕</button>
+    </div>
+  </div>
 
   <!-- Hidden canvas for share card generation -->
   <canvas id="share-canvas" style="display:none;" width="1200" height="630"></canvas>
@@ -3139,6 +3149,8 @@ function showResults() {
   // Show login prompt after first hum + update account badge
   if (typeof hmMaybeShowLoginPrompt === 'function') hmMaybeShowLoginPrompt();
   if (typeof hmUpdateAccountBadge === 'function') hmUpdateAccountBadge();
+  // Show A2HS banner after first successful result
+  setTimeout(() => showA2HSBanner('results-banner'), 800);
 }
 
 const YT_KEY = 'AIzaSyBCLnGsgv3Ocimiu5jlB7lwwn27t_EiWPY'; // restricted to hummatch.me only in GCP console
@@ -3418,6 +3430,8 @@ function exportSongList(mode) {
     showToast('CSV downloaded — open in Excel, Google Sheets, or your music app ⬇');
     hmTrack('export_csv', { count: pool.length });
   }
+  // Show A2HS after playlist save action
+  setTimeout(() => showA2HSBanner('results-banner'), 1200);
 }
 
 
@@ -3504,33 +3518,42 @@ function checkSavedProfile() {
   } catch(e) {}
 }
 
-// PWA install prompt
+// PWA install prompt — shown at high-intent moments only
 let deferredInstallPrompt = null;
+const _a2hsInstalled = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredInstallPrompt = e;
-  const btn = document.getElementById('install-btn');
-  if (btn) btn.style.display = 'inline-block';
 });
 window.addEventListener('appinstalled', () => {
   hmTrack("pwa_install");
   deferredInstallPrompt = null;
-  const btn = document.getElementById('install-btn');
-  if (btn) btn.style.display = 'none';
+  document.querySelectorAll('[id^="a2hs-"]').forEach(el => el.style.display = 'none');
 });
 // Standalone detection — fires on first launch after Add to Home Screen (any browser)
-if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+if (_a2hsInstalled) {
   if (!localStorage.getItem('hm_pwa_tracked')) {
     localStorage.setItem('hm_pwa_tracked', '1');
     hmTrack('pwa_install');
   }
 }
-// Show button on iOS where beforeinstallprompt doesn't fire
-if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.navigator.standalone) {
-  window.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('install-btn');
-    if (btn) btn.style.display = 'inline-block';
-  });
+function _a2hsCanShow(key) {
+  if (_a2hsInstalled) return false;
+  if (localStorage.getItem('hm_a2hs_dismiss_' + key)) return false;
+  return true;
+}
+function showA2HSBanner(key) {
+  if (!_a2hsCanShow(key)) return;
+  // On iOS, beforeinstallprompt doesn't fire but we still show the banner
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if (!deferredInstallPrompt && !isIOS) return;
+  const el = document.getElementById('a2hs-' + key);
+  if (el) el.style.display = 'block';
+}
+function dismissA2HS(key) {
+  localStorage.setItem('hm_a2hs_dismiss_' + key, '1');
+  const el = document.getElementById('a2hs-' + key);
+  if (el) el.style.display = 'none';
 }
 function installHumMatch() {
   hmTrack("a2hs_tap");
