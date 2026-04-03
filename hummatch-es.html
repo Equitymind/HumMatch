@@ -236,14 +236,6 @@
   </div>
 
   <div style="width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;">
-  <div class="gender-select" style="width:100%;">
-    <div class="gender-label">Optimizar resultados para</div>
-    <div class="gender-pills">
-      <button class="gender-pill active" id="gp-any" onclick="setGender('any')">🎤 Todos</button>
-      <button class="gender-pill" id="gp-f" onclick="setGender('f')">👩 Femenino</button>
-      <button class="gender-pill" id="gp-m" onclick="setGender('m')">👨 Masculino</button>
-    </div>
-  </div>
   <button class="cta-btn" style="width:100%;margin-top:8px;" onclick="startTest()">Encontrar Mis Canciones →</button>
   <div id="saved-profile-btn" style="display:none;margin-top:12px;width:100%;max-width:300px;">
     <button class="cta-btn secondary" style="width:100%;" onclick="loadSavedProfile()">🎤 Usar Mi Voz Guardada</button>
@@ -2288,8 +2280,7 @@ function showResults() {
   const typeEmoji = { 'Bass':'🔊','Bass-Baritone':'🎸','Baritone':'🎭','Tenor':'🌟','Alto/Contralto':'🍷','Mezzo-soprano':'🔥','Soprano':'✨' };
 
   // Find closest artist match (range overlap + brightness similarity)
-  const filteredArtists = filterGender === 'any' ? ARTISTS : ARTISTS.filter(a => a.gender === filterGender);
-  const scored = filteredArtists.map(a => {
+  const scored = ARTISTS.map(a => {
     const overlapLo = Math.max(userLow, a.low);
     const overlapHi = Math.min(userHigh, a.high);
     const overlap = Math.max(0, overlapHi - overlapLo);
@@ -2343,7 +2334,7 @@ function showResults() {
   // Share data
   shareVoiceType = voiceType;
   shareCoincidenciaPct = topArtist ? Math.round(topArtist.score * 100) : 0;
-  hmTrack("hum_complete", { voice_type: voiceType, score: shareCoincidenciaPct, gender: filterGender });
+  hmTrack("hum_complete", { voice_type: voiceType, score: shareCoincidenciaPct });
 
   // ── Log hum to user's hum_history (if logged in) ──
   const _humToken = typeof hmGetToken === 'function' ? hmGetToken() : null;
@@ -2584,14 +2575,6 @@ function installHumMatch() {
   }
 }
 
-// Gender preference for artist matching
-let filterGender = 'any';
-function setGender(g) {
-  filterGender = g;
-  hmTrack("gender_set", { gender: g });
-  document.querySelectorAll('.gender-pill').forEach(p => p.classList.remove('active'));
-  document.getElementById('gp-' + g).classList.add('active');
-}
 
 // ── Filter bar logic ──────────────────────────────────────────────────────────
 function setFilter(filter, el) {
