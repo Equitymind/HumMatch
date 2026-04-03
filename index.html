@@ -332,7 +332,7 @@
         localStorage.setItem(KEY, data.v);
       }
     })
-    .catch(() => {}); // silent fail — never block the app
+    .catch(() => {}); // silent fail, never block the app
 })();
 </script>
 </head>
@@ -364,8 +364,8 @@
 <!-- SCREEN 1: WELCOME -->
 <div id="screen-welcome" class="screen active">
   <div style="text-align:center;"><img src="/hummatch-logo.png" alt="HumMatch" style="height:100px;display:inline-block;"/></div>
-  <div class="app-tagline" style="font-size:1.05rem;color:var(--text1);font-weight:800;max-width:300px;">Hum for 15 seconds. Find songs made for your voice.</div>
-  <div style="font-size:0.78rem;color:var(--text3);max-width:280px;line-height:1.5;margin-bottom:10px;">No singing required. Just hum — we do the rest.</div>
+  <div class="app-tagline" style="font-size:1.05rem;color:var(--text1);font-weight:800;max-width:300px;">Hum for 10 seconds. Find songs made for your voice.</div>
+  <div style="font-size:0.78rem;color:var(--text3);max-width:280px;line-height:1.5;margin-bottom:10px;">No singing required. Just hum, we do the rest.</div>
 
   <div class="how-it-works">
     <div class="step">
@@ -390,7 +390,7 @@
   </div>
   </div><!-- /cta-wrapper -->
   <a href="/pricing.html" style="display:inline-block;margin-top:12px;font-size:0.78rem;text-decoration:none;letter-spacing:0.03em;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-    ✦ Become a Squad Leader — $5.99/mo: Unlimited hums &amp; more
+    ✦ Become a Squad Leader for $5.99/mo: Unlimited hums &amp; more
   </a>
 
   <!-- SquadMatch Feature Section -->
@@ -406,7 +406,7 @@
       <div style="font-size:1.15rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:8px;">Find songs your whole squad can nail</div>
 
       <!-- Copy -->
-      <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:18px;">Group karaoke nights, band practice jams, duet finder — <span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;">SquadMatch</span> finds songs everyone in your group can sing together.</div>
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:18px;">Group karaoke nights, band practice jams, duet finder.<span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;">SquadMatch</span> finds songs everyone in your group can sing together.</div>
 
       <!-- Friend avatars + shared matches visual -->
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
@@ -453,26 +453,26 @@
 <!-- SCREEN: PRIMER (drunk-proof prep screen) -->
 <div id="screen-primer" class="screen">
   <div class="primer-icon">🎤</div>
-  <div class="primer-title">Quick voice check — takes 15 seconds</div>
+  <div class="primer-title">Quick voice check, takes 10 seconds</div>
   <div class="primer-sub">You'll hum 3 times. No singing, no skill needed. Just make a "hmmmm" sound.</div>
 
   <div class="primer-steps">
     <div class="primer-step">
       <div class="primer-step-num">1</div>
-      <div class="primer-step-text"><strong>Low hum</strong> — as deep as you can go</div>
+      <div class="primer-step-text"><strong>Low hum</strong>: as deep as you can go</div>
     </div>
     <div class="primer-step">
       <div class="primer-step-num">2</div>
-      <div class="primer-step-text"><strong>Normal voice</strong> — your everyday hum</div>
+      <div class="primer-step-text"><strong>Normal voice</strong>: your everyday hum</div>
     </div>
     <div class="primer-step">
       <div class="primer-step-num">3</div>
-      <div class="primer-step-text"><strong>High hum</strong> — as high as you can go</div>
+      <div class="primer-step-text"><strong>High hum</strong>: as high as you can go</div>
     </div>
   </div>
 
   <button class="primer-ready-btn" onclick="beginAutoCapture()">I'm Ready →</button>
-  <div class="primer-tip">We only listen to the pitch — no audio is recorded or stored.</div>
+  <div class="primer-tip">We only listen to the pitch. No audio is recorded or stored.</div>
 </div>
 
 <!-- SCREEN 2: HUM TEST (auto-flow) -->
@@ -568,7 +568,7 @@
 
   <!-- STRETCH SECTION -->
   <div class="stretch-section" id="stretch-section" style="display:none;">
-    <div class="stretch-toggle" onclick="toggleStretch()">💪 Show stretch songs — great with a small key change</div>
+    <div class="stretch-toggle" onclick="toggleStretch()">💪 Show stretch songs, great with a small key change</div>
     <ul class="song-list" id="stretch-songs" style="margin-top:8px;display:none;"></ul>
   </div>
 
@@ -604,7 +604,7 @@
   </div>
 
 
-  <!-- A2HS prompt — shown after first successful result -->
+  <!-- A2HS prompt, shown after first successful result -->
   <div id="a2hs-results-banner" style="display:none;width:100%;max-width:400px;margin-top:16px;">
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
       <div style="font-size:1.4rem;flex-shrink:0;">📲</div>
@@ -657,7 +657,7 @@ function hmTrack(event, data) {
 }
 
 // ════════════════════════════════════════════════════════════
-// ARTIST DATABASE — range + timbre profile
+// ARTIST DATABASE: range + timbre profile
 // Fields: name, emoji, lowNote (MIDI), highNote (MIDI), brightness (0-100, higher=brighter/lighter), tags
 // MIDI note: C4=60, A2=45, etc.
 // ════════════════════════════════════════════════════════════
@@ -694,7 +694,7 @@ const ARTISTS = [
 ];
 
 // ════════════════════════════════════════════════════════════
-// SONG DATABASE — title, artist, loNote (MIDI), hiNote (MIDI), brightness
+// SONG DATABASE: title, artist, loNote (MIDI), hiNote (MIDI), brightness
 // ════════════════════════════════════════════════════════════
 const SONGS = [
   // Bass / Deep Baritone
@@ -993,7 +993,7 @@ const SONGS = [
   { title:'Africa',                  artist:'Toto',              lo:45, hi:70, brightness:55 },
   { title:'Total Eclipse of the Heart', artist:'Bonnie Tyler',   lo:49, hi:76, brightness:55 },
   { title:'Roxanne',                 artist:'The Police',        lo:46, hi:72, brightness:58 },
-  // The Weeknd — extended
+  // The Weeknd, extended
   { title:'Save Your Tears',         artist:'The Weeknd',        lo:44, hi:74, brightness:65, year:2020 },
   { title:'Sacrifice',               artist:'The Weeknd',        lo:44, hi:73, brightness:64, year:2022 },
   { title:'Die For You',             artist:'The Weeknd',        lo:43, hi:72, brightness:62, year:2016 },
@@ -1081,7 +1081,7 @@ const SONGS = [
   { title:'Feathered Indians',       artist:'Tyler Childers',    lo:40, hi:65, brightness:38, year:2017 },
   { title:'Whitehouse Road',         artist:'Tyler Childers',    lo:40, hi:65, brightness:40, year:2017 },
 
-  // ── NEW: Indie / Alt Rock (Baritone–Tenor) ─────────────────────────────────
+  // ── NEW: Indie / Alt Rock (Baritone to Tenor) ─────────────────────────────────
   // The Killers (extended)
   { title:'When You Were Young',     artist:'The Killers',       lo:43, hi:72, brightness:58, year:2006 },
   { title:'Read My Mind',            artist:'The Killers',       lo:43, hi:70, brightness:56, year:2006 },
@@ -1247,7 +1247,7 @@ const SONGS = [
   { title:'Maria Maria',             artist:'Santana',           lo:42, hi:68, brightness:55, year:1999 },
   { title:'Black Magic Woman',       artist:'Santana',           lo:40, hi:66, brightness:48, year:1970 },
 
-  // ── NEW: Female Pop / R&B (Mezzo–Soprano) ──────────────────────────────────
+  // ── NEW: Female Pop / R&B (Mezzo to Soprano) ──────────────────────────────────
   // Beyoncé
   { title:'Crazy in Love',           artist:'Beyoncé',           lo:50, hi:76, brightness:72, year:2003 },
   { title:'Halo',                    artist:'Beyoncé',           lo:50, hi:76, brightness:68, year:2008 },
@@ -1461,7 +1461,7 @@ const SONGS = [
   { title:'Sundown',                 artist:'Gordon Lightfoot',  lo:42, hi:66, brightness:46, year:1974 },
   { title:'The Wreck of the Edmund Fitzgerald', artist:'Gordon Lightfoot', lo:40, hi:64, brightness:40, year:1976 },
 
-  // ── NEW: Disco / 70s–80s Pop ────────────────────────────────────────────────
+  // ── NEW: Disco / 70s to 80s Pop ────────────────────────────────────────────────
   // ABBA
   { title:'Dancing Queen',           artist:'ABBA',              lo:50, hi:76, brightness:72, year:1976 },
   { title:'Mamma Mia',              artist:'ABBA',              lo:50, hi:76, brightness:70, year:1975 },
@@ -1590,7 +1590,7 @@ const SONGS = [
   // ABBA (extended)
   { title:'Waterloo',                artist:'ABBA',              lo:50, hi:76, brightness:70, year:1974 },
   { title:'Take a Chance on Me',     artist:'ABBA',              lo:50, hi:76, brightness:68, year:1977 },
-  // David Bowie (fill gap — not in existing array)
+  // David Bowie (fill gap, not in existing array)
   { title:'Space Oddity',            artist:'David Bowie',       lo:42, hi:70, brightness:52, year:1969 },
   { title:'Heroes',                  artist:'David Bowie',       lo:42, hi:70, brightness:55, year:1977 },
   { title:'Let\'s Dance',            artist:'David Bowie',       lo:42, hi:70, brightness:60, year:1983 },
@@ -2434,12 +2434,12 @@ function freqToMidi(hz) {
 }
 
 // ════════════════════════════════════════════════════════════
-// PITCH DETECTION — autocorrelation
+// PITCH DETECTION: autocorrelation
 // ════════════════════════════════════════════════════════════
 function detectPitch(buf, sampleRate) {
   const SIZE = buf.length;
   const MAX_SAMPLES = Math.floor(SIZE / 2);
-  // Min/max lag for 50Hz–1400Hz
+  // Min/max lag for 50Hz to 1400Hz
   const MIN_LAG = Math.floor(sampleRate / 1400);
   const MAX_LAG = Math.min(MAX_SAMPLES, Math.floor(sampleRate / 50));
 
@@ -2468,7 +2468,7 @@ function detectPitch(buf, sampleRate) {
       rising = false;
     }
     prevCorr = corr;
-    if (bestCorr > 0.92) break; // strong enough — stop early
+    if (bestCorr > 0.92) break; // strong enough, stop early
   }
 
   if (best < MIN_LAG) return -1;
@@ -2480,7 +2480,7 @@ function detectPitch(buf, sampleRate) {
   return sampleRate / refined;
 }
 
-// Spectral centroid — proxy for brightness/timbre
+// Spectral centroid: proxy for brightness/timbre
 function spectralCentroid(freqData) {
   let num = 0, denom = 0;
   for (let i = 0; i < freqData.length; i++) {
@@ -2569,7 +2569,7 @@ async function startTest() {
         <div style="font-size:2.5rem;margin-bottom:16px;">🎤</div>
         <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">Free hums available when invited by a Squad Leader</h2>
         <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:28px;max-width:300px;">${limitSubtext}</p>
-        <a href="/pricing.html" style="display:block;width:100%;max-width:300px;padding:16px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;text-decoration:none;border-radius:14px;font-size:1rem;font-weight:800;margin-bottom:12px;">✨ Become a Squad Leader — $5.99/mo</a>
+        <a href="/pricing.html" style="display:block;width:100%;max-width:300px;padding:16px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;text-decoration:none;border-radius:14px;font-size:1rem;font-weight:800;margin-bottom:12px;">✨ Become a Squad Leader for $5.99/mo</a>
         <div style="width:100%;max-width:300px;margin-bottom:8px;">
           <div style="display:flex;gap:8px;">
             <input id="promo-input" type="text" placeholder="Promo code" autocapitalize="characters" style="flex:1;padding:12px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(168,85,247,0.3);border-radius:10px;color:#fff;font-size:0.95rem;outline:none;"/>
@@ -2749,7 +2749,7 @@ function runPhaseCapture() {
       document.getElementById('pitch-bar').style.width = pct + '%';
 
       if (statusEl) {
-        if (rms > 0.02) { statusEl.innerHTML = '<span style="color:#22C55E;">✓ Good — keep humming!</span>'; }
+        if (rms > 0.02) { statusEl.innerHTML = '<span style="color:#22C55E;">✓ Good, keep humming!</span>'; }
         else { statusEl.innerHTML = '<span style="color:#F59E0B;">Hum a bit louder</span>'; }
       }
     } else {
@@ -2762,8 +2762,8 @@ function runPhaseCapture() {
     capturing = false;
 
     if (pitches.length < 3) {
-      // Not enough signal — retry this phase automatically
-      if (statusEl) { statusEl.innerHTML = '<span style="color:#F59E0B;">Didn\'t catch that — trying again…</span>'; }
+      // Not enough signal, retry this phase automatically
+      if (statusEl) { statusEl.innerHTML = '<span style="color:#F59E0B;">Didn\'t catch that, trying again…</span>'; }
       resetRing();
       setTimeout(() => runPhaseCapture(), 1200);
       return;
@@ -2831,13 +2831,13 @@ function showResults() {
   const notes = capturedNotes.filter(n => n !== null);
   if (notes.length < 2) { showScreen('screen-welcome'); return; }
 
-  // Apply generous range extrapolation — humming 3 notes captures the comfortable middle
+  // Apply generous range extrapolation, humming 3 notes captures the comfortable middle
   // Real singing range extends ~4 semitones below and ~8-10 above the hummed range
   // This corrects the common problem of narrow hum range → too few song matches
   const humLow  = Math.min(...notes);
   const humHigh = Math.max(...notes);
   const humSpan = humHigh - humLow;
-  // If span is very narrow (<8 semitones), user likely only hummed comfortable middle — expand
+  // If span is very narrow (<8 semitones), user likely only hummed comfortable middle, expand
   const extraLow  = humSpan < 10 ? 4 : 2;
   const extraHigh = humSpan < 10 ? 10 : 4;
   const userLow  = humLow  - extraLow;
@@ -2873,7 +2873,7 @@ function showResults() {
   const topArtist = scored[0];
   const topArtists = scored.slice(0, 4);
 
-  // Match songs to user range + brightness — keep top 30 for dismissal backfill
+  // Match songs to user range + brightness, keep top 30 for dismissal backfill
   const matchedSongs = SONGS
     .map(s => {
       const overlapLo = Math.max(userLow, s.lo);
@@ -2896,7 +2896,7 @@ function showResults() {
     return true;
   });
 
-  // Store full pool globally — dismissals pull next song from here
+  // Store full pool globally, dismissals pull next song from here
   window._hmFullPool = deduped;
   // Restore dismissed songs from localStorage so they persist across sessions
   const savedDismissed = JSON.parse(localStorage.getItem('hm_dismissed') || '[]');
@@ -2906,7 +2906,7 @@ function showResults() {
   document.getElementById('voice-badge').innerHTML = `${typeEmoji[voiceType] || '🎤'} ${voiceType}`;
   document.getElementById('result-emoji').textContent = (topArtist && topArtist.emoji) ? topArtist.emoji : '🎉';
   document.getElementById('range-text').textContent =
-    `${midiToName(userLow)} – ${midiToName(userHigh)} · ${span} semitone range`;
+    `${midiToName(userLow)} to ${midiToName(userHigh)} · ${span} semitone range`;
 
   // Range bar
   const fullSpan = 90 - 36;
@@ -2938,7 +2938,7 @@ function showResults() {
     return                     { key: 'stretch',label: '💪 Stretch',   cls: 'tier-stretch' };
   }
 
-  // Familiar song keywords — crowd-recognizable titles
+  // Familiar song keywords, crowd-recognizable titles
   const FAMILIAR_WORDS = ['love','night','dream','heart','world','baby','fire','home','run','free','time','life','forever','angel','sky','gold','girl','dancing','shine','feel','hello','don\'t','can\'t','won\'t','isn\'t'];
   function isFamiliar(title) {
     const t = title.toLowerCase();
@@ -3216,7 +3216,7 @@ function setFilter(filter, el) {
   // Re-render original confident songs if coming back from stretch
   if (window._hmSongs) {
     const confidentSongs = window._hmSongs.filter(s => s.tier.key !== 'stretch');
-    // Re-render (we need renderSongCard — inline it here)
+    // Re-render (we need renderSongCard, inline it here)
     document.getElementById('your-songs').innerHTML = confidentSongs.map(s => {
       const tierBadge = `<span class="tier-badge ${s.tier.cls}">${s.tier.label}</span>`;
       return `<li class="song-item" data-tier="${s.tier.key}" data-tags="${(s.tags||[]).join(',')}" data-familiar="${s.familiar}"
@@ -3323,7 +3323,7 @@ function toggleStretch() {
   stretchEl.style.display = open ? 'none' : 'flex';
   stretchEl.style.flexDirection = 'column';
   if (btn) btn.textContent = open
-    ? '💪 Show stretch songs — great with a small key change'
+    ? '💪 Show stretch songs, great with a small key change'
     : '💪 Hide stretch songs';
 }
 // ─────────────────────────────────────────────────────────────────────────────
@@ -3386,7 +3386,7 @@ function updateExportCount() {
     label.textContent = '';
     if (clearRow) clearRow.style.display = 'none';
   } else {
-    const cap = isPremium ? '' : total >= 20 ? ' · limit reached — upgrade for more' : ` · ${20 - total} more free`;
+    const cap = isPremium ? '' : total >= 20 ? ' · limit reached, upgrade for more' : ` · ${20 - total} more free`;
     label.textContent = `${total} song${total !== 1 ? 's' : ''} in your playlist${cap}`;
     if (clearRow) clearRow.style.display = 'block';
   }
@@ -3419,7 +3419,7 @@ function exportSongList(mode) {
   if (!pool.length) { showToast('Hum first to get your song list!'); return; }
 
   if (mode === 'copy') {
-    const text = pool.map((s, i) => `${i + 1}. ${s.title} — ${s.artist}`).join('\n');
+    const text = pool.map((s, i) => `${i + 1}. ${s.title} by ${s.artist}`).join('\n');
     navigator.clipboard.writeText(text)
       .then(() => showToast('Song list copied! Paste in your music app, Notes, or anywhere 📋'))
       .catch(() => {
@@ -3447,7 +3447,7 @@ function exportSongList(mode) {
     a.download = 'my-hummatch-songs.csv';
     a.click();
     URL.revokeObjectURL(url);
-    showToast('CSV downloaded — open in Excel, Google Sheets, or your music app ⬇');
+    showToast('CSV downloaded. Open in Excel, Google Sheets, or your music app ⬇');
     hmTrack('export_csv', { count: pool.length });
   }
   // Show A2HS after playlist save action
@@ -3488,7 +3488,7 @@ async function openKaraoke(title, artist) {
       throw new Error('no results');
     }
   } catch(e) {
-    // Fallback — open YouTube directly
+    // Fallback, open YouTube directly
     loading.innerHTML = `<div style="font-size:1.5rem;margin-bottom:12px;">🎤</div><div style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Tap below to open on YouTube</div>`;
     document.getElementById('karaoke-yt-btn').textContent = '▶ Now Sing It';
     document.getElementById('karaoke-yt-btn').onclick = () => window.open(fallbackUrl, '_blank');
@@ -3538,7 +3538,7 @@ function checkSavedProfile() {
   } catch(e) {}
 }
 
-// PWA install prompt — shown at high-intent moments only
+// PWA install prompt, shown at high-intent moments only
 let deferredInstallPrompt = null;
 const _a2hsInstalled = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
 window.addEventListener('beforeinstallprompt', e => {
@@ -3550,7 +3550,7 @@ window.addEventListener('appinstalled', () => {
   deferredInstallPrompt = null;
   document.querySelectorAll('[id^="a2hs-"]').forEach(el => el.style.display = 'none');
 });
-// Standalone detection — fires on first launch after Add to Home Screen (any browser)
+// Standalone detection, fires on first launch after Add to Home Screen (any browser)
 if (_a2hsInstalled) {
   if (!localStorage.getItem('hm_pwa_tracked')) {
     localStorage.setItem('hm_pwa_tracked', '1');
@@ -3599,7 +3599,7 @@ function installHumMatch() {
 // Load songs from API, fall back to inline SONGS array
 let SONGS_LOADED = false;
 async function loadSongs() {
-  // Use hardcoded JS array as authoritative source — DB endpoint is for admin management only
+  // Use hardcoded JS array as authoritative source. DB endpoint is for admin management only
   // This prevents duplicates from DB + inline array merging
   SONGS_LOADED = true;
   hmTrack("page_view");
@@ -3635,10 +3635,10 @@ function resetTest() {
   document.getElementById('pitch-hz').textContent = '';
   document.getElementById('pitch-bar').style.width = '0%';
   resetRing();
-  // Re-test doesn't count against the free hum limit — it's the same session
+  // Re-test doesn't count against the free hum limit, it's the same session
   const prev = parseInt(localStorage.getItem('hm_hum_count') || '0');
   if (prev > 0) localStorage.setItem('hm_hum_count', prev - 1);
-  // Go straight to primer (skip limit check — already passed)
+  // Go straight to primer (skip limit check, already passed)
   showScreen('screen-primer');
 }
 
@@ -3700,7 +3700,7 @@ function buildShareCard() {
   ctx.fillStyle = 'rgba(192,132,252,0.75)';
   ctx.fillText('MY TOP HUMMATCH SONG', LX, 230);
 
-  // Song title — big, white, bold
+  // Song title, big, white, bold
   ctx.fillStyle = '#ffffff';
   const songTitle = shareTopSong ? shareTopSong.title : shareArtistName;
   const displayTitle = songTitle.length > 20 ? songTitle.substring(0, 20) + '…' : songTitle;
@@ -3717,7 +3717,7 @@ function buildShareCard() {
     ctx.fillText(displayTitle.toUpperCase(), LX, 330);
   }
 
-  // Artist name — smaller, below song title
+  // Artist name, smaller, below song title
   if (shareTopSong) {
     ctx.font = '500 26px Arial, sans-serif';
     ctx.fillStyle = 'rgba(192,132,252,0.85)';
@@ -3791,7 +3791,7 @@ function buildShareCard() {
   // Promo code
   ctx.font = '600 18px Arial, sans-serif';
   ctx.fillStyle = 'rgba(192,132,252,0.7)';
-  ctx.fillText('Become a Squad Leader — $5.99/mo', RX, 448);
+  ctx.fillText('Become a Squad Leader for $5.99/mo', RX, 448);
 
   // Hashtag
   ctx.font = '500 18px Arial, sans-serif';
@@ -3979,7 +3979,7 @@ function closeNav() {
     localStorage.setItem(HAS_HUMMED_KEY, '1');
     // Delay 3 seconds after results appear
     setTimeout(() => {
-      // Re-check — user might have logged in during those 3 seconds
+      // Re-check, user might have logged in during those 3 seconds
       if (localStorage.getItem(TOKEN_KEY)) return;
       const sheet = document.getElementById('hm-login-sheet');
       if (sheet) sheet.classList.add('show');
@@ -4013,7 +4013,7 @@ function closeNav() {
     try {
       const r = await fetch(`/api/hummatch/auth/me?token=${encodeURIComponent(token)}`);
       if (!r.ok) {
-        // Invalid token — clear it
+        // Invalid token, clear it
         if (r.status === 404) {
           localStorage.removeItem(TOKEN_KEY);
           localStorage.removeItem(EMAIL_KEY);

@@ -283,7 +283,7 @@ async function loadGeoData() {
       mapMarkers.push(circle);
     });
     if (points.length === 0) {
-      document.getElementById('geo-note').textContent = 'No geo data yet — hums will appear as dots once location data is captured.';
+      document.getElementById('geo-note').textContent = 'No geo data yet. Hums will appear as dots once location data is captured.';
     } else {
       document.getElementById('geo-note').textContent = `${points.length} location${points.length > 1 ? 's' : ''} · Each dot = a hum source · Size = frequency`;
     }
@@ -318,7 +318,7 @@ function render(d) {
   document.getElementById('s-hums').textContent = fmt(d.totalHums);
   document.getElementById('s-conv').textContent = d.convRate + '%';
   document.getElementById('s-sung').textContent = fmt(d.totalSung);
-  // Trend arrows (placeholder — will show real data once prev period API is added)
+  // Trend arrows (placeholder, will show real data once prev period API is added)
   function setTrend(id, pct) {
     const el = document.getElementById(id);
     if (!el) return;

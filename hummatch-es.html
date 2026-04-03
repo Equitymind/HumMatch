@@ -407,7 +407,7 @@ function hmTrack(event, data) {
 }
 
 // ════════════════════════════════════════════════════════════
-// ARTIST DATABASE — range + timbre profile
+// ARTIST DATABASE: range + timbre profile
 // Fields: name, emoji, lowNote (MIDI), highNote (MIDI), brightness (0-100, higher=brighter/lighter), tags
 // MIDI note: C4=60, A2=45, etc.
 // ════════════════════════════════════════════════════════════
@@ -446,7 +446,7 @@ const ARTISTS = [
 ];
 
 // ════════════════════════════════════════════════════════════
-// SONG DATABASE — title, artist, loNote (MIDI), hiNote (MIDI), brightness
+// SONG DATABASE: title, artist, loNote (MIDI), hiNote (MIDI), brightness
 // ════════════════════════════════════════════════════════════
 const SONGS = [
   // Bass / Deep Baritone
@@ -529,7 +529,7 @@ const SONGS = [
   { title:'Africa',                  artist:'Toto',              lo:45, hi:70, brightness:55 },
   { title:'Total Eclipse of the Heart', artist:'Bonnie Tyler',   lo:49, hi:76, brightness:55 },
   { title:'Roxanne',                 artist:'The Police',        lo:46, hi:72, brightness:58 },
-  // The Weeknd — extended
+  // The Weeknd, extended
   { title:'Save Your Tears',         artist:'The Weeknd',        lo:44, hi:74, brightness:65, year:2020 },
   { title:'Sacrifice',               artist:'The Weeknd',        lo:44, hi:73, brightness:64, year:2022 },
   { title:'Die For You',             artist:'The Weeknd',        lo:43, hi:72, brightness:62, year:2016 },
@@ -654,7 +654,7 @@ const SONGS = [
   { title:'Hasta el Amanecer',       artist:'Nicky Jam',         lo:44, hi:70, brightness:67, year:2016 },
   { title:'X (EQUIS)',               artist:'Nicky Jam / J Balvin', lo:44, hi:70, brightness:72, year:2018 },
   { title:'Whine Up',                artist:'Nicky Jam',         lo:44, hi:70, brightness:70, year:2017 },
-  // Bad Bunny — additional
+  // Bad Bunny, additional
   { title:'Neverita',                artist:'Bad Bunny',         lo:44, hi:70, brightness:68, year:2022 },
   { title:'Ojitos Lindos',           artist:'Bad Bunny',         lo:44, hi:70, brightness:66, year:2022 },
   { title:'El Apagón',               artist:'Bad Bunny',         lo:44, hi:70, brightness:71, year:2022 },
@@ -914,7 +914,7 @@ const SONGS = [
   // Mezzo / Alto
   // Soprano
   // Crowd-pleasers / wide range
-  // The Weeknd — extended
+  // The Weeknd, extended
   { title:'Out of Time',             artist:'The Weeknd',        lo:44, hi:73, brightness:63, year:2022 },
   // Jonas Brothers
   { title:'Waffle House',            artist:'Jonas Brothers',    lo:45, hi:71, brightness:68, year:2023 },
@@ -957,7 +957,7 @@ const SONGS = [
   // Tyler Childers
   { title:'Feathered Indians',       artist:'Tyler Childers',    lo:40, hi:65, brightness:38, year:2017 },
   { title:'Whitehouse Road',         artist:'Tyler Childers',    lo:40, hi:65, brightness:40, year:2017 },
-  // ── NEW: Indie / Alt Rock (Baritone–Tenor) ─────────────────────────────────
+  // ── NEW: Indie / Alt Rock (Baritone to Tenor) ─────────────────────────────────
   // The Killers (extended)
   { title:'When You Were Young',     artist:'The Killers',       lo:43, hi:72, brightness:58, year:2006 },
   { title:'Read My Mind',            artist:'The Killers',       lo:43, hi:70, brightness:56, year:2006 },
@@ -1109,7 +1109,7 @@ const SONGS = [
   { title:'Smooth',                  artist:'Santana ft. Rob Thomas', lo:42, hi:68, brightness:55, year:1999 },
   { title:'Maria Maria',             artist:'Santana',           lo:42, hi:68, brightness:55, year:1999 },
   { title:'Black Magic Woman',       artist:'Santana',           lo:40, hi:66, brightness:48, year:1970 },
-  // ── NEW: Female Pop / R&B (Mezzo–Soprano) ──────────────────────────────────
+  // ── NEW: Female Pop / R&B (Mezzo to Soprano) ──────────────────────────────────
   // Beyoncé
   { title:'Crazy in Love',           artist:'Beyoncé',           lo:50, hi:76, brightness:72, year:2003 },
   { title:'Halo',                    artist:'Beyoncé',           lo:50, hi:76, brightness:68, year:2008 },
@@ -1311,7 +1311,7 @@ const SONGS = [
   { title:'If You Could Read My Mind', artist:'Gordon Lightfoot', lo:42, hi:66, brightness:44, year:1970 },
   { title:'Sundown',                 artist:'Gordon Lightfoot',  lo:42, hi:66, brightness:46, year:1974 },
   { title:'The Wreck of the Edmund Fitzgerald', artist:'Gordon Lightfoot', lo:40, hi:64, brightness:40, year:1976 },
-  // ── NEW: Disco / 70s–80s Pop ────────────────────────────────────────────────
+  // ── NEW: Disco / 70s to 80s Pop ────────────────────────────────────────────────
   // ABBA
   { title:'Dancing Queen',           artist:'ABBA',              lo:50, hi:76, brightness:72, year:1976 },
   { title:'Mamma Mia',              artist:'ABBA',              lo:50, hi:76, brightness:70, year:1975 },
@@ -1416,7 +1416,7 @@ const SONGS = [
   // ABBA (extended)
   { title:'Waterloo',                artist:'ABBA',              lo:50, hi:76, brightness:70, year:1974 },
   { title:'Take a Chance on Me',     artist:'ABBA',              lo:50, hi:76, brightness:68, year:1977 },
-  // David Bowie (fill gap — not in existing array)
+  // David Bowie (fill gap, not in existing array)
   { title:'Space Oddity',            artist:'David Bowie',       lo:42, hi:70, brightness:52, year:1969 },
   { title:'Heroes',                  artist:'David Bowie',       lo:42, hi:70, brightness:55, year:1977 },
   { title:'Let\'s Dance',            artist:'David Bowie',       lo:42, hi:70, brightness:60, year:1983 },
@@ -1997,12 +1997,12 @@ function freqToMidi(hz) {
 }
 
 // ════════════════════════════════════════════════════════════
-// PITCH DETECTION — autocorrelation
+// PITCH DETECTION: autocorrelation
 // ════════════════════════════════════════════════════════════
 function detectPitch(buf, sampleRate) {
   const SIZE = buf.length;
   const MAX_SAMPLES = Math.floor(SIZE / 2);
-  // Min/max lag for 50Hz–1400Hz
+  // Min/max lag for 50Hz to 1400Hz
   const MIN_LAG = Math.floor(sampleRate / 1400);
   const MAX_LAG = Math.min(MAX_SAMPLES, Math.floor(sampleRate / 50));
 
@@ -2031,7 +2031,7 @@ function detectPitch(buf, sampleRate) {
       rising = false;
     }
     prevCorr = corr;
-    if (bestCorr > 0.92) break; // strong enough — stop early
+    if (bestCorr > 0.92) break; // strong enough, stop early
   }
 
   if (best < MIN_LAG) return -1;
@@ -2043,7 +2043,7 @@ function detectPitch(buf, sampleRate) {
   return sampleRate / refined;
 }
 
-// Spectral centroid — proxy for brightness/timbre
+// Spectral centroid: proxy for brightness/timbre
 function spectralCentroid(freqData) {
   let num = 0, denom = 0;
   for (let i = 0; i < freqData.length; i++) {
@@ -2089,7 +2089,7 @@ function retryHum() {
 async function startTest() {
   // Create AudioContext first (must happen inside gesture handler on iOS)
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  // iOS Safari starts AudioContext in 'suspended' — resume immediately
+  // iOS Safari starts AudioContext in 'suspended', resume immediately
   if (audioCtx.state === 'suspended') {
     try { await audioCtx.resume(); } catch(e) {}
   }
@@ -2195,7 +2195,7 @@ function toggleCapture() {
     if (cd) { cd.classList.remove('visible'); cd.textContent = ''; }
 
     if (pitches.length < 3) {
-      document.getElementById('mic-label').textContent = 'NO SE DETECTÓ — TOCA PARA REINTENTAR';
+      document.getElementById('mic-label').textContent = 'NO SE DETECTÓ. TOCA PARA REINTENTAR';
       if (banner) banner.textContent = '🔄 ¡Tararea más fuerte! Toca el botón otra vez.';
       document.getElementById('pitch-note').textContent = '?';
       return;
@@ -2331,7 +2331,7 @@ function showResults() {
   document.getElementById('voice-badge').innerHTML = `${typeEmoji[voiceType] || '🎤'} ${voiceType}`;
   document.getElementById('result-emoji').textContent = (topArtist && topArtist.emoji) ? topArtist.emoji : '🎉';
   document.getElementById('range-text').textContent =
-    `${midiToName(userLow)} – ${midiToName(userHigh)} · ${span} semitonos de rango`;
+    `${midiToName(userLow)} a ${midiToName(userHigh)} · ${span} semitonos de rango`;
 
   // Range bar
   const fullSpan = 90 - 36;
@@ -2494,7 +2494,7 @@ async function openKaraoke(title, artist) {
       throw new Error('no results');
     }
   } catch(e) {
-    // Fallback — open YouTube directly
+    // Fallback, open YouTube directly
     loading.innerHTML = `<div style="font-size:1.5rem;margin-bottom:12px;">🎤</div><div style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Toca abajo para abrir en YouTube</div>`;
     document.getElementById('karaoke-yt-btn').textContent = '▶ ¡Cántala Ahora!';
     document.getElementById('karaoke-yt-btn').onclick = () => window.open(fallbackUrl, '_blank');
@@ -2690,7 +2690,7 @@ function buildShareCard() {
   ctx.fillStyle = 'rgba(192,132,252,0.75)';
   ctx.fillText('MI CANCIÓN HUMMATCH', LX, 228);
 
-  // Song title — big, white, bold
+  // Song title, big, white, bold
   ctx.fillStyle = '#ffffff';
   const songTitle = shareTopSong ? shareTopSong.title : shareArtistName;
   const displayTitle = songTitle.length > 20 ? songTitle.substring(0, 20) + '…' : songTitle;
@@ -2707,7 +2707,7 @@ function buildShareCard() {
     ctx.fillText(displayTitle.toUpperCase(), LX, 330);
   }
 
-  // Artist name — smaller, below song title
+  // Artist name, smaller, below song title
   if (shareTopSong) {
     ctx.font = '500 26px Arial, sans-serif';
     ctx.fillStyle = 'rgba(192,132,252,0.85)';
@@ -2849,7 +2849,7 @@ function exportSongListEs(mode) {
   if (!pool.length) { showToast('¡Primero tararea para obtener tu lista!'); return; }
 
   if (mode === 'copy') {
-    const text = pool.map((s, i) => `${i + 1}. ${s.title} — ${s.artist}`).join('\n');
+    const text = pool.map((s, i) => `${i + 1}. ${s.title} by ${s.artist}`).join('\n');
     navigator.clipboard.writeText(text)
       .then(() => showToast('¡Lista copiada! Pégala en tu app de música, Notas o donde quieras 📋'))
       .catch(() => {
@@ -2876,7 +2876,7 @@ function exportSongListEs(mode) {
     a.download = 'mis-canciones-hummatch.csv';
     a.click();
     URL.revokeObjectURL(url);
-    showToast('CSV descargado — ábrelo en Excel, Google Sheets o tu app de música ⬇');
+    showToast('CSV descargado. Ábrelo en Excel, Google Sheets o tu app de música ⬇');
     hmTrack('export_csv', { count: pool.length });
   }
 }

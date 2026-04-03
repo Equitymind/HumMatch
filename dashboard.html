@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>My HQ | HumMatch</title>
-<meta name="description" content="Your HumMatch HQ — voice matches, playlists, SquadMatch & more"/>
+<meta name="description" content="Your HumMatch HQ. Voice matches, playlists, SquadMatch and more."/>
 <link rel="icon" href="/hummatch-icon-bug-2x.png"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -362,7 +362,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
     </div>
   </div>
 
-  <!-- A2HS install prompt — subtle bottom card -->
+  <!-- A2HS install prompt, subtle bottom card -->
   <div id="a2hs-dash-banner" style="display:none;margin-top:20px;">
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
       <div style="font-size:1.3rem;flex-shrink:0;">📲</div>
@@ -540,7 +540,7 @@ function sortPlaylist(sort,el){currentSort=sort;document.querySelectorAll('.filt
 function exportPlaylist(){
   const songs=playlistData.slice(0,isPremium?playlistData.length:5);
   if(!songs.length){toast('No songs to export');return}
-  const text='My HumMatch Playlist\n\n'+songs.map((s,i)=>(i+1)+'. "'+s.song_title+'" — '+s.artist+' ('+(s.confidence||0)+'% match)').join('\n')+'\n\nMatched by HumMatch — hummatch.com';
+  const text='My HumMatch Playlist\n\n'+songs.map((s,i)=>(i+1)+'. "'+s.song_title+'" by '+s.artist+' ('+(s.confidence||0)+'% match)').join('\n')+'\n\nMatched by HumMatch · hummatch.com';
   navigator.clipboard.writeText(text).then(()=>toast('Playlist copied to clipboard!')).catch(()=>toast('Copy failed'));
 }
 
@@ -715,7 +715,7 @@ function startCheckout(plan){plan=plan||'monthly';window.location.href='/api/hum
 
 checkAuth();
 
-// PWA install prompt — high-intent moments only
+// PWA install prompt, high-intent moments only
 let deferredInstallPrompt=null;
 const _a2hsInstalled=window.navigator.standalone||window.matchMedia('(display-mode: standalone)').matches;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;});
