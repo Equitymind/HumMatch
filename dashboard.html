@@ -250,7 +250,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
     <div class="user-info">
       <a href="/" class="hum-btn">🎤 Hum a Song</a>
       <span class="user-email" id="user-email"></span>
-      <span class="premium-badge">SQUAD LEADER</span>
+      <span class="premium-badge" id="premium-badge" style="display:none">SQUAD LEADER</span>
       <button class="settings-btn" onclick="toggleSettings()">Settings</button>
       <button class="logout-btn" onclick="doLogout()">Logout</button>
     </div>
@@ -285,7 +285,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
   </div>
 
   <!-- Free user upgrade banner -->
-  <div id="free-upgrade-banner" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(219,39,119,0.1));border:1px solid rgba(124,58,237,0.25);border-radius:14px;padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+  <div id="free-upgrade-banner" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(219,39,119,0.1));border:1px solid rgba(124,58,237,0.25);border-radius:14px;padding:18px 22px;margin-bottom:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
     <div>
       <div style="font-size:0.9rem;font-weight:700;margin-bottom:2px">You're on the Free plan</div>
       <div style="font-size:0.78rem;color:rgba(255,255,255,0.45)">Upgrade for unlimited hums, squads, playlists &amp; more</div>
@@ -554,9 +554,13 @@ function showDashboard() {
     if (el) el.style.display = isPremium ? '' : 'none';
   });
 
+  // Show/hide premium badge
+  const badge = document.getElementById('premium-badge');
+  if (badge) badge.style.display = isPremium ? '' : 'none';
+
   // Show upgrade banner for free users
   const banner = document.getElementById('free-upgrade-banner');
-  if (banner) banner.style.display = isPremium ? 'none' : 'block';
+  if (banner) banner.style.display = isPremium ? 'none' : 'flex';
 
   loadAll();
 }
