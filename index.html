@@ -622,6 +622,22 @@
   </div>
 
 
+  <!-- POST-HUM SIGNUP PROMPT -->
+  <div id="hm-posthum-signup" style="display:none;width:100%;max-width:400px;margin-top:16px;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(168,85,247,0.35);border-radius:14px;padding:18px 18px 14px;position:relative;">
+      <button onclick="hmDismissPosthumSignup()" style="position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(255,255,255,0.25);font-size:1rem;cursor:pointer;padding:0;" aria-label="Dismiss">✕</button>
+      <div id="hm-posthum-content">
+        <div style="font-size:0.85rem;font-weight:700;color:#e2e0f0;margin-bottom:4px;">Save these results &amp; track your progress</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">Create a free account — future hums auto-save</div>
+        <button onclick="hmOpenSignupFromPrompt()" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Create Free Account</button>
+      </div>
+      <div id="hm-posthum-saved" style="display:none;text-align:center;padding:4px 0;">
+        <div style="font-size:0.9rem;font-weight:700;color:#a855f7;">✓ Results saved!</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:3px;">Future hums will auto-save to your account</div>
+      </div>
+    </div>
+  </div>
+
   <!-- A2HS prompt, shown after first successful result -->
   <div id="a2hs-results-banner" style="display:none;width:100%;max-width:400px;margin-top:16px;">
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
@@ -3916,6 +3932,17 @@ function showResults() {
   shareArtistName = topSong ? topSong.title + ' by ' + topSong.artist : (topArtist ? topArtist.name : '');
   shareTopSong = topSong ? { title: topSong.title, artist: topSong.artist } : null;
 
+  // ── Store hum data for retroactive save (if user signs up after) ──
+  window._pendingHumData = {
+    low_note: capturedNotes[0],
+    normal_note: capturedNotes[1],
+    high_note: capturedNotes[2],
+    voice_type: voiceType,
+    top_song: topSong ? topSong.title : '',
+    top_artist: topSong ? topSong.artist : '',
+    match_score: topSong ? Math.round((topSong.score || 0) * 100) : 0
+  };
+
   // ── Immediately sync hum_count + log hum session to server ──
   if (typeof hmSyncCounts === 'function') hmSyncCounts();
   if (_humToken) {
@@ -4912,7 +4939,28 @@ function closeNav() {
 
         hmHideLoginSheet();
         hmUpdateAccountBadge();
-        showToast('Account created! Playlist synced.');
+
+        // Retroactively save hum data if user signed up after humming
+        if (window._pendingHumData) {
+          const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
+          fetch('/api/hummatch/hum/session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-HM-Token': data.token },
+            body: JSON.stringify({ ...window._pendingHumData, hum_count: humCount })
+          }).catch(() => {});
+          window._pendingHumData = null;
+          // Show "saved" state in inline card
+          const posthumContent = document.getElementById('hm-posthum-content');
+          const posthumSaved = document.getElementById('hm-posthum-saved');
+          const posthumCard = document.getElementById('hm-posthum-signup');
+          if (posthumContent) posthumContent.style.display = 'none';
+          if (posthumSaved) posthumSaved.style.display = 'block';
+          if (posthumCard) posthumCard.style.display = 'block';
+          showToast('Account created! Results saved.');
+        } else {
+          showToast('Account created! Playlist synced.');
+        }
+
         hmTrack('account_register', { isNew: true });
 
         // Update nav links
@@ -4943,23 +4991,26 @@ function closeNav() {
     if (sheet) sheet.classList.remove('show');
   }
 
-  // ── Show login prompt (called after first hum result) ──
+  // ── Show inline signup prompt after hum results (once per session) ──
   window.hmMaybeShowLoginPrompt = function() {
-    // Don't show if already logged in
-    if (localStorage.getItem(TOKEN_KEY)) return;
-    // Don't show if dismissed within 7 days
-    const dismissed = parseInt(localStorage.getItem(DISMISS_KEY) || '0');
-    if (dismissed && Date.now() - dismissed < 7 * 24 * 60 * 60 * 1000) return;
-    // Only show after first hum (not before)
-    if (localStorage.getItem(HAS_HUMMED_KEY)) return; // Already shown before
-    localStorage.setItem(HAS_HUMMED_KEY, '1');
-    // Delay 3 seconds after results appear
-    setTimeout(() => {
-      // Re-check, user might have logged in during those 3 seconds
-      if (localStorage.getItem(TOKEN_KEY)) return;
-      const sheet = document.getElementById('hm-login-sheet');
-      if (sheet) sheet.classList.add('show');
-    }, 3000);
+    if (localStorage.getItem(TOKEN_KEY)) return; // already logged in
+    if (sessionStorage.getItem('hm_signup_prompt_shown')) return; // already shown this session
+    sessionStorage.setItem('hm_signup_prompt_shown', '1');
+    const card = document.getElementById('hm-posthum-signup');
+    if (card) card.style.display = 'block';
+  };
+
+  // ── Dismiss inline signup prompt ──
+  window.hmDismissPosthumSignup = function() {
+    const card = document.getElementById('hm-posthum-signup');
+    if (card) card.style.display = 'none';
+  };
+
+  // ── Open signup sheet from inline prompt ──
+  window.hmOpenSignupFromPrompt = function() {
+    window._signupFromPrompt = true;
+    const sheet = document.getElementById('hm-login-sheet');
+    if (sheet) sheet.classList.add('show');
   };
 
   // ── Update account badge in results header ──
