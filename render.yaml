@@ -23,8 +23,8 @@ services:
       - key: HUMMATCH_EMAIL_PASS
         sync: false
       - key: DB_PATH
-        value: /data/hummatch.db
+        value: /var/data/hummatch.db
     disk:
       name: hummatch-data
-      mountPath: /data
-      sizeGB: 1
+      mountPath: /var/data
+      sizeGB: 5
