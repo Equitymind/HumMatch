@@ -70,6 +70,10 @@
   .step-num { font-size: 1.3rem; margin-bottom: 6px; }
   .step-txt { font-size: 0.68rem; color: var(--text2); line-height: 1.4; }
 
+  /* ── WELCOME SCREEN (mobile scroll fix) ── */
+  #screen-welcome { justify-content: flex-start; padding-top: 48px; padding-bottom: max(40px, env(safe-area-inset-bottom, 40px)); overflow-y: auto; -webkit-overflow-scrolling: touch; gap: 0; }
+  #screen-welcome > * { flex-shrink: 0; }
+
   /* ── HUM TEST ── */
   #screen-test { justify-content: flex-start; padding-top: 60px; padding-bottom: max(60px, env(safe-area-inset-bottom, 60px)); overflow-y: auto; -webkit-overflow-scrolling: touch; }
   .test-phase { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
@@ -390,15 +394,21 @@
   </div>
 
   <!-- Footer -->
-  <div style="width:100%;max-width:380px;margin-top:28px;padding:20px 0 12px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
-    <a href="/dashboard" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Dashboard</a>
-    <a href="/squadmatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">SquadMatch</a>
-    <a href="/pricing" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Squad Leader</a>
-    <a href="/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contact</a>
-  </div>
-  <div style="width:100%;max-width:380px;text-align:center;margin-top:8px;">
-    <a href="/groupmatch" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Coming Soon: <span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">GroupMatch</span> &mdash; Find singers near you</a>
-  </div>
+  <footer style="width:100%;max-width:380px;margin-top:32px;padding:20px 0 max(24px, env(safe-area-inset-bottom, 24px));border-top:1px solid rgba(255,255,255,0.06);">
+    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:14px;">
+      <a href="/squadmatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">SquadMatch</a>
+      <a href="/groupmatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">GroupMatch</a>
+      <a href="/dashboard" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Dashboard</a>
+      <a href="/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
+    </div>
+    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:14px;">
+      <a href="/about" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">About</a>
+      <a href="/contact" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Contact</a>
+      <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
+      <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
+    </div>
+    <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.2);">&copy; 2026 HumMatch</div>
+  </footer>
 
 </div>
 
@@ -527,7 +537,7 @@
       <button onclick="exportSongList('copy')" style="flex:1;padding:13px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.85);font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">📋 Copy List</button>
       <button onclick="exportSongList('csv')" style="flex:1;padding:13px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.85);font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">⬇ Download CSV</button>
     </div>
-    <div style="font-size:0.68rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;line-height:1.5;">Until we connect directly to Spotify and Apple Music, this is the easiest way to build a singable playlist. Check the songs you want, then copy or download.</div>
+    <div style="font-size:0.68rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;line-height:1.5;">The easiest way to build a singable playlist. Check the songs you want, then copy or download to your favorite music app.</div>
   </div>
 
   <!-- SHARE SECTION -->
@@ -3175,26 +3185,6 @@ function toggleStretch() {
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
-// ── Spotify Playlist Export — PKCE OAuth flow ─────────────────────────────────
-const SPOTIFY_CLIENT_ID = '7fb671d75ec448abb430348a49ce9547';
-const SPOTIFY_REDIRECT   = 'https://hummatch.me';
-const SPOTIFY_SCOPES     = 'playlist-modify-public playlist-modify-private';
-
-async function sha256(plain) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(plain);
-  return window.crypto.subtle.digest('SHA-256', data);
-}
-function base64urlencode(buf) {
-  return btoa(String.fromCharCode(...new Uint8Array(buf)))
-    .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-}
-function generateCodeVerifier() {
-  const arr = new Uint8Array(64);
-  window.crypto.getRandomValues(arr);
-  return base64urlencode(arr.buffer);
-}
-
 // ── PERSISTENT PLAYLIST ──────────────────────────────────────────────────────
 const HM_PLAYLIST_KEY = 'hm_playlist';
 
@@ -3288,7 +3278,7 @@ function exportSongList(mode) {
   if (mode === 'copy') {
     const text = pool.map((s, i) => `${i + 1}. ${s.title} — ${s.artist}`).join('\n');
     navigator.clipboard.writeText(text)
-      .then(() => showToast('Song list copied! Paste into Spotify, Notes, or anywhere 📋'))
+      .then(() => showToast('Song list copied! Paste in your music app, Notes, or anywhere 📋'))
       .catch(() => {
         // Fallback for browsers that block clipboard
         const ta = document.createElement('textarea');
@@ -3314,18 +3304,11 @@ function exportSongList(mode) {
     a.download = 'my-hummatch-songs.csv';
     a.click();
     URL.revokeObjectURL(url);
-    showToast('CSV downloaded — open in Spotify, Excel, or Google Sheets ⬇');
+    showToast('CSV downloaded — open in Excel, Google Sheets, or your music app ⬇');
     hmTrack('export_csv', { count: pool.length });
   }
 }
 
-
-// Check on page load if returning from Spotify OAuth
-window.addEventListener('load', () => {
-  if (sessionStorage.getItem('sp_pending') && new URLSearchParams(window.location.search).has('code')) {
-    }
-});
-// ─────────────────────────────────────────────────────────────────────────────
 
 async function openKaraoke(title, artist) {
   hmTrack('song_click', { title, artist });
@@ -3501,26 +3484,6 @@ window.addEventListener('beforeunload', _trackSessionEnd);
 window.addEventListener('DOMContentLoaded', async () => {
   await loadSongs();
   checkSavedProfile();
-  // Check Spotify quota — show coming soon if dev mode cap reached
-  try {
-    const r = await fetch('/api/hummatch/spotify-status');
-    const s = await r.json();
-    if (!s.available) {
-      const btn = document.getElementById('spotify-btn');
-      if (btn) {
-        btn.style.background = 'rgba(255,255,255,0.08)';
-        btn.style.color = 'rgba(255,255,255,0.5)';
-        btn.style.cursor = 'default';
-        btn.onclick = null;
-        btn.innerHTML = `<span style="font-size:1.1rem;">🎵</span> Spotify + Apple Music Coming Soon`;
-      }
-      const status = document.getElementById('spotify-status');
-      if (status) {
-        status.style.color = 'rgba(168,85,247,0.7)';
-        status.textContent = 'Full Spotify integration launching soon. Your songs are saved above.';
-      }
-    }
-  } catch(e) { /* fail silently — don't break the app */ }
 });
 
 function resetTest() {
