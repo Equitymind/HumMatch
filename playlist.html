@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My HumMatch Playlist</title>
+  <meta name="description" content="Check out my voice-matched playlist on HumMatch — songs I can actually nail!">
+  <meta property="og:title" content="My HumMatch Playlist">
+  <meta property="og:description" content="Songs matched to my voice by HumMatch">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0d0b1a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #e2e0f0;
+      min-height: 100vh;
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    .logo {
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .playlist-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 14px;
+      padding: 28px 24px;
+      margin-top: 20px;
+    }
+    .playlist-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .playlist-meta {
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .song-list { list-style: none; }
+    .song-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(124,58,237,0.08);
+      gap: 14px;
+    }
+    .song-item:last-child { border-bottom: none; }
+    .song-rank {
+      color: rgba(255,255,255,0.3);
+      font-size: 14px;
+      width: 28px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .song-info { flex: 1; min-width: 0; }
+    .song-title {
+      font-weight: 600;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .song-artist {
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .song-details {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+      align-items: center;
+    }
+    .song-badge {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-high { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .badge-mid { background: rgba(234,179,8,0.15); color: #eab308; }
+    .badge-low { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .badge-genre {
+      background: rgba(168,85,247,0.12);
+      color: #A855F7;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 32px;
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 14px;
+    }
+    .cta-section h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .cta-btn {
+      display: inline-block;
+      padding: 12px 36px;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(168,85,247,0.3);
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(255,255,255,0.4);
+    }
+    .loading .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(168,85,247,0.2);
+      border-top-color: #A855F7;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-msg {
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(255,255,255,0.5);
+    }
+    .error-msg h2 { color: #e2e0f0; margin-bottom: 8px; }
+
+    .stats-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .stat-chip {
+      background: rgba(168,85,247,0.1);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+    .stat-chip strong { color: #A855F7; }
+
+    @media (max-width: 480px) {
+      .playlist-card { padding: 20px 16px; }
+      .song-details { flex-direction: column; gap: 4px; }
+      .badge-genre { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="/" class="logo">HumMatch</a>
+  </div>
+
+  <div class="container">
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading playlist...</p>
+    </div>
+
+    <div id="error" class="error-msg" style="display:none;">
+      <h2>Playlist Not Found</h2>
+      <p>This playlist link may have expired or doesn't exist.</p>
+      <div style="margin-top:20px;">
+        <a href="/" class="cta-btn">Go to HumMatch</a>
+      </div>
+    </div>
+
+    <div id="content" style="display:none;">
+      <div class="playlist-card">
+        <div class="playlist-title">My Voice-Matched Playlist</div>
+        <div class="playlist-meta" id="meta"></div>
+
+        <div class="stats-row" id="stats"></div>
+
+        <ul class="song-list" id="songList"></ul>
+      </div>
+
+      <div class="cta-section">
+        <h3>Want your own voice-matched playlist?</h3>
+        <p>Hum for 10 seconds and we'll find songs you can actually nail.</p>
+        <a href="/" class="cta-btn">Create Your Playlist</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (async () => {
+      const token = window.location.pathname.split('/playlist/')[1];
+      if (!token) return showError();
+
+      try {
+        const res = await fetch(`/api/hummatch/shared-playlist/${token}`);
+        if (!res.ok) return showError();
+        const data = await res.json();
+        renderPlaylist(data);
+      } catch {
+        showError();
+      }
+    })();
+
+    function showError() {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('error').style.display = 'block';
+    }
+
+    function renderPlaylist(data) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+
+      const songs = data.songs || [];
+      const date = data.created_at ? new Date(data.created_at + 'Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+      document.getElementById('meta').textContent = `${songs.length} songs matched${date ? ' \u2022 ' + date : ''}`;
+
+      // Stats
+      const avgConf = songs.length > 0 ? Math.round(songs.reduce((a, s) => a + (s.confidence || 0), 0) / songs.length) : 0;
+      const genres = [...new Set(songs.map(s => s.genre).filter(Boolean))];
+      const statsEl = document.getElementById('stats');
+      statsEl.innerHTML = `
+        <div class="stat-chip"><strong>${songs.length}</strong>&nbsp;songs</div>
+        <div class="stat-chip"><strong>${avgConf}%</strong>&nbsp;avg match</div>
+        ${genres.length > 0 ? `<div class="stat-chip"><strong>${genres.length}</strong>&nbsp;genre${genres.length > 1 ? 's' : ''}</div>` : ''}
+      `;
+
+      // Song list
+      const list = document.getElementById('songList');
+      list.innerHTML = songs.map((s, i) => {
+        const conf = s.confidence || 0;
+        const cls = conf >= 80 ? 'badge-high' : conf >= 60 ? 'badge-mid' : 'badge-low';
+        const title = s.song_title || s.title || 'Unknown';
+        const artist = s.artist || 'Unknown Artist';
+        const genre = s.genre || '';
+        return `
+          <li class="song-item">
+            <span class="song-rank">${i + 1}</span>
+            <div class="song-info">
+              <div class="song-title">${esc(title)}</div>
+              <div class="song-artist">${esc(artist)}</div>
+            </div>
+            <div class="song-details">
+              ${genre ? `<span class="badge-genre">${esc(genre)}</span>` : ''}
+              <span class="song-badge ${cls}">${conf}%</span>
+            </div>
+          </li>
+        `;
+      }).join('');
+
+      // Update page title
+      document.title = `My HumMatch Playlist (${songs.length} songs)`;
+    }
+
+    function esc(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+  </script>
+</body>
+</html>

@@ -18,6 +18,10 @@ services:
         sync: false
       - key: STRIPE_WEBHOOK_SECRET
         sync: false
+      - key: HUMMATCH_EMAIL_USER
+        sync: false
+      - key: HUMMATCH_EMAIL_PASS
+        sync: false
     disk:
       name: hummatch-data
       mountPath: /data

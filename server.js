@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const path = require('path');
 const Database = require('better-sqlite3');
 const { v4: uuidv4 } = require('uuid');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,183 @@ const SPOTIFY_AVAILABLE = process.env.SPOTIFY_AVAILABLE === 'true';
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || '';
 const stripe = STRIPE_SECRET_KEY ? require('stripe')(STRIPE_SECRET_KEY) : null;
+
+// ---------------------------------------------------------------------------
+// Email (Zoho Mail SMTP)
+// ---------------------------------------------------------------------------
+const EMAIL_USER = process.env.HUMMATCH_EMAIL_USER || '';
+const EMAIL_PASS = process.env.HUMMATCH_EMAIL_PASS || '';
+const emailTransporter = EMAIL_USER && EMAIL_PASS
+  ? nodemailer.createTransport({
+      host: 'smtp.zoho.com',
+      port: 465,
+      secure: true,
+      auth: { user: EMAIL_USER, pass: EMAIL_PASS }
+    })
+  : null;
+
+async function sendEmail(to, subject, html) {
+  if (!emailTransporter) {
+    console.warn('Email not configured — skipping send to', to);
+    return false;
+  }
+  try {
+    await emailTransporter.sendMail({
+      from: `"Joe from HumMatch" <${EMAIL_USER}>`,
+      to,
+      subject,
+      html
+    });
+    console.log(`Email sent: "${subject}" → ${to}`);
+    return true;
+  } catch (err) {
+    console.error(`Email send failed (${to}):`, err.message);
+    return false;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Email Templates
+// ---------------------------------------------------------------------------
+const EMAIL_FOOTER = `
+  <div style="margin-top:32px;padding-top:20px;border-top:1px solid rgba(124,58,237,0.2);">
+    <p style="margin:0;color:#e2e0f0;">Joe</p>
+    <p style="margin:4px 0 0;color:rgba(255,255,255,0.5);font-size:13px;">HumMatch &mdash; Find songs you can actually nail</p>
+    <p style="margin:8px 0 0;"><a href="https://hummatch.me" style="color:#A855F7;text-decoration:none;font-size:13px;">hummatch.me</a></p>
+  </div>
+`;
+
+function emailWrapper(content) {
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#0d0b1a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <div style="max-width:600px;margin:0 auto;padding:32px 24px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <span style="font-size:28px;font-weight:700;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HumMatch</span>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:28px 24px;color:#e2e0f0;font-size:15px;line-height:1.6;">
+      ${content}
+      ${EMAIL_FOOTER}
+    </div>
+    <p style="text-align:center;color:rgba(255,255,255,0.3);font-size:11px;margin-top:20px;">
+      &copy; ${new Date().getFullYear()} HumMatch. You received this because you signed up at hummatch.me.
+    </p>
+  </div>
+</body></html>`;
+}
+
+function emailPlaylistSaved(songs, shareUrl) {
+  const songRows = songs.slice(0, 20).map((s, i) => `
+    <tr>
+      <td style="padding:8px 12px;border-bottom:1px solid rgba(124,58,237,0.08);color:rgba(255,255,255,0.4);font-size:13px;">${i + 1}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid rgba(124,58,237,0.08);">
+        <strong style="color:#e2e0f0;">${s.song_title}</strong><br>
+        <span style="color:rgba(255,255,255,0.5);font-size:13px;">${s.artist}</span>
+      </td>
+      <td style="padding:8px 12px;border-bottom:1px solid rgba(124,58,237,0.08);text-align:right;">
+        <span style="background:${s.confidence >= 80 ? 'rgba(34,197,94,0.15);color:#22c55e' : s.confidence >= 60 ? 'rgba(234,179,8,0.15);color:#eab308' : 'rgba(239,68,68,0.15);color:#ef4444'};padding:3px 10px;border-radius:20px;font-size:13px;font-weight:600;">${s.confidence}%</span>
+      </td>
+    </tr>
+  `).join('');
+
+  return emailWrapper(`
+    <h2 style="margin:0 0 8px;color:#e2e0f0;font-size:20px;">Your HumMatch Playlist is Ready! 🎤</h2>
+    <p style="color:rgba(255,255,255,0.6);margin:0 0 20px;">Here are your top matched songs based on your voice:</p>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
+      <thead>
+        <tr style="border-bottom:2px solid rgba(124,58,237,0.2);">
+          <th style="padding:8px 12px;text-align:left;color:rgba(255,255,255,0.4);font-size:12px;text-transform:uppercase;">#</th>
+          <th style="padding:8px 12px;text-align:left;color:rgba(255,255,255,0.4);font-size:12px;text-transform:uppercase;">Song</th>
+          <th style="padding:8px 12px;text-align:right;color:rgba(255,255,255,0.4);font-size:12px;text-transform:uppercase;">Match</th>
+        </tr>
+      </thead>
+      <tbody>${songRows}</tbody>
+    </table>
+    ${songs.length > 20 ? `<p style="color:rgba(255,255,255,0.4);font-size:13px;text-align:center;">+ ${songs.length - 20} more songs in your full playlist</p>` : ''}
+    <div style="text-align:center;margin:24px 0 16px;">
+      <a href="${shareUrl}" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;border-radius:12px;font-weight:600;font-size:15px;">View Full Playlist</a>
+    </div>
+    <p style="color:rgba(255,255,255,0.4);font-size:13px;text-align:center;">Share this link with friends: <a href="${shareUrl}" style="color:#A855F7;">${shareUrl}</a></p>
+  `);
+}
+
+function emailWelcome(email) {
+  return emailWrapper(`
+    <h2 style="margin:0 0 8px;color:#e2e0f0;font-size:20px;">Welcome to HumMatch!</h2>
+    <p style="color:rgba(255,255,255,0.6);margin:0 0 20px;">Hey there! You're all set to find songs that match your voice.</p>
+    <h3 style="color:#A855F7;font-size:15px;margin:0 0 12px;">How to get started:</h3>
+    <ol style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
+      <li style="margin-bottom:8px;">Hit the <strong>Start Humming</strong> button on the main page</li>
+      <li style="margin-bottom:8px;">Hum any melody for about 10 seconds &mdash; doesn't have to be perfect!</li>
+      <li style="margin-bottom:8px;">We'll match your voice to songs you'll actually sound great singing</li>
+      <li style="margin-bottom:8px;">Save your favorites to your playlist</li>
+    </ol>
+    <h3 style="color:#A855F7;font-size:15px;margin:0 0 12px;">Pro tips:</h3>
+    <ul style="color:rgba(255,255,255,0.6);padding-left:20px;margin:0 0 20px;">
+      <li style="margin-bottom:6px;">Hum in a quiet room for best results</li>
+      <li style="margin-bottom:6px;">Try different pitches &mdash; you might be surprised!</li>
+      <li style="margin-bottom:6px;">Use headphones to avoid mic feedback</li>
+    </ul>
+    <div style="text-align:center;margin:24px 0 16px;">
+      <a href="https://hummatch.me/dashboard" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;border-radius:12px;font-weight:600;font-size:15px;">Go to Your Dashboard</a>
+    </div>
+  `);
+}
+
+function emailSquadLeader(email) {
+  return emailWrapper(`
+    <h2 style="margin:0 0 8px;color:#e2e0f0;font-size:20px;">Welcome to Squad Leader! 🎖️</h2>
+    <p style="color:rgba(255,255,255,0.6);margin:0 0 20px;">You've just unlocked the full HumMatch experience. Here's what's new:</p>
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:flex-start;margin-bottom:12px;">
+        <span style="color:#A855F7;font-size:18px;margin-right:10px;">✦</span>
+        <div><strong style="color:#e2e0f0;">Unlimited SquadMatch</strong><br><span style="color:rgba(255,255,255,0.5);font-size:13px;">No member limits &mdash; invite your whole crew</span></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;margin-bottom:12px;">
+        <span style="color:#A855F7;font-size:18px;margin-right:10px;">✦</span>
+        <div><strong style="color:#e2e0f0;">Song Requests</strong><br><span style="color:rgba(255,255,255,0.5);font-size:13px;">Request any song to be added to our catalog</span></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;margin-bottom:12px;">
+        <span style="color:#A855F7;font-size:18px;margin-right:10px;">✦</span>
+        <div><strong style="color:#e2e0f0;">Friend Codes</strong><br><span style="color:rgba(255,255,255,0.5);font-size:13px;">Share exclusive invite codes (5/month)</span></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;margin-bottom:12px;">
+        <span style="color:#A855F7;font-size:18px;margin-right:10px;">✦</span>
+        <div><strong style="color:#e2e0f0;">Priority Support</strong><br><span style="color:rgba(255,255,255,0.5);font-size:13px;">Get help faster when you need it</span></div>
+      </div>
+    </div>
+    <h3 style="color:#A855F7;font-size:15px;margin:0 0 12px;">Create your first SquadMatch:</h3>
+    <ol style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
+      <li style="margin-bottom:8px;">Go to your Dashboard</li>
+      <li style="margin-bottom:8px;">Click <strong>SquadMatch</strong> in the sidebar</li>
+      <li style="margin-bottom:8px;">Create a new session and invite friends</li>
+      <li style="margin-bottom:8px;">Everyone hums &mdash; find songs you can all sing together!</li>
+    </ol>
+    <div style="text-align:center;margin:24px 0 16px;">
+      <a href="https://hummatch.me/dashboard" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;border-radius:12px;font-weight:600;font-size:15px;">Go to Dashboard</a>
+    </div>
+  `);
+}
+
+function emailGroupMatchWaitlist(email) {
+  return emailWrapper(`
+    <h2 style="margin:0 0 8px;color:#e2e0f0;font-size:20px;">You're on the GroupMatch Waitlist!</h2>
+    <p style="color:rgba(255,255,255,0.6);margin:0 0 20px;">Thanks for signing up &mdash; we're excited to have you.</p>
+    <h3 style="color:#A855F7;font-size:15px;margin:0 0 12px;">What is GroupMatch?</h3>
+    <p style="color:rgba(255,255,255,0.6);margin:0 0 20px;">
+      GroupMatch connects you with other singers in your area for group karaoke sessions.
+      We'll match you based on voice type, location, and music taste.
+    </p>
+    <h3 style="color:#A855F7;font-size:15px;margin:0 0 12px;">What to expect:</h3>
+    <ul style="color:rgba(255,255,255,0.6);padding-left:20px;margin:0 0 20px;">
+      <li style="margin-bottom:6px;">You'll be among the <strong style="color:#e2e0f0;">first to get access</strong> when we launch</li>
+      <li style="margin-bottom:6px;">We'll email you with launch details and early access info</li>
+      <li style="margin-bottom:6px;">In the meantime, keep humming to build your playlist!</li>
+    </ul>
+    <div style="text-align:center;margin:24px 0 16px;">
+      <a href="https://hummatch.me" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;border-radius:12px;font-weight:600;font-size:15px;">Back to HumMatch</a>
+    </div>
+  `);
+}
 
 // ---------------------------------------------------------------------------
 // Middleware
@@ -48,10 +226,12 @@ app.post('/api/hummatch/stripe/webhook', express.raw({ type: 'application/json' 
       if (user) {
         db.prepare("UPDATE users SET is_premium = 1, updated_at = datetime('now') WHERE id = ?").run(user.id);
         console.log(`Stripe webhook: upgraded ${email} to premium`);
+        sendEmail(email, 'Welcome to Squad Leader!', emailSquadLeader(email));
       } else {
         const newToken = uuidv4();
         db.prepare('INSERT INTO users (email, token, is_premium, month_key) VALUES (?, ?, 1, ?)').run(email, newToken, monthKey());
         console.log(`Stripe webhook: created premium account for ${email}`);
+        sendEmail(email, 'Welcome to Squad Leader!', emailSquadLeader(email));
       }
     }
   }
@@ -205,6 +385,15 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_friend_codes_user ON friend_codes(user_id);
   CREATE INDEX IF NOT EXISTS idx_friend_codes_code ON friend_codes(code);
   CREATE INDEX IF NOT EXISTS idx_groupmatch_waitlist_email ON groupmatch_waitlist(email);
+
+  CREATE TABLE IF NOT EXISTS shared_playlists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_email TEXT NOT NULL,
+    songs TEXT DEFAULT '[]',
+    share_token TEXT UNIQUE NOT NULL,
+    created_at TEXT DEFAULT (datetime('now'))
+  );
+  CREATE INDEX IF NOT EXISTS idx_shared_playlists_token ON shared_playlists(share_token);
 `);
 
 // Add zip_code column to users if missing (migration for existing DBs)
@@ -410,6 +599,13 @@ const stmts = {
   ),
   updateUserZip: db.prepare(
     `UPDATE users SET zip_code = ?, updated_at = datetime('now') WHERE id = ?`
+  ),
+  // Shared playlists
+  insertSharedPlaylist: db.prepare(
+    'INSERT INTO shared_playlists (user_email, songs, share_token) VALUES (?, ?, ?)'
+  ),
+  getSharedPlaylist: db.prepare(
+    'SELECT * FROM shared_playlists WHERE share_token = ?'
   )
 };
 
@@ -482,6 +678,7 @@ app.post('/api/hummatch/auth/register', (req, res) => {
   const token = uuidv4();
   try {
     stmts.insertUser.run(email, token, monthKey());
+    sendEmail(email, 'Welcome to HumMatch!', emailWelcome(email));
     return res.json({ token, email, is_premium: false, isNew: true });
   } catch (e) {
     console.error('Register error:', e.message);
@@ -927,6 +1124,7 @@ app.get('/api/hummatch/checkout/success', async (req, res) => {
             db.prepare("UPDATE users SET is_premium = 1 WHERE email = ?").run(email);
           }
           console.log(`Premium activated for ${email} via checkout success`);
+          sendEmail(email, 'Welcome to Squad Leader!', emailSquadLeader(email));
         }
       }
     } catch (e) {
@@ -1019,11 +1217,95 @@ app.post('/api/groupmatch/waitlist', (req, res) => {
     const ua = req.headers['user-agent'] || '';
     stmts.insertEvent.run('groupmatch_waitlist_signup', 'en', JSON.stringify({ email: email.split('@')[0] + '@***', zip_code, voice_type }), ip, ua);
 
+    sendEmail(email, "You're on the GroupMatch Waitlist!", emailGroupMatchWaitlist(email));
+
     res.json({ ok: true, message: 'You\'re on the list! We\'ll notify you when GroupMatch launches.' });
   } catch (e) {
     console.error('GroupMatch waitlist error:', e.message);
     res.status(500).json({ error: 'Failed to join waitlist' });
   }
+});
+
+// ---------------------------------------------------------------------------
+// API: Save Playlist & Send Email
+// ---------------------------------------------------------------------------
+app.post('/api/hummatch/playlist/save', (req, res) => {
+  const email = (req.body.email || '').trim().toLowerCase();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: 'Valid email required' });
+  }
+  const songs = req.body.songs;
+  if (!Array.isArray(songs) || songs.length === 0) {
+    return res.status(400).json({ error: 'No songs to save' });
+  }
+
+  const shareToken = uuidv4().replace(/-/g, '').slice(0, 12);
+
+  try {
+    stmts.insertSharedPlaylist.run(email, JSON.stringify(songs), shareToken);
+
+    // Auto-register user if new
+    let user = stmts.getUserByEmail.get(email);
+    const isNew = !user;
+    if (!user) {
+      const token = uuidv4();
+      stmts.insertUser.run(email, token, monthKey());
+      user = stmts.getUserByEmail.get(email);
+    }
+
+    // Also save songs to user_playlists table
+    const insertPlaylist = db.transaction((songList, userId) => {
+      for (const s of songList) {
+        stmts.insertPlaylistSong.run(
+          userId, s.song_title || s.title || '', s.artist || '',
+          s.confidence || 0, s.genre || '', s.song_key || s.key || '',
+          s.voice_type || '', s.language || 'en'
+        );
+      }
+    });
+    insertPlaylist(songs, user.id);
+
+    const host = req.get('host') || 'hummatch.me';
+    const protocol = req.protocol || 'https';
+    const shareUrl = host.includes('localhost')
+      ? `${protocol}://${host}/playlist/${shareToken}`
+      : `https://hummatch.me/playlist/${shareToken}`;
+
+    // Send playlist email (async, don't block response)
+    sendEmail(email, 'Your HumMatch Playlist is Ready!', emailPlaylistSaved(songs, shareUrl));
+
+    // Send welcome email if new user
+    if (isNew) {
+      sendEmail(email, 'Welcome to HumMatch!', emailWelcome(email));
+    }
+
+    res.json({ ok: true, shareToken, shareUrl, isNew });
+  } catch (e) {
+    console.error('Playlist save error:', e.message);
+    res.status(500).json({ error: 'Failed to save playlist' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Public Playlist View (serves playlist.html)
+// ---------------------------------------------------------------------------
+app.get('/playlist/:token', (req, res) => {
+  res.sendFile(path.join(__dirname, 'playlist.html'));
+});
+
+// API: Get shared playlist data
+app.get('/api/hummatch/shared-playlist/:token', (req, res) => {
+  const playlist = stmts.getSharedPlaylist.get(req.params.token);
+  if (!playlist) return res.status(404).json({ error: 'Playlist not found' });
+
+  let songs = [];
+  try { songs = JSON.parse(playlist.songs || '[]'); } catch (_) {}
+
+  res.json({
+    songs,
+    created_at: playlist.created_at,
+    email: playlist.user_email.split('@')[0] + '@***'
+  });
 });
 
 // ---------------------------------------------------------------------------
