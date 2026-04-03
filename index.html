@@ -391,6 +391,12 @@
 </nav>
 
 
+<!-- Squad context banner (shown when joining squad via index.html) -->
+<div id="squad-context-banner" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(219,39,119,0.15));border-bottom:1px solid rgba(124,58,237,0.3);padding:10px 18px;text-align:center">
+  <div style="font-size:0.82rem;color:#e2e0f0;font-weight:600" id="squad-banner-text">You're humming for a SquadMatch</div>
+  <div style="font-size:0.72rem;color:rgba(255,255,255,0.48);margin-top:2px">Complete your hum — your results will be added to the squad</div>
+</div>
+
 <!-- SCREEN 1: WELCOME -->
 <div id="screen-welcome" class="screen active">
   <div style="text-align:center;"><img src="/hummatch-logo.png" alt="HumMatch" style="height:100px;display:inline-block;"/></div>
@@ -423,40 +429,26 @@
     ✦ Upgrade for $5.99/mo: Unlimited hums &amp; more
   </a>
 
-  <!-- SquadMatch Feature Section -->
-  <div style="width:100%;max-width:380px;margin-top:32px;padding:0 4px;">
-    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:28px 22px;position:relative;overflow:hidden;">
-      <!-- Subtle gradient glow -->
-      <div style="position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(168,85,247,0.15),transparent 70%);pointer-events:none;"></div>
-
-      <!-- NEW badge -->
-      <span style="display:inline-block;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.6rem;font-weight:800;letter-spacing:0.08em;padding:3px 10px;border-radius:20px;margin-bottom:14px;">NEW!</span>
-
-      <!-- Headline -->
-      <div style="font-size:1.15rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:8px;">Find songs your whole squad can nail</div>
-
-      <!-- Copy -->
-      <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:18px;">Group karaoke nights, band practice jams, duet finder.<span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;">SquadMatch</span> finds songs everyone in your group can sing together.</div>
-
-      <!-- Friend avatars + shared matches visual -->
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
-        <div style="display:flex;">
-          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#7C3AED);display:flex;align-items:center;justify-content:center;font-size:0.85rem;border:2px solid #0d0b1a;z-index:3;">🎤</div>
-          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#EC4899,#DB2777);display:flex;align-items:center;justify-content:center;font-size:0.85rem;border:2px solid #0d0b1a;margin-left:-10px;z-index:2;">🎶</div>
-          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#6D28D9);display:flex;align-items:center;justify-content:center;font-size:0.85rem;border:2px solid #0d0b1a;margin-left:-10px;z-index:1;">🎵</div>
-          <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:rgba(255,255,255,0.4);border:2px dashed rgba(255,255,255,0.15);margin-left:-10px;z-index:0;">+</div>
-        </div>
-        <div style="flex:1;">
-          <div style="font-size:0.7rem;color:rgba(255,255,255,0.35);margin-bottom:3px;">SHARED MATCHES</div>
-          <div style="display:flex;gap:5px;flex-wrap:wrap;">
-            <span style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.25);border-radius:8px;padding:2px 8px;font-size:0.65rem;color:rgba(255,255,255,0.7);">Don't Stop Believin'</span>
-            <span style="background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.2);border-radius:8px;padding:2px 8px;font-size:0.65rem;color:rgba(255,255,255,0.7);">+12 more</span>
-          </div>
-        </div>
+  <!-- SquadMatch Post-Hum Prompt (Screen 1) -->
+  <div id="squad-prompt-module" style="width:100%;max-width:380px;margin-top:28px;padding:0 4px;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.18);border-radius:14px;padding:24px 20px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-30px;right:-30px;width:110px;height:110px;background:radial-gradient(circle,rgba(168,85,247,0.14),transparent 70%);pointer-events:none;"></div>
+      <div style="font-size:1.05rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:8px;">Start a SquadMatch</div>
+      <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:18px;">Invite friends and find the songs your whole crew can actually nail together</div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;">
+        <button id="squad-start-btn" onclick="startSquadMatch()" style="flex:1;padding:11px 8px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.01em;">Start SquadMatch</button>
+        <button onclick="dismissSquadPrompt()" style="flex:1;padding:11px 8px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);font-size:0.82rem;font-weight:600;border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;">Maybe later</button>
       </div>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.35);text-align:center;">Up to 4 friends. They hum once. We do the rest.</div>
+    </div>
+  </div>
 
-      <!-- CTA -->
-      <a href="/squadmatch" style="display:block;width:100%;text-align:center;padding:12px 0;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.85rem;font-weight:700;border-radius:12px;text-decoration:none;letter-spacing:0.02em;">Try SquadMatch →</a>
+  <!-- My HQ: Active Squads Module -->
+  <div id="my-hq-squads" style="width:100%;max-width:380px;margin-top:14px;padding:0 4px;display:none;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:18px 18px;">
+      <div style="font-size:0.68rem;color:rgba(255,255,255,0.32);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">MY SQUADS</div>
+      <div id="my-squads-list"></div>
+      <a href="/squadmatch" style="display:block;margin-top:10px;text-align:center;font-size:0.78rem;color:rgba(168,85,247,0.8);font-weight:600;">+ New SquadMatch</a>
     </div>
   </div>
 
@@ -4181,6 +4173,43 @@ function showResults() {
   window._hmSongs = tieredSongs;
   window._hmStretch = stretchSongs;
 
+  // ── SquadMatch: store songs for squad creation ──
+  // Always save top 20 songs to localStorage so SquadMatch can pick them up
+  const _squadSongs = confidentSongs.slice(0, 20).map(s => ({ title: s.title, artist: s.artist, score: s.score || 0 }));
+  try {
+    localStorage.setItem('hm_squad_my_songs', JSON.stringify(_squadSongs));
+    if (voiceType) localStorage.setItem('hm_squad_voice_type', voiceType);
+  } catch(_) {}
+
+  // If returning from squad join flow (index.html?squad=X&member=Y), submit results to squad
+  (function() {
+    const _sqp = new URLSearchParams(location.search);
+    const _sqId = _sqp.get('squad');
+    const _sqMid = _sqp.get('member');
+    if (_sqId && _sqMid) {
+      const _sqSongs = confidentSongs.slice(0, 20).map(s => ({ title: s.title, artist: s.artist, score: s.score || 0 }));
+      const _sqRange = window._humRange || { lo: userLow, hi: userHigh };
+      fetch('/api/hummatch/squad/' + _sqId + '/hum', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          member_id: parseInt(_sqMid),
+          songs: _sqSongs,
+          voice_type: voiceType || '',
+          voice_low: _sqRange.lo || userLow,
+          voice_high: _sqRange.hi || userHigh
+        })
+      }).then(() => {
+        // Hide squad prompt, show "submitted" message then redirect
+        const prompt = document.getElementById('squad-prompt-module');
+        if (prompt) {
+          prompt.innerHTML = '<div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);border-radius:14px;padding:18px 20px;text-align:center"><div style="color:#4ade80;font-weight:700;font-size:0.92rem;margin-bottom:6px">✓ Results submitted to your squad!</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-bottom:12px">Redirecting to your SquadMatch…</div><a href="/squadmatch?squad=' + _sqId + '" style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border-radius:10px;text-decoration:none;">See Squad Progress</a></div>';
+        }
+        setTimeout(() => { window.location = '/squadmatch?squad=' + _sqId; }, 2000);
+      }).catch(() => {});
+    }
+  })();
+
   // Era tagging
   function getEra(s) {
     const yr = s.year || 0;
@@ -5055,6 +5084,72 @@ function closeNav() {
     if(foot){ foot.textContent='My HQ'; foot.href='/dashboard'; }
     if(signup){ signup.style.display='none'; }
   }
+})();
+
+// ── Squad context detection (when joining via ?squad=X&member=Y) ────────────
+(function() {
+  var p = new URLSearchParams(location.search);
+  var sqId  = p.get('squad');
+  var sqMid = p.get('member');
+  if (sqId && sqMid) {
+    var banner = document.getElementById('squad-context-banner');
+    if (banner) banner.style.display = 'block';
+    // Fetch squad name to personalise the banner
+    fetch('/api/hummatch/squad/' + sqId + '/status')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        var txt = document.getElementById('squad-banner-text');
+        if (txt && d.squad_name) txt.textContent = "You're humming for " + d.squad_name;
+      }).catch(function(){});
+    // Store member id for post-hum submission
+    try { localStorage.setItem('hm_squad_member_' + sqId, sqMid); } catch(_) {}
+  }
+})();
+
+// ── SquadMatch post-hum prompt functions ────────────────────────────────────
+function startSquadMatch() {
+  // Songs should already be in localStorage from the hum session
+  // If not logged in, redirect to signup with squad intent
+  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
+  if (!t) {
+    localStorage.setItem('hm_squad_pending_create', '1');
+    window.location = '/squadmatch?create=1';
+    return;
+  }
+  window.location = '/squadmatch?create=1';
+}
+
+function dismissSquadPrompt() {
+  var el = document.getElementById('squad-prompt-module');
+  if (el) { el.style.opacity = '0'; setTimeout(function(){ el.style.display = 'none'; }, 250); }
+  try { sessionStorage.setItem('hm_squad_dismissed', '1'); } catch(_) {}
+}
+
+// ── My HQ Squads loader ─────────────────────────────────────────────────────
+(function() {
+  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
+  if (!t) return;
+  fetch('/api/hummatch/squad', { headers: { 'X-HM-Token': t } })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (!d.squads || !d.squads.length) return;
+      var el = document.getElementById('my-hq-squads');
+      var list = document.getElementById('my-squads-list');
+      if (!el || !list) return;
+      var html = d.squads.slice(0, 3).map(function(sq) {
+        var members = sq.members || [];
+        var done = members.filter(function(m){ return m.hum_done; }).length;
+        var statusText = sq.status === 'complete' ? '✓ Complete' : (done + '/' + members.length + ' hummed');
+        var statusColor = sq.status === 'complete' ? '#4ade80' : '#a78bfa';
+        return '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)">' +
+          '<div><div style="font-size:0.84rem;font-weight:700;color:#e2e0f0">' + (sq.squad_name || 'My Squad') + '</div>' +
+          '<div style="font-size:0.72rem;color:rgba(255,255,255,0.38);margin-top:2px">' + members.length + ' member' + (members.length!==1?'s':'') + '</div></div>' +
+          '<a href="/squadmatch?squad=' + sq.id + '" style="font-size:0.75rem;font-weight:700;color:' + statusColor + ';text-decoration:none;padding:5px 10px;background:rgba(255,255,255,0.04);border-radius:8px">' + statusText + '</a>' +
+          '</div>';
+      }).join('');
+      list.innerHTML = html;
+      el.style.display = 'block';
+    }).catch(function(){});
 })();
 </script>
 

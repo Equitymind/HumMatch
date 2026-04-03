@@ -454,6 +454,27 @@ try {
   console.log('[migration] password_hash column already exists — OK');
 }
 
+// SquadMatch viral loop migrations
+try { db.exec(`ALTER TABLE squad_matches ADD COLUMN invite_token TEXT`); } catch(_){}
+try { db.exec(`ALTER TABLE squad_matches ADD COLUMN status TEXT DEFAULT 'active'`); } catch(_){}
+try { db.exec(`ALTER TABLE squad_matches ADD COLUMN best_song TEXT`); } catch(_){}
+try { db.exec(`ALTER TABLE squad_matches ADD COLUMN best_artist TEXT`); } catch(_){}
+try { db.exec(`ALTER TABLE squad_matches ADD COLUMN shared_songs TEXT DEFAULT '[]'`); } catch(_){}
+try { db.exec(`ALTER TABLE squad_matches ADD COLUMN voted_name TEXT`); } catch(_){}
+try { db.exec(`ALTER TABLE squad_members ADD COLUMN songs_json TEXT DEFAULT '[]'`); } catch(_){}
+try { db.exec(`ALTER TABLE squad_members ADD COLUMN hum_done INTEGER DEFAULT 0`); } catch(_){}
+try { db.exec(`ALTER TABLE squad_members ADD COLUMN voice_low INTEGER`); } catch(_){}
+try { db.exec(`ALTER TABLE squad_members ADD COLUMN voice_high INTEGER`); } catch(_){}
+db.exec(`CREATE TABLE IF NOT EXISTS squad_name_votes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  squad_id INTEGER,
+  member_id INTEGER,
+  voted_name TEXT,
+  voted_at TEXT DEFAULT (datetime('now')),
+  UNIQUE(squad_id, member_id)
+)`);
+console.log('[migration] SquadMatch viral loop tables ready');
+
 // ---------------------------------------------------------------------------
 // Auto-import analytics backup if events table is empty (for fresh deploys)
 // ---------------------------------------------------------------------------
@@ -625,6 +646,8 @@ const stmts = {
   updateSquadMemberStatus: db.prepare(
     'UPDATE squad_members SET status = ? WHERE id = ?'
   ),
+  getSquadById: db.prepare('SELECT * FROM squad_matches WHERE id = ?'),
+  getSquadByToken: db.prepare('SELECT * FROM squad_matches WHERE invite_token = ?'),
   // Song requests
   insertSongRequest: db.prepare(
     'INSERT INTO song_requests (user_id, song_title, artist, notes) VALUES (?, ?, ?, ?)'
@@ -1208,12 +1231,23 @@ app.get('/api/hummatch/squad', requireAuth, (req, res) => {
 });
 
 app.post('/api/hummatch/squad', requireAuth, (req, res) => {
-  const { squad_name, session_name } = req.body;
-  const name = session_name || squad_name || 'My SquadMatch';
+  const { squad_name, session_name, my_songs, voice_type, voice_low, voice_high } = req.body;
+  const leaderName = req.user.email.split('@')[0].split('.')[0];
+  const name = session_name || squad_name || `${leaderName}'s Squad`;
   try {
     const info = stmts.insertSquad.run(req.user.id, name);
-    res.json({ ok: true, id: info.lastInsertRowid, session_name: name });
+    const squadId = info.lastInsertRowid;
+    const inviteToken = uuidv4().replace(/-/g, '').slice(0, 10);
+    db.prepare('UPDATE squad_matches SET invite_token = ? WHERE id = ?').run(inviteToken, squadId);
+    // Add leader as first member with hum results
+    const memInfo = stmts.insertSquadMember.run(squadId, req.user.id, leaderName, voice_type || '', 'done');
+    if (my_songs && my_songs.length) {
+      db.prepare('UPDATE squad_members SET songs_json = ?, hum_done = 1, voice_low = ?, voice_high = ? WHERE id = ?')
+        .run(JSON.stringify(my_songs.slice(0, 20)), voice_low || null, voice_high || null, memInfo.lastInsertRowid);
+    }
+    res.json({ ok: true, id: squadId, session_name: name, invite_token: inviteToken });
   } catch (e) {
+    console.error('[squad/create] ERROR:', e.message);
     res.status(500).json({ error: 'Failed to create squad' });
   }
 });
@@ -1237,6 +1271,20 @@ app.post('/api/hummatch/squad/:id/invite', requireAuth, (req, res) => {
   } catch (e) {
     res.status(500).json({ error: 'Failed to invite member' });
   }
+});
+
+// Get squad by invite token (for join page — no auth)
+app.get('/api/hummatch/squad/join/:token', (req, res) => {
+  const squad = stmts.getSquadByToken.get(req.params.token);
+  if (!squad) return res.status(404).json({ error: 'Squad not found' });
+  const members = stmts.getSquadMembers.all(squad.id);
+  res.json({
+    squad_id: squad.id,
+    squad_name: squad.squad_name,
+    invite_token: squad.invite_token,
+    member_count: members.length,
+    members: members.map(m => ({ display_name: m.display_name, status: m.status, hum_done: m.hum_done || 0 }))
+  });
 });
 
 // Public squad info (no auth — for invite link landing page)
@@ -1270,6 +1318,126 @@ app.post('/api/hummatch/squad/:id/join', (req, res) => {
   } catch (e) {
     res.status(500).json({ error: 'Failed to join squad' });
   }
+});
+
+// Get squad status with members (polling endpoint)
+app.get('/api/hummatch/squad/:id/status', (req, res) => {
+  const squadId = parseInt(req.params.id);
+  const squad = stmts.getSquadById.get(squadId);
+  if (!squad) return res.status(404).json({ error: 'Squad not found' });
+  const members = stmts.getSquadMembers.all(squadId);
+  const doneCount = members.filter(m => m.hum_done).length;
+  const allDone = members.length >= 2 && doneCount === members.length;
+  res.json({
+    squad_id: squad.id,
+    squad_name: squad.squad_name,
+    invite_token: squad.invite_token,
+    status: squad.status || 'active',
+    voted_name: squad.voted_name || null,
+    best_song: squad.best_song || null,
+    best_artist: squad.best_artist || null,
+    shared_songs: (() => { try { return JSON.parse(squad.shared_songs || '[]'); } catch { return []; } })(),
+    member_count: members.length,
+    done_count: doneCount,
+    all_done: allDone,
+    members: members.map(m => ({
+      id: m.id,
+      display_name: m.display_name,
+      status: m.status,
+      hum_done: m.hum_done || 0
+    }))
+  });
+});
+
+// Member submits hum results
+app.post('/api/hummatch/squad/:id/hum', (req, res) => {
+  const squadId = parseInt(req.params.id);
+  const { member_id, songs, voice_low, voice_high, voice_type } = req.body;
+  if (!member_id || !songs) return res.status(400).json({ error: 'member_id and songs required' });
+
+  const squad = stmts.getSquadById.get(squadId);
+  if (!squad) return res.status(404).json({ error: 'Squad not found' });
+
+  try {
+    db.prepare('UPDATE squad_members SET songs_json = ?, hum_done = 1, voice_low = ?, voice_high = ?, voice_type = ?, status = ? WHERE id = ? AND squad_id = ?')
+      .run(JSON.stringify(songs.slice(0, 20)), voice_low || null, voice_high || null, voice_type || '', 'done', member_id, squadId);
+
+    // Check if all members done — calculate shared songs
+    const members = stmts.getSquadMembers.all(squadId);
+    const doneCount = members.filter(m => m.hum_done).length;
+
+    if (doneCount === members.length && members.length >= 2) {
+      const allSongArrays = members.map(m => {
+        try { return JSON.parse(m.songs_json || '[]'); } catch { return []; }
+      });
+      // Build strict intersection first
+      const titleSets = allSongArrays.map(arr => new Set(arr.map(s => (s.title || '').toLowerCase())));
+      const firstSet = titleSets[0];
+      let sharedTitles = [...firstSet].filter(t => titleSets.every(s => s.has(t)));
+
+      // Fallback: majority (>= half of members)
+      if (sharedTitles.length === 0) {
+        const titleCounts = {};
+        allSongArrays.flat().forEach(s => {
+          const t = (s.title || '').toLowerCase();
+          titleCounts[t] = (titleCounts[t] || 0) + 1;
+        });
+        sharedTitles = Object.keys(titleCounts).filter(t => titleCounts[t] >= Math.ceil(members.length / 2));
+      }
+
+      // Build song objects with avg scores
+      const allSongsFlat = allSongArrays.flat();
+      let sharedSongs = sharedTitles.map(t => {
+        const matches = allSongsFlat.filter(s => (s.title || '').toLowerCase() === t);
+        const avgScore = matches.reduce((a, b) => a + (b.score || 0), 0) / matches.length;
+        return { ...matches[0], score: avgScore };
+      });
+      sharedSongs.sort((a, b) => (b.score || 0) - (a.score || 0));
+      sharedSongs = sharedSongs.slice(0, 10);
+
+      const best = sharedSongs[0] || {};
+      db.prepare('UPDATE squad_matches SET best_song = ?, best_artist = ?, shared_songs = ?, status = ? WHERE id = ?')
+        .run(best.title || '', best.artist || '', JSON.stringify(sharedSongs), 'complete', squadId);
+    }
+
+    const updatedMembers = stmts.getSquadMembers.all(squadId);
+    const newDone = updatedMembers.filter(m => m.hum_done).length;
+    res.json({ ok: true, done_count: newDone, total_count: updatedMembers.length, all_done: newDone === updatedMembers.length });
+  } catch (e) {
+    console.error('[squad/hum] ERROR:', e.message);
+    res.status(500).json({ error: 'Failed to record hum results' });
+  }
+});
+
+// Submit name vote
+app.post('/api/hummatch/squad/:id/vote', (req, res) => {
+  const squadId = parseInt(req.params.id);
+  const { member_id, voted_name } = req.body;
+  if (!member_id || !voted_name) return res.status(400).json({ error: 'member_id and voted_name required' });
+
+  try {
+    db.prepare('INSERT OR REPLACE INTO squad_name_votes (squad_id, member_id, voted_name) VALUES (?, ?, ?)')
+      .run(squadId, member_id, voted_name);
+    const votes = db.prepare('SELECT voted_name, COUNT(*) as count FROM squad_name_votes WHERE squad_id = ? GROUP BY voted_name ORDER BY count DESC').all(squadId);
+    const members = stmts.getSquadMembers.all(squadId);
+    const totalVotes = votes.reduce((a, b) => a + b.count, 0);
+    // Set name if majority agreed
+    if (votes[0] && votes[0].count > members.length / 2) {
+      db.prepare('UPDATE squad_matches SET voted_name = ? WHERE id = ?').run(votes[0].voted_name, squadId);
+    }
+    res.json({ ok: true, votes, total_members: members.length, total_votes: totalVotes });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to record vote' });
+  }
+});
+
+// Get vote tallies
+app.get('/api/hummatch/squad/:id/votes', (req, res) => {
+  const squadId = parseInt(req.params.id);
+  const votes = db.prepare('SELECT voted_name, COUNT(*) as count FROM squad_name_votes WHERE squad_id = ? GROUP BY voted_name ORDER BY count DESC').all(squadId);
+  const members = stmts.getSquadMembers.all(squadId);
+  const squad = stmts.getSquadById.get(squadId);
+  res.json({ votes, total_members: members.length, voted_name: squad?.voted_name || null });
 });
 
 // ---------------------------------------------------------------------------
