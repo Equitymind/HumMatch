@@ -185,6 +185,14 @@ db.exec(`
     FOREIGN KEY(user_id) REFERENCES users(id)
   );
 
+  CREATE TABLE IF NOT EXISTS groupmatch_waitlist (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL,
+    zip_code TEXT,
+    voice_type TEXT,
+    created_at TEXT DEFAULT (datetime('now'))
+  );
+
   CREATE INDEX IF NOT EXISTS idx_events_created ON events(created_at);
   CREATE INDEX IF NOT EXISTS idx_events_event ON events(event);
   CREATE INDEX IF NOT EXISTS idx_users_token ON users(token);
@@ -196,7 +204,13 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_song_requests_user ON song_requests(user_id);
   CREATE INDEX IF NOT EXISTS idx_friend_codes_user ON friend_codes(user_id);
   CREATE INDEX IF NOT EXISTS idx_friend_codes_code ON friend_codes(code);
+  CREATE INDEX IF NOT EXISTS idx_groupmatch_waitlist_email ON groupmatch_waitlist(email);
 `);
+
+// Add zip_code column to users if missing (migration for existing DBs)
+try {
+  db.exec(`ALTER TABLE users ADD COLUMN zip_code TEXT`);
+} catch (_) { /* column already exists */ }
 
 // ---------------------------------------------------------------------------
 // Auto-import analytics backup if events table is empty (for fresh deploys)
@@ -386,6 +400,16 @@ const stmts = {
   ),
   resetCodeTracker: db.prepare(
     'UPDATE friend_code_tracker SET codes_issued = 0, reset_date = ? WHERE user_id = ?'
+  ),
+  // GroupMatch waitlist
+  insertWaitlist: db.prepare(
+    'INSERT INTO groupmatch_waitlist (email, zip_code, voice_type) VALUES (?, ?, ?)'
+  ),
+  getWaitlistByEmail: db.prepare(
+    'SELECT id FROM groupmatch_waitlist WHERE email = ?'
+  ),
+  updateUserZip: db.prepare(
+    `UPDATE users SET zip_code = ?, updated_at = datetime('now') WHERE id = ?`
   )
 };
 
@@ -484,7 +508,8 @@ app.get('/api/hummatch/auth/me', (req, res) => {
     playlist,
     hum_count: user.hum_count || 0,
     export_count: user.export_count || 0,
-    month_key: user.month_key || monthKey()
+    month_key: user.month_key || monthKey(),
+    zip_code: user.zip_code || ''
   });
 });
 
@@ -671,7 +696,8 @@ app.get('/api/hummatch/dashboard', requireAuth, (req, res) => {
     user: {
       email: req.user.email,
       is_premium: !!req.user.is_premium,
-      created_at: req.user.created_at
+      created_at: req.user.created_at,
+      zip_code: req.user.zip_code || ''
     }
   });
 });
@@ -859,7 +885,7 @@ app.post('/api/hummatch/spotify/export', requireAuth, (req, res) => {
 // API: Account Settings
 // ---------------------------------------------------------------------------
 app.put('/api/hummatch/account', requireAuth, (req, res) => {
-  const { email } = req.body;
+  const { email, zip_code } = req.body;
   if (email) {
     const trimmed = email.trim().toLowerCase();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
@@ -870,6 +896,9 @@ app.put('/api/hummatch/account', requireAuth, (req, res) => {
     } catch (e) {
       return res.status(400).json({ error: 'Email already in use' });
     }
+  }
+  if (zip_code !== undefined) {
+    stmts.updateUserZip.run(zip_code.trim().slice(0, 10), req.user.id);
   }
   res.json({ ok: true });
 });
@@ -966,6 +995,38 @@ app.get('/api/hummatch/checkout/:plan', async (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// API: GroupMatch Waitlist
+// ---------------------------------------------------------------------------
+app.post('/api/groupmatch/waitlist', (req, res) => {
+  const email = (req.body.email || '').trim().toLowerCase();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: 'Valid email required' });
+  }
+  const zip_code = (req.body.zip_code || '').trim().slice(0, 10);
+  const voice_type = (req.body.voice_type || '').trim().slice(0, 30);
+
+  // Prevent duplicate signups
+  const existing = stmts.getWaitlistByEmail.get(email);
+  if (existing) {
+    return res.json({ ok: true, message: 'You\'re already on the waitlist!' });
+  }
+
+  try {
+    stmts.insertWaitlist.run(email, zip_code, voice_type);
+
+    // Track analytics event
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+    const ua = req.headers['user-agent'] || '';
+    stmts.insertEvent.run('groupmatch_waitlist_signup', 'en', JSON.stringify({ email: email.split('@')[0] + '@***', zip_code, voice_type }), ip, ua);
+
+    res.json({ ok: true, message: 'You\'re on the list! We\'ll notify you when GroupMatch launches.' });
+  } catch (e) {
+    console.error('GroupMatch waitlist error:', e.message);
+    res.status(500).json({ error: 'Failed to join waitlist' });
+  }
+});
+
+// ---------------------------------------------------------------------------
 // Static files & SPA routing
 // ---------------------------------------------------------------------------
 app.use(express.static(path.join(__dirname), {
@@ -1003,6 +1064,11 @@ app.get('/hummatch/pricing', (_req, res) => {
 // SquadMatch landing page
 app.get('/squadmatch', (_req, res) => {
   res.sendFile(path.join(__dirname, 'squadmatch.html'));
+});
+
+// GroupMatch landing page
+app.get('/groupmatch', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'groupmatch.html'));
 });
 
 // Contact page (serves index.html, handled client-side)
