@@ -658,7 +658,7 @@
     <h2>Free to start. Unlimited with Premium.</h2>
     <p style="text-align: center; max-width: 700px; margin: 20px auto 0;">SquadMatch is free for small groups. Go premium for unlimited squad members, exports, and more.</p>
 
-    <div class="pricing-grid" style="max-width: 960px; grid-template-columns: repeat(3, 1fr);">
+    <div class="pricing-grid">
       <div class="pricing-card">
         <h3>Free</h3>
         <div class="pricing-price">$0</div>
@@ -671,33 +671,18 @@
         <a href="/dashboard" class="btn btn-secondary" style="width: 100%; text-align: center;">Get Started</a>
       </div>
 
-      <div class="pricing-card">
-        <h3>Monthly</h3>
-        <div class="pricing-price">$4.99 <span>/ mo</span></div>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Billed monthly</p>
-        <ul class="pricing-features">
-          <li>Unlimited squad members</li>
-          <li>Unlimited squads</li>
-          <li>Unlimited hums &amp; exports</li>
-          <li>Priority song requests</li>
-          <li>Friend invite codes</li>
-        </ul>
-        <a href="/api/hummatch/checkout/monthly" class="btn btn-primary" style="width: 100%; text-align: center;">Go Premium Monthly</a>
-      </div>
-
       <div class="pricing-card featured">
-        <h3>Annual</h3>
-        <div class="pricing-price">$29.99 <span>/ yr</span></div>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">$2.50/mo &mdash; billed annually</p>
-        <span style="display:inline-block;background:rgba(168,85,247,0.15);color:var(--purple);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px;">SAVE 45%</span>
+        <h3>Premium</h3>
+        <div class="pricing-price">$0.99 <span>/ month</span></div>
         <ul class="pricing-features">
           <li>Unlimited squad members</li>
           <li>Unlimited squads</li>
           <li>Unlimited hums &amp; exports</li>
           <li>Priority song requests</li>
           <li>Friend invite codes</li>
+          <li>Spotify playlist export</li>
         </ul>
-        <a href="/api/hummatch/checkout/annual" class="btn btn-primary" style="width: 100%; text-align: center;">Go Premium Annual</a>
+        <a href="#" onclick="startCheckout();return false;" class="btn btn-primary" style="width: 100%; text-align: center;">Go Premium</a>
       </div>
     </div>
   </div>

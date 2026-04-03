@@ -227,10 +227,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
       <li>5 friend discount codes/month</li>
       <li>Voice insights & stats</li>
     </ul>
-    <div style="display:flex;flex-direction:column;gap:10px;width:100%">
-      <a href="/api/hummatch/checkout/annual" class="upgrade-btn" style="text-decoration:none;text-align:center;display:block">Go Premium &mdash; $29.99/yr <span style="font-size:0.75rem;opacity:0.8">(Save 45%)</span></a>
-      <a href="/api/hummatch/checkout/monthly" style="display:block;text-align:center;padding:12px;border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.9rem;font-weight:600">or $4.99/mo monthly</a>
-    </div>
+    <button class="upgrade-btn" onclick="startCheckout()">Upgrade to Premium &mdash; $0.99/mo</button>
     <div style="margin-top:12px">
       <button class="btn-sm" onclick="doLogout()">Sign out</button>
     </div>
@@ -287,10 +284,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
       <div style="font-size:0.9rem;font-weight:700;margin-bottom:2px">You're on the Free plan</div>
       <div style="font-size:0.78rem;color:rgba(255,255,255,0.45)">Upgrade for unlimited squad members, Spotify export, song requests &amp; more</div>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <a href="/api/hummatch/checkout/annual" class="btn-primary" style="white-space:nowrap;text-decoration:none;text-align:center">$29.99/yr (Save 45%)</a>
-      <a href="/api/hummatch/checkout/monthly" style="white-space:nowrap;padding:8px 16px;border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.8rem;font-weight:600">$4.99/mo</a>
-    </div>
+    <button class="btn-primary" onclick="startCheckout()" style="white-space:nowrap">Upgrade — $0.99/mo</button>
   </div>
 
   <!-- SquadMatch -->
@@ -934,9 +928,8 @@ function toast(msg) {
 // ---------------------------------------------------------------------------
 // Stripe checkout
 // ---------------------------------------------------------------------------
-function startCheckout(plan) {
-  plan = plan || 'annual';
-  const url = '/api/hummatch/checkout/' + plan + (token ? '?token=' + token : '');
+function startCheckout() {
+  const url = '/api/hummatch/checkout/monthly' + (token ? '?token=' + token : '');
   window.location.href = url;
 }
 

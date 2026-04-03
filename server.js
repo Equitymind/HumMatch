@@ -875,8 +875,7 @@ app.put('/api/hummatch/account', requireAuth, (req, res) => {
 // API: Stripe Checkout
 // ---------------------------------------------------------------------------
 const STRIPE_PRICES = {
-  monthly: 'price_1TE07i8kAFC9VsZHxD9xqXYB',
-  annual: 'price_1TDCM48kAFC9VsZHdVNcIKI7'
+  monthly: 'price_1TE07i8kAFC9VsZHxD9xqXYB'
 };
 
 app.get('/api/hummatch/checkout/success', async (req, res) => {
@@ -908,13 +907,13 @@ app.get('/api/hummatch/checkout/:plan', async (req, res) => {
   if (!stripe) return res.status(500).json({ error: 'Stripe not configured' });
 
   const priceId = STRIPE_PRICES[req.params.plan];
-  if (!priceId) return res.status(400).json({ error: 'Invalid plan. Use monthly or annual.' });
+  if (!priceId) return res.status(400).json({ error: 'Invalid plan. Use monthly.' });
 
   const sessionOpts = {
     mode: 'subscription',
     line_items: [{ price: priceId, quantity: 1 }],
     success_url: `${req.protocol}://${req.get('host')}/api/hummatch/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${req.protocol}://${req.get('host')}/pricing`
+    cancel_url: `${req.protocol}://${req.get('host')}/`
   };
 
   // Pre-fill email if user is logged in
