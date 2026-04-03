@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Affiliate Program — HumMatch</title>
+  <meta name="description" content="Join the HumMatch affiliate program — share your unique link and earn when friends sign up."/>
+  <link rel="icon" href="/hummatch-icon-bug-2x.png" type="image/png"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0b1a;
+      --white: #e2e0f0;
+      --text-muted: rgba(255,255,255,0.4);
+      --purple: #A855F7;
+      --pink: #EC4899;
+      --surface-border: rgba(124,58,237,0.12);
+      --radius: 14px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .hero {
+      text-align: center;
+      padding: 60px 24px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .content {
+      padding: 40px 24px 80px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: grid;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .step-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .step-num {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      text-align: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+    .step-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .step-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 40px 28px;
+    }
+    .cta-section h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .cta-section p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.9; }
+
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+    .footer a { text-decoration: none; }
+    .footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">HumMatch</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/blog">Blog</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Affiliate Program</h1>
+    <p>Share HumMatch with your audience and earn when they upgrade to Squad Leader.</p>
+  </div>
+
+  <div class="content">
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Get Your Link</h3>
+        <p>Sign up and receive a unique referral link you can share anywhere — social media, your blog, YouTube descriptions, or directly with friends.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Share HumMatch</h3>
+        <p>When someone visits HumMatch through your link, they're tagged as your referral. They get to try the app free, just like everyone else.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Earn Rewards</h3>
+        <p>When your referrals upgrade to Squad Leader, you earn a commission. The more people you refer, the more you earn.</p>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2>Ready to get started?</h2>
+      <p>Reach out and we'll set you up with your unique affiliate link and tracking dashboard.</p>
+      <a href="/contact" class="cta-btn">Apply Now</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2026 HumMatch &nbsp;&middot;&nbsp; <a href="/">Home</a> &nbsp;&middot;&nbsp; <a href="/contact">Contact</a> &nbsp;&middot;&nbsp; <a href="/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms</a></p>
+  </div>
+</body>
+</html>

@@ -1357,12 +1357,17 @@ app.get('/groupmatch', (_req, res) => {
   res.sendFile(path.join(__dirname, 'groupmatch.html'));
 });
 
-// Contact page (serves index.html, handled client-side)
+// Contact page
 app.get('/contact', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'contact.html'));
 });
 app.get('/es/contact', (_req, res) => {
   res.sendFile(path.join(__dirname, 'hummatch-es.html'));
+});
+
+// Affiliate page
+app.get('/affiliate', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'affiliate.html'));
 });
 
 // SPA fallback: serve index.html for unmatched routes
