@@ -552,7 +552,7 @@
     <h1>Find songs your whole<br/>squad can sing</h1>
     <p>Invite your friends, compare vocal ranges, and discover the songs everyone in your group can nail together.</p>
     <div class="cta-buttons">
-      <a href="/dashboard" class="btn btn-primary">Start Your Squad</a>
+      <a href="#premium" class="btn btn-primary">Start Your Squad</a>
       <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
     </div>
   </div>
@@ -652,37 +652,46 @@
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="pricing-banner" id="pricing">
+<!-- PREMIUM -->
+<section class="pricing-banner" id="premium">
   <div class="container">
-    <h2>Free to start. Unlimited with Premium.</h2>
-    <p style="text-align: center; max-width: 700px; margin: 20px auto 0;">SquadMatch is free for small groups. Go premium for unlimited squad members, exports, and more.</p>
+    <h2>Unlock SquadMatch with Premium</h2>
+    <p style="text-align: center; max-width: 700px; margin: 20px auto 0;">Everything you need to run the ultimate squad singalong.</p>
+
+    <div style="max-width: 540px; margin: 40px auto 48px; text-align: left;">
+      <ul class="pricing-features" style="columns: 1;">
+        <li>Create unlimited SquadMatch sessions</li>
+        <li>Invite up to 4 friends per session</li>
+        <li>Friend discount codes (5/month, 20% off)</li>
+        <li>Song request submissions</li>
+        <li>Unlimited hums &amp; voice matching</li>
+        <li>Save unlimited playlists</li>
+        <li>Priority support</li>
+      </ul>
+    </div>
 
     <div class="pricing-grid">
       <div class="pricing-card">
-        <h3>Free</h3>
-        <div class="pricing-price">$0</div>
+        <h3>Monthly</h3>
+        <div class="pricing-price">$5.99 <span>/ month</span></div>
         <ul class="pricing-features">
-          <li>Up to 3 friends per squad</li>
-          <li>Shared song results</li>
-          <li>20 hums per month</li>
-          <li>Save your setlist</li>
+          <li>Full Premium access</li>
+          <li>Cancel anytime</li>
+          <li>Billed monthly</li>
         </ul>
-        <a href="/dashboard" class="btn btn-secondary" style="width: 100%; text-align: center;">Get Started</a>
+        <a href="#" onclick="startCheckout('monthly');return false;" class="btn btn-primary" style="width: 100%; text-align: center;">Go Premium</a>
       </div>
 
       <div class="pricing-card featured">
-        <h3>Premium</h3>
-        <div class="pricing-price">$0.99 <span>/ month</span></div>
+        <h3>Annual</h3>
+        <div class="pricing-price">$39.99 <span>/ year</span></div>
+        <p style="text-align: center; margin-bottom: 12px;"><span style="background:rgba(168,85,247,0.15);color:var(--purple);font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:20px;">Save 45%!</span></p>
         <ul class="pricing-features">
-          <li>Unlimited squad members</li>
-          <li>Unlimited squads</li>
-          <li>Unlimited hums &amp; exports</li>
-          <li>Priority song requests</li>
-          <li>Friend invite codes</li>
-          <li>Spotify playlist export</li>
+          <li>Full Premium access</li>
+          <li>Best value</li>
+          <li>Billed annually</li>
         </ul>
-        <a href="#" onclick="startCheckout();return false;" class="btn btn-primary" style="width: 100%; text-align: center;">Go Premium</a>
+        <a href="#" onclick="startCheckout('annual');return false;" class="btn btn-primary" style="width: 100%; text-align: center;">Go Premium — Save 45%</a>
       </div>
     </div>
   </div>
@@ -768,7 +777,7 @@
   <div class="container">
     <h2>Stop guessing what to sing</h2>
     <p>Invite your friends and find the songs you were all meant to sing together.</p>
-    <a href="/dashboard" class="btn btn-primary">Start Your Squad</a>
+    <a href="#premium" class="btn btn-primary">Start Your Squad</a>
   </div>
 </section>
 
@@ -792,9 +801,10 @@
 </footer>
 
 <script>
-function startCheckout() {
+function startCheckout(plan) {
+  plan = plan || 'monthly';
   const token = localStorage.getItem('hm_dash_token');
-  const url = '/api/hummatch/checkout/monthly' + (token ? '?token=' + token : '');
+  const url = '/api/hummatch/checkout/' + plan + (token ? '?token=' + token : '');
   window.location.href = url;
 }
 </script>

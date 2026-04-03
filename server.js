@@ -875,7 +875,8 @@ app.put('/api/hummatch/account', requireAuth, (req, res) => {
 // API: Stripe Checkout
 // ---------------------------------------------------------------------------
 const STRIPE_PRICES = {
-  monthly: 'price_1TE07i8kAFC9VsZHxD9xqXYB'
+  monthly: 'price_1TE07i8kAFC9VsZHxD9xqXYB',
+  annual: 'price_1TDCM48kAFC9VsZHdVNcIKI7'
 };
 
 app.get('/api/hummatch/checkout/success', async (req, res) => {
@@ -903,11 +904,40 @@ app.get('/api/hummatch/checkout/success', async (req, res) => {
   res.redirect('/dashboard?upgraded=1');
 });
 
+app.post('/api/checkout', async (req, res) => {
+  if (!stripe) return res.status(500).json({ error: 'Stripe not configured' });
+
+  const plan = req.body.plan || 'monthly';
+  const priceId = STRIPE_PRICES[plan];
+  if (!priceId) return res.status(400).json({ error: 'Invalid plan. Use monthly or annual.' });
+
+  const sessionOpts = {
+    mode: 'subscription',
+    line_items: [{ price: priceId, quantity: 1 }],
+    success_url: `${req.protocol}://${req.get('host')}/api/hummatch/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${req.protocol}://${req.get('host')}/`
+  };
+
+  const token = req.headers['x-hm-token'] || req.body.token;
+  if (token) {
+    const user = stmts.getUserByToken.get(token);
+    if (user) sessionOpts.customer_email = user.email;
+  }
+
+  try {
+    const session = await stripe.checkout.sessions.create(sessionOpts);
+    res.json({ url: session.url });
+  } catch (e) {
+    console.error('Stripe checkout error:', e.message);
+    res.status(500).json({ error: 'Failed to create checkout session' });
+  }
+});
+
 app.get('/api/hummatch/checkout/:plan', async (req, res) => {
   if (!stripe) return res.status(500).json({ error: 'Stripe not configured' });
 
   const priceId = STRIPE_PRICES[req.params.plan];
-  if (!priceId) return res.status(400).json({ error: 'Invalid plan. Use monthly.' });
+  if (!priceId) return res.status(400).json({ error: 'Invalid plan. Use monthly or annual.' });
 
   const sessionOpts = {
     mode: 'subscription',
@@ -959,12 +989,12 @@ app.get('/dashboard', (_req, res) => {
   res.sendFile(path.join(__dirname, 'dashboard.html'));
 });
 
-// Pricing page — redirect to Stripe checkout
+// Pricing page
 app.get('/pricing', (_req, res) => {
-  res.redirect('/api/hummatch/checkout/monthly');
+  res.sendFile(path.join(__dirname, 'pricing.html'));
 });
 app.get('/hummatch/pricing', (_req, res) => {
-  res.redirect('/api/hummatch/checkout/monthly');
+  res.sendFile(path.join(__dirname, 'pricing.html'));
 });
 
 // SquadMatch landing page
