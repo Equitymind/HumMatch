@@ -51,11 +51,7 @@
     -webkit-text-fill-color: transparent; background-clip: text; }
   .app-tagline { font-size: 0.82rem; color: var(--text2); margin: 4px 0 6px; line-height: 1.4; max-width: 280px; }
 
-  .gender-select { margin: 8px 0 0; text-align:center; }
-  .gender-label { font-size:0.68rem; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:6px; }
-  .gender-pills { display:flex; gap:10px; justify-content:center; }
-  .gender-pill { background:rgba(255,255,255,0.05); border:1px solid rgba(168,85,247,0.2); border-radius:20px; color:rgba(255,255,255,0.5); font-size:0.82rem; font-weight:600; padding:8px 18px; cursor:pointer; transition:all 0.2s; }
-  .gender-pill.active { background:rgba(168,85,247,0.18); border-color:rgba(168,85,247,0.6); color:#fff; }
+
   .filter-bar { width:100%; max-width:400px; display:flex; gap:8px; overflow-x:auto; padding:8px 0 14px; scrollbar-width:none; -webkit-overflow-scrolling:touch; position:relative; z-index:10; }
   .filter-bar::-webkit-scrollbar { display:none; }
   .filter-chip { flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:0.72rem; font-weight:700; cursor:pointer; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.55); transition:all 0.15s; }
@@ -116,12 +112,15 @@
     70% { box-shadow: 0 0 0 24px rgba(168,85,247,0); }
     100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); }
   }
-  .mic-label { font-size: 0.75rem; color: var(--text2); margin-top: 10px; }
+  .mic-label { font-size: 1.15rem; font-weight: 800; color: #fff; margin-top: 10px; text-shadow: 0 1px 8px rgba(0,0,0,0.5); padding: 8px 16px; text-align: center; }
+  .mic-countdown { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 2rem; font-weight: 900; color: #fff; pointer-events: none; text-shadow: 0 0 12px rgba(168,85,247,0.8); display: none; }
+  .mic-countdown.visible { display: block; }
+  .hum-step-banner { font-size: 1.3rem; font-weight: 800; color: #fff; text-align: center; padding: 12px 20px; border-radius: 14px; background: linear-gradient(135deg, rgba(168,85,247,0.25), rgba(236,72,153,0.25)); border: 1px solid rgba(168,85,247,0.3); margin-bottom: 12px; min-height: 52px; display: flex; align-items: center; justify-content: center; line-height: 1.3; }
 
-  .phase-dots { display: flex; gap: 8px; margin: 20px 0; }
-  .phase-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.3s; }
-  .phase-dot.done { background: var(--green); }
-  .phase-dot.active { background: var(--accent); }
+  .phase-dots { display: flex; gap: 12px; margin: 20px 0; align-items: center; }
+  .phase-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.3s, transform 0.3s; border: 2px solid rgba(255,255,255,0.1); }
+  .phase-dot.done { background: var(--green); transform: scale(1); border-color: var(--green); }
+  .phase-dot.active { background: var(--accent); transform: scale(1.2); border-color: var(--accent); }
 
   /* ── RESULTS ── */
   #screen-results { justify-content: flex-start; padding-top: 44px; padding-bottom: 160px; overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 100%; }
@@ -293,9 +292,12 @@
     <div class="phase-dot" id="dot-1"></div>
     <div class="phase-dot" id="dot-2"></div>
   </div>
+  <div id="phase-progress-text" style="font-size:0.9rem;font-weight:700;color:#A855F7;margin-bottom:8px;min-height:22px;"></div>
 
-  <button class="mic-btn" id="mic-btn" onclick="toggleCapture()">🎤</button>
-  <div class="mic-label" id="mic-label">Toca para comenzar</div>
+  <div class="hum-step-banner" id="hum-step-banner">👇 Toca el botón para comenzar a tararear</div>
+
+  <button class="mic-btn" id="mic-btn" onclick="toggleCapture()" style="position:relative;">🎤<span class="mic-countdown" id="mic-countdown"></span></button>
+  <div class="mic-label" id="mic-label">TOCA PARA EMPEZAR</div>
 </div>
 
 <!-- SCREEN 3: RESULTS -->
@@ -2067,9 +2069,9 @@ let shareTopSong = null;
 let waveRaf = null;
 
 const PHASES = [
-  { label:'FASE 1 DE 3', title:'Tararea tu nota más grave', sub:'Baja lo más que puedas cómodamente y mantén el tono 3 segundos' },
-  { label:'FASE 2 DE 3', title:'Tararea tu nota media', sub:'Tararea a tu tono más natural y relajado' },
-  { label:'FASE 3 DE 3', title:'Tararea tu nota más aguda', sub:'Sube lo más que puedas cómodamente y mantén el tono 3 segundos' },
+  { label:'TARAREO 1 DE 3', title:'Tararea tu nota más grave', sub:'Baja lo más que puedas y mantén el tono' },
+  { label:'TARAREO 2 DE 3', title:'Tararea tu nota media', sub:'Tararea a tu tono más natural y relajado' },
+  { label:'TARAREO 3 DE 3', title:'Tararea tu nota más aguda', sub:'Sube lo más que puedas y mantén el tono' },
 ];
 
 function showScreen(id) {
@@ -2120,8 +2122,13 @@ function updatePhaseUI() {
   document.getElementById('phase-label').textContent = p.label;
   document.getElementById('phase-title').textContent = p.title;
   document.getElementById('phase-sub').textContent = p.sub;
-  document.getElementById('mic-label').textContent = 'Toca para comenzar';
+  document.getElementById('mic-label').textContent = 'TOCA PARA EMPEZAR';
+  const banner = document.getElementById('hum-step-banner');
+  if (banner) banner.textContent = '👇 Toca el botón para tararear ' + (phase === 0 ? 'tu nota grave' : phase === 1 ? 'tu nota media' : 'tu nota aguda');
   document.getElementById('mic-btn').classList.remove('recording');
+  // Reset countdown
+  const cd = document.getElementById('mic-countdown');
+  if (cd) { cd.classList.remove('visible'); cd.textContent = ''; }
   [0,1,2].forEach(i => {
     const dot = document.getElementById('dot-'+i);
     dot.classList.remove('active','done');
@@ -2134,7 +2141,19 @@ function toggleCapture() {
   if (capturing) return; // prevent double tap
   capturing = true;
   document.getElementById('mic-btn').classList.add('recording');
-  document.getElementById('mic-label').textContent = 'Mantén el tono… 3 segundos';
+  document.getElementById('mic-label').textContent = 'TARAREANDO… ¡SIGUE ASÍ!';
+  const banner = document.getElementById('hum-step-banner');
+  if (banner) banner.textContent = '🎙️ Mantén el tono…';
+
+  // Countdown inside button
+  const cd = document.getElementById('mic-countdown');
+  if (cd) { cd.classList.add('visible'); cd.textContent = '3'; }
+  let countdown = 3;
+  const cdInterval = setInterval(() => {
+    countdown--;
+    if (cd && countdown > 0) cd.textContent = countdown;
+    else if (cd && countdown <= 0) { cd.textContent = '✓'; clearInterval(cdInterval); }
+  }, 1000);
 
   const pitches = [];
   const brightnesses = [];
@@ -2168,11 +2187,15 @@ function toggleCapture() {
 
   captureTimer = setTimeout(() => {
     clearInterval(interval);
+    clearInterval(cdInterval);
     capturing = false;
     document.getElementById('mic-btn').classList.remove('recording');
+    // Hide countdown
+    if (cd) { cd.classList.remove('visible'); cd.textContent = ''; }
 
     if (pitches.length < 3) {
-      document.getElementById('mic-label').textContent = 'No se detectó tono. Intenta de nuevo';
+      document.getElementById('mic-label').textContent = 'NO SE DETECTÓ — TOCA PARA REINTENTAR';
+      if (banner) banner.textContent = '🔄 ¡Tararea más fuerte! Toca el botón otra vez.';
       document.getElementById('pitch-note').textContent = '?';
       return;
     }
@@ -2191,13 +2214,21 @@ function toggleCapture() {
     const ids = ['low-note', 'mid-note', 'high-note'];
     document.getElementById(ids[phase]).textContent = midiToName(median);
 
+    // Update phase progress text
+    const progEl = document.getElementById('phase-progress-text');
+
     if (phase < 2) {
+      const nextNum = phase + 2;
+      if (progEl) progEl.textContent = 'Tarareo ' + (phase + 1) + ' de 3 listo ✓';
+      document.getElementById('mic-label').textContent = '✓ ¡LISTO!';
+      if (banner) banner.textContent = '✅ ¡Tarareo ' + (phase + 1) + ' completo! Toca para el tarareo ' + nextNum;
       phase++;
-      document.getElementById('mic-label').textContent = '✓ ¡Listo! Siguiente fase…';
-      setTimeout(updatePhaseUI, 700);
+      setTimeout(updatePhaseUI, 1200);
     } else {
       // All 3 phases done
-      document.getElementById('mic-label').textContent = '🎉 ¡Todo listo! Calculando resultados…';
+      if (progEl) progEl.textContent = 'Los 3 tarareos completos ✓';
+      document.getElementById('mic-label').textContent = '🎉 ¡TODO LISTO!';
+      if (banner) banner.textContent = '🔍 Analizando tu voz…';
       setTimeout(showResults, 900);
     }
   }, 3000);
@@ -2313,12 +2344,27 @@ function showResults() {
   shareVoiceType = voiceType;
   shareCoincidenciaPct = topArtist ? Math.round(topArtist.score * 100) : 0;
   hmTrack("hum_complete", { voice_type: voiceType, score: shareCoincidenciaPct, gender: filterGender });
+
+  // ── Log hum to user's hum_history (if logged in) ──
+  const _humToken = typeof hmGetToken === 'function' ? hmGetToken() : null;
+  function logHumMatch(title, artist, confidence) {
+    if (!_humToken) return;
+    fetch('/api/hummatch/hum', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-HM-Token': _humToken },
+      body: JSON.stringify({ song_title: title, artist: artist, confidence: confidence })
+    }).catch(() => {});
+  }
+
   const topSong = matchedSongs[0];
   shareArtistName = topSong ? topSong.title + ' by ' + topSong.artist : (topArtist ? topArtist.name : '');
   shareTopSong = topSong ? { title: topSong.title, artist: topSong.artist } : null;
 
   // Your songs
-  matchedSongs.slice(0, 6).forEach(s => hmTrack("song_matched", { title: s.title, artist: s.artist, score: Math.round((s.score || 0) * 100) }));
+  matchedSongs.slice(0, 6).forEach(s => {
+    hmTrack("song_matched", { title: s.title, artist: s.artist, score: Math.round((s.score || 0) * 100) });
+    logHumMatch(s.title, s.artist, Math.round((s.score || 0) * 100));
+  });
   if (!matchedSongs.length) {
     hmTrack("no_match");
     const fallbackSongs = SONGS

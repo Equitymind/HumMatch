@@ -51,11 +51,7 @@
     -webkit-text-fill-color: transparent; background-clip: text; }
   .app-tagline { font-size: 0.85rem; color: var(--text2); margin: 4px 0 10px; line-height: 1.4; max-width: 280px; }
 
-  .gender-select { margin: 8px 0 0; text-align:center; }
-  .gender-label { font-size:0.72rem; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px; }
-  .gender-pills { display:flex; gap:10px; justify-content:center; }
-  .gender-pill { background:rgba(255,255,255,0.05); border:1px solid rgba(168,85,247,0.2); border-radius:20px; color:rgba(255,255,255,0.5); font-size:0.82rem; font-weight:600; padding:8px 18px; cursor:pointer; transition:all 0.2s; }
-  .gender-pill.active { background:rgba(168,85,247,0.18); border-color:rgba(168,85,247,0.6); color:#fff; }
+
   .cta-btn { background: linear-gradient(135deg, #A855F7, #7C3AED);
     color: #fff; border: none; border-radius: 50px; padding: 18px 48px;
     font-size: 1.05rem; font-weight: 800; cursor: pointer; letter-spacing: 0.02em;
@@ -125,13 +121,18 @@
     70% { box-shadow: 0 0 0 28px rgba(236,72,153,0); }
     100% { box-shadow: 0 0 0 0 rgba(236,72,153,0); }
   }
-  .mic-label { font-size: 0.9rem; font-weight: 700; color: var(--text1); margin-top: 10px; letter-spacing: 0.02em; position: fixed; bottom: max(8px, calc(env(safe-area-inset-bottom, 8px) - 8px)); left: 0; right: 0; text-align: center; z-index: 200; }
+  .mic-label { font-size: 1.15rem; font-weight: 800; color: #fff; margin-top: 10px; letter-spacing: 0.02em; position: fixed; bottom: max(8px, calc(env(safe-area-inset-bottom, 8px) - 8px)); left: 0; right: 0; text-align: center; z-index: 200; text-shadow: 0 1px 8px rgba(0,0,0,0.5); padding: 8px 16px; }
+  .mic-countdown { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 2rem; font-weight: 900; color: #fff; pointer-events: none; text-shadow: 0 0 12px rgba(168,85,247,0.8); display: none; }
+  .mic-countdown.visible { display: block; }
+  .hum-step-banner { font-size: 1.3rem; font-weight: 800; color: #fff; text-align: center; padding: 12px 20px; border-radius: 14px; background: linear-gradient(135deg, rgba(168,85,247,0.25), rgba(236,72,153,0.25)); border: 1px solid rgba(168,85,247,0.3); margin-bottom: 12px; min-height: 52px; display: flex; align-items: center; justify-content: center; line-height: 1.3; }
   .phase-flash { position:fixed; top:0; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center; z-index:500; pointer-events:none; opacity:0; transition:opacity 0.15s; }
   .phase-flash.show { opacity:1; }
   .phase-flash-text { font-size:5rem; font-weight:900; color:#fff; text-shadow: 0 0 40px rgba(168,85,247,0.9); letter-spacing:0.05em; }
 
-  .phase-dots { display: flex; gap: 8px; margin: 20px 0; }
-  .phase-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.3s; }
+  .phase-dots { display: flex; gap: 12px; margin: 20px 0; align-items: center; }
+  .phase-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.3s, transform 0.3s; border: 2px solid rgba(255,255,255,0.1); }
+  .phase-dot.active { transform: scale(1.2); border-color: var(--accent); }
+  .phase-dot.done { transform: scale(1); border-color: var(--green); }
   .phase-dot.done { background: var(--green); }
   .phase-dot.active { background: var(--accent); }
 
@@ -335,14 +336,6 @@
   </div>
 
   <div style="width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;">
-  <div class="gender-select" style="width:100%;margin-top:14px;">
-    <div class="gender-label">Optimize results for</div>
-    <div class="gender-pills">
-      <button class="gender-pill active" id="gp-any" onclick="setGender('any')">🎤 All Artists</button>
-      <button class="gender-pill" id="gp-f" onclick="setGender('f')">👩 Female</button>
-      <button class="gender-pill" id="gp-m" onclick="setGender('m')">👨 Male</button>
-    </div>
-  </div>
   <button class="cta-btn" style="width:100%;margin-top:14px;" onclick="startTest()">Find My Songs →</button>
   <div id="saved-profile-btn" style="display:none;margin-top:12px;width:100%;max-width:300px;">
     <button class="cta-btn secondary" style="width:100%;" onclick="loadSavedProfile()">🎤 Use My Saved Voice</button>
@@ -450,12 +443,14 @@
     <div class="phase-dot" id="dot-1"></div>
     <div class="phase-dot" id="dot-2"></div>
   </div>
-  <div id="phase-progress-text" style="font-size:0.68rem;color:var(--text3);margin-bottom:8px;min-height:16px;"></div>
+  <div id="phase-progress-text" style="font-size:0.9rem;font-weight:700;color:#A855F7;margin-bottom:8px;min-height:22px;"></div>
+
+  <div class="hum-step-banner" id="hum-step-banner">👇 Tap the button to start humming</div>
 
   <div class="mic-btn-wrap ready" id="mic-btn-wrap">
-    <button class="mic-btn ready" id="mic-btn" onclick="toggleCapture()" style="font-size:1rem;font-weight:900;letter-spacing:0.05em;">🎤</button>
+    <button class="mic-btn ready" id="mic-btn" onclick="toggleCapture()" style="font-size:1rem;font-weight:900;letter-spacing:0.05em;">🎤<span class="mic-countdown" id="mic-countdown"></span></button>
   </div>
-  <div class="mic-label" id="mic-label">👆 TAP, THEN HOLD & HUM</div>
+  <div class="mic-label" id="mic-label">TAP TO START</div>
 </div>
 
 <!-- SCREEN 3: RESULTS -->
@@ -478,13 +473,6 @@
       <div class="range-bar-ticks">
         <span>E1</span><span>A2</span><span>E3</span><span>A4</span><span>E5</span><span>C7</span>
       </div>
-    </div>
-
-    <!-- GENDER FILTER (results screen) -->
-    <div style="display:flex;gap:8px;justify-content:center;margin:8px 0 2px;">
-      <button id="res-gp-any" class="gender-pill active" onclick="setGender('any')">🎤 All</button>
-      <button id="res-gp-f" class="gender-pill" onclick="setGender('f')">👩 Female</button>
-      <button id="res-gp-m" class="gender-pill" onclick="setGender('m')">👨 Male</button>
     </div>
 
     <!-- FILTER BAR -->
@@ -2448,9 +2436,9 @@ let shareTopSong = null;
 let waveRaf = null;
 
 const PHASES = [
-  { label:'PHASE 1 OF 3', title:'Hum your lowest note', sub:'Hold the button and hum as low as you comfortably can. Hold it steady for 3 seconds.' },
-  { label:'PHASE 2 OF 3', title:'Hum a comfortable middle note', sub:'Hold the button and hum at your most natural, relaxed pitch.' },
-  { label:'PHASE 3 OF 3', title:'Hum your highest note', sub:'Hold the button and reach as high as you comfortably can for 3 seconds.' },
+  { label:'HUM 1 OF 3', title:'Hum your lowest note', sub:'Go as low as you can and hold it steady' },
+  { label:'HUM 2 OF 3', title:'Hum a comfortable middle note', sub:'Hum at your most natural, relaxed pitch' },
+  { label:'HUM 3 OF 3', title:'Hum your highest note', sub:'Go as high as you can and hold it steady' },
 ];
 
 function showScreen(id) {
@@ -2573,11 +2561,16 @@ function updatePhaseUI() {
   document.getElementById('phase-label').textContent = p.label;
   document.getElementById('phase-title').textContent = p.title;
   document.getElementById('phase-sub').textContent = p.sub;
-  document.getElementById('mic-label').textContent = '👆 TAP, THEN HOLD & HUM';
+  document.getElementById('mic-label').textContent = 'TAP TO START';
+  const banner = document.getElementById('hum-step-banner');
+  if (banner) banner.textContent = '👇 Tap the button to hum ' + (phase === 0 ? 'your lowest note' : phase === 1 ? 'your middle note' : 'your highest note');
   const btn = document.getElementById('mic-btn');
   btn.classList.remove('recording');
   btn.classList.add('ready');
   document.getElementById('mic-btn-wrap').classList.add('ready');
+  // Reset countdown
+  const cd = document.getElementById('mic-countdown');
+  if (cd) { cd.classList.remove('visible'); cd.textContent = ''; }
   // Flash the phase word
   if (phase < 3) flashPhaseWord(PHASE_WORDS[phase]);
   [0,1,2].forEach(i => {
@@ -2596,7 +2589,19 @@ function toggleCapture() {
   btn.classList.remove('ready');
   btn.classList.add('recording');
   document.getElementById('mic-btn-wrap').classList.remove('ready');
-  document.getElementById('mic-label').textContent = 'HUMMING… HOLD STEADY';
+  document.getElementById('mic-label').textContent = 'HUMMING… KEEP GOING!';
+  const banner = document.getElementById('hum-step-banner');
+  if (banner) banner.textContent = '🎙️ Hold your hum steady…';
+
+  // Countdown inside button
+  const cd = document.getElementById('mic-countdown');
+  if (cd) { cd.classList.add('visible'); cd.textContent = '3'; }
+  let countdown = 3;
+  const cdInterval = setInterval(() => {
+    countdown--;
+    if (cd && countdown > 0) cd.textContent = countdown;
+    else if (cd && countdown <= 0) { cd.textContent = '✓'; clearInterval(cdInterval); }
+  }, 1000);
 
   const pitches = [];
   const brightnesses = [];
@@ -2628,7 +2633,7 @@ function toggleCapture() {
       document.getElementById('pitch-bar').style.width = pct + '%';
       // Signal feedback
       if (sigEl) {
-        if (rms > 0.02) { sigEl.innerHTML = '<span style="color:#22C55E;">✓ Good signal</span>'; }
+        if (rms > 0.02) { sigEl.innerHTML = '<span style="color:#22C55E;">✓ Good signal — keep humming!</span>'; }
         else { sigEl.innerHTML = '<span style="color:#F59E0B;">📢 Hum a bit louder</span>'; }
       }
     } else {
@@ -2638,11 +2643,15 @@ function toggleCapture() {
 
   captureTimer = setTimeout(() => {
     clearInterval(interval);
+    clearInterval(cdInterval);
     capturing = false;
     document.getElementById('mic-btn').classList.remove('recording');
+    // Hide countdown
+    if (cd) { cd.classList.remove('visible'); cd.textContent = ''; }
 
     if (pitches.length < 3) {
-      document.getElementById('mic-label').textContent = 'Try again — hum louder';
+      document.getElementById('mic-label').textContent = 'NOT DETECTED — TAP TO TRY AGAIN';
+      if (banner) banner.textContent = '🔄 Hum louder this time! Tap the button again.';
       document.getElementById('pitch-note').textContent = '?';
       return;
     }
@@ -2663,19 +2672,22 @@ function toggleCapture() {
 
     // Update phase progress text
     const progEl = document.getElementById('phase-progress-text');
-    if (progEl) progEl.textContent = 'Phase ' + (phase + 1) + ' of 3 complete ✓';
     // Reset signal status
     const sigReset = document.getElementById('signal-status');
     if (sigReset) sigReset.innerHTML = '🎤 Listening...';
 
     if (phase < 2) {
-      phase++;
+      const nextNum = phase + 2;
+      if (progEl) progEl.textContent = 'Hum ' + (phase + 1) + ' of 3 done ✓';
       document.getElementById('mic-label').textContent = '✓ GOT IT!';
-      setTimeout(updatePhaseUI, 800);
+      if (banner) banner.textContent = '✅ Hum ' + (phase + 1) + ' complete! Tap for hum ' + nextNum;
+      phase++;
+      setTimeout(updatePhaseUI, 1200);
     } else {
       // All 3 phases done
-      if (progEl) progEl.textContent = 'All 3 phases complete ✓';
-      document.getElementById('mic-label').textContent = '🎉 DONE! Finding your songs…';
+      if (progEl) progEl.textContent = 'All 3 hums complete ✓';
+      document.getElementById('mic-label').textContent = '🎉 ALL DONE!';
+      if (banner) banner.textContent = '🔍 Analyzing your voice…';
       setTimeout(showResults, 900);
     }
   }, 3000);
@@ -2744,8 +2756,7 @@ function showResults() {
   const typeEmoji = { 'Bass':'🔊','Bass-Baritone':'🎸','Baritone':'🎭','Tenor':'🌟','Alto/Contralto':'🍷','Mezzo-soprano':'🔥','Soprano':'✨' };
 
   // Find closest artist match (range overlap + brightness similarity)
-  const filteredArtists = filterGender === 'any' ? ARTISTS : ARTISTS.filter(a => a.gender === filterGender);
-  const scored = filteredArtists.map(a => {
+  const scored = ARTISTS.map(a => {
     const overlapLo = Math.max(userLow, a.low);
     const overlapHi = Math.min(userHigh, a.high);
     const overlap = Math.max(0, overlapHi - overlapLo);
@@ -2758,14 +2769,8 @@ function showResults() {
   const topArtist = scored[0];
   const topArtists = scored.slice(0, 4);
 
-  // Filter song pool by gender preference
-  const songPool = filterGender === 'any' ? SONGS : SONGS.filter(s => {
-    const a = ARTISTS.find(ar => ar.name === s.artist);
-    return !a || a.gender === filterGender;
-  });
-
   // Match songs to user range + brightness — keep top 30 for dismissal backfill
-  const matchedSongs = songPool
+  const matchedSongs = SONGS
     .map(s => {
       const overlapLo = Math.max(userLow, s.lo);
       const overlapHi = Math.min(userHigh, s.hi);
@@ -2809,7 +2814,18 @@ function showResults() {
   // Share data (topSong set after confidentSongs is built below)
   shareVoiceType = voiceType;
   shareMatchPct = topArtist ? Math.round(topArtist.score * 100) : 0;
-  hmTrack("hum_complete", { voice_type: voiceType, score: shareMatchPct, gender: filterGender });
+  hmTrack("hum_complete", { voice_type: voiceType, score: shareMatchPct });
+
+  // ── Log hum to user's hum_history (if logged in) ──
+  const _humToken = typeof hmGetToken === 'function' ? hmGetToken() : null;
+  function logHumMatch(title, artist, confidence) {
+    if (!_humToken) return;
+    fetch('/api/hummatch/hum', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-HM-Token': _humToken },
+      body: JSON.stringify({ song_title: title, artist: artist, confidence: confidence })
+    }).catch(() => {});
+  }
 
   // ── Confidence tier assignment ──
   function getTier(score) {
@@ -2897,6 +2913,7 @@ function showResults() {
   function renderSongCard(s) {
     const idx = _renderIdx++;
     hmTrack("song_matched", { title: s.title, artist: s.artist, score: Math.round((s.score || 0) * 100) });
+    logHumMatch(s.title, s.artist, Math.round((s.score || 0) * 100));
     const tags = s.tags || [];
     const era  = getEra(s);
     const tierBadge = `<span class="tier-badge ${s.tier.cls}">${s.tier.label}</span>`;
@@ -3435,22 +3452,6 @@ function installHumMatch() {
   }
 }
 
-// Gender preference for artist matching
-let filterGender = 'any'; // 'any' | 'm' | 'f'
-function setGender(g) {
-  filterGender = g;
-  hmTrack("gender_set", { gender: g });
-  // Update both welcome screen pills and results screen pills
-  document.querySelectorAll('.gender-pill').forEach(p => p.classList.remove('active'));
-  ['gp-' + g, 'res-gp-' + g].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.add('active');
-  });
-  // If results are already showing, re-render with new gender filter
-  if (document.getElementById('screen-results').classList.contains('active')) {
-    showResults();
-  }
-}
 
 // Capture affiliate ref from URL and store
 (function() {
