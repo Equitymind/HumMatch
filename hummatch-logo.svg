@@ -1,0 +1,46 @@
+<svg width="800" height="960" viewBox="0 0 800 960" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="300" y1="100" x2="500" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="960" fill="#060408"/>
+
+  <!-- ═══ MIC CAPSULE ═══ -->
+  <ellipse cx="400" cy="220" rx="72" ry="95" fill="none" stroke="url(#g)" stroke-width="20"/>
+
+  <!-- GRILL LINES -->
+  <line x1="342" y1="188" x2="458" y2="188" stroke="url(#g)" stroke-width="13" stroke-linecap="round"/>
+  <line x1="332" y1="212" x2="468" y2="212" stroke="url(#g)" stroke-width="13" stroke-linecap="round"/>
+  <line x1="332" y1="236" x2="468" y2="236" stroke="url(#g)" stroke-width="13" stroke-linecap="round"/>
+  <line x1="342" y1="260" x2="458" y2="260" stroke="url(#g)" stroke-width="13" stroke-linecap="round"/>
+
+  <!-- ═══ YOKE ARC ═══ -->
+  <path d="M 318 315 C 318 430 400 430 400 430 C 400 430 482 430 482 315"
+        fill="none" stroke="url(#g)" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- ═══ STEM ═══ -->
+  <line x1="400" y1="430" x2="400" y2="500" stroke="url(#g)" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- ═══ BASE ═══ -->
+  <line x1="308" y1="520" x2="492" y2="520" stroke="url(#g)" stroke-width="20" stroke-linecap="round"/>
+  <line x1="308" y1="500" x2="308" y2="540" stroke="url(#g)" stroke-width="14" stroke-linecap="round"/>
+  <line x1="492" y1="500" x2="492" y2="540" stroke="url(#g)" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- ═══ SOUND WAVES LEFT ═══ -->
+  <path d="M 252 268 Q 212 350 252 432" fill="none" stroke="url(#g)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M 196 238 Q 142 350 196 462" fill="none" stroke="url(#g)" stroke-width="16" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- ═══ SOUND WAVES RIGHT ═══ -->
+  <path d="M 548 268 Q 588 350 548 432" fill="none" stroke="url(#g)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M 604 238 Q 658 350 604 462" fill="none" stroke="url(#g)" stroke-width="16" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- ═══ WORDMARK ═══ -->
+  <text x="400" y="660"
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif"
+        font-size="108" font-weight="800" text-anchor="middle"
+        fill="url(#g)">HumMatch</text>
+</svg>

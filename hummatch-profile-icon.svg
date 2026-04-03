@@ -1,0 +1,45 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="350" y1="150" x2="450" y2="680" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="800" fill="#050308"/>
+  <circle cx="400" cy="400" r="390" fill="#0d0916"/>
+
+  <!-- ═══ MIC CAPSULE (oval head) centered at 400,290 ═══ -->
+  <ellipse cx="400" cy="280" rx="82" ry="108" fill="none" stroke="url(#g)" stroke-width="22"/>
+
+  <!-- GRILL LINES (4 lines across capsule) -->
+  <line x1="334" y1="245" x2="466" y2="245" stroke="url(#g)" stroke-width="15" stroke-linecap="round"/>
+  <line x1="322" y1="272" x2="478" y2="272" stroke="url(#g)" stroke-width="15" stroke-linecap="round"/>
+  <line x1="326" y1="299" x2="474" y2="299" stroke="url(#g)" stroke-width="15" stroke-linecap="round"/>
+  <line x1="338" y1="326" x2="462" y2="326" stroke="url(#g)" stroke-width="15" stroke-linecap="round"/>
+
+  <!-- ═══ YOKE / CRADLE (U shape) ═══ -->
+  <path d="M 308 385 C 308 520 400 520 400 520 C 400 520 492 520 492 385"
+        fill="none" stroke="url(#g)" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- ═══ STEM ═══ -->
+  <line x1="400" y1="520" x2="400" y2="608" stroke="url(#g)" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- ═══ T-BASE ═══ -->
+  <line x1="296" y1="632" x2="504" y2="632" stroke="url(#g)" stroke-width="22" stroke-linecap="round"/>
+  <line x1="296" y1="610" x2="296" y2="654" stroke="url(#g)" stroke-width="16" stroke-linecap="round"/>
+  <line x1="504" y1="610" x2="504" y2="654" stroke="url(#g)" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- ═══ SOUND WAVES LEFT ═══ -->
+  <path d="M 238 332 Q 192 415 238 498"
+        fill="none" stroke="url(#g)" stroke-width="22" stroke-linecap="round"/>
+  <path d="M 178 296 Q 118 415 178 534"
+        fill="none" stroke="url(#g)" stroke-width="17" stroke-linecap="round" opacity="0.65"/>
+
+  <!-- ═══ SOUND WAVES RIGHT ═══ -->
+  <path d="M 562 332 Q 608 415 562 498"
+        fill="none" stroke="url(#g)" stroke-width="22" stroke-linecap="round"/>
+  <path d="M 622 296 Q 682 415 622 534"
+        fill="none" stroke="url(#g)" stroke-width="17" stroke-linecap="round" opacity="0.65"/>
+</svg>
