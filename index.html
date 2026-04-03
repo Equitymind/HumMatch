@@ -2474,7 +2474,7 @@ function applyPromoCode() {
 }
 
 async function startTest() {
-  // Check free hum limit (20 hums per month for non-premium)
+  // Check free hum limit (10 hums per month for non-premium)
   const isPremium = localStorage.getItem('hm_premium') === 'true';
   if (!isPremium) {
     const now = Date.now();
@@ -2485,7 +2485,7 @@ async function startTest() {
       localStorage.setItem('hm_hum_count', '0');
     }
     const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
-    if (humCount >= 20) {
+    if (humCount >= 10) {
       showScreen('screen-welcome');
       // Show upgrade prompt
       const modal = document.createElement('div');
