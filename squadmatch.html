@@ -492,6 +492,36 @@
   <a class="hm-nav-item" href="/dashboard" id="navLoginItem">Log In</a>
 </nav>
 
+<!-- SQUAD JOIN VIEW (shown when ?join= param is present) -->
+<div id="squadJoinView" style="display:none; padding: 80px 24px; max-width: 480px; margin: 0 auto; text-align: center;">
+  <div style="font-size: 3rem; margin-bottom: 16px;">🎤</div>
+  <p style="font-size: 0.82rem; color: rgba(255,255,255,0.4); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">You've been invited</p>
+  <h1 id="joinSquadTitle" style="font-size: 2.2rem; font-weight: 900; margin-bottom: 8px; background: linear-gradient(135deg, #A855F7, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Join the Squad</h1>
+  <p id="joinSquadMeta" style="color: rgba(255,255,255,0.4); font-size: 0.95rem; margin-bottom: 36px;">Loading squad details...</p>
+
+  <div id="joinForm" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(124,58,237,0.2); border-radius: 14px; padding: 28px; text-align: left;">
+    <div style="margin-bottom: 20px;">
+      <label style="display: block; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em;">Your name</label>
+      <input id="joinName" type="text" placeholder="e.g. Nora" autocomplete="off"
+        style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(124,58,237,0.25); border-radius: 12px; color: #e2e0f0; font-size: 1rem; outline: none; transition: border-color 0.2s;"
+        onfocus="this.style.borderColor='rgba(168,85,247,0.6)'" onblur="this.style.borderColor='rgba(124,58,237,0.25)'"
+        onkeydown="if(event.key==='Enter')joinSquad()">
+    </div>
+    <button id="joinBtn" onclick="joinSquad()"
+      style="width: 100%; padding: 14px; background: linear-gradient(135deg, #A855F7, #EC4899); border: none; border-radius: 12px; color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s;">
+      Join Squad
+    </button>
+    <div id="joinError" style="display:none; margin-top: 14px; background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.3); border-radius: 10px; padding: 12px 16px; color: #EC4899; font-size: 0.9rem; text-align: center;"></div>
+  </div>
+
+  <div id="joinSuccess" style="display:none; background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.25); border-radius: 14px; padding: 36px 28px; text-align: center;">
+    <div style="font-size: 2.5rem; margin-bottom: 12px;">🎉</div>
+    <h2 style="font-size: 1.6rem; margin-bottom: 10px; color: #e2e0f0;">You're in!</h2>
+    <p id="joinSuccessMsg" style="color: rgba(255,255,255,0.5); margin-bottom: 28px;"></p>
+    <a href="/" class="btn btn-primary" style="display: inline-block;">Try HumMatch Free</a>
+  </div>
+</div>
+
 <!-- HERO -->
 <section class="hero">
   <div class="container">
@@ -755,6 +785,77 @@ function startCheckout(plan) {
     if(foot){ foot.textContent='My HQ'; }
   }
 })();
+
+// ── Squad invite join flow ──────────────────────────────────────────────────
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var joinId = params.get('join');
+  if (!joinId) return;
+
+  // Hide all marketing content
+  document.querySelectorAll('section').forEach(function(el){ el.style.display='none'; });
+
+  // Show join panel
+  var view = document.getElementById('squadJoinView');
+  view.style.display = 'block';
+  window._joinSquadId = joinId;
+
+  // Load squad details
+  fetch('/api/hummatch/squad/' + joinId + '/public')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.error) {
+        document.getElementById('joinSquadTitle').textContent = 'Invalid invite';
+        document.getElementById('joinSquadMeta').textContent = 'This squad link is no longer valid.';
+        document.getElementById('joinForm').style.display = 'none';
+        return;
+      }
+      window._joinSquadName = d.squad_name;
+      document.getElementById('joinSquadTitle').textContent = 'Join ' + d.squad_name;
+      var n = d.member_count;
+      document.getElementById('joinSquadMeta').textContent = n + ' member' + (n !== 1 ? 's' : '') + ' already in the squad';
+    })
+    .catch(function(){
+      document.getElementById('joinSquadMeta').textContent = 'Could not load squad details.';
+    });
+})();
+
+function joinSquad(){
+  var name = (document.getElementById('joinName').value || '').trim();
+  if (!name) { showJoinError('Please enter your name.'); return; }
+  var btn = document.getElementById('joinBtn');
+  btn.disabled = true;
+  btn.textContent = 'Joining...';
+  fetch('/api/hummatch/squad/' + window._joinSquadId + '/join', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ display_name: name })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (d.ok) {
+      document.getElementById('joinForm').style.display = 'none';
+      document.getElementById('joinError').style.display = 'none';
+      var squadName = d.squad_name || window._joinSquadName || 'the squad';
+      document.getElementById('joinSuccessMsg').textContent = 'You joined ' + squadName + '. Let the squad leader know you\'re in!';
+      document.getElementById('joinSuccess').style.display = 'block';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Join Squad';
+      showJoinError(d.error || 'Something went wrong. Try again.');
+    }
+  })
+  .catch(function(){
+    btn.disabled = false;
+    btn.textContent = 'Join Squad';
+    showJoinError('Network error. Please try again.');
+  });
+}
+function showJoinError(msg){
+  var el = document.getElementById('joinError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
 </script>
 </body>
 </html>

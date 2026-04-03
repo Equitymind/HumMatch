@@ -1239,6 +1239,39 @@ app.post('/api/hummatch/squad/:id/invite', requireAuth, (req, res) => {
   }
 });
 
+// Public squad info (no auth — for invite link landing page)
+app.get('/api/hummatch/squad/:id/public', (req, res) => {
+  const squadId = parseInt(req.params.id);
+  const squad = db.prepare('SELECT id, squad_name FROM squad_matches WHERE id = ?').get(squadId);
+  if (!squad) return res.status(404).json({ error: 'Squad not found' });
+  const members = stmts.getSquadMembers.all(squadId);
+  res.json({ squad_name: squad.squad_name, member_count: members.length, squad_id: squad.id });
+});
+
+// Join squad via invite link (no auth required)
+app.post('/api/hummatch/squad/:id/join', (req, res) => {
+  const squadId = parseInt(req.params.id);
+  const { display_name, voice_type } = req.body;
+  if (!display_name) return res.status(400).json({ error: 'Name required' });
+
+  const squad = db.prepare('SELECT id, squad_name, owner_user_id FROM squad_matches WHERE id = ?').get(squadId);
+  if (!squad) return res.status(404).json({ error: 'Squad not found' });
+
+  // Check member limit based on owner's premium status
+  const owner = db.prepare('SELECT is_premium FROM users WHERE id = ?').get(squad.owner_user_id);
+  const members = stmts.getSquadMembers.all(squadId);
+  if (!owner?.is_premium && members.length >= 4) {
+    return res.status(403).json({ error: 'This squad is full (4 member limit on free plan).' });
+  }
+
+  try {
+    const info = stmts.insertSquadMember.run(squadId, null, display_name, voice_type || '', 'joined');
+    res.json({ ok: true, id: info.lastInsertRowid, squad_name: squad.squad_name });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to join squad' });
+  }
+});
+
 // ---------------------------------------------------------------------------
 // API: Song Requests (Premium)
 // ---------------------------------------------------------------------------
