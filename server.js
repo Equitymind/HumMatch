@@ -640,6 +640,22 @@ function requireAdmin(req, res, next) {
 }
 
 // ---------------------------------------------------------------------------
+// API: Manual migration endpoint (for fixing production DB without SSH)
+// ---------------------------------------------------------------------------
+app.get('/api/hummatch/migrate/welcome-email-column', requireAdmin, (req, res) => {
+  try {
+    const cols = db.pragma('table_info(users)').map(c => c.name);
+    if (cols.includes('welcome_email_sent')) {
+      return res.json({ status: 'ok', message: 'Column already exists' });
+    }
+    db.exec(`ALTER TABLE users ADD COLUMN welcome_email_sent INTEGER DEFAULT 0`);
+    res.json({ status: 'ok', message: 'Column added successfully' });
+  } catch (err) {
+    res.status(500).json({ status: 'error', message: err.message });
+  }
+});
+
+// ---------------------------------------------------------------------------
 // API: Version (PWA auto-update)
 // ---------------------------------------------------------------------------
 app.get('/api/hummatch/version', (_req, res) => {
