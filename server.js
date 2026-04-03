@@ -831,6 +831,40 @@ app.post('/api/hummatch/auth/set-password', async (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// API: Auth - Forgot password (sends magic login link via email)
+// ---------------------------------------------------------------------------
+app.post('/api/hummatch/auth/forgot-password', async (req, res) => {
+  const email = (req.body.email || '').trim().toLowerCase();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: 'Valid email required' });
+  }
+
+  const user = db.prepare('SELECT token, email FROM users WHERE email = ?').get(email);
+  if (user) {
+    const baseUrl = process.env.BASE_URL || 'https://hummatch.me';
+    const loginUrl = `${baseUrl}/login?token=${encodeURIComponent(user.token)}`;
+    const html = emailWrapper(`
+      <div style="padding:32px 24px;">
+        <h2 style="color:#e2e0f0;font-size:1.3rem;margin-bottom:8px;">Log in to HumMatch</h2>
+        <p style="color:rgba(255,255,255,0.6);margin-bottom:24px;line-height:1.6;">
+          Click the button below to log in instantly. This link is tied to your account — keep it private.
+        </p>
+        <a href="${loginUrl}" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1rem;">
+          Log In to HumMatch
+        </a>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.82rem;margin-top:20px;">
+          If you didn't request this, you can safely ignore this email.
+        </p>
+        ${EMAIL_FOOTER}
+      </div>
+    `);
+    sendEmail(user.email, 'Your HumMatch login link', html);
+  }
+  // Always return success (don't reveal if email exists)
+  res.json({ ok: true });
+});
+
+// ---------------------------------------------------------------------------
 // API: Auth - Get current user
 // ---------------------------------------------------------------------------
 app.get('/api/hummatch/auth/me', (req, res) => {

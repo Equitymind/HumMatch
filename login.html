@@ -41,6 +41,10 @@ a:hover{color:#c084fc}
 /* Set-password form (for legacy users) */
 .set-pw-section{display:none}
 .set-pw-section .set-pw-note{color:rgba(255,255,255,0.5);font-size:0.82rem;margin-bottom:16px;line-height:1.5}
+
+.auth-link-btn{background:none;border:none;color:#a78bfa;font-size:0.82rem;cursor:pointer;margin-top:10px;font-family:inherit;padding:0}
+.auth-link-btn:hover{color:#c084fc}
+.form-success{color:#4ade80;font-size:0.82rem;min-height:20px;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -75,7 +79,18 @@ a:hover{color:#c084fc}
     <input type="password" class="auth-input" id="login-password" placeholder="Password" autocomplete="current-password" required/>
     <div class="form-error" id="login-error"></div>
     <button type="submit" class="auth-btn" id="login-btn">Log In</button>
+    <button type="button" class="auth-link-btn" onclick="showForgotPassword()">Forgot password?</button>
   </form>
+
+  <!-- Forgot Password Form -->
+  <div class="auth-form hidden" id="form-forgot" style="flex-direction:column;gap:0">
+    <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;margin-bottom:12px;line-height:1.5;">Enter your email and we'll send you a link to log in.</p>
+    <input type="email" class="auth-input" id="forgot-email" placeholder="Email" autocomplete="email" autocapitalize="off"/>
+    <div class="form-error" id="forgot-error"></div>
+    <div class="form-success" id="forgot-success"></div>
+    <button type="button" class="auth-btn" id="forgot-btn" onclick="handleForgotPassword()">Send Login Link</button>
+    <button type="button" class="auth-link-btn" onclick="showTab('login')">Back to Log In</button>
+  </div>
 
   <!-- Signup Form -->
   <form class="auth-form hidden" id="form-signup" onsubmit="handleSignup(event)">
@@ -109,15 +124,36 @@ a:hover{color:#c084fc}
 <script>
 let legacyEmail = '';
 
-// Check if already logged in
+// Check if already logged in or has magic link token in URL
 (function() {
+  const params = new URLSearchParams(window.location.search);
+  const urlToken = params.get('token');
+  if (urlToken) {
+    // Auto-login via magic link token
+    fetch(`/api/hummatch/auth/me?token=${encodeURIComponent(urlToken)}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data) {
+          localStorage.setItem('hm_dash_token', urlToken);
+          localStorage.setItem('hm_token', urlToken);
+          localStorage.setItem('hm_user_email', data.email);
+          if (data.is_premium) localStorage.setItem('hm_premium', 'true');
+          window.location.href = '/dashboard';
+        } else {
+          document.getElementById('login-error').textContent = 'This login link is invalid or expired.';
+          document.getElementById('login-error').style.display = 'block';
+        }
+      })
+      .catch(() => {});
+    return;
+  }
   const token = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
   if (token) {
     window.location.href = '/dashboard';
     return;
   }
   // Show signup tab if ?signup=1
-  if (new URLSearchParams(window.location.search).get('signup') === '1') {
+  if (params.get('signup') === '1') {
     showTab('signup');
   }
 })();
@@ -127,11 +163,23 @@ function showTab(tab) {
   document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
   document.getElementById('form-login').classList.toggle('hidden', tab !== 'login');
   document.getElementById('form-signup').classList.toggle('hidden', tab !== 'signup');
+  document.getElementById('form-forgot').classList.add('hidden');
   document.getElementById('set-pw-section').style.display = 'none';
   document.getElementById('auth-tabs').style.display = '';
   // Clear errors
-  document.querySelectorAll('.form-error, .field-error').forEach(el => { el.textContent = ''; el.style.display = 'none'; });
+  document.querySelectorAll('.form-error, .field-error, .form-success').forEach(el => { el.textContent = ''; el.style.display = 'none'; });
   document.querySelectorAll('.auth-input').forEach(el => el.classList.remove('error'));
+}
+
+function showForgotPassword() {
+  document.getElementById('form-login').classList.add('hidden');
+  document.getElementById('form-signup').classList.add('hidden');
+  document.getElementById('form-forgot').classList.remove('hidden');
+  document.getElementById('form-forgot').style.display = 'flex';
+  document.getElementById('auth-tabs').style.display = 'none';
+  document.getElementById('forgot-email').value = document.getElementById('login-email').value;
+  document.getElementById('forgot-error').textContent = '';
+  document.getElementById('forgot-success').textContent = '';
 }
 
 async function handleLogin(e) {
@@ -237,6 +285,41 @@ async function handleSignup(e) {
   }
   btn.disabled = false;
   btn.textContent = 'Create Account';
+}
+
+async function handleForgotPassword() {
+  const email = document.getElementById('forgot-email').value.trim();
+  const errEl = document.getElementById('forgot-error');
+  const successEl = document.getElementById('forgot-success');
+  const btn = document.getElementById('forgot-btn');
+
+  errEl.textContent = '';
+  successEl.textContent = '';
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEl.textContent = 'Please enter a valid email address.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  try {
+    await fetch('/api/hummatch/auth/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    // Always show success (don't reveal if account exists)
+    successEl.textContent = 'Check your inbox — we sent a login link!';
+    successEl.style.display = 'block';
+    btn.textContent = 'Sent!';
+  } catch (err) {
+    errEl.textContent = 'Connection error. Please try again.';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Send Login Link';
+  }
 }
 
 async function handleSetPassword(e) {
