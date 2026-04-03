@@ -163,9 +163,11 @@
   <nav class="nav">
     <a href="/" class="nav-logo">HumMatch</a>
     <div class="nav-links">
-      <a href="/">Home</a>
+      <a href="/">Try HumMatch</a>
       <a href="/pricing">Pricing</a>
+      <a href="/squadmatch">SquadMatch</a>
       <a href="/blog">Blog</a>
+      <a href="/dashboard" id="navLoginItem">Log In</a>
     </div>
   </nav>
 
@@ -200,7 +202,7 @@
   </div>
 
   <div class="footer">
-    <p>&copy; 2026 HumMatch &nbsp;&middot;&nbsp; <a href="/">Home</a> &nbsp;&middot;&nbsp; <a href="/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms</a></p>
+    <p>&copy; 2026 HumMatch &nbsp;&middot;&nbsp; <a href="/">Try HumMatch</a> &nbsp;&middot;&nbsp; <a href="/squadmatch">SquadMatch</a> &nbsp;&middot;&nbsp; <a href="/blog">Blog</a> &nbsp;&middot;&nbsp; <a href="/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms</a></p>
   </div>
 
   <script>
@@ -235,6 +237,13 @@
       btn.textContent = 'Send Message';
     }
   }
+  (function(){
+    var t = localStorage.getItem('hm_dash_token');
+    if(t){
+      var nav = document.getElementById('navLoginItem');
+      if(nav){ nav.textContent='My HQ'; }
+    }
+  })();
   </script>
 </body>
 </html>

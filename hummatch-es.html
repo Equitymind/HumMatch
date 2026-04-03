@@ -205,13 +205,17 @@
 <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
 <nav class="hm-nav-drawer" id="navDrawer">
   <div class="hm-nav-logo"><span>HumMatch</span></div>
-  <a class="hm-nav-item" href="/es">🎤 Probar HumMatch</a>
+  <a class="hm-nav-item" href="/es" style="color:#c084fc;font-weight:700;">🎤 Probar HumMatch</a>
   <a class="hm-nav-item" href="/es/how-it-works">Cómo Funciona</a>
+  <a class="hm-nav-item" href="/pricing">Precios</a>
+  <a class="hm-nav-item" href="/squadmatch">SquadMatch</a>
   <a class="hm-nav-item" href="/">🌎 English</a>
   <div class="hm-nav-divider"></div>
-  <a class="hm-nav-item" href="/pricing">Precios</a>
   <a class="hm-nav-item" href="/es/affiliate">Afiliados</a>
+  <a class="hm-nav-item" href="/blog">Blog</a>
   <a class="hm-nav-item" href="/es/contact">Contacto</a>
+  <div class="hm-nav-divider"></div>
+  <a class="hm-nav-item" href="/dashboard" id="navLoginItem">Iniciar Sesión</a>
 </nav>
 
 
@@ -2889,6 +2893,13 @@ function closeNav() {
   document.getElementById('navDrawer').classList.remove('open');
   document.getElementById('navOverlay').classList.remove('open');
 }
+(function(){
+  var t = localStorage.getItem('hm_dash_token');
+  if(t){
+    var nav = document.getElementById('navLoginItem');
+    if(nav){ nav.textContent='🎯 Mi HQ'; }
+  }
+})();
 </script>
 </body>
 </html>

@@ -90,9 +90,11 @@ select.form-input option{background:#1a1530;color:#e2e0f0}
     <h1>HumMatch</h1>
   </a>
   <div class="nav-links">
-    <a href="/">Home</a>
-    <a href="/dashboard">Dashboard</a>
+    <a href="/">Try HumMatch</a>
     <a href="/pricing">Pricing</a>
+    <a href="/squadmatch">SquadMatch</a>
+    <a href="/blog">Blog</a>
+    <a href="/dashboard" id="navLoginItem">Log In</a>
   </div>
 </nav>
 
@@ -183,11 +185,14 @@ select.form-input option{background:#1a1530;color:#e2e0f0}
 
 <!-- Footer -->
 <div class="footer">
-  <a href="/">Home</a>
-  <a href="/dashboard">Dashboard</a>
-  <a href="/squadmatch">SquadMatch</a>
+  <a href="/">Try HumMatch</a>
   <a href="/pricing">Pricing</a>
+  <a href="/squadmatch">SquadMatch</a>
+  <a href="/blog">Blog</a>
   <a href="/contact">Contact</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/terms">Terms</a>
+  <a href="/dashboard" id="footerLoginItem">Log In</a>
 </div>
 
 <!-- Toast -->
@@ -249,6 +254,15 @@ fetch('/api/hummatch/event', {
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ event: 'groupmatch_page_view' })
 });
+(function(){
+  var t = localStorage.getItem('hm_dash_token');
+  if(t){
+    var nav = document.getElementById('navLoginItem');
+    var foot = document.getElementById('footerLoginItem');
+    if(nav){ nav.textContent='My HQ'; }
+    if(foot){ foot.textContent='My HQ'; }
+  }
+})();
 </script>
 </body>
 </html>

@@ -314,15 +314,17 @@
 <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
 <nav class="hm-nav-drawer" id="navDrawer">
   <div class="hm-nav-logo"><span>HumMatch</span></div>
-  <a class="hm-nav-item" href="/">🎤 Try HumMatch</a>
+  <a class="hm-nav-item" href="/" style="color:#c084fc;font-weight:700;">🎤 Try HumMatch</a>
   <a class="hm-nav-item" href="/how-it-works">How It Works</a>
-  <a class="hm-nav-item" href="/blog">📖 Blog</a>
-  <a class="hm-nav-item" href="/es">🌎 Español</a>
-  <a class="hm-nav-item" href="/dashboard">🎯 Dashboard</a>
-  <div class="hm-nav-divider"></div>
   <a class="hm-nav-item" href="/pricing">Pricing</a>
+  <a class="hm-nav-item" href="/squadmatch">SquadMatch</a>
+  <a class="hm-nav-item" href="/es">🌎 Español</a>
+  <div class="hm-nav-divider"></div>
   <a class="hm-nav-item" href="/affiliate">Affiliate</a>
+  <a class="hm-nav-item" href="/blog">Blog</a>
   <a class="hm-nav-item" href="/contact">Contact</a>
+  <div class="hm-nav-divider"></div>
+  <a class="hm-nav-item" href="/dashboard" id="navLoginItem">Log In</a>
 </nav>
 
 
@@ -400,17 +402,18 @@
 
   <!-- Footer -->
   <footer style="width:100%;max-width:380px;margin-top:32px;padding:20px 0 max(24px, env(safe-area-inset-bottom, 24px));border-top:1px solid rgba(255,255,255,0.06);">
-    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:14px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:14px;">
+      <a href="/" style="font-size:0.75rem;text-decoration:none;color:#c084fc;font-weight:600;">Try HumMatch</a>
+      <a href="/how-it-works" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">How It Works</a>
+      <a href="/pricing" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Pricing</a>
       <a href="/squadmatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">SquadMatch</a>
-      <a href="/groupmatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">GroupMatch</a>
-      <a href="/dashboard" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Dashboard</a>
+      <a href="/es" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Español</a>
+      <a href="/affiliate" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Affiliate</a>
       <a href="/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
-    </div>
-    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:14px;">
-      <a href="/about" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">About</a>
-      <a href="/contact" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Contact</a>
+      <a href="/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contact</a>
       <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
       <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
+      <a href="/dashboard" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Log In</a>
     </div>
     <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.2);">&copy; 2026 HumMatch</div>
   </footer>
@@ -551,12 +554,6 @@
     </button>
   </div>
 
-  <!-- GroupMatch teaser -->
-  <div style="width:100%;max-width:400px;margin-top:20px;background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.06));border:1px solid rgba(168,85,247,0.15);border-radius:14px;padding:18px 20px;text-align:center;">
-    <div style="font-size:0.85rem;font-weight:700;color:#e2e0f0;margin-bottom:4px;">Love your match?</div>
-    <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">Soon you can find duet partners with compatible voices!</div>
-    <a href="/groupmatch" style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;padding:10px 22px;border-radius:10px;font-size:0.8rem;font-weight:700;text-decoration:none;transition:all 0.2s;">Join GroupMatch Waitlist</a>
-  </div>
 
   <!-- Hidden canvas for share card generation -->
   <canvas id="share-canvas" style="display:none;" width="1200" height="630"></canvas>
@@ -3749,6 +3746,16 @@ function closeNav() {
   document.getElementById('navDrawer').classList.remove('open');
   document.getElementById('navOverlay').classList.remove('open');
 }
+// Swap Log In → My HQ if logged in
+(function(){
+  var t = localStorage.getItem('hm_dash_token');
+  if(t){
+    var nav = document.getElementById('navLoginItem');
+    var foot = document.getElementById('footerLoginItem');
+    if(nav){ nav.textContent='🎯 My HQ'; }
+    if(foot){ foot.textContent='My HQ'; }
+  }
+})();
 </script>
 
 <!-- Login Bottom Sheet -->

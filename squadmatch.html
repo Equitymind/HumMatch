@@ -543,10 +543,11 @@
   <div class="container">
     <a href="/" class="logo">HumMatch</a>
     <div class="nav-links">
-      <a href="/">Home</a>
+      <a href="/">Try HumMatch</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/squadmatch">SquadMatch</a>
       <a href="/blog">Blog</a>
-      <a href="/squadmatch">SquadMatch <span class="new-badge">New</span></a>
-      <a href="/dashboard">Dashboard</a>
+      <a href="/dashboard" id="navLoginItem">Log In</a>
     </div>
   </div>
 </nav>
@@ -773,11 +774,17 @@
         <p>Vocal matching for everyone. A product of Equitymind Ventures.</p>
       </div>
       <div class="footer-links">
-        <a href="/">Home</a>
+        <a href="/">Try HumMatch</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/squadmatch">SquadMatch</a>
+        <a href="/es">Español</a>
+        <a href="/affiliate">Affiliate</a>
         <a href="/blog">Blog</a>
-        <a href="/squadmatch"><span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;padding:2px 6px;border-radius:3px;font-size:0.65rem;font-weight:700;margin-right:4px;">NEW!</span> SquadMatch</a>
-        <a href="/dashboard">Dashboard</a>
         <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/dashboard" id="footerLoginItem">Log In</a>
       </div>
     </div>
   </div>
@@ -790,6 +797,15 @@ function startCheckout(plan) {
   const url = '/api/hummatch/checkout/' + plan + (token ? '?token=' + token : '');
   window.location.href = url;
 }
+(function(){
+  var t = localStorage.getItem('hm_dash_token');
+  if(t){
+    var nav = document.getElementById('navLoginItem');
+    var foot = document.getElementById('footerLoginItem');
+    if(nav){ nav.textContent='My HQ'; }
+    if(foot){ foot.textContent='My HQ'; }
+  }
+})();
 </script>
 </body>
 </html>

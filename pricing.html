@@ -206,10 +206,11 @@
 <nav class="nav">
   <a href="/" class="nav-logo">HumMatch</a>
   <div class="nav-links">
-    <a href="/">Try It</a>
-    <a href="/dashboard">Dashboard</a>
+    <a href="/">Try HumMatch</a>
+    <a href="/pricing">Pricing</a>
     <a href="/squadmatch">SquadMatch</a>
-    <a href="/contact">Contact</a>
+    <a href="/blog">Blog</a>
+    <a href="/dashboard" id="navLoginItem">Log In</a>
   </div>
 </nav>
 
@@ -277,8 +278,16 @@
 </section>
 
 <footer>
-  <p>&copy; 2026 HumMatch &middot; <a href="/">Home</a> &middot; <a href="/contact">Contact</a> &middot; <a href="/blog">Blog</a></p>
+  <p>&copy; 2026 HumMatch &middot; <a href="/">Try HumMatch</a> &middot; <a href="/squadmatch">SquadMatch</a> &middot; <a href="/contact">Contact</a> &middot; <a href="/blog">Blog</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
 </footer>
-
+<script>
+(function(){
+  var t = localStorage.getItem('hm_dash_token');
+  if(t){
+    var nav = document.getElementById('navLoginItem');
+    if(nav){ nav.textContent='My HQ'; }
+  }
+})();
+</script>
 </body>
 </html>
