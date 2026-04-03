@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /song/
+Allow: /blog/
+Disallow: /api/
+Disallow: /analytics
 
 Sitemap: https://hummatch.me/sitemap.xml

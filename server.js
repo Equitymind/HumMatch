@@ -1857,6 +1857,16 @@ app.get('/login', (_req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
 
+// Song SEO pages: /song/:slug → /song/:slug.html
+app.get('/song/:slug', (req, res) => {
+  const file = path.join(__dirname, 'song', `${req.params.slug}.html`);
+  if (fs.existsSync(file)) {
+    res.sendFile(file);
+  } else {
+    res.redirect(302, '/#catalog');
+  }
+});
+
 // SPA fallback: serve index.html for unmatched routes
 app.get('*', (req, res) => {
   // Don't catch API routes or file extensions
