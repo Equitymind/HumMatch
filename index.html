@@ -2997,6 +2997,26 @@ function showResults() {
   shareArtistName = topSong ? topSong.title + ' by ' + topSong.artist : (topArtist ? topArtist.name : '');
   shareTopSong = topSong ? { title: topSong.title, artist: topSong.artist } : null;
 
+  // ── Immediately sync hum_count + log hum session to server ──
+  if (typeof hmSyncCounts === 'function') hmSyncCounts();
+  if (_humToken) {
+    const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
+    fetch('/api/hummatch/hum/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-HM-Token': _humToken },
+      body: JSON.stringify({
+        low_note: capturedNotes[0],
+        normal_note: capturedNotes[1],
+        high_note: capturedNotes[2],
+        voice_type: voiceType,
+        top_song: topSong ? topSong.title : '',
+        top_artist: topSong ? topSong.artist : '',
+        match_score: topSong ? Math.round((topSong.score || 0) * 100) : 0,
+        hum_count: humCount
+      })
+    }).catch(() => {});
+  }
+
   // Store globally for filter re-render
   window._hmSongs = tieredSongs;
   window._hmStretch = stretchSongs;

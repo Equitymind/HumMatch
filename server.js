@@ -322,6 +322,20 @@ db.exec(`
     FOREIGN KEY(user_id) REFERENCES users(id)
   );
 
+  CREATE TABLE IF NOT EXISTS hums (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    low_note INTEGER,
+    normal_note INTEGER,
+    high_note INTEGER,
+    voice_type TEXT,
+    top_song TEXT,
+    top_artist TEXT,
+    match_score INTEGER,
+    created_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
   CREATE TABLE IF NOT EXISTS squad_matches (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     owner_user_id INTEGER,
@@ -387,6 +401,7 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
   CREATE INDEX IF NOT EXISTS idx_playlists_user ON user_playlists(user_id);
   CREATE INDEX IF NOT EXISTS idx_hum_history_user ON hum_history(user_id);
+  CREATE INDEX IF NOT EXISTS idx_hums_user ON hums(user_id);
   CREATE INDEX IF NOT EXISTS idx_squad_owner ON squad_matches(owner_user_id);
   CREATE INDEX IF NOT EXISTS idx_squad_members_squad ON squad_members(squad_id);
   CREATE INDEX IF NOT EXISTS idx_song_requests_user ON song_requests(user_id);
@@ -562,6 +577,12 @@ const stmts = {
   ),
   getBestMatch: db.prepare(
     'SELECT MAX(confidence) as best FROM hum_history WHERE user_id = ?'
+  ),
+  insertHumSession: db.prepare(
+    'INSERT INTO hums (user_id, low_note, normal_note, high_note, voice_type, top_song, top_artist, match_score) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+  ),
+  getRecentHumSessions: db.prepare(
+    'SELECT * FROM hums WHERE user_id = ? ORDER BY created_at DESC LIMIT 10'
   ),
   // Squad
   insertSquad: db.prepare(
@@ -920,16 +941,27 @@ app.get('/api/hummatch/dashboard', requireAuth, (req, res) => {
   const weekHums = stmts.getWeekHumCount.get(uid).cnt;
   const bestMatch = stmts.getBestMatch.get(uid).best || 0;
   const playlist = stmts.getPlaylist.all(uid);
-  const recentHums = stmts.getHumHistory.all(uid);
+  const oldHums = stmts.getHumHistory.all(uid);
+  // New hum sessions table — map to same shape dashboard expects
+  const humSessions = stmts.getRecentHumSessions.all(uid).map(h => ({
+    song_title: h.top_song,
+    artist: h.top_artist,
+    confidence: h.match_score,
+    hummed_at: h.created_at,
+    voice_type: h.voice_type
+  }));
+  // Merge: sessions first (newer), then old hum_history entries not already covered
+  const seen = new Set(humSessions.map(h => h.song_title + '|' + h.hummed_at));
+  const merged = [...humSessions, ...oldHums.filter(h => !seen.has(h.song_title + '|' + h.hummed_at))].slice(0, 10);
 
   res.json({
     stats: {
-      totalHums,
+      totalHums: Math.max(totalHums, humSessions.length),
       weekHums,
       bestMatch,
       playlistSize: playlist.length
     },
-    recentHums,
+    recentHums: merged,
     user: {
       email: req.user.email,
       is_premium: !!req.user.is_premium,
@@ -977,6 +1009,27 @@ app.post('/api/hummatch/hum', requireAuth, (req, res) => {
     res.json({ ok: true });
   } catch (e) {
     res.status(500).json({ error: 'Failed to record hum' });
+  }
+});
+
+// Log a completed hum session + sync hum_count immediately
+app.post('/api/hummatch/hum/session', requireAuth, (req, res) => {
+  const { low_note, normal_note, high_note, voice_type, top_song, top_artist, match_score, hum_count } = req.body;
+  try {
+    stmts.insertHumSession.run(
+      req.user.id,
+      low_note || null, normal_note || null, high_note || null,
+      voice_type || '', top_song || '', top_artist || '', match_score || 0
+    );
+    // Also sync hum_count on the user record
+    if (hum_count !== undefined) {
+      db.prepare(`UPDATE users SET hum_count = ?, updated_at = datetime('now') WHERE id = ?`)
+        .run(hum_count, req.user.id);
+    }
+    res.json({ ok: true });
+  } catch (e) {
+    console.error('Hum session log error:', e.message);
+    res.status(500).json({ error: 'Failed to log hum session' });
   }
 });
 
