@@ -11,7 +11,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const BUILD_VERSION = process.env.BUILD_VERSION || '1.0.0';
 const ADMIN_KEY = process.env.ADMIN_API_KEY || 'hummatch-admin-2026';
-const SPOTIFY_AVAILABLE = process.env.SPOTIFY_AVAILABLE === 'true';
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || '';
 const stripe = STRIPE_SECRET_KEY ? require('stripe')(STRIPE_SECRET_KEY) : null;
@@ -650,13 +649,6 @@ app.post('/api/hummatch/event', (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
-// API: Spotify status
-// ---------------------------------------------------------------------------
-app.get('/api/hummatch/spotify-status', (_req, res) => {
-  res.json({ available: SPOTIFY_AVAILABLE });
-});
-
-// ---------------------------------------------------------------------------
 // API: Auth - Register / Login
 // ---------------------------------------------------------------------------
 app.post('/api/hummatch/auth/register', (req, res) => {
@@ -1083,19 +1075,6 @@ app.post('/api/hummatch/friend-codes', requireAuth, requirePremium, (req, res) =
 });
 
 // ---------------------------------------------------------------------------
-// API: Spotify Export (placeholder)
-// ---------------------------------------------------------------------------
-app.post('/api/hummatch/spotify/export', requireAuth, (req, res) => {
-  const songs = stmts.getPlaylist.all(req.user.id);
-  // Placeholder — real Spotify integration would use OAuth + Spotify Web API
-  res.json({
-    ok: true,
-    exported: songs.length,
-    message: `${songs.length} songs ready for Spotify export. Connect your Spotify account to complete.`
-  });
-});
-
-// ---------------------------------------------------------------------------
 // API: Account Settings
 // ---------------------------------------------------------------------------
 app.put('/api/hummatch/account', requireAuth, (req, res) => {
@@ -1395,5 +1374,4 @@ app.listen(PORT, () => {
   console.log(`  Static files: ${__dirname}`);
   console.log(`  Database: ${DB_PATH}`);
   console.log(`  Build version: ${BUILD_VERSION}`);
-  console.log(`  Spotify available: ${SPOTIFY_AVAILABLE}`);
 });

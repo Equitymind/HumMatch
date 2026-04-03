@@ -351,7 +351,7 @@
       <button onclick="exportSongListEs('copy')" style="flex:1;padding:13px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.85);font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">📋 Copiar lista</button>
       <button onclick="exportSongListEs('csv')" style="flex:1;padding:13px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.85);font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">⬇ Descargar CSV</button>
     </div>
-    <div style="font-size:0.68rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;line-height:1.5;">Hasta que nos conectemos directamente con Spotify y Apple Music, esta es la forma más fácil de crear una playlist. Selecciona las canciones que quieras, luego copia o descarga.</div>
+    <div style="font-size:0.68rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;line-height:1.5;">La forma más fácil de crear una playlist. Selecciona las canciones que quieras, luego copia o descarga a tu app de música favorita.</div>
   </div>
 
   <!-- SHARE SECTION -->
@@ -2793,25 +2793,6 @@ function showToast(msg) {
   setTimeout(() => t.remove(), 3000);
 }
 
-// ── SPOTIFY EXPORT ──────────────────────────────────────────────────────────
-const SPOTIFY_CLIENT_ID = '7fb671d75ec448abb430348a49ce9547';
-const SPOTIFY_REDIRECT   = 'https://hummatch.me/es';
-const SPOTIFY_SCOPES     = 'playlist-modify-public playlist-modify-private';
-
-async function sha256(plain) {
-  const enc = new TextEncoder();
-  const hash = await crypto.subtle.digest('SHA-256', enc.encode(plain));
-  return hash;
-}
-function base64urlencode(buf) {
-  return btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-}
-function generateCodeVerifier() {
-  const arr = new Uint8Array(32);
-  crypto.getRandomValues(arr);
-  return base64urlencode(arr.buffer);
-}
-
 function updateExportCountEs() {
   const checked = document.querySelectorAll('.hm-song-check-es:checked');
   const label = document.getElementById('export-count-label-es');
@@ -2832,7 +2813,7 @@ function exportSongListEs(mode) {
   if (mode === 'copy') {
     const text = pool.map((s, i) => `${i + 1}. ${s.title} — ${s.artist}`).join('\n');
     navigator.clipboard.writeText(text)
-      .then(() => showToast('¡Lista copiada! Pégala en Spotify, Notas o donde quieras 📋'))
+      .then(() => showToast('¡Lista copiada! Pégala en tu app de música, Notas o donde quieras 📋'))
       .catch(() => {
         const ta = document.createElement('textarea');
         ta.value = text;
@@ -2857,17 +2838,13 @@ function exportSongListEs(mode) {
     a.download = 'mis-canciones-hummatch.csv';
     a.click();
     URL.revokeObjectURL(url);
-    showToast('CSV descargado — ábrelo en Spotify, Excel o Google Sheets ⬇');
+    showToast('CSV descargado — ábrelo en Excel, Google Sheets o tu app de música ⬇');
     hmTrack('export_csv', { count: pool.length });
   }
 }
 
 
-window.addEventListener('load', () => {
-  if (sessionStorage.getItem('sp_pending') && new URLSearchParams(window.location.search).has('code')) {
-    spotifyHandleRedirect();
-  }
-});
+
 </script>
 <script>
 function toggleNav() {

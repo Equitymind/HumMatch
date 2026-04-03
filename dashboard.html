@@ -136,15 +136,6 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
 .hum-item .song{flex:1;color:rgba(255,255,255,0.7)}
 .hum-item .score{font-weight:800;color:#c084fc;min-width:32px;text-align:right}
 
-/* Spotify */
-.spotify-section{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.spotify-section .spotify-icon{font-size:2rem}
-.spotify-section .spotify-info{flex:1}
-.spotify-section .spotify-info .title{font-weight:700;font-size:0.9rem;color:#1DB954;margin-bottom:4px}
-.spotify-section .spotify-info .desc{font-size:0.78rem;color:rgba(255,255,255,0.4)}
-.btn-spotify{background:#1DB954;color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s}
-.btn-spotify:hover{background:#1ed760;transform:translateY(-1px);box-shadow:0 4px 16px rgba(29,185,84,0.3)}
-
 /* Account Settings */
 .settings-panel{display:none}
 .settings-panel.active{display:block}
@@ -428,19 +419,6 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
   <div class="card">
     <div id="hum-history">
       <div class="empty-state">Your recent hum history will appear here</div>
-    </div>
-  </div>
-
-  <!-- Spotify Export -->
-  <div class="section-title">🎧 Spotify Integration</div>
-  <div class="card">
-    <div class="spotify-section">
-      <div class="spotify-icon">🟢</div>
-      <div class="spotify-info">
-        <div class="title">Export to Spotify</div>
-        <div class="desc">Send your entire playlist to a new Spotify playlist in one click</div>
-      </div>
-      <button class="btn-spotify" onclick="exportSpotify()">Export All to Spotify</button>
     </div>
   </div>
 
@@ -978,17 +956,6 @@ async function submitSongRequest() {
     await loadSongRequests();
     toast('Song request submitted!');
   } catch (e) { toast('Failed to submit request'); }
-}
-
-// ---------------------------------------------------------------------------
-// Spotify Export
-// ---------------------------------------------------------------------------
-async function exportSpotify() {
-  try {
-    const res = await api('/api/hummatch/spotify/export', { method: 'POST' });
-    const d = await res.json();
-    toast(d.message || 'Export complete!');
-  } catch (e) { toast('Export failed'); }
 }
 
 // ---------------------------------------------------------------------------
