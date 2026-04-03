@@ -102,13 +102,52 @@
     .range-fill  { height: 100%; border-radius: 5px; background: var(--grad); position: absolute; }
     .diff-pill   { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; }
 
-    /* ── YOUTUBE ── */
-    .yt-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-    .yt-inner { padding: 36px; text-align: center; }
-    .yt-inner p { color: var(--muted); font-size: 0.9rem; margin-bottom: 18px; }
+    /* ── YOUTUBE HERO ── */
+    .yt-hero { margin: 28px 0 20px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: var(--card); }
+    .yt-thumb {
+      position: relative; width: 100%; aspect-ratio: 16/9; max-height: 340px;
+      background: linear-gradient(135deg, #1a0a2e 0%, #0d0b1a 50%, #1a0a2e 100%);
+      display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden;
+    }
+    .yt-thumb::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(168,85,247,0.15) 0%, transparent 70%);
+    }
+    .yt-play-btn {
+      width: 80px; height: 80px; background: #FF0000; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 40px rgba(255,0,0,0.35), 0 0 80px rgba(255,0,0,0.15);
+      transition: transform 0.15s, box-shadow 0.15s; position: relative; z-index: 1;
+    }
+    .yt-thumb:hover .yt-play-btn { transform: scale(1.08); box-shadow: 0 0 50px rgba(255,0,0,0.5), 0 0 100px rgba(255,0,0,0.2); }
+    .yt-thumb-label {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.7); color: rgba(255,255,255,0.75); font-size: 0.78rem;
+      padding: 4px 12px; border-radius: 20px; white-space: nowrap; z-index: 1;
+    }
+    .yt-thumb-song {
+      position: absolute; top: 16px; left: 16px; right: 16px; z-index: 1;
+      font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.85); text-align: center;
+    }
+
+    /* ── VOICE CTA (after video) ── */
+    .voice-cta {
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.15));
+      border: 1px solid rgba(168,85,247,0.32); border-top: none;
+      border-radius: 0 0 16px 16px; padding: 22px 24px; text-align: center;
+    }
+    .btn-test-voice {
+      display: inline-block; background: var(--grad); color: #fff;
+      padding: 14px 36px; border-radius: 12px; font-weight: 800; font-size: 1.05rem;
+      text-decoration: none; transition: opacity 0.15s, transform 0.1s;
+      box-shadow: 0 4px 24px rgba(168,85,247,0.35);
+    }
+    .btn-test-voice:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 6px 32px rgba(168,85,247,0.45); }
+    .voice-cta-sub { font-size: 0.82rem; color: var(--muted); margin-top: 10px; }
+
+    /* ── YOUTUBE (legacy, kept for footer) ── */
     .btn-yt { display: inline-flex; align-items: center; gap: 8px; background: #FF0000; color: #fff; padding: 12px 26px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: opacity 0.15s; }
     .btn-yt:hover { opacity: 0.85; }
-    .yt-note { font-size: 0.78rem; color: var(--muted); margin-top: 10px; }
 
     /* ── FAQ ── */
     .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 12px; }
@@ -141,7 +180,7 @@
 <nav>
   <a href="/" class="logo">HumMatch</a>
   <div class="nav-links">
-    <a href="/song/" class="nav-link">Songs</a>
+    <a href="/#catalog" class="nav-link">Songs</a>
     <a href="/blog" class="nav-link">Blog</a>
     <a href="/" class="nav-btn">Test My Voice</a>
   </div>
@@ -151,14 +190,32 @@
 <div class="hero">
   <nav aria-label="Breadcrumb" class="breadcrumb">
     <a href="/">HumMatch</a><span>›</span>
-    <a href="/song/">Song Directory</a><span>›</span>
+    <a href="/#catalog">Songs</a><span>›</span>
     Heathens
   </nav>
 
   <h1>Heathens</h1>
   <p class="by-artist">by <strong>Twenty One Pilots</strong> &nbsp;·&nbsp; 2016</p>
 
-  <div class="stats-grid">
+  <!-- YOUTUBE + VOICE CTA (above fold) -->
+  <a href="https://www.youtube.com/results?search_query=Heathens%20Twenty%20One%20Pilots%20karaoke"
+     target="_blank" rel="noopener noreferrer" class="yt-hero" style="display:block;text-decoration:none;">
+    <div class="yt-thumb">
+      <div class="yt-thumb-song">Heathens · Karaoke</div>
+      <div class="yt-play-btn">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <path d="M11 8l14 7-14 7V8z" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="yt-thumb-label">▶ Opens YouTube · "Heathens karaoke"</div>
+    </div>
+  </a>
+  <div class="voice-cta">
+    <a href="/?song=heathens-twenty-one-pilots" class="btn-test-voice">🎤 Test Your Voice on This Song</a>
+    <div class="voice-cta-sub">Hum for 5 seconds — find out if <strong style="color:var(--text)">Heathens</strong> fits your range. Free, no sign-up.</div>
+  </div>
+
+  <div class="stats-grid" style="margin-top:28px">
     <div class="stat">
       <div class="stat-label">Low Note</div>
       <div class="stat-val">F♯2</div>
@@ -189,8 +246,8 @@
   <div class="cta-box">
     <h2>Can You Sing "Heathens"?</h2>
     <p>Hum into your microphone for 5 seconds. HumMatch instantly detects your vocal range and tells you if this song fits your voice.</p>
-    <a href="/" class="btn-grad">🎤 Test My Voice — Free</a>
-    <a href="/song/" class="btn-ghost">Browse Song Directory</a>
+    <a href="/?song=heathens-twenty-one-pilots" class="btn-grad">🎤 Test My Voice on This Song</a>
+    <a href="/#catalog" class="btn-ghost">Browse All Songs</a>
   </div>
 
   <!-- RANGE VISUALIZATION -->
@@ -214,22 +271,6 @@
         <span class="diff-pill" style="background:#ef44441a; border:1px solid #ef444440; color:#ef4444">
           🔴 Hard — Demanding range — best for experienced singers.
         </span>
-      </div>
-    </div>
-  </div>
-
-  <!-- KARAOKE VIDEO -->
-  <div class="section">
-    <h2>Karaoke Video</h2>
-    <div class="yt-card">
-      <div class="yt-inner">
-        <p>Practice singing <strong style="color:var(--text)">Heathens</strong> with a backing track:</p>
-        <a href="https://www.youtube.com/results?search_query=Heathens%20Twenty%20One%20Pilots%20karaoke"
-           target="_blank" rel="noopener noreferrer" class="btn-yt">
-          <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><rect width="20" height="14" rx="3" fill="#FF0000"/><path d="M8 10V4l5 3-5 3z" fill="#fff"/></svg>
-          Find Karaoke Version on YouTube
-        </a>
-        <div class="yt-note">Opens YouTube search for "Heathens karaoke"</div>
       </div>
     </div>
   </div>
@@ -289,6 +330,11 @@
     <h2>Similar Songs by Vocal Range</h2>
     <div class="rel-grid">
       
+        <a href="/song/the-boys-are-back-in-town-thin-lizzy" class="rel-card">
+          <div class="rel-title">The Boys Are Back in Town</div>
+          <div class="rel-artist">Thin Lizzy</div>
+          <div class="rel-meta">F♯2–G♯4 &nbsp;<span style="color:#ef4444">Hard</span></div>
+        </a>
         <a href="/song/summer-of-69-bryan-adams" class="rel-card">
           <div class="rel-title">Summer of &#x27;69</div>
           <div class="rel-artist">Bryan Adams</div>
@@ -297,11 +343,6 @@
         <a href="/song/mr-jones-counting-crows" class="rel-card">
           <div class="rel-title">Mr. Jones</div>
           <div class="rel-artist">Counting Crows</div>
-          <div class="rel-meta">F♯2–G♯4 &nbsp;<span style="color:#ef4444">Hard</span></div>
-        </a>
-        <a href="/song/the-boys-are-back-in-town-thin-lizzy" class="rel-card">
-          <div class="rel-title">The Boys Are Back in Town</div>
-          <div class="rel-artist">Thin Lizzy</div>
           <div class="rel-meta">F♯2–G♯4 &nbsp;<span style="color:#ef4444">Hard</span></div>
         </a>
         <a href="/song/closing-time-semisonic" class="rel-card">
@@ -315,7 +356,7 @@
   <!-- BOTTOM CTA -->
   <div class="cta-box" style="margin-top:52px">
     <h2>Find Every Song That Fits YOUR Voice</h2>
-    <p>HumMatch analyzes your exact vocal range from a 5-second hum — then instantly shows you which of our 2,600+ songs you can sing. No sign-up, no downloads, completely free.</p>
+    <p>HumMatch analyzes your exact vocal range from a 5-second hum — then instantly shows you which of our 3,000+ songs you can sing. No sign-up, no downloads, completely free.</p>
     <a href="/" class="btn-grad">🎤 Start Humming — It's Free</a>
   </div>
 
