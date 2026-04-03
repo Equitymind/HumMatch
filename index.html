@@ -3956,9 +3956,10 @@ function closeNav() {
   });
 })();
 
-function startCheckout() {
+function startCheckout(plan) {
+  plan = plan || 'monthly';
   const token = localStorage.getItem('hm_token') || localStorage.getItem('hm_dash_token');
-  const url = '/api/hummatch/checkout/monthly' + (token ? '?token=' + token : '');
+  const url = '/api/hummatch/checkout/' + plan + (token ? '?token=' + token : '');
   window.location.href = url;
 }
 </script>

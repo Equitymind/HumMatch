@@ -928,8 +928,9 @@ function toast(msg) {
 // ---------------------------------------------------------------------------
 // Stripe checkout
 // ---------------------------------------------------------------------------
-function startCheckout() {
-  const url = '/api/hummatch/checkout/monthly' + (token ? '?token=' + token : '');
+function startCheckout(plan) {
+  plan = plan || 'monthly';
+  const url = '/api/hummatch/checkout/' + plan + (token ? '?token=' + token : '');
   window.location.href = url;
 }
 
