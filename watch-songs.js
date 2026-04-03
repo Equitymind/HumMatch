@@ -1,0 +1,313 @@
+#!/usr/bin/env node
+/**
+ * HumMatch Song Page Auto-Generator (Watcher)
+ *
+ * Watches index.html for changes. When a new song is added to the catalog,
+ * it automatically generates the SEO page and updates sitemap.xml.
+ *
+ * Run:  node watch-songs.js
+ * Stop: Ctrl+C
+ *
+ * Also usable as a one-shot sync (no watch loop):
+ *       node watch-songs.js --sync
+ */
+
+const fs   = require('fs');
+const path = require('path');
+
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+const BASE_URL   = 'https://hummatch.me';
+const SONG_DIR   = path.join(__dirname, 'song');
+const INDEX_HTML = path.join(__dirname, 'index.html');
+const SITEMAP    = path.join(__dirname, 'sitemap.xml');
+const SYNC_MODE  = process.argv.includes('--sync');
+
+// ─── MIDI / NOTE HELPERS ──────────────────────────────────────────────────────
+const NOTE_NAMES = ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+function midiToNote(midi) { return NOTE_NAMES[midi % 12] + (Math.floor(midi / 12) - 1); }
+function midiToNoteAscii(midi) {
+  const n = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+  return n[midi % 12] + (Math.floor(midi / 12) - 1);
+}
+function getDifficulty(lo, hi) {
+  const span = hi - lo;
+  if (span <= 12) return { label:'Easy',   emoji:'🟢', color:'#22c55e', desc:'Comfortable for most singers — fits within one octave.' };
+  if (span <= 17) return { label:'Medium', emoji:'🟡', color:'#f59e0b', desc:'Moderate challenge — requires some vocal training.' };
+  return               { label:'Hard',   emoji:'🔴', color:'#ef4444', desc:'Demanding range — best for experienced singers.' };
+}
+function slugify(s) {
+  return s.toLowerCase().replace(/['']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+function songSlug(t, a) { return slugify(t) + '-' + slugify(a); }
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+                  .replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
+}
+const MIDI_MIN = 36, MIDI_MAX = 84;
+function barLeft(lo)     { return Math.max(0, Math.round(((lo-MIDI_MIN)/(MIDI_MAX-MIDI_MIN))*100)); }
+function barWidth(lo,hi) { return Math.min(100-barLeft(lo), Math.max(4,Math.round(((hi-lo)/(MIDI_MAX-MIDI_MIN))*100))); }
+
+// ─── PARSE SONGS ─────────────────────────────────────────────────────────────
+function parseSongs() {
+  const html  = fs.readFileSync(INDEX_HTML, 'utf8');
+  const songs = [];
+  const seen  = new Set();
+  const reA   = /\{\s*title:'((?:[^'\\]|\\.)*)'\s*,\s*artist:'((?:[^'\\]|\\.)*)'\s*,\s*lo:(\d+)\s*,\s*hi:(\d+)\s*,\s*brightness:(\d+)(?:\s*,\s*year:(\d+))?\s*(?:,\s*tags:[^\}]*)?\}/g;
+  let m;
+  while ((m = reA.exec(html)) !== null) {
+    const key = m[1]+'|'+m[2];
+    if (!seen.has(key)) {
+      seen.add(key);
+      songs.push({ title:m[1].replace(/\\'/g,"'"), artist:m[2].replace(/\\'/g,"'"),
+                   lo:+m[3], hi:+m[4], brightness:+m[5], year:m[6]?+m[6]:null });
+    }
+  }
+  return songs;
+}
+
+// ─── RENDER PAGE ─────────────────────────────────────────────────────────────
+function renderPage(song, allSongs) {
+  const loNote  = midiToNote(song.lo);
+  const hiNote  = midiToNote(song.hi);
+  const loAscii = midiToNoteAscii(song.lo);
+  const hiAscii = midiToNoteAscii(song.hi);
+  const span    = song.hi - song.lo;
+  const diff    = getDifficulty(song.lo, song.hi);
+  const ytQuery = encodeURIComponent(`${song.title} ${song.artist} karaoke`);
+
+  const pageTitle = `${song.title} - Vocal Range & Karaoke Guide | HumMatch`;
+  const metaDesc  = `Find out if you can sing "${song.title}" by ${song.artist}. Vocal range: ${loAscii}–${hiAscii} (${span} semitones). Difficulty: ${diff.label}. Test your voice free on HumMatch.`;
+
+  // Related: 4 nearest by vocal range
+  const related = allSongs
+    .filter(s => s.slug !== song.slug)
+    .map(s => ({...s, dist: Math.abs(s.lo-song.lo)+Math.abs(s.hi-song.hi)+Math.abs(s.brightness-song.brightness)*0.1}))
+    .sort((a,b) => a.dist-b.dist).slice(0,4);
+
+  const relatedCards = related.map(r => {
+    const rL = midiToNote(r.lo), rH = midiToNote(r.hi), rD = getDifficulty(r.lo,r.hi);
+    return `\n        <a href="/song/${r.slug}" class="rel-card"><div class="rel-title">${esc(r.title)}</div><div class="rel-artist">${esc(r.artist)}</div><div class="rel-meta">${rL}–${rH} &nbsp;<span style="color:${rD.color}">${rD.label}</span></div></a>`;
+  }).join('');
+
+  const musicSchema      = { "@context":"https://schema.org","@type":"MusicComposition","name":song.title,"composer":{"@type":"MusicGroup","name":song.artist},...(song.year?{"datePublished":String(song.year)}:{}),"url":`${BASE_URL}/song/${song.slug}` };
+  const faqSchema        = { "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":`What vocal range do I need to sing ${song.title}?`,"acceptedAnswer":{"@type":"Answer","text":`${song.title} by ${song.artist} requires a vocal range from ${loAscii} to ${hiAscii}, spanning ${span} semitones.`}},
+    {"@type":"Question","name":`Is ${song.title} hard to sing?`,"acceptedAnswer":{"@type":"Answer","text":`${song.title} is rated ${diff.label}. ${diff.desc} It spans ${span} semitones.`}},
+    {"@type":"Question","name":`Can I sing ${song.title} at karaoke?`,"acceptedAnswer":{"@type":"Answer","text":`Whether you can sing ${song.title} depends on your vocal range (${loAscii}–${hiAscii}). Use HumMatch to test free.`}},
+    {"@type":"Question","name":`What is the highest note in ${song.title}?`,"acceptedAnswer":{"@type":"Answer","text":`The highest note in ${song.title} is ${hiAscii}.`}}
+  ]};
+  const breadcrumbSchema = { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"HumMatch","item":BASE_URL},
+    {"@type":"ListItem","position":2,"name":"Songs","item":`${BASE_URL}/#catalog`},
+    {"@type":"ListItem","position":3,"name":song.title,"item":`${BASE_URL}/song/${song.slug}`}
+  ]};
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${esc(pageTitle)}</title>
+  <meta name="description" content="${esc(metaDesc)}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="${BASE_URL}/song/${song.slug}">
+  <meta property="og:type" content="website"><meta property="og:title" content="${esc(pageTitle)}">
+  <meta property="og:description" content="${esc(metaDesc)}"><meta property="og:url" content="${BASE_URL}/song/${song.slug}">
+  <meta property="og:site_name" content="HumMatch">
+  <meta name="twitter:card" content="summary"><meta name="twitter:title" content="${esc(pageTitle)}">
+  <meta name="twitter:description" content="${esc(metaDesc)}">
+  <script type="application/ld+json">${JSON.stringify(musicSchema)}</script>
+  <script type="application/ld+json">${JSON.stringify(faqSchema)}</script>
+  <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0d0b1a;--card:rgba(255,255,255,0.04);--border:rgba(124,58,237,0.15);--grad:linear-gradient(135deg,#A855F7,#EC4899);--purple:#A855F7;--pink:#EC4899;--text:#e2e0f0;--muted:rgba(255,255,255,0.45);--radius:14px}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.65}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;background:rgba(13,11,26,0.92);backdrop-filter:blur(12px)}
+    .logo{font-size:1.2rem;font-weight:800;text-decoration:none;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nav-links{display:flex;gap:8px;align-items:center}
+    .nav-link{color:var(--muted);text-decoration:none;font-size:.875rem;padding:6px 12px;border-radius:8px;transition:color .15s}.nav-link:hover{color:var(--text)}
+    .nav-btn{background:var(--grad);color:#fff;padding:8px 18px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.875rem;transition:opacity .15s}.nav-btn:hover{opacity:.85}
+    .hero{max-width:880px;margin:0 auto;padding:48px 24px 32px}
+    .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:20px}.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--purple)}.breadcrumb span{margin:0 6px}
+    h1{font-size:clamp(1.8rem,5vw,2.9rem);font-weight:800;line-height:1.15;margin-bottom:6px}
+    .by-artist{font-size:1.05rem;color:var(--muted);margin-bottom:36px}.by-artist strong{color:var(--text)}
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:40px}
+    .stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;text-align:center}
+    .stat-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin-bottom:8px}
+    .stat-val{font-size:1.6rem;font-weight:800}.stat-sub{font-size:.72rem;color:var(--muted);margin-top:3px}
+    .content{max-width:880px;margin:0 auto;padding:0 24px 80px}
+    .section{margin:40px 0}h2{font-size:1.25rem;font-weight:700;margin-bottom:16px}
+    .cta-box{background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.12));border:1px solid rgba(168,85,247,0.28);border-radius:18px;padding:32px;text-align:center;margin:36px 0}
+    .cta-box h2{font-size:1.4rem;margin-bottom:10px}.cta-box p{color:var(--muted);font-size:.95rem;margin-bottom:22px;max-width:480px;margin-left:auto;margin-right:auto}
+    .btn-grad{display:inline-block;background:var(--grad);color:#fff;padding:14px 32px;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;transition:opacity .15s,transform .1s}.btn-grad:hover{opacity:.88;transform:translateY(-1px)}
+    .btn-ghost{display:inline-block;border:1px solid rgba(255,255,255,0.14);color:var(--text);padding:13px 24px;border-radius:12px;font-weight:600;font-size:.9rem;text-decoration:none;margin-left:12px;transition:background .15s}.btn-ghost:hover{background:rgba(255,255,255,0.07)}
+    .range-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+    .range-desc{font-size:.92rem;color:var(--muted);margin-bottom:18px}.range-desc strong{color:var(--text)}
+    .range-track{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .range-note{font-size:.82rem;font-weight:700;color:var(--muted);min-width:36px}
+    .range-bg{flex:1;height:10px;background:rgba(255,255,255,0.07);border-radius:5px;position:relative}
+    .range-fill{height:100%;border-radius:5px;background:var(--grad);position:absolute}
+    .diff-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:.85rem;font-weight:700}
+    .yt-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .yt-inner{padding:36px;text-align:center}.yt-inner p{color:var(--muted);font-size:.9rem;margin-bottom:18px}
+    .btn-yt{display:inline-flex;align-items:center;gap:8px;background:#FF0000;color:#fff;padding:12px 26px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.9rem;transition:opacity .15s}.btn-yt:hover{opacity:.85}
+    .yt-note{font-size:.78rem;color:var(--muted);margin-top:10px}
+    .faq-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:12px}
+    .faq-q{font-weight:700;font-size:.95rem;margin-bottom:8px;cursor:default}.faq-a{color:var(--muted);font-size:.9rem;line-height:1.6}.faq-a strong{color:var(--text)}
+    .rel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+    .rel-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;text-decoration:none;color:var(--text);display:block;transition:border-color .15s,background .15s}.rel-card:hover{border-color:rgba(168,85,247,0.45);background:rgba(168,85,247,0.07)}
+    .rel-title{font-weight:700;font-size:.9rem;margin-bottom:4px}.rel-artist{font-size:.78rem;color:var(--muted);margin-bottom:8px}.rel-meta{font-size:.78rem;color:var(--muted)}
+    footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--muted);font-size:.82rem}footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--purple)}
+    @media(max-width:580px){.btn-ghost{display:block;margin:10px auto 0;max-width:200px;text-align:center}.stats-grid{grid-template-columns:repeat(2,1fr)}.hero{padding-top:32px}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">HumMatch</a>
+  <div class="nav-links"><a href="/#catalog" class="nav-link">Songs</a><a href="/blog" class="nav-link">Blog</a><a href="/" class="nav-btn">Test My Voice</a></div>
+</nav>
+<div class="hero">
+  <nav aria-label="Breadcrumb" class="breadcrumb"><a href="/">HumMatch</a><span>›</span><a href="/#catalog">Songs</a><span>›</span>${esc(song.title)}</nav>
+  <h1>${esc(song.title)}</h1>
+  <p class="by-artist">by <strong>${esc(song.artist)}</strong>${song.year?` &nbsp;·&nbsp; ${song.year}`:''}</p>
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-label">Low Note</div><div class="stat-val">${loNote}</div><div class="stat-sub">MIDI ${song.lo}</div></div>
+    <div class="stat"><div class="stat-label">High Note</div><div class="stat-val">${hiNote}</div><div class="stat-sub">MIDI ${song.hi}</div></div>
+    <div class="stat"><div class="stat-label">Span</div><div class="stat-val">${span}</div><div class="stat-sub">semitones</div></div>
+    <div class="stat"><div class="stat-label">Difficulty</div><div class="stat-val" style="color:${diff.color}">${diff.label}</div><div class="stat-sub">${diff.emoji}</div></div>
+  </div>
+</div>
+<div class="content">
+  <div class="cta-box">
+    <h2>Can You Sing "${esc(song.title)}"?</h2>
+    <p>Hum into your microphone for 5 seconds. HumMatch instantly detects your vocal range and tells you if this song fits your voice.</p>
+    <a href="/" class="btn-grad">🎤 Test My Voice — Free</a><a href="/#catalog" class="btn-ghost">Browse All Songs</a>
+  </div>
+  <div class="section">
+    <h2>Vocal Range Breakdown</h2>
+    <div class="range-card">
+      <p class="range-desc"><strong>${esc(song.title)}</strong> spans <strong>${span} semitones</strong> — from <strong style="color:var(--purple)">${loNote}</strong> to <strong style="color:var(--pink)">${hiNote}</strong> ${span<12?'(under one octave)':span===12?'(exactly one octave)':`(${(span/12).toFixed(1)} octaves)`}.</p>
+      <div class="range-track"><span class="range-note">${loNote}</span><div class="range-bg"><div class="range-fill" style="left:${barLeft(song.lo)}%;width:${barWidth(song.lo,song.hi)}%;"></div></div><span class="range-note">${hiNote}</span></div>
+      <div><span class="diff-pill" style="background:${diff.color}1a;border:1px solid ${diff.color}40;color:${diff.color}">${diff.emoji} ${diff.label} — ${diff.desc}</span></div>
+    </div>
+  </div>
+  <div class="section">
+    <h2>Karaoke Video</h2>
+    <div class="yt-card"><div class="yt-inner">
+      <p>Practice singing <strong style="color:var(--text)">${esc(song.title)}</strong> with a backing track:</p>
+      <a href="https://www.youtube.com/results?search_query=${ytQuery}" target="_blank" rel="noopener noreferrer" class="btn-yt">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><rect width="20" height="14" rx="3" fill="#FF0000"/><path d="M8 10V4l5 3-5 3z" fill="#fff"/></svg>
+        Find Karaoke Version on YouTube
+      </a>
+      <div class="yt-note">Opens YouTube search for "${esc(song.title)} karaoke"</div>
+    </div></div>
+  </div>
+  <div class="section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item"><div class="faq-q">What vocal range do I need to sing ${esc(song.title)}?</div><div class="faq-a"><strong>${esc(song.title)}</strong> by ${esc(song.artist)} requires a vocal range from <strong>${loNote}</strong> to <strong>${hiNote}</strong>, spanning <strong>${span} semitones</strong>${span<12?' — under one octave.':span===12?' — exactly one octave.':`— about ${(span/12).toFixed(1)} octaves.`}</div></div>
+    <div class="faq-item"><div class="faq-q">Is ${esc(song.title)} hard to sing?</div><div class="faq-a"><strong style="color:${diff.color}">${diff.label}.</strong> ${diff.desc} The song spans ${span} semitones from ${loNote} to ${hiNote}. ${span<=12?'Most casual singers can handle this range.':span<=17?'Singers with some training should be comfortable.':'Practice the high notes before performing live.'}</div></div>
+    <div class="faq-item"><div class="faq-q">Can I sing ${esc(song.title)} at karaoke?</div><div class="faq-a">It depends on your vocal range. <strong>${esc(song.title)}</strong> sits between <strong>${loNote}</strong> and <strong>${hiNote}</strong>. <a href="/" style="color:var(--purple)">HumMatch detects your range in seconds</a> — just hum a note.</div></div>
+    <div class="faq-item"><div class="faq-q">What is the highest note in ${esc(song.title)}?</div><div class="faq-a">The highest note in <strong>${esc(song.title)}</strong> is <strong>${hiNote}</strong> (MIDI ${song.hi}). ${song.hi>=72?'Soprano/high tenor territory.':song.hi>=65?'Upper-mid range — reachable for tenors and mezzo-sopranos.':'Comfortable upper limit for baritones and altos.'}</div></div>
+    <div class="faq-item"><div class="faq-q">What is the lowest note in ${esc(song.title)}?</div><div class="faq-a">The lowest note is <strong>${loNote}</strong> (MIDI ${song.lo}). ${song.lo<=40?'Bass/baritone territory.':song.lo<=48?'Comfortable low-mid range, accessible for most voice types.':'Tenor/alto range — no deep bass required.'}</div></div>
+  </div>
+  <div class="section">
+    <h2>Similar Songs by Vocal Range</h2>
+    <div class="rel-grid">${relatedCards}</div>
+  </div>
+  <div class="cta-box" style="margin-top:52px">
+    <h2>Find Every Song That Fits YOUR Voice</h2>
+    <p>HumMatch analyzes your exact vocal range from a 5-second hum — then instantly shows you which of our 3,000+ songs you can sing.</p>
+    <a href="/" class="btn-grad">🎤 Start Humming — It's Free</a>
+  </div>
+</div>
+<footer><p>&copy; ${new Date().getFullYear()} HumMatch &nbsp;·&nbsp; <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a> &nbsp;·&nbsp; <a href="/blog">Blog</a> &nbsp;·&nbsp; <a href="/">Try HumMatch Free</a></p></footer>
+</body></html>`;
+}
+
+// ─── SITEMAP ──────────────────────────────────────────────────────────────────
+function rebuildSitemap(allSongs) {
+  const today = new Date().toISOString().split('T')[0];
+  const staticPages = [
+    { url:'/',                             priority:'1.0', freq:'weekly'  },
+    { url:'/blog',                         priority:'0.8', freq:'weekly'  },
+    { url:'/pricing',                      priority:'0.7', freq:'monthly' },
+    { url:'/blog/find-songs-you-can-nail', priority:'0.8', freq:'monthly' },
+    { url:'/blog/how-hummatch-works',      priority:'0.8', freq:'monthly' },
+    { url:'/blog/how-hummatch-was-built',  priority:'0.6', freq:'monthly' },
+  ];
+  const staticXml = staticPages.map(p =>
+    `  <url><loc>${BASE_URL}${p.url}</loc><lastmod>${today}</lastmod><changefreq>${p.freq}</changefreq><priority>${p.priority}</priority></url>`
+  ).join('\n');
+  const songXml = allSongs.map(s =>
+    `  <url><loc>${BASE_URL}/song/${s.slug}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>`
+  ).join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n\n  <!-- ── CORE PAGES ── -->\n${staticXml}\n\n  <!-- ── SONG PAGES (${allSongs.length}) ── -->\n${songXml}\n\n</urlset>\n`;
+}
+
+// ─── SYNC: generate any missing pages ────────────────────────────────────────
+function sync() {
+  if (!fs.existsSync(SONG_DIR)) fs.mkdirSync(SONG_DIR, { recursive: true });
+
+  const rawSongs = parseSongs();
+  const slugSeen = new Set();
+  const allSongs = [];
+  for (const s of rawSongs) {
+    const sl = songSlug(s.title, s.artist);
+    if (!slugSeen.has(sl)) { slugSeen.add(sl); allSongs.push({...s, slug: sl}); }
+  }
+
+  const existingFiles = new Set(fs.readdirSync(SONG_DIR).map(f => f.replace(/\.html$/, '')));
+  const newSongs = allSongs.filter(s => !existingFiles.has(s.slug));
+
+  if (newSongs.length === 0) {
+    console.log(`  ✅ All ${allSongs.length} catalog songs already have pages.`);
+    return allSongs;
+  }
+
+  let generated = 0;
+  for (const song of newSongs) {
+    try {
+      fs.writeFileSync(path.join(SONG_DIR, `${song.slug}.html`), renderPage(song, allSongs), 'utf8');
+      console.log(`  + Generated: ${song.slug}.html`);
+      generated++;
+    } catch (err) {
+      console.error(`  ✗ Error: ${song.slug} — ${err.message}`);
+    }
+  }
+
+  // Rebuild sitemap
+  const allFiles  = new Set(fs.readdirSync(SONG_DIR).map(f => f.replace(/\.html$/, '')));
+  const sitemapSongs = allSongs.filter(s => allFiles.has(s.slug));
+  fs.writeFileSync(SITEMAP, rebuildSitemap(sitemapSongs), 'utf8');
+  console.log(`  🗺  sitemap.xml updated — ${sitemapSongs.length} song pages`);
+
+  return allSongs;
+}
+
+// ─── MAIN ─────────────────────────────────────────────────────────────────────
+if (SYNC_MODE) {
+  console.log('\n🔄  HumMatch Song Page Sync');
+  console.log('===========================\n');
+  sync();
+  console.log('\n✅  Done.\n');
+  process.exit(0);
+}
+
+// Watch mode
+console.log('\n👁️   HumMatch Song Page Watcher');
+console.log('================================');
+console.log('  Watching index.html for new songs...');
+console.log('  Press Ctrl+C to stop.\n');
+
+// Initial sync
+sync();
+
+let debounceTimer = null;
+fs.watch(INDEX_HTML, (eventType) => {
+  if (eventType !== 'change') return;
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    console.log(`\n[${new Date().toLocaleTimeString()}] index.html changed — syncing pages...`);
+    sync();
+  }, 800); // debounce 800ms to avoid double-fire
+});
