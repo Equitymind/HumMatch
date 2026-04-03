@@ -1857,6 +1857,14 @@ app.get('/login', (_req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
 
+// Song directory index: /song/ → /song/index.html
+app.get('/song', (req, res) => {
+  res.sendFile(path.join(__dirname, 'song', 'index.html'));
+});
+app.get('/song/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'song', 'index.html'));
+});
+
 // Song SEO pages: /song/:slug → /song/:slug.html
 app.get('/song/:slug', (req, res) => {
   const file = path.join(__dirname, 'song', `${req.params.slug}.html`);

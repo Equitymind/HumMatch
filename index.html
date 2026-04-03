@@ -4921,8 +4921,8 @@ function showResults() {
     const artistSafe = s.artist.replace(/'/g,"\\'");
     const songKey = (s.title + '__' + s.artist).replace(/['"]/g,'');
     const genreLabel = tags.includes('rock') ? 'Rock' : tags.includes('pop') ? 'Pop' : tags.includes('country') ? 'Country' : tags.includes('classic') ? 'Classic' : '';
-    const pageSlug = getSongPageSlug(s.title, s.artist);
-    const guideLink = pageSlug ? `<a href="/song/${pageSlug}" style="color:rgba(168,85,247,0.7);font-size:0.68rem;font-weight:600;text-decoration:none;white-space:nowrap;" title="Vocal range guide for ${s.title}">Range Guide →</a>` : '';
+    const pageSlug = toSlug(s.title) + '-' + toSlug(s.artist);
+    const guideLink = `<a href="/song/${pageSlug}" style="color:rgba(168,85,247,0.7);font-size:0.68rem;font-weight:600;text-decoration:none;white-space:nowrap;" title="Vocal range guide for ${s.title}">Range Guide →</a>`;
     return `<li class="song-item"
       id="song-${songKey}"
       data-tier="${s.tier.key}"

@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Song Vocal Range Directory — 500 Songs | HumMatch</title>
-  <meta name="description" content="Browse 500 songs with vocal range data. Filter by difficulty, sort by range, and find which songs match your voice. Free vocal range test at HumMatch.">
+  <title>Song Vocal Range Directory — 2,500+ Songs | HumMatch</title>
+  <meta name="description" content="Browse 2,500+ songs with complete vocal range data. Filter by difficulty, sort by range, and find which songs match your voice. Free vocal range test at HumMatch.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://hummatch.me/song/">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website">
-  <meta property="og:title"       content="Song Vocal Range Directory — 500 Songs | HumMatch">
-  <meta property="og:description" content="Browse 500 songs with vocal range data. Filter by difficulty, sort by range, and find which songs match your voice.">
+  <meta property="og:title"       content="Song Vocal Range Directory — 2,500+ Songs | HumMatch">
+  <meta property="og:description" content="Browse 2,500+ songs with complete vocal range data. Filter by difficulty, sort by range, and find which songs match your voice.">
   <meta property="og:url"         content="https://hummatch.me/song/">
   <meta property="og:site_name"   content="HumMatch">
 
   <!-- Structured Data -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Song Vocal Range Directory","description":"Browse 500 songs with complete vocal range data — low note, high note, semitone span, and difficulty rating.","url":"https://hummatch.me/song/","isPartOf":{"@type":"WebSite","name":"HumMatch","url":"https://hummatch.me"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Song Vocal Range Directory","description":"Browse 2,500+ songs with complete vocal range data — low note, high note, semitone span, and difficulty rating.","url":"https://hummatch.me/song/","isPartOf":{"@type":"WebSite","name":"HumMatch","url":"https://hummatch.me"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"HumMatch","item":"https://hummatch.me"},{"@type":"ListItem","position":2,"name":"Song Directory","item":"https://hummatch.me/song/"}]}</script>
 
   <style>
@@ -50,7 +50,7 @@
     .nav-btn:hover { opacity: 0.85; }
 
     /* HERO */
-    .hero { max-width: 900px; margin: 0 auto; padding: 48px 24px 32px; }
+    .hero { max-width: 960px; margin: 0 auto; padding: 48px 24px 32px; }
     .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
     .breadcrumb a { color: var(--muted); text-decoration: none; }
     .breadcrumb a:hover { color: var(--purple); }
@@ -59,7 +59,7 @@
     .hero-sub { color: var(--muted); font-size: 1rem; margin-bottom: 32px; }
     .hero-sub strong { color: var(--text); }
 
-    /* CTA BANNER */
+    /* CTA STRIP */
     .cta-strip {
       background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(236,72,153,0.1));
       border: 1px solid rgba(168,85,247,0.25);
@@ -72,8 +72,15 @@
     .btn-grad { display: inline-block; background: var(--grad); color: #fff; padding: 11px 24px; border-radius: 11px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: opacity 0.15s, transform 0.1s; white-space: nowrap; }
     .btn-grad:hover { opacity: 0.88; transform: translateY(-1px); }
 
+    /* POPULAR SONGS */
+    .popular-section { max-width: 960px; margin: 0 auto; padding: 0 24px 24px; }
+    .popular-section h2 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); margin-bottom: 12px; }
+    .popular-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .popular-tag { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 0.78rem; text-decoration: none; color: var(--muted); transition: border-color 0.15s, color 0.15s; white-space: nowrap; }
+    .popular-tag:hover { border-color: rgba(168,85,247,0.4); color: var(--purple); }
+
     /* CONTROLS */
-    .controls { max-width: 900px; margin: 0 auto; padding: 0 24px 16px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .controls { max-width: 960px; margin: 0 auto; padding: 16px 24px 14px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
     .search-wrap { flex: 1; min-width: 220px; position: relative; }
     .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: 0.4; pointer-events: none; }
     #search { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 11px; padding: 11px 14px 11px 38px; color: var(--text); font-size: 0.9rem; outline: none; transition: border-color 0.15s; }
@@ -85,7 +92,7 @@
     .count-badge { font-size: 0.8rem; color: var(--muted); white-space: nowrap; padding: 0 4px; }
 
     /* TABLE */
-    .table-wrap { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; overflow-x: auto; }
+    .table-wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; }
     thead th {
       text-align: left; font-size: 0.72rem; text-transform: uppercase;
@@ -100,7 +107,6 @@
     tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.12s; }
     tbody tr:hover { background: rgba(168,85,247,0.06); }
     td { padding: 12px 14px; font-size: 0.875rem; vertical-align: middle; }
-    .td-song { max-width: 240px; }
     .song-name { font-weight: 700; color: var(--text); text-decoration: none; display: block; }
     .song-name:hover { color: var(--purple); }
     .td-artist { color: var(--muted); font-size: 0.82rem; }
@@ -110,21 +116,28 @@
     .diff-easy     { background: rgba(34,197,94,0.12);  border: 1px solid rgba(34,197,94,0.3);  color: #22c55e; }
     .diff-moderate { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; }
     .diff-hard     { background: rgba(239,68,68,0.12);  border: 1px solid rgba(239,68,68,0.3);  color: #ef4444; }
-    .guide-link { color: var(--purple); text-decoration: none; font-size: 0.78rem; white-space: nowrap; opacity: 0.8; }
+    .guide-link { color: var(--purple); text-decoration: none; font-size: 0.78rem; white-space: nowrap; opacity: 0.75; }
     .guide-link:hover { opacity: 1; text-decoration: underline; }
 
-    /* FOOTER */
-    footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--muted); font-size: 0.82rem; }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--purple); }
+    /* LOADING */
+    #loading { text-align: center; padding: 60px 20px; color: var(--muted); }
+    #loading .spinner { width: 32px; height: 32px; border: 3px solid rgba(168,85,247,0.2); border-top-color: var(--purple); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* EMPTY STATE */
     #no-results { display: none; text-align: center; padding: 60px 20px; color: var(--muted); }
     #no-results h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
 
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--purple); }
+    .footer-popular { max-width: 700px; margin: 0 auto 20px; }
+    .footer-popular h3 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 12px; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 12px; font-size: 0.78rem; }
+
     @media (max-width: 640px) {
       .td-range { display: none; }
-      .td-semi  { display: none; }
       h1 { font-size: 1.7rem; }
     }
   </style>
@@ -147,7 +160,7 @@
   </nav>
 
   <h1>Vocal Range Directory</h1>
-  <p class="hero-sub">Browse <strong>500 songs</strong> with complete vocal range data — low note, high note, semitone span, and difficulty. Find songs that fit your voice.</p>
+  <p class="hero-sub">Browse <strong>2,500+ songs</strong> with complete vocal range data — low note, high note, semitone span, and difficulty. Find songs that fit your voice.</p>
 
   <div class="cta-strip">
     <p><strong>Don't know your vocal range?</strong> Hum for 5 seconds and HumMatch instantly detects it — then shows you every song you can sing.</p>
@@ -155,6 +168,34 @@
   </div>
 </div>
 
+<!-- POPULAR SONGS -->
+<div class="popular-section">
+  <h2>Popular Songs</h2>
+  <div class="popular-tags">
+    <a href="/song/bohemian-rhapsody-queen" class="popular-tag">Bohemian Rhapsody</a>
+    <a href="/song/hotel-california-eagles" class="popular-tag">Hotel California</a>
+    <a href="/song/dont-stop-believin-journey" class="popular-tag">Don't Stop Believin'</a>
+    <a href="/song/africa-toto" class="popular-tag">Africa</a>
+    <a href="/song/sweet-home-alabama-lynyrd-skynyrd" class="popular-tag">Sweet Home Alabama</a>
+    <a href="/song/hallelujah-jeff-buckley" class="popular-tag">Hallelujah</a>
+    <a href="/song/rolling-in-the-deep-adele" class="popular-tag">Rolling in the Deep</a>
+    <a href="/song/billie-jean-michael-jackson" class="popular-tag">Billie Jean</a>
+    <a href="/song/wonderwall-oasis" class="popular-tag">Wonderwall</a>
+    <a href="/song/sweet-caroline-neil-diamond" class="popular-tag">Sweet Caroline</a>
+    <a href="/song/let-it-be-the-beatles" class="popular-tag">Let It Be</a>
+    <a href="/song/hey-jude-the-beatles" class="popular-tag">Hey Jude</a>
+    <a href="/song/livin-on-a-prayer-bon-jovi" class="popular-tag">Livin' on a Prayer</a>
+    <a href="/song/mr-brightside-the-killers" class="popular-tag">Mr. Brightside</a>
+    <a href="/song/shape-of-you-ed-sheeran" class="popular-tag">Shape of You</a>
+    <a href="/song/dancing-queen-abba" class="popular-tag">Dancing Queen</a>
+    <a href="/song/take-on-me-a-ha" class="popular-tag">Take On Me</a>
+    <a href="/song/eye-of-the-tiger-survivor" class="popular-tag">Eye of the Tiger</a>
+    <a href="/song/september-earth-wind-fire" class="popular-tag">September</a>
+    <a href="/song/dont-stop-me-now-queen" class="popular-tag">Don't Stop Me Now</a>
+  </div>
+</div>
+
+<!-- CONTROLS -->
 <div class="controls">
   <div class="search-wrap">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -166,11 +207,16 @@
     <option value="Moderate">Moderate (16–22)</option>
     <option value="Hard">Hard (23+)</option>
   </select>
-  <span class="count-badge" id="count-badge">500 songs</span>
+  <span class="count-badge" id="count-badge">Loading…</span>
 </div>
 
+<!-- TABLE -->
 <div class="table-wrap">
-  <table id="song-table">
+  <div id="loading">
+    <div class="spinner"></div>
+    Loading songs…
+  </div>
+  <table id="song-table" style="display:none">
     <thead>
       <tr>
         <th data-col="title" class="sorted">Song <span class="sort-icon">↑</span></th>
@@ -190,6 +236,21 @@
 </div>
 
 <footer>
+  <div class="footer-popular">
+    <h3>Popular Song Guides</h3>
+    <div class="footer-links">
+      <a href="/song/bohemian-rhapsody-queen">Bohemian Rhapsody</a>
+      <a href="/song/hotel-california-eagles">Hotel California</a>
+      <a href="/song/africa-toto">Africa</a>
+      <a href="/song/rolling-in-the-deep-adele">Rolling in the Deep</a>
+      <a href="/song/billie-jean-michael-jackson">Billie Jean</a>
+      <a href="/song/sweet-caroline-neil-diamond">Sweet Caroline</a>
+      <a href="/song/dont-stop-believin-journey">Don't Stop Believin'</a>
+      <a href="/song/wonderwall-oasis">Wonderwall</a>
+      <a href="/song/hey-jude-the-beatles">Hey Jude</a>
+      <a href="/song/hallelujah-jeff-buckley">Hallelujah</a>
+    </div>
+  </div>
   <p>
     &copy; 2026 HumMatch &nbsp;·&nbsp;
     <a href="/privacy">Privacy</a> &nbsp;·&nbsp;
@@ -200,50 +261,48 @@
 </footer>
 
 <script>
-const RAW = [["whats-up-4-non-blondes","What's Up","4 Non Blondes","B2","D5",27],["shallow-a-star-is-born","Shallow","A Star is Born","A♯2","D5",28],["take-on-me-a-ha","Take On Me","a-ha","A2","G♯5",35],["dancing-queen-abba","Dancing Queen","ABBA","D3","E5",26],["back-in-black-ac-dc","Back in Black","AC/DC","F♯2","A♯4",28],["hells-bells-ac-dc","Hells Bells","AC/DC","E2","G♯4",28],["highway-to-hell-ac-dc","Highway to Hell","AC/DC","F♯2","A♯4",28],["thunderstruck-ac-dc","Thunderstruck","AC/DC","F♯2","A♯4",28],["you-shook-me-all-night-long-ac-dc","You Shook Me All Night Long","AC/DC","F♯2","A♯4",28],["easy-on-me-adele","Easy On Me","Adele","D3","D5",24],["hello-adele","Hello","Adele","D3","D5",24],["rolling-in-the-deep-adele","Rolling in the Deep","Adele","D3","D5",24],["send-my-love-adele","Send My Love","Adele","D3","D5",24],["set-fire-to-the-rain-adele","Set Fire to the Rain","Adele","D3","E5",26],["skyfall-adele","Skyfall","Adele","A♯2","C5",26],["someone-like-you-adele","Someone Like You","Adele","D3","C5",22],["when-we-were-young-adele","When We Were Young","Adele","D3","D♯5",25],["dream-on-aerosmith","Dream On","Aerosmith","G♯2","E5",32],["walk-this-way-aerosmith","Walk This Way","Aerosmith","G♯2","C5",28],["belle-al-green","Belle","Al Green","G2","A4",26],["hand-in-my-pocket-alanis-morissette","Hand in My Pocket","Alanis Morissette","A♯2","A♯4",24],["ironic-alanis-morissette","Ironic","Alanis Morissette","B2","A♯4",23],["you-oughta-know-alanis-morissette","You Oughta Know","Alanis Morissette","A♯2","C5",26],["man-in-the-box-alice-in-chains","Man in the Box","Alice in Chains","D2","F♯4",28],["rooster-alice-in-chains","Rooster","Alice in Chains","E2","G♯4",28],["would-alice-in-chains","Would?","Alice in Chains","E2","G♯4",28],["ramblin-man-allman-brothers","Ramblin' Man","Allman Brothers","F2","F♯4",25],["back-to-black-amy-winehouse","Back to Black","Amy Winehouse","D3","G♯4",18],["rehab-amy-winehouse","Rehab","Amy Winehouse","D3","A♯4",20],["valerie-amy-winehouse","Valerie","Amy Winehouse","D3","A♯4",20],["505-arctic-monkeys","505","Arctic Monkeys","F♯2","G4",25],["do-i-wanna-know-arctic-monkeys","Do I Wanna Know?","Arctic Monkeys","F♯2","G♯4",26],["r-u-mine-arctic-monkeys","R U Mine?","Arctic Monkeys","F♯2","G♯4",26],["into-you-ariana-grande","Into You","Ariana Grande","F♯3","A♯5",28],["positions-ariana-grande","Positions","Ariana Grande","E3","C6",32],["problem-ariana-grande","Problem","Ariana Grande","F♯3","G♯5",26],["thank-u-next-ariana-grande","Thank U Next","Ariana Grande","F♯3","C6",30],["sweet-but-psycho-ava-max","Sweet but Psycho","Ava Max","D3","F♯5",28],["cant-get-enough-barry-white","Can't Get Enough","Barry White","C2","F3",17],["stand-by-me-ben-e-king","Stand by Me","Ben E. King","G2","F♯4",23],["take-my-breath-away-berlin","Take My Breath Away","Berlin","C3","C5",24],["crazy-in-love-beyonc","Crazy in Love","Beyoncé","D3","E5",26],["halo-beyonc","Halo","Beyoncé","D3","E5",26],["irreplaceable-beyonc","Irreplaceable","Beyoncé","D3","D5",24],["love-on-top-beyonc","Love on Top","Beyoncé","D3","F♯5",28],["single-ladies-beyonc","Single Ladies","Beyoncé","D3","E5",26],["crazy-in-love-beyonc-ft-jay-z","Crazy in Love","Beyoncé ft. Jay-Z","D♯3","F5",26],["bad-guy-billie-eilish","Bad Guy","Billie Eilish","D3","G♯4",18],["everything-i-wanted-billie-eilish","Everything I Wanted","Billie Eilish","C3","A♯4",22],["lovely-billie-eilish","Lovely","Billie Eilish","C3","A♯4",22],["ocean-eyes-billie-eilish","Ocean Eyes","Billie Eilish","D3","A♯4",20],["piano-man-billy-joel","Piano Man","Billy Joel","F♯2","G4",25],["we-didnt-start-the-fire-billy-joel","We Didn't Start the Fire","Billy Joel","G2","G4",24],["iron-man-black-sabbath","Iron Man","Black Sabbath","D2","F4",27],["paranoid-black-sabbath","Paranoid","Black Sabbath","E2","G♯4",28],["is-this-love-bob-marley","Is This Love","Bob Marley","F♯2","F♯4",24],["no-woman-no-cry-bob-marley","No Woman No Cry","Bob Marley","E2","F4",25],["redemption-song-bob-marley","Redemption Song","Bob Marley","E2","F4",25],["three-little-birds-bob-marley","Three Little Birds","Bob Marley","F♯2","F♯4",24],["livin-on-a-prayer-bon-jovi","Livin' on a Prayer","Bon Jovi","G2","A♯4",27],["wanted-dead-or-alive-bon-jovi","Wanted Dead or Alive","Bon Jovi","A♯2","C♯5",27],["you-give-love-a-bad-name-bon-jovi","You Give Love a Bad Name","Bon Jovi","B2","D5",27],["total-eclipse-of-the-heart-bonnie-tyler","Total Eclipse of the Heart","Bonnie Tyler","C♯3","E5",27],["foreplay-long-time-boston","Foreplay/Long Time","Boston","G♯2","D5",30],["more-than-a-feeling-boston","More Than a Feeling","Boston","G♯2","D5",30],["born-to-run-bruce-springsteen","Born to Run","Bruce Springsteen","F♯2","G♯4",26],["dancing-in-the-dark-bruce-springsteen","Dancing in the Dark","Bruce Springsteen","F♯2","G4",25],["glory-days-bruce-springsteen","Glory Days","Bruce Springsteen","F♯2","F♯4",24],["the-river-bruce-springsteen","The River","Bruce Springsteen","F2","F4",24],["thunder-road-bruce-springsteen","Thunder Road","Bruce Springsteen","G2","G4",24],["grenade-bruno-mars","Grenade","Bruno Mars","A♯2","C5",26],["just-the-way-you-are-bruno-mars","Just the Way You Are","Bruno Mars","A♯2","C5",26],["uptown-funk-bruno-mars","Uptown Funk","Bruno Mars","A♯2","D5",28],["cuts-like-a-knife-bryan-adams","Cuts Like a Knife","Bryan Adams","F2","G4",26],["run-to-you-bryan-adams","Run to You","Bryan Adams","F♯2","G♯4",26],["somebody-bryan-adams","Somebody","Bryan Adams","F♯2","G♯4",26],["summer-of-69-bryan-adams","Summer of '69","Bryan Adams","F♯2","G♯4",26],["everything-zen-bush","Everything Zen","Bush","F2","A♯4",29],["glycerine-bush","Glycerine","Bush","F2","G♯4",27],["dancing-on-my-own-calum-scott","Dancing on My Own","Calum Scott","G2","C5",29],["you-are-the-reason-calum-scott","You Are the Reason","Calum Scott","G2","A♯4",27],["my-heart-will-go-on-celine-dion","My Heart Will Go On","Celine Dion","E3","G♯5",28],["the-power-of-love-celine-dion","The Power of Love","Celine Dion","E3","A♯5",30],["good-luck-babe-chappell-roan","Good Luck, Babe!","Chappell Roan","D3","F♯5",28],["hot-to-go-chappell-roan","Hot to Go!","Chappell Roan","D3","E5",26],["pink-pony-club-chappell-roan","Pink Pony Club","Chappell Roan","D3","F5",27],["attention-charlie-puth","Attention","Charlie Puth","G♯2","C5",28],["one-call-away-charlie-puth","One Call Away","Charlie Puth","G♯2","B4",27],["we-dont-talk-anymore-charlie-puth","We Don't Talk Anymore","Charlie Puth","G♯2","C5",28],["broken-halos-chris-stapleton","Broken Halos","Chris Stapleton","F2","F4",24],["tennessee-whiskey-chris-stapleton","Tennessee Whiskey","Chris Stapleton","E2","G4",27],["dont-know-what-you-got-cinderella","Don't Know What You Got","Cinderella","G2","C5",29],["clocks-coldplay","Clocks","Coldplay","F♯2","A♯4",28],["fix-you-coldplay","Fix You","Coldplay","F♯2","A♯4",28],["speed-of-sound-coldplay","Speed of Sound","Coldplay","F♯2","A♯4",28],["the-scientist-coldplay","The Scientist","Coldplay","F♯2","A♯4",28],["viva-la-vida-coldplay","Viva la Vida","Coldplay","G2","A♯4",27],["yellow-coldplay","Yellow","Coldplay","F♯2","A♯4",28],["mr-jones-counting-crows","Mr. Jones","Counting Crows","F♯2","G♯4",26],["round-here-counting-crows","Round Here","Counting Crows","F2","G♯4",27],["girls-just-want-to-have-fun-cyndi-lauper","Girls Just Want to Have Fun","Cyndi Lauper","D3","F♯5",28],["stolen-dashboard-confessional","Stolen","Dashboard Confessional","G2","A♯4",27],["titanium-david-guetta","Titanium","David Guetta","C3","F♯5",30],["animal-def-leppard","Animal","Def Leppard","G2","B4",28],["love-bites-def-leppard","Love Bites","Def Leppard","F♯2","A♯4",28],["photograph-def-leppard","Photograph","Def Leppard","G2","A♯4",27],["pour-some-sugar-on-me-def-leppard","Pour Some Sugar on Me","Def Leppard","G2","C5",29],["skyscraper-demi-lovato","Skyscraper","Demi Lovato","D3","F♯5",28],["come-on-eileen-dexys-midnight-runners","Come On Eileen","Dexys Midnight Runners","G2","A♯4",27],["money-for-nothing-dire-straits","Money for Nothing","Dire Straits","F♯2","G4",25],["sultans-of-swing-dire-straits","Sultans of Swing","Dire Straits","F♯2","F♯4",24],["under-the-sea-disney","Under the Sea","Disney","F♯2","A♯4",28],["something-there-disney-cast","Something There","Disney Cast","D3","D5",24],["9-to-5-dolly-parton","9 to 5","Dolly Parton","D3","F♯5",28],["coat-of-many-colors-dolly-parton","Coat of Many Colors","Dolly Parton","D3","E5",26],["i-will-always-love-you-dolly-parton","I Will Always Love You","Dolly Parton","D3","F♯5",28],["jolene-dolly-parton","Jolene","Dolly Parton","D3","F♯5",28],["gods-plan-drake","God's Plan","Drake","F♯2","G4",25],["hotline-bling-drake","Hotline Bling","Drake","F♯2","G♯4",26],["one-dance-drake","One Dance","Drake","G2","G♯4",25],["break-my-heart-dua-lipa","Break My Heart","Dua Lipa","E3","D5",22],["dont-start-now-dua-lipa","Don't Start Now","Dua Lipa","C3","C♯5",25],["idgaf-dua-lipa","IDGAF","Dua Lipa","E3","D5",22],["levitating-dua-lipa","Levitating","Dua Lipa","C3","D5",26],["new-rules-dua-lipa","New Rules","Dua Lipa","C3","D5",26],["physical-dua-lipa","Physical","Dua Lipa","C3","E5",28],["one-kiss-dua-lipa-calvin-harris","One Kiss","Dua Lipa &amp; Calvin Harris","E3","D5",22],["hotel-california-eagles","Hotel California","Eagles","G♯2","G4",23],["september-earth-wind-fire","September","Earth, Wind &amp; Fire","C3","D5",26],["castle-on-the-hill-ed-sheeran","Castle on the Hill","Ed Sheeran","C3","A♯4",22],["dont-ed-sheeran","Don't","Ed Sheeran","G2","G4",24],["galway-girl-ed-sheeran","Galway Girl","Ed Sheeran","D3","C5",22],["lego-house-ed-sheeran","Lego House","Ed Sheeran","A♯2","A4",23],["perfect-ed-sheeran","Perfect","Ed Sheeran","A2","C5",27],["photograph-ed-sheeran","Photograph","Ed Sheeran","C3","A4",21],["shape-of-you-ed-sheeran","Shape of You","Ed Sheeran","A2","A♯4",25],["thinking-out-loud-ed-sheeran","Thinking Out Loud","Ed Sheeran","A2","C5",27],["bennie-and-the-jets-elton-john","Bennie and the Jets","Elton John","G2","A♯4",27],["can-you-feel-the-love-tonight-elton-john","Can You Feel the Love Tonight","Elton John","F♯2","A♯4",28],["circle-of-life-elton-john","Circle of Life","Elton John","F♯2","C5",30],["crocodile-rock-elton-john","Crocodile Rock","Elton John","G♯2","C5",28],["rocket-man-elton-john","Rocket Man","Elton John","G2","A♯4",27],["saturday-nights-alright-elton-john","Saturday Night's Alright","Elton John","G♯2","C5",28],["tiny-dancer-elton-john","Tiny Dancer","Elton John","G2","A♯4",27],["your-song-elton-john","Your Song","Elton John","G2","G♯4",25],["cant-help-falling-in-love-elvis-presley","Can't Help Falling in Love","Elvis Presley","F♯2","D4",20],["suspicious-minds-elvis-presley","Suspicious Minds","Elvis Presley","E2","D♯4",23],["wrecking-ball-eric-church","Wrecking Ball","Eric Church","F♯2","F♯4",24],["layla-unplugged-eric-clapton","Layla (Unplugged)","Eric Clapton","F♯2","G♯4",26],["tears-in-heaven-eric-clapton","Tears in Heaven","Eric Clapton","F♯2","G♯4",26],["wonderful-tonight-eric-clapton","Wonderful Tonight","Eric Clapton","F♯2","F♯4",24],["more-than-words-extreme","More Than Words","Extreme","G2","G♯4",25],["go-your-own-way-fleetwood-mac","Go Your Own Way","Fleetwood Mac","G2","G♯4",25],["gold-dust-woman-fleetwood-mac","Gold Dust Woman","Fleetwood Mac","C3","C5",24],["the-chain-fleetwood-mac","The Chain","Fleetwood Mac","F♯2","G♯4",26],["cruise-florida-georgia-line","Cruise","Florida Georgia Line","A2","G♯4",23],["fly-me-to-the-moon-frank-sinatra","Fly Me to the Moon","Frank Sinatra","F♯2","D4",20],["my-way-frank-sinatra","My Way","Frank Sinatra","E2","D4",22],["new-york-new-york-frank-sinatra","New York New York","Frank Sinatra","F♯2","E4",22],["friends-in-low-places-garth-brooks","Friends in Low Places","Garth Brooks","E2","E4",24],["barcelona-george-ezra","Barcelona","George Ezra","E2","G4",27],["budapest-george-ezra","Budapest","George Ezra","E2","G4",27],["shotgun-george-ezra","Shotgun","George Ezra","E2","G4",27],["careless-whisper-george-michael","Careless Whisper","George Michael","F♯2","A♯4",28],["faith-george-michael","Faith","George Michael","F♯2","G♯4",26],["father-figure-george-michael","Father Figure","George Michael","F♯2","A♯4",28],["baker-street-gerry-rafferty","Baker Street","Gerry Rafferty","F♯2","G4",25],["i-will-survive-gloria-gaynor","I Will Survive","Gloria Gaynor","E3","D♯5",23],["somebody-i-used-to-know-gotye","Somebody I Used to Know","Gotye","G2","C5",29],["somebody-that-i-used-to-know-gotye","Somebody That I Used to Know","Gotye","G2","C5",29],["november-rain-guns-n-roses","November Rain","Guns N&#x27; Roses","G2","C5",29],["paradise-city-guns-n-roses","Paradise City","Guns N&#x27; Roses","G♯2","E5",32],["sweet-child-o-mine-guns-n-roses","Sweet Child O' Mine","Guns N&#x27; Roses","G♯2","E5",32],["welcome-to-the-jungle-guns-n-roses","Welcome to the Jungle","Guns N&#x27; Roses","G2","E5",33],["adore-you-harry-styles","Adore You","Harry Styles","G♯2","C5",28],["as-it-was-harry-styles","As It Was","Harry Styles","G♯2","C5",28],["golden-harry-styles","Golden","Harry Styles","G2","A♯4",27],["lights-up-harry-styles","Lights Up","Harry Styles","C3","A♯4",22],["sign-of-the-times-harry-styles","Sign of the Times","Harry Styles","G♯2","D5",30],["watermelon-sugar-harry-styles","Watermelon Sugar","Harry Styles","G♯2","C5",28],["someone-new-hozier","Someone New","Hozier","E2","G♯4",28],["take-me-to-church-hozier","Take Me to Church","Hozier","E2","G♯4",28],["too-sweet-hozier","Too Sweet","Hozier","G2","B4",28],["work-song-hozier","Work Song","Hozier","F♯2","A♯4",28],["dont-you-want-me-human-league","Don't You Want Me","Human League","F♯2","G♯4",26],["let-it-go-idina-menzel","Let It Go","Idina Menzel","C3","A♯5",34],["show-yourself-idina-menzel","Show Yourself","Idina Menzel","E3","G5",27],["into-the-unknown-idina-menzel-aurora","Into the Unknown","Idina Menzel &amp; Aurora","E3","G5",27],["believer-imagine-dragons","Believer","Imagine Dragons","F2","A♯4",29],["demons-imagine-dragons","Demons","Imagine Dragons","E2","G♯4",28],["enemy-imagine-dragons","Enemy","Imagine Dragons","F2","A♯4",29],["natural-imagine-dragons","Natural","Imagine Dragons","F2","A♯4",29],["radioactive-imagine-dragons","Radioactive","Imagine Dragons","E2","G♯4",28],["thunder-imagine-dragons","Thunder","Imagine Dragons","F2","A♯4",29],["number-of-the-beast-iron-maiden","Number of the Beast","Iron Maiden","G♯2","E5",32],["run-to-the-hills-iron-maiden","Run to the Hills","Iron Maiden","G♯2","E5",32],["the-trooper-iron-maiden","The Trooper","Iron Maiden","G2","D5",31],["middle-child-j-cole","Middle Child","J. Cole","F♯2","G♯4",26],["no-role-modelz-j-cole","No Role Modelz","J. Cole","F♯2","G4",25],["banana-pancakes-jack-johnson","Banana Pancakes","Jack Johnson","F♯2","F♯4",24],["better-together-jack-johnson","Better Together","Jack Johnson","F♯2","F♯4",24],["upside-down-jack-johnson","Upside Down","Jack Johnson","G2","G4",24],["get-up-offa-that-thing-james-brown","Get Up Offa That Thing","James Brown","E2","G♯4",28],["i-got-you-i-feel-good-james-brown","I Got You (I Feel Good)","James Brown","E2","G♯4",28],["papas-got-a-brand-new-bag-james-brown","Papa's Got a Brand New Bag","James Brown","E2","G♯4",28],["hallelujah-jeff-buckley","Hallelujah","Jeff Buckley","F♯2","E5",34],["be-our-guest-jerry-orbach","Be Our Guest","Jerry Orbach","G♯2","A♯4",26],["are-you-gonna-be-my-girl-jet","Are You Gonna Be My Girl","Jet","G2","A♯4",27],["part-of-your-world-jodi-benson","Part of Your World","Jodi Benson","E3","F♯5",26],["country-roads-john-denver","Country Roads","John Denver","G♯2","G4",23],["all-of-me-john-legend","All of Me","John Legend","G2","A♯4",27],["ordinary-people-john-legend","Ordinary People","John Legend","G2","G♯4",25],["imagine-john-lennon","Imagine","John Lennon","A2","G4",22],["gravity-john-mayer","Gravity","John Mayer","F♯2","G♯4",26],["waiting-on-the-world-to-change-john-mayer","Waiting on the World to Change","John Mayer","F♯2","G♯4",26],["your-body-is-a-wonderland-john-mayer","Your Body Is a Wonderland","John Mayer","G2","A4",26],["hurt-johnny-cash","Hurt","Johnny Cash","D2","G3",17],["ring-of-fire-johnny-cash","Ring of Fire","Johnny Cash","D2","A3",19],["walk-the-line-johnny-cash","Walk the Line","Johnny Cash","E2","G3",15],["burnin-up-jonas-brothers","Burnin' Up","Jonas Brothers","B2","D5",27],["sucker-jonas-brothers","Sucker","Jonas Brothers","A♯2","C♯5",27],["waffle-house-jonas-brothers","Waffle House","Jonas Brothers","A2","B4",26],["what-a-man-gotta-do-jonas-brothers","What a Man Gotta Do","Jonas Brothers","A♯2","C5",26],["you-raise-me-up-josh-groban","You Raise Me Up","Josh Groban","E2","G♯4",28],["dont-stop-believin-journey","Don't Stop Believin'","Journey","G♯2","A♯4",26],["breaking-the-law-judas-priest","Breaking the Law","Judas Priest","F♯2","A♯4",28],["youve-got-another-thing-comin-judas-priest","You've Got Another Thing Comin'","Judas Priest","F♯2","A♯4",28],["love-yourself-justin-bieber","Love Yourself","Justin Bieber","G♯2","A♯4",26],["peaches-justin-bieber","Peaches","Justin Bieber","G♯2","A♯4",26],["sorry-justin-bieber","Sorry","Justin Bieber","A2","C5",27],["cant-stop-the-feeling-justin-timberlake","Can't Stop the Feeling","Justin Timberlake","B2","D5",27],["mirrors-justin-timberlake","Mirrors","Justin Timberlake","A♯2","D♯5",29],["carry-on-wayward-son-kansas","Carry On Wayward Son","Kansas","G♯2","C5",28],["firework-katy-perry","Firework","Katy Perry","E3","E5",24],["roar-katy-perry","Roar","Katy Perry","E3","E5",24],["this-is-me-keala-settle","This Is Me","Keala Settle","D3","E5",26],["since-u-been-gone-kelly-clarkson","Since U Been Gone","Kelly Clarkson","E3","F♯5",26],["stronger-kelly-clarkson","Stronger","Kelly Clarkson","E3","G5",27],["dna-kendrick-lamar","DNA.","Kendrick Lamar","F♯2","G4",25],["humble-kendrick-lamar","HUMBLE.","Kendrick Lamar","F♯2","G♯4",26],["swimming-pools-kendrick-lamar","Swimming Pools","Kendrick Lamar","F♯2","G♯4",26],["sex-on-fire-kings-of-leon","Sex on Fire","Kings of Leon","F♯2","A♯4",28],["use-somebody-kings-of-leon","Use Somebody","Kings of Leon","F♯2","A♯4",28],["alejandro-lady-gaga","Alejandro","Lady Gaga","C3","E5",28],["always-remember-us-this-way-lady-gaga","Always Remember Us This Way","Lady Gaga","C3","E5",28],["bad-romance-lady-gaga","Bad Romance","Lady Gaga","C3","F♯5",30],["born-this-way-lady-gaga","Born This Way","Lady Gaga","C3","F♯5",30],["poker-face-lady-gaga","Poker Face","Lady Gaga","C3","E5",28],["shallow-lady-gaga-bradley-cooper","Shallow","Lady Gaga / Bradley Cooper","A♯2","F♯5",32],["black-dog-led-zeppelin","Black Dog","Led Zeppelin","F♯2","F♯5",36],["rock-and-roll-led-zeppelin","Rock and Roll","Led Zeppelin","G♯2","D5",30],["stairway-to-heaven-led-zeppelin","Stairway to Heaven","Led Zeppelin","G2","D5",31],["everybody-knows-leonard-cohen","Everybody Knows","Leonard Cohen","D2","G♯3",18],["hallelujah-leonard-cohen","Hallelujah","Leonard Cohen","C2","G♯3",20],["before-you-go-lewis-capaldi","Before You Go","Lewis Capaldi","F♯2","A♯4",28],["someone-you-loved-lewis-capaldi","Someone You Loved","Lewis Capaldi","F♯2","A♯4",28],["lightning-crashes-live","Lightning Crashes","Live","F2","G♯4",27],["good-as-hell-lizzo","Good as Hell","Lizzo","E3","F♯5",26],["truth-hurts-lizzo","Truth Hurts","Lizzo","E3","E5",24],["beautiful-crazy-luke-combs","Beautiful Crazy","Luke Combs","E2","F♯4",26],["fast-car-luke-combs","Fast Car","Luke Combs","F♯2","G4",25],["when-it-rains-it-pours-luke-combs","When It Rains It Pours","Luke Combs","F2","F♯4",25],["free-bird-lynyrd-skynyrd","Free Bird","Lynyrd Skynyrd","F♯2","G♯4",26],["simple-man-lynyrd-skynyrd","Simple Man","Lynyrd Skynyrd","E2","F4",25],["sweet-home-alabama-lynyrd-skynyrd","Sweet Home Alabama","Lynyrd Skynyrd","F♯2","F4",23],["moves-like-jagger-maroon-5","Moves Like Jagger","Maroon 5","G♯2","D5",30],["she-will-be-loved-maroon-5","She Will Be Loved","Maroon 5","G♯2","D5",30],["sugar-maroon-5","Sugar","Maroon 5","G♯2","D5",30],["this-love-maroon-5","This Love","Maroon 5","G♯2","D5",30],["lets-get-it-on-marvin-gaye","Let's Get It On","Marvin Gaye","F♯2","C5",30],["sexual-healing-marvin-gaye","Sexual Healing","Marvin Gaye","F♯2","C5",30],["whats-going-on-marvin-gaye","What's Going On","Marvin Gaye","F♯2","C5",30],["3-am-matchbox-twenty","3 AM","Matchbox Twenty","F♯2","A♯4",28],["push-matchbox-twenty","Push","Matchbox Twenty","F♯2","A♯4",28],["safety-dance-men-without-hats","Safety Dance","Men Without Hats","G2","G♯4",25],["bitch-meredith-brooks","Bitch","Meredith Brooks","A♯2","A♯4",24],["enter-sandman-metallica","Enter Sandman","Metallica","E2","G♯4",28],["fade-to-black-metallica","Fade to Black","Metallica","E2","G♯4",28],["master-of-puppets-metallica","Master of Puppets","Metallica","E2","G♯4",28],["nothing-else-matters-metallica","Nothing Else Matters","Metallica","E2","G4",27],["feeling-good-michael-bubl","Feeling Good","Michael Bublé","E2","F♯4",26],["havent-met-you-yet-michael-bubl","Haven't Met You Yet","Michael Bublé","F2","F♯4",25],["beat-it-michael-jackson","Beat It","Michael Jackson","B2","B4",24],["billie-jean-michael-jackson","Billie Jean","Michael Jackson","B2","C5",25],["man-in-the-mirror-michael-jackson","Man in the Mirror","Michael Jackson","B2","C5",25],["thriller-michael-jackson","Thriller","Michael Jackson","A♯2","B4",25],["flowers-miley-cyrus","Flowers","Miley Cyrus","C3","D5",26],["wrecking-ball-miley-cyrus","Wrecking Ball","Miley Cyrus","C3","E5",28],["float-on-modest-mouse","Float On","Modest Mouse","F♯2","G♯4",26],["last-night-morgan-wallen","Last Night","Morgan Wallen","F♯2","G♯4",26],["wasted-on-you-morgan-wallen","Wasted on You","Morgan Wallen","F♯2","G4",25],["whiskey-glasses-morgan-wallen","Whiskey Glasses","Morgan Wallen","F2","F♯4",25],["i-will-wait-mumford-sons","I Will Wait","Mumford &amp; Sons","F♯2","A♯4",28],["little-lion-man-mumford-sons","Little Lion Man","Mumford &amp; Sons","F♯2","A♯4",28],["the-cave-mumford-sons","The Cave","Mumford &amp; Sons","F♯2","A♯4",28],["starlight-muse","Starlight","Muse","G♯2","D5",30],["supermassive-black-hole-muse","Supermassive Black Hole","Muse","G♯2","D5",30],["uprising-muse","Uprising","Muse","G♯2","C5",28],["sweet-caroline-neil-diamond","Sweet Caroline","Neil Diamond","G♯2","G♯4",24],["slow-hands-niall-horan","Slow Hands","Niall Horan","G2","A♯4",27],["this-town-niall-horan","This Town","Niall Horan","G2","A4",26],["photograph-nickelback","Photograph","Nickelback","A2","A4",24],["starships-nicki-minaj","Starships","Nicki Minaj","C3","E5",28],["super-bass-nicki-minaj","Super Bass","Nicki Minaj","C3","D5",26],["come-as-you-are-nirvana","Come as You Are","Nirvana","F2","G♯4",27],["heart-shaped-box-nirvana","Heart-Shaped Box","Nirvana","E2","A♯4",30],["in-bloom-nirvana","In Bloom","Nirvana","F♯2","A♯4",28],["lithium-nirvana","Lithium","Nirvana","F♯2","C5",30],["smells-like-teen-spirit-nirvana","Smells Like Teen Spirit","Nirvana","F♯2","C5",30],["champagne-supernova-oasis","Champagne Supernova","Oasis","A2","G♯4",23],["dont-look-back-in-anger-oasis","Don't Look Back in Anger","Oasis","A♯2","A♯4",24],["wonderwall-oasis","Wonderwall","Oasis","G♯2","F♯4",22],["drivers-license-olivia-rodrigo","drivers license","Olivia Rodrigo","D3","E5",26],["good-4-u-olivia-rodrigo","good 4 u","Olivia Rodrigo","C3","E5",28],["vampire-olivia-rodrigo","Vampire","Olivia Rodrigo","C3","E5",28],["drag-me-down-one-direction","Drag Me Down","One Direction","G2","C5",29],["story-of-my-life-one-direction","Story of My Life","One Direction","G2","A♯4",27],["what-makes-you-beautiful-one-direction","What Makes You Beautiful","One Direction","G♯2","C5",28],["apologize-onerepublic","Apologize","OneRepublic","F♯2","A♯4",28],["counting-stars-onerepublic","Counting Stars","OneRepublic","F♯2","A♯4",28],["good-life-onerepublic","Good Life","OneRepublic","F♯2","A♯4",28],["secrets-onerepublic","Secrets","OneRepublic","F♯2","A♯4",28],["stop-and-stare-onerepublic","Stop and Stare","OneRepublic","F♯2","A♯4",28],["sittin-on-the-dock-of-the-bay-otis-redding","(Sittin' On) The Dock of the Bay","Otis Redding","E2","F♯4",26],["these-arms-of-mine-otis-redding","These Arms of Mine","Otis Redding","E2","F♯4",26],["try-a-little-tenderness-otis-redding","Try a Little Tenderness","Otis Redding","E2","A♯4",30],["crazy-train-ozzy-osbourne","Crazy Train","Ozzy Osbourne","F♯2","A♯4",28],["mr-crowley-ozzy-osbourne","Mr. Crowley","Ozzy Osbourne","F2","G♯4",27],["just-give-me-a-reason-p-nk","Just Give Me a Reason","P!nk","D3","E5",26],["raise-your-glass-p-nk","Raise Your Glass","P!nk","D3","E5",26],["high-hopes-panic-at-the-disco","High Hopes","Panic! at the Disco","G♯2","E5",32],["i-write-sins-not-tragedies-panic-at-the-disco","I Write Sins Not Tragedies","Panic! at the Disco","G♯2","D5",30],["the-ballad-of-mona-lisa-panic-at-the-disco","The Ballad of Mona Lisa","Panic! at the Disco","G♯2","C5",28],["alive-pearl-jam","Alive","Pearl Jam","F♯2","A♯4",28],["black-pearl-jam","Black","Pearl Jam","F2","G♯4",27],["even-flow-pearl-jam","Even Flow","Pearl Jam","F♯2","A♯4",28],["jeremy-pearl-jam","Jeremy","Pearl Jam","F♯2","A♯4",28],["in-your-eyes-peter-gabriel","In Your Eyes","Peter Gabriel","F♯2","A♯4",28],["sledgehammer-peter-gabriel","Sledgehammer","Peter Gabriel","F♯2","A♯4",28],["against-all-odds-phil-collins","Against All Odds","Phil Collins","F♯2","G♯4",26],["in-the-air-tonight-phil-collins","In the Air Tonight","Phil Collins","G♯2","G♯4",24],["one-more-night-phil-collins","One More Night","Phil Collins","F♯2","G♯4",26],["you-cant-hurry-love-phil-collins","You Can't Hurry Love","Phil Collins","G2","A♯4",27],["home-phillip-phillips","Home","Phillip Phillips","F♯2","G♯4",26],["fearless-pink-floyd","Fearless","Pink Floyd","G2","G4",24],["every-rose-has-its-thorn-poison","Every Rose Has Its Thorn","Poison","G2","G♯4",25],["better-now-post-malone","Better Now","Post Malone","G♯2","C5",28],["circles-post-malone","Circles","Post Malone","G♯2","C5",28],["sunflower-post-malone","Sunflower","Post Malone","A2","C♯5",28],["kiss-prince","Kiss","Prince","G♯2","F♯5",34],["little-red-corvette-prince","Little Red Corvette","Prince","G♯2","E5",32],["purple-rain-prince","Purple Rain","Prince","G♯2","F♯5",34],["when-doves-cry-prince","When Doves Cry","Prince","G♯2","E5",32],["bohemian-rhapsody-queen","Bohemian Rhapsody","Queen","G♯2","F5",33],["dont-stop-me-now-queen","Don't Stop Me Now","Queen","G♯2","F♯5",34],["radio-ga-ga-queen","Radio Ga Ga","Queen","G2","A♯4",27],["under-pressure-queen","Under Pressure","Queen","F♯2","E5",34],["we-are-the-champions-queen","We Are the Champions","Queen","G♯2","E5",32],["we-will-rock-you-queen","We Will Rock You","Queen","E2","F♯4",26],["creep-radiohead","Creep","Radiohead","F♯2","C5",30],["fake-plastic-trees-radiohead","Fake Plastic Trees","Radiohead","F♯2","A♯4",28],["karma-police-radiohead","Karma Police","Radiohead","F♯2","A♯4",28],["no-surprises-radiohead","No Surprises","Radiohead","F♯2","G♯4",26],["georgia-on-my-mind-ray-charles","Georgia on My Mind","Ray Charles","D2","D4",24],["hit-the-road-jack-ray-charles","Hit the Road Jack","Ray Charles","D2","D4",24],["i-got-a-woman-ray-charles","I Got a Woman","Ray Charles","D2","E4",26],["jessies-girl-rick-springfield","Jessie's Girl","Rick Springfield","G2","A♯4",27],["diamonds-rihanna","Diamonds","Rihanna","D3","E5",26],["stay-rihanna","Stay","Rihanna","D3","D5",24],["umbrella-rihanna","Umbrella","Rihanna","D3","D5",24],["we-found-love-rihanna","We Found Love","Rihanna","D3","E5",26],["we-found-love-rihanna-ft-calvin-harris","We Found Love","Rihanna ft. Calvin Harris","E3","F5",25],["umbrella-rihanna-ft-jay-z","Umbrella","Rihanna ft. Jay-Z","D♯3","D5",23],["have-i-told-you-lately-rod-stewart","Have I Told You Lately","Rod Stewart","F♯2","F♯4",24],["maggie-may-rod-stewart","Maggie May","Rod Stewart","F2","F4",24],["city-of-stars-ryan-gosling","City of Stars","Ryan Gosling","G♯2","G4",23],["espresso-sabrina-carpenter","Espresso","Sabrina Carpenter","D3","D5",24],["please-please-please-sabrina-carpenter","Please Please Please","Sabrina Carpenter","D3","D♯5",25],["short-n-sweet-sabrina-carpenter","Short n' Sweet","Sabrina Carpenter","D3","D5",24],["a-change-is-gonna-come-sam-cooke","A Change Is Gonna Come","Sam Cooke","E2","G♯4",28],["cupid-sam-cooke","Cupid","Sam Cooke","F♯2","G♯4",26],["you-send-me-sam-cooke","You Send Me","Sam Cooke","F♯2","G♯4",26],["body-like-a-back-road-sam-hunt","Body Like a Back Road","Sam Hunt","A2","G4",22],["stay-with-me-sam-smith","Stay with Me","Sam Smith","F♯2","G♯4",26],["writings-on-the-wall-sam-smith","Writing's on the Wall","Sam Smith","F♯2","A♯4",28],["black-magic-woman-santana","Black Magic Woman","Santana","E2","F♯4",26],["maria-maria-santana","Maria Maria","Santana","F♯2","G♯4",26],["smooth-santana-ft-rob-thomas","Smooth","Santana ft. Rob Thomas","F♯2","G♯4",26],["building-a-mystery-sarah-mclachlan","Building a Mystery","Sarah McLachlan","C3","C5",24],["possession-sarah-mclachlan","Possession","Sarah McLachlan","C3","C5",24],["rock-you-like-a-hurricane-scorpions","Rock You Like a Hurricane","Scorpions","F♯2","C5",30],["wind-of-change-scorpions","Wind of Change","Scorpions","F♯2","G♯4",26],["closing-time-semisonic","Closing Time","Semisonic","F♯2","G♯4",26],["se-orita-shawn-mendes","Señorita","Shawn Mendes","A2","C5",27],["stitches-shawn-mendes","Stitches","Shawn Mendes","G♯2","C5",28],["theres-nothing-holdin-me-back-shawn-mendes","There's Nothing Holdin' Me Back","Shawn Mendes","G♯2","C5",28],["dont-you-forget-about-me-simple-minds","Don't You (Forget About Me)","Simple Minds","G2","A♯4",27],["1979-smashing-pumpkins","1979","Smashing Pumpkins","F♯2","G♯4",26],["bullet-with-butterfly-wings-smashing-pumpkins","Bullet with Butterfly Wings","Smashing Pumpkins","F♯2","C5",30],["today-smashing-pumpkins","Today","Smashing Pumpkins","F♯2","A♯4",28],["chasing-cars-snow-patrol","Chasing Cars","Snow Patrol","F♯2","G♯4",26],["run-snow-patrol","Run","Snow Patrol","F♯2","G♯4",26],["black-hole-sun-soundgarden","Black Hole Sun","Soundgarden","F2","C5",31],["spoonman-soundgarden","Spoonman","Soundgarden","F2","C5",31],["reelin-in-the-years-steely-dan","Reelin' in the Years","Steely Dan","G2","G♯4",25],["rikki-dont-lose-that-number-steely-dan","Rikki Don't Lose That Number","Steely Dan","F♯2","G4",25],["the-joker-steve-miller-band","The Joker","Steve Miller Band","G2","F♯4",23],["i-just-called-to-say-i-love-you-stevie-wonder","I Just Called to Say I Love You","Stevie Wonder","F♯2","A♯4",28],["isnt-she-lovely-stevie-wonder","Isn't She Lovely","Stevie Wonder","G♯2","C5",28],["sir-duke-stevie-wonder","Sir Duke","Stevie Wonder","G♯2","D5",30],["superstition-stevie-wonder","Superstition","Stevie Wonder","G♯2","D5",30],["desert-rose-sting","Desert Rose","Sting","G2","A♯4",27],["englishman-in-new-york-sting","Englishman in New York","Sting","F♯2","G♯4",26],["fields-of-gold-sting","Fields of Gold","Sting","F♯2","G♯4",26],["interstate-love-song-stone-temple-pilots","Interstate Love Song","Stone Temple Pilots","F2","G♯4",27],["plush-stone-temple-pilots","Plush","Stone Temple Pilots","F2","G♯4",27],["alors-on-danse-stromae","Alors on Danse","Stromae","F♯2","G♯4",26],["papaoutai-stromae","Papaoutai","Stromae","F♯2","G♯4",26],["eye-of-the-tiger-survivor","Eye of the Tiger","Survivor","F♯2","G4",25],["good-days-sza","Good Days","SZA","D3","D♯5",25],["kill-bill-sza","Kill Bill","SZA","D3","D5",24],["snooze-sza","Snooze","SZA","D3","D5",24],["all-too-well-10-min-taylor-swift","All Too Well (10 Min)","Taylor Swift","D3","D♯5",25],["anti-hero-taylor-swift","Anti-Hero","Taylor Swift","E3","C♯5",21],["august-taylor-swift","august","Taylor Swift","D3","C5",22],["betty-taylor-swift","Betty","Taylor Swift","C3","A♯4",22],["blank-space-taylor-swift","Blank Space","Taylor Swift","D3","D5",24],["cardigan-taylor-swift","Cardigan","Taylor Swift","D3","C5",22],["cruel-summer-taylor-swift","Cruel Summer","Taylor Swift","D3","E5",26],["enchanted-taylor-swift","Enchanted","Taylor Swift","E3","D5",22],["fearless-taylor-swift","Fearless","Taylor Swift","E3","D5",22],["love-story-taylor-swift","Love Story","Taylor Swift","E3","D5",22],["midnight-rain-taylor-swift","Midnight Rain","Taylor Swift","D3","D5",24],["shake-it-off-taylor-swift","Shake It Off","Taylor Swift","E3","D5",22],["you-belong-with-me-taylor-swift","You Belong with Me","Taylor Swift","E3","D5",22],["everybody-wants-to-rule-the-world-tears-for-fears","Everybody Wants to Rule the World","Tears for Fears","G2","A♯4",27],["head-over-heels-tears-for-fears","Head Over Heels","Tears for Fears","G2","A♯4",27],["shout-tears-for-fears","Shout","Tears for Fears","G2","A♯4",27],["say-hello-2-heaven-temple-of-the-dog","Say Hello 2 Heaven","Temple of the Dog","F♯2","C5",30],["hey-jude-the-beatles","Hey Jude","The Beatles","F♯2","A♯4",28],["let-it-be-the-beatles","Let It Be","The Beatles","F♯2","G♯4",26],["yesterday-the-beatles","Yesterday","The Beatles","G2","G♯4",25],["linger-the-cranberries","Linger","The Cranberries","B2","C5",25],["zombie-the-cranberries","Zombie","The Cranberries","B2","C5",25],["dont-you-want-me-the-human-league","Don't You Want Me","The Human League","B2","A4",22],["human-the-killers","Human","The Killers","G2","A♯4",27],["mr-brightside-the-killers","Mr. Brightside","The Killers","G2","A♯4",27],["read-my-mind-the-killers","Read My Mind","The Killers","G2","A♯4",27],["somebody-told-me-the-killers","Somebody Told Me","The Killers","G2","A♯4",27],["when-you-were-young-the-killers","When You Were Young","The Killers","G2","C5",29],["ho-hey-the-lumineers","Ho Hey","The Lumineers","F♯2","G♯4",26],["ophelia-the-lumineers","Ophelia","The Lumineers","F♯2","G♯4",26],["stubborn-love-the-lumineers","Stubborn Love","The Lumineers","F2","G4",26],["dont-stand-so-close-to-me-the-police","Don't Stand So Close to Me","The Police","G2","A♯4",27],["every-breath-you-take-the-police","Every Breath You Take","The Police","G2","A♯4",27],["every-little-thing-she-does-the-police","Every Little Thing She Does","The Police","G2","A♯4",27],["message-in-a-bottle-the-police","Message in a Bottle","The Police","G♯2","C5",28],["roxanne-the-police","Roxanne","The Police","G♯2","C5",28],["blinding-lights-the-weeknd","Blinding Lights","The Weeknd","G2","D5",31],["cant-feel-my-face-the-weeknd","Can't Feel My Face","The Weeknd","G♯2","C♯5",29],["die-for-you-the-weeknd","Die For You","The Weeknd","G2","C5",29],["out-of-time-the-weeknd","Out of Time","The Weeknd","G♯2","C♯5",29],["sacrifice-the-weeknd","Sacrifice","The Weeknd","G♯2","C♯5",29],["save-your-tears-the-weeknd","Save Your Tears","The Weeknd","G♯2","D5",30],["starboy-the-weeknd","Starboy","The Weeknd","G2","C5",29],["fell-in-love-with-a-girl-the-white-stripes","Fell in Love with a Girl","The White Stripes","F♯2","A♯4",28],["seven-nation-army-the-white-stripes","Seven Nation Army","The White Stripes","E2","G4",27],["the-boys-are-back-in-town-thin-lizzy","The Boys Are Back in Town","Thin Lizzy","F♯2","G♯4",26],["jumper-third-eye-blind","Jumper","Third Eye Blind","F♯2","A♯4",28],["semi-charmed-life-third-eye-blind","Semi-Charmed Life","Third Eye Blind","G2","A♯4",27],["creep-tlc","Creep","TLC","C♯3","B4",22],["its-not-unusual-tom-jones","It's Not Unusual","Tom Jones","E2","G4",27],["shes-a-lady-tom-jones","She's a Lady","Tom Jones","E2","F♯4",26],["africa-toto","Africa","Toto","A2","A♯4",25],["fast-car-tracy-chapman","Fast Car","Tracy Chapman","B2","G4",20],["heathens-twenty-one-pilots","Heathens","Twenty One Pilots","F♯2","G♯4",26],["ride-twenty-one-pilots","Ride","Twenty One Pilots","F♯2","A♯4",28],["stressed-out-twenty-one-pilots","Stressed Out","Twenty One Pilots","F♯2","A♯4",28],["feathered-indians-tyler-childers","Feathered Indians","Tyler Childers","E2","F4",25],["whitehouse-road-tyler-childers","Whitehouse Road","Tyler Childers","E2","F4",25],["with-or-without-you-u2","With or Without You","U2","G2","G4",24],["burn-usher","Burn","Usher","G♯2","C5",28],["confessions-part-ii-usher","Confessions Part II","Usher","G♯2","C5",28],["u-got-it-bad-usher","U Got It Bad","Usher","G♯2","C5",28],["yeah-usher","Yeah!","Usher","G♯2","C5",28],["hot-for-teacher-van-halen","Hot for Teacher","Van Halen","G2","A♯4",27],["jump-van-halen","Jump","Van Halen","G♯2","C5",28],["panama-van-halen","Panama","Van Halen","G♯2","C5",28],["brown-eyed-girl-van-morrison","Brown Eyed Girl","Van Morrison","G♯2","G4",23],["riptide-vance-joy","Riptide","Vance Joy","F♯2","G♯4",26],["low-rider-war","Low Rider","War","D♯2","A♯3",19],["here-i-go-again-whitesnake","Here I Go Again","Whitesnake","F♯2","A♯4",28],["is-this-love-whitesnake","Is This Love","Whitesnake","F♯2","G♯4",26],["i-wanna-dance-whitney-houston","I Wanna Dance","Whitney Houston","F3","G♯5",27],["i-will-always-love-you-whitney-houston","I Will Always Love You","Whitney Houston","E3","A♯5",30],["rewrite-the-stars-zac-efron-zendaya","Rewrite the Stars","Zac Efron &amp; Zendaya","A♯2","A♯4",24],["heading-south-zach-bryan","Heading South","Zach Bryan","E2","F♯4",26],["revival-zach-bryan","Revival","Zach Bryan","E2","F♯4",26],["something-in-the-orange-zach-bryan","Something in the Orange","Zach Bryan","F2","G4",26],["a-million-dreams-ziv-zaifman-hugh-jackman","A Million Dreams","Ziv Zaifman &amp; Hugh Jackman","A2","A♯4",25]];
-// [slug, title, artist, low, high, semitones]
-const SONGS = RAW.map(r => ({
-  slug: r[0], title: r[1], artist: r[2], low: r[3], high: r[4], semi: r[5],
-  diff: r[5] <= 15 ? 'Easy' : r[5] <= 22 ? 'Moderate' : 'Hard'
-}));
-
-// Sort state
+let SONGS = [];
+let filtered = [];
 let sortCol = 'title', sortDir = 1;
-let filtered = [...SONGS];
 
+function diffLabel(semi) {
+  return semi <= 15 ? 'Easy' : semi <= 22 ? 'Moderate' : 'Hard';
+}
 function diffOrder(d) { return d === 'Easy' ? 0 : d === 'Moderate' ? 1 : 2; }
 
 function sort(songs) {
   return [...songs].sort((a, b) => {
     let v;
-    if (sortCol === 'title')  v = a.title.localeCompare(b.title);
-    else if (sortCol === 'artist') v = a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title);
-    else if (sortCol === 'semi')   v = a.semi - b.semi;
-    else if (sortCol === 'diff')   v = diffOrder(a.diff) - diffOrder(b.diff);
-    else if (sortCol === 'range')  v = a.low.localeCompare(b.low);
+    if (sortCol === 'title')  v = a[1].localeCompare(b[1]);
+    else if (sortCol === 'artist') v = a[2].localeCompare(b[2]) || a[1].localeCompare(b[1]);
+    else if (sortCol === 'semi')   v = a[5] - b[5];
+    else if (sortCol === 'diff')   v = diffOrder(diffLabel(a[5])) - diffOrder(diffLabel(b[5]));
+    else if (sortCol === 'range')  v = a[3].localeCompare(b[3]);
     else v = 0;
     return v * sortDir;
   });
 }
 
-function diffPill(d) {
+function diffPill(semi) {
+  const d = diffLabel(semi);
   const cls = d === 'Easy' ? 'diff-easy' : d === 'Moderate' ? 'diff-moderate' : 'diff-hard';
   return `<span class="diff-pill ${cls}">${d}</span>`;
 }
 
-function renderRow(s) {
-  return `<tr>
-    <td class="td-song"><a href="/song/${s.slug}" class="song-name">${esc(s.title)}</a></td>
-    <td class="td-artist">${esc(s.artist)}</td>
-    <td class="td-range">${esc(s.low)} – ${esc(s.high)}</td>
-    <td class="td-semi">${s.semi}</td>
-    <td>${diffPill(s.diff)}</td>
-    <td><a href="/song/${s.slug}" class="guide-link">View Guide →</a></td>
-  </tr>`;
+function esc(str) {
+  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function esc(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function renderRow(s) {
+  // s = [slug, title, artist, low, high, semitones]
+  return `<tr>
+    <td><a href="/song/${s[0]}" class="song-name">${esc(s[1])}</a></td>
+    <td class="td-artist">${esc(s[2])}</td>
+    <td class="td-range">${esc(s[3])} – ${esc(s[4])}</td>
+    <td class="td-semi">${s[5]}</td>
+    <td>${diffPill(s[5])}</td>
+    <td><a href="/song/${s[0]}" class="guide-link">View Guide →</a></td>
+  </tr>`;
 }
 
 function render() {
@@ -254,13 +313,16 @@ function render() {
   if (sorted.length === 0) {
     body.innerHTML = '';
     noRes.style.display = 'block';
+    document.getElementById('song-table').style.display = 'none';
     badge.textContent = '0 songs';
   } else {
+    // Render in batches to avoid blocking UI for large lists
     body.innerHTML = sorted.map(renderRow).join('');
     noRes.style.display = 'none';
+    document.getElementById('song-table').style.display = '';
     badge.textContent = sorted.length === SONGS.length
-      ? `${sorted.length} songs`
-      : `${sorted.length} of ${SONGS.length} songs`;
+      ? `${sorted.length.toLocaleString()} songs`
+      : `${sorted.length.toLocaleString()} of ${SONGS.length.toLocaleString()} songs`;
   }
 }
 
@@ -268,9 +330,9 @@ function applyFilters() {
   const q = document.getElementById('search').value.trim().toLowerCase();
   const diff = document.getElementById('diff-filter').value;
   filtered = SONGS.filter(s => {
-    if (diff && s.diff !== diff) return false;
+    if (diff && diffLabel(s[5]) !== diff) return false;
     if (q) {
-      const hay = (s.title + ' ' + s.artist).toLowerCase();
+      const hay = (s[1] + ' ' + s[2]).toLowerCase();
       return hay.includes(q);
     }
     return true;
@@ -284,7 +346,6 @@ document.querySelectorAll('thead th[data-col]').forEach(th => {
     const col = th.dataset.col;
     if (sortCol === col) { sortDir *= -1; }
     else { sortCol = col; sortDir = 1; }
-    // Update header classes
     document.querySelectorAll('thead th').forEach(h => {
       h.classList.remove('sorted');
       const icon = h.querySelector('.sort-icon');
@@ -300,8 +361,18 @@ document.querySelectorAll('thead th[data-col]').forEach(th => {
 document.getElementById('search').addEventListener('input', applyFilters);
 document.getElementById('diff-filter').addEventListener('change', applyFilters);
 
-// Initial render
-render();
+// Load data
+fetch('/song/songs-data.json')
+  .then(r => r.json())
+  .then(data => {
+    SONGS = data;
+    filtered = [...SONGS];
+    document.getElementById('loading').style.display = 'none';
+    render();
+  })
+  .catch(() => {
+    document.getElementById('loading').textContent = 'Failed to load songs. Please refresh.';
+  });
 </script>
 </body>
 </html>
