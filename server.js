@@ -268,7 +268,8 @@ db.exec(`
     export_count INTEGER DEFAULT 0,
     month_key TEXT,
     created_at TEXT DEFAULT (datetime('now')),
-    updated_at TEXT DEFAULT (datetime('now'))
+    updated_at TEXT DEFAULT (datetime('now')),
+    welcome_email_sent INTEGER DEFAULT 0
   );
 
   CREATE TABLE IF NOT EXISTS geo (
@@ -398,6 +399,11 @@ db.exec(`
 // Add zip_code column to users if missing (migration for existing DBs)
 try {
   db.exec(`ALTER TABLE users ADD COLUMN zip_code TEXT`);
+} catch (_) { /* column already exists */ }
+
+// Add welcome_email_sent column to users if missing (migration for existing DBs)
+try {
+  db.exec(`ALTER TABLE users ADD COLUMN welcome_email_sent INTEGER DEFAULT 0`);
 } catch (_) { /* column already exists */ }
 
 // ---------------------------------------------------------------------------
@@ -670,6 +676,7 @@ app.post('/api/hummatch/auth/register', (req, res) => {
   const token = uuidv4();
   try {
     stmts.insertUser.run(email, token, monthKey());
+    db.prepare('UPDATE users SET welcome_email_sent = 1 WHERE email = ?').run(email);
     sendEmail(email, 'Welcome to HumMatch!', emailWelcome(email));
     return res.json({ token, email, is_premium: false, isNew: true });
   } catch (e) {
@@ -1270,8 +1277,9 @@ app.post('/api/hummatch/playlist/save', (req, res) => {
     // Send playlist email (async, don't block response)
     sendEmail(email, 'Your HumMatch Playlist is Ready!', emailPlaylistSaved(songs, shareUrl));
 
-    // Send welcome email if new user
-    if (isNew) {
+    // Send welcome email if new user and not already sent
+    if (isNew && !user.welcome_email_sent) {
+      db.prepare('UPDATE users SET welcome_email_sent = 1 WHERE id = ?').run(user.id);
       sendEmail(email, 'Welcome to HumMatch!', emailWelcome(email));
     }
 
