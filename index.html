@@ -67,11 +67,11 @@
   .step-txt { font-size: 0.68rem; color: var(--text2); line-height: 1.4; }
 
   /* ── WELCOME SCREEN (mobile scroll fix) ── */
-  #screen-welcome { justify-content: flex-start; padding-top: 48px; padding-bottom: max(40px, env(safe-area-inset-bottom, 40px)); overflow-y: auto; -webkit-overflow-scrolling: touch; gap: 0; }
+  #screen-welcome { justify-content: flex-start; padding-top: 64px; padding-bottom: max(40px, env(safe-area-inset-bottom, 40px)); overflow-y: auto; -webkit-overflow-scrolling: touch; gap: 0; }
   #screen-welcome > * { flex-shrink: 0; }
 
   /* ── HUM TEST ── */
-  #screen-test { justify-content: flex-start; padding-top: 60px; padding-bottom: max(60px, env(safe-area-inset-bottom, 60px)); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  #screen-test { justify-content: flex-start; padding-top: 68px; padding-bottom: max(60px, env(safe-area-inset-bottom, 60px)); overflow-y: auto; -webkit-overflow-scrolling: touch; }
   .test-phase { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
   .test-title { font-size: 1.7rem; font-weight: 900; margin-bottom: 6px; line-height: 1.2; }
@@ -137,7 +137,7 @@
   .phase-dot.active { background: var(--accent); }
 
   /* ── RESULTS ── */
-  #screen-results { justify-content: flex-start; padding: 0 0 160px; overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 100%; gap: 0; }
+  #screen-results { justify-content: flex-start; padding: 52px 0 160px; overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 100%; gap: 0; }
   .results-sticky-top { position: sticky; top: 0; z-index: 20; background: var(--bg); padding: 12px 16px 0; width: 100%; }
   .results-header { width: 100%; max-width: 400px; margin-bottom: 6px; }
   .voice-badge { display: inline-flex; align-items: center; gap: 8px;
@@ -232,14 +232,20 @@
 
   .confetti-emoji { font-size: 1.8rem; margin-bottom: 2px; }
 
+  /* ── Mobile Header Bar ─────────────────────────────── */
+  .hm-header { position:fixed; top:0; left:0; right:0; z-index:10000; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:rgba(8,6,15,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.1); }
+  .hm-header-logo { display:flex; align-items:center; gap:8px; text-decoration:none; }
+  .hm-header-logo img { height:32px; width:auto; }
+  .hm-header-logo span { font-size:1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
   /* ── Hamburger Nav ──────────────────────────────────── */
-  .hm-nav-toggle { position:fixed; top:16px; left:16px; z-index:10000; background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; padding:0; }
+  .hm-nav-toggle { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; padding:0; flex-shrink:0; }
   .hm-nav-toggle span { display:block; width:20px; height:2px; background:rgba(168,85,247,0.9); border-radius:2px; transition:all 0.25s; }
   .hm-nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
   .hm-nav-toggle.open span:nth-child(2) { opacity:0; }
   .hm-nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-  .hm-nav-drawer { position:fixed; top:0; left:0; width:240px; height:100%; background:rgba(8,6,15,0.97); backdrop-filter:blur(16px); border-right:1px solid rgba(168,85,247,0.15); z-index:9999; transform:translateX(-100%); transition:transform 0.28s cubic-bezier(.4,0,.2,1); padding:70px 0 24px; }
-  .hm-nav-drawer.open { transform:translateX(0); }
+  .hm-nav-drawer { position:fixed; top:0; left:0; width:240px; height:100%; background:rgba(8,6,15,0.97); backdrop-filter:blur(16px); border-right:1px solid rgba(168,85,247,0.15); z-index:9999; transform:translateX(-100%); visibility:hidden; transition:transform 0.28s cubic-bezier(.4,0,.2,1), visibility 0.28s; padding:70px 0 24px; }
+  .hm-nav-drawer.open { transform:translateX(0); visibility:visible; }
   .hm-nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9998; opacity:0; pointer-events:none; transition:opacity 0.28s; }
   .hm-nav-overlay.open { opacity:1; pointer-events:all; }
   .hm-nav-logo { padding:0 20px 20px; border-bottom:1px solid rgba(168,85,247,0.12); margin-bottom:8px; }
@@ -295,10 +301,16 @@
 </script>
 </head>
 <body>
-<!-- Hamburger Nav -->
-<button class="hm-nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
-  <span></span><span></span><span></span>
-</button>
+<!-- Header Bar -->
+<header class="hm-header">
+  <a class="hm-header-logo" href="/">
+    <img src="/hummatch-logo.png" alt="HumMatch"/>
+    <span>HumMatch</span>
+  </a>
+  <button class="hm-nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
 <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
 <nav class="hm-nav-drawer" id="navDrawer">
   <div class="hm-nav-logo"><span>HumMatch</span></div>
