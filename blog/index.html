@@ -155,6 +155,25 @@
       border-top: 1px solid rgba(168,85,247,0.1);
     }
     footer a { color: var(--accent); text-decoration: none; }
+    .footer-nav {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px 20px;
+      margin-bottom: 14px;
+    }
+    @media (min-width: 768px) {
+      .page-header {
+        max-width: 1100px;
+      }
+      .posts {
+        max-width: 1100px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
   </style>
 </head>
 <body>
@@ -256,7 +275,18 @@
 </main>
 
 <footer>
-  <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a></p>
+  <div class="footer-nav">
+    <a href="/" style="color:#c084fc;font-weight:600;font-size:0.75rem;">Try HumMatch</a>
+    <a href="/how-it-works" style="font-size:0.75rem;">How It Works</a>
+    <a href="/pricing" style="font-size:0.75rem;">Pricing</a>
+    <a href="/squadmatch" style="font-size:0.75rem;">SquadMatch</a>
+    <a href="/es" style="font-size:0.75rem;">Español</a>
+    <a href="/blog" style="font-size:0.75rem;">Blog</a>
+    <a href="/contact" style="font-size:0.75rem;">Contact</a>
+    <a href="/privacy" style="font-size:0.72rem;">Privacy</a>
+    <a href="/terms" style="font-size:0.72rem;">Terms</a>
+  </div>
+  <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>.</p>
 </footer>
 
 </body>
