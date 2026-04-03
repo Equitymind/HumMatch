@@ -1446,6 +1446,14 @@ app.get('/affiliate', (_req, res) => {
   res.sendFile(path.join(__dirname, 'affiliate.html'));
 });
 
+// Privacy & Terms
+app.get('/privacy', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'privacy.html'));
+});
+app.get('/terms', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'terms.html'));
+});
+
 // SPA fallback: serve index.html for unmatched routes
 app.get('*', (req, res) => {
   // Don't catch API routes or file extensions
