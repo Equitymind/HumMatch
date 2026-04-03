@@ -724,16 +724,18 @@ app.get('/api/hummatch/squad', requireAuth, (req, res) => {
   const squads = stmts.getSquads.all(req.user.id);
   const result = squads.map(s => ({
     ...s,
+    session_name: s.squad_name,
     members: stmts.getSquadMembers.all(s.id)
   }));
   res.json({ squads: result });
 });
 
 app.post('/api/hummatch/squad', requireAuth, (req, res) => {
-  const { squad_name } = req.body;
+  const { squad_name, session_name } = req.body;
+  const name = session_name || squad_name || 'My SquadMatch';
   try {
-    const info = stmts.insertSquad.run(req.user.id, squad_name || 'My SquadMatch');
-    res.json({ ok: true, id: info.lastInsertRowid });
+    const info = stmts.insertSquad.run(req.user.id, name);
+    res.json({ ok: true, id: info.lastInsertRowid, session_name: name });
   } catch (e) {
     res.status(500).json({ error: 'Failed to create squad' });
   }
@@ -753,7 +755,8 @@ app.post('/api/hummatch/squad/:id/invite', requireAuth, (req, res) => {
 
   try {
     const info = stmts.insertSquadMember.run(squadId, null, display_name || '', voice_type || '', 'pending');
-    res.json({ ok: true, id: info.lastInsertRowid });
+    const squad = stmts.getSquads.all(req.user.id).find(s => s.id === squadId);
+    res.json({ ok: true, id: info.lastInsertRowid, session_name: squad ? squad.squad_name : '' });
   } catch (e) {
     res.status(500).json({ error: 'Failed to invite member' });
   }

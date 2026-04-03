@@ -82,7 +82,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--purple);
+      color: var(--pink);
     }
 
     .new-badge {
@@ -121,12 +121,8 @@
       gap: 4px;
     }
 
-    .squadmatch-text span:first-child {
-      color: var(--white);
-    }
-
-    .squadmatch-text span:last-child {
-      background: linear-gradient(135deg, #A855F7, #EC4899);
+    .squadmatch-text {
+      background: linear-gradient(135deg, #EC4899, #A855F7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -242,7 +238,7 @@
 
     .callout-box {
       background: var(--surface);
-      border-left: 4px solid var(--purple);
+      border-left: 4px solid var(--pink);
       padding: 24px 32px;
       margin: 32px auto;
       max-width: 600px;
@@ -251,7 +247,7 @@
     }
 
     .callout-box strong {
-      color: var(--purple);
+      color: var(--pink);
       font-size: 1.1rem;
       display: block;
       margin-bottom: 8px;
@@ -277,15 +273,15 @@
     .step-number {
       width: 60px;
       height: 60px;
-      background: rgba(168,85,247,0.15);
-      border: 2px solid var(--purple);
+      background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(168,85,247,0.15));
+      border: 2px solid var(--pink);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.5rem;
       font-weight: 800;
-      color: var(--purple);
+      color: var(--pink);
       margin: 0 auto 20px;
     }
 
@@ -309,7 +305,7 @@
       line-height: 1.8;
       margin-bottom: 20px;
       font-size: 1.05rem;
-      border-left: 3px solid var(--purple);
+      border-left: 3px solid var(--pink);
       padding-left: 20px;
     }
 
@@ -329,7 +325,7 @@
       content: "\2022";
       position: absolute;
       left: 0;
-      color: var(--purple);
+      color: var(--pink);
       font-weight: 700;
       font-size: 1.5rem;
       line-height: 1;
@@ -380,7 +376,7 @@
     }
 
     .pricing-card.featured {
-      border-color: var(--purple);
+      border-color: var(--pink);
       position: relative;
     }
 
@@ -435,7 +431,7 @@
       content: "\2713";
       position: absolute;
       left: 0;
-      color: var(--purple);
+      color: var(--pink);
       font-weight: 700;
     }
 
@@ -545,9 +541,7 @@
   <div class="container">
     <div class="hero-badge">
       <div class="new-badge-badge">NEW!</div>
-      <div class="squadmatch-text">
-        <span>Squad</span><span>Match</span>
-      </div>
+      <div class="squadmatch-text">SquadMatch</div>
     </div>
     <h1>Find songs your whole<br/>squad can sing</h1>
     <p>Invite your friends, compare vocal ranges, and discover the songs everyone in your group can nail together.</p>
