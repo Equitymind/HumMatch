@@ -103,8 +103,8 @@ tr:hover td{background:rgba(124,58,237,0.05)}
     </div>
     <div class="right">
       <button class="time-btn" data-range="7" onclick="setRange(7)">7d</button>
-      <button class="time-btn active" data-range="30" onclick="setRange(30)">30d</button>
-      <button class="time-btn" data-range="0" onclick="setRange(0)">All Time</button>
+      <button class="time-btn" data-range="30" onclick="setRange(30)">30d</button>
+      <button class="time-btn active" data-range="0" onclick="setRange(0)">All Time</button>
       <span class="last-updated" id="last-updated"></span>
       <button class="logout-btn" onclick="doLogout()">Logout</button>
     </div>
@@ -136,8 +136,7 @@ tr:hover td{background:rgba(124,58,237,0.05)}
 
   <!-- Row 4: Revenue & misc -->
   <div class="stat-row">
-    <div class="stat-card"><div class="label">Monthly Purchases</div><div class="value" id="s-monthly">-</div></div>
-    <div class="stat-card"><div class="label">Annual Purchases</div><div class="value" id="s-annual">-</div></div>
+    <div class="stat-card"><div class="label">Purchases</div><div class="value" id="s-monthly">-</div></div>
     <div class="stat-card"><div class="label">Total Affiliates</div><div class="value" id="s-affiliates">-</div></div>
     <div class="stat-card"><div class="label">No-Match Rate</div><div class="value" id="s-nomatch">-</div></div>
   </div>
@@ -208,7 +207,7 @@ tr:hover td{background:rgba(124,58,237,0.05)}
 
 <script>
 let apiKey = sessionStorage.getItem('hm_analytics_key');
-let currentRange = 30;
+let currentRange = 0;
 let refreshTimer = null;
 let charts = {};
 
@@ -347,7 +346,6 @@ function render(d) {
     document.getElementById('s-duration').textContent = mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
   }
   document.getElementById('s-monthly').textContent = fmt(d.monthlyPurchases);
-  document.getElementById('s-annual').textContent = fmt(d.annualPurchases);
   // Avg time on site
   if (d.avgSessionSec && d.avgSessionSec > 0) {
     const m = Math.floor(d.avgSessionSec / 60);

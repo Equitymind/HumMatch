@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 3000;
 const BUILD_VERSION = process.env.BUILD_VERSION || '1.0.0';
 const ADMIN_KEY = process.env.ADMIN_API_KEY || 'hummatch-admin-2026';
 const SPOTIFY_AVAILABLE = process.env.SPOTIFY_AVAILABLE === 'true';
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
+const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || '';
+const stripe = STRIPE_SECRET_KEY ? require('stripe')(STRIPE_SECRET_KEY) : null;
 
 // ---------------------------------------------------------------------------
 // Middleware
@@ -21,6 +24,40 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false
 }));
 app.use(morgan('short'));
+
+// Stripe webhook needs raw body — must be registered before express.json
+app.post('/api/hummatch/stripe/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+  if (!stripe) return res.status(501).json({ error: 'Stripe not configured' });
+  let event;
+  try {
+    if (STRIPE_WEBHOOK_SECRET) {
+      event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], STRIPE_WEBHOOK_SECRET);
+    } else {
+      event = JSON.parse(req.body);
+    }
+  } catch (err) {
+    console.error('Stripe webhook error:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+    const email = (session.customer_email || (session.customer_details && session.customer_details.email) || '').toLowerCase();
+    if (email) {
+      const user = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
+      if (user) {
+        db.prepare("UPDATE users SET is_premium = 1, updated_at = datetime('now') WHERE id = ?").run(user.id);
+        console.log(`Stripe webhook: upgraded ${email} to premium`);
+      } else {
+        const newToken = uuidv4();
+        db.prepare('INSERT INTO users (email, token, is_premium, month_key) VALUES (?, ?, 1, ?)').run(email, newToken, monthKey());
+        console.log(`Stripe webhook: created premium account for ${email}`);
+      }
+    }
+  }
+  res.json({ received: true });
+});
+
 app.use(express.json({ limit: '1mb' }));
 
 // ---------------------------------------------------------------------------
@@ -835,6 +872,68 @@ app.put('/api/hummatch/account', requireAuth, (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// API: Stripe Checkout
+// ---------------------------------------------------------------------------
+const STRIPE_PRICES = {
+  monthly: 'price_1TE07i8kAFC9VsZHxD9xqXYB',
+  annual: 'price_1TDCM48kAFC9VsZHdVNcIKI7'
+};
+
+app.get('/api/hummatch/checkout/success', async (req, res) => {
+  if (stripe && req.query.session_id) {
+    try {
+      const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+      if (session.payment_status === 'paid') {
+        const email = (session.customer_details?.email || session.customer_email || '').toLowerCase();
+        if (email) {
+          const user = stmts.getUserByEmail.get(email);
+          if (user) {
+            db.prepare("UPDATE users SET is_premium = 1, updated_at = datetime('now') WHERE id = ?").run(user.id);
+          } else {
+            const newToken = uuidv4();
+            stmts.insertUser.run(email, newToken, monthKey());
+            db.prepare("UPDATE users SET is_premium = 1 WHERE email = ?").run(email);
+          }
+          console.log(`Premium activated for ${email} via checkout success`);
+        }
+      }
+    } catch (e) {
+      console.error('Checkout success verification error:', e.message);
+    }
+  }
+  res.redirect('/dashboard?upgraded=1');
+});
+
+app.get('/api/hummatch/checkout/:plan', async (req, res) => {
+  if (!stripe) return res.status(500).json({ error: 'Stripe not configured' });
+
+  const priceId = STRIPE_PRICES[req.params.plan];
+  if (!priceId) return res.status(400).json({ error: 'Invalid plan. Use monthly or annual.' });
+
+  const sessionOpts = {
+    mode: 'subscription',
+    line_items: [{ price: priceId, quantity: 1 }],
+    success_url: `${req.protocol}://${req.get('host')}/api/hummatch/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${req.protocol}://${req.get('host')}/pricing`
+  };
+
+  // Pre-fill email if user is logged in
+  const token = req.headers['x-hm-token'] || req.query.token;
+  if (token) {
+    const user = stmts.getUserByToken.get(token);
+    if (user) sessionOpts.customer_email = user.email;
+  }
+
+  try {
+    const session = await stripe.checkout.sessions.create(sessionOpts);
+    res.redirect(303, session.url);
+  } catch (e) {
+    console.error('Stripe checkout error:', e.message);
+    res.status(500).json({ error: 'Failed to create checkout session' });
+  }
+});
+
+// ---------------------------------------------------------------------------
 // Static files & SPA routing
 // ---------------------------------------------------------------------------
 app.use(express.static(path.join(__dirname), {
@@ -859,6 +958,14 @@ app.get('/blog', (_req, res) => {
 // Dashboard page
 app.get('/dashboard', (_req, res) => {
   res.sendFile(path.join(__dirname, 'dashboard.html'));
+});
+
+// Pricing page — redirect to Stripe checkout
+app.get('/pricing', (_req, res) => {
+  res.redirect('/api/hummatch/checkout/monthly');
+});
+app.get('/hummatch/pricing', (_req, res) => {
+  res.redirect('/api/hummatch/checkout/monthly');
 });
 
 // SquadMatch landing page
