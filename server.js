@@ -120,7 +120,7 @@ function emailWelcome(email) {
     <h3 style="color:#A855F7;font-size:15px;margin:0 0 12px;">How to get started:</h3>
     <ol style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
       <li style="margin-bottom:8px;">Hit the <strong>Start Humming</strong> button on the main page</li>
-      <li style="margin-bottom:8px;">Hum any melody for about 10 seconds &mdash; doesn't have to be perfect!</li>
+      <li style="margin-bottom:8px;">Tap to start, hum for 3 seconds, tap to stop. Repeat 3 times (different pitches work best!)</li>
       <li style="margin-bottom:8px;">We'll match your voice to songs you'll actually sound great singing</li>
       <li style="margin-bottom:8px;">Save your favorites to your playlist</li>
     </ol>
