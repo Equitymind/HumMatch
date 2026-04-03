@@ -346,7 +346,7 @@
   </div>
   </div><!-- /cta-wrapper -->
   <a href="#" onclick="startCheckout();return false;" style="display:inline-block;margin-top:12px;font-size:0.78rem;color:rgba(168,85,247,0.7);text-decoration:none;letter-spacing:0.03em;">
-    ✦ Go Premium — $0.99/mo: Unlimited hums &amp; more
+    ✦ Become a Squad Leader — $0.99/mo: Unlimited hums &amp; more
   </a>
   <button id="install-btn" onclick="installHumMatch()" style="display:block;margin-top:8px;background:none;border:1px solid rgba(168,85,247,0.35);border-radius:20px;color:rgba(168,85,247,0.8);font-size:0.8rem;font-weight:600;padding:8px 20px;cursor:pointer;">
     📲 Add to Home Screen
@@ -393,7 +393,7 @@
   <div style="width:100%;max-width:380px;margin-top:28px;padding:20px 0 12px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
     <a href="/dashboard" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Dashboard</a>
     <a href="/squadmatch" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">SquadMatch</a>
-    <a href="/pricing" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Premium</a>
+    <a href="/pricing" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Squad Leader</a>
     <a href="/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contact</a>
   </div>
 
@@ -2485,13 +2485,13 @@ async function startTest() {
       modal.style.cssText = 'position:fixed;inset:0;z-index:3000;background:rgba(8,6,15,0.96);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;';
       const isLoggedIn = !!localStorage.getItem('hm_token');
       const limitSubtext = isLoggedIn
-        ? 'Upgrade to Premium for unlimited hums and exports.'
-        : 'Create a free account to track your usage across devices, or upgrade to Premium.';
+        ? 'Unlock Squad Leader for unlimited hums and exports.'
+        : 'Create a free account to track your usage across devices, or unlock Squad Leader.';
       modal.innerHTML = `
         <div style="font-size:2.5rem;margin-bottom:16px;">🎤</div>
-        <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">Free hums available when invited by a Premium Squad Leader</h2>
+        <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">Free hums available when invited by a Squad Leader</h2>
         <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:28px;max-width:300px;">${limitSubtext}</p>
-        <a href="#" onclick="startCheckout();return false;" style="display:block;width:100%;max-width:300px;padding:16px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;text-decoration:none;border-radius:14px;font-size:1rem;font-weight:800;margin-bottom:12px;">✨ Upgrade to Premium — $0.99/mo</a>
+        <a href="#" onclick="startCheckout();return false;" style="display:block;width:100%;max-width:300px;padding:16px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;text-decoration:none;border-radius:14px;font-size:1rem;font-weight:800;margin-bottom:12px;">✨ Become a Squad Leader — $0.99/mo</a>
         <div style="width:100%;max-width:300px;margin-bottom:8px;">
           <div style="display:flex;gap:8px;">
             <input id="promo-input" type="text" placeholder="Promo code" autocapitalize="characters" style="flex:1;padding:12px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(168,85,247,0.3);border-radius:10px;color:#fff;font-size:0.95rem;outline:none;"/>
@@ -3262,8 +3262,8 @@ function exportSongList(mode) {
     if (exportCount >= 20) {
       const isLoggedIn = !!localStorage.getItem('hm_token');
       showToast(isLoggedIn
-        ? 'Export limit reached. Upgrade to Premium for unlimited exports. ✨'
-        : 'Export limit reached. Create a free account or upgrade to Premium. ✨');
+        ? 'Export limit reached. Unlock Squad Leader for unlimited exports. ✨'
+        : 'Export limit reached. Create a free account or unlock Squad Leader. ✨');
       return;
     }
     localStorage.setItem('hm_export_count', exportCount + 1);
@@ -3678,7 +3678,7 @@ function buildShareCard() {
   // Promo code
   ctx.font = '600 18px Arial, sans-serif';
   ctx.fillStyle = 'rgba(192,132,252,0.7)';
-  ctx.fillText('Go Premium — just $0.99/mo', RX, 448);
+  ctx.fillText('Become a Squad Leader — $0.99/mo', RX, 448);
 
   // Hashtag
   ctx.font = '500 18px Arial, sans-serif';
@@ -3880,7 +3880,7 @@ function closeNav() {
     const email = localStorage.getItem(EMAIL_KEY);
     const isPremium = localStorage.getItem('hm_premium') === 'true';
     if (!email) return;
-    showToast(`${email} · ${isPremium ? 'Premium' : 'Free'}`);
+    showToast(`${email} · ${isPremium ? 'Squad Leader' : 'Free'}`);
   };
 
   // ── Load user data on page load ──

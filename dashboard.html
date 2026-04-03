@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>HumMatch Dashboard</title>
-<meta name="description" content="Your premium HumMatch dashboard - playlists, stats, SquadMatch & more"/>
+<meta name="description" content="Your Squad Leader HumMatch dashboard - playlists, stats, SquadMatch & more"/>
 <link rel="icon" href="/hummatch-icon-bug-2x.png"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -229,7 +229,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
       <li>Save unlimited playlists</li>
       <li>Priority support</li>
     </ul>
-    <button class="upgrade-btn" onclick="startCheckout()">Upgrade to Premium &mdash; $0.99/mo</button>
+    <button class="upgrade-btn" onclick="startCheckout()">Become a Squad Leader &mdash; $0.99/mo</button>
     <div style="margin-top:12px">
       <button class="btn-sm" onclick="doLogout()">Sign out</button>
     </div>
@@ -246,7 +246,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
     </div>
     <div class="user-info">
       <span class="user-email" id="user-email"></span>
-      <span class="premium-badge">Premium</span>
+      <span class="premium-badge">SQUAD LEADER</span>
       <button class="settings-btn" onclick="toggleSettings()">Settings</button>
       <button class="logout-btn" onclick="doLogout()">Logout</button>
     </div>
@@ -326,7 +326,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
   <div class="two-col">
     <!-- Friend Codes -->
     <div class="card" id="friend-codes-section">
-      <h3>🎁 Premium Friend Invites</h3>
+      <h3>🎁 Squad Leader Friend Invites</h3>
       <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:12px">Share HumMatch with friends &mdash; they get 20% off forever!</p>
       <div class="code-display">
         <div class="code" id="current-code">---</div>
@@ -413,7 +413,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
       </div>
       <div class="settings-row">
         <div class="label">Subscription</div>
-        <div class="val premium" id="set-sub">Premium</div>
+        <div class="val premium" id="set-sub">Squad Leader</div>
       </div>
       <div class="settings-row">
         <div class="label">Member Since</div>
@@ -560,7 +560,7 @@ async function loadStats() {
 
     // Account settings
     document.getElementById('set-email').textContent = d.user.email;
-    document.getElementById('set-sub').textContent = d.user.is_premium ? 'Premium' : 'Free';
+    document.getElementById('set-sub').textContent = d.user.is_premium ? 'Squad Leader' : 'Free';
     if (d.user.created_at) {
       document.getElementById('set-since').textContent = new Date(d.user.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     }

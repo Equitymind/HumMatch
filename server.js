@@ -645,7 +645,7 @@ function requireAuth(req, res, next) {
 }
 
 function requirePremium(req, res, next) {
-  if (!req.user.is_premium) return res.status(403).json({ error: 'Premium required' });
+  if (!req.user.is_premium) return res.status(403).json({ error: 'Squad Leader required' });
   next();
 }
 
