@@ -233,7 +233,8 @@
   .confetti-emoji { font-size: 1.8rem; margin-bottom: 2px; }
 
   /* ── Mobile Header Bar ─────────────────────────────── */
-  .hm-header { position:fixed; top:0; left:0; right:0; z-index:10000; display:flex; align-items:center; justify-content:flex-end; padding:10px 16px; background:rgba(8,6,15,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.1); }
+  .hm-header { position:fixed; top:0; left:0; right:0; z-index:10000; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:rgba(8,6,15,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.1); }
+  .hm-header-logo { text-decoration:none; font-size:1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 
   /* ── Hamburger Nav ──────────────────────────────────── */
   .hm-nav-toggle { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; padding:0; flex-shrink:0; }
@@ -338,6 +339,7 @@
 <body>
 <!-- Header Bar -->
 <header class="hm-header">
+  <a class="hm-header-logo" href="/">HumMatch</a>
   <button class="hm-nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </button>

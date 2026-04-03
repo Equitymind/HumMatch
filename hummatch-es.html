@@ -171,7 +171,9 @@
   .confetti-emoji { font-size: 2.5rem; margin-bottom: 4px; }
 
   /* ── Hamburger Nav ──────────────────────────────────── */
-  .hm-nav-toggle { position:fixed; top:16px; left:16px; z-index:1000; background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; }
+  .hm-header { position:fixed; top:0; left:0; right:0; z-index:1001; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:rgba(8,6,15,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.1); }
+  .hm-header-logo { text-decoration:none; font-size:1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hm-nav-toggle { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; }
   .hm-nav-toggle span { display:block; width:20px; height:2px; background:rgba(168,85,247,0.9); border-radius:2px; transition:all 0.25s; }
   .hm-nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
   .hm-nav-toggle.open span:nth-child(2) { opacity:0; }
@@ -198,10 +200,13 @@
 </script>
 </head>
 <body>
-<!-- Hamburger Nav -->
-<button class="hm-nav-toggle" id="navToggle" aria-label="Menú" onclick="toggleNav()">
-  <span></span><span></span><span></span>
-</button>
+<!-- Header Bar -->
+<header class="hm-header">
+  <a class="hm-header-logo" href="/">HumMatch</a>
+  <button class="hm-nav-toggle" id="navToggle" aria-label="Menú" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
 <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
 <nav class="hm-nav-drawer" id="navDrawer">
   <div class="hm-nav-logo"><span>HumMatch</span></div>
