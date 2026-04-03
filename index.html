@@ -585,6 +585,17 @@
 
   <!-- SCROLLABLE SONG CONTENT -->
   <div style="padding: 0 16px; width: 100%;">
+
+  <!-- SQUADMATCH POST-HUM PROMPT -->
+  <div id="squad-results-prompt" style="width:100%;max-width:400px;margin:0 0 16px;display:none;">
+    <div style="background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.28);border-radius:14px;padding:16px 18px;position:relative;">
+      <button onclick="document.getElementById('squad-results-prompt').style.display='none';try{localStorage.setItem('hm_squad_prompt_dismissed','1');}catch(e){}" style="position:absolute;top:8px;right:10px;background:none;border:none;color:rgba(255,255,255,0.3);font-size:1rem;cursor:pointer;padding:4px;line-height:1;">✕</button>
+      <div style="font-size:0.95rem;font-weight:800;color:#fff;margin-bottom:4px;">🎤 Start a SquadMatch</div>
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.45;margin-bottom:14px;">Invite friends and find songs your whole crew can nail together</div>
+      <button onclick="startSquadMatch()" style="width:100%;padding:11px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.85rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.01em;">Start SquadMatch</button>
+    </div>
+  </div>
+
   <!-- MAIN SONG LIST -->
   <div class="section-title" id="songs-section-title">SONGS YOU CAN CONFIDENTLY SING</div>
   <ul class="song-list" id="your-songs" style="width:100%;max-width:400px;"></ul>
@@ -4336,8 +4347,11 @@ function showResults() {
       }
     }
     renderSongPage();
+    window._hmRenderSongPage = renderSongPage;
     setTimeout(restorePlaylistChecks, 50);
   }
+  // Store full confident list for language filter re-pagination
+  window._hmConfidentAllFull = confidentSongs.filter ? confidentSongs.filter(s => s.tier.key !== 'stretch') : [];
 
   // Render stretch section
   const stretchEl = document.getElementById('stretch-songs');
@@ -4352,6 +4366,13 @@ function showResults() {
   const topScore = confidentSongs[0] ? Math.round((confidentSongs[0].score || 0) * 100) : 0;
   hmTrack('results_view', { voice_type: voiceType, score: topScore });
   showScreen('screen-results');
+  // Show SquadMatch prompt (if not already dismissed)
+  try {
+    if (!localStorage.getItem('hm_squad_prompt_dismissed')) {
+      const sqEl = document.getElementById('squad-results-prompt');
+      if (sqEl) sqEl.style.display = 'block';
+    }
+  } catch(e) {}
   // Restore saved language filter (default to English for new users)
   const savedLangFilter = (() => { try { return localStorage.getItem('hm_lang_filter'); } catch(e) { return null; } })();
   const langToApply = (savedLangFilter && ['en','es','all'].includes(savedLangFilter)) ? savedLangFilter : 'en';
@@ -4407,29 +4428,47 @@ function setFilter(filter, el) {
     const mainEl = document.getElementById('your-songs');
     if (stretchEl && mainEl) mainEl.innerHTML = stretchEl.innerHTML;
     if (stretchSec) stretchSec.style.display = 'none';
+    window._hmInStretch = true;
+    const existing = document.getElementById('hm-show-more');
+    if (existing) existing.remove();
     return;
   }
-  // Re-render original confident songs if coming back from stretch
-  if (window._hmSongs) {
-    const confidentSongs = window._hmSongs.filter(s => s.tier.key !== 'stretch');
-    // Re-render (we need renderSongCard, inline it here)
-    document.getElementById('your-songs').innerHTML = confidentSongs.map(s => {
-      const tierBadge = `<span class="tier-badge ${s.tier.cls}">${s.tier.label}</span>`;
-      return `<li class="song-item" data-tier="${s.tier.key}" data-tags="${(s.tags||[]).join(',')}" data-familiar="${s.familiar}"
-        onclick="openKaraoke('${s.title.replace(/'/g,"\\'")}','${s.artist.replace(/'/g,"\\'")}')">
-        <div class="song-item-top"><span class="song-title">${s.title}</span>${tierBadge}</div>
-        <div class="song-meta"><span>${s.artist}</span></div>
-        <div class="song-bottom">
-          <span style="font-size:0.6rem;color:rgba(255,255,255,0.3);">${Math.round(s.score*100)}% vocal fit</span>
-          <span class="sing-btn">▶ Sing It</span>
-        </div></li>`;
-    }).join('');
-    if (window._hmStretch && window._hmStretch.length) {
-      if (stretchSec) stretchSec.style.display = 'block';
-    }
+
+  // Restore from stretch: re-paginate using the proper render function
+  if (window._hmInStretch) {
+    window._hmInStretch = false;
+    const full = window._hmConfidentAllFull || (window._hmSongs || []).filter(s => s.tier.key !== 'stretch');
+    window._hmConfidentAll = full;
+    window._hmConfidentAllFull = full;
+    window._hmConfidentPage = 0;
+    if (window._hmRenderSongPage) { window._hmRenderSongPage(); setTimeout(restorePlaylistChecks, 50); }
+    if (window._hmStretch && window._hmStretch.length && stretchSec) stretchSec.style.display = 'block';
   }
 
-  // Apply filter
+  // Language filters: re-paginate from full dataset so all pages are filtered
+  if (filter === 'en' || filter === 'es') {
+    const all = window._hmConfidentAllFull || window._hmConfidentAll || [];
+    if (!window._hmConfidentAllFull) window._hmConfidentAllFull = all.slice();
+    const filtered = all.filter(s => {
+      const slang = s.lang || 'en';
+      const stags = s.tags || [];
+      if (filter === 'en') return slang !== 'es' && !stags.includes('latin');
+      return slang === 'es' || stags.includes('latin');
+    });
+    window._hmConfidentAll = filtered;
+    window._hmConfidentPage = 0;
+    if (window._hmRenderSongPage) { window._hmRenderSongPage(); setTimeout(restorePlaylistChecks, 50); }
+    return;
+  }
+
+  // Non-language filter after language filter: restore full list
+  if (window._hmConfidentAllFull && window._hmConfidentAll !== window._hmConfidentAllFull) {
+    window._hmConfidentAll = window._hmConfidentAllFull.slice();
+    window._hmConfidentPage = 0;
+    if (window._hmRenderSongPage) { window._hmRenderSongPage(); setTimeout(restorePlaylistChecks, 50); }
+  }
+
+  // Apply show/hide filter to visible songs
   document.querySelectorAll('#your-songs .song-item').forEach(item => {
     const tier  = item.dataset.tier || '';
     const tags  = (item.dataset.tags || '').split(',');
