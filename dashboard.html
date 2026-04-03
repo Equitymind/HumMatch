@@ -48,6 +48,8 @@ a:hover{color:#c084fc}
 .dash-header .user-info{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .user-email{color:rgba(255,255,255,0.5);font-size:0.82rem}
 .premium-badge{background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;font-size:0.65rem;font-weight:800;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px}
+.hum-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:8px 18px;border-radius:10px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none}
+.hum-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,0.4);color:#fff}
 .settings-btn,.logout-btn{background:none;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:6px 12px;border-radius:8px;font-size:0.72rem;cursor:pointer;transition:all 0.2s}
 .settings-btn:hover{border-color:#7c3aed;color:#a78bfa}
 .logout-btn:hover{border-color:#ef4444;color:#ef4444}
@@ -240,10 +242,13 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
   <!-- Header -->
   <div class="dash-header">
     <div class="logo-wrap">
-      <img src="/hummatch-icon-bug-2x.png" alt="HumMatch" style="height:36px;width:36px;border-radius:8px" onerror="this.style.display='none'"/>
-      <h1>HumMatch Dashboard</h1>
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+        <img src="/hummatch-icon-bug-2x.png" alt="HumMatch" style="height:36px;width:36px;border-radius:8px" onerror="this.style.display='none'"/>
+        <h1>HumMatch Dashboard</h1>
+      </a>
     </div>
     <div class="user-info">
+      <a href="/" class="hum-btn">🎤 Hum a Song</a>
       <span class="user-email" id="user-email"></span>
       <span class="premium-badge">SQUAD LEADER</span>
       <button class="settings-btn" onclick="toggleSettings()">Settings</button>
