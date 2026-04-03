@@ -141,6 +141,25 @@ tr:hover td{background:rgba(124,58,237,0.05)}
     <div class="stat-card"><div class="label">No-Match Rate</div><div class="value" id="s-nomatch">-</div></div>
   </div>
 
+  <!-- Row 5: Hum → Signup Conversion -->
+  <div class="stat-row" style="margin-bottom:14px;">
+    <div class="stat-card" style="border-color:rgba(168,85,247,0.25);">
+      <div class="label">Hum → Signup Conv.</div>
+      <div class="value" id="s-hum-conv" style="font-size:2rem;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">-</div>
+      <div class="sub" id="sub-hum-conv"></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Anonymous Hummers</div>
+      <div class="value" id="s-anon-hums">-</div>
+      <div class="sub">sessions without account</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Registered Hummers</div>
+      <div class="value" id="s-reg-hums">-</div>
+      <div class="sub">unique users with hums</div>
+    </div>
+  </div>
+
   <!-- US Map -->
   <div class="chart-card wide" style="margin-bottom:14px;">
     <h3>🗺️ Hum Activity Map</h3>
@@ -154,6 +173,10 @@ tr:hover td{background:rgba(124,58,237,0.05)}
     <div class="chart-card wide">
       <h3>Daily Trend (14 days)</h3>
       <div class="chart-wrap"><canvas id="chart-trend"></canvas></div>
+    </div>
+    <div class="chart-card wide">
+      <h3>Hum → Signup: Anonymous vs Registered Hums</h3>
+      <div class="chart-wrap"><canvas id="chart-hum-conv"></canvas></div>
     </div>
     <div class="chart-card">
       <h3>User Journey Funnel</h3>
@@ -356,6 +379,13 @@ function render(d) {
   const noMatchRate = d.totalHums > 0 ? Math.round((d.noMatch / d.totalHums) * 100) : 0;
   document.getElementById('s-nomatch').textContent = noMatchRate + '%';
 
+  // Hum → Signup conversion
+  document.getElementById('s-hum-conv').textContent = (d.humSignupConvRate ?? 0) + '%';
+  document.getElementById('sub-hum-conv').textContent = `${fmt(d.anonHumCount)} anon → ${fmt(d.registeredHummerCount)} signups`;
+  document.getElementById('s-anon-hums').textContent = fmt(d.anonHumCount);
+  document.getElementById('s-reg-hums').textContent = fmt(d.registeredHummerCount);
+  renderHumConvChart(d.humConvTrend);
+
   // Tables
   renderTable('tbl-matched', d.topMatched, true);
   renderTable('tbl-sung', d.topSung, true);
@@ -507,6 +537,41 @@ function renderLangChart(d) {
         tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw.toLocaleString()} visits` } }
       },
       cutout: '55%'
+    }
+  });
+}
+
+function renderHumConvChart(data) {
+  destroyChart('humconv');
+  const ctx = document.getElementById('chart-hum-conv').getContext('2d');
+  charts.humconv = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: (data || []).map(d => d.day?.slice(5) || ''),
+      datasets: [
+        { label: 'Anonymous Hums', data: (data || []).map(d => d.anon_hums || 0), backgroundColor: 'rgba(168,85,247,0.75)', borderRadius: 4 },
+        { label: 'Registered Hums', data: (data || []).map(d => d.registered_hums || 0), backgroundColor: 'rgba(236,72,153,0.75)', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            afterBody: items => {
+              const total = items.reduce((s, i) => s + i.raw, 0);
+              if (total === 0) return '';
+              const reg = items.find(i => i.dataset.label === 'Registered Hums')?.raw || 0;
+              return `Conv: ${total > 0 ? ((reg / total) * 100).toFixed(1) : 0}%`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, ticks: { color: 'rgba(255,255,255,0.3)', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+        y: { stacked: true, ticks: { color: 'rgba(255,255,255,0.3)', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' }, beginAtZero: true }
+      }
     }
   });
 }

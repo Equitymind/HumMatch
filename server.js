@@ -959,6 +959,30 @@ app.get('/api/hummatch/analytics', requireAdmin, (req, res) => {
     ? Math.round((totalHums / totalVisits) * 100)
     : 0;
 
+  // Hum → Signup conversion metrics
+  const anonHumCount = db.prepare(
+    `SELECT COUNT(*) as cnt FROM hum_history WHERE user_id IS NULL AND hummed_at >= ?`
+  ).get(sinceDate).cnt;
+
+  const registeredHummerCount = db.prepare(
+    `SELECT COUNT(DISTINCT user_id) as cnt FROM hum_history WHERE user_id IS NOT NULL AND hummed_at >= ?`
+  ).get(sinceDate).cnt;
+
+  const totalHumSessions = anonHumCount + registeredHummerCount;
+  const humSignupConvRate = totalHumSessions > 0
+    ? parseFloat(((registeredHummerCount / totalHumSessions) * 100).toFixed(1))
+    : 0;
+
+  // Daily anon vs registered hum breakdown for trend chart
+  const humConvTrend = db.prepare(`
+    SELECT DATE(hummed_at) as day,
+      SUM(CASE WHEN user_id IS NULL THEN 1 ELSE 0 END) as anon_hums,
+      SUM(CASE WHEN user_id IS NOT NULL THEN 1 ELSE 0 END) as registered_hums
+    FROM hum_history
+    WHERE hummed_at >= ?
+    GROUP BY day ORDER BY day
+  `).all(sinceDate);
+
   // Daily breakdown for charts
   const dailyRows = db.prepare(`
     SELECT DATE(created_at) as day, event, COUNT(*) as cnt
@@ -994,7 +1018,8 @@ app.get('/api/hummatch/analytics', requireAdmin, (req, res) => {
     totalShares, totalSung,
     pwaInstalls, monthlyPurchases,
     convRate, avgSessionSec, returnVisitors,
-    daily, topSongs, topReferrers
+    daily, topSongs, topReferrers,
+    anonHumCount, registeredHummerCount, humSignupConvRate, humConvTrend
   });
 });
 
