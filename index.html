@@ -325,6 +325,18 @@
     .hum-card { max-width: 1200px; }
   }
 
+  @media (max-width: 767px) {
+    #screen-welcome {
+      padding-bottom: max(80px, env(safe-area-inset-bottom, 80px));
+      overscroll-behavior-y: contain;
+    }
+    footer {
+      position: relative;
+      margin-top: 40px;
+      padding-bottom: max(32px, env(safe-area-inset-bottom, 32px)) !important;
+    }
+  }
+
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2LE5Q48EG"></script>
