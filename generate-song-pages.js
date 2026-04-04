@@ -33,9 +33,18 @@ function midiToNoteAscii(midi) {
 // ─── DIFFICULTY ───────────────────────────────────────────────────────────────
 function getDifficulty(lo, hi) {
   const span = hi - lo;
-  if (span <= 12) return { label:'Easy',   emoji:'🟢', color:'#22c55e', desc:'Comfortable for most singers — fits within one octave.' };
-  if (span <= 17) return { label:'Medium', emoji:'🟡', color:'#f59e0b', desc:'Moderate challenge — requires some vocal training.' };
-  return               { label:'Hard',   emoji:'🔴', color:'#ef4444', desc:'Demanding range — best for experienced singers.' };
+  if (span <= 12) return { label:'Easy',   emoji:'🟢', color:'#22c55e', desc:'Comfortable for most singers — fits within one octave.',   catPath:'/easy-songs'   };
+  if (span <= 17) return { label:'Medium', emoji:'🟡', color:'#f59e0b', desc:'Moderate challenge — requires some vocal training.',        catPath:'/medium-songs' };
+  return               { label:'Hard',   emoji:'🔴', color:'#ef4444', desc:'Demanding range — best for experienced singers.',           catPath:'/hard-songs'   };
+}
+
+// ─── VOICE TYPE ───────────────────────────────────────────────────────────────
+function getVoiceType(hi) {
+  if (hi <= 60) return { label:'Bass',     path:'/bass-songs'     };
+  if (hi <= 65) return { label:'Baritone', path:'/baritone-songs' };
+  if (hi <= 70) return { label:'Tenor',    path:'/tenor-songs'    };
+  if (hi <= 76) return { label:'Alto',     path:'/alto-songs'     };
+  return               { label:'Soprano',  path:'/soprano-songs'  };
 }
 
 // ─── SLUG ─────────────────────────────────────────────────────────────────────
@@ -48,6 +57,10 @@ function slugify(str) {
 }
 function songSlug(title, artist) {
   return slugify(title) + '-' + slugify(artist);
+}
+
+function artistSlug(artist) {
+  return slugify(artist);
 }
 
 // ─── HTML ESCAPE ──────────────────────────────────────────────────────────────
@@ -191,8 +204,10 @@ function renderPage(song, related) {
   const hiNote  = midiToNote(song.hi);
   const loAscii = midiToNoteAscii(song.lo);
   const hiAscii = midiToNoteAscii(song.hi);
-  const span    = song.hi - song.lo;
-  const diff    = getDifficulty(song.lo, song.hi);
+  const span      = song.hi - song.lo;
+  const diff      = getDifficulty(song.lo, song.hi);
+  const voiceType = getVoiceType(song.hi);
+  const aSlug     = artistSlug(song.artist);
   const ytQuery = encodeURIComponent(`${song.title} ${song.artist} karaoke`);
   const today   = new Date().toISOString().split('T')[0];
 
@@ -249,14 +264,15 @@ function renderPage(song, related) {
     ]
   };
 
-  // Schema: BreadcrumbList
+  // Schema: BreadcrumbList (4-level: Home > Songs > Artist > Song)
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "HumMatch", "item": BASE_URL },
-      { "@type": "ListItem", "position": 2, "name": "Songs", "item": `${BASE_URL}/#catalog` },
-      { "@type": "ListItem", "position": 3, "name": song.title, "item": `${BASE_URL}/song/${song.slug}` }
+      { "@type": "ListItem", "position": 1, "name": "Home",      "item": BASE_URL },
+      { "@type": "ListItem", "position": 2, "name": "Songs",     "item": `${BASE_URL}/song/` },
+      { "@type": "ListItem", "position": 3, "name": song.artist, "item": `${BASE_URL}/artist/${aSlug}` },
+      { "@type": "ListItem", "position": 4, "name": song.title,  "item": `${BASE_URL}/song/${song.slug}` }
     ]
   };
 
@@ -423,14 +439,20 @@ function renderPage(song, related) {
 
 <!-- HERO -->
 <div class="hero">
-  <nav aria-label="Breadcrumb" class="breadcrumb">
-    <a href="/">HumMatch</a><span>›</span>
-    <a href="/#catalog">Songs</a><span>›</span>
+  <nav aria-label="Breadcrumb" class="breadcrumb"><!-- seo-links-v1 -->
+    <a href="/">Home</a><span>›</span>
+    <a href="/song/">Songs</a><span>›</span>
+    <a href="/artist/${aSlug}">${esc(song.artist)}</a><span>›</span>
     ${esc(song.title)}
   </nav>
 
   <h1>${esc(song.title)}</h1>
-  <p class="by-artist">by <strong>${esc(song.artist)}</strong>${song.year ? ` &nbsp;·&nbsp; ${song.year}` : ''}</p>
+  <p class="by-artist">by <a href="/artist/${aSlug}" style="color:inherit;text-decoration:none"><strong>${esc(song.artist)}</strong></a>${song.year ? ` &nbsp;·&nbsp; ${song.year}` : ''}</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;margin-top:-20px">
+    <a href="/artist/${aSlug}" style="background:rgba(255,255,255,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:5px 14px;font-size:0.78rem;text-decoration:none;color:rgba(255,255,255,0.5)">All ${esc(song.artist)} songs →</a>
+    <a href="${diff.catPath}" style="background:rgba(255,255,255,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:5px 14px;font-size:0.78rem;text-decoration:none;color:rgba(255,255,255,0.5)">${diff.emoji} ${diff.label} Songs</a>
+    <a href="${voiceType.path}" style="background:rgba(255,255,255,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:5px 14px;font-size:0.78rem;text-decoration:none;color:rgba(255,255,255,0.5)">${voiceType.label} Songs</a>
+  </div>
 
   <div class="stats-grid">
     <div class="stat">
@@ -597,6 +619,15 @@ function buildSitemap(songs) {
     { url:'/',                                priority:'1.0', freq:'weekly'  },
     { url:'/blog',                            priority:'0.8', freq:'weekly'  },
     { url:'/pricing',                         priority:'0.7', freq:'monthly' },
+    { url:'/song/',                           priority:'0.8', freq:'weekly'  },
+    { url:'/easy-songs',                      priority:'0.75',freq:'weekly'  },
+    { url:'/medium-songs',                    priority:'0.75',freq:'weekly'  },
+    { url:'/hard-songs',                      priority:'0.75',freq:'weekly'  },
+    { url:'/bass-songs',                      priority:'0.75',freq:'weekly'  },
+    { url:'/baritone-songs',                  priority:'0.75',freq:'weekly'  },
+    { url:'/tenor-songs',                     priority:'0.75',freq:'weekly'  },
+    { url:'/alto-songs',                      priority:'0.75',freq:'weekly'  },
+    { url:'/soprano-songs',                   priority:'0.75',freq:'weekly'  },
     { url:'/blog/find-songs-you-can-nail',    priority:'0.8', freq:'monthly' },
     { url:'/blog/how-hummatch-works',         priority:'0.8', freq:'monthly' },
     { url:'/blog/how-hummatch-was-built',     priority:'0.6', freq:'monthly' },

@@ -1857,6 +1857,28 @@ app.get('/login', (_req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
 
+// Artist pages: /artist/[slug] → /artist/[slug].html
+app.get('/artist/:slug', (req, res) => {
+  const file = path.join(__dirname, 'artist', `${req.params.slug}.html`);
+  if (fs.existsSync(file)) {
+    res.sendFile(file);
+  } else {
+    res.redirect(302, '/song/');
+  }
+});
+
+// Difficulty category pages
+app.get('/easy-songs',   (_req, res) => res.sendFile(path.join(__dirname, 'easy-songs.html')));
+app.get('/medium-songs', (_req, res) => res.sendFile(path.join(__dirname, 'medium-songs.html')));
+app.get('/hard-songs',   (_req, res) => res.sendFile(path.join(__dirname, 'hard-songs.html')));
+
+// Voice type category pages
+app.get('/bass-songs',      (_req, res) => res.sendFile(path.join(__dirname, 'bass-songs.html')));
+app.get('/baritone-songs',  (_req, res) => res.sendFile(path.join(__dirname, 'baritone-songs.html')));
+app.get('/tenor-songs',     (_req, res) => res.sendFile(path.join(__dirname, 'tenor-songs.html')));
+app.get('/alto-songs',      (_req, res) => res.sendFile(path.join(__dirname, 'alto-songs.html')));
+app.get('/soprano-songs',   (_req, res) => res.sendFile(path.join(__dirname, 'soprano-songs.html')));
+
 // Song directory index: /song/ → /song/index.html
 app.get('/song', (req, res) => {
   res.sendFile(path.join(__dirname, 'song', 'index.html'));
