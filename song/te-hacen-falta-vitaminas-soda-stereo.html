@@ -163,6 +163,21 @@
     .rel-artist { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
     .rel-meta   { font-size: 0.78rem; color: var(--muted); }
 
+    /* ── SHARE BAR ── */
+    .share-wrap { padding: 18px 0 8px; }
+    .share-label-sm { font-size: 0.72rem; color: var(--muted); text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .share-bar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 18px; border-radius: 10px; font-size: 0.85rem; font-weight: 700;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s; line-height: 1;
+    }
+    .share-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .share-tw   { background: #000; color: #fff; }
+    .share-fb   { background: #1877F2; color: #fff; }
+    .share-copy { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid rgba(255,255,255,0.14); font-family: inherit; }
+
     /* ── FOOTER ── */
     footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--muted); font-size: 0.82rem; }
     footer a { color: var(--muted); text-decoration: none; }
@@ -213,6 +228,30 @@
   <div class="voice-cta">
     <a href="/?song=te-hacen-falta-vitaminas-soda-stereo" class="btn-test-voice">🎤 Test Your Voice on This Song</a>
     <div class="voice-cta-sub">Hum for 5 seconds — find out if <strong style="color:var(--text)">Te Hacen Falta Vitaminas</strong> fits your range. Free, no sign-up.</div>
+  </div>
+
+  <!-- SHARE BAR -->
+  <div class="share-wrap">
+    <div class="share-label-sm">Share this song</div>
+    <div class="share-bar">
+      <a class="share-btn share-tw"
+         href="https://twitter.com/intent/tweet?text=Can%20you%20sing%20%22Te%20Hacen%20Falta%20Vitaminas%22%3F%20%F0%9F%8E%A4%20Test%20your%20vocal%20range%3A%20https%3A%2F%2Fhummatch.me%2Fsong%2Fte-hacen-falta-vitaminas-soda-stereo"
+         target="_blank" rel="noopener noreferrer"
+         onclick="trackShare('twitter')">
+        <svg width="14" height="14" viewBox="0 0 300 300" fill="currentColor"><path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66"/></svg>
+        Post on X
+      </a>
+      <a class="share-btn share-fb"
+         href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhummatch.me%2Fsong%2Fte-hacen-falta-vitaminas-soda-stereo"
+         target="_blank" rel="noopener noreferrer"
+         onclick="trackShare('facebook')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.234 2.686.234v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        Share on Facebook
+      </a>
+      <button class="share-btn share-copy" onclick="copyLink('https://hummatch.me/song/te-hacen-falta-vitaminas-soda-stereo', this)">
+        📋 Copy Link
+      </button>
+    </div>
   </div>
 
   <div class="stats-grid" style="margin-top:28px">
@@ -372,5 +411,38 @@
   </p>
 </footer>
 
+<script>
+function trackShare(platform) {
+  try {
+    fetch('/api/hummatch/event', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ event: 'song_share', data: { platform: platform, song: 'te-hacen-falta-vitaminas-soda-stereo' } }),
+      keepalive: true
+    });
+  } catch(e) {}
+}
+function copyLink(url, btn) {
+  trackShare('copy');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(function() { showCopied(btn); }).catch(function() { fallbackCopy(url, btn); });
+  } else {
+    fallbackCopy(url, btn);
+  }
+}
+function fallbackCopy(url, btn) {
+  var ta = document.createElement('textarea');
+  ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
+  showCopied(btn);
+}
+function showCopied(btn) {
+  var orig = btn.innerHTML;
+  btn.textContent = '✓ Copied!';
+  setTimeout(function() { btn.innerHTML = orig; }, 2000);
+}
+</script>
 </body>
 </html>
