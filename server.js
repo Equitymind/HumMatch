@@ -1923,6 +1923,23 @@ app.listen(PORT, () => {
     console.error('  [diag] hums table: MISSING or ERROR —', e.message);
   }
   try {
+    const songsCount = db.prepare('SELECT COUNT(*) as cnt FROM songs').get().cnt;
+    const artistCount = db.prepare('SELECT COUNT(DISTINCT artist) as cnt FROM songs').get().cnt;
+    const enCount = db.prepare('SELECT COUNT(*) as cnt FROM songs WHERE language = "en"').get().cnt;
+    const esCount = db.prepare('SELECT COUNT(*) as cnt FROM songs WHERE language = "es"').get().cnt;
+    const samples = db.prepare('SELECT title, artist FROM songs LIMIT 3').all();
+    console.log(`  [diag] songs table: OK (${songsCount} rows)`);
+    console.log(`  [diag] songs artists: ${artistCount} unique`);
+    console.log(`  [diag] songs languages: en=${enCount}, es=${esCount}`);
+    console.log(`  [diag] songs sample: ${samples.map(s => `"${s.title}" by ${s.artist}`).join(', ')}`);
+    if (songsCount === 0) {
+      console.error('  [ERROR] SONGS TABLE IS EMPTY! Run: node seed-songs.js');
+    }
+  } catch (e) {
+    console.error('  [diag] songs table: MISSING or ERROR —', e.message);
+    console.error('  [ERROR] SONGS TABLE BROKEN! Database needs seeding.');
+  }
+  try {
     const cols = db.pragma('table_info(users)').map(c => c.name);
     const hasWelcomeFlag = cols.includes('welcome_email_sent');
     console.log(`  [diag] users.welcome_email_sent column: ${hasWelcomeFlag ? 'OK' : 'MISSING'}`);
