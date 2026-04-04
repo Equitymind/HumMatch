@@ -337,6 +337,45 @@
     }
   }
 
+  /* ── Interest Selector ── */
+  .interest-chips { display:flex; flex-wrap:wrap; gap:7px; }
+  .interest-chip {
+    padding: 6px 13px;
+    border-radius: 50px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(124,58,237,0.3);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.5);
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .interest-chip.selected {
+    background: linear-gradient(135deg,#7c3aed,#db2777);
+    border-color: transparent;
+    color: #fff;
+  }
+  #interest-selector-panel {
+    display: none;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(124,58,237,0.22);
+    border-radius: 14px;
+    padding: 18px 16px;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 380px;
+  }
+  #interest-active-badge {
+    display: none;
+    font-size: 0.72rem;
+    color: #a855f7;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 6px;
+    cursor: pointer;
+  }
+
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2LE5Q48EG"></script>
@@ -416,6 +455,32 @@
     <div class="step">
       <div class="step-num">🎯</div>
       <div class="step-txt">Get a list of songs you can actually nail</div>
+    </div>
+  </div>
+
+  <!-- ── Interest Selector ── -->
+  <div style="width:100%;max-width:380px;padding:0 4px;margin-top:16px;">
+    <div style="text-align:center;">
+      <button id="interest-toggle-btn" onclick="toggleInterestPanel()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(124,58,237,0.28);color:rgba(255,255,255,0.6);border-radius:50px;padding:8px 18px;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:0.01em;">
+        🎯 Filter results by taste (optional)
+      </button>
+    </div>
+    <div id="interest-active-badge" onclick="toggleInterestPanel()">✦ Taste filter active — tap to change</div>
+
+    <div id="interest-selector-panel">
+      <div style="font-size:0.88rem;font-weight:700;color:#e2e0f0;margin-bottom:14px;">What music do you like?</div>
+
+      <div style="font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:8px;">Genre</div>
+      <div class="interest-chips" id="genre-chips"></div>
+
+      <div style="font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin:13px 0 8px;">Era</div>
+      <div class="interest-chips" id="decade-chips"></div>
+
+      <div style="display:flex;gap:8px;margin-top:16px;">
+        <button onclick="saveInterests()" style="flex:1;padding:10px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;font-family:inherit;">Save Filter</button>
+        <button onclick="skipInterests()" style="flex:1;padding:10px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.45);font-size:0.78rem;font-weight:600;border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;font-family:inherit;">Show Everything</button>
+      </div>
+      <div style="font-size:0.68rem;color:rgba(255,255,255,0.25);text-align:center;margin-top:10px;">Preferences saved for next time</div>
     </div>
   </div>
 
@@ -5459,6 +5524,103 @@ function showScreen(id) {
   document.getElementById(id).classList.add('active');
 }
 
+// ── Interest Selector ──────────────────────────────────────────────────────
+(function initInterestSelector() {
+  const GENRES  = [
+    { id:'pop',       label:'Pop' },
+    { id:'rock',      label:'Rock' },
+    { id:'country',   label:'Country' },
+    { id:'rnb',       label:'R&B' },
+    { id:'hiphop',    label:'Hip-Hop' },
+    { id:'latin',     label:'Latin' },
+    { id:'christian', label:'Christian' },
+    { id:'indie',     label:'Indie' },
+    { id:'metal',     label:'Metal' },
+    { id:'jazz',      label:'Jazz' },
+    { id:'disco',     label:'Disco' },
+  ];
+  const DECADES = [
+    { id:'50s60s', label:'50s–60s' },
+    { id:'70s',    label:'70s' },
+    { id:'80s',    label:'80s' },
+    { id:'90s',    label:'90s' },
+    { id:'2000s',  label:'2000s' },
+    { id:'2010s',  label:'2010s' },
+    { id:'2020s',  label:'2020s' },
+  ];
+
+  function buildChips(containerId, items, selectedIds) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = items.map(item => `
+      <div class="interest-chip${selectedIds.includes(item.id) ? ' selected' : ''}"
+           data-id="${item.id}"
+           onclick="toggleChip(this,'${containerId}')">
+        ${item.label}
+      </div>`).join('');
+  }
+
+  // Load saved prefs
+  let saved = { genres: [], decades: [] };
+  try { saved = JSON.parse(localStorage.getItem('hm_interests') || 'null') || { genres: [], decades: [] }; } catch(_) {}
+
+  buildChips('genre-chips',  GENRES,  saved.genres  || []);
+  buildChips('decade-chips', DECADES, saved.decades || []);
+
+  // Show active badge if filter is on
+  if ((saved.genres && saved.genres.length) || (saved.decades && saved.decades.length)) {
+    const badge = document.getElementById('interest-active-badge');
+    if (badge) badge.style.display = 'block';
+  }
+})();
+
+window.toggleChip = function(el, containerId) {
+  el.classList.toggle('selected');
+};
+
+window.toggleInterestPanel = function() {
+  const panel  = document.getElementById('interest-selector-panel');
+  const badge  = document.getElementById('interest-active-badge');
+  const btn    = document.getElementById('interest-toggle-btn');
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  if (btn) btn.style.display = isOpen ? 'inline-block' : 'none';
+  if (badge && isOpen) badge.style.display = 'none';
+};
+
+window.saveInterests = function() {
+  const genres  = [...document.querySelectorAll('#genre-chips .interest-chip.selected')].map(c => c.dataset.id);
+  const decades = [...document.querySelectorAll('#decade-chips .interest-chip.selected')].map(c => c.dataset.id);
+  localStorage.setItem('hm_interests', JSON.stringify({ genres, decades }));
+  const panel = document.getElementById('interest-selector-panel');
+  const btn   = document.getElementById('interest-toggle-btn');
+  const badge = document.getElementById('interest-active-badge');
+  if (panel) panel.style.display = 'none';
+  if (btn)   btn.style.display   = 'inline-block';
+  if (badge) badge.style.display = (genres.length || decades.length) ? 'block' : 'none';
+};
+
+window.skipInterests = function() {
+  localStorage.setItem('hm_interests', JSON.stringify({ genres: [], decades: [] }));
+  const panel = document.getElementById('interest-selector-panel');
+  const btn   = document.getElementById('interest-toggle-btn');
+  const badge = document.getElementById('interest-active-badge');
+  if (panel) panel.style.display = 'none';
+  if (btn)   btn.style.display   = 'inline-block';
+  if (badge) badge.style.display = 'none';
+};
+
+window.clearInterests = function() {
+  localStorage.setItem('hm_interests', JSON.stringify({ genres: [], decades: [] }));
+  // Reset chips
+  document.querySelectorAll('.interest-chip').forEach(c => c.classList.remove('selected'));
+  const badge = document.getElementById('interest-active-badge');
+  if (badge) badge.style.display = 'none';
+  // Re-run results with no filter
+  showResults();
+};
+// ── End Interest Selector ──────────────────────────────────────────────────
+
 function retryHum() {
   // Clean up no-match banner if present
   const banner = document.getElementById('no-match-banner');
@@ -5892,30 +6054,70 @@ function showResults() {
     const t = (s.title + ' ' + s.artist).toLowerCase();
     const tags = [];
     if (/elvis|sinatra|cash|dean martin|tony bennett|nat king/i.test(t)) tags.push('classic');
-    if (/beatles|queen|bowie|journey|bon jovi|aerosmith|petty|springsteen|eagles/i.test(t)) tags.push('rock');
-    if (/ed sheeran|bruno mars|michael jackson|katy perry|taylor swift|adele|beyonce|lady gaga|ariana/i.test(t)) tags.push('pop');
-    if (/cash|stapleton|morgan wallen|luke combs|zach bryan|tyler childers|luke bryan|blake shelton|keith urban|kenny chesney|garth brooks|tim mcgraw|alan jackson|carrie underwood|miranda lambert|kacey musgraves|maren morris|dolly parton|willie nelson|kenny rogers|hank williams|patsy cline|merle haggard|waylon jennings|loretta lynn|george jones|randy travis|shania twain|faith hill|brooks & dunn|george strait|reba mcentire|toby keith|zac brown|jason aldean|eric church|dierks bentley|thomas rhett|john denver/i.test(t)) tags.push('country');
+    if (/beatles|queen|bowie|journey|bon jovi|aerosmith|petty|springsteen|eagles|guns n roses|led zeppelin|u2|the who|rolling stones|david bowie|fleetwood mac|creedence|lynyrd skynyrd|acdc|ac\/dc|metallica|iron maiden|black sabbath|ozzy|nirvana|pearl jam|soundgarden|alice in chains|foo fighters|green day|weezer|radiohead|oasis|blur|the strokes|arctic monkeys|the killers|the cure|depeche mode|linkin park|system of a down|tool|pantera|megadeth|slayer|judas priest|van halen/i.test(t)) tags.push('rock');
+    if (/ed sheeran|bruno mars|michael jackson|katy perry|taylor swift|adele|beyonce|lady gaga|ariana grande|justin bieber|selena gomez|dua lipa|charlie puth|shawn mendes|halsey|billie eilish|olivia rodrigo|harry styles|the weeknd|post malone|lizzo|meghan trainor|sam smith|john legend|sia|kelly clarkson|pink|britney spears|backstreet boys|nsync|spice girls|one direction|coldplay|imagine dragons|maroon 5|train|onerepublic|jason mraz|colbie caillat/i.test(t)) tags.push('pop');
+    if (/cash|stapleton|morgan wallen|luke combs|zach bryan|tyler childers|luke bryan|blake shelton|keith urban|kenny chesney|garth brooks|tim mcgraw|alan jackson|carrie underwood|miranda lambert|kacey musgraves|maren morris|dolly parton|willie nelson|kenny rogers|hank williams|patsy cline|merle haggard|waylon jennings|loretta lynn|george jones|randy travis|shania twain|faith hill|brooks & dunn|george strait|reba mcentire|toby keith|zac brown|jason aldean|eric church|dierks bentley|thomas rhett|john denver|brad paisley|jimmie allen|brett eldredge|old dominion|little big town|chris young/i.test(t)) tags.push('country');
+    // R&B
+    if (/beyonce|alicia keys|marvin gaye|sam cooke|otis redding|al green|stevie wonder|aretha franklin|amy winehouse|usher|chris brown|rihanna|frank ocean|john legend|d'angelo|erykah badu|maxwell|brian mcknight|boyz ii men|boys ii men|r kelly|joe|neyo|ne-yo|toni braxton|mary j blige|lauryn hill|whitney houston|janet jackson|sza|h.e.r|her|giveon|daniel caesar/i.test(t)) tags.push('rnb');
+    // Hip-Hop
+    if (/drake|kanye|kendrick lamar|jay.z|eminem|post malone|travis scott|lil wayne|lil baby|future|21 savage|cardi b|nicki minaj|j cole|big sean|chance|childish gambino|logic|macklemore|old school rap|hip.hop|hip hop|rap/i.test(t)) tags.push('hiphop');
+    // Latin
+    if (/shakira|j balvin|bad bunny|marc anthony|luis miguel|jennifer lopez|ricky martin|enrique iglesias|pitbull|maluma|ozuna|daddy yankee|reggaeton|latin|bachata|salsa|juan gabriel|jose jose|camila cabello|gloria estefan|carlos santana|celia cruz/i.test(t)) tags.push('latin');
+    // Christian/Gospel
+    if (/lauren daigle|hillsong|chris tomlin|casting crowns|lecrae|tauren wells|for king|david crowder|tobymac|toby mac|matthew west|michael w. smith|michael w smith|amy grant|steven curtis chapman|dc talk|skillet|third day|newsboys|mercy me|mercyme|mandisa|plumb|bebo norman|jeremy camp|elevation|bethel|maverick|cain|brandon lake|zach williams|phil wickham|gateway worship|kristian stanfill/i.test(t)) tags.push('christian');
+    // Indie
+    if (/radiohead|arcade fire|death cab|the national|fleet foxes|bon iver|sufjan stevens|iron & wine|vampire weekend|the strokes|modest mouse|of montreal|beirut|jose gonzalez|jose gonzález|the lumineers|mumford|the head|lord huron|father john misty|phoebe bridgers|boygenius|lucy dacus|hozier|james blake|alt.j|alt j|tame impala|king krule|frank turner/i.test(t)) tags.push('indie');
+    // Metal
+    if (/metallica|iron maiden|black sabbath|ozzy osbourne|slayer|megadeth|pantera|tool|korn|linkin park|system of a down|disturbed|slipknot|five finger|breaking benjamin|halestorm|evanescence|within temptation|nightwish|epica|dimmu borgir|children of bodom|lamb of god|as i lay dying/i.test(t)) tags.push('metal');
+    // Jazz / Standards
+    if (/sinatra|nat king cole|ella fitzgerald|michael bublé|michael buble|chet baker|billie holiday|louis armstrong|tony bennett|dean martin|miles davis|john coltrane|diana krall|norah jones|frank sinatra|johnny hartman|peggy lee|sarah vaughan|bossa nova|swing|big band/i.test(t)) tags.push('jazz');
+    // Disco / Funk
+    if (/abba|bee gees|donna summer|earth wind|kool & the gang|kool and the gang|chic|sister sledge|gloria gaynor|village people|rick james|sly & the family|sly and the family|george clinton|parliament|funkadelic|james brown|jackson 5|michael jackson.*disco|disco|funky/i.test(t)) tags.push('disco');
+
     if (/party|dance|tonight|celebrate|good time/i.test(t)) tags.push('party');
     if (isFamiliar(s.title)) tags.push('familiar');
     // Context tags
-    // Car songs: anthems, singalong classics, big choruses everyone knows
     if (/don\'t stop|bohemian|sweet home|livin\' on a prayer|born to run|highway|take me home|africa|september|tiny dancer|mr\. brightside|rolling|journey|survivor|eye of the tiger|thunder|sweet caroline|don\'t stop believin|shake it off|uptown funk|can\'t stop/i.test(t)) tags.push('car');
     if (tags.includes('rock') || tags.includes('classic')) tags.push('car');
-    // Solo / private singing: ballads, emotional, introspective
     if (/falling|alone|missing|broken|hold on|without you|one more|someone like|fix you|yellow|hallelujah|tears|cry|prayer|believe|in my life|yesterday|imagine|hero/i.test(t)) tags.push('solo');
-    // Group / karaoke: crowd-pleasers, call-and-response, well-known, fun
     if (/love shack|september|sweet caroline|living on a prayer|don\'t stop believin|thriller|girls just|shake it|dancing queen|i will survive|mr\. brightside|africa|uptown|happy|party|tonight|everyone|group|together/i.test(t)) tags.push('group');
     if (tags.includes('party')) tags.push('group');
     return tags;
   }
 
-  // Extend matchedSongs with tiers + tags
+  // Decade tag from year
+  function getDecadeTag(s) {
+    const yr = s.year || 0;
+    if (yr >= 2020) return '2020s';
+    if (yr >= 2010) return '2010s';
+    if (yr >= 2000) return '2000s';
+    if (yr >= 1990) return '90s';
+    if (yr >= 1980) return '80s';
+    if (yr >= 1970) return '70s';
+    return '50s60s'; // pre-1970 or unknown
+  }
+
+  // Extend matchedSongs with tiers + tags + decade
   const tieredSongs = deduped.map(s => ({
     ...s,
     tier: getTier(s.score),
     tags: getTags(s),
+    decade: getDecadeTag(s),
     familiar: isFamiliar(s.title)
   }));
+
+  // ── Apply user interest filter ──
+  const _interests = (function() {
+    try { return JSON.parse(localStorage.getItem('hm_interests') || 'null'); } catch(_) { return null; }
+  })();
+  const _hasGenreFilter  = _interests && _interests.genres  && _interests.genres.length;
+  const _hasDecadeFilter = _interests && _interests.decades && _interests.decades.length;
+  function _matchesInterests(s) {
+    if (!_hasGenreFilter && !_hasDecadeFilter) return true;
+    const genreOk  = !_hasGenreFilter  || s.tags.some(g => _interests.genres.includes(g));
+    const decadeOk = !_hasDecadeFilter || _interests.decades.includes(s.decade);
+    return genreOk && decadeOk;
+  }
 
   // Separate confident songs from stretch
   // Filter out previously dismissed songs
@@ -5931,7 +6133,15 @@ function showResults() {
     return [...nails, ...strongs];
   }
 
-  const confidentSongs = sessionShuffle(tieredSongs.filter(s => s.tier.key !== 'stretch' && !isDismissed(s)));
+  const _confidentRaw = tieredSongs.filter(s => s.tier.key !== 'stretch' && !isDismissed(s));
+  const _confidentFiltered = _confidentRaw.filter(_matchesInterests);
+  // Fall back to unfiltered if taste filter kills everything
+  const confidentSongs = sessionShuffle(
+    (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length >= 3
+      ? _confidentFiltered
+      : _confidentRaw
+  );
+  const _tasteFilterActive = (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length >= 3;
   const stretchSongs   = tieredSongs.filter(s => s.tier.key === 'stretch' && !isDismissed(s));
 
   // Set share song data now that confidentSongs is available
@@ -6115,6 +6325,25 @@ function showResults() {
       yourSongsEl.innerHTML = '';
     }
   } else {
+    // ── Taste filter banner ──
+    const _existingTasteBanner = document.getElementById('hm-taste-banner');
+    if (_existingTasteBanner) _existingTasteBanner.remove();
+    if (_tasteFilterActive) {
+      const _genreLabels = { pop:'Pop', rock:'Rock', country:'Country', rnb:'R&B', hiphop:'Hip-Hop', latin:'Latin', christian:'Christian', indie:'Indie', metal:'Metal', jazz:'Jazz', disco:'Disco' };
+      const _decadeLabels = { '50s60s':'50s/60s', '70s':'70s', '80s':'80s', '90s':'90s', '2000s':'2000s', '2010s':'2010s', '2020s':'2020s' };
+      const _gNames = (_interests.genres || []).map(g => _genreLabels[g] || g).join(', ');
+      const _dNames = (_interests.decades || []).map(d => _decadeLabels[d] || d).join(', ');
+      const _filterDesc = [_gNames, _dNames].filter(Boolean).join(' · ');
+      yourSongsEl.insertAdjacentHTML('beforebegin', `
+        <div id="hm-taste-banner" style="width:100%;max-width:400px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.22);border-radius:12px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <div>
+            <div style="font-size:0.78rem;font-weight:700;color:#c084fc;margin-bottom:2px;">🎯 ${confidentSongs.length} songs match your voice &amp; taste</div>
+            <div style="font-size:0.68rem;color:rgba(255,255,255,0.35);">${_filterDesc}</div>
+          </div>
+          <button onclick="clearInterests()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);border-radius:8px;padding:5px 10px;font-size:0.68rem;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;">Show All</button>
+        </div>`);
+    }
+
     const PAGE_SIZE = 10;
     window._hmConfidentAll = confidentSongs;
     window._hmConfidentPage = 0;
