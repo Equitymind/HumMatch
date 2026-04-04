@@ -409,6 +409,19 @@ db.exec(`
     created_at TEXT DEFAULT (datetime('now'))
   );
 
+  CREATE TABLE IF NOT EXISTS songs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    artist TEXT NOT NULL,
+    lo INTEGER NOT NULL,
+    hi INTEGER NOT NULL,
+    brightness INTEGER DEFAULT 50,
+    year INTEGER,
+    language TEXT DEFAULT 'en',
+    slug TEXT UNIQUE NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
   CREATE INDEX IF NOT EXISTS idx_events_created ON events(created_at);
   CREATE INDEX IF NOT EXISTS idx_events_event ON events(event);
   CREATE INDEX IF NOT EXISTS idx_users_token ON users(token);
