@@ -166,8 +166,8 @@ if (errors > 0) {
 // Verify final count
 const finalCount = db.prepare('SELECT COUNT(*) as cnt FROM songs').get().cnt;
 const artistCount = db.prepare('SELECT COUNT(DISTINCT artist) as cnt FROM songs').get().cnt;
-const enCount = db.prepare('SELECT COUNT(*) as cnt FROM songs WHERE language = "en"').get().cnt;
-const esCount = db.prepare('SELECT COUNT(*) as cnt FROM songs WHERE language = "es"').get().cnt;
+const enCount = db.prepare("SELECT COUNT(*) as cnt FROM songs WHERE language = 'en'").get().cnt;
+const esCount = db.prepare("SELECT COUNT(*) as cnt FROM songs WHERE language = 'es'").get().cnt;
 
 console.log('\n📊 Final database state:');
 console.log(`  Total songs: ${finalCount}`);

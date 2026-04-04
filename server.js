@@ -1925,8 +1925,8 @@ app.listen(PORT, () => {
   try {
     const songsCount = db.prepare('SELECT COUNT(*) as cnt FROM songs').get().cnt;
     const artistCount = db.prepare('SELECT COUNT(DISTINCT artist) as cnt FROM songs').get().cnt;
-    const enCount = db.prepare('SELECT COUNT(*) as cnt FROM songs WHERE language = "en"').get().cnt;
-    const esCount = db.prepare('SELECT COUNT(*) as cnt FROM songs WHERE language = "es"').get().cnt;
+    const enCount = db.prepare("SELECT COUNT(*) as cnt FROM songs WHERE language = 'en'").get().cnt;
+    const esCount = db.prepare("SELECT COUNT(*) as cnt FROM songs WHERE language = 'es'").get().cnt;
     const samples = db.prepare('SELECT title, artist FROM songs LIMIT 3').all();
     console.log(`  [diag] songs table: OK (${songsCount} rows)`);
     console.log(`  [diag] songs artists: ${artistCount} unique`);
