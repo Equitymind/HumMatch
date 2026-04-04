@@ -1,0 +1,22 @@
+{
+  "name": "@hummatch/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for HumMatch - Find songs that match your vocal range",
+  "type": "module",
+  "bin": {
+    "hummatch-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["mcp", "vocal-range", "karaoke", "singing", "music", "voice"],
+  "author": "HumMatch Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Equitymind/HumMatch.git"
+  }
+}

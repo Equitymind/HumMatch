@@ -1,0 +1,1001 @@
+[
+  {
+    "title": "Ocean Avenue",
+    "artist": "Yellowcard",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 65,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Only One",
+    "artist": "Yellowcard",
+    "lo": 51,
+    "hi": 73,
+    "brightness": 63,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Way Away",
+    "artist": "Yellowcard",
+    "lo": 53,
+    "hi": 75,
+    "brightness": 67,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Dirty Little Secret",
+    "artist": "The All-American Rejects",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Swing, Swing",
+    "artist": "The All-American Rejects",
+    "lo": 51,
+    "hi": 73,
+    "brightness": 66,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "Move Along",
+    "artist": "The All-American Rejects",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 68,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "It Ends Tonight",
+    "artist": "The All-American Rejects",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 62,
+    "year": 2006,
+    "language": "English"
+  },
+  {
+    "title": "Gives You Hell",
+    "artist": "The All-American Rejects",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 64,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Punk Rock 101",
+    "artist": "Bowling for Soup",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 58,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "1985",
+    "artist": "Bowling for Soup",
+    "lo": 49,
+    "hi": 69,
+    "brightness": 60,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Girl All the Bad Guys Want",
+    "artist": "Bowling for Soup",
+    "lo": 47,
+    "hi": 67,
+    "brightness": 57,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "Ohio Is for Lovers",
+    "artist": "Hawthorne Heights",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 62,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Saying Sorry",
+    "artist": "Hawthorne Heights",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 60,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Cute Without the 'E' (Cut from the Team)",
+    "artist": "Taking Back Sunday",
+    "lo": 51,
+    "hi": 72,
+    "brightness": 64,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "MakeDamnSure",
+    "artist": "Taking Back Sunday",
+    "lo": 52,
+    "hi": 73,
+    "brightness": 66,
+    "year": 2006,
+    "language": "English"
+  },
+  {
+    "title": "Check Yes Juliet",
+    "artist": "We the Kings",
+    "lo": 53,
+    "hi": 74,
+    "brightness": 67,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Skyway Avenue",
+    "artist": "We the Kings",
+    "lo": 52,
+    "hi": 73,
+    "brightness": 65,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Dear Maria, Count Me In",
+    "artist": "All Time Low",
+    "lo": 51,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Weightless",
+    "artist": "All Time Low",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 63,
+    "year": 2009,
+    "language": "English"
+  },
+  {
+    "title": "Damned If I Do Ya (Damned If I Don't)",
+    "artist": "All Time Low",
+    "lo": 52,
+    "hi": 73,
+    "brightness": 66,
+    "year": 2009,
+    "language": "English"
+  },
+  {
+    "title": "The Middle",
+    "artist": "Jimmy Eat World",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 63,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Sweetness",
+    "artist": "Jimmy Eat World",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 61,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Pain",
+    "artist": "Jimmy Eat World",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 59,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Work",
+    "artist": "Jimmy Eat World",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 58,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Bleed American",
+    "artist": "Jimmy Eat World",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 62,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "A-Punk",
+    "artist": "Vampire Weekend",
+    "lo": 54,
+    "hi": 73,
+    "brightness": 68,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Oxford Comma",
+    "artist": "Vampire Weekend",
+    "lo": 53,
+    "hi": 72,
+    "brightness": 66,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Cape Cod Kwassa Kwassa",
+    "artist": "Vampire Weekend",
+    "lo": 52,
+    "hi": 71,
+    "brightness": 65,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Float On",
+    "artist": "Modest Mouse",
+    "lo": 49,
+    "hi": 68,
+    "brightness": 58,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Dashboard",
+    "artist": "Modest Mouse",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 56,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Take Me Out",
+    "artist": "Franz Ferdinand",
+    "lo": 51,
+    "hi": 72,
+    "brightness": 64,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Do You Want To",
+    "artist": "Franz Ferdinand",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 62,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "This Fire",
+    "artist": "Franz Ferdinand",
+    "lo": 52,
+    "hi": 73,
+    "brightness": 65,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Time to Pretend",
+    "artist": "MGMT",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 62,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Electric Feel",
+    "artist": "MGMT",
+    "lo": 49,
+    "hi": 69,
+    "brightness": 60,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Kids",
+    "artist": "MGMT",
+    "lo": 51,
+    "hi": 71,
+    "brightness": 63,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Pumped Up Kicks",
+    "artist": "Foster the People",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 56,
+    "year": 2010,
+    "language": "English"
+  },
+  {
+    "title": "Helena",
+    "artist": "My Chemical Romance",
+    "lo": 52,
+    "hi": 75,
+    "brightness": 68,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "I'm Not Okay (I Promise)",
+    "artist": "My Chemical Romance",
+    "lo": 51,
+    "hi": 74,
+    "brightness": 66,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Welcome to the Black Parade",
+    "artist": "My Chemical Romance",
+    "lo": 50,
+    "hi": 73,
+    "brightness": 65,
+    "year": 2006,
+    "language": "English"
+  },
+  {
+    "title": "Famous Last Words",
+    "artist": "My Chemical Romance",
+    "lo": 53,
+    "hi": 76,
+    "brightness": 70,
+    "year": 2006,
+    "language": "English"
+  },
+  {
+    "title": "Teenagers",
+    "artist": "My Chemical Romance",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 63,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Sugar, We're Goin Down",
+    "artist": "Fall Out Boy",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 64,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Dance, Dance",
+    "artist": "Fall Out Boy",
+    "lo": 51,
+    "hi": 73,
+    "brightness": 66,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "This Ain't a Scene, It's an Arms Race",
+    "artist": "Fall Out Boy",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 68,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Thnks fr th Mmrs",
+    "artist": "Fall Out Boy",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 62,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "I Don't Care",
+    "artist": "Fall Out Boy",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Face Down",
+    "artist": "The Red Jumpsuit Apparatus",
+    "lo": 51,
+    "hi": 73,
+    "brightness": 66,
+    "year": 2006,
+    "language": "English"
+  },
+  {
+    "title": "Your Guardian Angel",
+    "artist": "The Red Jumpsuit Apparatus",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 60,
+    "year": 2006,
+    "language": "English"
+  },
+  {
+    "title": "Savior",
+    "artist": "Rise Against",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Prayer of the Refugee",
+    "artist": "Rise Against",
+    "lo": 51,
+    "hi": 73,
+    "brightness": 67,
+    "year": 2006,
+    "language": "English"
+  },
+  {
+    "title": "Re-Education (Through Labor)",
+    "artist": "Rise Against",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 68,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Dammit",
+    "artist": "Blink-182",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 62,
+    "year": 1997,
+    "language": "English"
+  },
+  {
+    "title": "What's My Age Again?",
+    "artist": "Blink-182",
+    "lo": 49,
+    "hi": 69,
+    "brightness": 60,
+    "year": 1999,
+    "language": "English"
+  },
+  {
+    "title": "Feeling This",
+    "artist": "Blink-182",
+    "lo": 51,
+    "hi": 71,
+    "brightness": 64,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Ocean Avenue",
+    "artist": "Yellowcard",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 66,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Beverly Hills",
+    "artist": "Weezer",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 58,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Perfect Situation",
+    "artist": "Weezer",
+    "lo": 49,
+    "hi": 69,
+    "brightness": 60,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Pork and Beans",
+    "artist": "Weezer",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 62,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Last Resort",
+    "artist": "Papa Roach",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2000,
+    "language": "English"
+  },
+  {
+    "title": "Scars",
+    "artist": "Papa Roach",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 57,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Getting Away with Murder",
+    "artist": "Papa Roach",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 59,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "How You Remind Me",
+    "artist": "Nickelback",
+    "lo": 44,
+    "hi": 66,
+    "brightness": 52,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Photograph",
+    "artist": "Nickelback",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Far Away",
+    "artist": "Nickelback",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 53,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Rockstar",
+    "artist": "Nickelback",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Someday",
+    "artist": "Nickelback",
+    "lo": 44,
+    "hi": 66,
+    "brightness": 51,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "The Reason",
+    "artist": "Hoobastank",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 58,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Crawling in the Dark",
+    "artist": "Hoobastank",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 60,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Out of Control",
+    "artist": "Hoobastank",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 62,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Meant to Live",
+    "artist": "Switchfoot",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 63,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Dare You to Move",
+    "artist": "Switchfoot",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 61,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Stars",
+    "artist": "Switchfoot",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 59,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Hemorrhage (In My Hands)",
+    "artist": "Fuel",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 56,
+    "year": 2000,
+    "language": "English"
+  },
+  {
+    "title": "Shimmer",
+    "artist": "Fuel",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 58,
+    "year": 2000,
+    "language": "English"
+  },
+  {
+    "title": "Bad Day",
+    "artist": "Daniel Powter",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 62,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Free Fallin'",
+    "artist": "John Mayer",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 58,
+    "year": 2008,
+    "language": "English"
+  },
+  {
+    "title": "Waiting on the World to Change",
+    "artist": "John Mayer",
+    "lo": 47,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2006,
+    "language": "English"
+  },
+  {
+    "title": "Say",
+    "artist": "John Mayer",
+    "lo": 49,
+    "hi": 69,
+    "brightness": 60,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Daughters",
+    "artist": "John Mayer",
+    "lo": 46,
+    "hi": 66,
+    "brightness": 53,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Your Body Is a Wonderland",
+    "artist": "John Mayer",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 57,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Collide",
+    "artist": "Howie Day",
+    "lo": 49,
+    "hi": 69,
+    "brightness": 59,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "She Will Be Loved",
+    "artist": "Maroon 5",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 58,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "This Love",
+    "artist": "Maroon 5",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 61,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "Sunday Morning",
+    "artist": "Maroon 5",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 56,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "Makes Me Wonder",
+    "artist": "Maroon 5",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 63,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Won't Go Home Without You",
+    "artist": "Maroon 5",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 59,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Harder to Breathe",
+    "artist": "Maroon 5",
+    "lo": 51,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "100 Years",
+    "artist": "Five for Fighting",
+    "lo": 46,
+    "hi": 67,
+    "brightness": 54,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Superman (It's Not Easy)",
+    "artist": "Five for Fighting",
+    "lo": 45,
+    "hi": 66,
+    "brightness": 52,
+    "year": 2000,
+    "language": "English"
+  },
+  {
+    "title": "The World I Know",
+    "artist": "Collective Soul",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 56,
+    "year": 1995,
+    "language": "English"
+  },
+  {
+    "title": "Shine",
+    "artist": "Collective Soul",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 58,
+    "year": 1993,
+    "language": "English"
+  },
+  {
+    "title": "Heavy",
+    "artist": "Collective Soul",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 60,
+    "year": 1999,
+    "language": "English"
+  },
+  {
+    "title": "Blurry",
+    "artist": "Puddle of Mudd",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 56,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "She Hates Me",
+    "artist": "Puddle of Mudd",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 58,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "Control",
+    "artist": "Puddle of Mudd",
+    "lo": 46,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Lips of an Angel",
+    "artist": "Hinder",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 58,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Better Than Me",
+    "artist": "Hinder",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 56,
+    "year": 2007,
+    "language": "English"
+  },
+  {
+    "title": "Get Stoned",
+    "artist": "Hinder",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 60,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "Photograph",
+    "artist": "Nickelback",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2005,
+    "language": "English"
+  },
+  {
+    "title": "It's Been Awhile",
+    "artist": "Staind",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 53,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Outside",
+    "artist": "Staind",
+    "lo": 44,
+    "hi": 66,
+    "brightness": 51,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "So Far Away",
+    "artist": "Staind",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 54,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Right Here",
+    "artist": "Staind",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 56,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Fade",
+    "artist": "Staind",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Click Click Boom",
+    "artist": "Saliva",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 58,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Always",
+    "artist": "Saliva",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 56,
+    "year": 2002,
+    "language": "English"
+  },
+  {
+    "title": "Rest in Pieces",
+    "artist": "Saliva",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 60,
+    "year": 2003,
+    "language": "English"
+  },
+  {
+    "title": "Wherever You Will Go",
+    "artist": "The Calling",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 60,
+    "year": 2001,
+    "language": "English"
+  },
+  {
+    "title": "Adrienne",
+    "artist": "The Calling",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 58,
+    "year": 2004,
+    "language": "English"
+  },
+  {
+    "title": "Our Lives",
+    "artist": "The Calling",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 61,
+    "year": 2004,
+    "language": "English"
+  }
+]

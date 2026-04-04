@@ -23,7 +23,7 @@
   <!-- Structured Data -->
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"MusicComposition","name":"Sígueme y Te Sigo","composer":{"@type":"MusicGroup","name":"Ozuna"},"datePublished":"2017","url":"https://hummatch.me/song/s-gueme-y-te-sigo-ozuna"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What vocal range do I need to sing Sígueme y Te Sigo?","acceptedAnswer":{"@type":"Answer","text":"Sígueme y Te Sigo by Ozuna requires a vocal range from G2 to F#4, spanning 23 semitones (1.9 octaves)."}},{"@type":"Question","name":"Is Sígueme y Te Sigo hard to sing?","acceptedAnswer":{"@type":"Answer","text":"Sígueme y Te Sigo is rated Hard. Demanding range — best for experienced singers. It spans 23 semitones from G2 to F#4."}},{"@type":"Question","name":"Can I sing Sígueme y Te Sigo at karaoke?","acceptedAnswer":{"@type":"Answer","text":"Whether you can sing Sígueme y Te Sigo depends on your personal vocal range. The song requires G2 to F#4. Use HumMatch to test your exact range for free in under 10 seconds."}},{"@type":"Question","name":"What is the highest note in Sígueme y Te Sigo?","acceptedAnswer":{"@type":"Answer","text":"The highest note in Sígueme y Te Sigo by Ozuna is F#4. If you can comfortably sing F#4, this song is within your reach."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"HumMatch","item":"https://hummatch.me"},{"@type":"ListItem","position":2,"name":"Songs","item":"https://hummatch.me/#catalog"},{"@type":"ListItem","position":3,"name":"Sígueme y Te Sigo","item":"https://hummatch.me/song/s-gueme-y-te-sigo-ozuna"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hummatch.me"},{"@type":"ListItem","position":2,"name":"Songs","item":"https://hummatch.me/song/"},{"@type":"ListItem","position":3,"name":"Ozuna","item":"https://hummatch.me/artist/ozuna"},{"@type":"ListItem","position":4,"name":"Sígueme y Te Sigo","item":"https://hummatch.me/song/s-gueme-y-te-sigo-ozuna"}]}</script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -102,52 +102,13 @@
     .range-fill  { height: 100%; border-radius: 5px; background: var(--grad); position: absolute; }
     .diff-pill   { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; }
 
-    /* ── YOUTUBE HERO ── */
-    .yt-hero { margin: 28px 0 20px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: var(--card); }
-    .yt-thumb {
-      position: relative; width: 100%; aspect-ratio: 16/9; max-height: 340px;
-      background: linear-gradient(135deg, #1a0a2e 0%, #0d0b1a 50%, #1a0a2e 100%);
-      display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden;
-    }
-    .yt-thumb::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(168,85,247,0.15) 0%, transparent 70%);
-    }
-    .yt-play-btn {
-      width: 80px; height: 80px; background: #FF0000; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 40px rgba(255,0,0,0.35), 0 0 80px rgba(255,0,0,0.15);
-      transition: transform 0.15s, box-shadow 0.15s; position: relative; z-index: 1;
-    }
-    .yt-thumb:hover .yt-play-btn { transform: scale(1.08); box-shadow: 0 0 50px rgba(255,0,0,0.5), 0 0 100px rgba(255,0,0,0.2); }
-    .yt-thumb-label {
-      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-      background: rgba(0,0,0,0.7); color: rgba(255,255,255,0.75); font-size: 0.78rem;
-      padding: 4px 12px; border-radius: 20px; white-space: nowrap; z-index: 1;
-    }
-    .yt-thumb-song {
-      position: absolute; top: 16px; left: 16px; right: 16px; z-index: 1;
-      font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.85); text-align: center;
-    }
-
-    /* ── VOICE CTA (after video) ── */
-    .voice-cta {
-      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.15));
-      border: 1px solid rgba(168,85,247,0.32); border-top: none;
-      border-radius: 0 0 16px 16px; padding: 22px 24px; text-align: center;
-    }
-    .btn-test-voice {
-      display: inline-block; background: var(--grad); color: #fff;
-      padding: 14px 36px; border-radius: 12px; font-weight: 800; font-size: 1.05rem;
-      text-decoration: none; transition: opacity 0.15s, transform 0.1s;
-      box-shadow: 0 4px 24px rgba(168,85,247,0.35);
-    }
-    .btn-test-voice:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 6px 32px rgba(168,85,247,0.45); }
-    .voice-cta-sub { font-size: 0.82rem; color: var(--muted); margin-top: 10px; }
-
-    /* ── YOUTUBE (legacy, kept for footer) ── */
+    /* ── YOUTUBE ── */
+    .yt-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .yt-inner { padding: 36px; text-align: center; }
+    .yt-inner p { color: var(--muted); font-size: 0.9rem; margin-bottom: 18px; }
     .btn-yt { display: inline-flex; align-items: center; gap: 8px; background: #FF0000; color: #fff; padding: 12px 26px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: opacity 0.15s; }
     .btn-yt:hover { opacity: 0.85; }
+    .yt-note { font-size: 0.78rem; color: var(--muted); margin-top: 10px; }
 
     /* ── FAQ ── */
     .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 12px; }
@@ -162,21 +123,6 @@
     .rel-title  { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
     .rel-artist { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
     .rel-meta   { font-size: 0.78rem; color: var(--muted); }
-
-    /* ── SHARE BAR ── */
-    .share-wrap { padding: 18px 0 8px; }
-    .share-label-sm { font-size: 0.72rem; color: var(--muted); text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
-    .share-bar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    .share-btn {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 10px 18px; border-radius: 10px; font-size: 0.85rem; font-weight: 700;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: opacity 0.15s, transform 0.1s; line-height: 1;
-    }
-    .share-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-    .share-tw   { background: #000; color: #fff; }
-    .share-fb   { background: #1877F2; color: #fff; }
-    .share-copy { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid rgba(255,255,255,0.14); font-family: inherit; }
 
     /* ── FOOTER ── */
     footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--muted); font-size: 0.82rem; }
@@ -203,58 +149,22 @@
 
 <!-- HERO -->
 <div class="hero">
-  <nav aria-label="Breadcrumb" class="breadcrumb">
-    <a href="/">HumMatch</a><span>›</span>
-    <a href="/#catalog">Songs</a><span>›</span>
+  <nav aria-label="Breadcrumb" class="breadcrumb"><!-- seo-links-v1 -->
+    <a href="/">Home</a><span>›</span>
+    <a href="/song/">Songs</a><span>›</span>
+    <a href="/artist/ozuna">Ozuna</a><span>›</span>
     Sígueme y Te Sigo
   </nav>
 
   <h1>Sígueme y Te Sigo</h1>
-  <p class="by-artist">by <strong>Ozuna</strong> &nbsp;·&nbsp; 2017</p>
-
-  <!-- YOUTUBE + VOICE CTA (above fold) -->
-  <a href="https://www.youtube.com/results?search_query=S%C3%ADgueme%20y%20Te%20Sigo%20Ozuna%20karaoke"
-     target="_blank" rel="noopener noreferrer" class="yt-hero" style="display:block;text-decoration:none;">
-    <div class="yt-thumb">
-      <div class="yt-thumb-song">Sígueme y Te Sigo · Karaoke</div>
-      <div class="yt-play-btn">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-          <path d="M11 8l14 7-14 7V8z" fill="#fff"/>
-        </svg>
-      </div>
-      <div class="yt-thumb-label">▶ Opens YouTube · "Sígueme y Te Sigo karaoke"</div>
-    </div>
-  </a>
-  <div class="voice-cta">
-    <a href="/?song=s-gueme-y-te-sigo-ozuna" class="btn-test-voice">🎤 Test Your Voice on This Song</a>
-    <div class="voice-cta-sub">Hum for 5 seconds — find out if <strong style="color:var(--text)">Sígueme y Te Sigo</strong> fits your range. Free, no sign-up.</div>
+  <p class="by-artist">by <a href="/artist/ozuna" style="color:inherit;text-decoration:none"><strong>Ozuna</strong></a> &nbsp;·&nbsp; 2017</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;margin-top:-20px">
+    <a href="/artist/ozuna" style="background:rgba(255,255,255,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:5px 14px;font-size:0.78rem;text-decoration:none;color:rgba(255,255,255,0.5)">All Ozuna songs →</a>
+    <a href="/hard-songs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:5px 14px;font-size:0.78rem;text-decoration:none;color:rgba(255,255,255,0.5)">🔴 Hard Songs</a>
+    <a href="/tenor-songs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:5px 14px;font-size:0.78rem;text-decoration:none;color:rgba(255,255,255,0.5)">Tenor Songs</a>
   </div>
 
-  <!-- SHARE BAR -->
-  <div class="share-wrap">
-    <div class="share-label-sm">Share this song</div>
-    <div class="share-bar">
-      <a class="share-btn share-tw"
-         href="https://twitter.com/intent/tweet?text=Can%20you%20sing%20%22S%C3%ADgueme%20y%20Te%20Sigo%22%3F%20%F0%9F%8E%A4%20Test%20your%20vocal%20range%3A%20https%3A%2F%2Fhummatch.me%2Fsong%2Fs-gueme-y-te-sigo-ozuna"
-         target="_blank" rel="noopener noreferrer"
-         onclick="trackShare('twitter')">
-        <svg width="14" height="14" viewBox="0 0 300 300" fill="currentColor"><path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66"/></svg>
-        Post on X
-      </a>
-      <a class="share-btn share-fb"
-         href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhummatch.me%2Fsong%2Fs-gueme-y-te-sigo-ozuna"
-         target="_blank" rel="noopener noreferrer"
-         onclick="trackShare('facebook')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.234 2.686.234v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-        Share on Facebook
-      </a>
-      <button class="share-btn share-copy" onclick="copyLink('https://hummatch.me/song/s-gueme-y-te-sigo-ozuna', this)">
-        📋 Copy Link
-      </button>
-    </div>
-  </div>
-
-  <div class="stats-grid" style="margin-top:28px">
+  <div class="stats-grid">
     <div class="stat">
       <div class="stat-label">Low Note</div>
       <div class="stat-val">G2</div>
@@ -285,7 +195,7 @@
   <div class="cta-box">
     <h2>Can You Sing "Sígueme y Te Sigo"?</h2>
     <p>Hum into your microphone for 5 seconds. HumMatch instantly detects your vocal range and tells you if this song fits your voice.</p>
-    <a href="/?song=s-gueme-y-te-sigo-ozuna" class="btn-grad">🎤 Test My Voice on This Song</a>
+    <a href="/" class="btn-grad">🎤 Test My Voice — Free</a>
     <a href="/#catalog" class="btn-ghost">Browse All Songs</a>
   </div>
 
@@ -310,6 +220,42 @@
         <span class="diff-pill" style="background:#ef44441a; border:1px solid #ef444440; color:#ef4444">
           🔴 Hard — Demanding range — best for experienced singers.
         </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Voice Type Fit -->
+  <div class="section">
+    <h2>Perfect For These Voice Types</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;flex:1;min-width:140px"><div style="font-size:1.4rem;margin-bottom:4px">🎤</div><div style="font-weight:700;font-size:0.95rem;margin-bottom:2px">Baritone</div><div style="font-size:0.8rem;color:var(--muted)">Most common male voice</div></div>
+    </div>
+  </div>
+
+  <div class="section"><h2>Best For</h2><div style="display:flex;gap:10px;flex-wrap:wrap"><div style="background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:12px 16px;flex:1;min-width:150px"><div style="font-size:1.2rem;margin-bottom:4px">🚗</div><div style="font-weight:700;font-size:0.9rem;margin-bottom:2px">Road Trip</div><div style="font-size:0.78rem;color:var(--muted)">Upbeat singalong</div></div><div style="background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:12px 16px;flex:1;min-width:150px"><div style="font-size:1.2rem;margin-bottom:4px">🎯</div><div style="font-weight:700;font-size:0.9rem;margin-bottom:2px">Practice</div><div style="font-size:0.78rem;color:var(--muted)">Build vocal strength</div></div></div></div>
+
+  <div class="section"><div style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:12px;padding:18px 20px"><div style="display:flex;align-items:center;gap:12px"><div style="font-size:1.8rem">🎹</div><div><div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">Try Transposing Higher</div><div style="font-size:0.85rem;color:var(--muted)">Shift 2 semitones higher for more comfortable lows. Most karaoke apps let you adjust pitch.</div></div></div></div></div>
+
+  <div class="section">
+    <div style="background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.12));border:1px solid rgba(168,85,247,0.28);border-radius:14px;padding:20px 24px;text-align:center">
+      <h3 style="font-size:1.15rem;margin-bottom:8px">🎸 Can Your Squad Nail This Together?</h3>
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;max-width:420px;margin-left:auto;margin-right:auto">Test your group's vocal ranges and find songs everyone can sing. Perfect for karaoke nights and road trips.</p>
+      <a href="/squadmatch" style="display:inline-block;background:var(--grad);color:#fff;padding:10px 24px;border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none">➡️ Try SquadMatch</a>
+    </div>
+  </div>
+
+  <!-- KARAOKE VIDEO -->
+  <div class="section">
+    <h2>Karaoke Video</h2>
+    <div class="yt-card">
+      <div class="yt-inner">
+        <p>Practice singing <strong style="color:var(--text)">Sígueme y Te Sigo</strong> with a backing track:</p>
+        <a href="https://www.youtube.com/results?search_query=S%C3%ADgueme%20y%20Te%20Sigo%20Ozuna%20karaoke"
+           target="_blank" rel="noopener noreferrer" class="btn-yt">
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><rect width="20" height="14" rx="3" fill="#FF0000"/><path d="M8 10V4l5 3-5 3z" fill="#fff"/></svg>
+          Find Karaoke Version on YouTube
+        </a>
+        <div class="yt-note">Opens YouTube search for "Sígueme y Te Sigo karaoke"</div>
       </div>
     </div>
   </div>
@@ -369,9 +315,14 @@
     <h2>Similar Songs by Vocal Range</h2>
     <div class="rel-grid">
       
-        <a href="/song/coraz-n-maluma-ft-nego-do-borel" class="rel-card">
-          <div class="rel-title">Corazón</div>
-          <div class="rel-artist">Maluma ft. Nego do Borel</div>
+        <a href="/song/the-joker-steve-miller-band" class="rel-card">
+          <div class="rel-title">The Joker</div>
+          <div class="rel-artist">Steve Miller Band</div>
+          <div class="rel-meta">G2–F♯4 &nbsp;<span style="color:#ef4444">Hard</span></div>
+        </a>
+        <a href="/song/candy-shop-50-cent" class="rel-card">
+          <div class="rel-title">Candy Shop</div>
+          <div class="rel-artist">50 Cent</div>
           <div class="rel-meta">G2–F♯4 &nbsp;<span style="color:#ef4444">Hard</span></div>
         </a>
         <a href="/song/rock-and-roll-never-forgets-bob-seger" class="rel-card">
@@ -379,14 +330,9 @@
           <div class="rel-artist">Bob Seger</div>
           <div class="rel-meta">G2–F♯4 &nbsp;<span style="color:#ef4444">Hard</span></div>
         </a>
-        <a href="/song/the-joker-steve-miller-band" class="rel-card">
-          <div class="rel-title">The Joker</div>
-          <div class="rel-artist">Steve Miller Band</div>
-          <div class="rel-meta">G2–F♯4 &nbsp;<span style="color:#ef4444">Hard</span></div>
-        </a>
-        <a href="/song/abracadabra-steve-miller-band" class="rel-card">
-          <div class="rel-title">Abracadabra</div>
-          <div class="rel-artist">Steve Miller Band</div>
+        <a href="/song/the-lady-is-a-tramp-ella-fitzgerald" class="rel-card">
+          <div class="rel-title">The Lady Is a Tramp</div>
+          <div class="rel-artist">Ella Fitzgerald</div>
           <div class="rel-meta">G2–F♯4 &nbsp;<span style="color:#ef4444">Hard</span></div>
         </a>
     </div>
@@ -395,7 +341,7 @@
   <!-- BOTTOM CTA -->
   <div class="cta-box" style="margin-top:52px">
     <h2>Find Every Song That Fits YOUR Voice</h2>
-    <p>HumMatch analyzes your exact vocal range from a 5-second hum — then instantly shows you which of our 3,000+ songs you can sing. No sign-up, no downloads, completely free.</p>
+    <p>HumMatch analyzes your exact vocal range from a 5-second hum — then instantly shows you which of our 2,600+ songs you can sing. No sign-up, no downloads, completely free.</p>
     <a href="/" class="btn-grad">🎤 Start Humming — It's Free</a>
   </div>
 
@@ -411,38 +357,5 @@
   </p>
 </footer>
 
-<script>
-function trackShare(platform) {
-  try {
-    fetch('/api/hummatch/event', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ event: 'song_share', data: { platform: platform, song: 's-gueme-y-te-sigo-ozuna' } }),
-      keepalive: true
-    });
-  } catch(e) {}
-}
-function copyLink(url, btn) {
-  trackShare('copy');
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(url).then(function() { showCopied(btn); }).catch(function() { fallbackCopy(url, btn); });
-  } else {
-    fallbackCopy(url, btn);
-  }
-}
-function fallbackCopy(url, btn) {
-  var ta = document.createElement('textarea');
-  ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
-  document.body.appendChild(ta); ta.focus(); ta.select();
-  try { document.execCommand('copy'); } catch(e) {}
-  document.body.removeChild(ta);
-  showCopied(btn);
-}
-function showCopied(btn) {
-  var orig = btn.innerHTML;
-  btn.textContent = '✓ Copied!';
-  setTimeout(function() { btn.innerHTML = orig; }, 2000);
-}
-</script>
 </body>
 </html>

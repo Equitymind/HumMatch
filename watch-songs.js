@@ -47,12 +47,50 @@ const MIDI_MIN = 36, MIDI_MAX = 84;
 function barLeft(lo)     { return Math.max(0, Math.round(((lo-MIDI_MIN)/(MIDI_MAX-MIDI_MIN))*100)); }
 function barWidth(lo,hi) { return Math.min(100-barLeft(lo), Math.max(4,Math.round(((hi-lo)/(MIDI_MAX-MIDI_MIN))*100))); }
 
+// Voice type analysis
+function getVoiceTypes(lo, hi) {
+  const types = [];
+  // Bass: E2-E4 (40-64)
+  if (lo >= 40 && hi <= 64) types.push({ name: 'Bass', icon: '🎵', desc: 'Deep, rich low range' });
+  // Baritone: A2-A4 (45-69)
+  if (lo >= 42 && hi <= 72 && lo < 50) types.push({ name: 'Baritone', icon: '🎤', desc: 'Most common male voice' });
+  // Tenor: C3-C5 (48-72)
+  if (lo >= 48 && hi <= 76) types.push({ name: 'Tenor', icon: '🎶', desc: 'Higher male range' });
+  // Alto: G3-G5 (55-79)
+  if (lo >= 52 && hi <= 81 && lo < 60) types.push({ name: 'Alto', icon: '🎵', desc: 'Lower female range' });
+  // Mezzo-Soprano: A3-A5 (57-81)
+  if (lo >= 55 && hi <= 84 && lo < 62) types.push({ name: 'Mezzo-Soprano', icon: '🎤', desc: 'Mid female range' });
+  // Soprano: C4-C6 (60-84)
+  if (lo >= 59 && hi >= 72) types.push({ name: 'Soprano', icon: '🎶', desc: 'High female range' });
+  return types.length > 0 ? types : [{ name: 'Wide Range', icon: '🎵', desc: 'Requires versatility' }];
+}
+
+// Song context tags
+function getBestFor(span, brightness, lo, hi) {
+  const tags = [];
+  if (span <= 12) tags.push({ label: 'Karaoke Night', icon: '🎤', reason: 'Easy crowd-pleaser' });
+  if (brightness >= 65) tags.push({ label: 'Road Trip', icon: '🚗', reason: 'Upbeat singalong' });
+  if (span <= 14 && brightness <= 55) tags.push({ label: 'Shower Sessions', icon: '🚿', reason: 'Comfortable range' });
+  if (span >= 18) tags.push({ label: 'Practice', icon: '🎯', reason: 'Build vocal strength' });
+  if (lo <= 55 && hi >= 70) tags.push({ label: 'Duet Potential', icon: '👥', reason: 'Wide range split' });
+  return tags.slice(0, 3); // Max 3 tags
+}
+
+// Transpose suggestion for hard songs
+function getTransposeAdvice(span, lo, hi) {
+  if (span <= 17) return null; // Only for Hard songs
+  const suggestions = [];
+  if (hi >= 76) suggestions.push({ direction: 'Lower', semitones: -3, reason: 'Easier high notes' });
+  if (lo <= 48) suggestions.push({ direction: 'Higher', semitones: +2, reason: 'More comfortable lows' });
+  return suggestions.length > 0 ? suggestions[0] : null;
+}
+
 // ─── PARSE SONGS ─────────────────────────────────────────────────────────────
 function parseSongs() {
   const html  = fs.readFileSync(INDEX_HTML, 'utf8');
   const songs = [];
   const seen  = new Set();
-  const reA   = /\{\s*title:'((?:[^'\\]|\\.)*)'\s*,\s*artist:'((?:[^'\\]|\\.)*)'\s*,\s*lo:(\d+)\s*,\s*hi:(\d+)\s*,\s*brightness:(\d+)(?:\s*,\s*year:(\d+))?\s*(?:,\s*tags:[^\}]*)?\}/g;
+  const reA   = /"title"\s*:\s*"([^"]*)",?\s*"artist"\s*:\s*"([^"]*)",?\s*"lo"\s*:\s*(\d+),?\s*"hi"\s*:\s*(\d+),?\s*"brightness"\s*:\s*(\d+)(?:,?\s*"year"\s*:\s*(\d+))?/g;
   let m;
   while ((m = reA.exec(html)) !== null) {
     const key = m[1]+'|'+m[2];
@@ -74,6 +112,12 @@ function renderPage(song, allSongs) {
   const span    = song.hi - song.lo;
   const diff    = getDifficulty(song.lo, song.hi);
   const ytQuery = encodeURIComponent(`${song.title} ${song.artist} karaoke`);
+  
+  // Enhanced features
+  const voiceTypes = getVoiceTypes(song.lo, song.hi);
+  const bestFor = getBestFor(span, song.brightness, song.lo, song.hi);
+  const transpose = getTransposeAdvice(span, song.lo, song.hi);
+  song.slug = songSlug(song.title, song.artist);
 
   const pageTitle = `${song.title} - Vocal Range & Karaoke Guide | HumMatch`;
   const metaDesc  = `Find out if you can sing "${song.title}" by ${song.artist}. Vocal range: ${loAscii}–${hiAscii} (${span} semitones). Difficulty: ${diff.label}. Test your voice free on HumMatch.`;
@@ -180,8 +224,8 @@ function renderPage(song, allSongs) {
 <div class="content">
   <div class="cta-box">
     <h2>Can You Sing "${esc(song.title)}"?</h2>
-    <p>Hum into your microphone for 5 seconds. HumMatch instantly detects your vocal range and tells you if this song fits your voice.</p>
-    <a href="/" class="btn-grad">🎤 Test My Voice — Free</a><a href="/#catalog" class="btn-ghost">Browse All Songs</a>
+    <p>Hum for 10 seconds and HumMatch instantly tells you if this song fits your vocal range. No sign-up, completely free.</p>
+    <a href="/?song=${song.slug}" class="btn-grad">🎤 Test Your Voice on This Song</a>
   </div>
   <div class="section">
     <h2>Vocal Range Breakdown</h2>
@@ -191,6 +235,45 @@ function renderPage(song, allSongs) {
       <div><span class="diff-pill" style="background:${diff.color}1a;border:1px solid ${diff.color}40;color:${diff.color}">${diff.emoji} ${diff.label} — ${diff.desc}</span></div>
     </div>
   </div>
+  
+  <!-- Voice Type Fit -->
+  <div class="section">
+    <h2>Perfect For These Voice Types</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      ${voiceTypes.map(vt => `<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;flex:1;min-width:140px"><div style="font-size:1.4rem;margin-bottom:4px">${vt.icon}</div><div style="font-weight:700;font-size:0.95rem;margin-bottom:2px">${vt.name}</div><div style="font-size:0.8rem;color:var(--muted)">${vt.desc}</div></div>`).join('')}
+    </div>
+  </div>
+  
+  <!-- Best For -->
+  ${bestFor.length > 0 ? `<div class="section">
+    <h2>Best For</h2>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      ${bestFor.map(bf => `<div style="background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:12px 16px;flex:1;min-width:150px"><div style="font-size:1.2rem;margin-bottom:4px">${bf.icon}</div><div style="font-weight:700;font-size:0.9rem;margin-bottom:2px">${bf.label}</div><div style="font-size:0.78rem;color:var(--muted)">${bf.reason}</div></div>`).join('')}
+    </div>
+  </div>` : ''}
+  
+  <!-- Transpose Advice -->
+  ${transpose ? `<div class="section">
+    <div style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:12px;padding:18px 20px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="font-size:1.8rem">🎹</div>
+        <div>
+          <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">Try Transposing ${transpose.direction}</div>
+          <div style="font-size:0.85rem;color:var(--muted)">Shift ${Math.abs(transpose.semitones)} semitones ${transpose.direction.toLowerCase()} for ${transpose.reason}. Most karaoke apps let you adjust pitch.</div>
+        </div>
+      </div>
+    </div>
+  </div>` : ''}
+  
+  <!-- SquadMatch CTA -->
+  <div class="section">
+    <div style="background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.12));border:1px solid rgba(168,85,247,0.28);border-radius:14px;padding:20px 24px;text-align:center">
+      <h3 style="font-size:1.15rem;margin-bottom:8px">🎸 Can Your Squad Nail This Together?</h3>
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;max-width:420px;margin-left:auto;margin-right:auto">Test your group's vocal ranges and find songs everyone can sing. Perfect for karaoke nights and road trips.</p>
+      <a href="/squadmatch" style="display:inline-block;background:var(--grad);color:#fff;padding:10px 24px;border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none">➡️ Try SquadMatch</a>
+    </div>
+  </div>
+  
   <div class="section">
     <h2>Karaoke Video</h2>
     <div class="yt-card"><div class="yt-inner">
@@ -216,7 +299,7 @@ function renderPage(song, allSongs) {
   </div>
   <div class="cta-box" style="margin-top:52px">
     <h2>Find Every Song That Fits YOUR Voice</h2>
-    <p>HumMatch analyzes your exact vocal range from a 5-second hum — then instantly shows you which of our 3,000+ songs you can sing.</p>
+    <p>HumMatch analyzes your exact vocal range from a 10-second hum — then instantly shows you which of our 4,700+ songs you can sing.</p>
     <a href="/" class="btn-grad">🎤 Start Humming — It's Free</a>
   </div>
 </div>

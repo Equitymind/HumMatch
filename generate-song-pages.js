@@ -15,7 +15,7 @@ const path = require('path');
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const BASE_URL  = 'https://hummatch.me';
 const SONG_DIR  = path.join(__dirname, 'song');
-const MAX_PAGES = 500;
+const MAX_PAGES = 10000;
 
 // ─── MIDI → NOTE NAME ─────────────────────────────────────────────────────────
 const NOTE_NAMES = ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
@@ -45,6 +45,44 @@ function getVoiceType(hi) {
   if (hi <= 70) return { label:'Tenor',    path:'/tenor-songs'    };
   if (hi <= 76) return { label:'Alto',     path:'/alto-songs'     };
   return               { label:'Soprano',  path:'/soprano-songs'  };
+}
+
+// ─── ENHANCED VOICE TYPE ANALYSIS ─────────────────────────────────────────────
+function getVoiceTypes(lo, hi) {
+  const types = [];
+  // Bass: E2-E4 (40-64)
+  if (lo >= 40 && hi <= 64) types.push({ name: 'Bass', icon: '🎵', desc: 'Deep, rich low range' });
+  // Baritone: A2-A4 (45-69)
+  if (lo >= 42 && hi <= 72 && lo < 50) types.push({ name: 'Baritone', icon: '🎤', desc: 'Most common male voice' });
+  // Tenor: C3-C5 (48-72)
+  if (lo >= 48 && hi <= 76) types.push({ name: 'Tenor', icon: '🎶', desc: 'Higher male range' });
+  // Alto: G3-G5 (55-79)
+  if (lo >= 52 && hi <= 81 && lo < 60) types.push({ name: 'Alto', icon: '🎵', desc: 'Lower female range' });
+  // Mezzo-Soprano: A3-A5 (57-81)
+  if (lo >= 55 && hi <= 84 && lo < 62) types.push({ name: 'Mezzo-Soprano', icon: '🎤', desc: 'Mid female range' });
+  // Soprano: C4-C6 (60-84)
+  if (lo >= 59 && hi >= 72) types.push({ name: 'Soprano', icon: '🎶', desc: 'High female range' });
+  return types.length > 0 ? types : [{ name: 'Wide Range', icon: '🎵', desc: 'Requires versatility' }];
+}
+
+// ─── SONG CONTEXT TAGS ────────────────────────────────────────────────────────
+function getBestFor(span, brightness, lo, hi) {
+  const tags = [];
+  if (span <= 12) tags.push({ label: 'Karaoke Night', icon: '🎤', reason: 'Easy crowd-pleaser' });
+  if (brightness >= 65) tags.push({ label: 'Road Trip', icon: '🚗', reason: 'Upbeat singalong' });
+  if (span <= 14 && brightness <= 55) tags.push({ label: 'Shower Sessions', icon: '🚿', reason: 'Comfortable range' });
+  if (span >= 18) tags.push({ label: 'Practice', icon: '🎯', reason: 'Build vocal strength' });
+  if (lo <= 55 && hi >= 70) tags.push({ label: 'Duet Potential', icon: '👥', reason: 'Wide range split' });
+  return tags.slice(0, 3); // Max 3 tags
+}
+
+// ─── TRANSPOSE ADVICE ─────────────────────────────────────────────────────────
+function getTransposeAdvice(span, lo, hi) {
+  if (span <= 17) return null; // Only for Hard songs
+  const suggestions = [];
+  if (hi >= 76) suggestions.push({ direction: 'Lower', semitones: -3, reason: 'easier high notes' });
+  if (lo <= 48) suggestions.push({ direction: 'Higher', semitones: +2, reason: 'more comfortable lows' });
+  return suggestions.length > 0 ? suggestions[0] : null;
 }
 
 // ─── SLUG ─────────────────────────────────────────────────────────────────────
@@ -82,41 +120,24 @@ function barWidth(lo,hi) { return Math.min(100-barLeft(lo), Math.max(4, Math.rou
 function parseSongs() {
   console.log('  Reading index.html...');
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-  const songs = [];
-  const seen  = new Set();
-
-  // Format A — old JS object style: { title:'...', artist:'...', lo:N, hi:N, brightness:N }
-  const reA = /\{\s*title:'((?:[^'\\]|\\.)*)'\s*,\s*artist:'((?:[^'\\]|\\.)*)'\s*,\s*lo:(\d+)\s*,\s*hi:(\d+)\s*,\s*brightness:(\d+)(?:\s*,\s*year:(\d+))?\s*\}/g;
-  let m;
-  while ((m = reA.exec(html)) !== null) {
-    const key = m[1]+'|'+m[2];
-    if (!seen.has(key)) {
-      seen.add(key);
-      songs.push({
-        title:      m[1].replace(/\\'/g,"'"),
-        artist:     m[2].replace(/\\'/g,"'"),
-        lo:         +m[3], hi: +m[4], brightness: +m[5],
-        year:       m[6] ? +m[6] : null
-      });
-    }
+  
+  // Extract the SONGS array directly
+  const songsMatch = html.match(/const SONGS = \[(.*?)\];/s);
+  if (!songsMatch) {
+    console.error('Could not find SONGS array in index.html');
+    return [];
   }
-
-  // Format B — JSON style: {"title":"...","artist":"...","lo":N,"hi":N,"brightness":N}
-  const reB = /\{"title":"((?:[^"\\]|\\.)*)","artist":"((?:[^"\\]|\\.)*)"[^}]*?"lo":(\d+)[^}]*?"hi":(\d+)[^}]*?"brightness":(\d+)(?:[^}]*?"year":(\d+))?[^}]*?\}/g;
-  while ((m = reB.exec(html)) !== null) {
-    const key = m[1]+'|'+m[2];
-    if (!seen.has(key)) {
-      seen.add(key);
-      songs.push({
-        title:  m[1].replace(/\\"/g,'"'),
-        artist: m[2].replace(/\\"/g,'"'),
-        lo: +m[3], hi: +m[4], brightness: +m[5],
-        year: m[6] ? +m[6] : null
-      });
-    }
+  
+  // Parse as JSON array
+  try {
+    const songsJSON = '[' + songsMatch[1] + ']';
+    const parsed = JSON.parse(songsJSON);
+    console.log(`  Found ${parsed.length} songs in SONGS array`);
+    return parsed;
+  } catch (err) {
+    console.error('Failed to parse SONGS array:', err.message);
+    return [];
   }
-
-  return songs;
 }
 
 // ─── SELECT TOP 500 ───────────────────────────────────────────────────────────
@@ -209,6 +230,11 @@ function renderPage(song, related) {
   const voiceType = getVoiceType(song.hi);
   const aSlug     = artistSlug(song.artist);
   const ytQuery = encodeURIComponent(`${song.title} ${song.artist} karaoke`);
+  
+  // Enhanced features
+  const voiceTypes = getVoiceTypes(song.lo, song.hi);
+  const bestFor = getBestFor(span, song.brightness, song.lo, song.hi);
+  const transpose = getTransposeAdvice(span, song.lo, song.hi);
   const today   = new Date().toISOString().split('T')[0];
 
   const pageTitle = `${song.title} - Vocal Range & Karaoke Guide | HumMatch`;
@@ -511,6 +537,26 @@ function renderPage(song, related) {
           ${diff.emoji} ${diff.label} — ${diff.desc}
         </span>
       </div>
+    </div>
+  </div>
+
+  <!-- Voice Type Fit -->
+  <div class="section">
+    <h2>Perfect For These Voice Types</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      ${voiceTypes.map(function(vt) { return '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;flex:1;min-width:140px"><div style="font-size:1.4rem;margin-bottom:4px">' + vt.icon + '</div><div style="font-weight:700;font-size:0.95rem;margin-bottom:2px">' + vt.name + '</div><div style="font-size:0.8rem;color:var(--muted)">' + vt.desc + '</div></div>'; }).join('')}
+    </div>
+  </div>
+
+  ${bestFor.length > 0 ? '<div class="section"><h2>Best For</h2><div style="display:flex;gap:10px;flex-wrap:wrap">' + bestFor.map(function(bf) { return '<div style="background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:12px 16px;flex:1;min-width:150px"><div style="font-size:1.2rem;margin-bottom:4px">' + bf.icon + '</div><div style="font-weight:700;font-size:0.9rem;margin-bottom:2px">' + bf.label + '</div><div style="font-size:0.78rem;color:var(--muted)">' + bf.reason + '</div></div>'; }).join('') + '</div></div>' : ''}
+
+  ${transpose ? '<div class="section"><div style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:12px;padding:18px 20px"><div style="display:flex;align-items:center;gap:12px"><div style="font-size:1.8rem">🎹</div><div><div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">Try Transposing ' + transpose.direction + '</div><div style="font-size:0.85rem;color:var(--muted)">Shift ' + Math.abs(transpose.semitones) + ' semitones ' + transpose.direction.toLowerCase() + ' for ' + transpose.reason + '. Most karaoke apps let you adjust pitch.</div></div></div></div></div>' : ''}
+
+  <div class="section">
+    <div style="background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.12));border:1px solid rgba(168,85,247,0.28);border-radius:14px;padding:20px 24px;text-align:center">
+      <h3 style="font-size:1.15rem;margin-bottom:8px">🎸 Can Your Squad Nail This Together?</h3>
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;max-width:420px;margin-left:auto;margin-right:auto">Test your group's vocal ranges and find songs everyone can sing. Perfect for karaoke nights and road trips.</p>
+      <a href="/squadmatch" style="display:inline-block;background:var(--grad);color:#fff;padding:10px 24px;border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none">➡️ Try SquadMatch</a>
     </div>
   </div>
 

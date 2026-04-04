@@ -1,0 +1,1602 @@
+[
+  {
+    "title": "El Pescador",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 1993
+  },
+  {
+    "title": "Volví a Nacer",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2012
+  },
+  {
+    "title": "Robarte un Beso",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2016
+  },
+  {
+    "title": "Ella es mi Fiesta",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "Costeño",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "Cuando nos Volvamos a Ver",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 52,
+    "year": 2012
+  },
+  {
+    "title": "Mi Tierra",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2017
+  },
+  {
+    "title": "Bogotá",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2018
+  },
+  {
+    "title": "La Quiero a Morir",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2018
+  },
+  {
+    "title": "Pa Mayte",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1994
+  },
+  {
+    "title": "Quiero Más",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2021
+  },
+  {
+    "title": "La Canción",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2019
+  },
+  {
+    "title": "La Cumbia del Rio",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1975
+  },
+  {
+    "title": "El Condor",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1980
+  },
+  {
+    "title": "El Aguajal",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1985
+  },
+  {
+    "title": "El Testamento",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1990
+  },
+  {
+    "title": "Musa",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1995
+  },
+  {
+    "title": "Mi Primera Cana",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1978
+  },
+  {
+    "title": "El Día de mi Suerte",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1988
+  },
+  {
+    "title": "Los Caminos de la Vida",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1985
+  },
+  {
+    "title": "La Creciente",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1991
+  },
+  {
+    "title": "Pedazo de Acordeón",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1982
+  },
+  {
+    "title": "Las Mañanitas Sabaneras",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1977
+  },
+  {
+    "title": "Al Cielo le Pido",
+    "artist": "Andrés Cepeda",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 2012
+  },
+  {
+    "title": "El Mundo Afuera",
+    "artist": "Andrés Cepeda",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 2016
+  },
+  {
+    "title": "Sigo Siendo el Rey",
+    "artist": "Andrés Cepeda",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 2018
+  },
+  {
+    "title": "Más de lo que Crees",
+    "artist": "Andrés Cepeda",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 2020
+  },
+  {
+    "title": "Como el Viento",
+    "artist": "Andrés Cepeda",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 2014
+  },
+  {
+    "title": "Tarde lo Conocí",
+    "artist": "Andrés Cepeda",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 2010
+  },
+  {
+    "title": "Buen Amor",
+    "artist": "Andrés Cepeda",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 2015
+  },
+  {
+    "title": "Ojalá",
+    "artist": "Silvio Brito",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1986
+  },
+  {
+    "title": "El Cantor de Fonseca",
+    "artist": "Silvio Brito",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1982
+  },
+  {
+    "title": "Vallenato de Corazón",
+    "artist": "Silvio Brito",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1990
+  },
+  {
+    "title": "Que Llueva",
+    "artist": "Silvio Brito",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1988
+  },
+  {
+    "title": "La Rebelión",
+    "artist": "Joe Arroyo",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 52,
+    "year": 1986
+  },
+  {
+    "title": "En Barranquilla me Quedo",
+    "artist": "Joe Arroyo",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 52,
+    "year": 1989
+  },
+  {
+    "title": "A Mi Dios Todo le Debo",
+    "artist": "Joe Arroyo",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "La Noche",
+    "artist": "Joe Arroyo",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1988
+  },
+  {
+    "title": "Salome",
+    "artist": "Joe Arroyo",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 52,
+    "year": 1993
+  },
+  {
+    "title": "El Trato",
+    "artist": "Joe Arroyo",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1991
+  },
+  {
+    "title": "Oiga Mire Vea",
+    "artist": "Joe Arroyo",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 52,
+    "year": 1989
+  },
+  {
+    "title": "Burbujas de Amor",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "Ojalá que Llueva Café",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "La Bilirrubina",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "Rosalía",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "El Costo de la Vida",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "Si Tú no Bailas Conmigo",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "El Niagara en Bicicleta",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "Visa para un Sueño",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1987
+  },
+  {
+    "title": "Fogaraté",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1998
+  },
+  {
+    "title": "La Llave de mi Corazón",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 2007
+  },
+  {
+    "title": "Bachata Rosa",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "Frío, Frío",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1998
+  },
+  {
+    "title": "Palomito",
+    "artist": "Los Hermanos Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1988
+  },
+  {
+    "title": "Esa Morena",
+    "artist": "Los Hermanos Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1990
+  },
+  {
+    "title": "La Dueña del Swing",
+    "artist": "Los Hermanos Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1993
+  },
+  {
+    "title": "Tu No Puedes Comprarme",
+    "artist": "Los Hermanos Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1995
+  },
+  {
+    "title": "El Africano",
+    "artist": "Los Hermanos Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1997
+  },
+  {
+    "title": "El Liguero Mágico",
+    "artist": "Los Hermanos Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "Que el Ritmo no Pare",
+    "artist": "Los Hermanos Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2001
+  },
+  {
+    "title": "Te Está Sobrando",
+    "artist": "Eddy Herrera",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1994
+  },
+  {
+    "title": "El Amor de mi Vida",
+    "artist": "Eddy Herrera",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1996
+  },
+  {
+    "title": "Amor Diferente",
+    "artist": "Eddy Herrera",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1998
+  },
+  {
+    "title": "Nada Sin Ti",
+    "artist": "Eddy Herrera",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2000
+  },
+  {
+    "title": "Déjame Entrar",
+    "artist": "Eddy Herrera",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2002
+  },
+  {
+    "title": "El Rey",
+    "artist": "Eddy Herrera",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1996
+  },
+  {
+    "title": "Enamorado",
+    "artist": "Eddy Herrera",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1994
+  },
+  {
+    "title": "Quiero Más",
+    "artist": "Toño Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2000
+  },
+  {
+    "title": "Tu Boquita",
+    "artist": "Toño Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "El Brujo",
+    "artist": "Toño Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2002
+  },
+  {
+    "title": "La Noche",
+    "artist": "Sergio Vargas",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1995
+  },
+  {
+    "title": "No Me Trates así",
+    "artist": "Sergio Vargas",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1992
+  },
+  {
+    "title": "Bonita Mía",
+    "artist": "Sergio Vargas",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1998
+  },
+  {
+    "title": "Hace un Año",
+    "artist": "Sergio Vargas",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2000
+  },
+  {
+    "title": "La Bilirrubina",
+    "artist": "Sergio Vargas",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1993
+  },
+  {
+    "title": "Amores Pasajeros",
+    "artist": "Sergio Vargas",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1997
+  },
+  {
+    "title": "Mi Corazón Encantado",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 56,
+    "year": 2016
+  },
+  {
+    "title": "Tu Falta de Querer",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 56,
+    "year": 2016
+  },
+  {
+    "title": "Amárrame",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 56,
+    "year": 2017
+  },
+  {
+    "title": "Antes de Ti",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2018
+  },
+  {
+    "title": "Corazón de Neón",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 56,
+    "year": 2018
+  },
+  {
+    "title": "Plata ta ta",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 58,
+    "year": 2019
+  },
+  {
+    "title": "Pornocracia",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2018
+  },
+  {
+    "title": "Vendida",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2014
+  },
+  {
+    "title": "Deja Vu",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2021
+  },
+  {
+    "title": "Que Tengo en Mente",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2021
+  },
+  {
+    "title": "Cumbia Cumbia",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2023
+  },
+  {
+    "title": "Vivir Quintanarrooensse",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2019
+  },
+  {
+    "title": "Nunca es Suficiente",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "Hasta la Raíz",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "Tú me Acostumbraste",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "Que no se Rompa la Noche",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "Mujer Divina",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "Paloma Negra",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2017
+  },
+  {
+    "title": "Soledad y el Mar",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2017
+  },
+  {
+    "title": "Con él, con ella, con ustéd",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2017
+  },
+  {
+    "title": "Tata",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2020
+  },
+  {
+    "title": "Alma Mía",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2018
+  },
+  {
+    "title": "Electricidad",
+    "artist": "Bomba Estéreo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 56,
+    "year": 2017
+  },
+  {
+    "title": "Soy Yo",
+    "artist": "Bomba Estéreo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 56,
+    "year": 2017
+  },
+  {
+    "title": "La Escalera",
+    "artist": "Bomba Estéreo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 56,
+    "year": 2014
+  },
+  {
+    "title": "Algo Está Cambiando",
+    "artist": "Bomba Estéreo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 56,
+    "year": 2009
+  },
+  {
+    "title": "Fuego",
+    "artist": "Bomba Estéreo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 56,
+    "year": 2015
+  },
+  {
+    "title": "Internacionales",
+    "artist": "Bomba Estéreo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 56,
+    "year": 2019
+  },
+  {
+    "title": "Duele",
+    "artist": "Bomba Estéreo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 56,
+    "year": 2019
+  },
+  {
+    "title": "Ojitos Rojos",
+    "artist": "Bomba Estéreo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 56,
+    "year": 2019
+  },
+  {
+    "title": "Matador",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1994
+  },
+  {
+    "title": "Carnaval toda la Vida",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1986
+  },
+  {
+    "title": "El Satánico Dr. Cadillac",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1989
+  },
+  {
+    "title": "Yo no me Sentaría en tu Mesa",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1994
+  },
+  {
+    "title": "Siguiendo la Luna",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1986
+  },
+  {
+    "title": "Quinto Centenario",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "El Genio del Dub",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1989
+  },
+  {
+    "title": "Manuel Santillán el León",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1994
+  },
+  {
+    "title": "Quiero Más",
+    "artist": "Molotov",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 54,
+    "year": 1997
+  },
+  {
+    "title": "Voto Latino",
+    "artist": "Molotov",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 54,
+    "year": 1997
+  },
+  {
+    "title": "Dance and Dense Denso",
+    "artist": "Molotov",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 54,
+    "year": 1997
+  },
+  {
+    "title": "Hit Me",
+    "artist": "Molotov",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 54,
+    "year": 1997
+  },
+  {
+    "title": "Here we Kum",
+    "artist": "Molotov",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 54,
+    "year": 1999
+  },
+  {
+    "title": "Cuéntame",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2016
+  },
+  {
+    "title": "Hawai",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2020
+  },
+  {
+    "title": "Felices los 4",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2017
+  },
+  {
+    "title": "Chantaje",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2016
+  },
+  {
+    "title": "Addicted",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2019
+  },
+  {
+    "title": "HP",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2018
+  },
+  {
+    "title": "Corazón",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2017
+  },
+  {
+    "title": "Borró Cassette",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "ADMV",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2020
+  },
+  {
+    "title": "Sobrio",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2020
+  },
+  {
+    "title": "11 PM",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2018
+  },
+  {
+    "title": "El Perdedor",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2015
+  },
+  {
+    "title": "El Ganador",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2017
+  },
+  {
+    "title": "El Amante",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2012
+  },
+  {
+    "title": "Hasta el Amanecer",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2016
+  },
+  {
+    "title": "X (Equis)",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2018
+  },
+  {
+    "title": "Te lo Mereces",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2020
+  },
+  {
+    "title": "Cuando tú no estás",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2019
+  },
+  {
+    "title": "Ven y Hazlo Tú",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2018
+  },
+  {
+    "title": "Cancún",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2021
+  },
+  {
+    "title": "te lo mereces",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2019
+  },
+  {
+    "title": "Mi Tesoro",
+    "artist": "Nicky Jam",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2020
+  },
+  {
+    "title": "Criminal",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2017
+  },
+  {
+    "title": "Taki Taki",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2018
+  },
+  {
+    "title": "Te Bote",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2018
+  },
+  {
+    "title": "Síguelo Bailando",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2016
+  },
+  {
+    "title": "El Farsante",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2017
+  },
+  {
+    "title": "Coméntale",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2017
+  },
+  {
+    "title": "Baila Baila Baila",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2019
+  },
+  {
+    "title": "Un Coco",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2018
+  },
+  {
+    "title": "La Modelo",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2017
+  },
+  {
+    "title": "Yo x Ti, Tu x Mí",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2020
+  },
+  {
+    "title": "Adicto",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2020
+  },
+  {
+    "title": "Caramelo",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2020
+  },
+  {
+    "title": "Pepas",
+    "artist": "Farruko",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2021
+  },
+  {
+    "title": "Calma",
+    "artist": "Farruko",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2019
+  },
+  {
+    "title": "Passion Whine",
+    "artist": "Farruko",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2014
+  },
+  {
+    "title": "Party Animal",
+    "artist": "Farruko",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "Chillax",
+    "artist": "Farruko",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2015
+  },
+  {
+    "title": "Cositas Buenas",
+    "artist": "Farruko",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2013
+  },
+  {
+    "title": "Sunset",
+    "artist": "Farruko",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2021
+  },
+  {
+    "title": "Que el Amor no Se Pierda",
+    "artist": "Anitta",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 54,
+    "year": 2018
+  },
+  {
+    "title": "Paradinha",
+    "artist": "Anitta",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 54,
+    "year": 2017
+  },
+  {
+    "title": "Envolver",
+    "artist": "Anitta",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 56,
+    "year": 2022
+  },
+  {
+    "title": "Boys Don't Cry",
+    "artist": "Anitta",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 54,
+    "year": 2022
+  },
+  {
+    "title": "Banana",
+    "artist": "Anitta",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 54,
+    "year": 2020
+  },
+  {
+    "title": "Bellakeo",
+    "artist": "Anitta",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 54,
+    "year": 2022
+  },
+  {
+    "title": "Lobby",
+    "artist": "Anitta",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 54,
+    "year": 2023
+  },
+  {
+    "title": "El Diablo Sonriendo",
+    "artist": "Diomedes Díaz",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1993
+  },
+  {
+    "title": "Amor Ingrato",
+    "artist": "Andrés Cepeda",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 2022
+  },
+  {
+    "title": "Tarde o Temprano",
+    "artist": "Andrés Cepeda",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 2019
+  },
+  {
+    "title": "Como yo te Amé",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 2005
+  },
+  {
+    "title": "Maracuyá",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1998
+  },
+  {
+    "title": "Que Tengo que Hacer",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 2007
+  },
+  {
+    "title": "Kitipun",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 2007
+  },
+  {
+    "title": "Malanga",
+    "artist": "Juan Luis Guerra",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 52,
+    "year": 2010
+  },
+  {
+    "title": "De Cuando en Cuando",
+    "artist": "Eddy Herrera",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2004
+  },
+  {
+    "title": "Nunca Voy a Dejarte",
+    "artist": "Los Hermanos Rosario",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2005
+  },
+  {
+    "title": "Chau",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2012
+  },
+  {
+    "title": "En el 2000",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2009
+  },
+  {
+    "title": "Elefantes",
+    "artist": "Natalia Lafourcade",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 2006
+  },
+  {
+    "title": "Vuélveme a Querer",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2021
+  },
+  {
+    "title": "Vino",
+    "artist": "Mon Laferte",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2022
+  },
+  {
+    "title": "Frijolero",
+    "artist": "Molotov",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 54,
+    "year": 2003
+  },
+  {
+    "title": "Cuatro Babys",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2016
+  },
+  {
+    "title": "Medallo",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2021
+  },
+  {
+    "title": "La Noche de Anoche",
+    "artist": "Maluma",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2021
+  },
+  {
+    "title": "Amigos y Rivales",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2016
+  },
+  {
+    "title": "Sensación del Bloque",
+    "artist": "Ozuna",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 50,
+    "year": 2021
+  },
+  {
+    "title": "La Funka",
+    "artist": "Farruko",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 52,
+    "year": 2016
+  },
+  {
+    "title": "Tócame",
+    "artist": "Anitta",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 54,
+    "year": 2023
+  },
+  {
+    "title": "Eres tú",
+    "artist": "María Becerra",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 2021
+  },
+  {
+    "title": "Colocao",
+    "artist": "María Becerra",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 2021
+  },
+  {
+    "title": "Ojalá que Llueva Café (Remix)",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2017
+  },
+  {
+    "title": "Espuma del Mar",
+    "artist": "Sergio Vargas",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2002
+  },
+  {
+    "title": "Disco",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1988
+  },
+  {
+    "title": "Tarde",
+    "artist": "Los Fabulosos Cadillacs",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "Que Llueva",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2020
+  },
+  {
+    "title": "Bésame",
+    "artist": "Camilo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 2022
+  },
+  {
+    "title": "Machu Picchu",
+    "artist": "Camilo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 2021
+  },
+  {
+    "title": "Nuestro Amor Eterno",
+    "artist": "Carlos Vives",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 55,
+    "year": 2015
+  }
+]

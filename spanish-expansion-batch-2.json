@@ -1,0 +1,1602 @@
+[
+  {
+    "title": "De Música Ligera",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "Persiana Americana",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "Cuando Pase el Temblor",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1985
+  },
+  {
+    "title": "Fue",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "En la Ciudad de la Furia",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "Nada Personal",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1985
+  },
+  {
+    "title": "Trátame Suavemente",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1984
+  },
+  {
+    "title": "Te Hacen Falta Vitaminas",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1986
+  },
+  {
+    "title": "Signos",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1986
+  },
+  {
+    "title": "Lo que Sangra",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 1990
+  },
+  {
+    "title": "Un Millón de Años Luz",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 50,
+    "year": 1990
+  },
+  {
+    "title": "Zoom",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 54,
+    "year": 1994
+  },
+  {
+    "title": "Zamba de Mí",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1992
+  },
+  {
+    "title": "La Ingrata",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1994
+  },
+  {
+    "title": "Eres",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 52,
+    "year": 1994
+  },
+  {
+    "title": "Chilanga Banda",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1994
+  },
+  {
+    "title": "Cómo Te Extraño Mi Cielo",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1992
+  },
+  {
+    "title": "Déjate Caer",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "Quisiera No Extrañarte",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2007
+  },
+  {
+    "title": "No Controles",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1992
+  },
+  {
+    "title": "Las Flores",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 52,
+    "year": 1999
+  },
+  {
+    "title": "Olvídame y Pega la Vuelta",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "Volver a Comenzar",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2003
+  },
+  {
+    "title": "Entre tu Amor y mi Amor",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2007
+  },
+  {
+    "title": "Entre la Oscuridad",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1990
+  },
+  {
+    "title": "Maldito Duende",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1990
+  },
+  {
+    "title": "El Espíritu del Vino",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1993
+  },
+  {
+    "title": "La Sirena Varada",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1991
+  },
+  {
+    "title": "La Chispa Adecuada",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1993
+  },
+  {
+    "title": "Avalancha",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1995
+  },
+  {
+    "title": "En Algún Lugar",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1990
+  },
+  {
+    "title": "Apuesta por el Rock and Roll",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1990
+  },
+  {
+    "title": "Iberia Sumergida",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1990
+  },
+  {
+    "title": "Las de la Última Fila",
+    "artist": "Héroes del Silencio",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1993
+  },
+  {
+    "title": "La Célula que Explota",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "Afuera",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "No Dejes que",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1988
+  },
+  {
+    "title": "Viento",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "El Diablo Me Obligó",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1994
+  },
+  {
+    "title": "Aquí No es Así",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1988
+  },
+  {
+    "title": "Quisiera Ser Alcohólico",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1988
+  },
+  {
+    "title": "Los Dioses Ocultos",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "El Comunicado",
+    "artist": "La Ley",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1997
+  },
+  {
+    "title": "Lágrimas",
+    "artist": "La Ley",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2001
+  },
+  {
+    "title": "Aquí",
+    "artist": "La Ley",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1995
+  },
+  {
+    "title": "Fuera de Mí",
+    "artist": "La Ley",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1997
+  },
+  {
+    "title": "Mentira",
+    "artist": "La Ley",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2001
+  },
+  {
+    "title": "Intenta Amar",
+    "artist": "La Ley",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "La Isla",
+    "artist": "La Ley",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "Doble Opuesto",
+    "artist": "La Ley",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 1995
+  },
+  {
+    "title": "Ahora Quien",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2002
+  },
+  {
+    "title": "Valió la Pena",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2002
+  },
+  {
+    "title": "Te Conozco Bien",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2004
+  },
+  {
+    "title": "Vivir mi Vida",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 52,
+    "year": 2013
+  },
+  {
+    "title": "Flor Pálida",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2013
+  },
+  {
+    "title": "Cambié por Ti",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2014
+  },
+  {
+    "title": "Tu Amor me Hace Bien",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 52,
+    "year": 2004
+  },
+  {
+    "title": "Nadie Como Ella",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "Y Hubo Alguien",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "El Cantante",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 52,
+    "year": 1999
+  },
+  {
+    "title": "Necesito Amarte",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1995
+  },
+  {
+    "title": "Hasta que te Conocí",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1997
+  },
+  {
+    "title": "Qué Precio Tiene el Cielo",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1993
+  },
+  {
+    "title": "Perdoname",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1992
+  },
+  {
+    "title": "Vivir sin ella",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2002
+  },
+  {
+    "title": "Que Manera de Quererte",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1989
+  },
+  {
+    "title": "Conciencia",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2001
+  },
+  {
+    "title": "Conteo Regresivo",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "Si Tuvieras Fe",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1996
+  },
+  {
+    "title": "Boda Blanca",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1993
+  },
+  {
+    "title": "No es un Juego Nuevo",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1988
+  },
+  {
+    "title": "Por Culpa Tuya",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2002
+  },
+  {
+    "title": "Dedicatoria",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 1995
+  },
+  {
+    "title": "Vuelta y Vuelta",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2004
+  },
+  {
+    "title": "El Gran Varón",
+    "artist": "Willie Colón",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 48,
+    "year": 1989
+  },
+  {
+    "title": "Calle Luna, Calle Sol",
+    "artist": "Willie Colón",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 48,
+    "year": 1975
+  },
+  {
+    "title": "Idilio",
+    "artist": "Willie Colón",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 48,
+    "year": 1980
+  },
+  {
+    "title": "El Todopoderoso",
+    "artist": "Willie Colón",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 48,
+    "year": 1989
+  },
+  {
+    "title": "Te Conozco",
+    "artist": "Willie Colón",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 48,
+    "year": 1984
+  },
+  {
+    "title": "Sigue Adelante",
+    "artist": "Willie Colón",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 48,
+    "year": 1994
+  },
+  {
+    "title": "Ligia Elena",
+    "artist": "Rubén Blades",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 46,
+    "year": 1978
+  },
+  {
+    "title": "Pedro Navaja",
+    "artist": "Rubén Blades",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 46,
+    "year": 1978
+  },
+  {
+    "title": "Plástico",
+    "artist": "Rubén Blades",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 46,
+    "year": 1978
+  },
+  {
+    "title": "Buscando Guayaba",
+    "artist": "Rubén Blades",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 46,
+    "year": 1984
+  },
+  {
+    "title": "Paula C",
+    "artist": "Rubén Blades",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 46,
+    "year": 1987
+  },
+  {
+    "title": "La Cantante",
+    "artist": "La India",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1997
+  },
+  {
+    "title": "Nunca Voy a Olvidarte",
+    "artist": "La India",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1994
+  },
+  {
+    "title": "Mi Mayor Venganza",
+    "artist": "La India",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1997
+  },
+  {
+    "title": "Ese Hombre",
+    "artist": "La India",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1992
+  },
+  {
+    "title": "Dicen Que Soy",
+    "artist": "La India",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 54,
+    "year": 2002
+  },
+  {
+    "title": "Vivir lo Nuestro",
+    "artist": "La India",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1994
+  },
+  {
+    "title": "Obsesión",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2014
+  },
+  {
+    "title": "Propuesta Indecente",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2013
+  },
+  {
+    "title": "Eres Mía",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2014
+  },
+  {
+    "title": "Héroe Favorito",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2016
+  },
+  {
+    "title": "Canalla",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2014
+  },
+  {
+    "title": "Debate de 4",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2014
+  },
+  {
+    "title": "Soy el Mismo",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2013
+  },
+  {
+    "title": "El Farsante",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2017
+  },
+  {
+    "title": "Bella y Sensual",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2017
+  },
+  {
+    "title": "Millones",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2019
+  },
+  {
+    "title": "De Nuevo",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2019
+  },
+  {
+    "title": "La Diabla",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2019
+  },
+  {
+    "title": "Le Mentí",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2020
+  },
+  {
+    "title": "Yo También",
+    "artist": "Romeo Santos",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2020
+  },
+  {
+    "title": "Darte un Beso",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2013
+  },
+  {
+    "title": "Stand by Me",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2010
+  },
+  {
+    "title": "Corazón sin Cara",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2011
+  },
+  {
+    "title": "Las Cosas Pequeñas",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2011
+  },
+  {
+    "title": "Incondicional",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2013
+  },
+  {
+    "title": "Soy el Mismo",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2015
+  },
+  {
+    "title": "Te Me Vas",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2010
+  },
+  {
+    "title": "Culpa al Corazón",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2015
+  },
+  {
+    "title": "Back It Up",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 48,
+    "year": 2015
+  },
+  {
+    "title": "Ganas Locas",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 48,
+    "year": 2016
+  },
+  {
+    "title": "El Amor que Perdimos",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2019
+  },
+  {
+    "title": "Otra Vez",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 48,
+    "year": 2017
+  },
+  {
+    "title": "Nunca Mejor",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2017
+  },
+  {
+    "title": "¿Cómo te Atreves?",
+    "artist": "Prince Royce",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 46,
+    "year": 2019
+  },
+  {
+    "title": "Obsesión",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2002
+  },
+  {
+    "title": "Su Veneno",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2007
+  },
+  {
+    "title": "Todo a tu Tiempo",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2005
+  },
+  {
+    "title": "Cuando Volveras",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2000
+  },
+  {
+    "title": "Dile Al Amor",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2007
+  },
+  {
+    "title": "El Malo",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2004
+  },
+  {
+    "title": "Por un Segundo",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2005
+  },
+  {
+    "title": "Los Infieles",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2002
+  },
+  {
+    "title": "Romeo Santos Aventura Mix",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2010
+  },
+  {
+    "title": "La Boda",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2009
+  },
+  {
+    "title": "Amor a Distancia",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2004
+  },
+  {
+    "title": "Qué Destino",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2010
+  },
+  {
+    "title": "Como Duele",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2002
+  },
+  {
+    "title": "Morena",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2005
+  },
+  {
+    "title": "Que Hago",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2007
+  },
+  {
+    "title": "Bidi Bidi Bom Bom",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1994
+  },
+  {
+    "title": "Como la Flor",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1992
+  },
+  {
+    "title": "Amor Prohibido",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 56,
+    "year": 1994
+  },
+  {
+    "title": "No Me Queda Más",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1995
+  },
+  {
+    "title": "Techno Cumbia",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 56,
+    "year": 1995
+  },
+  {
+    "title": "Baila Esta Cumbia",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 56,
+    "year": 1995
+  },
+  {
+    "title": "Si una Vez",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1994
+  },
+  {
+    "title": "Dreaming of You",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 52,
+    "year": 1995
+  },
+  {
+    "title": "Quintanilla Mix",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1994
+  },
+  {
+    "title": "Que te Vaya Bonito",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1993
+  },
+  {
+    "title": "La Llamada",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1992
+  },
+  {
+    "title": "Contigo Quiero Estar",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1993
+  },
+  {
+    "title": "Fotos y Recuerdos",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1995
+  },
+  {
+    "title": "Disco Medley",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 56,
+    "year": 1994
+  },
+  {
+    "title": "Cumbia del Rio",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 56,
+    "year": 1993
+  },
+  {
+    "title": "Cómo la Flor - Cumbia",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1992
+  },
+  {
+    "title": "Nunca Nadie Como Tú",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 46,
+    "year": 2018
+  },
+  {
+    "title": "Mis Sentimientos",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 46,
+    "year": 2015
+  },
+  {
+    "title": "Como te Voy a Olvidar",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 46,
+    "year": 2015
+  },
+  {
+    "title": "Cómo te Extraño",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 46,
+    "year": 2018
+  },
+  {
+    "title": "El Listón de tu Pelo",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1992
+  },
+  {
+    "title": "17 Años",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 2018
+  },
+  {
+    "title": "Amor a Distancia",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 2015
+  },
+  {
+    "title": "El Caballo Bayo",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1990
+  },
+  {
+    "title": "En Tu Cuerpo en Tu Mente",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 46,
+    "year": 2019
+  },
+  {
+    "title": "Mi Niña Mujer",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 2019
+  },
+  {
+    "title": "Cumbia Sobre el Río",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1990
+  },
+  {
+    "title": "No Soy el Único",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 1999
+  },
+  {
+    "title": "Que Bonita Está",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 46,
+    "year": 2019
+  },
+  {
+    "title": "Con Qué Derecho",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 2017
+  },
+  {
+    "title": "Me Vas a Recordar",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 2021
+  },
+  {
+    "title": "Mátenme Porque Me Muero",
+    "artist": "Los Ángeles Azules",
+    "lo": 48,
+    "hi": 65,
+    "brightness": 44,
+    "year": 2020
+  },
+  {
+    "title": "Cumbia Buenísima",
+    "artist": "Celso Piña",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 46,
+    "year": 1998
+  },
+  {
+    "title": "Cumbia Sampuesana",
+    "artist": "Celso Piña",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 46,
+    "year": 2002
+  },
+  {
+    "title": "Rocking con el Barrio",
+    "artist": "Celso Piña",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 46,
+    "year": 2005
+  },
+  {
+    "title": "El Marinero",
+    "artist": "Celso Piña",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 46,
+    "year": 2007
+  },
+  {
+    "title": "La Cumbia del Amor",
+    "artist": "Celso Piña",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 46,
+    "year": 2000
+  },
+  {
+    "title": "Barrio Bravo",
+    "artist": "Celso Piña",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 46,
+    "year": 2010
+  },
+  {
+    "title": "La Ventanita",
+    "artist": "Celso Piña",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 46,
+    "year": 2015
+  },
+  {
+    "title": "Cumbia Power",
+    "artist": "Celso Piña",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 46,
+    "year": 2012
+  },
+  {
+    "title": "Cumbia Surumbamba",
+    "artist": "Kumbia Kings",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2003
+  },
+  {
+    "title": "Boom",
+    "artist": "Kumbia Kings",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "Melina",
+    "artist": "Kumbia Kings",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2000
+  },
+  {
+    "title": "Amor, Familia y Respeto",
+    "artist": "Kumbia Kings",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2001
+  },
+  {
+    "title": "Shhh Escúchame",
+    "artist": "Kumbia Kings",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2003
+  },
+  {
+    "title": "Pa Qué me Haces Llorar",
+    "artist": "Kumbia Kings",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2005
+  },
+  {
+    "title": "Pero me Acuerdo de Ti",
+    "artist": "Kumbia Kings",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1999
+  },
+  {
+    "title": "La Bamba",
+    "artist": "Ritchie Valens",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 1958
+  },
+  {
+    "title": "Ven Conmigo",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1987
+  },
+  {
+    "title": "Prófugos",
+    "artist": "Soda Stereo",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "Telefonía",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2003
+  },
+  {
+    "title": "Que Pasará",
+    "artist": "Café Tacvba",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2012
+  },
+  {
+    "title": "¿Qué Crees?",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1990
+  },
+  {
+    "title": "Nubes",
+    "artist": "Caifanes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 52,
+    "year": 1992
+  },
+  {
+    "title": "Cómo Fuiste",
+    "artist": "La Ley",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 50,
+    "year": 2003
+  },
+  {
+    "title": "Quédate",
+    "artist": "Gilberto Santa Rosa",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2008
+  },
+  {
+    "title": "Pégame tu Vicio",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 56,
+    "year": 1990
+  },
+  {
+    "title": "Jalene",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 56,
+    "year": 1989
+  },
+  {
+    "title": "Qué Creías",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1993
+  },
+  {
+    "title": "Un x100to",
+    "artist": "Aventura",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 44,
+    "year": 2010
+  },
+  {
+    "title": "Rinconcito en el Cielo",
+    "artist": "Kumbia Kings",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 50,
+    "year": 2005
+  },
+  {
+    "title": "Ahora Tú Puedes Marcharte",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 50,
+    "year": 2001
+  },
+  {
+    "title": "Tu Amor me Hace Bien (Remix)",
+    "artist": "Marc Anthony",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 52,
+    "year": 2005
+  },
+  {
+    "title": "La Noche que lo Conocí",
+    "artist": "La India",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1999
+  },
+  {
+    "title": "Cumbia del Rio",
+    "artist": "Celso Piña",
+    "lo": 45,
+    "hi": 65,
+    "brightness": 46,
+    "year": 2018
+  },
+  {
+    "title": "No Volveras",
+    "artist": "Selena",
+    "lo": 52,
+    "hi": 74,
+    "brightness": 54,
+    "year": 1991
+  }
+]
