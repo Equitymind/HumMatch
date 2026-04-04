@@ -16,11 +16,39 @@
   <url><loc>https://hummatch.me/hard-songs</loc><lastmod>2026-04-04</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
 
   <!-- ── VOICE TYPE PAGES (5) ── -->
-  <url><loc>https://hummatch.me/bass-songs</loc><lastmod>2026-04-04</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://hummatch.me/baritone-songs</loc><lastmod>2026-04-04</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://hummatch.me/tenor-songs</loc><lastmod>2026-04-04</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://hummatch.me/alto-songs</loc><lastmod>2026-04-04</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://hummatch.me/soprano-songs</loc><lastmod>2026-04-04</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://hummatch.me/bass-songs</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://hummatch.me/baritone-songs</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://hummatch.me/tenor-songs</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://hummatch.me/alto-songs</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://hummatch.me/soprano-songs</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+
+  <!-- ── DUET PAGES (26: index + 25 voice combinations) ── -->
+  <url><loc>https://hummatch.me/duets/</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.80</priority></url>
+  <url><loc>https://hummatch.me/duets/bass-bass</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/bass-baritone</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/bass-tenor</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/bass-mezzo</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/bass-soprano</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/baritone-bass</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/baritone-baritone</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/baritone-tenor</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/baritone-mezzo</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/baritone-soprano</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/tenor-bass</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/tenor-baritone</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/tenor-tenor</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/tenor-mezzo</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/tenor-soprano</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/mezzo-bass</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/mezzo-baritone</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/mezzo-tenor</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/mezzo-mezzo</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/mezzo-soprano</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/soprano-bass</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/soprano-baritone</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/soprano-tenor</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/soprano-mezzo</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
+  <url><loc>https://hummatch.me/duets/soprano-soprano</loc><lastmod>2026-04-03</lastmod><changefreq>monthly</changefreq><priority>0.72</priority></url>
 
   <!-- ── ARTIST PAGES (696) ── -->
   <url><loc>https://hummatch.me/artist/21-savage</loc><lastmod>2026-04-04</lastmod><changefreq>monthly</changefreq><priority>0.70</priority></url>
