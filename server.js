@@ -1959,21 +1959,37 @@ app.listen(PORT, () => {
     console.error('  [diag] hums table: MISSING or ERROR —', e.message);
   }
   try {
-    const songsCount = db.prepare('SELECT COUNT(*) as cnt FROM songs').get().cnt;
-    const artistCount = db.prepare('SELECT COUNT(DISTINCT artist) as cnt FROM songs').get().cnt;
-    const enCount = db.prepare("SELECT COUNT(*) as cnt FROM songs WHERE language = 'en'").get().cnt;
-    const esCount = db.prepare("SELECT COUNT(*) as cnt FROM songs WHERE language = 'es'").get().cnt;
-    const samples = db.prepare('SELECT title, artist FROM songs LIMIT 3').all();
-    console.log(`  [diag] songs table: OK (${songsCount} rows)`);
-    console.log(`  [diag] songs artists: ${artistCount} unique`);
-    console.log(`  [diag] songs languages: en=${enCount}, es=${esCount}`);
-    console.log(`  [diag] songs sample: ${samples.map(s => `"${s.title}" by ${s.artist}`).join(', ')}`);
-    if (songsCount === 0) {
-      console.error('  [ERROR] SONGS TABLE IS EMPTY! Run: node seed-songs.js');
+    const songsTable = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='songs'").get();
+    if (!songsTable) {
+      console.error('  [diag] songs table: MISSING');
+    } else {
+      const total = db.prepare('SELECT COUNT(*) AS c FROM songs').get().c;
+      const artists = db.prepare('SELECT COUNT(DISTINCT artist) AS c FROM songs').get().c;
+      const slugs = db.prepare('SELECT COUNT(DISTINCT slug) AS c FROM songs').get().c;
+      const withRange = db.prepare('SELECT COUNT(*) AS c FROM songs WHERE lo IS NOT NULL AND hi IS NOT NULL').get().c;
+      const withLanguage = db.prepare("SELECT COUNT(*) AS c FROM songs WHERE language IS NOT NULL AND language != ''").get().c;
+      const enCount = db.prepare("SELECT COUNT(*) AS c FROM songs WHERE language = 'en'").get().c;
+      const esCount = db.prepare("SELECT COUNT(*) AS c FROM songs WHERE language = 'es'").get().c;
+      const samples = db.prepare('SELECT slug, title, artist FROM songs LIMIT 5').all();
+      
+      console.log(`  [diag] songs table: OK (${total} rows)`);
+      console.log(`  [diag] songs artists: ${artists} unique`);
+      console.log(`  [diag] songs slugs: ${slugs} unique`);
+      console.log(`  [diag] songs with range: ${withRange}`);
+      console.log(`  [diag] songs with language: ${withLanguage}`);
+      console.log(`  [diag] songs languages: en=${enCount}, es=${esCount}`);
+      console.log(`  [diag] songs sample: ${samples.map(s => `${s.slug} ("${s.title}" by ${s.artist})`).join(', ')}`);
+      
+      if (total === 0) {
+        console.error('  [ERROR] SONGS TABLE IS EMPTY! Auto-seed should have run.');
+      } else if (total < 100) {
+        console.error(`  [WARNING] Only ${total} songs in catalog (expected 3000+)`);
+      } else if (withRange < total * 0.9) {
+        console.error(`  [WARNING] ${total - withRange} songs missing vocal range data`);
+      }
     }
   } catch (e) {
-    console.error('  [diag] songs table: MISSING or ERROR —', e.message);
-    console.error('  [ERROR] SONGS TABLE BROKEN! Database needs seeding.');
+    console.error('  [diag] songs table: ERROR —', e.message);
   }
   try {
     const cols = db.pragma('table_info(users)').map(c => c.name);
