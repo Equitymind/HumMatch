@@ -1907,6 +1907,29 @@ app.get('*', (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// Auto-seed songs if empty
+// ---------------------------------------------------------------------------
+function autoSeedSongs() {
+  try {
+    const songsCount = db.prepare('SELECT COUNT(*) as cnt FROM songs').get().cnt;
+    if (songsCount > 0) {
+      console.log(`[seed] songs table already populated (${songsCount} rows) — skipping auto-seed`);
+      return;
+    }
+    console.log('[seed] songs table is EMPTY — auto-seeding from index.html...');
+    const { execSync } = require('child_process');
+    const result = execSync('node seed-songs.js', { cwd: __dirname, encoding: 'utf8' });
+    console.log(result);
+    console.log('[seed] auto-seed complete!');
+  } catch (e) {
+    console.error('[seed] auto-seed FAILED:', e.message);
+    console.error('[seed] you may need to manually run: node seed-songs.js');
+  }
+}
+
+autoSeedSongs();
+
+// ---------------------------------------------------------------------------
 // Start server
 // ---------------------------------------------------------------------------
 app.listen(PORT, () => {
