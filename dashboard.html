@@ -287,6 +287,7 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
       <button class="btn-sm" onclick="showAddFriend()">+ Add Friend</button>
       <button class="btn-sm" onclick="copyInviteLink()">Copy Invite Link</button>
+      <button class="btn-sm" style="background:rgba(239,68,68,0.15);color:#ef4444;border-color:rgba(239,68,68,0.3)" onclick="deleteSquad()">Delete Squad</button>
     </div>
     <div id="add-friend-form" style="display:none;margin-bottom:14px">
       <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -633,6 +634,20 @@ function copyInviteLink(){
   const name=squad?(squad.session_name||squad.squad_name||'SquadMatch'):'SquadMatch';
   const text='Join '+name+' on HumMatch! '+window.location.origin+'/squadmatch?join='+activeSquadId;
   navigator.clipboard.writeText(text).then(()=>toast('Invite link copied!')).catch(()=>toast('Copy failed'));
+}
+
+async function deleteSquad(){
+  if(!activeSquadId)return;
+  const squad=squads.find(s=>s.id===activeSquadId);
+  const name=squad?(squad.session_name||squad.squad_name||'My SquadMatch'):'this squad';
+  if(!confirm('Delete "'+name+'"? This cannot be undone.'))return;
+  try{
+    const res=await api('/api/hummatch/squad/'+activeSquadId,{method:'DELETE'});
+    if(!res.ok){toast('Failed to delete squad');return}
+    toast('Squad deleted');
+    closeSquadDetail();
+    await loadSquadOnly();
+  }catch(e){toast('Failed to delete squad')}
 }
 
 function renderHumHistory(){
