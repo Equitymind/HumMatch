@@ -493,7 +493,16 @@ function renderVoiceSnapshot(){
   const voice=getVoiceType(),topMatch=getTopMatch(),topArtist=getTopArtist(),rem=getHumsRemaining();
   let c='';
   c+='<div class="voice-card"><div class="vc-icon">🎙️</div><div class="vc-label">Your Voice</div>';
-  c+=voice?'<div class="vc-value">'+esc(voice)+'</div>':'<div class="vc-empty">Take your first HumMatch to unlock your voice profile</div>';
+  // If we have topMatch or topArtist, show voice type or building profile status
+  if(voice) {
+    c+='<div class="vc-value">'+esc(voice)+'</div>';
+  } else if(topMatch || topArtist) {
+    // Has hum data but voice type not determined yet
+    c+='<div class="vc-value" style="font-size:0.85rem;color:rgba(255,255,255,0.6);">Voice profile building</div>';
+    c+='<div class="vc-sub" style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:4px;">Take another HumMatch to refine</div>';
+  } else {
+    c+='<div class="vc-empty">Take your first HumMatch to unlock your voice profile</div>';
+  }
   c+='</div>';
   c+='<div class="voice-card"><div class="vc-icon">⭐</div><div class="vc-label">Top Match</div>';
   c+=topMatch?'<div class="vc-value">'+esc(topMatch.title)+'</div><div class="vc-sub">'+topMatch.confidence+'% fit</div>':'<div class="vc-empty">Your best song match will appear here</div>';

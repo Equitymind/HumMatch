@@ -637,8 +637,15 @@ function renderPage(song, related) {
   <!-- BOTTOM CTA -->
   <div class="cta-box" style="margin-top:52px">
     <h2>Find Every Song That Fits YOUR Voice</h2>
-    <p>HumMatch analyzes your exact vocal range from a 5-second hum — then instantly shows you which of our 2,600+ songs you can sing. No sign-up, no downloads, completely free.</p>
+    <p>HumMatch analyzes your exact vocal range from a 5-second hum — then instantly shows you which of our 6,000+ songs you can sing. No sign-up, no downloads, completely free.</p>
     <a href="/" class="btn-grad">🎤 Start Humming — It's Free</a>
+  </div>
+
+  <!-- PREMIUM CTA -->
+  <div style="max-width:640px;margin:48px auto 0;padding:24px;background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.06));border:1px solid rgba(168,85,247,0.25);border-radius:16px;text-align:center;">
+    <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:10px;">Save your best-fit songs, playlists, and SquadMatch sessions</h3>
+    <p style="font-size:0.875rem;color:rgba(255,255,255,0.65);margin-bottom:18px;line-height:1.5;">Get unlimited access with Squad Leader — unlimited hums, saved playlists, and host group sessions to find songs your whole crew can sing.</p>
+    <a href="/pricing" style="display:inline-block;padding:12px 24px;background:linear-gradient(135deg,#A855F7,#EC4899);border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;text-decoration:none;transition:opacity 0.15s;">⭐ Upgrade to Squad Leader</a>
   </div>
 
 </div><!-- /content -->
