@@ -18,7 +18,7 @@
   --muted:rgba(255,255,255,0.42);
   --radius:14px;
 }
-html,body{min-height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+html,body{min-height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-overflow-scrolling:touch}
 a{color:inherit;text-decoration:none}
 .nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(13,11,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(124,58,237,0.1)}
 .nav-logo{display:flex;align-items:center;gap:8px;font-size:1rem;font-weight:800;color:#fff}
@@ -27,7 +27,7 @@ a{color:inherit;text-decoration:none}
 .nav-back:hover{background:rgba(255,255,255,0.06);color:var(--text)}
 .screen{display:none;min-height:calc(100vh - 56px)}
 .screen.active{display:block}
-.si{max-width:420px;margin:0 auto;padding:28px 18px 60px}
+.si{max-width:420px;margin:0 auto;padding:28px 18px max(80px, calc(60px + env(safe-area-inset-bottom)));}
 .badge{display:inline-flex;align-items:center;padding:3px 12px;border-radius:20px;font-size:0.62rem;font-weight:800;letter-spacing:0.08em;background:var(--grad);color:#fff}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 18px}
 .btn{display:block;width:100%;padding:14px;border-radius:12px;font-size:0.9rem;font-weight:700;border:none;cursor:pointer;transition:opacity 0.15s,transform 0.1s;text-align:center;letter-spacing:0.02em}
