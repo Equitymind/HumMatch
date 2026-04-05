@@ -172,13 +172,42 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
   <div class="si">
     <div class="badge" style="margin-bottom:14px">SQUAD LEADER</div>
     <div class="h1">Start your SquadMatch</div>
-    <div class="sub">You're the Squad Leader</div>
-    <div class="card" style="margin-bottom:18px">
-      <label>Squad Name (optional)</label>
-      <input type="text" id="squad-name-input" placeholder="Joe's Squad" maxlength="40"/>
+    <div class="sub">You'll host the session and unlock songs your squad can sing together in harmony.</div>
+    
+    <div class="card" style="margin-bottom:14px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);">
+      <div style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:10px;">What Squad Leaders unlock</div>
+      <ul style="list-style:none;padding:0;margin:0;">
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Invite up to 5 friends
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Everyone hums once
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> HumMatch analyzes the group's range, timbre, and brightness
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Get song suggestions optimized for harmonic fit
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Track who's hummed, save shared playlists, manage everything in HumMatch HQ
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Issue up to 5 exclusive 20% discount codes each month
+        </li>
+      </ul>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.55);margin-top:12px;font-style:italic;">
+        Discount codes are only available through a Squad Leader.
+      </div>
     </div>
-    <button class="btn btn-primary" id="create-btn" onclick="createSquad()">Invite My Squad</button>
-    <div class="helper">Up to 4 friends. They hum once. We do the rest.</div>
+    
+    <div class="card" style="margin-bottom:18px">
+      <label>Squad name (optional)</label>
+      <input type="text" id="squad-name-input" placeholder="Name it anything you want, or leave it blank" maxlength="40"/>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Helper text: Name it anything you want, or leave it blank.</div>
+    </div>
+    <button class="btn btn-primary" id="create-btn" onclick="createSquad()">Create & Invite My Squad</button>
+    <div class="helper">Next, we'll generate your squad link to share by text, WhatsApp, or social.</div>
     <div id="invite-section" style="display:none;margin-top:24px">
       <div class="divider"></div>
       <div style="font-size:0.75rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Share Your Invite Link</div>
