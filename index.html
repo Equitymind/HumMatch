@@ -64685,7 +64685,8 @@ function saveProfile() {
   const profile = {
     notes: capturedNotes,
     brightness: capturedBrightness,
-    savedAt: Date.now()
+    savedAt: Date.now(),
+    version: 2 // Increment when matching algorithm changes
   };
   try { localStorage.setItem('hummatch_profile', JSON.stringify(profile)); } catch(e) {}
 }
@@ -64695,6 +64696,14 @@ function loadSavedProfile() {
     const raw = localStorage.getItem('hummatch_profile');
     if (!raw) return false;
     const p = JSON.parse(raw);
+    
+    // Invalidate profiles from before gender filtering fixes (version 2)
+    if (!p.version || p.version < 2) {
+      console.log('Old profile detected, clearing...');
+      localStorage.removeItem('hummatch_profile');
+      return false;
+    }
+    
     capturedNotes = p.notes || [null, null, null];
     capturedBrightness = p.brightness || [null, null, null];
     showResults();
