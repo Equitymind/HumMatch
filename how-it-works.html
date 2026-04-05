@@ -151,7 +151,7 @@ h1 {
     <div class="step-number">3</div>
     <div class="step-content">
       <h2>Get Personalized Matches</h2>
-      <p>We compare your voice against 4,456 karaoke songs in our catalog and show you the perfect matches—songs that fit your range, suit your vibe, and make you sound amazing!</p>
+      <p>We compare your voice against our growing catalog and show you the perfect matches—songs that fit your range, suit your vibe, and make you sound amazing!</p>
     </div>
   </div>
 
@@ -163,6 +163,24 @@ h1 {
     </div>
   </div>
 
+  <h2 style="text-align:center;margin-top:48px;margin-bottom:24px;color:var(--text1);">The Science Behind HumMatch</h2>
+  
+  <div class="tech-section" style="background:var(--bg2);border:1px solid rgba(168,85,247,0.15);border-radius:16px;padding:32px;margin-bottom:32px;">
+    <h3 style="color:var(--accent);margin-bottom:16px;font-size:1.2rem;">🧪 How We Analyze Your Voice</h3>
+    <p style="color:var(--text2);margin-bottom:16px;line-height:1.7;">
+      HumMatch uses **spectral analysis** powered by the Web Audio API to extract your vocal characteristics in real-time:
+    </p>
+    <ul style="color:var(--text2);margin-left:24px;margin-bottom:16px;line-height:1.8;">
+      <li><strong style="color:var(--accent);">Fundamental Frequency Detection:</strong> We track your lowest and highest notes using autocorrelation algorithms, measuring pitch in real-time with sub-semitone accuracy.</li>
+      <li><strong style="color:var(--accent);">Vocal Timbre Analysis:</strong> Using spectral centroid calculation, we measure your voice's "brightness"—the distribution of harmonic energy that gives your voice its unique character.</li>
+      <li><strong style="color:var(--accent);">Dynamic Range Mapping:</strong> We convert MIDI note numbers to Hz frequencies, mapping your comfortable singing range to our indexed song database.</li>
+      <li><strong style="color:var(--accent);">Gender-Aware Filtering:</strong> Our dual-filter algorithm (midpoint threshold + brightness spectrum) ensures accurate vocal type classification—no more soprano suggestions for bass singers!</li>
+    </ul>
+    <p style="color:var(--text3);font-size:0.9rem;font-style:italic;">
+      All processing happens client-side using JavaScript and the Web Audio API. No audio is ever uploaded or stored—your voice analysis happens entirely in your browser's memory.
+    </p>
+  </div>
+  
   <h2 style="text-align:center;margin-top:48px;margin-bottom:24px;color:var(--text1);">Why HumMatch Works</h2>
   
   <div class="feature-grid">
