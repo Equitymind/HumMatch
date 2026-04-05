@@ -613,6 +613,7 @@
       </div>
       <div class="voice-badge" id="voice-badge">⚡ Loading…</div>
       <div style="font-size:0.9rem;color:var(--text2);margin-bottom:4px;" id="range-text"></div>
+      <div style="font-size:0.88rem;color:var(--text2);margin-bottom:8px;font-weight:600;" id="brightness-text"></div>
     </div>
 
     <div class="range-bar-wrap" id="range-bar-section">
@@ -34454,8 +34455,17 @@ function showResults() {
   // ── RENDER ──
   document.getElementById('voice-badge').innerHTML = `${typeEmoji[voiceType] || '🎤'} ${voiceType}`;
   document.getElementById('result-emoji').textContent = (topArtist && topArtist.emoji) ? topArtist.emoji : '🎉';
+  
+  // Brightness descriptor based on score
+  const brightnessLabel = userBrightness >= 70 ? 'Very Bright' :
+                          userBrightness >= 55 ? 'Bright' :
+                          userBrightness >= 45 ? 'Neutral' :
+                          userBrightness >= 30 ? 'Dark & Warm' : 'Very Dark';
+  
   document.getElementById('range-text').textContent =
     `${midiToName(userLow)} to ${midiToName(userHigh)} · ${span} semitone range`;
+  document.getElementById('brightness-text').textContent =
+    `✨ Timbre: ${Math.round(userBrightness)}/100 (${brightnessLabel})`;
 
   // Range bar
   const fullSpan = 90 - 36;
