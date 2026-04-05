@@ -1,0 +1,218 @@
+[
+  {"title":"Despacito","artist":"Luis Fonsi ft. Daddy Yankee","lo":42,"hi":66,"brightness":63,"year":2017,"genre":"latin"},
+  {"title":"Bailando","artist":"Enrique Iglesias","lo":43,"hi":67,"brightness":64,"year":2014,"genre":"latin"},
+  {"title":"La Bamba","artist":"Ritchie Valens","lo":44,"hi":68,"brightness":65,"year":1958,"genre":"latin"},
+  {"title":"Livin' La Vida Loca","artist":"Ricky Martin","lo":44,"hi":68,"brightness":66,"year":1999,"genre":"latin"},
+  {"title":"Smooth","artist":"Santana ft. Rob Thomas","lo":43,"hi":67,"brightness":64,"year":1999,"genre":"latin"},
+  {"title":"Hips Don't Lie","artist":"Shakira ft. Wyclef Jean","lo":51,"hi":75,"brightness":68,"year":2006,"genre":"latin"},
+  {"title":"Whenever, Wherever","artist":"Shakira","lo":52,"hi":76,"brightness":69,"year":2001,"genre":"latin"},
+  {"title":"Waka Waka","artist":"Shakira","lo":51,"hi":75,"brightness":68,"year":2010,"genre":"latin"},
+  {"title":"La Tortura","artist":"Shakira ft. Alejandro Sanz","lo":52,"hi":76,"brightness":69,"year":2005,"genre":"latin"},
+  {"title":"Chantaje","artist":"Shakira ft. Maluma","lo":51,"hi":75,"brightness":67,"year":2016,"genre":"latin"},
+  
+  {"title":"Gasolina","artist":"Daddy Yankee","lo":42,"hi":66,"brightness":62,"year":2004,"genre":"reggaeton"},
+  {"title":"Dura","artist":"Daddy Yankee","lo":43,"hi":67,"brightness":63,"year":2018,"genre":"reggaeton"},
+  {"title":"Con Calma","artist":"Daddy Yankee ft. Snow","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"reggaeton"},
+  {"title":"Limbo","artist":"Daddy Yankee","lo":43,"hi":67,"brightness":63,"year":2012,"genre":"reggaeton"},
+  
+  {"title":"Mi Gente","artist":"J Balvin & Willy William","lo":43,"hi":67,"brightness":64,"year":2017,"genre":"reggaeton"},
+  {"title":"Ginza","artist":"J Balvin","lo":42,"hi":66,"brightness":63,"year":2015,"genre":"reggaeton"},
+  {"title":"Ay Vamos","artist":"J Balvin","lo":43,"hi":67,"brightness":64,"year":2014,"genre":"reggaeton"},
+  {"title":"Safari","artist":"J Balvin ft. Pharrell Williams","lo":43,"hi":67,"brightness":64,"year":2016,"genre":"reggaeton"},
+  {"title":"Reggaeton","artist":"J Balvin & Willy William","lo":42,"hi":66,"brightness":63,"year":2017,"genre":"reggaeton"},
+  
+  {"title":"Taki Taki","artist":"DJ Snake ft. Selena Gomez, Ozuna, Cardi B","lo":51,"hi":75,"brightness":67,"year":2018,"genre":"reggaeton"},
+  {"title":"I Like It","artist":"Cardi B, Bad Bunny & J Balvin","lo":50,"hi":74,"brightness":66,"year":2018,"genre":"reggaeton"},
+  
+  {"title":"Dákiti","artist":"Bad Bunny & Jhay Cortez","lo":42,"hi":66,"brightness":62,"year":2020,"genre":"reggaeton"},
+  {"title":"Safaera","artist":"Bad Bunny ft. Jowell & Randy, Ñengo Flow","lo":43,"hi":67,"brightness":63,"year":2020,"genre":"reggaeton"},
+  {"title":"Yo Perreo Sola","artist":"Bad Bunny","lo":42,"hi":66,"brightness":62,"year":2020,"genre":"reggaeton"},
+  {"title":"Callaita","artist":"Bad Bunny ft. Tainy","lo":43,"hi":67,"brightness":63,"year":2019,"genre":"reggaeton"},
+  {"title":"Mía","artist":"Bad Bunny ft. Drake","lo":42,"hi":66,"brightness":62,"year":2018,"genre":"reggaeton"},
+  
+  {"title":"Tusa","artist":"Karol G & Nicki Minaj","lo":51,"hi":75,"brightness":68,"year":2019,"genre":"reggaeton"},
+  {"title":"Bichota","artist":"Karol G","lo":52,"hi":76,"brightness":69,"year":2020,"genre":"reggaeton"},
+  {"title":"Ay, DiOs Mío!","artist":"Karol G","lo":51,"hi":75,"brightness":67,"year":2019,"genre":"reggaeton"},
+  {"title":"Secreto","artist":"Karol G ft. Anuel AA","lo":52,"hi":76,"brightness":68,"year":2019,"genre":"reggaeton"},
+  
+  {"title":"Criminal","artist":"Natti Natasha & Ozuna","lo":51,"hi":75,"brightness":67,"year":2017,"genre":"reggaeton"},
+  {"title":"Sin Pijama","artist":"Becky G & Natti Natasha","lo":52,"hi":76,"brightness":68,"year":2018,"genre":"reggaeton"},
+  
+  {"title":"Vivir Mi Vida","artist":"Marc Anthony","lo":43,"hi":67,"brightness":64,"year":2013,"genre":"salsa"},
+  {"title":"Valió la Pena","artist":"Marc Anthony","lo":42,"hi":66,"brightness":63,"year":2004,"genre":"salsa"},
+  {"title":"Y Hubo Alguien","artist":"Marc Anthony","lo":43,"hi":67,"brightness":64,"year":2013,"genre":"salsa"},
+  {"title":"Flor Pálida","artist":"Marc Anthony","lo":42,"hi":66,"brightness":63,"year":1995,"genre":"salsa"},
+  
+  {"title":"Suavemente","artist":"Elvis Crespo","lo":43,"hi":67,"brightness":64,"year":1998,"genre":"merengue"},
+  {"title":"Pintame","artist":"Elvis Crespo","lo":42,"hi":66,"brightness":63,"year":1998,"genre":"merengue"},
+  
+  {"title":"Obsesión","artist":"Aventura","lo":42,"hi":66,"brightness":62,"year":2002,"genre":"bachata"},
+  {"title":"Dile al Amor","artist":"Aventura","lo":43,"hi":67,"brightness":63,"year":2009,"genre":"bachata"},
+  {"title":"Por un Segundo","artist":"Aventura","lo":42,"hi":66,"brightness":62,"year":2007,"genre":"bachata"},
+  {"title":"El Perdedor","artist":"Aventura","lo":43,"hi":67,"brightness":63,"year":2009,"genre":"bachata"},
+  
+  {"title":"Propuesta Indecente","artist":"Romeo Santos","lo":42,"hi":66,"brightness":62,"year":2013,"genre":"bachata"},
+  {"title":"Eres Mía","artist":"Romeo Santos","lo":43,"hi":67,"brightness":63,"year":2014,"genre":"bachata"},
+  {"title":"Odio","artist":"Romeo Santos ft. Drake","lo":42,"hi":66,"brightness":62,"year":2014,"genre":"bachata"},
+  {"title":"Promise","artist":"Romeo Santos ft. Usher","lo":43,"hi":67,"brightness":63,"year":2011,"genre":"bachata"},
+  {"title":"Centavito","artist":"Romeo Santos","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"bachata"},
+  
+  {"title":"Darte un Beso","artist":"Prince Royce","lo":43,"hi":67,"brightness":64,"year":2013,"genre":"bachata"},
+  {"title":"Stand by Me","artist":"Prince Royce","lo":42,"hi":66,"brightness":63,"year":2010,"genre":"bachata"},
+  {"title":"Corazón Sin Cara","artist":"Prince Royce","lo":43,"hi":67,"brightness":64,"year":2010,"genre":"bachata"},
+  
+  {"title":"Échame la Culpa","artist":"Luis Fonsi & Demi Lovato","lo":51,"hi":75,"brightness":67,"year":2017,"genre":"latin"},
+  {"title":"Imposible","artist":"Luis Fonsi & Ozuna","lo":43,"hi":67,"brightness":64,"year":2018,"genre":"latin"},
+  
+  {"title":"Soltera","artist":"Lunay, Daddy Yankee, Bad Bunny","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"reggaeton"},
+  {"title":"Ella Quiere Beber","artist":"Anuel AA ft. Romeo Santos","lo":43,"hi":67,"brightness":63,"year":2018,"genre":"reggaeton"},
+  {"title":"China","artist":"Anuel AA, Daddy Yankee, Karol G, Ozuna, J Balvin","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"reggaeton"},
+  
+  {"title":"Súbeme la Radio","artist":"Enrique Iglesias ft. Descemer Bueno, Zion & Lennox","lo":43,"hi":67,"brightness":64,"year":2017,"genre":"latin"},
+  {"title":"El Perdón","artist":"Nicky Jam & Enrique Iglesias","lo":42,"hi":66,"brightness":63,"year":2015,"genre":"reggaeton"},
+  {"title":"Duele el Corazón","artist":"Enrique Iglesias ft. Wisin","lo":43,"hi":67,"brightness":64,"year":2016,"genre":"latin"},
+  
+  {"title":"X","artist":"Nicky Jam & J Balvin","lo":42,"hi":66,"brightness":62,"year":2018,"genre":"reggaeton"},
+  {"title":"Hasta el Amanecer","artist":"Nicky Jam","lo":43,"hi":67,"brightness":63,"year":2016,"genre":"reggaeton"},
+  {"title":"El Amante","artist":"Nicky Jam","lo":42,"hi":66,"brightness":62,"year":2017,"genre":"reggaeton"},
+  
+  {"title":"Te Boté","artist":"Nio García, Casper Mágico, Bad Bunny","lo":42,"hi":66,"brightness":62,"year":2018,"genre":"reggaeton"},
+  {"title":"Fantasías","artist":"Rauw Alejandro & Farruko","lo":43,"hi":67,"brightness":63,"year":2020,"genre":"reggaeton"},
+  {"title":"Todo de Ti","artist":"Rauw Alejandro","lo":42,"hi":66,"brightness":62,"year":2021,"genre":"reggaeton"},
+  
+  {"title":"Hawái","artist":"Maluma","lo":43,"hi":67,"brightness":64,"year":2020,"genre":"reggaeton"},
+  {"title":"Felices los 4","artist":"Maluma","lo":42,"hi":66,"brightness":63,"year":2017,"genre":"reggaeton"},
+  {"title":"Corazón","artist":"Maluma ft. Nego do Borel","lo":43,"hi":67,"brightness":64,"year":2017,"genre":"reggaeton"},
+  {"title":"11 PM","artist":"Maluma","lo":42,"hi":66,"brightness":63,"year":2018,"genre":"reggaeton"},
+  
+  {"title":"Otra Vez","artist":"Zion & Lennox ft. J Balvin","lo":43,"hi":67,"brightness":64,"year":2016,"genre":"reggaeton"},
+  {"title":"La Player (Bandolera)","artist":"Zion & Lennox","lo":42,"hi":66,"brightness":63,"year":2015,"genre":"reggaeton"},
+  
+  {"title":"Adictiva","artist":"Daddy Yankee & Anuel AA","lo":42,"hi":66,"brightness":62,"year":2018,"genre":"reggaeton"},
+  {"title":"La Romana","artist":"Bad Bunny ft. El Alfa","lo":43,"hi":67,"brightness":63,"year":2019,"genre":"reggaeton"},
+  {"title":"Otro Trago","artist":"Sech ft. Darell","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"reggaeton"},
+  
+  {"title":"Mayores","artist":"Becky G ft. Bad Bunny","lo":51,"hi":75,"brightness":67,"year":2017,"genre":"latin"},
+  {"title":"Shower","artist":"Becky G","lo":52,"hi":76,"brightness":68,"year":2014,"genre":"pop"},
+  
+  {"title":"Mamacita","artist":"Tyga ft. YG, Santana","lo":42,"hi":66,"brightness":62,"year":2014,"genre":"latin"},
+  {"title":"Oye Como Va","artist":"Santana","lo":43,"hi":67,"brightness":64,"year":1970,"genre":"latin"},
+  {"title":"Black Magic Woman","artist":"Santana","lo":42,"hi":66,"brightness":63,"year":1970,"genre":"rock"},
+  {"title":"Maria Maria","artist":"Santana ft. The Product G&B","lo":43,"hi":67,"brightness":64,"year":1999,"genre":"latin"},
+  
+  {"title":"Perro Fiel","artist":"Shakira & Nicky Jam","lo":51,"hi":75,"brightness":67,"year":2017,"genre":"reggaeton"},
+  {"title":"Me Enamoré","artist":"Shakira","lo":52,"hi":76,"brightness":68,"year":2017,"genre":"latin"},
+  {"title":"Try Everything","artist":"Shakira","lo":51,"hi":75,"brightness":67,"year":2016,"genre":"pop"},
+  
+  {"title":"Bailar","artist":"Deorro ft. Elvis Crespo","lo":43,"hi":67,"brightness":64,"year":2016,"genre":"latin"},
+  {"title":"Lean On","artist":"Major Lazer & DJ Snake ft. MØ","lo":51,"hi":75,"brightness":67,"year":2015,"genre":"edm"},
+  
+  {"title":"Ven Conmigo","artist":"Daddy Yankee","lo":42,"hi":66,"brightness":62,"year":2011,"genre":"reggaeton"},
+  {"title":"Shaky Shaky","artist":"Daddy Yankee","lo":43,"hi":67,"brightness":63,"year":2016,"genre":"reggaeton"},
+  {"title":"Que Tire Pa Lante","artist":"Daddy Yankee","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"reggaeton"},
+  
+  {"title":"Pa' Ti","artist":"Jennifer Lopez & Maluma","lo":51,"hi":75,"brightness":67,"year":2020,"genre":"latin"},
+  {"title":"Let's Get Loud","artist":"Jennifer Lopez","lo":52,"hi":76,"brightness":69,"year":1999,"genre":"latin"},
+  {"title":"On the Floor","artist":"Jennifer Lopez ft. Pitbull","lo":51,"hi":75,"brightness":67,"year":2011,"genre":"pop"},
+  {"title":"Ain't Your Mama","artist":"Jennifer Lopez","lo":52,"hi":76,"brightness":68,"year":2016,"genre":"pop"},
+  
+  {"title":"Timber","artist":"Pitbull ft. Ke$ha","lo":51,"hi":75,"brightness":67,"year":2013,"genre":"pop"},
+  {"title":"Give Me Everything","artist":"Pitbull ft. Ne-Yo, Afrojack, Nayer","lo":42,"hi":66,"brightness":62,"year":2011,"genre":"pop"},
+  {"title":"Time of Our Lives","artist":"Pitbull & Ne-Yo","lo":43,"hi":67,"brightness":63,"year":2014,"genre":"pop"},
+  {"title":"Fireball","artist":"Pitbull ft. John Ryan","lo":42,"hi":66,"brightness":62,"year":2014,"genre":"pop"},
+  {"title":"Hotel Room Service","artist":"Pitbull","lo":43,"hi":67,"brightness":63,"year":2009,"genre":"pop"},
+  
+  {"title":"Danza Kuduro","artist":"Don Omar ft. Lucenzo","lo":43,"hi":67,"brightness":64,"year":2010,"genre":"reggaeton"},
+  {"title":"Zumba","artist":"Don Omar","lo":42,"hi":66,"brightness":63,"year":2009,"genre":"reggaeton"},
+  {"title":"Taboo","artist":"Don Omar","lo":43,"hi":67,"brightness":64,"year":2011,"genre":"reggaeton"},
+  
+  {"title":"Lean On","artist":"Major Lazer ft. MØ & DJ Snake","lo":51,"hi":75,"brightness":67,"year":2015,"genre":"edm"},
+  {"title":"Cold Water","artist":"Major Lazer ft. Justin Bieber & MØ","lo":43,"hi":67,"brightness":64,"year":2016,"genre":"edm"},
+  
+  {"title":"Ai Se Eu Te Pego","artist":"Michel Teló","lo":43,"hi":67,"brightness":64,"year":2011,"genre":"latin"},
+  {"title":"Humilde Residência","artist":"Michel Teló","lo":42,"hi":66,"brightness":63,"year":2012,"genre":"latin"},
+  
+  {"title":"Sua Cara","artist":"Major Lazer ft. Anitta & Pabllo Vittar","lo":51,"hi":75,"brightness":67,"year":2017,"genre":"latin"},
+  {"title":"Downtown","artist":"Anitta & J Balvin","lo":52,"hi":76,"brightness":68,"year":2019,"genre":"reggaeton"},
+  {"title":"Vai Malandra","artist":"Anitta","lo":51,"hi":75,"brightness":67,"year":2017,"genre":"latin"},
+  
+  {"title":"Corazón","artist":"Sebastián Yatra & Guaynaa","lo":43,"hi":67,"brightness":64,"year":2020,"genre":"latin"},
+  {"title":"Traicionera","artist":"Sebastián Yatra","lo":42,"hi":66,"brightness":63,"year":2016,"genre":"latin"},
+  {"title":"Un Año","artist":"Sebastián Yatra & Reik","lo":43,"hi":67,"brightness":64,"year":2018,"genre":"latin"},
+  
+  {"title":"Con Altura","artist":"Rosalía & J Balvin ft. El Guincho","lo":51,"hi":75,"brightness":67,"year":2019,"genre":"reggaeton"},
+  {"title":"Malamente","artist":"Rosalía","lo":52,"hi":76,"brightness":68,"year":2018,"genre":"flamenco"},
+  {"title":"Pienso en Tu Mirá","artist":"Rosalía","lo":51,"hi":75,"brightness":67,"year":2018,"genre":"flamenco"},
+  
+  {"title":"Blinding Lights (Remix)","artist":"The Weeknd & Rosalía","lo":42,"hi":66,"brightness":62,"year":2020,"genre":"pop"},
+  {"title":"Mood","artist":"24kGoldn ft. iann dior","lo":43,"hi":67,"brightness":64,"year":2020,"genre":"pop"},
+  
+  {"title":"No Me Conoce","artist":"Jhay Cortez, J Balvin, Bad Bunny","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"reggaeton"},
+  {"title":"Easy","artist":"Jhay Cortez ft. Ozuna","lo":43,"hi":67,"brightness":63,"year":2019,"genre":"reggaeton"},
+  
+  {"title":"Loco Contigo","artist":"DJ Snake, J Balvin, Tyga","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"reggaeton"},
+  {"title":"Turn Down for What","artist":"DJ Snake & Lil Jon","lo":43,"hi":67,"brightness":63,"year":2013,"genre":"edm"},
+  
+  {"title":"Vacío","artist":"Rauw Alejandro & Anuel AA","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"reggaeton"},
+  {"title":"Tattoo","artist":"Rauw Alejandro","lo":43,"hi":67,"brightness":63,"year":2020,"genre":"reggaeton"},
+  
+  {"title":"La Curiosidad","artist":"Jay Wheeler, DJ Nelson, Myke Towers","lo":42,"hi":66,"brightness":62,"year":2020,"genre":"reggaeton"},
+  {"title":"Ella No Es Tuya","artist":"Rochy RD, Myke Towers, Nicki Nicole","lo":43,"hi":67,"brightness":63,"year":2020,"genre":"reggaeton"},
+  
+  {"title":"Medallo","artist":"Blessd, Justin Quiles, Lenny Tavárez","lo":42,"hi":66,"brightness":62,"year":2021,"genre":"reggaeton"},
+  {"title":"Diosa","artist":"Myke Towers","lo":43,"hi":67,"brightness":63,"year":2021,"genre":"reggaeton"},
+  
+  {"title":"Pepas","artist":"Farruko","lo":42,"hi":66,"brightness":62,"year":2021,"genre":"reggaeton"},
+  {"title":"Calma","artist":"Pedro Capó & Farruko","lo":43,"hi":67,"brightness":64,"year":2018,"genre":"latin"},
+  
+  {"title":"Telepatía","artist":"Kali Uchis","lo":51,"hi":75,"brightness":67,"year":2020,"genre":"pop"},
+  {"title":"After Hours","artist":"The Weeknd","lo":42,"hi":66,"brightness":62,"year":2020,"genre":"pop"},
+  
+  {"title":"Ateo","artist":"C. Tangana & Nathy Peluso","lo":42,"hi":66,"brightness":62,"year":2021,"genre":"latin"},
+  {"title":"Antes de Morirme","artist":"C. Tangana & Rosalía","lo":51,"hi":75,"brightness":67,"year":2021,"genre":"latin"},
+  
+  {"title":"Volví","artist":"Aventura & Bad Bunny","lo":42,"hi":66,"brightness":62,"year":2021,"genre":"bachata"},
+  {"title":"Inmortal","artist":"Aventura","lo":43,"hi":67,"brightness":63,"year":2019,"genre":"bachata"},
+  
+  {"title":"Envolver","artist":"Anitta","lo":51,"hi":75,"brightness":67,"year":2021,"genre":"reggaeton"},
+  {"title":"Me Gusta","artist":"Anitta ft. Cardi B & Myke Towers","lo":52,"hi":76,"brightness":68,"year":2020,"genre":"reggaeton"},
+  
+  {"title":"Poblado (Remix)","artist":"J Balvin, Karol G, Nicky Jam, Crissin, Totoy El Frío, Natan & Shander","lo":42,"hi":66,"brightness":62,"year":2021,"genre":"reggaeton"},
+  {"title":"Un Ratito","artist":"Bad Bunny","lo":43,"hi":67,"brightness":63,"year":2022,"genre":"reggaeton"},
+  
+  {"title":"Bandido","artist":"Myke Towers & Juhn","lo":42,"hi":66,"brightness":62,"year":2021,"genre":"reggaeton"},
+  {"title":"ULALA","artist":"Myke Towers & Mora","lo":43,"hi":67,"brightness":63,"year":2021,"genre":"reggaeton"},
+  
+  {"title":"La Nota","artist":"Manuel Turizo & Rauw Alejandro","lo":42,"hi":66,"brightness":62,"year":2021,"genre":"reggaeton"},
+  {"title":"Mala Costumbre","artist":"Manuel Turizo & Jay Wheeler","lo":43,"hi":67,"brightness":63,"year":2021,"genre":"reggaeton"},
+  
+  {"title":"Nostálgico","artist":"Rvssian, Rauw Alejandro, Chris Brown","lo":42,"hi":66,"brightness":62,"year":2021,"genre":"reggaeton"},
+  {"title":"2:00 AM","artist":"Rauw Alejandro & DJ Luian","lo":43,"hi":67,"brightness":63,"year":2021,"genre":"reggaeton"},
+  
+  {"title":"Fiel","artist":"Wisin & Jhay Cortez ft. Anuel AA","lo":42,"hi":66,"brightness":62,"year":2020,"genre":"reggaeton"},
+  {"title":"Pantysito","artist":"Feid & Alejo","lo":43,"hi":67,"brightness":63,"year":2021,"genre":"reggaeton"},
+  
+  {"title":"Escápate Conmigo","artist":"Wisin ft. Ozuna","lo":42,"hi":66,"brightness":62,"year":2017,"genre":"reggaeton"},
+  {"title":"Nota de Amor","artist":"Wisin & Carlos Vives ft. Daddy Yankee","lo":43,"hi":67,"brightness":64,"year":2017,"genre":"latin"},
+  
+  {"title":"Favorito","artist":"Camilo","lo":43,"hi":67,"brightness":64,"year":2020,"genre":"latin"},
+  {"title":"Tutu","artist":"Camilo & Pedro Capó","lo":42,"hi":66,"brightness":63,"year":2019,"genre":"latin"},
+  
+  {"title":"Ropa Cara","artist":"Camilo","lo":43,"hi":67,"brightness":64,"year":2020,"genre":"latin"},
+  {"title":"Vida de Rico","artist":"Camilo","lo":42,"hi":66,"brightness":63,"year":2020,"genre":"latin"},
+  
+  {"title":"Botella Tras Botella","artist":"Gera MX & Christian Nodal","lo":42,"hi":66,"brightness":62,"year":2020,"genre":"regional"},
+  {"title":"Adiós Amor","artist":"Christian Nodal","lo":43,"hi":67,"brightness":63,"year":2016,"genre":"regional"},
+  
+  {"title":"Ya No Somos Ni Seremos","artist":"Christian Nodal","lo":42,"hi":66,"brightness":62,"year":2019,"genre":"regional"},
+  {"title":"De Los Besos Que Te Di","artist":"Christian Nodal","lo":43,"hi":67,"brightness":63,"year":2019,"genre":"regional"},
+  
+  {"title":"Cumbiana","artist":"Carlos Vives & Sebastian Yatra","lo":43,"hi":67,"brightness":64,"year":2020,"genre":"latin"},
+  {"title":"La Gota Fría","artist":"Carlos Vives","lo":42,"hi":66,"brightness":63,"year":1993,"genre":"vallenato"},
+  
+  {"title":"Robarte un Beso","artist":"Carlos Vives & Sebastián Yatra","lo":43,"hi":67,"brightness":64,"year":2017,"genre":"latin"},
+  {"title":"Volví a Nacer","artist":"Carlos Vives ft. Maluma","lo":42,"hi":66,"brightness":63,"year":2015,"genre":"latin"},
+  
+  {"title":"No Se Va","artist":"Grupo Frontera & Bad Bunny","lo":42,"hi":66,"brightness":62,"year":2023,"genre":"regional"},
+  {"title":"un x100to","artist":"Grupo Frontera & Bad Bunny","lo":43,"hi":67,"brightness":63,"year":2023,"genre":"regional"}
+]
