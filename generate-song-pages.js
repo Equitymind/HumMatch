@@ -15,7 +15,7 @@ const path = require('path');
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const BASE_URL  = 'https://hummatch.me';
 const SONG_DIR  = path.join(__dirname, 'song');
-const MAX_PAGES = 10000;
+const MAX_PAGES = 15000; // Allow room for growth beyond 10K
 
 // ─── MIDI → NOTE NAME ─────────────────────────────────────────────────────────
 const NOTE_NAMES = ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
