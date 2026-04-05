@@ -1,0 +1,1442 @@
+[
+  {
+    "title": "Take Me Out",
+    "artist": "Franz Ferdinand",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "This Fire",
+    "artist": "Franz Ferdinand",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 70,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Do You Want To",
+    "artist": "Franz Ferdinand",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "Float On",
+    "artist": "Modest Mouse",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Ocean Breathes Salty",
+    "artist": "Modest Mouse",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Dashboard",
+    "artist": "Modest Mouse",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Mr. Brightside",
+    "artist": "The Killers",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 70,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Somebody Told Me",
+    "artist": "The Killers",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "When You Were Young",
+    "artist": "The Killers",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "All These Things That I've Done",
+    "artist": "The Killers",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Human",
+    "artist": "The Killers",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Smile Like You Mean It",
+    "artist": "The Killers",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Read My Mind",
+    "artist": "The Killers",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Such Great Heights",
+    "artist": "The Postal Service",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "We Will Become Silhouettes",
+    "artist": "The Postal Service",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "The District Sleeps Alone Tonight",
+    "artist": "The Postal Service",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "Such Great Heights",
+    "artist": "Iron & Wine",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Seven Nation Army",
+    "artist": "The White Stripes",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "Fell in Love with a Girl",
+    "artist": "The White Stripes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Hotel Yorba",
+    "artist": "The White Stripes",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "We're Going to Be Friends",
+    "artist": "The White Stripes",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "The Hardest Button to Button",
+    "artist": "The White Stripes",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "Icky Thump",
+    "artist": "The White Stripes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Time to Pretend",
+    "artist": "MGMT",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Kids",
+    "artist": "MGMT",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Electric Feel",
+    "artist": "MGMT",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "The Way We Get By",
+    "artist": "Spoon",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2002,
+    "genre": "indie"
+  },
+  {
+    "title": "I Turn My Camera On",
+    "artist": "Spoon",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "The Underdog",
+    "artist": "Spoon",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Don't You Evah",
+    "artist": "Spoon",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "I Bet You Look Good on the Dancefloor",
+    "artist": "Arctic Monkeys",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 70,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "When the Sun Goes Down",
+    "artist": "Arctic Monkeys",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Mardy Bum",
+    "artist": "Arctic Monkeys",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Fluorescent Adolescent",
+    "artist": "Arctic Monkeys",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Fake Tales of San Francisco",
+    "artist": "Arctic Monkeys",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Brianstorm",
+    "artist": "Arctic Monkeys",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 70,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "505",
+    "artist": "Arctic Monkeys",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Orange Crush",
+    "artist": "R.E.M.",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1988,
+    "genre": "indie"
+  },
+  {
+    "title": "New Slang",
+    "artist": "The Shins",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Caring Is Creepy",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Phantom Limb",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Australia",
+    "artist": "The Shins",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Turn on Me",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "1234",
+    "artist": "Feist",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "I Feel It All",
+    "artist": "Feist",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "My Moon My Man",
+    "artist": "Feist",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Mushaboom",
+    "artist": "Feist",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Maps",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 67,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "Y Control",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 70,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "Heads Will Roll",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Zero",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Young Folks",
+    "artist": "Peter Bjorn and John",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Let's Dance to Joy Division",
+    "artist": "The Wombats",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Moving to New York",
+    "artist": "The Wombats",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Kill the Director",
+    "artist": "The Wombats",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Oxford Comma",
+    "artist": "Vampire Weekend",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "A-Punk",
+    "artist": "Vampire Weekend",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 70,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Cape Cod Kwassa Kwassa",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Cousins",
+    "artist": "Vampire Weekend",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Horchata",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Holiday",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "The Modern Age",
+    "artist": "The Strokes",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Last Nite",
+    "artist": "The Strokes",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Hard to Explain",
+    "artist": "The Strokes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Someday",
+    "artist": "The Strokes",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Reptilia",
+    "artist": "The Strokes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "12:51",
+    "artist": "The Strokes",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "You Only Live Once",
+    "artist": "The Strokes",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Heart in a Cage",
+    "artist": "The Strokes",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Juicebox",
+    "artist": "The Strokes",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "She Moves in Her Own Way",
+    "artist": "The Kooks",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Naive",
+    "artist": "The Kooks",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Ooh La",
+    "artist": "The Kooks",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Always Where I Need to Be",
+    "artist": "The Kooks",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Junk of the Heart (Happy)",
+    "artist": "The Kooks",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2011,
+    "genre": "indie"
+  },
+  {
+    "title": "The Cave",
+    "artist": "Mumford & Sons",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Little Lion Man",
+    "artist": "Mumford & Sons",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "The Scientist",
+    "artist": "Coldplay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2002,
+    "genre": "indie"
+  },
+  {
+    "title": "In My Place",
+    "artist": "Coldplay",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2002,
+    "genre": "indie"
+  },
+  {
+    "title": "God Put a Smile upon Your Face",
+    "artist": "Coldplay",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2002,
+    "genre": "indie"
+  },
+  {
+    "title": "Fix You",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 65,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "Speed of Sound",
+    "artist": "Coldplay",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "Talk",
+    "artist": "Coldplay",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "Viva la Vida",
+    "artist": "Coldplay",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Violet Hill",
+    "artist": "Coldplay",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Lost!",
+    "artist": "Coldplay",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Strawberry Swing",
+    "artist": "Coldplay",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Obstacle 1",
+    "artist": "Interpol",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2002,
+    "genre": "indie"
+  },
+  {
+    "title": "Slow Hands",
+    "artist": "Interpol",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Evil",
+    "artist": "Interpol",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "C'mere",
+    "artist": "Interpol",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "PDA",
+    "artist": "Interpol",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2002,
+    "genre": "indie"
+  },
+  {
+    "title": "Say It Ain't So",
+    "artist": "Weezer",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1994,
+    "genre": "indie"
+  },
+  {
+    "title": "Island in the Sun",
+    "artist": "Weezer",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Hash Pipe",
+    "artist": "Weezer",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Dope Nose",
+    "artist": "Weezer",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2002,
+    "genre": "indie"
+  },
+  {
+    "title": "Keep Fishin'",
+    "artist": "Weezer",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2002,
+    "genre": "indie"
+  },
+  {
+    "title": "Beverly Hills",
+    "artist": "Weezer",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "Perfect Situation",
+    "artist": "Weezer",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "Pork and Beans",
+    "artist": "Weezer",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "All My Friends",
+    "artist": "LCD Soundsystem",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Someone Great",
+    "artist": "LCD Soundsystem",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Daft Punk Is Playing at My House",
+    "artist": "LCD Soundsystem",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "North American Scum",
+    "artist": "LCD Soundsystem",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Naive Melody (This Must Be the Place)",
+    "artist": "Talking Heads",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1983,
+    "genre": "indie"
+  },
+  {
+    "title": "Two Weeks",
+    "artist": "Grizzly Bear",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "While You Wait for the Others",
+    "artist": "Grizzly Bear",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Sleepyhead",
+    "artist": "Passion Pit",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 70,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Little Secrets",
+    "artist": "Passion Pit",
+    "lo": 50,
+    "hi": 73,
+    "brightness": 71,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "The Reeling",
+    "artist": "Passion Pit",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 70,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "To Kingdom Come",
+    "artist": "Passion Pit",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Walcott",
+    "artist": "Vampire Weekend",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Mansard Roof",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Campus",
+    "artist": "Vampire Weekend",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Bryn",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Boston",
+    "artist": "Augustana",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 65,
+    "year": 2005,
+    "genre": "indie"
+  },
+  {
+    "title": "Sweet Disposition",
+    "artist": "The Temper Trap",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Love Like a Sunset",
+    "artist": "Phoenix",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Lisztomania",
+    "artist": "Phoenix",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "1901",
+    "artist": "Phoenix",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Fences",
+    "artist": "Phoenix",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Armistice",
+    "artist": "Phoenix",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "If You Wanna",
+    "artist": "The Vaccines",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2011,
+    "genre": "indie"
+  },
+  {
+    "title": "Tighten Up",
+    "artist": "The Black Keys",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Howlin' for You",
+    "artist": "The Black Keys",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Gold on the Ceiling",
+    "artist": "The Black Keys",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2011,
+    "genre": "indie"
+  },
+  {
+    "title": "Lonely Boy",
+    "artist": "The Black Keys",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2011,
+    "genre": "indie"
+  },
+  {
+    "title": "Next Girl",
+    "artist": "The Black Keys",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2011,
+    "genre": "indie"
+  },
+  {
+    "title": "Ten Cent Pistol",
+    "artist": "The Black Keys",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Strange Times",
+    "artist": "The Black Keys",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "I Got Mine",
+    "artist": "The Black Keys",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Oceans and Streams",
+    "artist": "The Black Keys",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Your Touch",
+    "artist": "The Black Keys",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Just Got to Be",
+    "artist": "The Black Keys",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Your Algebra",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Kissing the Lipless",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "So Says I",
+    "artist": "The Shins",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "Gone",
+    "artist": "The Shins",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "Saint Simon",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2003,
+    "genre": "indie"
+  },
+  {
+    "title": "Sleeping Lessons",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Pam Berry",
+    "artist": "The Shins",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Sea Legs",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Red Rabbits",
+    "artist": "The Shins",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "A Comet Appears",
+    "artist": "The Shins",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Girl Sailor",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Split Needles",
+    "artist": "The Shins",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Black Wave",
+    "artist": "The Shins",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "A-Punk",
+    "artist": "Vampire Weekend",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 70,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "I Stand Corrected",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "M79",
+    "artist": "Vampire Weekend",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "One (Blake's Got a New Face)",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Walcott",
+    "artist": "Vampire Weekend",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "The Kids Don't Stand a Chance",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "California English",
+    "artist": "Vampire Weekend",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Taxi Cab",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Run",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Giving Up the Gun",
+    "artist": "Vampire Weekend",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "White Sky",
+    "artist": "Vampire Weekend",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Diplomat's Son",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "I Think Ur a Contra",
+    "artist": "Vampire Weekend",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2010,
+    "genre": "indie"
+  }
+]
