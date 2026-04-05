@@ -1,0 +1,194 @@
+[
+  {"title":"Bohemian Rhapsody","artist":"Queen","lo":43,"hi":73,"brightness":66,"year":1975,"genre":"rock"},
+  {"title":"Somebody to Love","artist":"Queen","lo":44,"hi":74,"brightness":68,"year":1976,"genre":"rock"},
+  {"title":"We Will Rock You","artist":"Queen","lo":42,"hi":66,"brightness":63,"year":1977,"genre":"rock"},
+  {"title":"We Are the Champions","artist":"Queen","lo":43,"hi":71,"brightness":65,"year":1977,"genre":"rock"},
+  {"title":"Another One Bites the Dust","artist":"Queen","lo":42,"hi":68,"brightness":62,"year":1980,"genre":"rock"},
+  {"title":"Under Pressure","artist":"Queen & David Bowie","lo":44,"hi":72,"brightness":66,"year":1981,"genre":"rock"},
+  {"title":"Crazy Little Thing Called Love","artist":"Queen","lo":43,"hi":69,"brightness":64,"year":1979,"genre":"rock"},
+  {"title":"Killer Queen","artist":"Queen","lo":45,"hi":73,"brightness":67,"year":1974,"genre":"rock"},
+  {"title":"Don't Stop Me Now","artist":"Queen","lo":46,"hi":74,"brightness":69,"year":1978,"genre":"rock"},
+  {"title":"Radio Ga Ga","artist":"Queen","lo":44,"hi":70,"brightness":65,"year":1984,"genre":"rock"},
+  
+  {"title":"Stairway to Heaven","artist":"Led Zeppelin","lo":43,"hi":73,"brightness":65,"year":1971,"genre":"rock"},
+  {"title":"Whole Lotta Love","artist":"Led Zeppelin","lo":42,"hi":72,"brightness":64,"year":1969,"genre":"rock"},
+  {"title":"Kashmir","artist":"Led Zeppelin","lo":41,"hi":69,"brightness":61,"year":1975,"genre":"rock"},
+  {"title":"Black Dog","artist":"Led Zeppelin","lo":43,"hi":71,"brightness":63,"year":1971,"genre":"rock"},
+  {"title":"Immigrant Song","artist":"Led Zeppelin","lo":46,"hi":76,"brightness":70,"year":1970,"genre":"rock"},
+  {"title":"Rock and Roll","artist":"Led Zeppelin","lo":44,"hi":72,"brightness":66,"year":1971,"genre":"rock"},
+  {"title":"Ramble On","artist":"Led Zeppelin","lo":42,"hi":70,"brightness":62,"year":1969,"genre":"rock"},
+  
+  {"title":"Hotel California","artist":"Eagles","lo":43,"hi":69,"brightness":64,"year":1976,"genre":"rock"},
+  {"title":"Take It Easy","artist":"Eagles","lo":44,"hi":68,"brightness":65,"year":1972,"genre":"rock"},
+  {"title":"Desperado","artist":"Eagles","lo":42,"hi":68,"brightness":61,"year":1973,"genre":"rock"},
+  {"title":"Life in the Fast Lane","artist":"Eagles","lo":43,"hi":67,"brightness":63,"year":1976,"genre":"rock"},
+  {"title":"One of These Nights","artist":"Eagles","lo":45,"hi":71,"brightness":67,"year":1975,"genre":"rock"},
+  {"title":"Lyin' Eyes","artist":"Eagles","lo":44,"hi":68,"brightness":64,"year":1975,"genre":"rock"},
+  {"title":"Witchy Woman","artist":"Eagles","lo":42,"hi":66,"brightness":60,"year":1972,"genre":"rock"},
+  {"title":"Heartache Tonight","artist":"Eagles","lo":43,"hi":69,"brightness":65,"year":1979,"genre":"rock"},
+  
+  {"title":"Dream On","artist":"Aerosmith","lo":43,"hi":73,"brightness":66,"year":1973,"genre":"rock"},
+  {"title":"Sweet Emotion","artist":"Aerosmith","lo":42,"hi":68,"brightness":63,"year":1975,"genre":"rock"},
+  {"title":"Walk This Way","artist":"Aerosmith","lo":44,"hi":70,"brightness":66,"year":1975,"genre":"rock"},
+  {"title":"I Don't Want to Miss a Thing","artist":"Aerosmith","lo":43,"hi":71,"brightness":65,"year":1998,"genre":"rock"},
+  {"title":"Janie's Got a Gun","artist":"Aerosmith","lo":42,"hi":68,"brightness":62,"year":1989,"genre":"rock"},
+  {"title":"Cryin'","artist":"Aerosmith","lo":43,"hi":69,"brightness":64,"year":1993,"genre":"rock"},
+  {"title":"Amazing","artist":"Aerosmith","lo":44,"hi":70,"brightness":65,"year":1993,"genre":"rock"},
+  
+  {"title":"Born to Run","artist":"Bruce Springsteen","lo":43,"hi":69,"brightness":64,"year":1975,"genre":"rock"},
+  {"title":"Thunder Road","artist":"Bruce Springsteen","lo":42,"hi":68,"brightness":63,"year":1975,"genre":"rock"},
+  {"title":"Dancing in the Dark","artist":"Bruce Springsteen","lo":44,"hi":68,"brightness":65,"year":1984,"genre":"rock"},
+  {"title":"Born in the U.S.A.","artist":"Bruce Springsteen","lo":43,"hi":69,"brightness":64,"year":1984,"genre":"rock"},
+  {"title":"Glory Days","artist":"Bruce Springsteen","lo":44,"hi":68,"brightness":65,"year":1984,"genre":"rock"},
+  {"title":"The River","artist":"Bruce Springsteen","lo":42,"hi":68,"brightness":62,"year":1980,"genre":"rock"},
+  {"title":"I'm on Fire","artist":"Bruce Springsteen","lo":41,"hi":65,"brightness":60,"year":1984,"genre":"rock"},
+  
+  {"title":"Comfortably Numb","artist":"Pink Floyd","lo":42,"hi":70,"brightness":62,"year":1979,"genre":"rock"},
+  {"title":"Wish You Were Here","artist":"Pink Floyd","lo":41,"hi":67,"brightness":60,"year":1975,"genre":"rock"},
+  {"title":"Another Brick in the Wall","artist":"Pink Floyd","lo":42,"hi":68,"brightness":62,"year":1979,"genre":"rock"},
+  {"title":"Money","artist":"Pink Floyd","lo":41,"hi":67,"brightness":61,"year":1973,"genre":"rock"},
+  {"title":"Time","artist":"Pink Floyd","lo":42,"hi":69,"brightness":62,"year":1973,"genre":"rock"},
+  {"title":"Shine On You Crazy Diamond","artist":"Pink Floyd","lo":41,"hi":68,"brightness":60,"year":1975,"genre":"rock"},
+  
+  {"title":"Free Bird","artist":"Lynyrd Skynyrd","lo":43,"hi":71,"brightness":64,"year":1973,"genre":"rock"},
+  {"title":"Sweet Home Alabama","artist":"Lynyrd Skynyrd","lo":42,"hi":68,"brightness":63,"year":1974,"genre":"rock"},
+  {"title":"Simple Man","artist":"Lynyrd Skynyrd","lo":41,"hi":67,"brightness":61,"year":1973,"genre":"rock"},
+  {"title":"Gimme Three Steps","artist":"Lynyrd Skynyrd","lo":43,"hi":69,"brightness":64,"year":1973,"genre":"rock"},
+  
+  {"title":"More Than a Feeling","artist":"Boston","lo":45,"hi":73,"brightness":68,"year":1976,"genre":"rock"},
+  {"title":"Peace of Mind","artist":"Boston","lo":44,"hi":72,"brightness":67,"year":1976,"genre":"rock"},
+  {"title":"Foreplay/Long Time","artist":"Boston","lo":43,"hi":71,"brightness":65,"year":1976,"genre":"rock"},
+  {"title":"Don't Look Back","artist":"Boston","lo":45,"hi":73,"brightness":68,"year":1978,"genre":"rock"},
+  
+  {"title":"Carry On Wayward Son","artist":"Kansas","lo":45,"hi":73,"brightness":68,"year":1976,"genre":"rock"},
+  {"title":"Dust in the Wind","artist":"Kansas","lo":43,"hi":69,"brightness":64,"year":1977,"genre":"rock"},
+  {"title":"Point of Know Return","artist":"Kansas","lo":44,"hi":72,"brightness":66,"year":1977,"genre":"rock"},
+  
+  {"title":"Don't Stop Believin'","artist":"Journey","lo":45,"hi":73,"brightness":68,"year":1981,"genre":"rock"},
+  {"title":"Any Way You Want It","artist":"Journey","lo":46,"hi":74,"brightness":69,"year":1980,"genre":"rock"},
+  {"title":"Faithfully","artist":"Journey","lo":44,"hi":72,"brightness":66,"year":1983,"genre":"rock"},
+  {"title":"Open Arms","artist":"Journey","lo":43,"hi":71,"brightness":65,"year":1981,"genre":"rock"},
+  {"title":"Separate Ways","artist":"Journey","lo":46,"hi":74,"brightness":69,"year":1983,"genre":"rock"},
+  {"title":"Lights","artist":"Journey","lo":45,"hi":73,"brightness":68,"year":1978,"genre":"rock"},
+  {"title":"Lovin', Touchin', Squeezin'","artist":"Journey","lo":44,"hi":72,"brightness":67,"year":1979,"genre":"rock"},
+  
+  {"title":"Africa","artist":"Toto","lo":44,"hi":70,"brightness":66,"year":1982,"genre":"rock"},
+  {"title":"Hold the Line","artist":"Toto","lo":45,"hi":71,"brightness":67,"year":1978,"genre":"rock"},
+  {"title":"I Won't Hold You Back","artist":"Toto","lo":43,"hi":69,"brightness":64,"year":1982,"genre":"rock"},
+  
+  {"title":"Every Breath You Take","artist":"The Police","lo":43,"hi":69,"brightness":64,"year":1983,"genre":"rock"},
+  {"title":"Message in a Bottle","artist":"The Police","lo":45,"hi":71,"brightness":67,"year":1979,"genre":"rock"},
+  {"title":"Roxanne","artist":"The Police","lo":42,"hi":68,"brightness":62,"year":1978,"genre":"rock"},
+  {"title":"Don't Stand So Close to Me","artist":"The Police","lo":44,"hi":70,"brightness":65,"year":1980,"genre":"rock"},
+  {"title":"Walking on the Moon","artist":"The Police","lo":43,"hi":69,"brightness":63,"year":1979,"genre":"rock"},
+  {"title":"King of Pain","artist":"The Police","lo":44,"hi":70,"brightness":65,"year":1983,"genre":"rock"},
+  
+  {"title":"Eye of the Tiger","artist":"Survivor","lo":44,"hi":70,"brightness":66,"year":1982,"genre":"rock"},
+  {"title":"The Search Is Over","artist":"Survivor","lo":43,"hi":69,"brightness":64,"year":1984,"genre":"rock"},
+  {"title":"High on You","artist":"Survivor","lo":44,"hi":70,"brightness":65,"year":1984,"genre":"rock"},
+  {"title":"I Can't Hold Back","artist":"Survivor","lo":45,"hi":71,"brightness":67,"year":1984,"genre":"rock"},
+  
+  {"title":"You Give Love a Bad Name","artist":"Bon Jovi","lo":44,"hi":72,"brightness":67,"year":1986,"genre":"rock"},
+  {"title":"Livin' on a Prayer","artist":"Bon Jovi","lo":45,"hi":73,"brightness":68,"year":1986,"genre":"rock"},
+  {"title":"Wanted Dead or Alive","artist":"Bon Jovi","lo":43,"hi":69,"brightness":64,"year":1986,"genre":"rock"},
+  {"title":"Bed of Roses","artist":"Bon Jovi","lo":42,"hi":70,"brightness":63,"year":1992,"genre":"rock"},
+  {"title":"Always","artist":"Bon Jovi","lo":43,"hi":71,"brightness":65,"year":1994,"genre":"rock"},
+  {"title":"It's My Life","artist":"Bon Jovi","lo":44,"hi":70,"brightness":66,"year":2000,"genre":"rock"},
+  {"title":"Runaway","artist":"Bon Jovi","lo":45,"hi":73,"brightness":68,"year":1983,"genre":"rock"},
+  
+  {"title":"Every Rose Has Its Thorn","artist":"Poison","lo":43,"hi":69,"brightness":64,"year":1988,"genre":"rock"},
+  {"title":"Nothing but a Good Time","artist":"Poison","lo":44,"hi":70,"brightness":66,"year":1988,"genre":"rock"},
+  {"title":"Talk Dirty to Me","artist":"Poison","lo":45,"hi":71,"brightness":67,"year":1986,"genre":"rock"},
+  {"title":"Unskinny Bop","artist":"Poison","lo":44,"hi":70,"brightness":66,"year":1990,"genre":"rock"},
+  
+  {"title":"Home Sweet Home","artist":"Mötley Crüe","lo":43,"hi":71,"brightness":64,"year":1985,"genre":"rock"},
+  {"title":"Dr. Feelgood","artist":"Mötley Crüe","lo":44,"hi":70,"brightness":66,"year":1989,"genre":"rock"},
+  {"title":"Kickstart My Heart","artist":"Mötley Crüe","lo":45,"hi":71,"brightness":67,"year":1989,"genre":"rock"},
+  {"title":"Girls, Girls, Girls","artist":"Mötley Crüe","lo":44,"hi":70,"brightness":65,"year":1987,"genre":"rock"},
+  
+  {"title":"Round and Round","artist":"Ratt","lo":44,"hi":72,"brightness":67,"year":1984,"genre":"rock"},
+  {"title":"Lay It Down","artist":"Ratt","lo":43,"hi":69,"brightness":64,"year":1985,"genre":"rock"},
+  
+  {"title":"Still of the Night","artist":"Whitesnake","lo":43,"hi":73,"brightness":66,"year":1987,"genre":"rock"},
+  {"title":"Here I Go Again","artist":"Whitesnake","lo":44,"hi":72,"brightness":67,"year":1987,"genre":"rock"},
+  {"title":"Is This Love","artist":"Whitesnake","lo":43,"hi":71,"brightness":65,"year":1987,"genre":"rock"},
+  
+  {"title":"Jump","artist":"Van Halen","lo":45,"hi":73,"brightness":68,"year":1984,"genre":"rock"},
+  {"title":"Panama","artist":"Van Halen","lo":44,"hi":72,"brightness":67,"year":1984,"genre":"rock"},
+  {"title":"Runnin' with the Devil","artist":"Van Halen","lo":43,"hi":71,"brightness":65,"year":1978,"genre":"rock"},
+  {"title":"Ain't Talkin' 'Bout Love","artist":"Van Halen","lo":42,"hi":68,"brightness":63,"year":1978,"genre":"rock"},
+  {"title":"Hot for Teacher","artist":"Van Halen","lo":44,"hi":72,"brightness":67,"year":1984,"genre":"rock"},
+  {"title":"Eruption","artist":"Van Halen","lo":0,"hi":0,"brightness":50,"year":1978,"genre":"rock"},
+  
+  {"title":"Tom Sawyer","artist":"Rush","lo":45,"hi":75,"brightness":69,"year":1981,"genre":"rock"},
+  {"title":"Limelight","artist":"Rush","lo":46,"hi":74,"brightness":68,"year":1981,"genre":"rock"},
+  {"title":"The Spirit of Radio","artist":"Rush","lo":45,"hi":73,"brightness":68,"year":1980,"genre":"rock"},
+  {"title":"Closer to the Heart","artist":"Rush","lo":44,"hi":72,"brightness":66,"year":1977,"genre":"rock"},
+  {"title":"Fly by Night","artist":"Rush","lo":45,"hi":73,"brightness":67,"year":1975,"genre":"rock"},
+  
+  {"title":"La Grange","artist":"ZZ Top","lo":41,"hi":67,"brightness":61,"year":1973,"genre":"rock"},
+  {"title":"Sharp Dressed Man","artist":"ZZ Top","lo":42,"hi":68,"brightness":62,"year":1983,"genre":"rock"},
+  {"title":"Gimme All Your Lovin'","artist":"ZZ Top","lo":43,"hi":69,"brightness":64,"year":1983,"genre":"rock"},
+  {"title":"Legs","artist":"ZZ Top","lo":42,"hi":68,"brightness":63,"year":1983,"genre":"rock"},
+  {"title":"Tush","artist":"ZZ Top","lo":41,"hi":67,"brightness":61,"year":1975,"genre":"rock"},
+  
+  {"title":"Blue Öyster Cult - (Don't Fear) The Reaper","artist":"Blue Öyster Cult","lo":42,"hi":68,"brightness":62,"year":1976,"genre":"rock"},
+  {"title":"Burnin' for You","artist":"Blue Öyster Cult","lo":43,"hi":69,"brightness":64,"year":1981,"genre":"rock"},
+  {"title":"Godzilla","artist":"Blue Öyster Cult","lo":42,"hi":68,"brightness":63,"year":1977,"genre":"rock"},
+  
+  {"title":"Smoke on the Water","artist":"Deep Purple","lo":42,"hi":70,"brightness":63,"year":1972,"genre":"rock"},
+  {"title":"Highway Star","artist":"Deep Purple","lo":44,"hi":72,"brightness":67,"year":1972,"genre":"rock"},
+  {"title":"Hush","artist":"Deep Purple","lo":43,"hi":69,"brightness":64,"year":1968,"genre":"rock"},
+  
+  {"title":"Smoke on the Water","artist":"Deep Purple","lo":42,"hi":70,"brightness":63,"year":1972,"genre":"rock"},
+  {"title":"Fortunate Son","artist":"Creedence Clearwater Revival","lo":43,"hi":67,"brightness":63,"year":1969,"genre":"rock"},
+  {"title":"Bad Moon Rising","artist":"Creedence Clearwater Revival","lo":42,"hi":66,"brightness":62,"year":1969,"genre":"rock"},
+  {"title":"Have You Ever Seen the Rain","artist":"Creedence Clearwater Revival","lo":43,"hi":67,"brightness":63,"year":1970,"genre":"rock"},
+  {"title":"Proud Mary","artist":"Creedence Clearwater Revival","lo":42,"hi":68,"brightness":62,"year":1969,"genre":"rock"},
+  {"title":"Down on the Corner","artist":"Creedence Clearwater Revival","lo":43,"hi":67,"brightness":63,"year":1969,"genre":"rock"},
+  {"title":"Lookin' Out My Back Door","artist":"Creedence Clearwater Revival","lo":42,"hi":66,"brightness":62,"year":1970,"genre":"rock"},
+  
+  {"title":"White Room","artist":"Cream","lo":43,"hi":71,"brightness":64,"year":1968,"genre":"rock"},
+  {"title":"Sunshine of Your Love","artist":"Cream","lo":42,"hi":68,"brightness":62,"year":1967,"genre":"rock"},
+  {"title":"Crossroads","artist":"Cream","lo":43,"hi":69,"brightness":64,"year":1968,"genre":"rock"},
+  
+  {"title":"All Along the Watchtower","artist":"Jimi Hendrix","lo":42,"hi":68,"brightness":62,"year":1968,"genre":"rock"},
+  {"title":"Purple Haze","artist":"Jimi Hendrix","lo":43,"hi":69,"brightness":64,"year":1967,"genre":"rock"},
+  {"title":"Foxy Lady","artist":"Jimi Hendrix","lo":42,"hi":68,"brightness":63,"year":1967,"genre":"rock"},
+  {"title":"Little Wing","artist":"Jimi Hendrix","lo":41,"hi":67,"brightness":61,"year":1967,"genre":"rock"},
+  {"title":"Voodoo Child (Slight Return)","artist":"Jimi Hendrix","lo":42,"hi":68,"brightness":62,"year":1968,"genre":"rock"},
+  
+  {"title":"Layla","artist":"Derek and the Dominos","lo":43,"hi":71,"brightness":65,"year":1970,"genre":"rock"},
+  {"title":"Wonderful Tonight","artist":"Eric Clapton","lo":42,"hi":68,"brightness":62,"year":1977,"genre":"rock"},
+  {"title":"Tears in Heaven","artist":"Eric Clapton","lo":43,"hi":69,"brightness":63,"year":1992,"genre":"rock"},
+  {"title":"Change the World","artist":"Eric Clapton","lo":42,"hi":68,"brightness":62,"year":1996,"genre":"rock"},
+  
+  {"title":"Light My Fire","artist":"The Doors","lo":42,"hi":70,"brightness":63,"year":1967,"genre":"rock"},
+  {"title":"Riders on the Storm","artist":"The Doors","lo":41,"hi":67,"brightness":60,"year":1971,"genre":"rock"},
+  {"title":"People Are Strange","artist":"The Doors","lo":42,"hi":68,"brightness":62,"year":1967,"genre":"rock"},
+  {"title":"Break On Through","artist":"The Doors","lo":43,"hi":69,"brightness":64,"year":1967,"genre":"rock"},
+  {"title":"Love Her Madly","artist":"The Doors","lo":42,"hi":68,"brightness":63,"year":1971,"genre":"rock"},
+  
+  {"title":"White Rabbit","artist":"Jefferson Airplane","lo":51,"hi":75,"brightness":68,"year":1967,"genre":"rock"},
+  {"title":"Somebody to Love","artist":"Jefferson Airplane","lo":52,"hi":76,"brightness":69,"year":1967,"genre":"rock"},
+  
+  {"title":"All Right Now","artist":"Free","lo":43,"hi":71,"brightness":65,"year":1970,"genre":"rock"},
+  {"title":"Fire and Water","artist":"Free","lo":42,"hi":68,"brightness":62,"year":1970,"genre":"rock"},
+  
+  {"title":"25 or 6 to 4","artist":"Chicago","lo":44,"hi":72,"brightness":67,"year":1970,"genre":"rock"},
+  {"title":"Saturday in the Park","artist":"Chicago","lo":43,"hi":69,"brightness":64,"year":1972,"genre":"rock"},
+  {"title":"If You Leave Me Now","artist":"Chicago","lo":42,"hi":68,"brightness":62,"year":1976,"genre":"rock"},
+  {"title":"Hard to Say I'm Sorry","artist":"Chicago","lo":44,"hi":70,"brightness":65,"year":1982,"genre":"rock"},
+  {"title":"You're the Inspiration","artist":"Chicago","lo":43,"hi":71,"brightness":64,"year":1984,"genre":"rock"},
+  
+  {"title":"Vehicle","artist":"The Ides of March","lo":43,"hi":69,"brightness":65,"year":1970,"genre":"rock"},
+  
+  {"title":"Green-Eyed Lady","artist":"Sugarloaf","lo":42,"hi":68,"brightness":63,"year":1970,"genre":"rock"},
+  
+  {"title":"Spirit in the Sky","artist":"Norman Greenbaum","lo":43,"hi":69,"brightness":64,"year":1969,"genre":"rock"},
+  
+  {"title":"In-A-Gadda-Da-Vida","artist":"Iron Butterfly","lo":42,"hi":68,"brightness":62,"year":1968,"genre":"rock"},
+  
+  {"title":"Born to Be Wild","artist":"Steppenwolf","lo":43,"hi":69,"brightness":64,"year":1968,"genre":"rock"},
+  {"title":"Magic Carpet Ride","artist":"Steppenwolf","lo":42,"hi":68,"brightness":63,"year":1968,"genre":"rock"}
+]

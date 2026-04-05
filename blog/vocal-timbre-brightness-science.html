@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Understanding Vocal Timbre: The Science Behind HumMatch's Brightness Score | HumMatch</title>
+  <meta name="description" content="Why two singers with the same range sound different—and how HumMatch uses spectral analysis to measure vocal brightness and timbre scientifically."/>
+  <meta name="keywords" content="vocal timbre, brightness score, spectral centroid, voice analysis, vocal range, karaoke matching, harmony compatibility"/>
+  <link rel="icon" href="/hummatch-icon-bug-2x.png" type="image/png"/>
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Understanding Vocal Timbre: The Science Behind HumMatch"/>
+  <meta property="og:description" content="How HumMatch measures vocal brightness using spectral analysis—and why it matters for finding songs that match YOUR voice."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://hummatch.me/blog/vocal-timbre-brightness-science"/>
+  
+  <!-- Schema.org Article Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Understanding Vocal Timbre: The Science Behind HumMatch's Brightness Score",
+    "description": "Why two singers with the same range sound different—and how HumMatch uses spectral analysis to measure vocal brightness scientifically.",
+    "author": {
+      "@type": "Organization",
+      "name": "HumMatch"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "HumMatch",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hummatch.me/hummatch-icon-bug-2x.png"
+      }
+    },
+    "datePublished": "2026-04-05",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://hummatch.me/blog/vocal-timbre-brightness-science"
+    }
+  }
+  </script>
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0b1a;
+      --white: #e2e0f0;
+      --text-muted: rgba(255,255,255,0.65);
+      --purple: #A855F7;
+      --pink: #EC4899;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+    }
+    
+    header {
+      background: rgba(8,6,15,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(168,85,247,0.12);
+      padding: 18px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+    
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+    
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin: 48px 0 20px;
+      color: var(--white);
+    }
+    
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 32px 0 16px;
+      color: rgba(168,85,247,0.9);
+    }
+    
+    p {
+      margin-bottom: 20px;
+      color: var(--text-muted);
+    }
+    
+    ul, ol {
+      margin: 20px 0 20px 24px;
+      color: var(--text-muted);
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    th {
+      background: rgba(168,85,247,0.1);
+      color: var(--white);
+      font-weight: 700;
+    }
+    
+    td {
+      color: var(--text-muted);
+    }
+    
+    .cta-box {
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.1));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 40px 0;
+      text-align: center;
+    }
+    
+    .cta-box h3 {
+      margin-top: 0;
+      color: var(--white);
+    }
+    
+    .cta-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      margin-top: 16px;
+      transition: opacity 0.2s;
+    }
+    
+    .cta-btn:hover {
+      opacity: 0.9;
+    }
+    
+    .highlight-box {
+      background: rgba(168,85,247,0.08);
+      border-left: 3px solid #A855F7;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 8px;
+    }
+    
+    code {
+      background: rgba(255,255,255,0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      color: #EC4899;
+    }
+    
+    pre {
+      background: rgba(0,0,0,0.3);
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 24px 0;
+      border: 1px solid rgba(168,85,247,0.2);
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    
+    footer a {
+      color: rgba(168,85,247,0.7);
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      color: var(--purple);
+    }
+    
+    @media (max-width: 768px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.3rem; }
+      article { padding: 40px 20px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="header-logo">HumMatch</a>
+</header>
+
+<article>
+  <h1>Understanding Vocal Timbre: The Science Behind HumMatch's Brightness Score</h1>
+  <p class="subtitle">Why two singers with the same range can sound completely different—and how HumMatch measures it.</p>
+  
+  <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:40px 0;">
+  
+  <h2>What Is Vocal Timbre?</h2>
+  <p>You've heard it before: two singers hit the exact same note, but one sounds bright and piercing while the other sounds warm and velvety. That difference isn't pitch—it's <strong>timbre</strong>, the unique "color" or "texture" of a voice.</p>
+  
+  <p>In classical vocal pedagogy, timbre is described subjectively:</p>
+  <ul>
+    <li><strong>Soprano:</strong> Bright, clear, crystalline</li>
+    <li><strong>Mezzo-Soprano:</strong> Warm, rich, full-bodied</li>
+    <li><strong>Contralto:</strong> Deep, mellow, chocolate-like</li>
+    <li><strong>Tenor:</strong> Bright, ringing, penetrating</li>
+    <li><strong>Baritone:</strong> Rich, versatile, robust</li>
+    <li><strong>Bass:</strong> Deep, resonant, authoritative</li>
+  </ul>
+  
+  <p>But <strong>HumMatch takes it further—we measure it scientifically.</strong></p>
+  
+  <h2>The Science: Spectral Centroid</h2>
+  <p>When you sing a note, you're not just producing one frequency—you're creating a complex wave made up of:</p>
+  <ol>
+    <li><strong>The fundamental frequency</strong> (the note you hear: "Middle C")</li>
+    <li><strong>Harmonic overtones</strong> (higher frequencies that add character)</li>
+  </ol>
+  
+  <p><strong>Spectral centroid</strong> measures where the "center of mass" of those frequencies sits:</p>
+  <ul>
+    <li><strong>Higher spectral centroid</strong> = More upper harmonics = <strong>Brighter voice</strong></li>
+    <li><strong>Lower spectral centroid</strong> = More bass frequencies = <strong>Darker voice</strong></li>
+  </ul>
+  
+  <div class="highlight-box">
+    <p><strong>Think of it like this:</strong></p>
+    <ul style="margin-bottom:0;">
+      <li><strong>Bright voice</strong> (Ariana Grande, Freddie Mercury): Lots of "sparkle" in the upper frequencies</li>
+      <li><strong>Dark voice</strong> (Barry White, Johnny Cash): More "weight" in the lower frequencies</li>
+    </ul>
+  </div>
+  
+  <h2>HumMatch's 0-100 Brightness Scale</h2>
+  <p>We convert the raw spectral centroid measurement into a simple, intuitive scale:</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Score</th>
+        <th>Description</th>
+        <th>Example Artists</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>0-30</strong></td>
+        <td>Very Dark</td>
+        <td>Barry White, Leonard Cohen, Cher</td>
+      </tr>
+      <tr>
+        <td><strong>31-50</strong></td>
+        <td>Dark-Medium</td>
+        <td>Johnny Cash, Elvis Presley, Adele</td>
+      </tr>
+      <tr>
+        <td><strong>51-70</strong></td>
+        <td>Medium-Bright</td>
+        <td>Frank Sinatra, Michael Bublé, Beyoncé</td>
+      </tr>
+      <tr>
+        <td><strong>71-100</strong></td>
+        <td>Very Bright</td>
+        <td>Freddie Mercury, Adam Levine, Ariana Grande</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <p>Your brightness score is calculated <strong>during your hum</strong>—HumMatch's algorithm analyzes your voice's harmonic profile in real-time using the same technology used in professional audio engineering software.</p>
+  
+  <h2>Why Timbre Matching Matters for Karaoke</h2>
+  
+  <h3>Problem: Range alone doesn't predict a good match.</h3>
+  <p>You might have the same vocal range as Freddie Mercury (Bass-Baritone, F2-F4), but if your voice is naturally dark and warm like Johnny Cash, singing "Bohemian Rhapsody" will sound off—it needs a <strong>bright, cutting tone</strong> to work.</p>
+  
+  <h3>Solution: HumMatch matches both range AND brightness.</h3>
+  <p>When you hum, we measure:</p>
+  <ol>
+    <li>✅ <strong>Your vocal range</strong> (F2 to C#4 = Bass-Baritone)</li>
+    <li>✅ <strong>Your brightness score</strong> (42/100 = Dark, warm voice)</li>
+  </ol>
+  
+  <p>Then we find songs that match BOTH:</p>
+  <ul>
+    <li>✅ Fit your range (you can hit the notes)</li>
+    <li>✅ Match your timbre (you'll sound GOOD singing them)</li>
+  </ul>
+  
+  <div class="highlight-box">
+    <p><strong>Result:</strong> Instead of generic "baritone songs," you get:</p>
+    <ul style="margin-bottom:0;">
+      <li><strong>For dark voices:</strong> Johnny Cash, Barry White, Leonard Cohen</li>
+      <li><strong>For bright voices:</strong> Elvis (early rock), Frank Sinatra (upbeat swing)</li>
+    </ul>
+  </div>
+  
+  <h2>SquadMatch: Harmony Is About Blending Timbres</h2>
+  <p>Here's where it gets even cooler—<strong>SquadMatch</strong> uses timbre compatibility to build better vocal groups.</p>
+  
+  <h3>The Harmony Problem:</h3>
+  <p>Four people with different ranges CAN sing together... but if their timbres clash, it sounds messy:</p>
+  <ul>
+    <li><strong>Sarah:</strong> Soprano, brightness 85 (very bright, piercing)</li>
+    <li><strong>Mike:</strong> Tenor, brightness 45 (dark, mellow)</li>
+    <li><strong>Result:</strong> Sarah's voice will DOMINATE, Mike will sound muddy</li>
+  </ul>
+  
+  <h3>The HumMatch Solution:</h3>
+  <p>We analyze the <strong>average brightness</strong> of your squad and prioritize songs where:</p>
+  <ol>
+    <li>✅ All ranges are covered (soprano + alto + tenor + bass)</li>
+    <li>✅ Timbres blend naturally (similar brightness scores)</li>
+    <li>✅ Harmony parts exist (tagged songs with SATB arrangements)</li>
+  </ol>
+  
+  <div class="cta-box">
+    <h3>Try It Yourself</h3>
+    <p>Ready to discover your vocal brightness?</p>
+    <a href="/" class="cta-btn">Hum Now at HumMatch →</a>
+    <p style="margin-top:16px;font-size:0.9rem;color:rgba(255,255,255,0.5);">No signup required. No downloads. Just hum and discover.</p>
+  </div>
+  
+  <h2>The Science Behind the Magic</h2>
+  <p><strong>How HumMatch Measures Timbre:</strong></p>
+  <ol>
+    <li><strong>FFT Analysis</strong> (Fast Fourier Transform) → Breaks voice into frequency components</li>
+    <li><strong>Spectral Centroid Calculation</strong> → Finds the "center of mass" of frequencies</li>
+    <li><strong>Normalization</strong> → Converts raw Hz measurement to 0-100 scale</li>
+    <li><strong>Real-Time Processing</strong> → All analysis happens during your 3-second hum</li>
+  </ol>
+  
+  <h3>References:</h3>
+  <ul>
+    <li>McAdams, S. (2019). <em>The Perceptual Representation of Timbre</em>. McGill University</li>
+    <li>Pfitzner, K. (2025). <em>Voice Type Test: Understanding Your Vocal Identity</em></li>
+    <li>Grey, J. M. (1977). <em>Multidimensional perceptual scaling of musical timbres</em>. Journal of the Acoustical Society of America</li>
+  </ul>
+  
+  <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:48px 0 40px;">
+  
+  <div class="cta-box">
+    <h3>Ready to discover your voice?</h3>
+    <p><strong>HumMatch isn't just a karaoke app—it's the world's first vocal analysis platform designed for everyone.</strong></p>
+    <p>Whether you're a shower singer, karaoke enthusiast, choir director, or band leader—we measure what matters: <strong>Range + Timbre + Compatibility.</strong></p>
+    <a href="/" class="cta-btn">Start Humming →</a>
+  </div>
+  
+</article>
+
+<footer>
+  <p>&copy; 2026 HumMatch &middot; Built with science, designed for singers.</p>
+  <p style="margin-top:12px;">
+    <a href="/">Try HumMatch</a> &middot; 
+    <a href="/squadmatch">SquadMatch</a> &middot; 
+    <a href="/blog">Blog</a> &middot; 
+    <a href="/contact">Contact</a> &middot; 
+    <a href="/privacy">Privacy</a> &middot; 
+    <a href="/terms">Terms</a>
+  </p>
+</footer>
+
+</body>
+</html>
