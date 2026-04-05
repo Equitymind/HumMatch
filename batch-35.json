@@ -1,0 +1,1802 @@
+[
+  {
+    "title": "Clocks",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "The Scientist",
+    "artist": "Coldplay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "In My Place",
+    "artist": "Coldplay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "God Put a Smile upon Your Face",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "Speed of Sound",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "Fix You",
+    "artist": "Coldplay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "Talk",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "Viva la Vida",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Violet Hill",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Lost!",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Lovers in Japan",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Paradise",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2011,
+    "genre": "rock"
+  },
+  {
+    "title": "Every Teardrop Is a Waterfall",
+    "artist": "Coldplay",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2011,
+    "genre": "rock"
+  },
+  {
+    "title": "Charlie Brown",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2011,
+    "genre": "rock"
+  },
+  {
+    "title": "Princess of China",
+    "artist": "Coldplay ft. Rihanna",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2011,
+    "genre": "pop"
+  },
+  {
+    "title": "A Sky Full of Stars",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2014,
+    "genre": "pop"
+  },
+  {
+    "title": "Magic",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2014,
+    "genre": "rock"
+  },
+  {
+    "title": "Ink",
+    "artist": "Coldplay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2014,
+    "genre": "rock"
+  },
+  {
+    "title": "Adventure of a Lifetime",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2015,
+    "genre": "pop"
+  },
+  {
+    "title": "Hymn for the Weekend",
+    "artist": "Coldplay",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2016,
+    "genre": "pop"
+  },
+  {
+    "title": "Mr. Brightside",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "Somebody Told Me",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "All These Things That I've Done",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "Smile Like You Mean It",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "When You Were Young",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Read My Mind",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "For Reasons Unknown",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Bones",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Human",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Spaceman",
+    "artist": "The Killers",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 70,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "A Dustland Fairytale",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "The World We Live In",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Runaways",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2012,
+    "genre": "rock"
+  },
+  {
+    "title": "Miss Atomic Bomb",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2012,
+    "genre": "rock"
+  },
+  {
+    "title": "The Way It Was",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2012,
+    "genre": "rock"
+  },
+  {
+    "title": "Shot at the Night",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2013,
+    "genre": "rock"
+  },
+  {
+    "title": "The Man",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2017,
+    "genre": "rock"
+  },
+  {
+    "title": "Run for Cover",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2017,
+    "genre": "rock"
+  },
+  {
+    "title": "Caution",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2020,
+    "genre": "rock"
+  },
+  {
+    "title": "My Own Soul's Warning",
+    "artist": "The Killers",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2020,
+    "genre": "rock"
+  },
+  {
+    "title": "I Bet You Look Good on the Dancefloor",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "When the Sun Goes Down",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Fluorescent Adolescent",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "Brianstorm",
+    "artist": "Arctic Monkeys",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 71,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "505",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "Crying Lightning",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Cornerstone",
+    "artist": "Arctic Monkeys",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "R U Mine?",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2012,
+    "genre": "rock"
+  },
+  {
+    "title": "Do I Wanna Know?",
+    "artist": "Arctic Monkeys",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2013,
+    "genre": "rock"
+  },
+  {
+    "title": "Why'd You Only Call Me When You're High?",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2013,
+    "genre": "rock"
+  },
+  {
+    "title": "Arabella",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2013,
+    "genre": "rock"
+  },
+  {
+    "title": "Snap Out of It",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2013,
+    "genre": "rock"
+  },
+  {
+    "title": "Four Out of Five",
+    "artist": "Arctic Monkeys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2018,
+    "genre": "rock"
+  },
+  {
+    "title": "Tranquility Base Hotel & Casino",
+    "artist": "Arctic Monkeys",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2018,
+    "genre": "rock"
+  },
+  {
+    "title": "Last Nite",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "rock"
+  },
+  {
+    "title": "Someday",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2001,
+    "genre": "rock"
+  },
+  {
+    "title": "Hard to Explain",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2001,
+    "genre": "rock"
+  },
+  {
+    "title": "The Modern Age",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2001,
+    "genre": "rock"
+  },
+  {
+    "title": "Reptilia",
+    "artist": "The Strokes",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 70,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "12:51",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "The End Has No End",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Juicebox",
+    "artist": "The Strokes",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 71,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Heart in a Cage",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "You Only Live Once",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Razorblade",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Under Cover of Darkness",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2011,
+    "genre": "rock"
+  },
+  {
+    "title": "Taken for a Fool",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2011,
+    "genre": "rock"
+  },
+  {
+    "title": "The Adults Are Talking",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2020,
+    "genre": "rock"
+  },
+  {
+    "title": "Bad Decisions",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2020,
+    "genre": "rock"
+  },
+  {
+    "title": "Maps",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Date with the Night",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 71,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Y Control",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Gold Lion",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Heads Will Roll",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 71,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Zero",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Sacrilege",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 2013,
+    "genre": "rock"
+  },
+  {
+    "title": "Wake Up",
+    "artist": "Arcade Fire",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Rebellion (Lies)",
+    "artist": "Arcade Fire",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Neighborhood #1 (Tunnels)",
+    "artist": "Arcade Fire",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Keep the Car Running",
+    "artist": "Arcade Fire",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "No Cars Go",
+    "artist": "Arcade Fire",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Intervention",
+    "artist": "Arcade Fire",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "The Suburbs",
+    "artist": "Arcade Fire",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Ready to Start",
+    "artist": "Arcade Fire",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "We Used to Wait",
+    "artist": "Arcade Fire",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Sprawl II (Mountains Beyond Mountains)",
+    "artist": "Arcade Fire",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 2010,
+    "genre": "indie"
+  },
+  {
+    "title": "Reflektor",
+    "artist": "Arcade Fire",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2013,
+    "genre": "indie"
+  },
+  {
+    "title": "Afterlife",
+    "artist": "Arcade Fire",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2013,
+    "genre": "indie"
+  },
+  {
+    "title": "Float On",
+    "artist": "Modest Mouse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Ocean Breathes Salty",
+    "artist": "Modest Mouse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 2004,
+    "genre": "indie"
+  },
+  {
+    "title": "Dashboard",
+    "artist": "Modest Mouse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "We've Got Everything",
+    "artist": "Modest Mouse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Missed the Boat",
+    "artist": "Modest Mouse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Take Me Out",
+    "artist": "Franz Ferdinand",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "This Fire",
+    "artist": "Franz Ferdinand",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "The Dark of the Matinée",
+    "artist": "Franz Ferdinand",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "Do You Want To",
+    "artist": "Franz Ferdinand",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "Walk Away",
+    "artist": "Franz Ferdinand",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "No You Girls",
+    "artist": "Franz Ferdinand",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Ulysses",
+    "artist": "Franz Ferdinand",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Seven Nation Army",
+    "artist": "The White Stripes",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 68,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Fell in Love with a Girl",
+    "artist": "The White Stripes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2001,
+    "genre": "rock"
+  },
+  {
+    "title": "Hotel Yorba",
+    "artist": "The White Stripes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2001,
+    "genre": "rock"
+  },
+  {
+    "title": "The Hardest Button to Button",
+    "artist": "The White Stripes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "My Doorbell",
+    "artist": "The White Stripes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "Icky Thump",
+    "artist": "The White Stripes",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 71,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "You Don't Know What Love Is (You Just Do as You're Told)",
+    "artist": "The White Stripes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "Time to Pretend",
+    "artist": "MGMT",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Electric Feel",
+    "artist": "MGMT",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Kids",
+    "artist": "MGMT",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Weekend Wars",
+    "artist": "MGMT",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Someday",
+    "artist": "The Strokes",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2001,
+    "genre": "rock"
+  },
+  {
+    "title": "Use Somebody",
+    "artist": "Kings of Leon",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Sex on Fire",
+    "artist": "Kings of Leon",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 70,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Knocked Up",
+    "artist": "Kings of Leon",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "On Call",
+    "artist": "Kings of Leon",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "Notion",
+    "artist": "Kings of Leon",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Pyro",
+    "artist": "Kings of Leon",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 70,
+    "year": 2010,
+    "genre": "rock"
+  },
+  {
+    "title": "Radioactive",
+    "artist": "Kings of Leon",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2010,
+    "genre": "rock"
+  },
+  {
+    "title": "The Immortals",
+    "artist": "Kings of Leon",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2010,
+    "genre": "rock"
+  },
+  {
+    "title": "Supersoaker",
+    "artist": "Kings of Leon",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2013,
+    "genre": "rock"
+  },
+  {
+    "title": "Wait for Me",
+    "artist": "Kings of Leon",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2013,
+    "genre": "rock"
+  },
+  {
+    "title": "1901",
+    "artist": "Phoenix",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Lisztomania",
+    "artist": "Phoenix",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Lasso",
+    "artist": "Phoenix",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Trying to Be Cool",
+    "artist": "Phoenix",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2013,
+    "genre": "indie"
+  },
+  {
+    "title": "Entertainment",
+    "artist": "Phoenix",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2013,
+    "genre": "indie"
+  },
+  {
+    "title": "Cochise",
+    "artist": "Audioslave",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "Like a Stone",
+    "artist": "Audioslave",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "Show Me How to Live",
+    "artist": "Audioslave",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "Gasoline",
+    "artist": "Audioslave",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "Be Yourself",
+    "artist": "Audioslave",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "Doesn't Remind Me",
+    "artist": "Audioslave",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2005,
+    "genre": "rock"
+  },
+  {
+    "title": "Revelations",
+    "artist": "Audioslave",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Are You Gonna Be My Girl",
+    "artist": "Jet",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Rollover DJ",
+    "artist": "Jet",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 71,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Cold Hard Bitch",
+    "artist": "Jet",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Look What You've Done",
+    "artist": "Jet",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Put Your Money Where Your Mouth Is",
+    "artist": "Jet",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Rip It Up",
+    "artist": "Jet",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 71,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Caring Is Creepy",
+    "artist": "The Shins",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "New Slang",
+    "artist": "The Shins",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2001,
+    "genre": "indie"
+  },
+  {
+    "title": "Phantom Limb",
+    "artist": "The Shins",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Australia",
+    "artist": "The Shins",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "indie"
+  },
+  {
+    "title": "Simple Song",
+    "artist": "The Shins",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2012,
+    "genre": "indie"
+  },
+  {
+    "title": "Hysteric",
+    "artist": "The Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 71,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Man",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Rich",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 2003,
+    "genre": "rock"
+  },
+  {
+    "title": "Phenomena",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Cheated Hearts",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Turn Into",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Skeletons",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Runaway",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Despair",
+    "artist": "Yeah Yeah Yeahs",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 2013,
+    "genre": "rock"
+  },
+  {
+    "title": "Banquet",
+    "artist": "Bloc Party",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "Helicopter",
+    "artist": "Bloc Party",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 71,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "Positive Tension",
+    "artist": "Bloc Party",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "So Here We Are",
+    "artist": "Bloc Party",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "This Modern Love",
+    "artist": "Bloc Party",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "The Prayer",
+    "artist": "Bloc Party",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 70,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "Hunting for Witches",
+    "artist": "Bloc Party",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 71,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "Naïve",
+    "artist": "The Kooks",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "She Moves in Her Own Way",
+    "artist": "The Kooks",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Ooh La",
+    "artist": "The Kooks",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "indie"
+  },
+  {
+    "title": "Always Where I Need to Be",
+    "artist": "The Kooks",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Shine On",
+    "artist": "The Kooks",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Chelsea Dagger",
+    "artist": "The Fratellis",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Flathead",
+    "artist": "The Fratellis",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Henrietta",
+    "artist": "The Fratellis",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2007,
+    "genre": "rock"
+  },
+  {
+    "title": "Whistle for the Choir",
+    "artist": "The Fratellis",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Starlight",
+    "artist": "Muse",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Supermassive Black Hole",
+    "artist": "Muse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Knights of Cydonia",
+    "artist": "Muse",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 71,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Map of the Problematique",
+    "artist": "Muse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Uprising",
+    "artist": "Muse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Resistance",
+    "artist": "Muse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Undisclosed Desires",
+    "artist": "Muse",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "Madness",
+    "artist": "Muse",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2012,
+    "genre": "rock"
+  },
+  {
+    "title": "Panic Station",
+    "artist": "Muse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2012,
+    "genre": "rock"
+  },
+  {
+    "title": "Follow Me",
+    "artist": "Muse",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2012,
+    "genre": "rock"
+  },
+  {
+    "title": "Complicate",
+    "artist": "Interpol",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 67,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "Obstacle 1",
+    "artist": "Interpol",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "PDA",
+    "artist": "Interpol",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2002,
+    "genre": "rock"
+  },
+  {
+    "title": "Evil",
+    "artist": "Interpol",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "C mere",
+    "artist": "Interpol",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "Slow Hands",
+    "artist": "Interpol",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "Vertigo",
+    "artist": "U2",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "City of Blinding Lights",
+    "artist": "U2",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "Sometimes You Can't Make It on Your Own",
+    "artist": "U2",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 2004,
+    "genre": "rock"
+  },
+  {
+    "title": "Get On Your Boots",
+    "artist": "U2",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "rock"
+  },
+  {
+    "title": "In the Sun",
+    "artist": "Joseph Arthur",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2000,
+    "genre": "indie"
+  },
+  {
+    "title": "Steady As She Goes",
+    "artist": "The Raconteurs",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2006,
+    "genre": "rock"
+  },
+  {
+    "title": "Salute Your Solution",
+    "artist": "The Raconteurs",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Many Shades of Black",
+    "artist": "The Raconteurs",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "rock"
+  },
+  {
+    "title": "Sweet Disposition",
+    "artist": "The Temper Trap",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2008,
+    "genre": "indie"
+  },
+  {
+    "title": "Fader",
+    "artist": "The Temper Trap",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Love Lost",
+    "artist": "The Temper Trap",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2009,
+    "genre": "indie"
+  },
+  {
+    "title": "Trembling Hands",
+    "artist": "The Temper Trap",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2012,
+    "genre": "indie"
+  },
+  {
+    "title": "Need Your Love",
+    "artist": "The Temper Trap",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 2012,
+    "genre": "indie"
+  },
+  {
+    "title": "Little Boy",
+    "artist": "The Kills",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 69,
+    "year": 2008,
+    "genre": "rock"
+  }
+]
