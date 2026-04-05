@@ -383,6 +383,36 @@ db.exec(`
     FOREIGN KEY(user_id) REFERENCES users(id)
   );
 
+  CREATE TABLE IF NOT EXISTS affiliates (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE NOT NULL,
+    affiliate_code TEXT UNIQUE NOT NULL,
+    venue_name TEXT,
+    city TEXT,
+    payout_method TEXT,
+    total_scans INTEGER DEFAULT 0,
+    total_signups INTEGER DEFAULT 0,
+    total_hums INTEGER DEFAULT 0,
+    total_premium_conversions INTEGER DEFAULT 0,
+    lifetime_commission REAL DEFAULT 0,
+    pending_payout REAL DEFAULT 0,
+    last_payout_date TEXT,
+    created_at TEXT DEFAULT (datetime('now')),
+    welcome_email_sent INTEGER DEFAULT 0
+  );
+
+  CREATE TABLE IF NOT EXISTS affiliate_conversions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    affiliate_code TEXT NOT NULL,
+    user_id INTEGER,
+    event_type TEXT NOT NULL,
+    commission_amount REAL DEFAULT 0,
+    commission_paid INTEGER DEFAULT 0,
+    created_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY(affiliate_code) REFERENCES affiliates(affiliate_code),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
   CREATE TABLE IF NOT EXISTS friend_codes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,
@@ -964,6 +994,108 @@ app.post('/api/hummatch/auth/sync', (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// API: Affiliate - Instant Signup
+// ---------------------------------------------------------------------------
+app.post('/api/hummatch/affiliate/signup', async (req, res) => {
+  try {
+    const { email, venueName, city, payoutMethod } = req.body;
+    
+    if (!email || !venueName || !city || !payoutMethod) {
+      return res.status(400).json({ error: 'All fields required' });
+    }
+    
+    // Check if email already registered
+    const existing = db.prepare('SELECT * FROM affiliates WHERE email = ?').get(email);
+    if (existing) {
+      return res.json({ 
+        success: true, 
+        affiliateCode: existing.affiliate_code,
+        alreadyExists: true 
+      });
+    }
+    
+    // Generate unique affiliate code
+    const cityCode = city.substring(0,3).toUpperCase().replace(/[^A-Z]/g,'X');
+    const randomCode = Math.random().toString(36).substring(2,7).toUpperCase();
+    const affiliateCode = `HM-${cityCode}-${randomCode}`;
+    
+    // Save to database
+    db.prepare(`
+      INSERT INTO affiliates (email, affiliate_code, venue_name, city, payout_method)
+      VALUES (?, ?, ?, ?, ?)
+    `).run(email, affiliateCode, venueName, city, payoutMethod);
+    
+    // Send welcome email with QR code
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=https://hummatch.me?ref=${affiliateCode}`;
+    const dashboardUrl = `https://hummatch.me/affiliate/dashboard?code=${affiliateCode}`;
+    
+    const html = emailWrapper(`
+      <div style="padding:32px 24px;">
+        <h2 style="color:#e2e0f0;font-size:1.5rem;margin-bottom:8px;">Welcome to the HumMatch Affiliate Program! 🎤</h2>
+        <p style="color:rgba(255,255,255,0.6);margin-bottom:24px;line-height:1.6;">
+          You're all set, ${venueName}! Here's everything you need to start earning.
+        </p>
+        
+        <div style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:12px;padding:20px;margin-bottom:24px;">
+          <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;margin-bottom:4px;">Your Affiliate Code</p>
+          <p style="color:#a855f7;font-size:1.3rem;font-weight:800;margin:0;">${affiliateCode}</p>
+        </div>
+        
+        <h3 style="color:#e2e0f0;font-size:1.1rem;margin:24px 0 12px;">How You Earn</h3>
+        <div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:12px;padding:20px;margin-bottom:16px;">
+          <p style="color:#4ade80;font-size:1.2rem;font-weight:800;margin:0 0 8px 0;">20% Recurring Commission</p>
+          <p style="color:rgba(255,255,255,0.7);margin:0;line-height:1.6;">
+            Every time someone you refer upgrades to <strong>Squad Leader</strong>, you earn <strong>20% of their subscription fee</strong> every month for as long as they stay subscribed. Build passive income one referral at a time!
+          </p>
+        </div>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.6;">
+          <strong>Example:</strong> Refer 50 subscribers and earn recurring monthly income from their subscriptions. The more you refer, the more you earn!
+        </p>
+        
+        <h3 style="color:#e2e0f0;font-size:1.1rem;margin:24px 0 12px;">Your QR Code</h3>
+        <p style="color:rgba(255,255,255,0.6);margin-bottom:16px;">
+          Download your custom QR code and display it at your venue:
+        </p>
+        <img src="${qrUrl}" alt="Your HumMatch QR Code" style="width:200px;height:200px;border-radius:12px;margin-bottom:16px;" />
+        <br/>
+        <a href="${qrUrl}" style="display:inline-block;padding:12px 24px;background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.4);color:#a855f7;text-decoration:none;border-radius:10px;font-weight:700;font-size:0.9rem;margin-right:8px;">
+          Download QR Code
+        </a>
+        <a href="${dashboardUrl}" style="display:inline-block;padding:12px 24px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;text-decoration:none;border-radius:10px;font-weight:700;font-size:0.9rem;">
+          View Dashboard
+        </a>
+        
+        <p style="color:rgba(255,255,255,0.4);font-size:0.82rem;margin-top:32px;line-height:1.6;">
+          <strong>Tips for Success:</strong><br/>
+          • Project the QR on screens during karaoke breaks<br/>
+          • Print handouts for singers<br/>
+          • Share on your venue's social media<br/>
+          • Wear it on a T-shirt while KJ'ing
+        </p>
+        
+        ${EMAIL_FOOTER}
+      </div>
+    `);
+    
+    sendEmail(email, 'Welcome to HumMatch Affiliates! 🎤', html);
+    
+    // Mark email as sent
+    db.prepare('UPDATE affiliates SET welcome_email_sent = 1 WHERE email = ?').run(email);
+    
+    res.json({ 
+      success: true, 
+      affiliateCode,
+      qrUrl,
+      dashboardUrl
+    });
+    
+  } catch (err) {
+    console.error('Affiliate signup error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ---------------------------------------------------------------------------
 // API: Analytics dashboard (admin-only)
 // ---------------------------------------------------------------------------
 app.get('/api/hummatch/analytics', requireAdmin, (req, res) => {
@@ -1487,6 +1619,35 @@ app.get('/api/hummatch/squad/:id/votes', (req, res) => {
   res.json({ votes, total_members: members.length, voted_name: squad?.voted_name || null });
 });
 
+// Delete squad
+app.delete('/api/hummatch/squad/:id', requireAuth, (req, res) => {
+  const squadId = parseInt(req.params.id);
+  const squad = stmts.getSquadById.get(squadId);
+  
+  if (!squad) {
+    return res.status(404).json({ error: 'Squad not found' });
+  }
+  
+  // Check if user is the creator
+  if (squad.owner_user_id !== req.user.id) {
+    return res.status(403).json({ error: 'Only the squad creator can delete it' });
+  }
+  
+  try {
+    // Delete squad members first (foreign key constraint)
+    db.prepare('DELETE FROM squad_members WHERE squad_id = ?').run(squadId);
+    // Delete name votes
+    db.prepare('DELETE FROM squad_name_votes WHERE squad_id = ?').run(squadId);
+    // Delete the squad
+    db.prepare('DELETE FROM squads WHERE id = ?').run(squadId);
+    
+    res.json({ ok: true });
+  } catch (e) {
+    console.error('Squad deletion error:', e);
+    res.status(500).json({ error: 'Failed to delete squad' });
+  }
+});
+
 // ---------------------------------------------------------------------------
 // API: Song Requests (Premium)
 // ---------------------------------------------------------------------------
@@ -1821,8 +1982,8 @@ app.get('/blog', (_req, res) => {
   res.sendFile(path.join(__dirname, 'blog', 'index.html'));
 });
 
-// Dashboard page
-app.get('/dashboard', (_req, res) => {
+// Dashboard page (requires authentication)
+app.get('/dashboard', requireAuth, (_req, res) => {
   res.sendFile(path.join(__dirname, 'dashboard.html'));
 });
 
@@ -1908,6 +2069,11 @@ app.get('/song/:slug', (req, res) => {
   } else {
     res.redirect(302, '/#catalog');
   }
+});
+
+// How It Works page
+app.get('/how-it-works', (req, res) => {
+  res.sendFile(path.join(__dirname, 'how-it-works.html'));
 });
 
 // SPA fallback: serve index.html for unmatched routes

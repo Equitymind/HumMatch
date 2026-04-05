@@ -26,31 +26,23 @@
     }
     a { color: inherit; }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .nav-logo {
-      font-size: 1.2rem;
-      font-weight: 800;
-      text-decoration: none;
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .nav-links { display: flex; gap: 20px; }
-    .nav-links a {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--white); }
+    /* Hamburger Nav */
+    .hm-header { position:sticky; top:0; z-index:100; background:rgba(8,6,15,0.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.12); display:flex; align-items:center; justify-content:space-between; padding:14px 18px; }
+    .hm-header-logo { font-size:1.15rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }
+    .hm-nav-toggle { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; padding:0; flex-shrink:0; }
+    .hm-nav-toggle span { display:block; width:20px; height:2px; background:rgba(168,85,247,0.9); border-radius:2px; transition:all 0.25s; }
+    .hm-nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hm-nav-toggle.open span:nth-child(2) { opacity:0; }
+    .hm-nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .hm-nav-drawer { position:fixed; top:0; left:0; width:240px; height:100%; background:rgba(8,6,15,0.97); backdrop-filter:blur(16px); border-right:1px solid rgba(168,85,247,0.15); z-index:9999; transform:translateX(-100%); visibility:hidden; transition:transform 0.28s cubic-bezier(.4,0,.2,1), visibility 0.28s; padding:70px 0 24px; }
+    .hm-nav-drawer.open { transform:translateX(0); visibility:visible; }
+    .hm-nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9998; opacity:0; pointer-events:none; transition:opacity 0.28s; }
+    .hm-nav-overlay.open { opacity:1; pointer-events:all; }
+    .hm-nav-logo { padding:0 20px 20px; border-bottom:1px solid rgba(168,85,247,0.12); margin-bottom:8px; }
+    .hm-nav-logo span { font-size:1.1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hm-nav-item { display:block; padding:13px 24px; color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color 0.15s, background 0.15s; }
+    .hm-nav-item:hover { color:#fff; background:rgba(168,85,247,0.1); }
+    .hm-nav-divider { height:1px; background:rgba(168,85,247,0.1); margin:8px 20px; }
 
     .hero {
       text-align: center;
@@ -144,32 +136,35 @@
       transition: opacity 0.2s;
     }
     .cta-btn:hover { opacity: 0.9; }
-
-    .footer {
-      text-align: center;
-      padding: 40px 24px;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
-    .footer a { text-decoration: none; }
-    .footer a:hover { color: var(--white); }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <a href="/" class="nav-logo">HumMatch</a>
-    <div class="nav-links">
-      <a href="/">Try HumMatch</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/squadmatch">SquadMatch</a>
-      <a href="/blog">Blog</a>
-      <a href="/dashboard" id="navLoginItem">Log In</a>
-    </div>
+  <header class="hm-header">
+    <a class="hm-header-logo" href="/">HumMatch</a>
+    <button class="hm-nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
+  <nav class="hm-nav-drawer" id="navDrawer">
+    <div class="hm-nav-logo"><span>HumMatch</span></div>
+    <a class="hm-nav-item" href="/">🎤 Try HumMatch</a>
+    <a class="hm-nav-item" href="/how-it-works">How It Works</a>
+    <a class="hm-nav-item" href="/squadmatch">SquadMatch</a>
+    <a class="hm-nav-item" href="/es">🌎 Español</a>
+    <div class="hm-nav-divider"></div>
+    <a class="hm-nav-item" href="/song-directory">🎵 Song Directory</a>
+    <a class="hm-nav-item" href="/affiliate">Affiliate</a>
+    <a class="hm-nav-item" href="/blog">Blog</a>
+    <a class="hm-nav-item" href="/contact">Contact</a>
+    <div class="hm-nav-divider"></div>
+    <a class="hm-nav-item" href="/login" id="navLoginItem">Log In</a>
+    <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Sign Up</a>
   </nav>
 
   <div class="hero">
     <h1>Affiliate Program</h1>
-    <p>Share HumMatch with your audience and earn when they upgrade to Squad Leader.</p>
+    <p>Earn 20% recurring commission when your referrals upgrade to Squad Leader. Build passive monthly income, paid automatically.</p>
   </div>
 
   <div class="content">
@@ -186,27 +181,128 @@
       </div>
       <div class="step-card">
         <div class="step-num">3</div>
-        <h3>Earn Rewards</h3>
-        <p>When your referrals upgrade to Squad Leader, you earn a commission. The more people you refer, the more you earn.</p>
+        <h3>Earn 20% Recurring</h3>
+        <p>When your referrals upgrade to Squad Leader, you earn 20% of their subscription every month for as long as they stay subscribed. Build a growing stream of passive income with every referral.</p>
       </div>
     </div>
 
     <div class="cta-section">
       <h2>Ready to get started?</h2>
-      <p>Reach out and we'll set you up with your unique affiliate link and tracking dashboard.</p>
-      <a href="/contact" class="cta-btn">Apply Now</a>
+      <p>Get your custom QR code instantly. No approval needed!</p>
+      
+      <form id="affiliate-signup-form" style="max-width:400px;margin:24px auto 0;">
+        <input type="email" id="affiliate-email" placeholder="Your email" required 
+          style="width:100%;padding:14px;border-radius:10px;border:1px solid rgba(168,85,247,0.3);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;margin-bottom:12px;">
+        <input type="text" id="venue-name" placeholder="Bar/Venue Name" required 
+          style="width:100%;padding:14px;border-radius:10px;border:1px solid rgba(168,85,247,0.3);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;margin-bottom:12px;">
+        <input type="text" id="venue-city" placeholder="City, State" required 
+          style="width:100%;padding:14px;border-radius:10px;border:1px solid rgba(168,85,247,0.3);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;margin-bottom:12px;">
+        <input type="text" id="payout-venmo" placeholder="Venmo/PayPal for payouts" required 
+          style="width:100%;padding:14px;border-radius:10px;border:1px solid rgba(168,85,247,0.3);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;margin-bottom:16px;">
+        <button type="submit" class="cta-btn" style="width:100%;cursor:pointer;">Get My QR Code →</button>
+      </form>
+      
+      <div id="signup-success" style="display:none;margin-top:24px;padding:20px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:12px;">
+        <div style="font-size:1.5rem;margin-bottom:12px;">✅</div>
+        <h3 style="font-size:1.2rem;margin-bottom:8px;">You're all set!</h3>
+        <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin-bottom:16px;">Your affiliate code: <strong id="affiliate-code-display" style="color:#4ade80;"></strong></p>
+        <a id="download-qr-btn" class="cta-btn" style="display:inline-block;margin-top:8px;">Download QR Code</a>
+        <a href="/affiliate/dashboard" class="cta-btn" style="display:inline-block;margin-top:8px;margin-left:8px;background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.4);">View Dashboard</a>
+      </div>
     </div>
   </div>
 
-  <div class="footer">
-    <p>&copy; 2026 HumMatch &nbsp;&middot;&nbsp; <a href="/">Try HumMatch</a> &nbsp;&middot;&nbsp; <a href="/squadmatch">SquadMatch</a> &nbsp;&middot;&nbsp; <a href="/contact">Contact</a> &nbsp;&middot;&nbsp; <a href="/blog">Blog</a> &nbsp;&middot;&nbsp; <a href="/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms</a></p>
-  </div>
+  <footer style="width:100%;margin-top:32px;padding:20px 0 24px;border-top:1px solid rgba(255,255,255,0.06);">
+    <div style="display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;">
+      <a href="/how-it-works" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">How It Works</a>
+      <a href="/squadmatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">SquadMatch</a>
+      <a href="/es" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Español</a>
+      <a href="/affiliate" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Affiliate</a>
+      <a href="/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
+      <a href="/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contact</a>
+      <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
+      <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
+      <a href="/sitemap.xml" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Sitemap</a>
+      <a href="/login" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Log In</a>
+    </div>
+    <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.2);">&copy; 2026 HumMatch</div>
+  </footer>
+
 <script>
+// Affiliate Signup Handler
+document.getElementById('affiliate-signup-form')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('affiliate-email').value;
+  const venueName = document.getElementById('venue-name').value;
+  const city = document.getElementById('venue-city').value;
+  const payoutMethod = document.getElementById('payout-venmo').value;
+  
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  submitBtn.textContent = 'Creating your account...';
+  submitBtn.disabled = true;
+  
+  try {
+    const response = await fetch('/api/hummatch/affiliate/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, venueName, city, payoutMethod })
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      document.getElementById('affiliate-signup-form').style.display = 'none';
+      document.getElementById('signup-success').style.display = 'block';
+      document.getElementById('affiliate-code-display').textContent = data.affiliateCode;
+      
+      const downloadBtn = document.getElementById('download-qr-btn');
+      downloadBtn.href = data.qrUrl;
+      downloadBtn.download = `hummatch-qr-${data.affiliateCode}.png`;
+      
+      // Store in localStorage for dashboard access
+      localStorage.setItem('hm_affiliate_code', data.affiliateCode);
+      localStorage.setItem('hm_affiliate_email', email);
+      localStorage.setItem('hm_affiliate_venue', venueName);
+      
+      if (data.alreadyExists) {
+        alert('Welcome back! Your affiliate code has been resent to your email.');
+      }
+    } else {
+      alert(data.error || 'Something went wrong. Please try again.');
+      submitBtn.textContent = 'Get My QR Code →';
+      submitBtn.disabled = false;
+    }
+  } catch (err) {
+    console.error('Signup error:', err);
+    alert('Network error. Please check your connection and try again.');
+    submitBtn.textContent = 'Get My QR Code →';
+    submitBtn.disabled = false;
+  }
+});
+
+function toggleNav() {
+  const tog = document.getElementById('navToggle');
+  const drw = document.getElementById('navDrawer');
+  const ovl = document.getElementById('navOverlay');
+  tog.classList.toggle('open');
+  drw.classList.toggle('open');
+  ovl.classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navToggle').classList.remove('open');
+  document.getElementById('navDrawer').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+}
+// Swap Log In / Sign Up → My HQ if logged in
 (function(){
-  var t = localStorage.getItem('hm_dash_token');
+  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
   if(t){
     var nav = document.getElementById('navLoginItem');
-    if(nav){ nav.textContent='My HQ'; }
+    var foot = document.getElementById('footerLoginItem');
+    var signup = document.getElementById('navSignupItem');
+    if(nav){ nav.textContent='🎯 My HQ'; nav.href='/dashboard'; }
+    if(foot){ foot.textContent='My HQ'; foot.href='/dashboard'; }
+    if(signup){ signup.style.display='none'; }
   }
 })();
 </script>
