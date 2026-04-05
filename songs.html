@@ -201,12 +201,29 @@ async function loadSongs() {
       // Fallback: parse from index.html
       const htmlResponse = await fetch('/');
       const html = await htmlResponse.text();
-      const match = html.match(/const SONGS = (\[[\s\S]*?\]);/);
-      if (match) {
-        SONGS = JSON.parse(match[1]);
-      } else {
-        throw new Error('Could not parse SONGS array');
+      // More robust regex that handles large arrays
+      const startIdx = html.indexOf('const SONGS = [');
+      if (startIdx === -1) throw new Error('SONGS array not found');
+      
+      const jsonStart = startIdx + 'const SONGS = '.length;
+      let bracketCount = 0;
+      let endIdx = jsonStart;
+      
+      // Find matching closing bracket
+      for (let i = jsonStart; i < html.length; i++) {
+        if (html[i] === '[') bracketCount++;
+        else if (html[i] === ']') {
+          bracketCount--;
+          if (bracketCount === 0) {
+            endIdx = i + 1;
+            break;
+          }
+        }
       }
+      
+      const jsonStr = html.substring(jsonStart, endIdx);
+      SONGS = JSON.parse(jsonStr);
+      console.log('Loaded', SONGS.length, 'songs from index.html');
     }
     renderSongs(SONGS);
     populateGenres();

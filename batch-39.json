@@ -1,0 +1,1433 @@
+[
+  {
+    "title": "Stand by Your Man",
+    "artist": "Tammy Wynette",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1968,
+    "genre": "country"
+  },
+  {
+    "title": "D-I-V-O-R-C-E",
+    "artist": "Tammy Wynette",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1968,
+    "genre": "country"
+  },
+  {
+    "title": "'Til I Can Make It on My Own",
+    "artist": "Tammy Wynette",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1976,
+    "genre": "country"
+  },
+  {
+    "title": "Your Good Girl's Gonna Go Bad",
+    "artist": "Tammy Wynette",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1967,
+    "genre": "country"
+  },
+  {
+    "title": "I Walk the Line",
+    "artist": "Johnny Cash",
+    "lo": 41,
+    "hi": 64,
+    "brightness": 59,
+    "year": 1956,
+    "genre": "country"
+  },
+  {
+    "title": "Ring of Fire",
+    "artist": "Johnny Cash",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1963,
+    "genre": "country"
+  },
+  {
+    "title": "Folsom Prison Blues",
+    "artist": "Johnny Cash",
+    "lo": 42,
+    "hi": 65,
+    "brightness": 60,
+    "year": 1955,
+    "genre": "country"
+  },
+  {
+    "title": "A Boy Named Sue",
+    "artist": "Johnny Cash",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1969,
+    "genre": "country"
+  },
+  {
+    "title": "Jackson",
+    "artist": "Johnny Cash & June Carter",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1967,
+    "genre": "country"
+  },
+  {
+    "title": "Hurt",
+    "artist": "Johnny Cash",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 58,
+    "year": 2002,
+    "genre": "country"
+  },
+  {
+    "title": "Sunday Morning Coming Down",
+    "artist": "Johnny Cash",
+    "lo": 42,
+    "hi": 65,
+    "brightness": 60,
+    "year": 1970,
+    "genre": "country"
+  },
+  {
+    "title": "Get Rhythm",
+    "artist": "Johnny Cash",
+    "lo": 44,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1956,
+    "genre": "country"
+  },
+  {
+    "title": "Crazy",
+    "artist": "Patsy Cline",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 64,
+    "year": 1961,
+    "genre": "country"
+  },
+  {
+    "title": "Walkin' After Midnight",
+    "artist": "Patsy Cline",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1957,
+    "genre": "country"
+  },
+  {
+    "title": "I Fall to Pieces",
+    "artist": "Patsy Cline",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1961,
+    "genre": "country"
+  },
+  {
+    "title": "Sweet Dreams (Of You)",
+    "artist": "Patsy Cline",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1963,
+    "genre": "country"
+  },
+  {
+    "title": "She's Got You",
+    "artist": "Patsy Cline",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1962,
+    "genre": "country"
+  },
+  {
+    "title": "Back in the Saddle Again",
+    "artist": "Gene Autry",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1939,
+    "genre": "country"
+  },
+  {
+    "title": "Jolene",
+    "artist": "Dolly Parton",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "9 to 5",
+    "artist": "Dolly Parton",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1980,
+    "genre": "country"
+  },
+  {
+    "title": "I Will Always Love You",
+    "artist": "Dolly Parton",
+    "lo": 46,
+    "hi": 72,
+    "brightness": 66,
+    "year": 1974,
+    "genre": "country"
+  },
+  {
+    "title": "Coat of Many Colors",
+    "artist": "Dolly Parton",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1971,
+    "genre": "country"
+  },
+  {
+    "title": "Here You Come Again",
+    "artist": "Dolly Parton",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1977,
+    "genre": "country"
+  },
+  {
+    "title": "Two Doors Down",
+    "artist": "Dolly Parton",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1977,
+    "genre": "country"
+  },
+  {
+    "title": "Islands in the Stream",
+    "artist": "Dolly Parton & Kenny Rogers",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1983,
+    "genre": "country"
+  },
+  {
+    "title": "The Gambler",
+    "artist": "Kenny Rogers",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1978,
+    "genre": "country"
+  },
+  {
+    "title": "Lucille",
+    "artist": "Kenny Rogers",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1977,
+    "genre": "country"
+  },
+  {
+    "title": "Coward of the County",
+    "artist": "Kenny Rogers",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1979,
+    "genre": "country"
+  },
+  {
+    "title": "Lady",
+    "artist": "Kenny Rogers",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 62,
+    "year": 1980,
+    "genre": "country"
+  },
+  {
+    "title": "She Believes in Me",
+    "artist": "Kenny Rogers",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1979,
+    "genre": "country"
+  },
+  {
+    "title": "Ruby, Don't Take Your Love to Town",
+    "artist": "Kenny Rogers",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1969,
+    "genre": "country"
+  },
+  {
+    "title": "Through the Years",
+    "artist": "Kenny Rogers",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1981,
+    "genre": "country"
+  },
+  {
+    "title": "He Stopped Loving Her Today",
+    "artist": "George Jones",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1980,
+    "genre": "country"
+  },
+  {
+    "title": "She Thinks I Still Care",
+    "artist": "George Jones",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1962,
+    "genre": "country"
+  },
+  {
+    "title": "The Grand Tour",
+    "artist": "George Jones",
+    "lo": 42,
+    "hi": 65,
+    "brightness": 60,
+    "year": 1974,
+    "genre": "country"
+  },
+  {
+    "title": "White Lightning",
+    "artist": "George Jones",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1959,
+    "genre": "country"
+  },
+  {
+    "title": "Golden Ring",
+    "artist": "George Jones & Tammy Wynette",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1976,
+    "genre": "country"
+  },
+  {
+    "title": "He'll Have to Go",
+    "artist": "Jim Reeves",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 58,
+    "year": 1959,
+    "genre": "country"
+  },
+  {
+    "title": "Four Walls",
+    "artist": "Jim Reeves",
+    "lo": 41,
+    "hi": 65,
+    "brightness": 59,
+    "year": 1957,
+    "genre": "country"
+  },
+  {
+    "title": "Welcome to My World",
+    "artist": "Jim Reeves",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1964,
+    "genre": "country"
+  },
+  {
+    "title": "Coal Miner's Daughter",
+    "artist": "Loretta Lynn",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1970,
+    "genre": "country"
+  },
+  {
+    "title": "You Ain't Woman Enough",
+    "artist": "Loretta Lynn",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 1966,
+    "genre": "country"
+  },
+  {
+    "title": "Don't Come Home A-Drinkin'",
+    "artist": "Loretta Lynn",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1966,
+    "genre": "country"
+  },
+  {
+    "title": "Fist City",
+    "artist": "Loretta Lynn",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 1968,
+    "genre": "country"
+  },
+  {
+    "title": "The Pill",
+    "artist": "Loretta Lynn",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1975,
+    "genre": "country"
+  },
+  {
+    "title": "Mammas Don't Let Your Babies Grow Up to Be Cowboys",
+    "artist": "Willie Nelson & Waylon Jennings",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1978,
+    "genre": "country"
+  },
+  {
+    "title": "On the Road Again",
+    "artist": "Willie Nelson",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1980,
+    "genre": "country"
+  },
+  {
+    "title": "Always on My Mind",
+    "artist": "Willie Nelson",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1982,
+    "genre": "country"
+  },
+  {
+    "title": "Blue Eyes Crying in the Rain",
+    "artist": "Willie Nelson",
+    "lo": 42,
+    "hi": 65,
+    "brightness": 60,
+    "year": 1975,
+    "genre": "country"
+  },
+  {
+    "title": "Whiskey River",
+    "artist": "Willie Nelson",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "Angel Flying Too Close to the Ground",
+    "artist": "Willie Nelson",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1980,
+    "genre": "country"
+  },
+  {
+    "title": "To All the Girls I've Loved Before",
+    "artist": "Willie Nelson & Julio Iglesias",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1984,
+    "genre": "country"
+  },
+  {
+    "title": "Seven Spanish Angels",
+    "artist": "Willie Nelson & Ray Charles",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1984,
+    "genre": "country"
+  },
+  {
+    "title": "Pancho and Lefty",
+    "artist": "Willie Nelson & Merle Haggard",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1983,
+    "genre": "country"
+  },
+  {
+    "title": "Okie from Muskogee",
+    "artist": "Merle Haggard",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1969,
+    "genre": "country"
+  },
+  {
+    "title": "Mama Tried",
+    "artist": "Merle Haggard",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1968,
+    "genre": "country"
+  },
+  {
+    "title": "Sing Me Back Home",
+    "artist": "Merle Haggard",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1967,
+    "genre": "country"
+  },
+  {
+    "title": "The Fightin' Side of Me",
+    "artist": "Merle Haggard",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1970,
+    "genre": "country"
+  },
+  {
+    "title": "Big City",
+    "artist": "Merle Haggard",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1981,
+    "genre": "country"
+  },
+  {
+    "title": "If We Make It Through December",
+    "artist": "Merle Haggard",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "My Heroes Have Always Been Cowboys",
+    "artist": "Willie Nelson",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1980,
+    "genre": "country"
+  },
+  {
+    "title": "Rhinestone Cowboy",
+    "artist": "Glen Campbell",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1975,
+    "genre": "country"
+  },
+  {
+    "title": "Wichita Lineman",
+    "artist": "Glen Campbell",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1968,
+    "genre": "country"
+  },
+  {
+    "title": "Gentle on My Mind",
+    "artist": "Glen Campbell",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1967,
+    "genre": "country"
+  },
+  {
+    "title": "By the Time I Get to Phoenix",
+    "artist": "Glen Campbell",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1967,
+    "genre": "country"
+  },
+  {
+    "title": "Galveston",
+    "artist": "Glen Campbell",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1969,
+    "genre": "country"
+  },
+  {
+    "title": "Southern Nights",
+    "artist": "Glen Campbell",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1977,
+    "genre": "country"
+  },
+  {
+    "title": "Country Roads (Take Me Home)",
+    "artist": "John Denver",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1971,
+    "genre": "country"
+  },
+  {
+    "title": "Annie's Song",
+    "artist": "John Denver",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1974,
+    "genre": "country"
+  },
+  {
+    "title": "Rocky Mountain High",
+    "artist": "John Denver",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1972,
+    "genre": "country"
+  },
+  {
+    "title": "Sunshine on My Shoulders",
+    "artist": "John Denver",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "Thank God I'm a Country Boy",
+    "artist": "John Denver",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 69,
+    "year": 1975,
+    "genre": "country"
+  },
+  {
+    "title": "Leaving on a Jet Plane",
+    "artist": "John Denver",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1969,
+    "genre": "country"
+  },
+  {
+    "title": "Calypso",
+    "artist": "John Denver",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1975,
+    "genre": "country"
+  },
+  {
+    "title": "I'm Sorry",
+    "artist": "John Denver",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1975,
+    "genre": "country"
+  },
+  {
+    "title": "Friends with You",
+    "artist": "John Denver",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1971,
+    "genre": "country"
+  },
+  {
+    "title": "El Paso",
+    "artist": "Marty Robbins",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1959,
+    "genre": "country"
+  },
+  {
+    "title": "Big Iron",
+    "artist": "Marty Robbins",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1960,
+    "genre": "country"
+  },
+  {
+    "title": "A White Sport Coat",
+    "artist": "Marty Robbins",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1957,
+    "genre": "country"
+  },
+  {
+    "title": "The Devil Went Down to Georgia",
+    "artist": "Charlie Daniels Band",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1979,
+    "genre": "country"
+  },
+  {
+    "title": "The South's Gonna Do It Again",
+    "artist": "Charlie Daniels Band",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 67,
+    "year": 1975,
+    "genre": "country"
+  },
+  {
+    "title": "Uneasy Rider",
+    "artist": "Charlie Daniels Band",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "Long Haired Country Boy",
+    "artist": "Charlie Daniels Band",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1974,
+    "genre": "country"
+  },
+  {
+    "title": "For the Good Times",
+    "artist": "Ray Price",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1970,
+    "genre": "country"
+  },
+  {
+    "title": "Heartaches by the Number",
+    "artist": "Ray Price",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1959,
+    "genre": "country"
+  },
+  {
+    "title": "City Lights",
+    "artist": "Ray Price",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1958,
+    "genre": "country"
+  },
+  {
+    "title": "You're the Best Break This Old Heart Ever Had",
+    "artist": "Ed Bruce",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1981,
+    "genre": "country"
+  },
+  {
+    "title": "Harper Valley PTA",
+    "artist": "Jeannie C. Riley",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1968,
+    "genre": "country"
+  },
+  {
+    "title": "Behind Closed Doors",
+    "artist": "Charlie Rich",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "The Most Beautiful Girl",
+    "artist": "Charlie Rich",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "Kiss an Angel Good Mornin'",
+    "artist": "Charley Pride",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1971,
+    "genre": "country"
+  },
+  {
+    "title": "Is Anybody Goin' to San Antone",
+    "artist": "Charley Pride",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1970,
+    "genre": "country"
+  },
+  {
+    "title": "Delta Dawn",
+    "artist": "Tanya Tucker",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1972,
+    "genre": "country"
+  },
+  {
+    "title": "What's Your Mama's Name",
+    "artist": "Tanya Tucker",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "Blood Red and Goin' Down",
+    "artist": "Tanya Tucker",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "Texas (When I Die)",
+    "artist": "Tanya Tucker",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1978,
+    "genre": "country"
+  },
+  {
+    "title": "Hello Darlin'",
+    "artist": "Conway Twitty",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1970,
+    "genre": "country"
+  },
+  {
+    "title": "Tight Fittin' Jeans",
+    "artist": "Conway Twitty",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1981,
+    "genre": "country"
+  },
+  {
+    "title": "Louisiana Woman, Mississippi Man",
+    "artist": "Conway Twitty & Loretta Lynn",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1973,
+    "genre": "country"
+  },
+  {
+    "title": "After the Fire Is Gone",
+    "artist": "Conway Twitty & Loretta Lynn",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1971,
+    "genre": "country"
+  },
+  {
+    "title": "Rose Garden",
+    "artist": "Lynn Anderson",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1970,
+    "genre": "country"
+  },
+  {
+    "title": "How Great Thou Art",
+    "artist": "Elvis Presley",
+    "lo": 42,
+    "hi": 69,
+    "brightness": 61,
+    "year": 1967,
+    "genre": "country"
+  },
+  {
+    "title": "Green Green Grass of Home",
+    "artist": "Porter Wagoner",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1965,
+    "genre": "country"
+  },
+  {
+    "title": "The Race Is On",
+    "artist": "George Jones",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1964,
+    "genre": "country"
+  },
+  {
+    "title": "Make the World Go Away",
+    "artist": "Eddy Arnold",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1965,
+    "genre": "country"
+  },
+  {
+    "title": "Release Me",
+    "artist": "Ray Price",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1954,
+    "genre": "country"
+  },
+  {
+    "title": "Oh Lonesome Me",
+    "artist": "Don Gibson",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1958,
+    "genre": "country"
+  },
+  {
+    "title": "I Can't Stop Loving You",
+    "artist": "Don Gibson",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1957,
+    "genre": "country"
+  },
+  {
+    "title": "Sixteen Tons",
+    "artist": "Tennessee Ernie Ford",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 58,
+    "year": 1955,
+    "genre": "country"
+  },
+  {
+    "title": "Kaw-Liga",
+    "artist": "Hank Williams",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1953,
+    "genre": "country"
+  },
+  {
+    "title": "Your Cheatin' Heart",
+    "artist": "Hank Williams",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1953,
+    "genre": "country"
+  },
+  {
+    "title": "I'm So Lonesome I Could Cry",
+    "artist": "Hank Williams",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1949,
+    "genre": "country"
+  },
+  {
+    "title": "Hey Good Lookin'",
+    "artist": "Hank Williams",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1951,
+    "genre": "country"
+  },
+  {
+    "title": "Cold, Cold Heart",
+    "artist": "Hank Williams",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1951,
+    "genre": "country"
+  },
+  {
+    "title": "Jambalaya (On the Bayou)",
+    "artist": "Hank Williams",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1952,
+    "genre": "country"
+  },
+  {
+    "title": "I Saw the Light",
+    "artist": "Hank Williams",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1948,
+    "genre": "country"
+  },
+  {
+    "title": "Move It On Over",
+    "artist": "Hank Williams",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1947,
+    "genre": "country"
+  },
+  {
+    "title": "Lovesick Blues",
+    "artist": "Hank Williams",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1949,
+    "genre": "country"
+  },
+  {
+    "title": "Blue Moon of Kentucky",
+    "artist": "Bill Monroe",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1946,
+    "genre": "country"
+  },
+  {
+    "title": "Orange Blossom Special",
+    "artist": "Johnny Cash",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1965,
+    "genre": "country"
+  },
+  {
+    "title": "Tennessee Waltz",
+    "artist": "Patti Page",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1950,
+    "genre": "country"
+  },
+  {
+    "title": "Wildwood Flower",
+    "artist": "The Carter Family",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1928,
+    "genre": "country"
+  },
+  {
+    "title": "Will the Circle Be Unbroken",
+    "artist": "The Carter Family",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1935,
+    "genre": "country"
+  },
+  {
+    "title": "Dueling Banjos",
+    "artist": "Arthur Guitar Boogie Smith",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 69,
+    "year": 1955,
+    "genre": "country"
+  },
+  {
+    "title": "Foggy Mountain Breakdown",
+    "artist": "Flatt & Scruggs",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1949,
+    "genre": "country"
+  },
+  {
+    "title": "The Ballad of Jed Clampett",
+    "artist": "Flatt & Scruggs",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1962,
+    "genre": "country"
+  },
+  {
+    "title": "Mountain Dew",
+    "artist": "Grandpa Jones",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1947,
+    "genre": "country"
+  },
+  {
+    "title": "T for Texas (Blue Yodel No. 1)",
+    "artist": "Jimmie Rodgers",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1927,
+    "genre": "country"
+  },
+  {
+    "title": "In the Jailhouse Now",
+    "artist": "Jimmie Rodgers",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1928,
+    "genre": "country"
+  },
+  {
+    "title": "Tumbling Tumbleweeds",
+    "artist": "Sons of the Pioneers",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1934,
+    "genre": "country"
+  },
+  {
+    "title": "Cool Water",
+    "artist": "Sons of the Pioneers",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1941,
+    "genre": "country"
+  },
+  {
+    "title": "Ghost Riders in the Sky",
+    "artist": "Vaughn Monroe",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1949,
+    "genre": "country"
+  },
+  {
+    "title": "Mexicali Rose",
+    "artist": "Gene Autry",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1938,
+    "genre": "country"
+  },
+  {
+    "title": "Don't Fence Me In",
+    "artist": "Roy Rogers",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1944,
+    "genre": "country"
+  },
+  {
+    "title": "Happy Trails",
+    "artist": "Roy Rogers & Dale Evans",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1952,
+    "genre": "country"
+  },
+  {
+    "title": "San Antonio Rose",
+    "artist": "Bob Wills",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1940,
+    "genre": "country"
+  },
+  {
+    "title": "Faded Love",
+    "artist": "Bob Wills",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1950,
+    "genre": "country"
+  },
+  {
+    "title": "Walking the Floor Over You",
+    "artist": "Ernest Tubb",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1941,
+    "genre": "country"
+  },
+  {
+    "title": "Bouquet of Roses",
+    "artist": "Eddy Arnold",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1948,
+    "genre": "country"
+  },
+  {
+    "title": "Anytime",
+    "artist": "Eddy Arnold",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1948,
+    "genre": "country"
+  },
+  {
+    "title": "Cattle Call",
+    "artist": "Eddy Arnold",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1955,
+    "genre": "country"
+  },
+  {
+    "title": "Slippin' Around",
+    "artist": "Margaret Whiting & Jimmy Wakely",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1949,
+    "genre": "country"
+  },
+  {
+    "title": "Chattanoogie Shoe Shine Boy",
+    "artist": "Red Foley",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1950,
+    "genre": "country"
+  },
+  {
+    "title": "Peace in the Valley",
+    "artist": "Red Foley",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1951,
+    "genre": "country"
+  },
+  {
+    "title": "A Satisfied Mind",
+    "artist": "Porter Wagoner",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1955,
+    "genre": "country"
+  },
+  {
+    "title": "Detroit City",
+    "artist": "Bobby Bare",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1963,
+    "genre": "country"
+  },
+  {
+    "title": "500 Miles Away from Home",
+    "artist": "Bobby Bare",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1963,
+    "genre": "country"
+  },
+  {
+    "title": "Almost Persuaded",
+    "artist": "David Houston",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1966,
+    "genre": "country"
+  },
+  {
+    "title": "Before the Next Teardrop Falls",
+    "artist": "Freddy Fender",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1975,
+    "genre": "country"
+  },
+  {
+    "title": "Wasted Days and Wasted Nights",
+    "artist": "Freddy Fender",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1975,
+    "genre": "country"
+  },
+  {
+    "title": "You Decorated My Life",
+    "artist": "Kenny Rogers",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1979,
+    "genre": "country"
+  },
+  {
+    "title": "Don't It Make My Brown Eyes Blue",
+    "artist": "Crystal Gayle",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1977,
+    "genre": "country"
+  },
+  {
+    "title": "Talking in Your Sleep",
+    "artist": "Crystal Gayle",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1978,
+    "genre": "country"
+  },
+  {
+    "title": "Half the Way",
+    "artist": "Crystal Gayle",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1979,
+    "genre": "country"
+  },
+  {
+    "title": "You and I",
+    "artist": "Eddie Rabbitt & Crystal Gayle",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1982,
+    "genre": "country"
+  },
+  {
+    "title": "I Love a Rainy Night",
+    "artist": "Eddie Rabbitt",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1980,
+    "genre": "country"
+  },
+  {
+    "title": "Drivin' My Life Away",
+    "artist": "Eddie Rabbitt",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1980,
+    "genre": "country"
+  },
+  {
+    "title": "Suspicions",
+    "artist": "Eddie Rabbitt",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 67,
+    "year": 1979,
+    "genre": "country"
+  },
+  {
+    "title": "Every Which Way But Loose",
+    "artist": "Eddie Rabbitt",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1978,
+    "genre": "country"
+  }
+]
