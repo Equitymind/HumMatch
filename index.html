@@ -34414,13 +34414,14 @@ function showResults() {
     })
     .filter(s => {
       // Gender filtering: exclude songs that don't match voice gender
-      const songIsFemale = s.lo >= 50; // B2 or above = likely female song
-      const songIsMale = s.hi <= 67;   // G4 or below = likely male song
+      // Female songs typically sit in a higher register overall
+      const songIsFemale = (s.lo >= 48 && s.hi >= 67) || s.hi >= 72; // C3+ low AND G4+ high, OR very high overall
+      const songIsMale = s.hi <= 69 && s.lo <= 50; // A4 or below high AND B2 or below low
       
       // If user is clearly male, filter out female songs
-      if (isMaleVoice && songIsFemale && !songIsMale) return false;
+      if (isMaleVoice && songIsFemale) return false;
       // If user is clearly female, filter out male songs  
-      if (isFemaleVoice && songIsMale && !songIsFemale) return false;
+      if (isFemaleVoice && songIsMale) return false;
       
       return s.score > 0.45; // Also apply score threshold
     })
