@@ -459,31 +459,24 @@
   </div>
 
   <!-- ── Interest Selector ── -->
-  <div style="width:100%;max-width:380px;padding:0 4px;margin-top:16px;">
-    <div style="text-align:center;">
-      <button id="interest-toggle-btn" onclick="toggleInterestPanel()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(124,58,237,0.28);color:rgba(255,255,255,0.6);border-radius:50px;padding:8px 18px;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:0.01em;">
-        🎯 Filter results by taste (optional)
-      </button>
-    </div>
-    <div id="interest-active-badge" onclick="toggleInterestPanel()">✦ Taste filter active — tap to change</div>
-
-    <div id="interest-selector-panel">
-      <div style="font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:8px;">Genre</div>
+  <div style="width:100%;max-width:380px;padding:0 4px;margin-top:12px;">
+    <div id="interest-selector-panel" style="display:block !important;">
+      <div style="font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:6px;">Genre (optional)</div>
       <div class="interest-chips" id="genre-chips"></div>
 
-      <div style="font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin:10px 0 6px;">Era</div>
+      <div style="font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin:8px 0 4px;">Era (optional)</div>
       <div class="interest-chips" id="decade-chips"></div>
 
-      <div style="display:flex;gap:8px;margin-top:12px;">
+      <div style="display:flex;gap:8px;margin-top:10px;">
         <button onclick="saveInterests()" style="flex:1;padding:10px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;font-family:inherit;">Save Filter</button>
         <button onclick="skipInterests()" style="flex:1;padding:10px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.45);font-size:0.78rem;font-weight:600;border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;font-family:inherit;">Show Everything</button>
       </div>
-      <div style="font-size:0.68rem;color:rgba(255,255,255,0.25);text-align:center;margin-top:10px;">Preferences saved for next time</div>
+      <div style="font-size:0.64rem;color:rgba(255,255,255,0.2);text-align:center;margin-top:6px;">Preferences saved for next time</div>
     </div>
   </div>
 
   <div style="width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;">
-  <button class="cta-btn" style="width:100%;margin-top:14px;" onclick="startTest()">Find My Songs →</button>
+  <button class="cta-btn" style="width:100%;margin-top:12px;" onclick="startTest()">Find My Songs →</button>
   <div id="saved-profile-btn" style="display:none;margin-top:12px;width:100%;max-width:300px;">
     <button class="cta-btn secondary" style="width:100%;" onclick="loadSavedProfile()">🎤 Use My Saved Voice</button>
     <div style="font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:6px;" id="saved-profile-date"></div>
