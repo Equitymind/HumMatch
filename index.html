@@ -81658,8 +81658,25 @@ function savePlaylist(list) {
 function togglePlaylistSong(title, artist, checked) {
   let list = loadPlaylist();
   const key = title + '__' + artist;
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  
   if (checked) {
     if (!list.find(s => s.title === title && s.artist === artist)) {
+      // Check playlist limit for free users
+      if (!isPremium && list.length >= 20) {
+        // Show upgrade prompt
+        showToast('⭐ Playlist limit reached! Upgrade to Squad Leader for unlimited saved songs.');
+        // Show upgrade modal if it exists
+        setTimeout(() => {
+          if (confirm('🎵 Upgrade to Squad Leader?\n\nUnlock unlimited playlists, unlimited hums, and host SquadMatch sessions.\n\nOnly $7.99/mo')) {
+            window.location.href = '/pricing';
+          }
+        }, 500);
+        // Uncheck the checkbox
+        const checkbox = document.querySelector(`input[data-title="${title.replace(/"/g,'&quot;')}"][data-artist="${artist.replace(/"/g,'&quot;')}"]`);
+        if (checkbox) checkbox.checked = false;
+        return;
+      }
       list.push({ title, artist });
     }
   } else {
