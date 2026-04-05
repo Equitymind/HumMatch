@@ -68293,8 +68293,10 @@ function dismissSquadPrompt() {
     <div class="hm-field-error" id="hm-pw-confirm-error"></div>
     <button type="button" class="hm-login-btn" id="hm-login-submit" onclick="hmSubmitLogin()">Create Account</button>
   </form>
-  <button class="hm-sheet-link" onclick="window.location.href='/login'">Already have an account? Log in</button>
-  <button class="hm-login-dismiss" onclick="hmDismissLogin()">Not now</button>
+  <div style="display:flex;gap:8px;margin-top:12px;">
+    <button class="hm-sheet-link" onclick="window.location.href='/login'" style="flex:1;padding:12px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:rgba(255,255,255,0.8);font-size:0.85rem;font-weight:600;cursor:pointer;">Log In</button>
+    <button class="hm-login-dismiss" onclick="hmDismissLogin()" style="flex:1;padding:12px;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:rgba(255,255,255,0.5);font-size:0.85rem;font-weight:600;cursor:pointer;">Not now</button>
+  </div>
 </div>
 
 <script>
