@@ -180,9 +180,7 @@ h1 {
     </select>
   </div>
   
-  <div class="stats">
-    <span id="songCount">Loading...</span>
-  </div>
+
   
   <div class="song-grid" id="songGrid">
     <div class="loading">Loading songs...</div>
@@ -195,16 +193,31 @@ let SONGS = [];
 
 async function loadSongs() {
   try {
-    const response = await fetch('/index.html');
-    const html = await response.text();
-    const match = html.match(/const SONGS = (\[[\s\S]*?\]);/);
-    if (match) {
-      SONGS = JSON.parse(match[1]);
-      renderSongs(SONGS);
-      populateGenres();
+    // Try to fetch from a dedicated JSON endpoint first
+    const response = await fetch('/api/songs.json');
+    if (response.ok) {
+      SONGS = await response.json();
+    } else {
+      // Fallback: parse from index.html
+      const htmlResponse = await fetch('/');
+      const html = await htmlResponse.text();
+      const match = html.match(/const SONGS = (\[[\s\S]*?\]);/);
+      if (match) {
+        SONGS = JSON.parse(match[1]);
+      } else {
+        throw new Error('Could not parse SONGS array');
+      }
     }
+    renderSongs(SONGS);
+    populateGenres();
   } catch (error) {
-    document.getElementById('songGrid').innerHTML = '<div class="loading">Error loading songs</div>';
+    console.error('Error loading songs:', error);
+    document.getElementById('songGrid').innerHTML = `
+      <div class="loading">
+        <p style="margin-bottom: 12px;">Unable to load song catalog</p>
+        <p style="font-size: 0.9rem; opacity: 0.7;">Try <a href="/" style="color: #A855F7;">returning home</a> or refreshing this page</p>
+      </div>
+    `;
   }
 }
 
@@ -221,7 +234,6 @@ function populateGenres() {
 
 function renderSongs(songs) {
   const grid = document.getElementById('songGrid');
-  document.getElementById('songCount').textContent = `Showing ${songs.length} songs`;
   
   if (songs.length === 0) {
     grid.innerHTML = '<div class="loading">No songs found</div>';
