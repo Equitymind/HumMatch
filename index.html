@@ -34413,15 +34413,17 @@ function showResults() {
       return { ...s, score: rangeFit * 0.65 + brightFit * 0.35 };
     })
     .filter(s => {
-      // Gender filtering: exclude songs that don't match voice gender
-      // Female songs typically sit in a higher register overall
-      const songIsFemale = (s.lo >= 48 && s.hi >= 67) || s.hi >= 72; // C3+ low AND G4+ high, OR very high overall
-      const songIsMale = s.hi <= 69 && s.lo <= 50; // A4 or below high AND B2 or below low
+      // Gender filtering: check the song's MIDPOINT (tessitura)
+      // Female songs center around C4-C5 (60-72)
+      // Male songs center around G2-G3 (43-55)
+      const songMidpoint = (s.lo + s.hi) / 2;
       
-      // If user is clearly male, filter out female songs
-      if (isMaleVoice && songIsFemale) return false;
-      // If user is clearly female, filter out male songs  
-      if (isFemaleVoice && songIsMale) return false;
+      // If user is male (high <= 65), block songs centered above male comfort zone (midpoint > 52)
+      // Threshold: E3 midpoint or higher is typically female range
+      if (isMaleVoice && songMidpoint >= 52) return false;
+      
+      // If user is female (low >= 48), block songs centered in male range (midpoint < 58)
+      if (isFemaleVoice && songMidpoint < 58) return false;
       
       return s.score > 0.45; // Also apply score threshold
     })
