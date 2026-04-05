@@ -34458,16 +34458,18 @@ function showResults() {
   document.getElementById('voice-badge').innerHTML = `${typeEmoji[voiceType] || '🎤'} ${voiceType}`;
   document.getElementById('result-emoji').textContent = (topArtist && topArtist.emoji) ? topArtist.emoji : '🎉';
   
-  // Brightness descriptor based on score
-  const brightnessLabel = userBrightness >= 70 ? 'Very Bright' :
-                          userBrightness >= 55 ? 'Bright' :
-                          userBrightness >= 45 ? 'Neutral' :
-                          userBrightness >= 30 ? 'Dark & Warm' : 'Very Dark';
+  // Brightness descriptor based on score (only if captured)
+  if (userBrightness && !isNaN(userBrightness)) {
+    const brightnessLabel = userBrightness >= 70 ? 'Very Bright' :
+                            userBrightness >= 55 ? 'Bright' :
+                            userBrightness >= 45 ? 'Neutral' :
+                            userBrightness >= 30 ? 'Dark & Warm' : 'Very Dark';
+    document.getElementById('brightness-text').textContent =
+      `✨ Timbre: ${Math.round(userBrightness)}/100 (${brightnessLabel})`;
+  }
   
   document.getElementById('range-text').textContent =
     `${midiToName(userLow)} to ${midiToName(userHigh)} · ${span} semitone range`;
-  document.getElementById('brightness-text').textContent =
-    `✨ Timbre: ${Math.round(userBrightness)}/100 (${brightnessLabel})`;
 
   // Range bar
   const fullSpan = 90 - 36;
