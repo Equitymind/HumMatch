@@ -34399,6 +34399,10 @@ function showResults() {
   const topArtists = scored.slice(0, 4);
 
   // Match songs to user range + brightness, keep top matches
+  // Detect likely gender based on vocal range to filter out mismatches
+  const isMaleVoice = userHigh <= 65;  // C#4 or below = likely male
+  const isFemaleVoice = userLow >= 48; // C3 or above = likely female
+  
   const matchedSongs = SONGS
     .map(s => {
       const overlapLo = Math.max(userLow, s.lo);
@@ -34408,7 +34412,18 @@ function showResults() {
       const brightFit = 1 - Math.abs(userBrightness - s.brightness) / 100;
       return { ...s, score: rangeFit * 0.65 + brightFit * 0.35 };
     })
-    .filter(s => s.score > 0.45)  // Raise threshold to 45% for better matches
+    .filter(s => {
+      // Gender filtering: exclude songs that don't match voice gender
+      const songIsFemale = s.lo >= 50; // B2 or above = likely female song
+      const songIsMale = s.hi <= 67;   // G4 or below = likely male song
+      
+      // If user is clearly male, filter out female songs
+      if (isMaleVoice && songIsFemale && !songIsMale) return false;
+      // If user is clearly female, filter out male songs  
+      if (isFemaleVoice && songIsMale && !songIsFemale) return false;
+      
+      return s.score > 0.45; // Also apply score threshold
+    })
     .sort((a, b) => b.score - a.score)
     .reduce((acc, s) => {
       // Cap at 2 songs per artist to prevent Johnny Cash monopoly
