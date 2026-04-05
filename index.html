@@ -460,10 +460,10 @@
   <!-- ── Interest Selector ── -->
   <div style="width:100%;max-width:380px;padding:0 4px;margin-top:12px;">
     <div id="interest-selector-panel" style="display:block !important;">
-      <div style="font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:6px;">Genre (optional)</div>
+
       <div class="interest-chips" id="genre-chips"></div>
 
-      <div style="font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin:8px 0 4px;">Era (optional)</div>
+
       <div class="interest-chips" id="decade-chips"></div>
 
       <div style="display:flex;gap:8px;margin-top:10px;">
@@ -54635,7 +54635,7 @@ function showResults() {
     const _existingTasteBanner = document.getElementById('hm-taste-banner');
     if (_existingTasteBanner) _existingTasteBanner.remove();
     if (_tasteFilterActive) {
-      const _genreLabels = { pop:'Pop', rock:'Rock', country:'Country', rnb:'R&B', hiphop:'Hip-Hop', latin:'Latin', christian:'Christian', indie:'Indie', metal:'Metal', jazz:'Jazz', disco:'Disco' };
+      const _genreLabels = { pop:'Pop', rock:'Rock', country:'Country', rnb:'R&B', hiphop:'Hip-Hop', latin:'Latin', indie:'Indie', disco:'Disco' };
       const _decadeLabels = { '50s60s':'50s/60s', '70s':'70s', '80s':'80s', '90s':'90s', '2000s':'2000s', '2010s':'2010s', '2020s':'2020s' };
       const _gNames = (_interests.genres || []).map(g => _genreLabels[g] || g).join(', ');
       const _dNames = (_interests.decades || []).map(d => _decadeLabels[d] || d).join(', ');
