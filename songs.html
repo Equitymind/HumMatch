@@ -225,6 +225,11 @@ async function loadSongs() {
       SONGS = JSON.parse(jsonStr);
       console.log('Loaded', SONGS.length, 'songs from index.html');
     }
+    
+    // Clear any error messages
+    const grid = document.getElementById('songGrid');
+    grid.innerHTML = '';
+    
     renderSongs(SONGS);
     populateGenres();
   } catch (error) {
