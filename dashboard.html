@@ -662,7 +662,7 @@ function renderHumHistory(){
 function renderNextUp(){
   const el=document.getElementById('next-up-section');let icon='💡',text='';
   if(!hasHums()){icon='🎤';text='<strong>Take your first HumMatch</strong> to unlock your voice profile'}
-  else if(!playlistData.length){icon='🎵';text='<strong>Save your matches</strong> to build your first playlist'}
+  else if(!playlistData.length){icon='🎵';text='<strong><a href="/" style="color:inherit;text-decoration:underline">Save your matches</a></strong> to build your first playlist'}
   else if(squads.length===0){icon='👥';text='<strong>Start your first SquadMatch</strong> to find songs your crew can all sing'}
   else if(!isPremium){icon='⭐';text='<strong>Upgrade to save more than one playlist</strong> and unlock full HQ access'}
   else{icon='📤';text='<strong>Share your top result</strong> with a friend and see how your voices compare'}
