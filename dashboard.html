@@ -771,6 +771,21 @@ function installHumMatch(){
 }
 // Show dash A2HS after auth loads
 setTimeout(()=>showA2HSBanner('dash'),2000);
+
+// Refresh user stats when page becomes visible (fixes stale hum count)
+document.addEventListener('visibilitychange', async () => {
+  if (!document.hidden && token) {
+    try {
+      const authRes = await fetch('/api/hummatch/auth/me?token=' + token);
+      if (authRes.ok) {
+        authData = await authRes.json();
+        renderAll(); // Re-render with fresh hum count
+      }
+    } catch (e) {
+      console.error('Failed to refresh auth data', e);
+    }
+  }
+});
 </script>
 </body>
 </html>
