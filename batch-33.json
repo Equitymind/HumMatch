@@ -1,0 +1,1802 @@
+[
+  {
+    "title": "Crash My Party",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "That's My Kind of Night",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "Play It Again",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Roller Coaster",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "I See You",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Strip It Down",
+    "artist": "Luke Bryan",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Home Alone Tonight",
+    "artist": "Luke Bryan ft. Karen Fairchild",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Huntin', Fishin' and Lovin' Every Day",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Move",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Light It Up",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Most People Are Good",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Knockin' Boots",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "What She Wants Tonight",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "One Margarita",
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Down to One",
+    "artist": "Luke Bryan",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "God Gave Me You",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2011,
+    "genre": "country"
+  },
+  {
+    "title": "Honey Bee",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2011,
+    "genre": "country"
+  },
+  {
+    "title": "Drink on It",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2012,
+    "genre": "country"
+  },
+  {
+    "title": "Sure Be Cool If You Did",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "Boys 'Round Here",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "Mine Would Be You",
+    "artist": "Blake Shelton",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "Doin' What She Likes",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "My Eyes",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Sangria",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Gonna",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Came Here to Forget",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "A Guy with a Girl",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Every Time I Hear That Song",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "I'll Name the Dogs",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "I Lived It",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "God's Country",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Hell Right",
+    "artist": "Blake Shelton ft. Trace Adkins",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Nobody But You",
+    "artist": "Blake Shelton ft. Gwen Stefani",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Happy Anywhere",
+    "artist": "Blake Shelton ft. Gwen Stefani",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Minimum Wage",
+    "artist": "Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Follow Your Arrow",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 65,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "Merry Go 'Round",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "Biscuits",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 66,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Dime Store Cowgirl",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 65,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Space Cowboy",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Butterflies",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Rainbow",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "High Horse",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 67,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Slow Burn",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Golden Hour",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Happy & Sad",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Velvet Elvis",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 65,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Wonder Woman",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 66,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Oh, What a World",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Justified",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Camera Roll",
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 63,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Die a Happy Man",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Crash and Burn",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "T-Shirt",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Star of the Show",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Craving You",
+    "artist": "Thomas Rhett ft. Maren Morris",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Unforgettable",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Marry Me",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Life Changes",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Sixteen",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Remember You Young",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Look What God Gave Her",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Beer Can't Fix",
+    "artist": "Thomas Rhett ft. Jon Pardi",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "What's Your Country Song",
+    "artist": "Thomas Rhett",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "House Party",
+    "artist": "Sam Hunt",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Leave the Night On",
+    "artist": "Sam Hunt",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Take Your Time",
+    "artist": "Sam Hunt",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Break Up in a Small Town",
+    "artist": "Sam Hunt",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Make You Miss Me",
+    "artist": "Sam Hunt",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Body Like a Back Road",
+    "artist": "Sam Hunt",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Downtown's Dead",
+    "artist": "Sam Hunt",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Kinfolks",
+    "artist": "Sam Hunt",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Hard to Forget",
+    "artist": "Sam Hunt",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "You Make It Easy",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Drowns the Whiskey",
+    "artist": "Jason Aldean ft. Miranda Lambert",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Girl Like You",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Rearview Town",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "We Back",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Got What I Got",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "If I Didn't Love You",
+    "artist": "Jason Aldean & Carrie Underwood",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Trouble with a Heartbreak",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2022,
+    "genre": "country"
+  },
+  {
+    "title": "Meant to Be",
+    "artist": "Bebe Rexha & Florida Georgia Line",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 65,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "H.O.L.Y.",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "May We All",
+    "artist": "Florida Georgia Line ft. Tim McGraw",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "God, Your Mama, and Me",
+    "artist": "Florida Georgia Line ft. Backstreet Boys",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Simple",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Talk You Out of It",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "I Love My Country",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Long Live",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Dive Bar",
+    "artist": "Garth Brooks ft. Blake Shelton",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "All Day Long",
+    "artist": "Garth Brooks",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Ask Me How I Know",
+    "artist": "Garth Brooks",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Baby, Let's Lay Down and Dance",
+    "artist": "Garth Brooks",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Tequila",
+    "artist": "Dan + Shay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Speechless",
+    "artist": "Dan + Shay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "All to Myself",
+    "artist": "Dan + Shay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "10,000 Hours",
+    "artist": "Dan + Shay ft. Justin Bieber",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "I Should Probably Go to Bed",
+    "artist": "Dan + Shay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 62,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Glad You Exist",
+    "artist": "Dan + Shay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Steal My Love",
+    "artist": "Dan + Shay",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Dirt",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 62,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Sun Daze",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Sippin' on Fire",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Anything Goes",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Confession",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Wagon Wheel",
+    "artist": "Darius Rucker",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "Radio",
+    "artist": "Darius Rucker",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "Homegrown Honey",
+    "artist": "Darius Rucker",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Southern Style",
+    "artist": "Darius Rucker",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "If I Told You",
+    "artist": "Darius Rucker",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "For the First Time",
+    "artist": "Darius Rucker",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Blue Ain't Your Color",
+    "artist": "Keith Urban",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "The Fighter",
+    "artist": "Keith Urban ft. Carrie Underwood",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Female",
+    "artist": "Keith Urban",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Coming Home",
+    "artist": "Keith Urban ft. Julia Michaels",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Never Comin' Down",
+    "artist": "Keith Urban",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "We Were",
+    "artist": "Keith Urban",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "God Whispered Your Name",
+    "artist": "Keith Urban",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Girl Crush",
+    "artist": "Little Big Town",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Better Man",
+    "artist": "Little Big Town",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 63,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "When Someone Stops Loving You",
+    "artist": "Little Big Town",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "The Daughters",
+    "artist": "Little Big Town",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Over Drinking",
+    "artist": "Little Big Town",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Dirt Road Anthem",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2011,
+    "genre": "country"
+  },
+  {
+    "title": "My Kinda Party",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2010,
+    "genre": "country"
+  },
+  {
+    "title": "Don't You Wanna Stay",
+    "artist": "Jason Aldean ft. Kelly Clarkson",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2010,
+    "genre": "country"
+  },
+  {
+    "title": "Tattoos on This Town",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2011,
+    "genre": "country"
+  },
+  {
+    "title": "Fly Over States",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2012,
+    "genre": "country"
+  },
+  {
+    "title": "Take a Little Ride",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2012,
+    "genre": "country"
+  },
+  {
+    "title": "The Only Way I Know",
+    "artist": "Jason Aldean ft. Luke Bryan & Eric Church",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2012,
+    "genre": "country"
+  },
+  {
+    "title": "1994",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2012,
+    "genre": "country"
+  },
+  {
+    "title": "Night Train",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2012,
+    "genre": "country"
+  },
+  {
+    "title": "When She Says Baby",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Burnin' It Down",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Just Gettin' Started",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Tonight Looks Good on You",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2015,
+    "genre": "country"
+  },
+  {
+    "title": "Lights Come On",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "A Little More Summertime",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Any Ol' Barstool",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "They Don't Know",
+    "artist": "Jason Aldean",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Cruise",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2012,
+    "genre": "country"
+  },
+  {
+    "title": "Get Your Shine On",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "Round Here",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2013,
+    "genre": "group"
+  },
+  {
+    "title": "Stay",
+    "artist": "Florida Georgia Line",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 62,
+    "year": 2013,
+    "genre": "country"
+  },
+  {
+    "title": "This Is How We Roll",
+    "artist": "Florida Georgia Line ft. Luke Bryan",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2014,
+    "genre": "country"
+  },
+  {
+    "title": "Five More Minutes",
+    "artist": "Scotty McCreery",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "This Is It",
+    "artist": "Scotty McCreery",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "In Between",
+    "artist": "Scotty McCreery",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "You Time",
+    "artist": "Scotty McCreery",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Homesick",
+    "artist": "Kane Brown",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "What Ifs",
+    "artist": "Kane Brown ft. Lauren Alaina",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Heaven",
+    "artist": "Kane Brown",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 61,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Lose It",
+    "artist": "Kane Brown",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Good as You",
+    "artist": "Kane Brown",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Homesick",
+    "artist": "Kane Brown",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "One Thing Right",
+    "artist": "Marshmello & Kane Brown",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Cool Again",
+    "artist": "Kane Brown",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Worldwide Beautiful",
+    "artist": "Kane Brown",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Yours",
+    "artist": "Russell Dickerson",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Blue Tacoma",
+    "artist": "Russell Dickerson",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Every Little Thing",
+    "artist": "Russell Dickerson",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Love You Like I Used To",
+    "artist": "Russell Dickerson",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "More Girls Like You",
+    "artist": "Kip Moore",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Plead the Fifth",
+    "artist": "Kip Moore",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Last Shot",
+    "artist": "Kip Moore",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Middle of a Memory",
+    "artist": "Cole Swindell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2016,
+    "genre": "country"
+  },
+  {
+    "title": "Flatliner",
+    "artist": "Cole Swindell ft. Dierks Bentley",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Break Up in the End",
+    "artist": "Cole Swindell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Love You Too Late",
+    "artist": "Cole Swindell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Single Saturday Night",
+    "artist": "Cole Swindell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Some Habits",
+    "artist": "Cole Swindell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Drinkin Problem",
+    "artist": "Midland",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Make a Little",
+    "artist": "Midland",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "Burn Out",
+    "artist": "Midland",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Mr. Lonely",
+    "artist": "Midland",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "When It Rains It Pours",
+    "artist": "Luke Combs",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2017,
+    "genre": "country"
+  },
+  {
+    "title": "One Number Away",
+    "artist": "Luke Combs",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "She Got the Best of Me",
+    "artist": "Luke Combs",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Beautiful Crazy",
+    "artist": "Luke Combs",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 2018,
+    "genre": "country"
+  },
+  {
+    "title": "Beer Never Broke My Heart",
+    "artist": "Luke Combs",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Even Though I Am Leaving",
+    "artist": "Luke Combs",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Does to Me",
+    "artist": "Luke Combs ft. Eric Church",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Lovin on You",
+    "artist": "Luke Combs",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Better Together",
+    "artist": "Luke Combs",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Forever After All",
+    "artist": "Luke Combs",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Cold as You",
+    "artist": "Luke Combs",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2022,
+    "genre": "country"
+  },
+  {
+    "title": "Bluebird",
+    "artist": "Miranda Lambert",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "It All Comes Out in the Wash",
+    "artist": "Miranda Lambert",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 65,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Settling Down",
+    "artist": "Miranda Lambert",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 63,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "If I Was a Cowboy",
+    "artist": "Miranda Lambert",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Whiskey Glasses",
+    "artist": "Morgan Wallen",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "Chasin You",
+    "artist": "Morgan Wallen",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "More Than My Hometown",
+    "artist": "Morgan Wallen",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "7 Summers",
+    "artist": "Morgan Wallen",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2020,
+    "genre": "country"
+  },
+  {
+    "title": "Wasted on You",
+    "artist": "Morgan Wallen",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Sand in My Boots",
+    "artist": "Morgan Wallen",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 2021,
+    "genre": "country"
+  },
+  {
+    "title": "Somebody's Problem",
+    "artist": "Morgan Wallen",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 2023,
+    "genre": "country"
+  },
+  {
+    "title": "The Bones",
+    "artist": "Maren Morris",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 64,
+    "year": 2019,
+    "genre": "country"
+  },
+  {
+    "title": "To Hell & Back",
+    "artist": "Maren Morris",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 65,
+    "year": 2022,
+    "genre": "country"
+  },
+  {
+    "title": "Circles Around This Town",
+    "artist": "Maren Morris",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 65,
+    "year": 2022,
+    "genre": "country"
+  }
+]
