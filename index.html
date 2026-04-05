@@ -64319,6 +64319,15 @@ function showResults() {
   const langToApply = (savedLangFilter && ['en','es','all'].includes(savedLangFilter)) ? savedLangFilter : 'en';
   const langChip = document.querySelector(`.filter-chip[data-filter="${langToApply}"]`);
   if (langChip) setTimeout(() => setFilter(langToApply, langChip), 50);
+  
+  // Save matched results for quick reload
+  savedMatchedSongs = confidentSongs;
+  savedStretchSongs = stretchSongs;
+  savedVoiceType = voiceType;
+  savedRangeText = `${midiToNote(userLow)} to ${midiToNote(userHigh)} (${userHigh - userLow} semitones)`;
+  const brightLabel = userBrightness >= 70 ? 'Very Bright' : userBrightness >= 55 ? 'Bright' : userBrightness >= 45 ? 'Neutral' : userBrightness >= 30 ? 'Dark & Warm' : 'Very Dark';
+  savedBrightnessText = `✨ Timbre: ${Math.round(userBrightness)}/100 (${brightLabel})`;
+  
   saveProfile();
   checkSavedProfile(); // refresh welcome screen button
   setTimeout(() => { restorePlaylistChecks(); updateExportCount(); }, 100);
@@ -64681,10 +64690,23 @@ function closeKaraoke() {
 }
 
 // ── VOICE PROFILE PERSISTENCE ──
+// Store matched songs and voice data for quick reload
+let savedMatchedSongs = [];
+let savedStretchSongs = [];
+let savedVoiceType = '';
+let savedRangeText = '';
+let savedBrightnessText = '';
+
 function saveProfile() {
   const profile = {
     notes: capturedNotes,
     brightness: capturedBrightness,
+    // Save the actual matched results
+    matchedSongs: savedMatchedSongs,
+    stretchSongs: savedStretchSongs,
+    voiceType: savedVoiceType,
+    rangeText: savedRangeText,
+    brightnessText: savedBrightnessText,
     savedAt: Date.now(),
     version: 2 // Increment when matching algorithm changes
   };
@@ -64704,11 +64726,50 @@ function loadSavedProfile() {
       return false;
     }
     
+    // Restore saved results directly
     capturedNotes = p.notes || [null, null, null];
     capturedBrightness = p.brightness || [null, null, null];
-    showResults();
+    savedMatchedSongs = p.matchedSongs || [];
+    savedStretchSongs = p.stretchSongs || [];
+    savedVoiceType = p.voiceType || '';
+    savedRangeText = p.rangeText || '';
+    savedBrightnessText = p.brightnessText || '';
+    
+    // Show the saved results directly instead of re-running algorithm
+    showSavedResults();
     return true;
   } catch(e) { return false; }
+}
+
+function showSavedResults() {
+  // Display saved results without re-running matching algorithm
+  document.getElementById('result-emoji').textContent = '🎉';
+  document.getElementById('voice-badge').textContent = savedVoiceType;
+  document.getElementById('range-text').textContent = savedRangeText;
+  document.getElementById('brightness-text').textContent = savedBrightnessText;
+  
+  // Render saved song lists
+  const yourSongsEl = document.getElementById('your-songs');
+  const stretchSongsEl = document.getElementById('stretch-songs');
+  const stretchSection = document.getElementById('stretch-section');
+  
+  yourSongsEl.innerHTML = savedMatchedSongs.map(renderSongCard).join('');
+  
+  if (savedStretchSongs.length > 0) {
+    stretchSongsEl.innerHTML = savedStretchSongs.map(renderSongCard).join('');
+    stretchSection.style.display = 'block';
+  } else {
+    stretchSection.style.display = 'none';
+  }
+  
+  // Show results screen
+  showScreen('screen-results');
+  
+  // Restore playlist checks
+  setTimeout(() => { restorePlaylistChecks(); updateExportCount(); }, 100);
+  
+  // Update account badge
+  if (typeof hmUpdateAccountBadge === 'function') hmUpdateAccountBadge();
 }
 
 function checkSavedProfile() {
