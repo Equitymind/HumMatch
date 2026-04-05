@@ -34398,7 +34398,7 @@ function showResults() {
   const topArtist = scored[0];
   const topArtists = scored.slice(0, 4);
 
-  // Match songs to user range + brightness, keep top 30 for dismissal backfill
+  // Match songs to user range + brightness, keep top matches
   const matchedSongs = SONGS
     .map(s => {
       const overlapLo = Math.max(userLow, s.lo);
@@ -34408,8 +34408,14 @@ function showResults() {
       const brightFit = 1 - Math.abs(userBrightness - s.brightness) / 100;
       return { ...s, score: rangeFit * 0.65 + brightFit * 0.35 };
     })
-    .filter(s => s.score > 0.35)
+    .filter(s => s.score > 0.45)  // Raise threshold to 45% for better matches
     .sort((a, b) => b.score - a.score)
+    .reduce((acc, s) => {
+      // Cap at 2 songs per artist to prevent Johnny Cash monopoly
+      const artistCount = acc.filter(x => x.artist === s.artist).length;
+      if (artistCount < 2) acc.push(s);
+      return acc;
+    }, [])
     .slice(0, 60);  // Keep full pool for dismissal backfill + show-more variety
 
   // Deduplicate by normalized title (removes "Walk the Line" / "I Walk the Line" dupes)
@@ -34695,6 +34701,7 @@ function showResults() {
         <span>${s.artist}</span>
         ${genreLabel ? `<span class="dot">·</span><span>${genreLabel}</span>` : ''}
         ${s.year    ? `<span class="dot">·</span><span>${s.year}</span>` : ''}
+        ${s.score ? `<span class="dot">·</span><span style="color:#4ade80;font-weight:700;">✓ ${Math.round(s.score * 100)}% match</span>` : ''}
       </div>
       ${catBadge}
       <div class="song-bottom">
