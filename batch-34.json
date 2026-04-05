@@ -1,0 +1,1802 @@
+[
+  {
+    "title": "My Girl",
+    "artist": "The Temptations",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "Ain't Too Proud to Beg",
+    "artist": "The Temptations",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "Just My Imagination (Running Away with Me)",
+    "artist": "The Temptations",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1971,
+    "genre": "soul"
+  },
+  {
+    "title": "Papa Was a Rollin' Stone",
+    "artist": "The Temptations",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 64,
+    "year": 1972,
+    "genre": "soul"
+  },
+  {
+    "title": "Get Ready",
+    "artist": "The Temptations",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "The Way You Do the Things You Do",
+    "artist": "The Temptations",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "I Can't Get Next to You",
+    "artist": "The Temptations",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "Ball of Confusion (That's What the World Is Today)",
+    "artist": "The Temptations",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "Cloud Nine",
+    "artist": "The Temptations",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "I Wish It Would Rain",
+    "artist": "The Temptations",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "I'm Gonna Make You Love Me",
+    "artist": "The Temptations & Diana Ross & The Supremes",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Treat Her Like a Lady",
+    "artist": "The Temptations",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1984,
+    "genre": "soul"
+  },
+  {
+    "title": "Stop! In the Name of Love",
+    "artist": "The Supremes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "You Can't Hurry Love",
+    "artist": "The Supremes",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "Baby Love",
+    "artist": "The Supremes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "Come See About Me",
+    "artist": "The Supremes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "Where Did Our Love Go",
+    "artist": "The Supremes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "You Keep Me Hangin' On",
+    "artist": "The Supremes",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "Love Child",
+    "artist": "The Supremes",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 68,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Someday We'll Be Together",
+    "artist": "Diana Ross & The Supremes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "Reflections",
+    "artist": "Diana Ross & The Supremes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Back in My Arms Again",
+    "artist": "The Supremes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "I Hear a Symphony",
+    "artist": "The Supremes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "Love Is Here and Now You're Gone",
+    "artist": "The Supremes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "The Happening",
+    "artist": "The Supremes",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Reach Out I'll Be There",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "I Can't Help Myself (Sugar Pie Honey Bunch)",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 67,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "Standing in the Shadows of Love",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "Bernadette",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Baby I Need Your Loving",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "It's the Same Old Song",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "Shake Me, Wake Me (When It's Over)",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "7-Rooms of Gloom",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Walk Away Renée",
+    "artist": "Four Tops",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Still Water (Love)",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "Ain't No Woman (Like the One I've Got)",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1973,
+    "genre": "soul"
+  },
+  {
+    "title": "When She Was My Girl",
+    "artist": "Four Tops",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1981,
+    "genre": "soul"
+  },
+  {
+    "title": "I Heard It Through the Grapevine",
+    "artist": "Marvin Gaye",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 64,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "What's Going On",
+    "artist": "Marvin Gaye",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1971,
+    "genre": "soul"
+  },
+  {
+    "title": "Let's Get It On",
+    "artist": "Marvin Gaye",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1973,
+    "genre": "soul"
+  },
+  {
+    "title": "Sexual Healing",
+    "artist": "Marvin Gaye",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 64,
+    "year": 1982,
+    "genre": "soul"
+  },
+  {
+    "title": "Mercy Mercy Me (The Ecology)",
+    "artist": "Marvin Gaye",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1971,
+    "genre": "soul"
+  },
+  {
+    "title": "Inner City Blues (Make Me Wanna Holler)",
+    "artist": "Marvin Gaye",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1971,
+    "genre": "soul"
+  },
+  {
+    "title": "Ain't No Mountain High Enough",
+    "artist": "Marvin Gaye & Tammi Terrell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "You're All I Need to Get By",
+    "artist": "Marvin Gaye & Tammi Terrell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Ain't Nothing Like the Real Thing",
+    "artist": "Marvin Gaye & Tammi Terrell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Your Precious Love",
+    "artist": "Marvin Gaye & Tammi Terrell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "If I Could Build My Whole World Around You",
+    "artist": "Marvin Gaye & Tammi Terrell",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Too Busy Thinking About My Baby",
+    "artist": "Marvin Gaye",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "How Sweet It Is (To Be Loved By You)",
+    "artist": "Marvin Gaye",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "I'll Be Doggone",
+    "artist": "Marvin Gaye",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "Pride and Joy",
+    "artist": "Marvin Gaye",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1963,
+    "genre": "soul"
+  },
+  {
+    "title": "Hitch Hike",
+    "artist": "Marvin Gaye",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 67,
+    "year": 1962,
+    "genre": "soul"
+  },
+  {
+    "title": "Can I Get a Witness",
+    "artist": "Marvin Gaye",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1963,
+    "genre": "soul"
+  },
+  {
+    "title": "That's the Way Love Is",
+    "artist": "Marvin Gaye",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "Signed, Sealed, Delivered I'm Yours",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 67,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "For Once in My Life",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "You Are the Sunshine of My Life",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1973,
+    "genre": "soul"
+  },
+  {
+    "title": "Superstition",
+    "artist": "Stevie Wonder",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1972,
+    "genre": "funk"
+  },
+  {
+    "title": "Sir Duke",
+    "artist": "Stevie Wonder",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 1977,
+    "genre": "funk"
+  },
+  {
+    "title": "I Wish",
+    "artist": "Stevie Wonder",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1976,
+    "genre": "funk"
+  },
+  {
+    "title": "Isn't She Lovely",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 67,
+    "year": 1976,
+    "genre": "soul"
+  },
+  {
+    "title": "Higher Ground",
+    "artist": "Stevie Wonder",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1973,
+    "genre": "funk"
+  },
+  {
+    "title": "Living for the City",
+    "artist": "Stevie Wonder",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1973,
+    "genre": "funk"
+  },
+  {
+    "title": "Boogie On Reggae Woman",
+    "artist": "Stevie Wonder",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1974,
+    "genre": "funk"
+  },
+  {
+    "title": "My Cherie Amour",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "Uptight (Everything's Alright)",
+    "artist": "Stevie Wonder",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "I Was Made to Love Her",
+    "artist": "Stevie Wonder",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Shoo-Be-Doo-Be-Doo-Da-Day",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Yester-Me, Yester-You, Yesterday",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "Never Had a Dream Come True",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "Heaven Help Us All",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "If You Really Love Me",
+    "artist": "Stevie Wonder",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1971,
+    "genre": "soul"
+  },
+  {
+    "title": "ABC",
+    "artist": "The Jackson 5",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 69,
+    "year": 1970,
+    "genre": "pop"
+  },
+  {
+    "title": "I Want You Back",
+    "artist": "The Jackson 5",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1969,
+    "genre": "pop"
+  },
+  {
+    "title": "I'll Be There",
+    "artist": "The Jackson 5",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "The Love You Save",
+    "artist": "The Jackson 5",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1970,
+    "genre": "pop"
+  },
+  {
+    "title": "Never Can Say Goodbye",
+    "artist": "The Jackson 5",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1971,
+    "genre": "soul"
+  },
+  {
+    "title": "Dancing Machine",
+    "artist": "The Jackson 5",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1974,
+    "genre": "funk"
+  },
+  {
+    "title": "I Am Love",
+    "artist": "The Jackson 5",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1975,
+    "genre": "soul"
+  },
+  {
+    "title": "Mama's Pearl",
+    "artist": "The Jackson 5",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1971,
+    "genre": "pop"
+  },
+  {
+    "title": "Sugar Daddy",
+    "artist": "The Jackson 5",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1971,
+    "genre": "funk"
+  },
+  {
+    "title": "Looking Through the Windows",
+    "artist": "The Jackson 5",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1972,
+    "genre": "soul"
+  },
+  {
+    "title": "Tears of a Clown",
+    "artist": "Smokey Robinson & The Miracles",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "Shop Around",
+    "artist": "The Miracles",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1960,
+    "genre": "soul"
+  },
+  {
+    "title": "You've Really Got a Hold on Me",
+    "artist": "The Miracles",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 64,
+    "year": 1962,
+    "genre": "soul"
+  },
+  {
+    "title": "The Tracks of My Tears",
+    "artist": "The Miracles",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "Ooo Baby Baby",
+    "artist": "The Miracles",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "Going to a Go-Go",
+    "artist": "The Miracles",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 67,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "I Second That Emotion",
+    "artist": "Smokey Robinson & The Miracles",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "More Love",
+    "artist": "Smokey Robinson & The Miracles",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 64,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "The Love I Saw in You Was Just a Mirage",
+    "artist": "The Miracles",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Baby, Baby Don't Cry",
+    "artist": "The Miracles",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "Please Mr. Postman",
+    "artist": "The Marvelettes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1961,
+    "genre": "soul"
+  },
+  {
+    "title": "Beechwood 4-5789",
+    "artist": "The Marvelettes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1962,
+    "genre": "soul"
+  },
+  {
+    "title": "Too Many Fish in the Sea",
+    "artist": "The Marvelettes",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "Don't Mess with Bill",
+    "artist": "The Marvelettes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "The Hunter Gets Captured by the Game",
+    "artist": "The Marvelettes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "My Baby Must Be a Magician",
+    "artist": "The Marvelettes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Dancing in the Street",
+    "artist": "Martha and the Vandellas",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 69,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "Heat Wave",
+    "artist": "Martha and the Vandellas",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 1963,
+    "genre": "soul"
+  },
+  {
+    "title": "Nowhere to Run",
+    "artist": "Martha and the Vandellas",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "Jimmy Mack",
+    "artist": "Martha and the Vandellas",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Quicksand",
+    "artist": "Martha and the Vandellas",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1963,
+    "genre": "soul"
+  },
+  {
+    "title": "(Love Is Like a) Heat Wave",
+    "artist": "Martha and the Vandellas",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 1963,
+    "genre": "soul"
+  },
+  {
+    "title": "In My Lonely Room",
+    "artist": "Martha and the Vandellas",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "Wild One",
+    "artist": "Martha and the Vandellas",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "Money (That's What I Want)",
+    "artist": "Barrett Strong",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1959,
+    "genre": "soul"
+  },
+  {
+    "title": "Do You Love Me",
+    "artist": "The Contours",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 68,
+    "year": 1962,
+    "genre": "soul"
+  },
+  {
+    "title": "First I Look at the Purse",
+    "artist": "The Contours",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 67,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "What Becomes of the Brokenhearted",
+    "artist": "Jimmy Ruffin",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "I've Passed This Way Before",
+    "artist": "Jimmy Ruffin",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "Gonna Give Her All the Love I've Got",
+    "artist": "Jimmy Ruffin",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Take Me in Your Arms (Rock Me a Little While)",
+    "artist": "Kim Weston",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1965,
+    "genre": "soul"
+  },
+  {
+    "title": "It Takes Two",
+    "artist": "Marvin Gaye & Kim Weston",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 67,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "This Old Heart of Mine (Is Weak for You)",
+    "artist": "The Isley Brothers",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "I Guess I'll Always Love You",
+    "artist": "The Isley Brothers",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1966,
+    "genre": "soul"
+  },
+  {
+    "title": "Behind a Painted Smile",
+    "artist": "The Isley Brothers",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Needle in a Haystack",
+    "artist": "The Velvelettes",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "He Was Really Sayin' Somethin'",
+    "artist": "The Velvelettes",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1964,
+    "genre": "soul"
+  },
+  {
+    "title": "Love Makes Me Do Foolish Things",
+    "artist": "Martha Reeves",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "I Can't Dance to That Music You're Playin'",
+    "artist": "Martha Reeves & The Vandellas",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Forget Me Not",
+    "artist": "Martha Reeves & The Vandellas",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "25 Miles",
+    "artist": "Edwin Starr",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 68,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "War",
+    "artist": "Edwin Starr",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 69,
+    "year": 1970,
+    "genre": "funk"
+  },
+  {
+    "title": "Stop the War Now",
+    "artist": "Edwin Starr",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 67,
+    "year": 1971,
+    "genre": "funk"
+  },
+  {
+    "title": "R.E.S.P.E.C.T.",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Think",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Chain of Fools",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "(You Make Me Feel Like) A Natural Woman",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "I Say a Little Prayer",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Baby I Love You",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Ain't No Way",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "I Never Loved a Man (The Way I Love You)",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Do Right Woman, Do Right Man",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1967,
+    "genre": "soul"
+  },
+  {
+    "title": "Since You've Been Gone (Sweet Sweet Baby)",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "See Saw",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "The House That Jack Built",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1968,
+    "genre": "soul"
+  },
+  {
+    "title": "Share Your Love with Me",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "Eleanor Rigby",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1969,
+    "genre": "soul"
+  },
+  {
+    "title": "Call Me",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 68,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "Spirit in the Dark",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 69,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "Don't Play That Song (You Lied)",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "Bridge Over Troubled Water",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1971,
+    "genre": "soul"
+  },
+  {
+    "title": "Rock Steady",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 1971,
+    "genre": "funk"
+  },
+  {
+    "title": "Day Dreaming",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 65,
+    "year": 1972,
+    "genre": "soul"
+  },
+  {
+    "title": "Angel",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1973,
+    "genre": "soul"
+  },
+  {
+    "title": "Until You Come Back to Me (That's What I'm Gonna Do)",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1973,
+    "genre": "soul"
+  },
+  {
+    "title": "Ain't Nothing Like the Real Thing",
+    "artist": "Aretha Franklin & Michael McDonald",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1989,
+    "genre": "soul"
+  },
+  {
+    "title": "Freeway of Love",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 1985,
+    "genre": "rnb"
+  },
+  {
+    "title": "Who's Zoomin' Who",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 69,
+    "year": 1985,
+    "genre": "rnb"
+  },
+  {
+    "title": "I Knew You Were Waiting (For Me)",
+    "artist": "Aretha Franklin & George Michael",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 1987,
+    "genre": "pop"
+  },
+  {
+    "title": "Jumpin' Jack Flash",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 71,
+    "year": 1986,
+    "genre": "rock"
+  },
+  {
+    "title": "Cruisin",
+    "artist": "Smokey Robinson",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1979,
+    "genre": "soul"
+  },
+  {
+    "title": "Being with You",
+    "artist": "Smokey Robinson",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1981,
+    "genre": "soul"
+  },
+  {
+    "title": "Just to See Her",
+    "artist": "Smokey Robinson",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1987,
+    "genre": "soul"
+  },
+  {
+    "title": "Quiet Storm",
+    "artist": "Smokey Robinson",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 1975,
+    "genre": "soul"
+  },
+  {
+    "title": "Baby Come Close",
+    "artist": "Smokey Robinson",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1974,
+    "genre": "soul"
+  },
+  {
+    "title": "Sweet Harmony",
+    "artist": "Smokey Robinson",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1973,
+    "genre": "soul"
+  },
+  {
+    "title": "Lovely Day",
+    "artist": "Bill Withers",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1977,
+    "genre": "soul"
+  },
+  {
+    "title": "Lean on Me",
+    "artist": "Bill Withers",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1972,
+    "genre": "soul"
+  },
+  {
+    "title": "Aint No Sunshine",
+    "artist": "Bill Withers",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 1971,
+    "genre": "soul"
+  },
+  {
+    "title": "Use Me",
+    "artist": "Bill Withers",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1972,
+    "genre": "soul"
+  },
+  {
+    "title": "Just the Two of Us",
+    "artist": "Grover Washington Jr. ft. Bill Withers",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1981,
+    "genre": "soul"
+  },
+  {
+    "title": "Three Times a Lady",
+    "artist": "Commodores",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 1978,
+    "genre": "soul"
+  },
+  {
+    "title": "Easy",
+    "artist": "Commodores",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1977,
+    "genre": "soul"
+  },
+  {
+    "title": "Brick House",
+    "artist": "Commodores",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 67,
+    "year": 1977,
+    "genre": "funk"
+  },
+  {
+    "title": "Still",
+    "artist": "Commodores",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1979,
+    "genre": "soul"
+  },
+  {
+    "title": "Sail On",
+    "artist": "Commodores",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1979,
+    "genre": "soul"
+  },
+  {
+    "title": "Sweet Love",
+    "artist": "Commodores",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1976,
+    "genre": "soul"
+  },
+  {
+    "title": "Just to Be Close to You",
+    "artist": "Commodores",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1976,
+    "genre": "soul"
+  },
+  {
+    "title": "Too Hot ta Trot",
+    "artist": "Commodores",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 67,
+    "year": 1977,
+    "genre": "funk"
+  },
+  {
+    "title": "Lady (You Bring Me Up)",
+    "artist": "Commodores",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1981,
+    "genre": "funk"
+  },
+  {
+    "title": "Oh No",
+    "artist": "Commodores",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1981,
+    "genre": "funk"
+  },
+  {
+    "title": "Nightshift",
+    "artist": "Commodores",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1985,
+    "genre": "soul"
+  },
+  {
+    "title": "All Night Long (All Night)",
+    "artist": "Lionel Richie",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1983,
+    "genre": "pop"
+  },
+  {
+    "title": "Hello",
+    "artist": "Lionel Richie",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1984,
+    "genre": "pop"
+  },
+  {
+    "title": "Truly",
+    "artist": "Lionel Richie",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 1982,
+    "genre": "pop"
+  },
+  {
+    "title": "Stuck on You",
+    "artist": "Lionel Richie",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 64,
+    "year": 1984,
+    "genre": "pop"
+  },
+  {
+    "title": "Running with the Night",
+    "artist": "Lionel Richie",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1983,
+    "genre": "pop"
+  },
+  {
+    "title": "Penny Lover",
+    "artist": "Lionel Richie",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1984,
+    "genre": "pop"
+  },
+  {
+    "title": "Say You, Say Me",
+    "artist": "Lionel Richie",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1985,
+    "genre": "pop"
+  },
+  {
+    "title": "Dancing on the Ceiling",
+    "artist": "Lionel Richie",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 66,
+    "year": 1986,
+    "genre": "pop"
+  },
+  {
+    "title": "Se La",
+    "artist": "Lionel Richie",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1987,
+    "genre": "pop"
+  },
+  {
+    "title": "Endless Love",
+    "artist": "Lionel Richie & Diana Ross",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1981,
+    "genre": "pop"
+  },
+  {
+    "title": "Upside Down",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1980,
+    "genre": "disco"
+  },
+  {
+    "title": "Im Coming Out",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 69,
+    "year": 1980,
+    "genre": "disco"
+  },
+  {
+    "title": "Love Hangover",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1976,
+    "genre": "disco"
+  },
+  {
+    "title": "Touch Me in the Morning",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1973,
+    "genre": "soul"
+  },
+  {
+    "title": "Theme from Mahogany (Do You Know Where You Are Going To)",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 65,
+    "year": 1975,
+    "genre": "soul"
+  },
+  {
+    "title": "Aint No Mountain High Enough",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "Reach Out and Touch (Somebodys Hand)",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1970,
+    "genre": "soul"
+  },
+  {
+    "title": "Missing You",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1984,
+    "genre": "pop"
+  },
+  {
+    "title": "Muscles",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1982,
+    "genre": "pop"
+  },
+  {
+    "title": "Why Do Fools Fall in Love",
+    "artist": "Diana Ross",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 70,
+    "year": 1981,
+    "genre": "pop"
+  },
+  {
+    "title": "Mirror Mirror",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1982,
+    "genre": "pop"
+  },
+  {
+    "title": "Endless Love",
+    "artist": "Diana Ross & Lionel Richie",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 66,
+    "year": 1981,
+    "genre": "pop"
+  },
+  {
+    "title": "The Best Years of My Life",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 67,
+    "year": 1993,
+    "genre": "pop"
+  },
+  {
+    "title": "If We Hold On Together",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 65,
+    "year": 1988,
+    "genre": "pop"
+  },
+  {
+    "title": "Chain Reaction",
+    "artist": "Diana Ross",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 69,
+    "year": 1985,
+    "genre": "pop"
+  }
+]
