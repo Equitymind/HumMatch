@@ -1,0 +1,1442 @@
+[
+  {
+    "title": "Fly Me to the Moon",
+    "artist": "Frank Sinatra",
+    "lo": 44,
+    "hi": 70,
+    "brightness": 64,
+    "year": 1964,
+    "genre": "jazz"
+  },
+  {
+    "title": "My Way",
+    "artist": "Frank Sinatra",
+    "lo": 42,
+    "hi": 69,
+    "brightness": 61,
+    "year": 1969,
+    "genre": "jazz"
+  },
+  {
+    "title": "New York, New York",
+    "artist": "Frank Sinatra",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 66,
+    "year": 1979,
+    "genre": "jazz"
+  },
+  {
+    "title": "I've Got You Under My Skin",
+    "artist": "Frank Sinatra",
+    "lo": 44,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1956,
+    "genre": "jazz"
+  },
+  {
+    "title": "The Way You Look Tonight",
+    "artist": "Frank Sinatra",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1964,
+    "genre": "jazz"
+  },
+  {
+    "title": "Strangers in the Night",
+    "artist": "Frank Sinatra",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1966,
+    "genre": "jazz"
+  },
+  {
+    "title": "That's Life",
+    "artist": "Frank Sinatra",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1966,
+    "genre": "jazz"
+  },
+  {
+    "title": "Come Fly with Me",
+    "artist": "Frank Sinatra",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1958,
+    "genre": "jazz"
+  },
+  {
+    "title": "One for My Baby (And One More for the Road)",
+    "artist": "Frank Sinatra",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1958,
+    "genre": "jazz"
+  },
+  {
+    "title": "Summer Wind",
+    "artist": "Frank Sinatra",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1966,
+    "genre": "jazz"
+  },
+  {
+    "title": "It Was a Very Good Year",
+    "artist": "Frank Sinatra",
+    "lo": 41,
+    "hi": 67,
+    "brightness": 60,
+    "year": 1965,
+    "genre": "jazz"
+  },
+  {
+    "title": "All the Way",
+    "artist": "Frank Sinatra",
+    "lo": 43,
+    "hi": 69,
+    "brightness": 63,
+    "year": 1957,
+    "genre": "jazz"
+  },
+  {
+    "title": "Night and Day",
+    "artist": "Frank Sinatra",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1942,
+    "genre": "jazz"
+  },
+  {
+    "title": "Moon River",
+    "artist": "Andy Williams",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 64,
+    "year": 1961,
+    "genre": "jazz"
+  },
+  {
+    "title": "Days of Wine and Roses",
+    "artist": "Andy Williams",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1963,
+    "genre": "jazz"
+  },
+  {
+    "title": "Can't Help Falling in Love",
+    "artist": "Elvis Presley",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1961,
+    "genre": "jazz"
+  },
+  {
+    "title": "Unforgettable",
+    "artist": "Nat King Cole",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1951,
+    "genre": "jazz"
+  },
+  {
+    "title": "The Christmas Song",
+    "artist": "Nat King Cole",
+    "lo": 41,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1946,
+    "genre": "jazz"
+  },
+  {
+    "title": "Mona Lisa",
+    "artist": "Nat King Cole",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1950,
+    "genre": "jazz"
+  },
+  {
+    "title": "L-O-V-E",
+    "artist": "Nat King Cole",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1965,
+    "genre": "jazz"
+  },
+  {
+    "title": "When I Fall in Love",
+    "artist": "Nat King Cole",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1957,
+    "genre": "jazz"
+  },
+  {
+    "title": "Smile",
+    "artist": "Nat King Cole",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 62,
+    "year": 1954,
+    "genre": "jazz"
+  },
+  {
+    "title": "Stardust",
+    "artist": "Nat King Cole",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1957,
+    "genre": "jazz"
+  },
+  {
+    "title": "At Last",
+    "artist": "Etta James",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 64,
+    "year": 1960,
+    "genre": "jazz"
+  },
+  {
+    "title": "I'd Rather Go Blind",
+    "artist": "Etta James",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1967,
+    "genre": "jazz"
+  },
+  {
+    "title": "All I Could Do Was Cry",
+    "artist": "Etta James",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1960,
+    "genre": "jazz"
+  },
+  {
+    "title": "Sunday Kind of Love",
+    "artist": "Etta James",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1960,
+    "genre": "jazz"
+  },
+  {
+    "title": "Something's Got a Hold on Me",
+    "artist": "Etta James",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1962,
+    "genre": "jazz"
+  },
+  {
+    "title": "What a Wonderful World",
+    "artist": "Louis Armstrong",
+    "lo": 40,
+    "hi": 65,
+    "brightness": 58,
+    "year": 1967,
+    "genre": "jazz"
+  },
+  {
+    "title": "La Vie En Rose",
+    "artist": "Louis Armstrong",
+    "lo": 41,
+    "hi": 66,
+    "brightness": 59,
+    "year": 1950,
+    "genre": "jazz"
+  },
+  {
+    "title": "Hello, Dolly!",
+    "artist": "Louis Armstrong",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1964,
+    "genre": "jazz"
+  },
+  {
+    "title": "Mack the Knife",
+    "artist": "Louis Armstrong",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1956,
+    "genre": "jazz"
+  },
+  {
+    "title": "When You're Smiling",
+    "artist": "Louis Armstrong",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1929,
+    "genre": "jazz"
+  },
+  {
+    "title": "A Kiss to Build a Dream On",
+    "artist": "Louis Armstrong",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1951,
+    "genre": "jazz"
+  },
+  {
+    "title": "When the Saints Go Marching In",
+    "artist": "Louis Armstrong",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1938,
+    "genre": "jazz"
+  },
+  {
+    "title": "Summertime",
+    "artist": "Ella Fitzgerald",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1957,
+    "genre": "jazz"
+  },
+  {
+    "title": "Dream a Little Dream of Me",
+    "artist": "Ella Fitzgerald",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1950,
+    "genre": "jazz"
+  },
+  {
+    "title": "Someone to Watch Over Me",
+    "artist": "Ella Fitzgerald",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 64,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "Misty",
+    "artist": "Ella Fitzgerald",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "Cry Me a River",
+    "artist": "Ella Fitzgerald",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 64,
+    "year": 1961,
+    "genre": "jazz"
+  },
+  {
+    "title": "How High the Moon",
+    "artist": "Ella Fitzgerald",
+    "lo": 47,
+    "hi": 74,
+    "brightness": 68,
+    "year": 1947,
+    "genre": "jazz"
+  },
+  {
+    "title": "It Don't Mean a Thing (If It Ain't Got That Swing)",
+    "artist": "Ella Fitzgerald",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1957,
+    "genre": "jazz"
+  },
+  {
+    "title": "Cheek to Cheek",
+    "artist": "Ella Fitzgerald",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1957,
+    "genre": "jazz"
+  },
+  {
+    "title": "The Lady Is a Tramp",
+    "artist": "Ella Fitzgerald",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1956,
+    "genre": "jazz"
+  },
+  {
+    "title": "Blue Skies",
+    "artist": "Ella Fitzgerald",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1958,
+    "genre": "jazz"
+  },
+  {
+    "title": "Bewitched, Bothered and Bewildered",
+    "artist": "Ella Fitzgerald",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1956,
+    "genre": "jazz"
+  },
+  {
+    "title": "Mack the Knife",
+    "artist": "Ella Fitzgerald",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1960,
+    "genre": "jazz"
+  },
+  {
+    "title": "Autumn Leaves",
+    "artist": "Nat King Cole",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1955,
+    "genre": "jazz"
+  },
+  {
+    "title": "In the Wee Small Hours of the Morning",
+    "artist": "Frank Sinatra",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1955,
+    "genre": "jazz"
+  },
+  {
+    "title": "I Get a Kick Out of You",
+    "artist": "Frank Sinatra",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1953,
+    "genre": "jazz"
+  },
+  {
+    "title": "You Make Me Feel So Young",
+    "artist": "Frank Sinatra",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 66,
+    "year": 1956,
+    "genre": "jazz"
+  },
+  {
+    "title": "The Best Is Yet to Come",
+    "artist": "Frank Sinatra",
+    "lo": 43,
+    "hi": 69,
+    "brightness": 63,
+    "year": 1964,
+    "genre": "jazz"
+  },
+  {
+    "title": "Come Rain or Come Shine",
+    "artist": "Frank Sinatra",
+    "lo": 43,
+    "hi": 69,
+    "brightness": 63,
+    "year": 1961,
+    "genre": "jazz"
+  },
+  {
+    "title": "I've Got the World on a String",
+    "artist": "Frank Sinatra",
+    "lo": 44,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1953,
+    "genre": "jazz"
+  },
+  {
+    "title": "My Funny Valentine",
+    "artist": "Chet Baker",
+    "lo": 40,
+    "hi": 65,
+    "brightness": 58,
+    "year": 1954,
+    "genre": "jazz"
+  },
+  {
+    "title": "But Not for Me",
+    "artist": "Chet Baker",
+    "lo": 41,
+    "hi": 66,
+    "brightness": 59,
+    "year": 1954,
+    "genre": "jazz"
+  },
+  {
+    "title": "I Fall in Love Too Easily",
+    "artist": "Chet Baker",
+    "lo": 41,
+    "hi": 66,
+    "brightness": 59,
+    "year": 1954,
+    "genre": "jazz"
+  },
+  {
+    "title": "My Funny Valentine",
+    "artist": "Frank Sinatra",
+    "lo": 42,
+    "hi": 68,
+    "brightness": 61,
+    "year": 1953,
+    "genre": "jazz"
+  },
+  {
+    "title": "Blue Moon",
+    "artist": "Billie Holiday",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1952,
+    "genre": "jazz"
+  },
+  {
+    "title": "God Bless the Child",
+    "artist": "Billie Holiday",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 64,
+    "year": 1941,
+    "genre": "jazz"
+  },
+  {
+    "title": "Strange Fruit",
+    "artist": "Billie Holiday",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1939,
+    "genre": "jazz"
+  },
+  {
+    "title": "Good Morning Heartache",
+    "artist": "Billie Holiday",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1946,
+    "genre": "jazz"
+  },
+  {
+    "title": "Don't Explain",
+    "artist": "Billie Holiday",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1946,
+    "genre": "jazz"
+  },
+  {
+    "title": "Lover Man",
+    "artist": "Billie Holiday",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1944,
+    "genre": "jazz"
+  },
+  {
+    "title": "Easy Living",
+    "artist": "Billie Holiday",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1937,
+    "genre": "jazz"
+  },
+  {
+    "title": "Solitude",
+    "artist": "Billie Holiday",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1941,
+    "genre": "jazz"
+  },
+  {
+    "title": "All of Me",
+    "artist": "Billie Holiday",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1941,
+    "genre": "jazz"
+  },
+  {
+    "title": "The Very Thought of You",
+    "artist": "Billie Holiday",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1938,
+    "genre": "jazz"
+  },
+  {
+    "title": "I'll Be Seeing You",
+    "artist": "Billie Holiday",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1944,
+    "genre": "jazz"
+  },
+  {
+    "title": "Georgia on My Mind",
+    "artist": "Ray Charles",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1960,
+    "genre": "jazz"
+  },
+  {
+    "title": "Hit the Road Jack",
+    "artist": "Ray Charles",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1961,
+    "genre": "jazz"
+  },
+  {
+    "title": "I Can't Stop Loving You",
+    "artist": "Ray Charles",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1962,
+    "genre": "jazz"
+  },
+  {
+    "title": "Unchain My Heart",
+    "artist": "Ray Charles",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1961,
+    "genre": "jazz"
+  },
+  {
+    "title": "Hallelujah I Love Her So",
+    "artist": "Ray Charles",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1956,
+    "genre": "jazz"
+  },
+  {
+    "title": "What'd I Say",
+    "artist": "Ray Charles",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "Busted",
+    "artist": "Ray Charles",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1963,
+    "genre": "jazz"
+  },
+  {
+    "title": "Cry Me a River",
+    "artist": "Julie London",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1955,
+    "genre": "jazz"
+  },
+  {
+    "title": "That Old Black Magic",
+    "artist": "Ella Fitzgerald",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1961,
+    "genre": "jazz"
+  },
+  {
+    "title": "Taking a Chance on Love",
+    "artist": "Benny Goodman",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1940,
+    "genre": "jazz"
+  },
+  {
+    "title": "Moonglow",
+    "artist": "Benny Goodman",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1934,
+    "genre": "jazz"
+  },
+  {
+    "title": "Sing, Sing, Sing",
+    "artist": "Benny Goodman",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1937,
+    "genre": "jazz"
+  },
+  {
+    "title": "Stompin' at the Savoy",
+    "artist": "Benny Goodman",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1936,
+    "genre": "jazz"
+  },
+  {
+    "title": "Don't Be That Way",
+    "artist": "Benny Goodman",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1938,
+    "genre": "jazz"
+  },
+  {
+    "title": "Body and Soul",
+    "artist": "Coleman Hawkins",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1939,
+    "genre": "jazz"
+  },
+  {
+    "title": "Take Five",
+    "artist": "Dave Brubeck",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "Blue Rondo à la Turk",
+    "artist": "Dave Brubeck",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "Unsquare Dance",
+    "artist": "Dave Brubeck",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1961,
+    "genre": "jazz"
+  },
+  {
+    "title": "'Round Midnight",
+    "artist": "Thelonious Monk",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1944,
+    "genre": "jazz"
+  },
+  {
+    "title": "Straight, No Chaser",
+    "artist": "Thelonious Monk",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1951,
+    "genre": "jazz"
+  },
+  {
+    "title": "Blue Monk",
+    "artist": "Thelonious Monk",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1954,
+    "genre": "jazz"
+  },
+  {
+    "title": "Ruby, My Dear",
+    "artist": "Thelonious Monk",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 1947,
+    "genre": "jazz"
+  },
+  {
+    "title": "Well, You Needn't",
+    "artist": "Thelonious Monk",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1947,
+    "genre": "jazz"
+  },
+  {
+    "title": "So What",
+    "artist": "Miles Davis",
+    "lo": 41,
+    "hi": 65,
+    "brightness": 59,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "All Blues",
+    "artist": "Miles Davis",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "Freddie Freeloader",
+    "artist": "Miles Davis",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "Blue in Green",
+    "artist": "Miles Davis",
+    "lo": 41,
+    "hi": 65,
+    "brightness": 59,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "Flamenco Sketches",
+    "artist": "Miles Davis",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "My Funny Valentine",
+    "artist": "Miles Davis",
+    "lo": 40,
+    "hi": 65,
+    "brightness": 58,
+    "year": 1964,
+    "genre": "jazz"
+  },
+  {
+    "title": "'Round Midnight",
+    "artist": "Miles Davis",
+    "lo": 41,
+    "hi": 65,
+    "brightness": 59,
+    "year": 1955,
+    "genre": "jazz"
+  },
+  {
+    "title": "A Night in Tunisia",
+    "artist": "Dizzy Gillespie",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1946,
+    "genre": "jazz"
+  },
+  {
+    "title": "Salt Peanuts",
+    "artist": "Dizzy Gillespie",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1945,
+    "genre": "jazz"
+  },
+  {
+    "title": "Anthropology",
+    "artist": "Dizzy Gillespie & Charlie Parker",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1945,
+    "genre": "jazz"
+  },
+  {
+    "title": "Groovin' High",
+    "artist": "Dizzy Gillespie",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1945,
+    "genre": "jazz"
+  },
+  {
+    "title": "Manteca",
+    "artist": "Dizzy Gillespie",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1947,
+    "genre": "jazz"
+  },
+  {
+    "title": "Ornithology",
+    "artist": "Charlie Parker",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1946,
+    "genre": "jazz"
+  },
+  {
+    "title": "Ko-Ko",
+    "artist": "Charlie Parker",
+    "lo": 47,
+    "hi": 72,
+    "brightness": 68,
+    "year": 1945,
+    "genre": "jazz"
+  },
+  {
+    "title": "Now's the Time",
+    "artist": "Charlie Parker",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1945,
+    "genre": "jazz"
+  },
+  {
+    "title": "Yardbird Suite",
+    "artist": "Charlie Parker",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1946,
+    "genre": "jazz"
+  },
+  {
+    "title": "Parker's Mood",
+    "artist": "Charlie Parker",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1948,
+    "genre": "jazz"
+  },
+  {
+    "title": "Confirmation",
+    "artist": "Charlie Parker",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1953,
+    "genre": "jazz"
+  },
+  {
+    "title": "Billie's Bounce",
+    "artist": "Charlie Parker",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1945,
+    "genre": "jazz"
+  },
+  {
+    "title": "Perdido",
+    "artist": "Duke Ellington",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1942,
+    "genre": "jazz"
+  },
+  {
+    "title": "Take the 'A' Train",
+    "artist": "Duke Ellington",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1941,
+    "genre": "jazz"
+  },
+  {
+    "title": "Mood Indigo",
+    "artist": "Duke Ellington",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1930,
+    "genre": "jazz"
+  },
+  {
+    "title": "Caravan",
+    "artist": "Duke Ellington",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1936,
+    "genre": "jazz"
+  },
+  {
+    "title": "Sophisticated Lady",
+    "artist": "Duke Ellington",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1933,
+    "genre": "jazz"
+  },
+  {
+    "title": "Prelude to a Kiss",
+    "artist": "Duke Ellington",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1938,
+    "genre": "jazz"
+  },
+  {
+    "title": "Satin Doll",
+    "artist": "Duke Ellington",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1953,
+    "genre": "jazz"
+  },
+  {
+    "title": "In a Sentimental Mood",
+    "artist": "Duke Ellington",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 61,
+    "year": 1935,
+    "genre": "jazz"
+  },
+  {
+    "title": "Cottontail",
+    "artist": "Duke Ellington",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1940,
+    "genre": "jazz"
+  },
+  {
+    "title": "Perdido",
+    "artist": "Duke Ellington",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1942,
+    "genre": "jazz"
+  },
+  {
+    "title": "C Jam Blues",
+    "artist": "Duke Ellington",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1942,
+    "genre": "jazz"
+  },
+  {
+    "title": "April in Paris",
+    "artist": "Count Basie",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1955,
+    "genre": "jazz"
+  },
+  {
+    "title": "One O'Clock Jump",
+    "artist": "Count Basie",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1937,
+    "genre": "jazz"
+  },
+  {
+    "title": "Jumpin' at the Woodside",
+    "artist": "Count Basie",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1938,
+    "genre": "jazz"
+  },
+  {
+    "title": "Lil' Darlin'",
+    "artist": "Count Basie",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1957,
+    "genre": "jazz"
+  },
+  {
+    "title": "Shiny Stockings",
+    "artist": "Count Basie",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1955,
+    "genre": "jazz"
+  },
+  {
+    "title": "Every Day (I Have the Blues)",
+    "artist": "Count Basie",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1955,
+    "genre": "jazz"
+  },
+  {
+    "title": "Fly Me to the Moon (In Other Words)",
+    "artist": "Peggy Lee",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1964,
+    "genre": "jazz"
+  },
+  {
+    "title": "Fever",
+    "artist": "Peggy Lee",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1958,
+    "genre": "jazz"
+  },
+  {
+    "title": "Is That All There Is?",
+    "artist": "Peggy Lee",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1969,
+    "genre": "jazz"
+  },
+  {
+    "title": "Them There Eyes",
+    "artist": "Billie Holiday",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1939,
+    "genre": "jazz"
+  },
+  {
+    "title": "On the Sunny Side of the Street",
+    "artist": "Louis Armstrong",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1956,
+    "genre": "jazz"
+  },
+  {
+    "title": "Basin Street Blues",
+    "artist": "Louis Armstrong",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1928,
+    "genre": "jazz"
+  },
+  {
+    "title": "Lazy River",
+    "artist": "Louis Armstrong",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1931,
+    "genre": "jazz"
+  },
+  {
+    "title": "St. Louis Blues",
+    "artist": "Bessie Smith",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 61,
+    "year": 1925,
+    "genre": "jazz"
+  },
+  {
+    "title": "Downhearted Blues",
+    "artist": "Bessie Smith",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1923,
+    "genre": "jazz"
+  },
+  {
+    "title": "Gimme a Pigfoot (And a Bottle of Beer)",
+    "artist": "Bessie Smith",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1933,
+    "genre": "jazz"
+  },
+  {
+    "title": "T'ain't Nobody's Biz-ness If I Do",
+    "artist": "Bessie Smith",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1923,
+    "genre": "jazz"
+  },
+  {
+    "title": "Nobody Knows You When You're Down and Out",
+    "artist": "Bessie Smith",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1929,
+    "genre": "jazz"
+  },
+  {
+    "title": "After You've Gone",
+    "artist": "Bessie Smith",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1927,
+    "genre": "jazz"
+  },
+  {
+    "title": "Embraceable You",
+    "artist": "Judy Garland",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1944,
+    "genre": "jazz"
+  },
+  {
+    "title": "The Man That Got Away",
+    "artist": "Judy Garland",
+    "lo": 46,
+    "hi": 73,
+    "brightness": 67,
+    "year": 1954,
+    "genre": "jazz"
+  },
+  {
+    "title": "Get Happy",
+    "artist": "Judy Garland",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1950,
+    "genre": "jazz"
+  },
+  {
+    "title": "The Trolley Song",
+    "artist": "Judy Garland",
+    "lo": 47,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1944,
+    "genre": "jazz"
+  },
+  {
+    "title": "For Me and My Gal",
+    "artist": "Judy Garland",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1942,
+    "genre": "jazz"
+  },
+  {
+    "title": "It's Only a Paper Moon",
+    "artist": "Nat King Cole",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1943,
+    "genre": "jazz"
+  },
+  {
+    "title": "Route 66",
+    "artist": "Nat King Cole",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1946,
+    "genre": "jazz"
+  },
+  {
+    "title": "Tenderly",
+    "artist": "Sarah Vaughan",
+    "lo": 44,
+    "hi": 70,
+    "brightness": 64,
+    "year": 1952,
+    "genre": "jazz"
+  },
+  {
+    "title": "Misty",
+    "artist": "Sarah Vaughan",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 65,
+    "year": 1958,
+    "genre": "jazz"
+  },
+  {
+    "title": "Lullaby of Birdland",
+    "artist": "Sarah Vaughan",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1954,
+    "genre": "jazz"
+  },
+  {
+    "title": "Whatever Lola Wants",
+    "artist": "Sarah Vaughan",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1955,
+    "genre": "jazz"
+  },
+  {
+    "title": "Broken-Hearted Melody",
+    "artist": "Sarah Vaughan",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1959,
+    "genre": "jazz"
+  },
+  {
+    "title": "Autumn in New York",
+    "artist": "Billie Holiday",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1952,
+    "genre": "jazz"
+  },
+  {
+    "title": "Body and Soul",
+    "artist": "Billie Holiday",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1940,
+    "genre": "jazz"
+  },
+  {
+    "title": "I Cover the Waterfront",
+    "artist": "Billie Holiday",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1941,
+    "genre": "jazz"
+  },
+  {
+    "title": "Yesterday",
+    "artist": "Billie Holiday",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1952,
+    "genre": "jazz"
+  },
+  {
+    "title": "These Foolish Things (Remind Me of You)",
+    "artist": "Billie Holiday",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1936,
+    "genre": "jazz"
+  },
+  {
+    "title": "Pennies from Heaven",
+    "artist": "Louis Prima",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1956,
+    "genre": "jazz"
+  },
+  {
+    "title": "Just a Gigolo / I Ain't Got Nobody",
+    "artist": "Louis Prima",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1956,
+    "genre": "jazz"
+  }
+]
