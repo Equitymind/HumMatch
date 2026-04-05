@@ -1,0 +1,1379 @@
+[
+  {
+    "title": "Don't You (Forget About Me)",
+    "artist": "Simple Minds",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Alive and Kicking",
+    "artist": "Simple Minds",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Don't You Want Me",
+    "artist": "The Human League",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Tainted Love",
+    "artist": "Soft Cell",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Come On Eileen",
+    "artist": "Dexys Midnight Runners",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Rio",
+    "artist": "Duran Duran",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Hungry Like the Wolf",
+    "artist": "Duran Duran",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "The Reflex",
+    "artist": "Duran Duran",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Girls on Film",
+    "artist": "Duran Duran",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Is There Something I Should Know?",
+    "artist": "Duran Duran",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Union of the Snake",
+    "artist": "Duran Duran",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "A View to a Kill",
+    "artist": "Duran Duran",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Notorious",
+    "artist": "Duran Duran",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "Ordinary World",
+    "artist": "Duran Duran",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1993,
+    "genre": "new wave"
+  },
+  {
+    "title": "Take On Me",
+    "artist": "a-ha",
+    "lo": 49,
+    "hi": 80,
+    "brightness": 71,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "The Sun Always Shines on T.V.",
+    "artist": "a-ha",
+    "lo": 47,
+    "hi": 72,
+    "brightness": 68,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Hunting High and Low",
+    "artist": "a-ha",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "You Spin Me Round (Like a Record)",
+    "artist": "Dead or Alive",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Relax",
+    "artist": "Frankie Goes to Hollywood",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Two Tribes",
+    "artist": "Frankie Goes to Hollywood",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "The Power of Love",
+    "artist": "Frankie Goes to Hollywood",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "West End Girls",
+    "artist": "Pet Shop Boys",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "It's a Sin",
+    "artist": "Pet Shop Boys",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "Always on My Mind",
+    "artist": "Pet Shop Boys",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "What Have I Done to Deserve This?",
+    "artist": "Pet Shop Boys",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "Heart",
+    "artist": "Pet Shop Boys",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1988,
+    "genre": "new wave"
+  },
+  {
+    "title": "Being Boring",
+    "artist": "Pet Shop Boys",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1990,
+    "genre": "new wave"
+  },
+  {
+    "title": "Go West",
+    "artist": "Pet Shop Boys",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1993,
+    "genre": "new wave"
+  },
+  {
+    "title": "True",
+    "artist": "Spandau Ballet",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 64,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Gold",
+    "artist": "Spandau Ballet",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Through the Barricades",
+    "artist": "Spandau Ballet",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "Forever Young",
+    "artist": "Alphaville",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Big in Japan",
+    "artist": "Alphaville",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Sweet Dreams (Are Made of This)",
+    "artist": "Eurythmics",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Here Comes the Rain Again",
+    "artist": "Eurythmics",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Would I Lie to You?",
+    "artist": "Eurythmics",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Missionary Man",
+    "artist": "Eurythmics",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "There Must Be an Angel (Playing with My Heart)",
+    "artist": "Eurythmics",
+    "lo": 48,
+    "hi": 73,
+    "brightness": 69,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Love Is a Stranger",
+    "artist": "Eurythmics",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Who Can It Be Now?",
+    "artist": "Men at Work",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Down Under",
+    "artist": "Men at Work",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Overkill",
+    "artist": "Men at Work",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "It's My Life",
+    "artist": "Talk Talk",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Such a Shame",
+    "artist": "Talk Talk",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Safety Dance",
+    "artist": "Men Without Hats",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "I Ran (So Far Away)",
+    "artist": "A Flock of Seagulls",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Space Age Love Song",
+    "artist": "A Flock of Seagulls",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Wishing (If I Had a Photograph of You)",
+    "artist": "A Flock of Seagulls",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Our House",
+    "artist": "Madness",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "It Must Be Love",
+    "artist": "Madness",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Baggy Trousers",
+    "artist": "Madness",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "One Step Beyond",
+    "artist": "Madness",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1979,
+    "genre": "new wave"
+  },
+  {
+    "title": "Love Shack",
+    "artist": "The B-52's",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1989,
+    "genre": "new wave"
+  },
+  {
+    "title": "Rock Lobster",
+    "artist": "The B-52's",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1978,
+    "genre": "new wave"
+  },
+  {
+    "title": "Roam",
+    "artist": "The B-52's",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1989,
+    "genre": "new wave"
+  },
+  {
+    "title": "Private Idaho",
+    "artist": "The B-52's",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "Love Cats",
+    "artist": "The Cure",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Just Like Heaven",
+    "artist": "The Cure",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "Lovesong",
+    "artist": "The Cure",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1989,
+    "genre": "new wave"
+  },
+  {
+    "title": "Friday I'm in Love",
+    "artist": "The Cure",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1992,
+    "genre": "new wave"
+  },
+  {
+    "title": "Pictures of You",
+    "artist": "The Cure",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1989,
+    "genre": "new wave"
+  },
+  {
+    "title": "Fascination Street",
+    "artist": "The Cure",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1989,
+    "genre": "new wave"
+  },
+  {
+    "title": "In Between Days",
+    "artist": "The Cure",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "A Forest",
+    "artist": "The Cure",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "Close to Me",
+    "artist": "The Cure",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Boys Don't Cry",
+    "artist": "The Cure",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1979,
+    "genre": "new wave"
+  },
+  {
+    "title": "The Walk",
+    "artist": "The Cure",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Let's Go to Bed",
+    "artist": "The Cure",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Lullaby",
+    "artist": "The Cure",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1989,
+    "genre": "new wave"
+  },
+  {
+    "title": "High",
+    "artist": "The Cure",
+    "lo": 47,
+    "hi": 72,
+    "brightness": 68,
+    "year": 1992,
+    "genre": "new wave"
+  },
+  {
+    "title": "Wrong",
+    "artist": "Depeche Mode",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 2009,
+    "genre": "new wave"
+  },
+  {
+    "title": "Just Can't Get Enough",
+    "artist": "Depeche Mode",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Everything Counts",
+    "artist": "Depeche Mode",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "People Are People",
+    "artist": "Depeche Mode",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Master and Servant",
+    "artist": "Depeche Mode",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Shake the Disease",
+    "artist": "Depeche Mode",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Stripped",
+    "artist": "Depeche Mode",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "A Question of Time",
+    "artist": "Depeche Mode",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "Strangelove",
+    "artist": "Depeche Mode",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "Never Let Me Down Again",
+    "artist": "Depeche Mode",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "Behind the Wheel",
+    "artist": "Depeche Mode",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "Personal Jesus",
+    "artist": "Depeche Mode",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1989,
+    "genre": "new wave"
+  },
+  {
+    "title": "Enjoy the Silence",
+    "artist": "Depeche Mode",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1990,
+    "genre": "new wave"
+  },
+  {
+    "title": "Policy of Truth",
+    "artist": "Depeche Mode",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1990,
+    "genre": "new wave"
+  },
+  {
+    "title": "World in My Eyes",
+    "artist": "Depeche Mode",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1990,
+    "genre": "new wave"
+  },
+  {
+    "title": "I Feel You",
+    "artist": "Depeche Mode",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1993,
+    "genre": "new wave"
+  },
+  {
+    "title": "Walking in My Shoes",
+    "artist": "Depeche Mode",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1993,
+    "genre": "new wave"
+  },
+  {
+    "title": "In Your Room",
+    "artist": "Depeche Mode",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1993,
+    "genre": "new wave"
+  },
+  {
+    "title": "Blue Monday",
+    "artist": "New Order",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Bizarre Love Triangle",
+    "artist": "New Order",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "True Faith",
+    "artist": "New Order",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "Regret",
+    "artist": "New Order",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1993,
+    "genre": "new wave"
+  },
+  {
+    "title": "Temptation",
+    "artist": "New Order",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "The Perfect Kiss",
+    "artist": "New Order",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Thieves Like Us",
+    "artist": "New Order",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Confusion",
+    "artist": "New Order",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Shell Shock",
+    "artist": "New Order",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "World (The Price of Love)",
+    "artist": "New Order",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1993,
+    "genre": "new wave"
+  },
+  {
+    "title": "Round & Round",
+    "artist": "New Order",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1989,
+    "genre": "new wave"
+  },
+  {
+    "title": "She Blinded Me with Science",
+    "artist": "Thomas Dolby",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Hyperactive!",
+    "artist": "Thomas Dolby",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Der Kommissar",
+    "artist": "After the Fire",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Save a Prayer",
+    "artist": "Duran Duran",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Wild Boys",
+    "artist": "Duran Duran",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "New Moon on Monday",
+    "artist": "Duran Duran",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Planet Earth",
+    "artist": "Duran Duran",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Careless Whisper",
+    "artist": "George Michael",
+    "lo": 44,
+    "hi": 70,
+    "brightness": 64,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Wake Me Up Before You Go-Go",
+    "artist": "Wham!",
+    "lo": 49,
+    "hi": 73,
+    "brightness": 70,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Freedom",
+    "artist": "Wham!",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Everything She Wants",
+    "artist": "Wham!",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "I'm Your Man",
+    "artist": "Wham!",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Last Christmas",
+    "artist": "Wham!",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Club Tropicana",
+    "artist": "Wham!",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Young Guns (Go for It)",
+    "artist": "Wham!",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Bad Boys",
+    "artist": "Wham!",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Don't Dream It's Over",
+    "artist": "Crowded House",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "Something So Strong",
+    "artist": "Crowded House",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "Weather with You",
+    "artist": "Crowded House",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1991,
+    "genre": "new wave"
+  },
+  {
+    "title": "Better Be Home Soon",
+    "artist": "Crowded House",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1988,
+    "genre": "new wave"
+  },
+  {
+    "title": "World Where You Live",
+    "artist": "Crowded House",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1986,
+    "genre": "new wave"
+  },
+  {
+    "title": "Distant Sun",
+    "artist": "Crowded House",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1993,
+    "genre": "new wave"
+  },
+  {
+    "title": "Private Investigations",
+    "artist": "Dire Straits",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Love Will Tear Us Apart",
+    "artist": "Joy Division",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "Transmission",
+    "artist": "Joy Division",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1979,
+    "genre": "new wave"
+  },
+  {
+    "title": "Ceremony",
+    "artist": "Joy Division",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Atmosphere",
+    "artist": "Joy Division",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "She's Lost Control",
+    "artist": "Joy Division",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1979,
+    "genre": "new wave"
+  },
+  {
+    "title": "Disorder",
+    "artist": "Joy Division",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1979,
+    "genre": "new wave"
+  },
+  {
+    "title": "New Dawn Fades",
+    "artist": "Joy Division",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1979,
+    "genre": "new wave"
+  },
+  {
+    "title": "Shadowplay",
+    "artist": "Joy Division",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1979,
+    "genre": "new wave"
+  },
+  {
+    "title": "Isolation",
+    "artist": "Joy Division",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "Heart and Soul",
+    "artist": "Joy Division",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "Cities in Dust",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "Peek-a-Boo",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1988,
+    "genre": "new wave"
+  },
+  {
+    "title": "Hong Kong Garden",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1978,
+    "genre": "new wave"
+  },
+  {
+    "title": "Happy House",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "Christine",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "Spellbound",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Arabian Knights",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1981,
+    "genre": "new wave"
+  },
+  {
+    "title": "Melt!",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Dear Prudence",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Swimming Horses",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Dazzle",
+    "artist": "Siouxsie and the Banshees",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "The Killing Moon",
+    "artist": "Echo & the Bunnymen",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 66,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Lips Like Sugar",
+    "artist": "Echo & the Bunnymen",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1987,
+    "genre": "new wave"
+  },
+  {
+    "title": "The Cutter",
+    "artist": "Echo & the Bunnymen",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Rescue",
+    "artist": "Echo & the Bunnymen",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1980,
+    "genre": "new wave"
+  },
+  {
+    "title": "The Back of Love",
+    "artist": "Echo & the Bunnymen",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1982,
+    "genre": "new wave"
+  },
+  {
+    "title": "Never Stop",
+    "artist": "Echo & the Bunnymen",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1983,
+    "genre": "new wave"
+  },
+  {
+    "title": "Seven Seas",
+    "artist": "Echo & the Bunnymen",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1984,
+    "genre": "new wave"
+  },
+  {
+    "title": "Bring on the Dancing Horses",
+    "artist": "Echo & the Bunnymen",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1985,
+    "genre": "new wave"
+  },
+  {
+    "title": "People Are Strange",
+    "artist": "Echo & the Bunnymen",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1988,
+    "genre": "new wave"
+  },
+  {
+    "title": "Nothing Lasts Forever",
+    "artist": "Echo & the Bunnymen",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1997,
+    "genre": "new wave"
+  }
+]
