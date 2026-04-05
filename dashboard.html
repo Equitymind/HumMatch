@@ -776,13 +776,29 @@ setTimeout(()=>showA2HSBanner('dash'),2000);
 document.addEventListener('visibilitychange', async () => {
   if (!document.hidden && token) {
     try {
-      const authRes = await fetch('/api/hummatch/auth/me?token=' + token);
+      // Add cache-busting timestamp to force fresh fetch
+      const authRes = await fetch('/api/hummatch/auth/me?token=' + token + '&_=' + Date.now(), {cache: 'no-store'});
       if (authRes.ok) {
         authData = await authRes.json();
         renderAll(); // Re-render with fresh hum count
       }
     } catch (e) {
       console.error('Failed to refresh auth data', e);
+    }
+  }
+});
+
+// Also refresh on page focus (Safari iOS doesn't always fire visibilitychange)
+window.addEventListener('focus', async () => {
+  if (token) {
+    try {
+      const authRes = await fetch('/api/hummatch/auth/me?token=' + token + '&_=' + Date.now(), {cache: 'no-store'});
+      if (authRes.ok) {
+        authData = await authRes.json();
+        renderAll();
+      }
+    } catch (e) {
+      console.error('Failed to refresh auth data on focus', e);
     }
   }
 });
