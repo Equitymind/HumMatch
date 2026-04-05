@@ -34414,17 +34414,21 @@ function showResults() {
       return { ...s, score: rangeFit * 0.65 + brightFit * 0.35 };
     })
     .filter(s => {
-      // Gender filtering: check the song's MIDPOINT (tessitura)
-      // Female songs center around C4-C5 (60-72)
-      // Male songs center around G2-G3 (43-55)
+      // Gender filtering: DUAL approach (tessitura + brightness)
+      // Female songs center around C4-C5 (60-72) AND are brighter (55+)
+      // Male songs center around G2-G3 (43-55) AND are darker (30-55)
       const songMidpoint = (s.lo + s.hi) / 2;
       
-      // If user is male (high <= 65), block songs centered above male comfort zone (midpoint > 52)
-      // Threshold: E3 midpoint or higher is typically female range
-      if (isMaleVoice && songMidpoint >= 52) return false;
+      // MALE VOICE FILTERING:
+      // Block songs with female tessitura (midpoint >= 52)
+      // OR songs with bright timbre (brightness > 60) even if range overlaps
+      // This catches contraltos like Nina Simone, Etta James
+      if (isMaleVoice && (songMidpoint >= 52 || s.brightness > 60)) return false;
       
-      // If user is female (low >= 48), block songs centered in male range (midpoint < 58)
-      if (isFemaleVoice && songMidpoint < 58) return false;
+      // FEMALE VOICE FILTERING:
+      // Block songs with male tessitura (midpoint < 58)
+      // OR songs with dark timbre (brightness < 45)
+      if (isFemaleVoice && (songMidpoint < 58 || s.brightness < 45)) return false;
       
       return s.score > 0.45; // Also apply score threshold
     })
