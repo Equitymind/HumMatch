@@ -1753,14 +1753,13 @@ app.put('/api/hummatch/account', requireAuth, (req, res) => {
 // ---------------------------------------------------------------------------
 // API: Stripe Checkout
 // ---------------------------------------------------------------------------
-// TODO: UPDATE THESE WITH NEW $7.99/$49.99 PRICE IDs FROM STRIPE!
-// See STRIPE-PRICE-UPDATE.md for instructions
-// Old prices (archive these after creating new ones):
+// NEW PRICING: $7.99/mo, $49.99/yr (created 2026-04-05)
+// Old prices archived:
 //   monthly $5.99: price_1TE07i8kAFC9VsZHxD9xqXYB
 //   annual $39.99: price_1TDCM48kAFC9VsZHdVNcIKI7
 const STRIPE_PRICES = {
-  monthly: 'price_1TE07i8kAFC9VsZHxD9xqXYB', // UPDATE: Should be new $7.99 price ID
-  annual: 'price_1TDCM48kAFC9VsZHdVNcIKI7'  // UPDATE: Should be new $49.99 price ID
+  monthly: 'price_1TIpgS8kAFC9VsZHvbr6HjoD', // $7.99/mo
+  annual: 'price_1TIpgT8kAFC9VsZHWMuxhboQ'   // $49.99/yr
 };
 
 app.get('/api/hummatch/checkout/success', async (req, res) => {
