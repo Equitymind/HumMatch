@@ -1,0 +1,1523 @@
+[
+  {
+    "title": "Superstition",
+    "artist": "Stevie Wonder",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 70,
+    "year": 1972,
+    "language": "en"
+  },
+  {
+    "title": "Sir Duke",
+    "artist": "Stevie Wonder",
+    "lo": 53,
+    "hi": 74,
+    "brightness": 75,
+    "year": 1976,
+    "language": "en"
+  },
+  {
+    "title": "Isn't She Lovely",
+    "artist": "Stevie Wonder",
+    "lo": 52,
+    "hi": 72,
+    "brightness": 80,
+    "year": 1976,
+    "language": "en"
+  },
+  {
+    "title": "Higher Ground",
+    "artist": "Stevie Wonder",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1973,
+    "language": "en"
+  },
+  {
+    "title": "I Wish",
+    "artist": "Stevie Wonder",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 72,
+    "year": 1976,
+    "language": "en"
+  },
+  {
+    "title": "September",
+    "artist": "Earth, Wind & Fire",
+    "lo": 48,
+    "hi": 75,
+    "brightness": 78,
+    "year": 1978,
+    "language": "en"
+  },
+  {
+    "title": "Boogie Wonderland",
+    "artist": "Earth, Wind & Fire",
+    "lo": 50,
+    "hi": 76,
+    "brightness": 80,
+    "year": 1979,
+    "language": "en"
+  },
+  {
+    "title": "Let's Groove",
+    "artist": "Earth, Wind & Fire",
+    "lo": 49,
+    "hi": 74,
+    "brightness": 75,
+    "year": 1981,
+    "language": "en"
+  },
+  {
+    "title": "Shining Star",
+    "artist": "Earth, Wind & Fire",
+    "lo": 50,
+    "hi": 73,
+    "brightness": 77,
+    "year": 1975,
+    "language": "en"
+  },
+  {
+    "title": "After the Love Has Gone",
+    "artist": "Earth, Wind & Fire",
+    "lo": 52,
+    "hi": 75,
+    "brightness": 70,
+    "year": 1979,
+    "language": "en"
+  },
+  {
+    "title": "Let's Get It On",
+    "artist": "Marvin Gaye",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1973,
+    "language": "en"
+  },
+  {
+    "title": "What's Going On",
+    "artist": "Marvin Gaye",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 60,
+    "year": 1971,
+    "language": "en"
+  },
+  {
+    "title": "Ain't No Mountain High Enough",
+    "artist": "Marvin Gaye & Tammi Terrell",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 70,
+    "year": 1967,
+    "language": "en"
+  },
+  {
+    "title": "Sexual Healing",
+    "artist": "Marvin Gaye",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 62,
+    "year": 1982,
+    "language": "en"
+  },
+  {
+    "title": "I Heard It Through the Grapevine",
+    "artist": "Marvin Gaye",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 58,
+    "year": 1968,
+    "language": "en"
+  },
+  {
+    "title": "Respect",
+    "artist": "Aretha Franklin",
+    "lo": 49,
+    "hi": 75,
+    "brightness": 75,
+    "year": 1967,
+    "language": "en"
+  },
+  {
+    "title": "Think",
+    "artist": "Aretha Franklin",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 78,
+    "year": 1968,
+    "language": "en"
+  },
+  {
+    "title": "I Say a Little Prayer",
+    "artist": "Aretha Franklin",
+    "lo": 53,
+    "hi": 74,
+    "brightness": 72,
+    "year": 1968,
+    "language": "en"
+  },
+  {
+    "title": "Natural Woman",
+    "artist": "Aretha Franklin",
+    "lo": 50,
+    "hi": 73,
+    "brightness": 68,
+    "year": 1967,
+    "language": "en"
+  },
+  {
+    "title": "Chain of Fools",
+    "artist": "Aretha Franklin",
+    "lo": 51,
+    "hi": 72,
+    "brightness": 70,
+    "year": 1967,
+    "language": "en"
+  },
+  {
+    "title": "Let's Stay Together",
+    "artist": "Al Green",
+    "lo": 51,
+    "hi": 77,
+    "brightness": 72,
+    "year": 1971,
+    "language": "en"
+  },
+  {
+    "title": "Tired of Being Alone",
+    "artist": "Al Green",
+    "lo": 50,
+    "hi": 75,
+    "brightness": 68,
+    "year": 1971,
+    "language": "en"
+  },
+  {
+    "title": "Love and Happiness",
+    "artist": "Al Green",
+    "lo": 49,
+    "hi": 73,
+    "brightness": 70,
+    "year": 1972,
+    "language": "en"
+  },
+  {
+    "title": "Take Me to the River",
+    "artist": "Al Green",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 67,
+    "year": 1974,
+    "language": "en"
+  },
+  {
+    "title": "How Can You Mend a Broken Heart",
+    "artist": "Al Green",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 65,
+    "year": 1972,
+    "language": "en"
+  },
+  {
+    "title": "Super Freak",
+    "artist": "Rick James",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 73,
+    "year": 1981,
+    "language": "en"
+  },
+  {
+    "title": "Give It to Me Baby",
+    "artist": "Rick James",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 70,
+    "year": 1981,
+    "language": "en"
+  },
+  {
+    "title": "Brick House",
+    "artist": "Commodores",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 68,
+    "year": 1977,
+    "language": "en"
+  },
+  {
+    "title": "Easy",
+    "artist": "Commodores",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 62,
+    "year": 1977,
+    "language": "en"
+  },
+  {
+    "title": "Three Times a Lady",
+    "artist": "Commodores",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 60,
+    "year": 1978,
+    "language": "en"
+  },
+  {
+    "title": "Move On Up",
+    "artist": "Curtis Mayfield",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1970,
+    "language": "en"
+  },
+  {
+    "title": "Freddie's Dead",
+    "artist": "Curtis Mayfield",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 65,
+    "year": 1972,
+    "language": "en"
+  },
+  {
+    "title": "Superfly",
+    "artist": "Curtis Mayfield",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1972,
+    "language": "en"
+  },
+  {
+    "title": "It's Your Thing",
+    "artist": "The Isley Brothers",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 72,
+    "year": 1969,
+    "language": "en"
+  },
+  {
+    "title": "That Lady",
+    "artist": "The Isley Brothers",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1973,
+    "language": "en"
+  },
+  {
+    "title": "Between the Sheets",
+    "artist": "The Isley Brothers",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 62,
+    "year": 1983,
+    "language": "en"
+  },
+  {
+    "title": "Le Freak",
+    "artist": "Chic",
+    "lo": 49,
+    "hi": 73,
+    "brightness": 75,
+    "year": 1978,
+    "language": "en"
+  },
+  {
+    "title": "Good Times",
+    "artist": "Chic",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 78,
+    "year": 1979,
+    "language": "en"
+  },
+  {
+    "title": "I Want You Back",
+    "artist": "The Jackson 5",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 80,
+    "year": 1969,
+    "language": "en"
+  },
+  {
+    "title": "ABC",
+    "artist": "The Jackson 5",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 82,
+    "year": 1970,
+    "language": "en"
+  },
+  {
+    "title": "I'll Be There",
+    "artist": "The Jackson 5",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 68,
+    "year": 1970,
+    "language": "en"
+  },
+  {
+    "title": "Jungle Boogie",
+    "artist": "Kool & The Gang",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 72,
+    "year": 1973,
+    "language": "en"
+  },
+  {
+    "title": "Celebration",
+    "artist": "Kool & The Gang",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 78,
+    "year": 1980,
+    "language": "en"
+  },
+  {
+    "title": "Get Down Tonight",
+    "artist": "KC and the Sunshine Band",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 75,
+    "year": 1975,
+    "language": "en"
+  },
+  {
+    "title": "That's the Way (I Like It)",
+    "artist": "KC and the Sunshine Band",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 76,
+    "year": 1975,
+    "language": "en"
+  },
+  {
+    "title": "Play That Funky Music",
+    "artist": "Wild Cherry",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 72,
+    "year": 1976,
+    "language": "en"
+  },
+  {
+    "title": "Pick Up the Pieces",
+    "artist": "Average White Band",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 70,
+    "year": 1974,
+    "language": "en"
+  },
+  {
+    "title": "Lady Marmalade",
+    "artist": "Labelle",
+    "lo": 52,
+    "hi": 76,
+    "brightness": 78,
+    "year": 1974,
+    "language": "en"
+  },
+  {
+    "title": "Car Wash",
+    "artist": "Rose Royce",
+    "lo": 50,
+    "hi": 73,
+    "brightness": 75,
+    "year": 1976,
+    "language": "en"
+  },
+  {
+    "title": "Best of My Love",
+    "artist": "The Emotions",
+    "lo": 53,
+    "hi": 76,
+    "brightness": 72,
+    "year": 1977,
+    "language": "en"
+  },
+  {
+    "title": "Smells Like Teen Spirit",
+    "artist": "Nirvana",
+    "lo": 40,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "Come as You Are",
+    "artist": "Nirvana",
+    "lo": 40,
+    "hi": 65,
+    "brightness": 60,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "Heart-Shaped Box",
+    "artist": "Nirvana",
+    "lo": 41,
+    "hi": 66,
+    "brightness": 58,
+    "year": 1993,
+    "language": "en"
+  },
+  {
+    "title": "Lithium",
+    "artist": "Nirvana",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 62,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "In Bloom",
+    "artist": "Nirvana",
+    "lo": 41,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "Alive",
+    "artist": "Pearl Jam",
+    "lo": 40,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "Even Flow",
+    "artist": "Pearl Jam",
+    "lo": 40,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "Jeremy",
+    "artist": "Pearl Jam",
+    "lo": 41,
+    "hi": 68,
+    "brightness": 60,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "Black",
+    "artist": "Pearl Jam",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 58,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "Better Man",
+    "artist": "Pearl Jam",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 62,
+    "year": 1994,
+    "language": "en"
+  },
+  {
+    "title": "Black Hole Sun",
+    "artist": "Soundgarden",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 55,
+    "year": 1994,
+    "language": "en"
+  },
+  {
+    "title": "Spoonman",
+    "artist": "Soundgarden",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 62,
+    "year": 1994,
+    "language": "en"
+  },
+  {
+    "title": "Fell on Black Days",
+    "artist": "Soundgarden",
+    "lo": 46,
+    "hi": 67,
+    "brightness": 58,
+    "year": 1994,
+    "language": "en"
+  },
+  {
+    "title": "Outshined",
+    "artist": "Soundgarden",
+    "lo": 44,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "Rusty Cage",
+    "artist": "Soundgarden",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 63,
+    "year": 1991,
+    "language": "en"
+  },
+  {
+    "title": "Man in the Box",
+    "artist": "Alice in Chains",
+    "lo": 41,
+    "hi": 65,
+    "brightness": 58,
+    "year": 1990,
+    "language": "en"
+  },
+  {
+    "title": "Rooster",
+    "artist": "Alice in Chains",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 1992,
+    "language": "en"
+  },
+  {
+    "title": "Would?",
+    "artist": "Alice in Chains",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1992,
+    "language": "en"
+  },
+  {
+    "title": "Them Bones",
+    "artist": "Alice in Chains",
+    "lo": 41,
+    "hi": 65,
+    "brightness": 62,
+    "year": 1992,
+    "language": "en"
+  },
+  {
+    "title": "No Excuses",
+    "artist": "Alice in Chains",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 58,
+    "year": 1994,
+    "language": "en"
+  },
+  {
+    "title": "Interstate Love Song",
+    "artist": "Stone Temple Pilots",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1994,
+    "language": "en"
+  },
+  {
+    "title": "Plush",
+    "artist": "Stone Temple Pilots",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 60,
+    "year": 1992,
+    "language": "en"
+  },
+  {
+    "title": "Creep",
+    "artist": "Stone Temple Pilots",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 58,
+    "year": 1992,
+    "language": "en"
+  },
+  {
+    "title": "Vasoline",
+    "artist": "Stone Temple Pilots",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 63,
+    "year": 1994,
+    "language": "en"
+  },
+  {
+    "title": "Big Empty",
+    "artist": "Stone Temple Pilots",
+    "lo": 43,
+    "hi": 65,
+    "brightness": 57,
+    "year": 1994,
+    "language": "en"
+  },
+  {
+    "title": "Creep",
+    "artist": "Radiohead",
+    "lo": 45,
+    "hi": 72,
+    "brightness": 62,
+    "year": 1992,
+    "language": "en"
+  },
+  {
+    "title": "Karma Police",
+    "artist": "Radiohead",
+    "lo": 44,
+    "hi": 70,
+    "brightness": 58,
+    "year": 1997,
+    "language": "en"
+  },
+  {
+    "title": "No Surprises",
+    "artist": "Radiohead",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 55,
+    "year": 1997,
+    "language": "en"
+  },
+  {
+    "title": "Fake Plastic Trees",
+    "artist": "Radiohead",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 60,
+    "year": 1995,
+    "language": "en"
+  },
+  {
+    "title": "High and Dry",
+    "artist": "Radiohead",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 62,
+    "year": 1995,
+    "language": "en"
+  },
+  {
+    "title": "1979",
+    "artist": "The Smashing Pumpkins",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1995,
+    "language": "en"
+  },
+  {
+    "title": "Tonight, Tonight",
+    "artist": "The Smashing Pumpkins",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1995,
+    "language": "en"
+  },
+  {
+    "title": "Disarm",
+    "artist": "The Smashing Pumpkins",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 63,
+    "year": 1993,
+    "language": "en"
+  },
+  {
+    "title": "Bullet with Butterfly Wings",
+    "artist": "The Smashing Pumpkins",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1995,
+    "language": "en"
+  },
+  {
+    "title": "Today",
+    "artist": "The Smashing Pumpkins",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1993,
+    "language": "en"
+  },
+  {
+    "title": "thank u, next",
+    "artist": "Ariana Grande",
+    "lo": 46,
+    "hi": 75,
+    "brightness": 72,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "7 rings",
+    "artist": "Ariana Grande",
+    "lo": 51,
+    "hi": 77,
+    "brightness": 75,
+    "year": 2019,
+    "language": "en"
+  },
+  {
+    "title": "no tears left to cry",
+    "artist": "Ariana Grande",
+    "lo": 50,
+    "hi": 78,
+    "brightness": 78,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "God is a woman",
+    "artist": "Ariana Grande",
+    "lo": 48,
+    "hi": 76,
+    "brightness": 70,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "Side to Side",
+    "artist": "Ariana Grande",
+    "lo": 52,
+    "hi": 75,
+    "brightness": 73,
+    "year": 2016,
+    "language": "en"
+  },
+  {
+    "title": "Stitches",
+    "artist": "Shawn Mendes",
+    "lo": 48,
+    "hi": 74,
+    "brightness": 70,
+    "year": 2015,
+    "language": "en"
+  },
+  {
+    "title": "Treat You Better",
+    "artist": "Shawn Mendes",
+    "lo": 47,
+    "hi": 73,
+    "brightness": 68,
+    "year": 2016,
+    "language": "en"
+  },
+  {
+    "title": "In My Blood",
+    "artist": "Shawn Mendes",
+    "lo": 49,
+    "hi": 75,
+    "brightness": 72,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "Señorita",
+    "artist": "Shawn Mendes & Camila Cabello",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 75,
+    "year": 2019,
+    "language": "en"
+  },
+  {
+    "title": "There's Nothing Holdin' Me Back",
+    "artist": "Shawn Mendes",
+    "lo": 51,
+    "hi": 76,
+    "brightness": 77,
+    "year": 2017,
+    "language": "en"
+  },
+  {
+    "title": "Without Me",
+    "artist": "Halsey",
+    "lo": 46,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "Closer",
+    "artist": "The Chainsmokers ft. Halsey",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 68,
+    "year": 2016,
+    "language": "en"
+  },
+  {
+    "title": "Bad at Love",
+    "artist": "Halsey",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 70,
+    "year": 2017,
+    "language": "en"
+  },
+  {
+    "title": "Colors",
+    "artist": "Halsey",
+    "lo": 49,
+    "hi": 73,
+    "brightness": 67,
+    "year": 2016,
+    "language": "en"
+  },
+  {
+    "title": "Gasoline",
+    "artist": "Halsey",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2015,
+    "language": "en"
+  },
+  {
+    "title": "bad guy",
+    "artist": "Billie Eilish",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 60,
+    "year": 2019,
+    "language": "en"
+  },
+  {
+    "title": "everything i wanted",
+    "artist": "Billie Eilish",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 58,
+    "year": 2019,
+    "language": "en"
+  },
+  {
+    "title": "when the party's over",
+    "artist": "Billie Eilish",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 55,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "bury a friend",
+    "artist": "Billie Eilish",
+    "lo": 42,
+    "hi": 66,
+    "brightness": 52,
+    "year": 2019,
+    "language": "en"
+  },
+  {
+    "title": "ocean eyes",
+    "artist": "Billie Eilish",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 65,
+    "year": 2016,
+    "language": "en"
+  },
+  {
+    "title": "Blinding Lights",
+    "artist": "The Weeknd",
+    "lo": 48,
+    "hi": 75,
+    "brightness": 78,
+    "year": 2019,
+    "language": "en"
+  },
+  {
+    "title": "Starboy",
+    "artist": "The Weeknd",
+    "lo": 47,
+    "hi": 73,
+    "brightness": 72,
+    "year": 2016,
+    "language": "en"
+  },
+  {
+    "title": "Can't Feel My Face",
+    "artist": "The Weeknd",
+    "lo": 49,
+    "hi": 74,
+    "brightness": 75,
+    "year": 2015,
+    "language": "en"
+  },
+  {
+    "title": "The Hills",
+    "artist": "The Weeknd",
+    "lo": 46,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2015,
+    "language": "en"
+  },
+  {
+    "title": "Earned It",
+    "artist": "The Weeknd",
+    "lo": 48,
+    "hi": 75,
+    "brightness": 68,
+    "year": 2014,
+    "language": "en"
+  },
+  {
+    "title": "New Rules",
+    "artist": "Dua Lipa",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 75,
+    "year": 2017,
+    "language": "en"
+  },
+  {
+    "title": "Don't Start Now",
+    "artist": "Dua Lipa",
+    "lo": 51,
+    "hi": 76,
+    "brightness": 80,
+    "year": 2019,
+    "language": "en"
+  },
+  {
+    "title": "Levitating",
+    "artist": "Dua Lipa",
+    "lo": 52,
+    "hi": 77,
+    "brightness": 82,
+    "year": 2020,
+    "language": "en"
+  },
+  {
+    "title": "IDGAF",
+    "artist": "Dua Lipa",
+    "lo": 49,
+    "hi": 73,
+    "brightness": 72,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "One Kiss",
+    "artist": "Calvin Harris & Dua Lipa",
+    "lo": 50,
+    "hi": 75,
+    "brightness": 78,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "Rockstar",
+    "artist": "Post Malone ft. 21 Savage",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 62,
+    "year": 2017,
+    "language": "en"
+  },
+  {
+    "title": "Circles",
+    "artist": "Post Malone",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 68,
+    "year": 2019,
+    "language": "en"
+  },
+  {
+    "title": "Sunflower",
+    "artist": "Post Malone & Swae Lee",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 75,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "Better Now",
+    "artist": "Post Malone",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 70,
+    "year": 2018,
+    "language": "en"
+  },
+  {
+    "title": "Congratulations",
+    "artist": "Post Malone ft. Quavo",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2016,
+    "language": "en"
+  },
+  {
+    "title": "Shape of You",
+    "artist": "Ed Sheeran",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 73,
+    "year": 2017,
+    "language": "en"
+  },
+  {
+    "title": "Perfect",
+    "artist": "Ed Sheeran",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 65,
+    "year": 2017,
+    "language": "en"
+  },
+  {
+    "title": "Photograph",
+    "artist": "Ed Sheeran",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 68,
+    "year": 2014,
+    "language": "en"
+  },
+  {
+    "title": "Thinking Out Loud",
+    "artist": "Ed Sheeran",
+    "lo": 46,
+    "hi": 69,
+    "brightness": 70,
+    "year": 2014,
+    "language": "en"
+  },
+  {
+    "title": "Castle on the Hill",
+    "artist": "Ed Sheeran",
+    "lo": 50,
+    "hi": 73,
+    "brightness": 72,
+    "year": 2017,
+    "language": "en"
+  },
+  {
+    "title": "Ring of Fire",
+    "artist": "Johnny Cash",
+    "lo": 42,
+    "hi": 69,
+    "brightness": 70,
+    "year": 1963,
+    "language": "en"
+  },
+  {
+    "title": "I Walk the Line",
+    "artist": "Johnny Cash",
+    "lo": 40,
+    "hi": 65,
+    "brightness": 60,
+    "year": 1956,
+    "language": "en"
+  },
+  {
+    "title": "Folsom Prison Blues",
+    "artist": "Johnny Cash",
+    "lo": 41,
+    "hi": 66,
+    "brightness": 65,
+    "year": 1955,
+    "language": "en"
+  },
+  {
+    "title": "Man in Black",
+    "artist": "Johnny Cash",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 58,
+    "year": 1971,
+    "language": "en"
+  },
+  {
+    "title": "Hurt",
+    "artist": "Johnny Cash",
+    "lo": 38,
+    "hi": 62,
+    "brightness": 52,
+    "year": 2002,
+    "language": "en"
+  },
+  {
+    "title": "Jolene",
+    "artist": "Dolly Parton",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 70,
+    "year": 1973,
+    "language": "en"
+  },
+  {
+    "title": "9 to 5",
+    "artist": "Dolly Parton",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 75,
+    "year": 1980,
+    "language": "en"
+  },
+  {
+    "title": "I Will Always Love You",
+    "artist": "Dolly Parton",
+    "lo": 49,
+    "hi": 73,
+    "brightness": 68,
+    "year": 1974,
+    "language": "en"
+  },
+  {
+    "title": "Coat of Many Colors",
+    "artist": "Dolly Parton",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 65,
+    "year": 1971,
+    "language": "en"
+  },
+  {
+    "title": "Islands in the Stream",
+    "artist": "Kenny Rogers & Dolly Parton",
+    "lo": 48,
+    "hi": 73,
+    "brightness": 72,
+    "year": 1983,
+    "language": "en"
+  },
+  {
+    "title": "On the Road Again",
+    "artist": "Willie Nelson",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1980,
+    "language": "en"
+  },
+  {
+    "title": "Always on My Mind",
+    "artist": "Willie Nelson",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 62,
+    "year": 1982,
+    "language": "en"
+  },
+  {
+    "title": "Mammas Don't Let Your Babies Grow Up to Be Cowboys",
+    "artist": "Willie Nelson & Waylon Jennings",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1978,
+    "language": "en"
+  },
+  {
+    "title": "Blue Eyes Crying in the Rain",
+    "artist": "Willie Nelson",
+    "lo": 44,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1975,
+    "language": "en"
+  },
+  {
+    "title": "To All the Girls I've Loved Before",
+    "artist": "Willie Nelson & Julio Iglesias",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1984,
+    "language": "en"
+  },
+  {
+    "title": "Crazy",
+    "artist": "Patsy Cline",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 60,
+    "year": 1961,
+    "language": "en"
+  },
+  {
+    "title": "I Fall to Pieces",
+    "artist": "Patsy Cline",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 58,
+    "year": 1961,
+    "language": "en"
+  },
+  {
+    "title": "Walkin' After Midnight",
+    "artist": "Patsy Cline",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 63,
+    "year": 1957,
+    "language": "en"
+  },
+  {
+    "title": "Sweet Dreams",
+    "artist": "Patsy Cline",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 62,
+    "year": 1963,
+    "language": "en"
+  },
+  {
+    "title": "She's Got You",
+    "artist": "Patsy Cline",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 65,
+    "year": 1962,
+    "language": "en"
+  },
+  {
+    "title": "Your Cheatin' Heart",
+    "artist": "Hank Williams",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 60,
+    "year": 1953,
+    "language": "en"
+  },
+  {
+    "title": "I'm So Lonesome I Could Cry",
+    "artist": "Hank Williams",
+    "lo": 42,
+    "hi": 65,
+    "brightness": 55,
+    "year": 1949,
+    "language": "en"
+  },
+  {
+    "title": "Hey Good Lookin'",
+    "artist": "Hank Williams",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1951,
+    "language": "en"
+  },
+  {
+    "title": "Jambalaya (On the Bayou)",
+    "artist": "Hank Williams",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 68,
+    "year": 1952,
+    "language": "en"
+  },
+  {
+    "title": "I Saw the Light",
+    "artist": "Hank Williams",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 70,
+    "year": 1948,
+    "language": "en"
+  },
+  {
+    "title": "Stand By Your Man",
+    "artist": "Tammy Wynette",
+    "lo": 50,
+    "hi": 73,
+    "brightness": 65,
+    "year": 1968,
+    "language": "en"
+  },
+  {
+    "title": "D-I-V-O-R-C-E",
+    "artist": "Tammy Wynette",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 62,
+    "year": 1968,
+    "language": "en"
+  },
+  {
+    "title": "Till I Can Make It on My Own",
+    "artist": "Tammy Wynette",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 60,
+    "year": 1976,
+    "language": "en"
+  },
+  {
+    "title": "The Okie from Muskogee",
+    "artist": "Merle Haggard",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1969,
+    "language": "en"
+  },
+  {
+    "title": "Mama Tried",
+    "artist": "Merle Haggard",
+    "lo": 43,
+    "hi": 66,
+    "brightness": 63,
+    "year": 1968,
+    "language": "en"
+  },
+  {
+    "title": "The Fightin' Side of Me",
+    "artist": "Merle Haggard",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 67,
+    "year": 1970,
+    "language": "en"
+  },
+  {
+    "title": "Take Me Home, Country Roads",
+    "artist": "John Denver",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 72,
+    "year": 1971,
+    "language": "en"
+  },
+  {
+    "title": "Annie's Song",
+    "artist": "John Denver",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1974,
+    "language": "en"
+  },
+  {
+    "title": "The Gambler",
+    "artist": "Kenny Rogers",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 65,
+    "year": 1978,
+    "language": "en"
+  },
+  {
+    "title": "Lucille",
+    "artist": "Kenny Rogers",
+    "lo": 44,
+    "hi": 66,
+    "brightness": 62,
+    "year": 1977,
+    "language": "en"
+  },
+  {
+    "title": "Coward of the County",
+    "artist": "Kenny Rogers",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1979,
+    "language": "en"
+  },
+  {
+    "title": "El Paso",
+    "artist": "Marty Robbins",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1959,
+    "language": "en"
+  },
+  {
+    "title": "Big Bad John",
+    "artist": "Jimmy Dean",
+    "lo": 42,
+    "hi": 64,
+    "brightness": 60,
+    "year": 1961,
+    "language": "en"
+  },
+  {
+    "title": "Coal Miner's Daughter",
+    "artist": "Loretta Lynn",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 65,
+    "year": 1970,
+    "language": "en"
+  },
+  {
+    "title": "You Ain't Woman Enough",
+    "artist": "Loretta Lynn",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 68,
+    "year": 1966,
+    "language": "en"
+  },
+  {
+    "title": "Harper Valley PTA",
+    "artist": "Jeannie C. Riley",
+    "lo": 51,
+    "hi": 73,
+    "brightness": 70,
+    "year": 1968,
+    "language": "en"
+  },
+  {
+    "title": "Friends in Low Places",
+    "artist": "Garth Brooks",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 67,
+    "year": 1990,
+    "language": "en"
+  },
+  {
+    "title": "The Dance",
+    "artist": "Garth Brooks",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 62,
+    "year": 1990,
+    "language": "en"
+  },
+  {
+    "title": "Achy Breaky Heart",
+    "artist": "Billy Ray Cyrus",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 70,
+    "year": 1992,
+    "language": "en"
+  }
+]
