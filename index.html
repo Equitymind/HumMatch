@@ -67107,25 +67107,21 @@ function showResults() {
   // Filter out previously dismissed songs
   const isDismissed = s => window._hmDismissed && window._hmDismissed.has((s.title + '__' + s.artist).replace(/['"]/g,''));
 
-  // Session shuffle: within each score band, randomize order so repeat visits feel fresh
+  // Sort by match percentage descending (best matches first)
   function sessionShuffle(songs) {
-    const seed = Math.floor(Date.now() / 300000); // changes every 5 min
-    const seeded = songs.map((s, i) => ({ s, r: Math.sin(seed + i * 17.3) }));
-    // Sort: nail tier first (deterministic), then shuffle within each tier
-    const nails   = seeded.filter(x => x.s.tier.key === 'nail').sort((a,b) => a.r - b.r).map(x=>x.s);
-    const strongs = seeded.filter(x => x.s.tier.key === 'strong').sort((a,b) => a.r - b.r).map(x=>x.s);
-    return [...nails, ...strongs];
+    // Always sort by score descending - no randomization
+    return songs.slice().sort((a, b) => b.score - a.score);
   }
 
   const _confidentRaw = tieredSongs.filter(s => s.tier.key !== 'stretch' && !isDismissed(s));
   const _confidentFiltered = _confidentRaw.filter(_matchesInterests);
-  // Fall back to unfiltered if taste filter kills everything
+  // Always respect genre/decade filters - never fall back to unfiltered
   const confidentSongs = sessionShuffle(
-    (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length >= 3
+    (_hasGenreFilter || _hasDecadeFilter)
       ? _confidentFiltered
       : _confidentRaw
   );
-  const _tasteFilterActive = (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length >= 3;
+  const _tasteFilterActive = (_hasGenreFilter || _hasDecadeFilter);
   const stretchSongs   = tieredSongs.filter(s => s.tier.key === 'stretch' && !isDismissed(s));
 
   // Set share song data now that confidentSongs is available
