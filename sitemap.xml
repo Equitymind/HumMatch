@@ -18,7 +18,7 @@
   <url><loc>https://hummatch.me/blog/how-hummatch-works</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://hummatch.me/blog/how-hummatch-was-built</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
-  <!-- ── SONG PAGES (6184) ── -->
+  <!-- ── SONG PAGES (6324) ── -->
   <url><loc>https://hummatch.me/song/whats-up-4-non-blondes</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://hummatch.me/song/shallow-a-star-is-born</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://hummatch.me/song/take-on-me-a-ha</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
@@ -214,6 +214,7 @@
   <url><loc>https://hummatch.me/song/happy-ashanti</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://hummatch.me/song/hello-lionel-richie</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://hummatch.me/song/radioactive-kings-of-leon</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/can-you-feel-the-love-tonight-the-lion-king</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://hummatch.me/song/a-lot-21-savage</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://hummatch.me/song/bank-account-21-savage</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://hummatch.me/song/runnin-21-savage</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
@@ -6203,5 +6204,144 @@
   <url><loc>https://hummatch.me/song/trembling-hands-the-temper-trap</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://hummatch.me/song/need-your-love-the-temper-trap</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://hummatch.me/song/little-boy-the-kills</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/defying-gravity-wicked</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/seasons-of-love-rent</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/dont-cry-for-me-argentina-evita</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/memory-cats</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/all-that-jazz-chicago</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/and-i-am-telling-you-im-not-going-dreamgirls</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/cell-block-tango-chicago</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/one-day-more-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/on-my-own-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-dreamed-a-dream-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-phantom-of-the-opera-the-phantom-of-the-opera</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/music-of-the-night-the-phantom-of-the-opera</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/all-i-ask-of-you-the-phantom-of-the-opera</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/tomorrow-annie</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/send-in-the-clowns-a-little-night-music</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/for-good-wicked</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/popular-wicked</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/being-alive-company</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/bring-him-home-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/empty-chairs-at-empty-tables-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/stars-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/master-of-the-house-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/do-you-hear-the-people-sing-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/castle-on-a-cloud-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/at-the-end-of-the-day-les-mis-rables</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/la-vie-boheme-rent</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/out-tonight-rent</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/take-me-or-leave-me-rent</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/what-you-own-rent</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/without-you-rent</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/no-day-but-today-rent</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/big-spender-sweet-charity</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/tradition-fiddler-on-the-roof</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/do-you-love-me-fiddler-on-the-roof</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/my-favorite-things-the-sound-of-music</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/edelweiss-the-sound-of-music</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-sound-of-music-the-sound-of-music</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/sixteen-going-on-seventeen-the-sound-of-music</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/climb-evry-mountain-the-sound-of-music</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-have-confidence-the-sound-of-music</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/something-good-the-sound-of-music</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/somewhere-west-side-story</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/tonight-west-side-story</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/maria-west-side-story</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/america-west-side-story</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/one-hand-one-heart-west-side-story</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/oklahoma-oklahoma</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-surrey-with-the-fringe-on-top-oklahoma</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-caint-say-no-oklahoma</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/june-is-bustin-out-all-over-carousel</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/whats-the-use-of-wondrin-carousel</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/im-gonna-wash-that-man-right-outa-my-hair-south-pacific</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/younger-than-springtime-south-pacific</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/there-is-nothin-like-a-dame-south-pacific</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/im-in-love-with-a-wonderful-guy-south-pacific</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/getting-to-know-you-the-king-and-i</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/shall-we-dance-the-king-and-i</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/hello-young-lovers-the-king-and-i</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-have-dreamed-the-king-and-i</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/we-kiss-in-a-shadow-the-king-and-i</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/something-wonderful-the-king-and-i</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-could-have-danced-all-night-my-fair-lady</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-rain-in-spain-my-fair-lady</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/ive-grown-accustomed-to-her-face-my-fair-lady</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/with-a-little-bit-of-luck-my-fair-lady</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/ol-man-river-show-boat</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/cant-help-lovin-dat-man-show-boat</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/make-believe-show-boat</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/camelot-camelot</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/if-ever-i-would-leave-you-camelot</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/aquarius-hair</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/let-the-sunshine-in-hair</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/good-morning-baltimore-hairspray</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-can-hear-the-bells-hairspray</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/you-cant-stop-the-beat-hairspray</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/without-love-hairspray</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/big-blonde-and-beautiful-hairspray</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-know-where-ive-been-hairspray</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/welcome-to-the-60s-hairspray</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-impossible-dream-man-of-la-mancha</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/ill-know-guys-and-dolls</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/sit-down-youre-rockin-the-boat-guys-and-dolls</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/adelaides-lament-guys-and-dolls</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/guys-and-dolls-guys-and-dolls</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-music-man-the-music-man</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/till-there-was-you-the-music-man</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/seventy-six-trombones-the-music-man</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/marian-the-librarian-the-music-man</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/gary-indiana-the-music-man</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/shipoopi-the-music-man</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/try-to-remember-the-fantasticks</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/soon-its-gonna-rain-the-fantasticks</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/cabaret-cabaret</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/maybe-this-time-cabaret</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/money-cabaret</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/what-would-you-do-cabaret</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/one-a-chorus-line</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/at-the-ballet-a-chorus-line</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-music-and-the-mirror-a-chorus-line</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-hope-i-get-it-a-chorus-line</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/unexpected-song-song-dance</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-last-night-of-the-world-miss-saigon</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/why-god-why-miss-saigon</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/sun-and-moon-miss-saigon</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-still-believe-miss-saigon</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-american-dream-miss-saigon</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/close-every-door-joseph-and-the-amazing-technicolor-dreamcoat</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/any-dream-will-do-joseph-and-the-amazing-technicolor-dreamcoat</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/go-go-go-joseph-joseph-and-the-amazing-technicolor-dreamcoat</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/those-canaan-days-joseph-and-the-amazing-technicolor-dreamcoat</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/i-dont-know-how-to-love-him-jesus-christ-superstar</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/gethsemane-jesus-christ-superstar</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/superstar-jesus-christ-superstar</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/everythings-alright-jesus-christ-superstar</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-circle-of-life-the-lion-king</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/hakuna-matata-the-lion-king</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/shadowland-the-lion-king</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/endless-night-the-lion-king</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/the-wizard-and-i-wicked</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/no-good-deed-wicked</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/im-not-that-girl-wicked</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/as-long-as-youre-mine-wicked</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/mr-cellophane-chicago</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/razzle-dazzle-chicago</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/roxie-chicago</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/when-youre-good-to-mama-chicago</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/nowadays-chicago</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/both-sides-now-judy-collins-from-musical-repertoire</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/listen-dreamgirls</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/one-night-only-dreamgirls</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/when-i-first-saw-you-dreamgirls</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/waitress-she-used-to-be-mine-waitress</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/what-baking-can-do-waitress</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/when-he-sees-me-waitress</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/everything-changes-waitress</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/santa-fe-newsies</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/seize-the-day-newsies</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/king-of-new-york-newsies</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://hummatch.me/song/watch-what-happens-newsies</loc><lastmod>2026-04-05</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
 
 </urlset>

@@ -1,0 +1,1451 @@
+[
+  {
+    "title": "Defying Gravity",
+    "artist": "Wicked",
+    "lo": 52,
+    "hi": 79,
+    "brightness": 75,
+    "year": 2003,
+    "genre": "musical"
+  },
+  {
+    "title": "Seasons of Love",
+    "artist": "Rent",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 70,
+    "year": 1996,
+    "genre": "musical"
+  },
+  {
+    "title": "Don't Cry for Me Argentina",
+    "artist": "Evita",
+    "lo": 48,
+    "hi": 74,
+    "brightness": 68,
+    "year": 1976,
+    "genre": "musical"
+  },
+  {
+    "title": "Memory",
+    "artist": "Cats",
+    "lo": 46,
+    "hi": 76,
+    "brightness": 65,
+    "year": 1981,
+    "genre": "musical"
+  },
+  {
+    "title": "All That Jazz",
+    "artist": "Chicago",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 72,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "And I Am Telling You I'm Not Going",
+    "artist": "Dreamgirls",
+    "lo": 48,
+    "hi": 77,
+    "brightness": 74,
+    "year": 1981,
+    "genre": "musical"
+  },
+  {
+    "title": "Cell Block Tango",
+    "artist": "Chicago",
+    "lo": 49,
+    "hi": 68,
+    "brightness": 69,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "One Day More",
+    "artist": "Les Misérables",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 73,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "On My Own",
+    "artist": "Les Misérables",
+    "lo": 47,
+    "hi": 73,
+    "brightness": 66,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "I Dreamed a Dream",
+    "artist": "Les Misérables",
+    "lo": 45,
+    "hi": 72,
+    "brightness": 64,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "The Phantom of the Opera",
+    "artist": "The Phantom of the Opera",
+    "lo": 50,
+    "hi": 76,
+    "brightness": 71,
+    "year": 1986,
+    "genre": "musical"
+  },
+  {
+    "title": "Music of the Night",
+    "artist": "The Phantom of the Opera",
+    "lo": 44,
+    "hi": 70,
+    "brightness": 62,
+    "year": 1986,
+    "genre": "musical"
+  },
+  {
+    "title": "All I Ask of You",
+    "artist": "The Phantom of the Opera",
+    "lo": 46,
+    "hi": 72,
+    "brightness": 67,
+    "year": 1986,
+    "genre": "musical"
+  },
+  {
+    "title": "Tomorrow",
+    "artist": "Annie",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1977,
+    "genre": "musical"
+  },
+  {
+    "title": "Send in the Clowns",
+    "artist": "A Little Night Music",
+    "lo": 43,
+    "hi": 68,
+    "brightness": 60,
+    "year": 1973,
+    "genre": "musical"
+  },
+  {
+    "title": "For Good",
+    "artist": "Wicked",
+    "lo": 48,
+    "hi": 74,
+    "brightness": 68,
+    "year": 2003,
+    "genre": "musical"
+  },
+  {
+    "title": "Popular",
+    "artist": "Wicked",
+    "lo": 51,
+    "hi": 73,
+    "brightness": 72,
+    "year": 2003,
+    "genre": "musical"
+  },
+  {
+    "title": "Being Alive",
+    "artist": "Company",
+    "lo": 47,
+    "hi": 73,
+    "brightness": 67,
+    "year": 1970,
+    "genre": "musical"
+  },
+  {
+    "title": "Bring Him Home",
+    "artist": "Les Misérables",
+    "lo": 43,
+    "hi": 75,
+    "brightness": 63,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "Empty Chairs at Empty Tables",
+    "artist": "Les Misérables",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 62,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "Stars",
+    "artist": "Les Misérables",
+    "lo": 44,
+    "hi": 72,
+    "brightness": 65,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "Master of the House",
+    "artist": "Les Misérables",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "Do You Hear the People Sing",
+    "artist": "Les Misérables",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 71,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "Castle on a Cloud",
+    "artist": "Les Misérables",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 64,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "At the End of the Day",
+    "artist": "Les Misérables",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 70,
+    "year": 1985,
+    "genre": "musical"
+  },
+  {
+    "title": "Seasons of Love",
+    "artist": "Rent Cast",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 71,
+    "year": 1996,
+    "genre": "musical"
+  },
+  {
+    "title": "La Vie Boheme",
+    "artist": "Rent",
+    "lo": 51,
+    "hi": 70,
+    "brightness": 72,
+    "year": 1996,
+    "genre": "musical"
+  },
+  {
+    "title": "Out Tonight",
+    "artist": "Rent",
+    "lo": 52,
+    "hi": 73,
+    "brightness": 73,
+    "year": 1996,
+    "genre": "musical"
+  },
+  {
+    "title": "Take Me or Leave Me",
+    "artist": "Rent",
+    "lo": 49,
+    "hi": 74,
+    "brightness": 72,
+    "year": 1996,
+    "genre": "musical"
+  },
+  {
+    "title": "What You Own",
+    "artist": "Rent",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 70,
+    "year": 1996,
+    "genre": "musical"
+  },
+  {
+    "title": "Without You",
+    "artist": "Rent",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 65,
+    "year": 1996,
+    "genre": "musical"
+  },
+  {
+    "title": "One Song Glory",
+    "artist": "Rent",
+    "lo": 48,
+    "hi": 74,
+    "brightness": 68,
+    "year": 1996,
+    "genre": "musical"
+  },
+  {
+    "title": "No Day But Today",
+    "artist": "Rent",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1996,
+    "genre": "musical"
+  },
+  {
+    "title": "Big Spender",
+    "artist": "Sweet Charity",
+    "lo": 49,
+    "hi": 69,
+    "brightness": 70,
+    "year": 1966,
+    "genre": "musical"
+  },
+  {
+    "title": "If I Were a Rich Man",
+    "artist": "Fiddler on the Roof",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1964,
+    "genre": "musical"
+  },
+  {
+    "title": "Sunrise, Sunset",
+    "artist": "Fiddler on the Roof",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1964,
+    "genre": "musical"
+  },
+  {
+    "title": "Matchmaker",
+    "artist": "Fiddler on the Roof",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1964,
+    "genre": "musical"
+  },
+  {
+    "title": "Tradition",
+    "artist": "Fiddler on the Roof",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 69,
+    "year": 1964,
+    "genre": "musical"
+  },
+  {
+    "title": "Do You Love Me",
+    "artist": "Fiddler on the Roof",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1964,
+    "genre": "musical"
+  },
+  {
+    "title": "My Favorite Things",
+    "artist": "The Sound of Music",
+    "lo": 47,
+    "hi": 72,
+    "brightness": 68,
+    "year": 1959,
+    "genre": "musical"
+  },
+  {
+    "title": "Edelweiss",
+    "artist": "The Sound of Music",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 62,
+    "year": 1959,
+    "genre": "musical"
+  },
+  {
+    "title": "Do-Re-Mi",
+    "artist": "The Sound of Music",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1959,
+    "genre": "musical"
+  },
+  {
+    "title": "The Sound of Music",
+    "artist": "The Sound of Music",
+    "lo": 46,
+    "hi": 72,
+    "brightness": 67,
+    "year": 1959,
+    "genre": "musical"
+  },
+  {
+    "title": "Sixteen Going on Seventeen",
+    "artist": "The Sound of Music",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1959,
+    "genre": "musical"
+  },
+  {
+    "title": "Climb Ev'ry Mountain",
+    "artist": "The Sound of Music",
+    "lo": 45,
+    "hi": 74,
+    "brightness": 66,
+    "year": 1959,
+    "genre": "musical"
+  },
+  {
+    "title": "I Have Confidence",
+    "artist": "The Sound of Music",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1959,
+    "genre": "musical"
+  },
+  {
+    "title": "Something Good",
+    "artist": "The Sound of Music",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 64,
+    "year": 1959,
+    "genre": "musical"
+  },
+  {
+    "title": "Somewhere",
+    "artist": "West Side Story",
+    "lo": 46,
+    "hi": 73,
+    "brightness": 65,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "Tonight",
+    "artist": "West Side Story",
+    "lo": 47,
+    "hi": 72,
+    "brightness": 68,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "Maria",
+    "artist": "West Side Story",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 67,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "America",
+    "artist": "West Side Story",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 72,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "I Feel Pretty",
+    "artist": "West Side Story",
+    "lo": 49,
+    "hi": 73,
+    "brightness": 71,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "One Hand, One Heart",
+    "artist": "West Side Story",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 64,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "Oklahoma!",
+    "artist": "Oklahoma!",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 69,
+    "year": 1943,
+    "genre": "musical"
+  },
+  {
+    "title": "Oh, What a Beautiful Mornin'",
+    "artist": "Oklahoma!",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1943,
+    "genre": "musical"
+  },
+  {
+    "title": "People Will Say We're in Love",
+    "artist": "Oklahoma!",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1943,
+    "genre": "musical"
+  },
+  {
+    "title": "The Surrey with the Fringe on Top",
+    "artist": "Oklahoma!",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 66,
+    "year": 1943,
+    "genre": "musical"
+  },
+  {
+    "title": "I Cain't Say No",
+    "artist": "Oklahoma!",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1943,
+    "genre": "musical"
+  },
+  {
+    "title": "You'll Never Walk Alone",
+    "artist": "Carousel",
+    "lo": 44,
+    "hi": 74,
+    "brightness": 64,
+    "year": 1945,
+    "genre": "musical"
+  },
+  {
+    "title": "If I Loved You",
+    "artist": "Carousel",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 63,
+    "year": 1945,
+    "genre": "musical"
+  },
+  {
+    "title": "June Is Bustin' Out All Over",
+    "artist": "Carousel",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 70,
+    "year": 1945,
+    "genre": "musical"
+  },
+  {
+    "title": "What's the Use of Wond'rin'",
+    "artist": "Carousel",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 62,
+    "year": 1945,
+    "genre": "musical"
+  },
+  {
+    "title": "Some Enchanted Evening",
+    "artist": "South Pacific",
+    "lo": 43,
+    "hi": 70,
+    "brightness": 62,
+    "year": 1949,
+    "genre": "musical"
+  },
+  {
+    "title": "I'm Gonna Wash That Man Right Outa My Hair",
+    "artist": "South Pacific",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1949,
+    "genre": "musical"
+  },
+  {
+    "title": "Bali Ha'i",
+    "artist": "South Pacific",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 61,
+    "year": 1949,
+    "genre": "musical"
+  },
+  {
+    "title": "Younger Than Springtime",
+    "artist": "South Pacific",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 65,
+    "year": 1949,
+    "genre": "musical"
+  },
+  {
+    "title": "There Is Nothin' Like a Dame",
+    "artist": "South Pacific",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1949,
+    "genre": "musical"
+  },
+  {
+    "title": "I'm in Love with a Wonderful Guy",
+    "artist": "South Pacific",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 71,
+    "year": 1949,
+    "genre": "musical"
+  },
+  {
+    "title": "Getting to Know You",
+    "artist": "The King and I",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1951,
+    "genre": "musical"
+  },
+  {
+    "title": "Shall We Dance?",
+    "artist": "The King and I",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 67,
+    "year": 1951,
+    "genre": "musical"
+  },
+  {
+    "title": "Hello, Young Lovers",
+    "artist": "The King and I",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 64,
+    "year": 1951,
+    "genre": "musical"
+  },
+  {
+    "title": "I Have Dreamed",
+    "artist": "The King and I",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 62,
+    "year": 1951,
+    "genre": "musical"
+  },
+  {
+    "title": "We Kiss in a Shadow",
+    "artist": "The King and I",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 63,
+    "year": 1951,
+    "genre": "musical"
+  },
+  {
+    "title": "Something Wonderful",
+    "artist": "The King and I",
+    "lo": 44,
+    "hi": 70,
+    "brightness": 62,
+    "year": 1951,
+    "genre": "musical"
+  },
+  {
+    "title": "On the Street Where You Live",
+    "artist": "My Fair Lady",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 66,
+    "year": 1956,
+    "genre": "musical"
+  },
+  {
+    "title": "I Could Have Danced All Night",
+    "artist": "My Fair Lady",
+    "lo": 48,
+    "hi": 73,
+    "brightness": 69,
+    "year": 1956,
+    "genre": "musical"
+  },
+  {
+    "title": "Wouldn't It Be Loverly",
+    "artist": "My Fair Lady",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1956,
+    "genre": "musical"
+  },
+  {
+    "title": "The Rain in Spain",
+    "artist": "My Fair Lady",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 70,
+    "year": 1956,
+    "genre": "musical"
+  },
+  {
+    "title": "I've Grown Accustomed to Her Face",
+    "artist": "My Fair Lady",
+    "lo": 45,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1956,
+    "genre": "musical"
+  },
+  {
+    "title": "Get Me to the Church on Time",
+    "artist": "My Fair Lady",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 69,
+    "year": 1956,
+    "genre": "musical"
+  },
+  {
+    "title": "With a Little Bit of Luck",
+    "artist": "My Fair Lady",
+    "lo": 47,
+    "hi": 68,
+    "brightness": 67,
+    "year": 1956,
+    "genre": "musical"
+  },
+  {
+    "title": "Ol' Man River",
+    "artist": "Show Boat",
+    "lo": 40,
+    "hi": 67,
+    "brightness": 58,
+    "year": 1927,
+    "genre": "musical"
+  },
+  {
+    "title": "Can't Help Lovin' Dat Man",
+    "artist": "Show Boat",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 63,
+    "year": 1927,
+    "genre": "musical"
+  },
+  {
+    "title": "Make Believe",
+    "artist": "Show Boat",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1927,
+    "genre": "musical"
+  },
+  {
+    "title": "Camelot",
+    "artist": "Camelot",
+    "lo": 45,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1960,
+    "genre": "musical"
+  },
+  {
+    "title": "If Ever I Would Leave You",
+    "artist": "Camelot",
+    "lo": 46,
+    "hi": 72,
+    "brightness": 67,
+    "year": 1960,
+    "genre": "musical"
+  },
+  {
+    "title": "Aquarius",
+    "artist": "Hair",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1967,
+    "genre": "musical"
+  },
+  {
+    "title": "Let the Sunshine In",
+    "artist": "Hair",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 71,
+    "year": 1967,
+    "genre": "musical"
+  },
+  {
+    "title": "Good Morning Baltimore",
+    "artist": "Hairspray",
+    "lo": 50,
+    "hi": 74,
+    "brightness": 72,
+    "year": 2002,
+    "genre": "musical"
+  },
+  {
+    "title": "I Can Hear the Bells",
+    "artist": "Hairspray",
+    "lo": 51,
+    "hi": 75,
+    "brightness": 73,
+    "year": 2002,
+    "genre": "musical"
+  },
+  {
+    "title": "You Can't Stop the Beat",
+    "artist": "Hairspray",
+    "lo": 52,
+    "hi": 73,
+    "brightness": 74,
+    "year": 2002,
+    "genre": "musical"
+  },
+  {
+    "title": "Without Love",
+    "artist": "Hairspray",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 70,
+    "year": 2002,
+    "genre": "musical"
+  },
+  {
+    "title": "Big, Blonde and Beautiful",
+    "artist": "Hairspray",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 69,
+    "year": 2002,
+    "genre": "musical"
+  },
+  {
+    "title": "I Know Where I've Been",
+    "artist": "Hairspray",
+    "lo": 47,
+    "hi": 74,
+    "brightness": 68,
+    "year": 2002,
+    "genre": "musical"
+  },
+  {
+    "title": "Welcome to the 60's",
+    "artist": "Hairspray",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 71,
+    "year": 2002,
+    "genre": "musical"
+  },
+  {
+    "title": "The Impossible Dream",
+    "artist": "Man of La Mancha",
+    "lo": 46,
+    "hi": 73,
+    "brightness": 67,
+    "year": 1965,
+    "genre": "musical"
+  },
+  {
+    "title": "I'll Know",
+    "artist": "Guys and Dolls",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1950,
+    "genre": "musical"
+  },
+  {
+    "title": "Luck Be a Lady",
+    "artist": "Guys and Dolls",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 1950,
+    "genre": "musical"
+  },
+  {
+    "title": "Sit Down You're Rockin' the Boat",
+    "artist": "Guys and Dolls",
+    "lo": 49,
+    "hi": 70,
+    "brightness": 70,
+    "year": 1950,
+    "genre": "musical"
+  },
+  {
+    "title": "If I Were a Bell",
+    "artist": "Guys and Dolls",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1950,
+    "genre": "musical"
+  },
+  {
+    "title": "Adelaide's Lament",
+    "artist": "Guys and Dolls",
+    "lo": 49,
+    "hi": 69,
+    "brightness": 68,
+    "year": 1950,
+    "genre": "musical"
+  },
+  {
+    "title": "Guys and Dolls",
+    "artist": "Guys and Dolls",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 1950,
+    "genre": "musical"
+  },
+  {
+    "title": "The Music Man",
+    "artist": "The Music Man",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "Till There Was You",
+    "artist": "The Music Man",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 64,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "Seventy Six Trombones",
+    "artist": "The Music Man",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 71,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "Marian the Librarian",
+    "artist": "The Music Man",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "Gary, Indiana",
+    "artist": "The Music Man",
+    "lo": 48,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "Shipoopi",
+    "artist": "The Music Man",
+    "lo": 50,
+    "hi": 70,
+    "brightness": 70,
+    "year": 1957,
+    "genre": "musical"
+  },
+  {
+    "title": "Try to Remember",
+    "artist": "The Fantasticks",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 62,
+    "year": 1960,
+    "genre": "musical"
+  },
+  {
+    "title": "Soon It's Gonna Rain",
+    "artist": "The Fantasticks",
+    "lo": 45,
+    "hi": 69,
+    "brightness": 63,
+    "year": 1960,
+    "genre": "musical"
+  },
+  {
+    "title": "Cabaret",
+    "artist": "Cabaret",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1966,
+    "genre": "musical"
+  },
+  {
+    "title": "Willkommen",
+    "artist": "Cabaret",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1966,
+    "genre": "musical"
+  },
+  {
+    "title": "Maybe This Time",
+    "artist": "Cabaret",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 65,
+    "year": 1966,
+    "genre": "musical"
+  },
+  {
+    "title": "Money",
+    "artist": "Cabaret",
+    "lo": 49,
+    "hi": 69,
+    "brightness": 69,
+    "year": 1966,
+    "genre": "musical"
+  },
+  {
+    "title": "What Would You Do",
+    "artist": "Cabaret",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 64,
+    "year": 1966,
+    "genre": "musical"
+  },
+  {
+    "title": "One",
+    "artist": "A Chorus Line",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 71,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "What I Did for Love",
+    "artist": "A Chorus Line",
+    "lo": 46,
+    "hi": 72,
+    "brightness": 66,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "At the Ballet",
+    "artist": "A Chorus Line",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 65,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "Nothing",
+    "artist": "A Chorus Line",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "The Music and the Mirror",
+    "artist": "A Chorus Line",
+    "lo": 49,
+    "hi": 73,
+    "brightness": 69,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "I Hope I Get It",
+    "artist": "A Chorus Line",
+    "lo": 50,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "Unexpected Song",
+    "artist": "Song & Dance",
+    "lo": 46,
+    "hi": 72,
+    "brightness": 66,
+    "year": 1982,
+    "genre": "musical"
+  },
+  {
+    "title": "The Last Night of the World",
+    "artist": "Miss Saigon",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 64,
+    "year": 1989,
+    "genre": "musical"
+  },
+  {
+    "title": "Why God Why",
+    "artist": "Miss Saigon",
+    "lo": 47,
+    "hi": 73,
+    "brightness": 68,
+    "year": 1989,
+    "genre": "musical"
+  },
+  {
+    "title": "Sun and Moon",
+    "artist": "Miss Saigon",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 66,
+    "year": 1989,
+    "genre": "musical"
+  },
+  {
+    "title": "I Still Believe",
+    "artist": "Miss Saigon",
+    "lo": 48,
+    "hi": 73,
+    "brightness": 68,
+    "year": 1989,
+    "genre": "musical"
+  },
+  {
+    "title": "The American Dream",
+    "artist": "Miss Saigon",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 71,
+    "year": 1989,
+    "genre": "musical"
+  },
+  {
+    "title": "Close Every Door",
+    "artist": "Joseph and the Amazing Technicolor Dreamcoat",
+    "lo": 45,
+    "hi": 72,
+    "brightness": 65,
+    "year": 1968,
+    "genre": "musical"
+  },
+  {
+    "title": "Any Dream Will Do",
+    "artist": "Joseph and the Amazing Technicolor Dreamcoat",
+    "lo": 47,
+    "hi": 71,
+    "brightness": 68,
+    "year": 1968,
+    "genre": "musical"
+  },
+  {
+    "title": "Go Go Go Joseph",
+    "artist": "Joseph and the Amazing Technicolor Dreamcoat",
+    "lo": 49,
+    "hi": 72,
+    "brightness": 70,
+    "year": 1968,
+    "genre": "musical"
+  },
+  {
+    "title": "Those Canaan Days",
+    "artist": "Joseph and the Amazing Technicolor Dreamcoat",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1968,
+    "genre": "musical"
+  },
+  {
+    "title": "I Don't Know How to Love Him",
+    "artist": "Jesus Christ Superstar",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 64,
+    "year": 1970,
+    "genre": "musical"
+  },
+  {
+    "title": "Gethsemane",
+    "artist": "Jesus Christ Superstar",
+    "lo": 46,
+    "hi": 74,
+    "brightness": 66,
+    "year": 1970,
+    "genre": "musical"
+  },
+  {
+    "title": "Superstar",
+    "artist": "Jesus Christ Superstar",
+    "lo": 48,
+    "hi": 73,
+    "brightness": 69,
+    "year": 1970,
+    "genre": "musical"
+  },
+  {
+    "title": "Everything's Alright",
+    "artist": "Jesus Christ Superstar",
+    "lo": 47,
+    "hi": 70,
+    "brightness": 66,
+    "year": 1970,
+    "genre": "musical"
+  },
+  {
+    "title": "The Circle of Life",
+    "artist": "The Lion King",
+    "lo": 49,
+    "hi": 74,
+    "brightness": 71,
+    "year": 1997,
+    "genre": "musical"
+  },
+  {
+    "title": "Can You Feel the Love Tonight",
+    "artist": "The Lion King",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 63,
+    "year": 1997,
+    "genre": "musical"
+  },
+  {
+    "title": "Hakuna Matata",
+    "artist": "The Lion King",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 69,
+    "year": 1997,
+    "genre": "musical"
+  },
+  {
+    "title": "Shadowland",
+    "artist": "The Lion King",
+    "lo": 47,
+    "hi": 72,
+    "brightness": 67,
+    "year": 1997,
+    "genre": "musical"
+  },
+  {
+    "title": "Endless Night",
+    "artist": "The Lion King",
+    "lo": 45,
+    "hi": 71,
+    "brightness": 64,
+    "year": 1997,
+    "genre": "musical"
+  },
+  {
+    "title": "The Wizard and I",
+    "artist": "Wicked",
+    "lo": 49,
+    "hi": 75,
+    "brightness": 70,
+    "year": 2003,
+    "genre": "musical"
+  },
+  {
+    "title": "No Good Deed",
+    "artist": "Wicked",
+    "lo": 50,
+    "hi": 76,
+    "brightness": 72,
+    "year": 2003,
+    "genre": "musical"
+  },
+  {
+    "title": "I'm Not That Girl",
+    "artist": "Wicked",
+    "lo": 46,
+    "hi": 70,
+    "brightness": 64,
+    "year": 2003,
+    "genre": "musical"
+  },
+  {
+    "title": "As Long As You're Mine",
+    "artist": "Wicked",
+    "lo": 47,
+    "hi": 72,
+    "brightness": 67,
+    "year": 2003,
+    "genre": "musical"
+  },
+  {
+    "title": "Mr. Cellophane",
+    "artist": "Chicago",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 65,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "Razzle Dazzle",
+    "artist": "Chicago",
+    "lo": 49,
+    "hi": 71,
+    "brightness": 70,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "Roxie",
+    "artist": "Chicago",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 71,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "When You're Good to Mama",
+    "artist": "Chicago",
+    "lo": 47,
+    "hi": 69,
+    "brightness": 67,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "Nowadays",
+    "artist": "Chicago",
+    "lo": 48,
+    "hi": 70,
+    "brightness": 68,
+    "year": 1975,
+    "genre": "musical"
+  },
+  {
+    "title": "Both Sides Now",
+    "artist": "Judy Collins (from musical repertoire)",
+    "lo": 44,
+    "hi": 69,
+    "brightness": 62,
+    "year": 1967,
+    "genre": "musical"
+  },
+  {
+    "title": "Listen",
+    "artist": "Dreamgirls",
+    "lo": 48,
+    "hi": 75,
+    "brightness": 69,
+    "year": 1981,
+    "genre": "musical"
+  },
+  {
+    "title": "One Night Only",
+    "artist": "Dreamgirls",
+    "lo": 50,
+    "hi": 73,
+    "brightness": 72,
+    "year": 1981,
+    "genre": "musical"
+  },
+  {
+    "title": "When I First Saw You",
+    "artist": "Dreamgirls",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 66,
+    "year": 1981,
+    "genre": "musical"
+  },
+  {
+    "title": "Waitress (She Used to Be Mine)",
+    "artist": "Waitress",
+    "lo": 47,
+    "hi": 73,
+    "brightness": 67,
+    "year": 2015,
+    "genre": "musical"
+  },
+  {
+    "title": "What Baking Can Do",
+    "artist": "Waitress",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 68,
+    "year": 2015,
+    "genre": "musical"
+  },
+  {
+    "title": "When He Sees Me",
+    "artist": "Waitress",
+    "lo": 50,
+    "hi": 73,
+    "brightness": 71,
+    "year": 2015,
+    "genre": "musical"
+  },
+  {
+    "title": "Everything Changes",
+    "artist": "Waitress",
+    "lo": 46,
+    "hi": 71,
+    "brightness": 65,
+    "year": 2015,
+    "genre": "musical"
+  },
+  {
+    "title": "Santa Fe",
+    "artist": "Newsies",
+    "lo": 47,
+    "hi": 73,
+    "brightness": 68,
+    "year": 2012,
+    "genre": "musical"
+  },
+  {
+    "title": "Seize the Day",
+    "artist": "Newsies",
+    "lo": 50,
+    "hi": 72,
+    "brightness": 72,
+    "year": 2012,
+    "genre": "musical"
+  },
+  {
+    "title": "King of New York",
+    "artist": "Newsies",
+    "lo": 51,
+    "hi": 73,
+    "brightness": 73,
+    "year": 2012,
+    "genre": "musical"
+  },
+  {
+    "title": "Watch What Happens",
+    "artist": "Newsies",
+    "lo": 48,
+    "hi": 71,
+    "brightness": 69,
+    "year": 2012,
+    "genre": "musical"
+  }
+]
