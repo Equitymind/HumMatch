@@ -124595,13 +124595,17 @@ function showResults() {
   const _interests = (function() {
     try { return JSON.parse(localStorage.getItem('hm_interests') || 'null'); } catch(_) { return null; }
   })();
-  const _hasGenreFilter  = _interests && _interests.genres  && _interests.genres.length;
-  const _hasDecadeFilter = _interests && _interests.decades && _interests.decades.length;
+  // Merge genres and decades into one filter (decades are now genre tags)
+  const _allFilters = [];
+  if (_interests) {
+    if (_interests.genres) _allFilters.push(..._interests.genres);
+    if (_interests.decades) _allFilters.push(..._interests.decades);
+  }
+  const _hasFilter = _allFilters.length > 0;
   function _matchesInterests(s) {
-    if (!_hasGenreFilter && !_hasDecadeFilter) return true;
-    const genreOk  = !_hasGenreFilter  || (s.tags && s.tags.some(g => _interests.genres.includes(g)));
-    const decadeOk = !_hasDecadeFilter || _interests.decades.includes(s.decade);
-    return genreOk && decadeOk;
+    if (!_hasFilter) return true;
+    if (!s.tags || !s.tags.length) return false;
+    return s.tags.some(tag => _allFilters.includes(tag));
   }
 
   // Separate confident songs from stretch
@@ -124618,16 +124622,16 @@ function showResults() {
   const _confidentFiltered = _confidentRaw.filter(_matchesInterests);
   
   // If genre/decade filter results in too few songs (<10), include stretch songs that match filter
-  const needMoreSongs = (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length < 10;
+  const needMoreSongs = _hasFilter && _confidentFiltered.length < 10;
   const _stretchFiltered = needMoreSongs ? tieredSongs.filter(s => s.tier.key === 'stretch' && !isDismissed(s) && _matchesInterests(s)) : [];
   
   // Respect genre/decade filters, but fall back if empty (prevents stuck state)
   const confidentSongs = sessionShuffle(
-    (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length > 0
+    _hasFilter && _confidentFiltered.length > 0
       ? [..._confidentFiltered, ..._stretchFiltered]
       : _confidentRaw
   );
-  const _tasteFilterActive = (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length > 0;
+  const _tasteFilterActive = _hasFilter && _confidentFiltered.length > 0;
   const stretchSongs   = tieredSongs.filter(s => s.tier.key === 'stretch' && !isDismissed(s));
 
   // Set share song data now that confidentSongs is available
@@ -124816,11 +124820,8 @@ function showResults() {
     const _existingTasteBanner = document.getElementById('hm-taste-banner');
     if (_existingTasteBanner) _existingTasteBanner.remove();
     if (_tasteFilterActive) {
-      const _genreLabels = { pop:'Pop', rock:'Rock', country:'Country', rnb:'R&B', hiphop:'Hip-Hop', latin:'Latin', indie:'Indie', disco:'Disco' };
-      const _decadeLabels = { '50s60s':'50s/60s', '70s':'70s', '80s':'80s', '90s':'90s', '2000s':'2000s', '2010s':'2010s', '2020s':'2020s' };
-      const _gNames = (_interests.genres || []).map(g => _genreLabels[g] || g).join(', ');
-      const _dNames = (_interests.decades || []).map(d => _decadeLabels[d] || d).join(', ');
-      const _filterDesc = [_gNames, _dNames].filter(Boolean).join(' · ');
+      const _filterLabels = { pop:'Pop', rock:'Rock', country:'Country', rnb:'R&B', hiphop:'Hip-Hop', latin:'Latin', indie:'Indie', disco:'Disco', '50s60s':'50s/60s', '70s':'70s', '80s':'80s', '90s':'90s', '2000s':'2000s', '2010s':'2010s', '2020s':'2020s' };
+      const _filterDesc = _allFilters.map(f => _filterLabels[f] || f).join(', ');
       yourSongsEl.insertAdjacentHTML('beforebegin', `
         <div id="hm-taste-banner" style="width:100%;max-width:400px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.22);border-radius:12px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
           <div>
