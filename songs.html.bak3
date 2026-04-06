@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browse All Songs | HumMatch - Vocal Intelligence</title>
+<meta name="description" content="Browse our complete catalog of songs analyzed for vocal range, difficulty, and timbre. Search by artist, title, genre, or vocal range.">
+<link rel="canonical" href="https://hummatch.me/songs" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Browse All Songs | HumMatch" />
+<meta property="og:description" content="Browse our complete catalog of songs analyzed for vocal range, difficulty, and timbre." />
+<meta property="og:url" content="https://hummatch.me/songs" />
+<meta property="og:site_name" content="HumMatch" />
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "HumMatch Song Directory",
+  "description": "Complete catalog of songs analyzed for vocal range, difficulty, and timbre matching",
+  "url": "https://hummatch.me/songs",
+  "numberOfItems": "6000+",
+  "itemListElement": {
+    "@type": "MusicRecording",
+    "name": "Song catalog with vocal analysis"
+  }
+}
+</script>
+<style>
+:root {
+  --bg: #0d0d1a;
+  --surface: #1a1a2e;
+  --accent: #a855f7;
+  --text1: #f0e6ff;
+  --text2: #b39ddb;
+  --text3: #7b6fa0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text1);
+  line-height: 1.6;
+  padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+.subtitle {
+  color: var(--text2);
+  margin-bottom: 32px;
+  font-size: 1.1rem;
+}
+.search-filter {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.search-box {
+  flex: 1;
+  min-width: 300px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(168,85,247,0.3);
+  border-radius: 12px;
+  color: #fff;
+}
+.search-box:focus {
+  outline: none;
+  border-color: #A855F7;
+  background: rgba(255,255,255,0.08);
+}
+.filter-select {
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(168,85,247,0.3);
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+}
+.filter-select:focus {
+  outline: none;
+  border-color: #A855F7;
+}
+.stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+  color: var(--text3);
+}
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+.song-card {
+  background: var(--surface);
+  border: 1px solid rgba(168,85,247,0.15);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: var(--text1);
+  display: block;
+}
+.song-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(168,85,247,0.2);
+}
+.song-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text1);
+  margin-bottom: 4px;
+}
+.song-artist {
+  font-size: 0.9rem;
+  color: var(--text2);
+  margin-bottom: 12px;
+}
+.song-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+}
+.meta-badge {
+  background: rgba(168,85,247,0.15);
+  border: 1px solid rgba(168,85,247,0.3);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text2);
+}
+.back-link {
+  display: inline-block;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="/" class="back-link">← Back to HumMatch</a>
+  
+  <h1>🎵 Browse All Songs</h1>
+  <p class="subtitle">Search and filter our complete catalog analyzed for vocal intelligence</p>
+  
+  <div class="search-filter">
+    <input type="text" class="search-box" id="search" placeholder="Search by song or artist...">
+    <select class="filter-select" id="genreFilter">
+      <option value="">All Genres</option>
+    </select>
+    <select class="filter-select" id="sortBy">
+      <option value="title">Sort: Title (A-Z)</option>
+      <option value="artist">Sort: Artist (A-Z)</option>
+      <option value="year">Sort: Year (Newest)</option>
+    </select>
+  </div>
+  
+
+  
+  <div class="song-grid" id="songGrid">
+    <div class="loading">Loading songs...</div>
+  </div>
+</div>
+
+<script>
+// Load SONGS from parent window or fetch from index.html
+let SONGS = [];
+
+async function loadSongs() {
+  try {
+    // Try to fetch from a dedicated JSON endpoint first
+    const response = await fetch('/api/songs.json');
+    if (response.ok) {
+      SONGS = await response.json();
+    } else {
+      // Fallback: parse from index.html
+      const htmlResponse = await fetch('/');
+      const html = await htmlResponse.text();
+      // More robust regex that handles large arrays
+      const startIdx = html.indexOf('const SONGS = [');
+      if (startIdx === -1) throw new Error('SONGS array not found');
+      
+      const jsonStart = startIdx + 'const SONGS = '.length;
+      let bracketCount = 0;
+      let endIdx = jsonStart;
+      
+      // Find matching closing bracket
+      for (let i = jsonStart; i < html.length; i++) {
+        if (html[i] === '[') bracketCount++;
+        else if (html[i] === ']') {
+          bracketCount--;
+          if (bracketCount === 0) {
+            endIdx = i + 1;
+            break;
+          }
+        }
+      }
+      
+      const jsonStr = html.substring(jsonStart, endIdx);
+      SONGS = JSON.parse(jsonStr);
+      console.log('Loaded', SONGS.length, 'songs from index.html');
+    }
+    
+    // Clear any error messages
+    const grid = document.getElementById('songGrid');
+    grid.innerHTML = '';
+    
+    renderSongs(SONGS);
+    populateGenres();
+  } catch (error) {
+    console.error('Error loading songs:', error);
+    document.getElementById('songGrid').innerHTML = `
+      <div class="loading">
+        <p style="margin-bottom: 12px;">Unable to load song catalog</p>
+        <p style="font-size: 0.9rem; opacity: 0.7;">Try <a href="/" style="color: #A855F7;">returning home</a> or refreshing this page</p>
+      </div>
+    `;
+  }
+}
+
+function populateGenres() {
+  const genres = [...new Set(SONGS.map(s => s.genre))].sort();
+  const select = document.getElementById('genreFilter');
+  genres.forEach(genre => {
+    const option = document.createElement('option');
+    option.value = genre;
+    option.textContent = genre.charAt(0).toUpperCase() + genre.slice(1);
+    select.appendChild(option);
+  });
+}
+
+function renderSongs(songs) {
+  const grid = document.getElementById('songGrid');
+  
+  if (songs.length === 0) {
+    grid.innerHTML = '<div class="loading">No songs found</div>';
+    return;
+  }
+  
+  grid.innerHTML = songs.map(song => {
+    const slug = `${song.title}-${song.artist}`.toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    
+    const rangeText = `Range: ${midiToNote(song.lo)}-${midiToNote(song.hi)}`;
+    const brightnessText = song.brightness ? `Timbre: ${song.brightness}/100` : '';
+    
+    return `
+      <a href="/song/${slug}" class="song-card">
+        <div class="song-title">${song.title}</div>
+        <div class="song-artist">${song.artist}</div>
+        <div class="song-meta">
+          <span class="meta-badge">${song.genre}</span>
+          <span class="meta-badge">${rangeText}</span>
+          ${brightnessText ? `<span class="meta-badge">${brightnessText}</span>` : ''}
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
+function midiToNote(midi) {
+  const notes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+  const octave = Math.floor(midi / 12) - 1;
+  const note = notes[midi % 12];
+  return note + octave;
+}
+
+function filterAndSort() {
+  const search = document.getElementById('search').value.toLowerCase();
+  const genre = document.getElementById('genreFilter').value;
+  const sortBy = document.getElementById('sortBy').value;
+  
+  let filtered = SONGS.filter(song => {
+    const matchesSearch = song.title.toLowerCase().includes(search) || 
+                         song.artist.toLowerCase().includes(search);
+    const matchesGenre = !genre || song.genre === genre;
+    return matchesSearch && matchesGenre;
+  });
+  
+  filtered.sort((a, b) => {
+    if (sortBy === 'title') return a.title.localeCompare(b.title);
+    if (sortBy === 'artist') return a.artist.localeCompare(b.artist);
+    if (sortBy === 'year') return (b.year || 0) - (a.year || 0);
+    return 0;
+  });
+  
+  renderSongs(filtered);
+}
+
+document.getElementById('search').addEventListener('input', filterAndSort);
+document.getElementById('genreFilter').addEventListener('change', filterAndSort);
+document.getElementById('sortBy').addEventListener('change', filterAndSort);
+
+loadSongs();
+</script>
+</body>
+</html>

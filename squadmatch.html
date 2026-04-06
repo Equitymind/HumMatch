@@ -178,7 +178,7 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
       <div style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:10px;">What Squad Leaders unlock</div>
       <ul style="list-style:none;padding:0;margin:0;">
         <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
-          <span style="position:absolute;left:0;">•</span> Invite up to 5 friends
+          <span style="position:absolute;left:0;">•</span> Invite up to 4 friends
         </li>
         <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
           <span style="position:absolute;left:0;">•</span> Everyone hums once
@@ -202,26 +202,32 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
     </div>
     
     <div class="card" style="margin-bottom:18px">
-      <label>Squad name (optional)</label>
-      <input type="text" id="squad-name-input" placeholder="e.g., Karaoke Night Crew" maxlength="40"/>
-      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Name it anything you want, or leave it blank.</div>
+      <label>Squad name</label>
+      <input type="text" id="squad-name-input" placeholder="Joe's Squad" maxlength="40"/>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Pick a name now — you can change it anytime in HQ.</div>
     </div>
     <button class="btn btn-primary" id="create-btn" onclick="confirmCreateSquad()">Create & Invite My Squad</button>
     <div class="helper">Next, we'll generate your squad link to share by text, WhatsApp, email, or social.</div>
     <div id="invite-section" style="display:none;margin-top:24px">
       <div class="divider"></div>
-      <div style="font-size:0.75rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Share Your Invite Link</div>
-      <div class="inv-box">
-        <span class="inv-url" id="inv-url">…</span>
-        <button class="inv-copy" onclick="copyLink()">Copy</button>
+      <div style="font-size:0.75rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Invite Your First Friend</div>
+      <div style="margin-bottom:16px;">
+        <input type="text" id="invite-contact" placeholder="Phone number or email" style="width:100%;padding:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:#fff;font-size:0.95rem;margin-bottom:8px;"/>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">We'll send them your squad invite link.</div>
       </div>
-      <div class="sbtns">
-        <button class="sbtn" onclick="shareText()">💬 Text</button>
-        <button class="sbtn wa" onclick="shareWA()">📱 WhatsApp</button>
-        <button class="sbtn em" onclick="shareEmail()">✉️ Email</button>
-        <button class="sbtn" onclick="nativeShare()">⬆️ Share</button>
+      <button class="btn btn-primary" onclick="sendFirstInvite()" style="margin-bottom:12px;">Send Invite & Continue</button>
+      <div style="text-align:center;margin:12px 0;">
+        <div style="font-size:0.75rem;color:var(--muted);margin-bottom:8px;">Or share manually:</div>
+        <div class="inv-box" style="margin-bottom:8px;">
+          <span class="inv-url" id="inv-url">…</span>
+          <button class="inv-copy" onclick="copyLink()">Copy</button>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+          <button class="sbtn" onclick="nativeShare()" style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);padding:8px 16px;border-radius:8px;color:#fff;font-size:0.8rem;cursor:pointer;">⬆️ Share</button>
+          <button class="sbtn" onclick="shareText()" style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);padding:8px 16px;border-radius:8px;color:#fff;font-size:0.8rem;cursor:pointer;">💬 Text</button>
+          <button class="sbtn wa" onclick="shareWA()" style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);padding:8px 16px;border-radius:8px;color:#fff;font-size:0.8rem;cursor:pointer;">📱 WhatsApp</button>
+        </div>
       </div>
-      <button class="btn btn-secondary" style="margin-top:8px" onclick="goWaiting()">See Who's Joined →</button>
     </div>
   </div>
 </div>
@@ -371,7 +377,8 @@ const S = {
   squadId:null, token:null, memberId:null, inviteToken:null,
   squadName:null, voiceType:null, selectedName:null,
   songs:[], bestSong:null, bestArtist:null, memberCount:0,
-  votedName:null, shareFrom:'reveal', pollTimer:null, cardType:1
+  votedName:null, shareFrom:'reveal', pollTimer:null, cardType:1,
+  inviteSent:false
 };
 
 // ── Mini catalog for voice-type matching ──────────────────────────────────
@@ -509,7 +516,7 @@ function loadCreate() {
   const isPremium = localStorage.getItem('hm_premium') === 'true';
   if (!isPremium) {
     // Redirect to pricing page with squad intent
-    window.location = '/pricing?intent=squad';
+    window.location = '/pricing?intent=squad&v=2';
     return;
   }
   
@@ -524,11 +531,10 @@ function loadCreate() {
 function confirmCreateSquad() {
   const nm = document.getElementById('squad-name-input').value.trim();
   if (!nm) {
-    toast('Please enter a squad name');
+    toast('Please name your squad');
     document.getElementById('squad-name-input').focus();
     return;
   }
-  // Optional: Add confirmation dialog
   if (!confirm(`Create squad "${nm}" and generate invite link?`)) {
     return;
   }
@@ -576,22 +582,47 @@ function invUrl() {
   return location.href;
 }
 
+function sendFirstInvite() {
+  const contact = document.getElementById('invite-contact').value.trim();
+  if (!contact) {
+    toast('Please enter a phone number or email');
+    document.getElementById('invite-contact').focus();
+    return;
+  }
+  
+  const inviteUrl = invUrl();
+  const inviteMsg = `Join my SquadMatch on HumMatch! ${inviteUrl}`;
+  
+  // Detect if email or phone
+  if (contact.includes('@')) {
+    // Email
+    window.open(`mailto:${contact}?subject=${encodeURIComponent('Join my SquadMatch!')}&body=${encodeURIComponent(inviteMsg)}`);
+  } else {
+    // Phone (SMS)
+    window.open(`sms:${contact}?&body=${encodeURIComponent(inviteMsg)}`);
+  }
+  
+  // Proceed immediately
+  toast('Invite sent! ✓');
+  setTimeout(() => goWaiting(), 1000);
+}
 function copyLink() {
   const url = invUrl();
-  if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => toast('Link copied!')).catch(() => fallbackCopy(url));
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => { toast('Link copied!'); setTimeout(() => goWaiting(), 1000); }).catch(() => fallbackCopy(url));
   else fallbackCopy(url);
 }
 function fallbackCopy(url) {
   const el = Object.assign(document.createElement('textarea'), {value:url});
   document.body.appendChild(el); el.select(); document.execCommand('copy'); el.remove();
   toast('Link copied!');
+  setTimeout(() => goWaiting(), 1000);
 }
-function shareText() { window.open('sms:?&body=' + encodeURIComponent('Join my SquadMatch! ' + invUrl())); }
-function shareWA()   { window.open('https://wa.me/?text=' + encodeURIComponent("Join my SquadMatch and let's find songs we can all sing together! " + invUrl())); }
-function shareEmail(){ window.open('mailto:?subject=' + encodeURIComponent("Join my SquadMatch!") + '&body=' + encodeURIComponent("Hey! Join my SquadMatch on HumMatch:\n" + invUrl())); }
+function shareText() { window.open('sms:?&body=' + encodeURIComponent('Join my SquadMatch! ' + invUrl())); setTimeout(() => goWaiting(), 1000); }
+function shareWA()   { window.open('https://wa.me/?text=' + encodeURIComponent("Join my SquadMatch and let's find songs we can all sing together! " + invUrl())); setTimeout(() => goWaiting(), 1000); }
+function shareEmail(){ window.open('mailto:?subject=' + encodeURIComponent("Join my SquadMatch!") + '&body=' + encodeURIComponent("Hey! Join my SquadMatch on HumMatch:\n" + invUrl())); setTimeout(() => goWaiting(), 1000); }
 function nativeShare() {
   const url = invUrl();
-  if (navigator.share) navigator.share({title:"Join my SquadMatch!", text:"Let's find songs we can all sing together.", url}).catch(() => copyLink());
+  if (navigator.share) navigator.share({title:"Join my SquadMatch!", text:"Let's find songs we can all sing together.", url}).then(() => { setTimeout(() => goWaiting(), 1000); }).catch(() => copyLink());
   else copyLink();
 }
 function goWaiting() { if (S.squadId) window.location = '/squadmatch?squad=' + S.squadId; }

@@ -564,6 +564,8 @@ function renderPage(song, related) {
     </div>
   </div>
 
+  ${song.tags && song.tags.length > 0 ? '<div class="section"><h2>Genre</h2><div style="display:flex;gap:8px;flex-wrap:wrap">' + song.tags.map(function(tag) { return '<span style="background:rgba(168,85,247,0.1);color:var(--purple);padding:6px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;border:1px solid rgba(168,85,247,0.2);text-transform:capitalize">' + tag + '</span>'; }).join('') + '</div></div>' : ''}
+
   ${bestFor.length > 0 ? '<div class="section"><h2>Best For</h2><div style="display:flex;gap:10px;flex-wrap:wrap">' + bestFor.map(function(bf) { return '<div style="background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:12px 16px;flex:1;min-width:150px"><div style="font-size:1.2rem;margin-bottom:4px">' + bf.icon + '</div><div style="font-weight:700;font-size:0.9rem;margin-bottom:2px">' + bf.label + '</div><div style="font-size:0.78rem;color:var(--muted)">' + bf.reason + '</div></div>'; }).join('') + '</div></div>' : ''}
 
   ${transpose ? '<div class="section"><div style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:12px;padding:18px 20px"><div style="display:flex;align-items:center;gap:12px"><div style="font-size:1.8rem">🎹</div><div><div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">Try Transposing ' + transpose.direction + '</div><div style="font-size:0.85rem;color:var(--muted)">Shift ' + Math.abs(transpose.semitones) + ' semitones ' + transpose.direction.toLowerCase() + ' for ' + transpose.reason + '. Most karaoke apps let you adjust pitch.</div></div></div></div></div>' : ''}

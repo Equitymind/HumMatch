@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top 100 Christian & Gospel Songs to Sing | HumMatch</title>
+  <meta name="description" content="Find the perfect Christian or Gospel song for your voice. Browse 100 top picks — contemporary Christian, traditional hymns, and gospel standards — with vocal range data and difficulty ratings.">
+  <meta name="keywords" content="christian karaoke songs, gospel songs to sing, church music vocal range, christian worship songs for singers, gospel karaoke, hymns vocal range">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hummatch.me/christian-music.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Top 100 Christian & Gospel Songs to Sing | HumMatch">
+  <meta property="og:description" content="Find songs that match your voice from 100 Christian & Gospel picks — with vocal range data, difficulty ratings, and a free vocal range test.">
+  <meta property="og:url"         content="https://hummatch.me/christian-music.html">
+  <meta property="og:site_name"   content="HumMatch">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"CollectionPage","name":"Top 100 Christian & Gospel Songs to Sing","description":"Browse top Christian and Gospel songs with vocal range and difficulty data. Includes contemporary Christian, traditional hymns, and gospel standards.","url":"https://hummatch.me/christian-music.html","isPartOf":{"@type":"WebSite","name":"HumMatch","url":"https://hummatch.me"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"HumMatch","item":"https://hummatch.me"},{"@type":"ListItem","position":2,"name":"Christian & Gospel Music","item":"https://hummatch.me/christian-music.html"}]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are easy Christian songs to sing?","acceptedAnswer":{"@type":"Answer","text":"Easy Christian songs include 'Amazing Grace', '10,000 Reasons', 'How Great Thou Art', and 'Oceans' — all rated Easy on HumMatch and spanning fewer than 12 semitones."}},{"@type":"Question","name":"What vocal range do I need for gospel songs?","acceptedAnswer":{"@type":"Answer","text":"Gospel songs typically demand a wide range, often 15–20 semitones. Sopranos and high tenors shine on classics like 'O Happy Day' and Whitney Houston's 'I Will Always Love You' (often sung in church settings). Alto/baritone voices excel at many traditional hymns."}},{"@type":"Question","name":"Are Lauren Daigle songs hard to sing?","acceptedAnswer":{"@type":"Answer","text":"Lauren Daigle's songs like 'You Say' and 'How Can It Be' are moderately difficult — they span 10–14 semitones and include some emotional runs. They're accessible for trained singers but challenging for beginners."}}]}
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:     #0d0b1a;
+      --card:   rgba(255,255,255,0.04);
+      --border: rgba(124,58,237,0.15);
+      --grad:   linear-gradient(135deg, #A855F7, #EC4899);
+      --purple: #A855F7;
+      --pink:   #EC4899;
+      --text:   #e2e0f0;
+      --muted:  rgba(255,255,255,0.45);
+      --radius: 14px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(13,11,26,0.92); backdrop-filter: blur(12px);
+    }
+    .logo { font-size: 1.2rem; font-weight: 800; text-decoration: none; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; gap: 8px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.875rem; padding: 6px 12px; border-radius: 8px; transition: color 0.15s; }
+    .nav-link:hover { color: var(--text); }
+    .nav-btn { background: var(--grad); color: #fff; padding: 8px 18px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.875rem; transition: opacity 0.15s; }
+    .nav-btn:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero { max-width: 1000px; margin: 0 auto; padding: 48px 24px 32px; }
+    .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--purple); }
+    .breadcrumb span { margin: 0 6px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25); border-radius: 20px; padding: 4px 14px; font-size: 0.78rem; color: var(--purple); margin-bottom: 16px; }
+    h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+    .hero-sub { color: var(--muted); font-size: 1rem; margin-bottom: 32px; max-width: 640px; }
+    .hero-sub strong { color: var(--text); }
+
+    /* STATS ROW */
+    .stats-row { display: flex; gap: 24px; margin-bottom: 36px; flex-wrap: wrap; }
+    .stat-chip { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 20px; flex: 1; min-width: 120px; }
+    .stat-chip .num { font-size: 1.6rem; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-chip .lbl { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+    /* VOCAL RANGE TOOL EMBED */
+    .range-embed {
+      background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(236,72,153,0.1));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: var(--radius); padding: 28px;
+      margin-bottom: 36px; text-align: center;
+    }
+    .range-embed h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+    .range-embed p { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; }
+    .range-embed .voice-types { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .voice-btn { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 8px 16px; font-size: 0.82rem; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+    .voice-btn:hover, .voice-btn.active { border-color: var(--purple); color: var(--purple); background: rgba(168,85,247,0.1); }
+    .btn-grad { display: inline-block; background: var(--grad); color: #fff; padding: 11px 28px; border-radius: 11px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: opacity 0.15s, transform 0.1s; }
+    .btn-grad:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* FILTERS */
+    .filters { max-width: 1000px; margin: 0 auto; padding: 0 24px 24px; }
+    .filter-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .filter-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+    .filter-btn { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 6px 16px; font-size: 0.8rem; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--purple); color: var(--purple); background: rgba(168,85,247,0.1); }
+
+    /* SONG GRID */
+    .section { max-width: 1000px; margin: 0 auto; padding: 0 24px 48px; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .section-header h2 { font-size: 1.25rem; font-weight: 700; }
+    .section-header .count { font-size: 0.78rem; color: var(--muted); background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 2px 10px; }
+    .song-grid { display: grid; gap: 10px; }
+    .song-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 14px 18px; display: grid;
+      grid-template-columns: 2fr 1fr 80px 80px 90px;
+      align-items: center; gap: 12px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .song-card:hover { border-color: rgba(168,85,247,0.35); background: rgba(168,85,247,0.04); }
+    .song-card.hidden { display: none; }
+    .song-title { font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .song-artist { font-size: 0.78rem; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .song-range { font-size: 0.8rem; color: var(--muted); text-align: center; }
+    .song-range strong { display: block; font-size: 0.88rem; color: var(--text); }
+    .diff-badge { border-radius: 8px; padding: 3px 10px; font-size: 0.72rem; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 0.04em; }
+    .diff-easy   { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+    .diff-medium { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+    .diff-hard   { background: rgba(239,68,68,0.15);  color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+    .voice-tag { font-size: 0.72rem; color: var(--muted); text-align: right; }
+    .voice-tag span { display: inline-block; background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.15); border-radius: 6px; padding: 2px 7px; margin-bottom: 3px; }
+    .col-hdr { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 0 18px 8px; display: grid; grid-template-columns: 2fr 1fr 80px 80px 90px; gap: 12px; max-width: 1000px; margin: 0 auto; }
+
+    /* VOICE GUIDE */
+    .voice-guide { max-width: 1000px; margin: 0 auto; padding: 0 24px 48px; }
+    .voice-guide h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; }
+    .voice-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .voice-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+    .voice-card .vname { font-weight: 700; margin-bottom: 4px; }
+    .voice-card .vrange { font-size: 0.78rem; color: var(--purple); margin-bottom: 10px; }
+    .voice-card ul { list-style: none; }
+    .voice-card ul li { font-size: 0.82rem; color: var(--muted); padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .voice-card ul li:last-child { border-bottom: none; }
+    .voice-card ul li::before { content: "♪ "; color: var(--purple); }
+
+    /* FAQ */
+    .faq { max-width: 1000px; margin: 0 auto; padding: 0 24px 56px; }
+    .faq h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; }
+    .faq-item { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; }
+    .faq-q { padding: 16px 20px; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q:hover { background: rgba(168,85,247,0.05); }
+    .faq-a { padding: 0 20px 16px; font-size: 0.88rem; color: var(--muted); line-height: 1.7; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-q { color: var(--purple); }
+    .faq-chevron { transition: transform 0.2s; color: var(--muted); }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--purple); }
+    .footer-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+
+    @media (max-width: 680px) {
+      .song-card { grid-template-columns: 1fr 80px 80px; }
+      .song-card .song-range, .voice-tag { display: none; }
+      .col-hdr { grid-template-columns: 1fr 80px 80px; }
+      .col-hdr span:nth-child(2), .col-hdr span:nth-child(5) { display: none; }
+    }
+    @media (max-width: 480px) {
+      .song-card { grid-template-columns: 1fr 80px; }
+      .song-card .voice-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">HumMatch</a>
+  <div class="nav-links">
+    <a href="/song/" class="nav-link">Songs</a>
+    <a href="/blog/" class="nav-link">Blog</a>
+    <a href="/#try" class="nav-btn">Find My Songs</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="breadcrumb">
+    <a href="/">HumMatch</a><span>›</span>
+    <a href="/song/">Songs</a><span>›</span>
+    Christian &amp; Gospel
+  </div>
+  <div class="hero-badge">✝ Christian &amp; Gospel</div>
+  <h1>Top 100 Christian &amp; Gospel Songs to Sing</h1>
+  <p class="hero-sub">
+    From <strong>contemporary worship</strong> to <strong>classic hymns</strong> and <strong>soul-stirring gospel</strong> — every song rated for difficulty and matched to your vocal range.
+    Whether you're leading worship, singing karaoke, or practicing at home, find the songs your voice was made for.
+  </p>
+  <div class="stats-row">
+    <div class="stat-chip"><div class="num">100</div><div class="lbl">Songs catalogued</div></div>
+    <div class="stat-chip"><div class="num">3</div><div class="lbl">Sub-categories</div></div>
+    <div class="stat-chip"><div class="num">6</div><div class="lbl">Voice types covered</div></div>
+    <div class="stat-chip"><div class="num">Free</div><div class="lbl">Vocal range test</div></div>
+  </div>
+</div>
+
+<!-- VOCAL RANGE TOOL EMBED -->
+<div style="max-width:1000px;margin:0 auto;padding:0 24px 36px">
+  <div class="range-embed">
+    <h2>🎤 Find Songs That Fit YOUR Voice</h2>
+    <p>Not sure which of these songs you can actually sing? HumMatch compares your vocal range to every song's requirements — for free.</p>
+    <div class="voice-types">
+      <button class="voice-btn" onclick="selectVoice(this,'soprano')">Soprano</button>
+      <button class="voice-btn" onclick="selectVoice(this,'mezzo')">Mezzo-Soprano</button>
+      <button class="voice-btn" onclick="selectVoice(this,'alto')">Alto</button>
+      <button class="voice-btn" onclick="selectVoice(this,'tenor')">Tenor</button>
+      <button class="voice-btn" onclick="selectVoice(this,'baritone')">Baritone</button>
+      <button class="voice-btn" onclick="selectVoice(this,'bass')">Bass</button>
+    </div>
+    <a href="/#try" class="btn-grad" id="range-cta">Test My Vocal Range Free →</a>
+    <p style="margin-top:12px;font-size:0.78rem;color:var(--muted)">No account needed • Results in 60 seconds • Works on mobile</p>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="filter-label">Filter by category</div>
+  <div class="filter-row" id="cat-filters">
+    <button class="filter-btn active" onclick="filterSongs('cat','all',this)">All (100)</button>
+    <button class="filter-btn" onclick="filterSongs('cat','contemporary',this)">Contemporary Christian (35)</button>
+    <button class="filter-btn" onclick="filterSongs('cat','gospel',this)">Gospel (35)</button>
+    <button class="filter-btn" onclick="filterSongs('cat','hymn',this)">Traditional Hymns (30)</button>
+  </div>
+  <div class="filter-label">Filter by difficulty</div>
+  <div class="filter-row" id="diff-filters">
+    <button class="filter-btn active" onclick="filterSongs('diff','all',this)">All difficulties</button>
+    <button class="filter-btn" onclick="filterSongs('diff','Easy',this)">Easy</button>
+    <button class="filter-btn" onclick="filterSongs('diff','Medium',this)">Medium</button>
+    <button class="filter-btn" onclick="filterSongs('diff','Hard',this)">Hard</button>
+  </div>
+</div>
+
+<!-- COLUMN HEADERS -->
+<div class="col-hdr">
+  <span>Song / Artist</span>
+  <span style="text-align:center">Category</span>
+  <span style="text-align:center">Range</span>
+  <span style="text-align:center">Difficulty</span>
+  <span style="text-align:right">Best For</span>
+</div>
+
+<!-- SONG LIST: Contemporary Christian -->
+<div class="section">
+  <div class="section-header">
+    <h2>Contemporary Christian</h2>
+    <span class="count">35 songs</span>
+  </div>
+  <div class="song-grid" id="songs-contemporary">
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">You Say</div><div class="song-artist">Lauren Daigle</div></div>
+      <div class="song-range"><strong>Bb3–F5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Mezzo</span><span>Alto</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">How Can It Be</div><div class="song-artist">Lauren Daigle</div></div>
+      <div class="song-range"><strong>A3–E5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Alto</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">Trust in You</div><div class="song-artist">Lauren Daigle</div></div>
+      <div class="song-range"><strong>G3–D5</strong>10 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Alto</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">10,000 Reasons (Bless the Lord)</div><div class="song-artist">Matt Redman</div></div>
+      <div class="song-range"><strong>C4–D5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">Oceans (Where Feet May Fail)</div><div class="song-artist">Hillsong United</div></div>
+      <div class="song-range"><strong>A3–F#5</strong>14 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">What a Beautiful Name</div><div class="song-artist">Hillsong Worship</div></div>
+      <div class="song-range"><strong>B3–E5</strong>11 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Soprano</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">Cornerstone</div><div class="song-artist">Hillsong Worship</div></div>
+      <div class="song-range"><strong>A3–C#5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Hard">
+      <div><div class="song-title">Shout to the Lord</div><div class="song-artist">Hillsong</div></div>
+      <div class="song-range"><strong>G3–G5</strong>17 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">Good Good Father</div><div class="song-artist">Chris Tomlin</div></div>
+      <div class="song-range"><strong>B3–E5</strong>10 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">How Great Is Our God</div><div class="song-artist">Chris Tomlin</div></div>
+      <div class="song-range"><strong>A3–D5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">Our God</div><div class="song-artist">Chris Tomlin</div></div>
+      <div class="song-range"><strong>G3–E5</strong>13 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">Glorious Day</div><div class="song-artist">Casting Crowns</div></div>
+      <div class="song-range"><strong>A3–C5</strong>8 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Baritone</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">Who Am I</div><div class="song-artist">Casting Crowns</div></div>
+      <div class="song-range"><strong>G3–D5</strong>10 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">East to West</div><div class="song-artist">Casting Crowns</div></div>
+      <div class="song-range"><strong>A3–D5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">Holy Spirit</div><div class="song-artist">Francesca Battistelli</div></div>
+      <div class="song-range"><strong>C4–E5</strong>10 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Soprano</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">Beautiful, Beautiful</div><div class="song-artist">Francesca Battistelli</div></div>
+      <div class="song-range"><strong>B3–D5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Mezzo</span><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Hard">
+      <div><div class="song-title">Broken Vessels (Amazing Grace)</div><div class="song-artist">Hillsong Worship</div></div>
+      <div class="song-range"><strong>F3–G5</strong>15 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">King of My Heart</div><div class="song-artist">Bethel Music</div></div>
+      <div class="song-range"><strong>A3–E5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Mezzo</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">Reckless Love</div><div class="song-artist">Cory Asbury</div></div>
+      <div class="song-range"><strong>G3–D5</strong>10 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">Way Maker</div><div class="song-artist">Sinach / Michael W. Smith</div></div>
+      <div class="song-range"><strong>B3–F#5</strong>13 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Hard">
+      <div><div class="song-title">Graves Into Gardens</div><div class="song-artist">Elevation Worship</div></div>
+      <div class="song-range"><strong>G3–G5</strong>17 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">Do It Again</div><div class="song-artist">Elevation Worship</div></div>
+      <div class="song-range"><strong>A3–D5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">O Come to the Altar</div><div class="song-artist">Elevation Worship</div></div>
+      <div class="song-range"><strong>Bb3–E5</strong>11 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Hard">
+      <div><div class="song-title">Resurrecting</div><div class="song-artist">Elevation Worship</div></div>
+      <div class="song-range"><strong>G3–Ab5</strong>16 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">Build My Life</div><div class="song-artist">Pat Barrett / Housefires</div></div>
+      <div class="song-range"><strong>A3–E5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">The Lion and the Lamb</div><div class="song-artist">Big Daddy Weave</div></div>
+      <div class="song-range"><strong>Bb3–D5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">More of You</div><div class="song-artist">Colton Dixon</div></div>
+      <div class="song-range"><strong>G3–E5</strong>13 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">Tell Your Heart to Beat Again</div><div class="song-artist">Danny Gokey</div></div>
+      <div class="song-range"><strong>A3–D5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">Word of God Speak</div><div class="song-artist">MercyMe</div></div>
+      <div class="song-range"><strong>G3–C5</strong>8 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Baritone</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">I Can Only Imagine</div><div class="song-artist">MercyMe</div></div>
+      <div class="song-range"><strong>A3–D5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Hard">
+      <div><div class="song-title">Voice of Truth</div><div class="song-artist">Casting Crowns</div></div>
+      <div class="song-range"><strong>F3–F5</strong>15 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">This Is Amazing Grace</div><div class="song-artist">Phil Wickham</div></div>
+      <div class="song-range"><strong>A3–E5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Easy">
+      <div><div class="song-title">Living Hope</div><div class="song-artist">Phil Wickham</div></div>
+      <div class="song-range"><strong>B3–E5</strong>10 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Medium">
+      <div><div class="song-title">Promises</div><div class="song-artist">Maverick City Music</div></div>
+      <div class="song-range"><strong>G3–E5</strong>13 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="contemporary" data-diff="Hard">
+      <div><div class="song-title">Champion</div><div class="song-artist">Bethel Music</div></div>
+      <div class="song-range"><strong>F3–Ab5</strong>17 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SONG LIST: Gospel -->
+<div class="section">
+  <div class="section-header">
+    <h2>Gospel Standards</h2>
+    <span class="count">35 songs</span>
+  </div>
+  <div class="song-grid" id="songs-gospel">
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Oh Happy Day</div><div class="song-artist">Edwin Hawkins Singers</div></div>
+      <div class="song-range"><strong>C4–G5</strong>15 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Easy">
+      <div><div class="song-title">This Little Light of Mine</div><div class="song-artist">Traditional</div></div>
+      <div class="song-range"><strong>C4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">His Eye Is on the Sparrow</div><div class="song-artist">Traditional / Mahalia Jackson</div></div>
+      <div class="song-range"><strong>A3–F5</strong>13 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Alto</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Total Praise</div><div class="song-artist">Richard Smallwood</div></div>
+      <div class="song-range"><strong>Bb3–G5</strong>16 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">I'll Fly Away</div><div class="song-artist">Traditional / Albert E. Brumley</div></div>
+      <div class="song-range"><strong>G3–D5</strong>10 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">I Will Praise Him</div><div class="song-artist">Tasha Cobbs Leonard</div></div>
+      <div class="song-range"><strong>G3–Ab5</strong>17 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">Break Every Chain</div><div class="song-artist">Tasha Cobbs Leonard</div></div>
+      <div class="song-range"><strong>A3–E5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Alto</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Rise Up</div><div class="song-artist">Andra Day</div></div>
+      <div class="song-range"><strong>Ab3–F5</strong>14 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Alto</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Stand</div><div class="song-artist">Donnie McClurkin</div></div>
+      <div class="song-range"><strong>G3–G5</strong>17 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">We Fall Down</div><div class="song-artist">Donnie McClurkin</div></div>
+      <div class="song-range"><strong>A3–D5</strong>9 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Alabaster Box</div><div class="song-artist">CeCe Winans</div></div>
+      <div class="song-range"><strong>Bb3–Gb5</strong>14 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Easy">
+      <div><div class="song-title">Blessed Assurance</div><div class="song-artist">Fanny Crosby / Traditional</div></div>
+      <div class="song-range"><strong>D4–E5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Mezzo</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">It's Working</div><div class="song-artist">William McDowell</div></div>
+      <div class="song-range"><strong>G3–F5</strong>15 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">I'm Available to You</div><div class="song-artist">Rev. Milton Brunson</div></div>
+      <div class="song-range"><strong>A3–E5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Alto</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Easy">
+      <div><div class="song-title">He's Got the Whole World in His Hands</div><div class="song-artist">Traditional</div></div>
+      <div class="song-range"><strong>D4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Your Great Name</div><div class="song-artist">Natalie Grant</div></div>
+      <div class="song-range"><strong>A3–F5</strong>13 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">We Shall Overcome</div><div class="song-artist">Traditional</div></div>
+      <div class="song-range"><strong>C4–E5</strong>10 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Revelation Song</div><div class="song-artist">Jennie Lee Riddle / Kari Jobe</div></div>
+      <div class="song-range"><strong>A3–G5</strong>16 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">I Give You My Heart</div><div class="song-artist">Hillsong / Reuben Morgan</div></div>
+      <div class="song-range"><strong>A3–D5</strong>9 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Jesus Paid It All</div><div class="song-artist">Kristian Stanfill</div></div>
+      <div class="song-range"><strong>G3–F5</strong>15 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Easy">
+      <div><div class="song-title">Great Is Thy Faithfulness</div><div class="song-artist">Traditional</div></div>
+      <div class="song-range"><strong>C4–E5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">Draw Me Close</div><div class="song-artist">Kelly Carpenter</div></div>
+      <div class="song-range"><strong>Bb3–D5</strong>8 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Indescribable</div><div class="song-artist">Chris Tomlin</div></div>
+      <div class="song-range"><strong>F3–G5</strong>16 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Easy">
+      <div><div class="song-title">Victory in Jesus</div><div class="song-artist">Traditional</div></div>
+      <div class="song-range"><strong>D4–E5</strong>8 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Baritone</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">Waymaker (Live)</div><div class="song-artist">Leeland</div></div>
+      <div class="song-range"><strong>G3–E5</strong>13 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Center</div><div class="song-artist">Charlie Hall</div></div>
+      <div class="song-range"><strong>A3–F5</strong>13 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Easy">
+      <div><div class="song-title">Open the Eyes of My Heart</div><div class="song-artist">Paul Baloche</div></div>
+      <div class="song-range"><strong>A3–D5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">Holy Is the Lord</div><div class="song-artist">Chris Tomlin</div></div>
+      <div class="song-range"><strong>B3–E5</strong>11 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Ain't No Mountain High Enough (Gospel arr.)</div><div class="song-artist">Traditional arr.</div></div>
+      <div class="song-range"><strong>G3–G5</strong>17 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">God Is Here</div><div class="song-artist">Fred Hammond</div></div>
+      <div class="song-range"><strong>A3–E5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Baritone</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Easy">
+      <div><div class="song-title">Give Me Jesus</div><div class="song-artist">Fernando Ortega / Traditional</div></div>
+      <div class="song-range"><strong>C4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">Not Afraid</div><div class="song-artist">Tye Tribbett</div></div>
+      <div class="song-range"><strong>F3–Ab5</strong>17 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Medium">
+      <div><div class="song-title">Yes (You Are Good)</div><div class="song-artist">Shekinah Glory Ministry</div></div>
+      <div class="song-range"><strong>Bb3–F5</strong>14 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Alto</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Easy">
+      <div><div class="song-title">Lean on Me</div><div class="song-artist">Gospel arr. — Bill Withers</div></div>
+      <div class="song-range"><strong>C4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="gospel" data-diff="Hard">
+      <div><div class="song-title">I Smile</div><div class="song-artist">Kirk Franklin</div></div>
+      <div class="song-range"><strong>F3–F5</strong>15 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SONG LIST: Hymns -->
+<div class="section">
+  <div class="section-header">
+    <h2>Traditional Hymns</h2>
+    <span class="count">30 songs</span>
+  </div>
+  <div class="song-grid" id="songs-hymn">
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Amazing Grace</div><div class="song-artist">Traditional (John Newton)</div></div>
+      <div class="song-range"><strong>D4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">How Great Thou Art</div><div class="song-artist">Traditional / Stuart K. Hine</div></div>
+      <div class="song-range"><strong>D4–F#5</strong>14 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Holy, Holy, Holy</div><div class="song-artist">Traditional (Reginald Heber)</div></div>
+      <div class="song-range"><strong>D4–E5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Be Thou My Vision</div><div class="song-artist">Traditional (Irish Hymn)</div></div>
+      <div class="song-range"><strong>C4–D5</strong>8 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">It Is Well with My Soul</div><div class="song-artist">Horatio Spafford / Philip Bliss</div></div>
+      <div class="song-range"><strong>C4–E5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">Crown Him with Many Crowns</div><div class="song-artist">Matthew Bridges</div></div>
+      <div class="song-range"><strong>Eb4–F5</strong>11 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">O Come All Ye Faithful</div><div class="song-artist">Traditional</div></div>
+      <div class="song-range"><strong>D4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">Joyful, Joyful We Adore Thee</div><div class="song-artist">Henry van Dyke</div></div>
+      <div class="song-range"><strong>E4–F#5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Just as I Am</div><div class="song-artist">Charlotte Elliott</div></div>
+      <div class="song-range"><strong>C4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">To God Be the Glory</div><div class="song-artist">Fanny Crosby</div></div>
+      <div class="song-range"><strong>C4–E5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">Come Thou Fount</div><div class="song-artist">Robert Robinson</div></div>
+      <div class="song-range"><strong>D4–F#5</strong>13 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">When I Survey the Wondrous Cross</div><div class="song-artist">Isaac Watts</div></div>
+      <div class="song-range"><strong>C4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Trust and Obey</div><div class="song-artist">John Sammis</div></div>
+      <div class="song-range"><strong>D4–E5</strong>8 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Baritone</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">Abide with Me</div><div class="song-artist">Henry Francis Lyte</div></div>
+      <div class="song-range"><strong>C4–F5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">I Surrender All</div><div class="song-artist">Judson W. Van DeVenter</div></div>
+      <div class="song-range"><strong>C4–D5</strong>8 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">A Mighty Fortress Is Our God</div><div class="song-artist">Martin Luther</div></div>
+      <div class="song-range"><strong>D4–F5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Baritone</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Leaning on the Everlasting Arms</div><div class="song-artist">Elisha Hoffman</div></div>
+      <div class="song-range"><strong>D4–E5</strong>8 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">The Old Rugged Cross</div><div class="song-artist">George Bennard</div></div>
+      <div class="song-range"><strong>Bb3–Eb5</strong>11 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Baritone</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">He Lives</div><div class="song-artist">Alfred H. Ackley</div></div>
+      <div class="song-range"><strong>D4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Hard">
+      <div><div class="song-title">O Holy Night</div><div class="song-artist">Adolphe Adam</div></div>
+      <div class="song-range"><strong>C4–B5</strong>19 st</div>
+      <div class="diff-badge diff-hard">Hard</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">In the Garden</div><div class="song-artist">C. Austin Miles</div></div>
+      <div class="song-range"><strong>D4–E5</strong>8 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">How Deep the Father's Love</div><div class="song-artist">Stuart Townend</div></div>
+      <div class="song-range"><strong>C4–E5</strong>9 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Softly and Tenderly</div><div class="song-artist">Will L. Thompson</div></div>
+      <div class="song-range"><strong>C4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">Christ the Lord Is Risen Today</div><div class="song-artist">Charles Wesley</div></div>
+      <div class="song-range"><strong>D4–G5</strong>15 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Soprano</span><span>Tenor</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Fairest Lord Jesus</div><div class="song-artist">Traditional (German)</div></div>
+      <div class="song-range"><strong>C4–E5</strong>9 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">My Jesus I Love Thee</div><div class="song-artist">William R. Featherstone</div></div>
+      <div class="song-range"><strong>C4–F5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Soprano</span><span>Mezzo</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Rock of Ages</div><div class="song-artist">Augustus Toplady</div></div>
+      <div class="song-range"><strong>C4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">And Can It Be</div><div class="song-artist">Charles Wesley</div></div>
+      <div class="song-range"><strong>C4–G5</strong>14 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Soprano</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Easy">
+      <div><div class="song-title">Doxology (Praise God from Whom)</div><div class="song-artist">Thomas Ken</div></div>
+      <div class="song-range"><strong>D4–D5</strong>7 st</div>
+      <div class="diff-badge diff-easy">Easy</div>
+      <div class="voice-tag"><span>All voices</span></div>
+    </div>
+
+    <div class="song-card" data-cat="hymn" data-diff="Medium">
+      <div><div class="song-title">Immortal, Invisible God Only Wise</div><div class="song-artist">Walter Chalmers Smith</div></div>
+      <div class="song-range"><strong>D4–F5</strong>12 st</div>
+      <div class="diff-badge diff-medium">Medium</div>
+      <div class="voice-tag"><span>Tenor</span><span>Baritone</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- VOICE TYPE GUIDE -->
+<div class="voice-guide">
+  <h2>Christian &amp; Gospel Songs by Voice Type</h2>
+  <div class="voice-cards">
+    <div class="voice-card">
+      <div class="vname">Soprano</div>
+      <div class="vrange">C4–G6 typical</div>
+      <ul>
+        <li>Shout to the Lord</li>
+        <li>O Holy Night</li>
+        <li>Revelation Song</li>
+        <li>Total Praise</li>
+        <li>Alabaster Box</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <div class="vname">Mezzo-Soprano</div>
+      <div class="vrange">A3–F5 typical</div>
+      <ul>
+        <li>You Say (Lauren Daigle)</li>
+        <li>His Eye Is on the Sparrow</li>
+        <li>Break Every Chain</li>
+        <li>What a Beautiful Name</li>
+        <li>Holy Spirit</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <div class="vname">Alto</div>
+      <div class="vrange">G3–D5 typical</div>
+      <ul>
+        <li>His Eye Is on the Sparrow</li>
+        <li>Rise Up</li>
+        <li>Yes (You Are Good)</li>
+        <li>Break Every Chain</li>
+        <li>Glorious Day</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <div class="vname">Tenor</div>
+      <div class="vrange">C3–G5 typical</div>
+      <ul>
+        <li>How Great Is Our God</li>
+        <li>I Can Only Imagine</li>
+        <li>10,000 Reasons</li>
+        <li>Reckless Love</li>
+        <li>Stand (Donnie McClurkin)</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <div class="vname">Baritone</div>
+      <div class="vrange">G2–E4 typical</div>
+      <ul>
+        <li>Cornerstone</li>
+        <li>How Great Is Our God</li>
+        <li>Be Thou My Vision</li>
+        <li>A Mighty Fortress</li>
+        <li>Word of God Speak</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <div class="vname">Bass</div>
+      <div class="vrange">E2–C4 typical</div>
+      <ul>
+        <li>Amazing Grace (low key)</li>
+        <li>Just as I Am</li>
+        <li>Rock of Ages</li>
+        <li>Doxology</li>
+        <li>Give Me Jesus</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      What are the easiest Christian songs to sing at church?
+      <span class="faq-chevron">▾</span>
+    </div>
+    <div class="faq-a">
+      The easiest church songs span only 7–9 semitones and stay in a comfortable mid-range: <strong>Amazing Grace</strong> (D4–D5), <strong>It Is Well with My Soul</strong> (C4–E5), <strong>10,000 Reasons</strong> (C4–D5), and <strong>Doxology</strong> (D4–D5). All are rated Easy on HumMatch and suit virtually every voice type.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      What vocal range do gospel songs typically require?
+      <span class="faq-chevron">▾</span>
+    </div>
+    <div class="faq-a">
+      Classic gospel songs demand a wide range — often 14–17 semitones. Songs like <strong>Oh Happy Day</strong> (C4–G5) and <strong>Total Praise</strong> (Bb3–G5) sit firmly in soprano/high tenor territory. For lower voices, look for arrangements in different keys or choose standards like <strong>His Eye Is on the Sparrow</strong> and <strong>Victory in Jesus</strong>, which are more forgiving.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Are Lauren Daigle songs hard to sing?
+      <span class="faq-chevron">▾</span>
+    </div>
+    <div class="faq-a">
+      Lauren Daigle's songs are rated <strong>Medium</strong> on HumMatch. <em>You Say</em> spans Bb3–F5 (12 semitones) with some emotional runs, while <em>Trust in You</em> is slightly easier at G3–D5 (10 semitones). They're very singable for mezzo-sopranos and altos, but beginners may find the sustained passages challenging.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      What is the hardest Christian song to sing?
+      <span class="faq-chevron">▾</span>
+    </div>
+    <div class="faq-a">
+      Among the songs here, <strong>O Holy Night</strong> is the most demanding at C4–B5 (19 semitones). Other vocally challenging picks include <strong>Shout to the Lord</strong>, <strong>Graves Into Gardens</strong>, and <strong>Revelation Song</strong> — all requiring 15+ semitones of range and excellent breath control.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      How do I find which Christian songs match my voice?
+      <span class="faq-chevron">▾</span>
+    </div>
+    <div class="faq-a">
+      Use HumMatch's free vocal range tool — hum or sing a few notes and it maps your range to the songs in our catalog. You'll see instantly which hymns, gospel classics, and contemporary worship songs your voice can handle. No account needed, works on mobile.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER CTA -->
+<div style="max-width:1000px;margin:0 auto;padding:0 24px 56px;text-align:center">
+  <div style="background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.12));border:1px solid rgba(168,85,247,0.25);border-radius:16px;padding:36px 24px">
+    <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:8px">Find Your Perfect Worship Song</h2>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:24px">Test your vocal range in 60 seconds — then see which of these 100 Christian &amp; gospel songs fit your voice perfectly.</p>
+    <a href="/#try" class="btn-grad" style="font-size:1rem;padding:14px 36px">Test My Vocal Range — Free →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/song/">Song Directory</a>
+    <a href="/blog/">Blog</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+  <p>&copy; 2026 HumMatch · Find songs that fit your voice</p>
+</footer>
+
+<script>
+  // Voice type selection
+  let selectedVoice = null;
+  function selectVoice(btn, type) {
+    document.querySelectorAll('.voice-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedVoice = type;
+    const cta = document.getElementById('range-cta');
+    const labels = { soprano:'Soprano', mezzo:'Mezzo-Soprano', alto:'Alto', tenor:'Tenor', baritone:'Baritone', bass:'Bass' };
+    cta.textContent = `Find ${labels[type]} Songs on HumMatch →`;
+    cta.href = `/#try?voice=${type}`;
+  }
+
+  // Filter logic
+  let activeCat = 'all', activeDiff = 'all';
+  function filterSongs(type, val, btn) {
+    if (type === 'cat') {
+      activeCat = val;
+      document.querySelectorAll('#cat-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    } else {
+      activeDiff = val;
+      document.querySelectorAll('#diff-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    }
+    btn.classList.add('active');
+    document.querySelectorAll('.song-card').forEach(card => {
+      const catMatch  = activeCat  === 'all' || card.dataset.cat  === activeCat;
+      const diffMatch = activeDiff === 'all' || card.dataset.diff === activeDiff;
+      card.classList.toggle('hidden', !(catMatch && diffMatch));
+    });
+    // Update visible counts
+    const visible = document.querySelectorAll('.song-card:not(.hidden)').length;
+    const allBtn = document.querySelector('#cat-filters .filter-btn');
+    // Only update totals for "all" button label
+  }
+
+  // FAQ accordion
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

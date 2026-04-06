@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choir Song Finder for Directors | HumMatch</title>
+  <meta name="description" content="Find the perfect songs for your choir. Enter your voice section counts — soprano, alto, tenor, bass — and instantly discover matching choral repertoire. Free tool for choir directors.">
+  <meta name="keywords" content="choir song finder, songs for my choir, choir director tools, choral repertoire finder, SATB song list, women's choir songs, men's choir songs, SAB choir songs">
+  <meta property="og:title" content="Choir Song Finder for Directors | HumMatch">
+  <meta property="og:description" content="Enter your choir's exact voice makeup and find songs that fit. Free tool for choir directors — Classical, Gospel, Pop, Folk, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hummatch.com/for-choir-directors.html">
+  <link rel="canonical" href="https://hummatch.com/for-choir-directors.html">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0b1a;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(124,58,237,0.15);
+      --grad-1: #A855F7;
+      --grad-2: #EC4899;
+      --text: #e2e0f0;
+      --muted: rgba(255,255,255,0.4);
+      --radius: 14px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(13,11,26,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+      border: none;
+      border-radius: 10px;
+      color: #fff !important;
+      font-size: 13px !important;
+      font-weight: 700;
+      padding: 7px 16px;
+      text-decoration: none;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; color: #fff !important; }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 24px 40px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      color: var(--grad-1);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 50px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding: 20px 0;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+    /* ── Calculator embed ── */
+    .calc-section {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 16px 56px;
+    }
+    .section-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .iframe-wrap {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .calc-iframe {
+      width: 100%;
+      border: none;
+      display: block;
+      min-height: 720px;
+    }
+
+    /* ── Features ── */
+    .features {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 56px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .features-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .features-header h2 {
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .features-header p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+    }
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+    .feature-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── How it works ── */
+    .how-it-works {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      text-align: center;
+    }
+    .how-it-works h2 {
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 800;
+      margin-bottom: 32px;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+    @media (max-width: 520px) {
+      .steps { grid-template-columns: 1fr; }
+    }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .step h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .step p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── Repertoire categories ── */
+    .categories {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      border-top: 1px solid var(--border);
+      padding-top: 56px;
+    }
+    .categories h2 {
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 800;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .categories > p {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .cat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      transition: border-color 0.2s;
+    }
+    .cat-card:hover { border-color: rgba(168,85,247,0.35); }
+    .cat-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .cat-card p { font-size: 12px; color: var(--muted); }
+    .cat-count {
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 24px 72px;
+      text-align: center;
+    }
+    .cta-card {
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.1));
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 20px;
+      padding: 40px 32px;
+    }
+    .cta-card h2 { font-size: 24px; font-weight: 800; margin-bottom: 10px; }
+    .cta-card p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+    .btn-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+      border-radius: 12px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+    .cta-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer a { color: var(--grad-1); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-sep { margin: 0 10px; }
+
+    /* ── Schema ── */
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="/" class="nav-logo">HumMatch</a>
+    <div class="nav-links">
+      <a href="/choir-calculator.html">Song Finder</a>
+      <a href="/" class="nav-cta">Try HumMatch Free</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">Choir Directors</div>
+    <h1>Find the Perfect <span>Songs for Your Choir</span></h1>
+    <p>Enter your soprano, alto, tenor, and bass counts — get an instant, curated list of songs that actually fit your singers.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">42+</span>
+        <span class="stat-label">Choral pieces</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">6</span>
+        <span class="stat-label">Arrangement types</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">Free</span>
+        <span class="stat-label">No signup needed</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-it-works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Enter your section sizes</h4>
+        <p>Type how many sopranos, altos, tenors, and basses you have.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Instant matches</h4>
+        <p>See every arrangement type that works — SATB, SSA, SAB, TTBB, and more.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Share with your team</h4>
+        <p>Copy a shareable link to send your choir's results to co-directors or section leads.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator embed -->
+  <section class="calc-section">
+    <div class="section-label">Choir Song Finder Tool</div>
+    <div class="iframe-wrap">
+      <iframe
+        id="calc-iframe"
+        class="calc-iframe"
+        src="/choir-calculator.html"
+        title="Choir Song Finder — Enter your voice section sizes"
+        loading="lazy"
+        scrolling="no"
+      ></iframe>
+    </div>
+    <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--muted)">
+      <a href="/choir-calculator.html" style="color:var(--grad-1);text-decoration:none;">Open full-page version &rarr;</a>
+    </p>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="features-header">
+      <h2>Built for real choir directors</h2>
+      <p>No filler — just the data you need to pick repertoire fast.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">&#x2696;&#xFE0F;</span>
+        <h3>Balance scoring</h3>
+        <p>Each result flags if your section sizes are thin for a given piece — so you know before you commit to a song.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#x1F3BC;</span>
+        <h3>All arrangement types</h3>
+        <p>SATB, SSA, SAB, TTBB, 2-part, rounds — the finder works for every configuration of voices.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#x1F3AF;</span>
+        <h3>Difficulty levels</h3>
+        <p>Filter by Beginner, Intermediate, or Advanced so you always pitch repertoire at the right level.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#x1F517;</span>
+        <h3>Shareable links</h3>
+        <p>Hit "Share" to copy a link with your choir's exact makeup encoded. Send it to anyone in seconds.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#x1F3A7;</span>
+        <h3>Genre variety</h3>
+        <p>Classical, Gospel, Pop, Folk, Broadway — browse across styles or filter to exactly what your choir performs.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#x26A1;</span>
+        <h3>Instant results</h3>
+        <p>No sign-up, no loading screens. Type your numbers and see matches immediately. Zero friction.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Repertoire categories -->
+  <section class="categories">
+    <h2>Repertoire by voice arrangement</h2>
+    <p>The finder covers songs across every major choral configuration.</p>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <span class="cat-count">16</span>
+        <h4>SATB</h4>
+        <p>Full 4-part mixed choir — Classical, Gospel &amp; Pop</p>
+      </div>
+      <div class="cat-card">
+        <span class="cat-count">5</span>
+        <h4>SSA</h4>
+        <p>Women's / treble chorus arrangements</p>
+      </div>
+      <div class="cat-card">
+        <span class="cat-count">5</span>
+        <h4>SAB</h4>
+        <p>3-part mixed — works without tenors</p>
+      </div>
+      <div class="cat-card">
+        <span class="cat-count">5</span>
+        <h4>TTBB</h4>
+        <p>Men's chorus arrangements</p>
+      </div>
+      <div class="cat-card">
+        <span class="cat-count">5</span>
+        <h4>2-Part / Unison</h4>
+        <p>Perfect for beginners or small ensembles</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-card">
+      <h2>Help your choir members learn their parts</h2>
+      <p>HumMatch lets singers hum a melody and find out exactly what song it is — and which voice part they're singing. Great for sectional rehearsals.</p>
+      <a href="/" class="btn-cta">Try HumMatch Free</a>
+      <p class="cta-sub">No account required &mdash; works in any browser</p>
+    </div>
+  </section>
+
+  <footer>
+    <a href="/">HumMatch</a>
+    <span class="footer-sep">&middot;</span>
+    <a href="/choir-calculator.html">Choir Song Finder</a>
+    <span class="footer-sep">&middot;</span>
+    <a href="/">Hum a Song</a>
+    <br><br>
+    <span>Free tools for choir directors &mdash; find songs for your choir size</span>
+  </footer>
+
+  <!-- Auto-resize iframe to content height -->
+  <script>
+    const iframe = document.getElementById('calc-iframe');
+    function resizeIframe() {
+      try {
+        const h = iframe.contentDocument.body.scrollHeight;
+        if (h > 400) iframe.style.minHeight = h + 'px';
+      } catch(e) {}
+    }
+    iframe.addEventListener('load', () => {
+      resizeIframe();
+      setInterval(resizeIframe, 800);
+    });
+  </script>
+
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Choir Song Finder",
+    "url": "https://hummatch.com/choir-calculator.html",
+    "description": "Enter your choir's voice part counts to find songs that match your exact soprano, alto, tenor, and bass makeup.",
+    "applicationCategory": "MusicApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+</body>
+</html>

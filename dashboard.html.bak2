@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>My HQ | HumMatch</title>
+<meta name="description" content="Your HumMatch HQ. Voice matches, playlists, SquadMatch and more."/>
+<link rel="icon" href="/hummatch-icon-bug-2x.png"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0b1a;color:#e2e0f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh}
+a{color:#a78bfa;text-decoration:none}
+a:hover{color:#c084fc}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(124,58,237,0.3);border-radius:3px}
+
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px}
+#login-screen .logo-wrap{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+#login-screen h1{font-size:1.5rem;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#login-screen p{color:rgba(255,255,255,0.4);font-size:0.85rem;max-width:300px;text-align:center}
+.login-input{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.3);color:#fff;padding:14px 20px;border-radius:12px;font-size:1rem;width:300px;outline:none;transition:border 0.2s}
+.login-input:focus{border-color:#7c3aed}
+.login-btn{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:12px 32px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(124,58,237,0.4)}
+.login-error{color:#ef4444;font-size:0.82rem;min-height:20px}
+
+#dashboard{display:none;max-width:1200px;margin:0 auto;padding:20px 20px 60px}
+#dashboard.active{display:block}
+
+.dash-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(124,58,237,0.15)}
+.dash-header .logo-wrap{display:flex;align-items:center;gap:10px}
+.dash-header h1{font-size:1.3rem;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.dash-header .user-info{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.user-email{color:rgba(255,255,255,0.5);font-size:0.82rem}
+.premium-badge{background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;font-size:0.65rem;font-weight:800;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px}
+.hum-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:8px 18px;border-radius:10px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none}
+.hum-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,0.4);color:#fff}
+.settings-btn,.logout-btn{background:none;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:6px 12px;border-radius:8px;font-size:0.72rem;cursor:pointer;transition:all 0.2s}
+.settings-btn:hover{border-color:#7c3aed;color:#a78bfa}
+.logout-btn:hover{border-color:#ef4444;color:#ef4444}
+
+.hero-card{background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(219,39,119,0.08));border:1px solid rgba(124,58,237,0.2);border-radius:16px;padding:32px 28px;text-align:center;margin-bottom:20px}
+.hero-card h2{font-size:1.35rem;font-weight:800;color:#fff;margin-bottom:8px}
+.hero-card p{color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.5;margin-bottom:20px;max-width:460px;margin-left:auto;margin-right:auto}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:14px 32px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(124,58,237,0.4);color:#fff}
+.hero-sub{color:rgba(255,255,255,0.25);font-size:0.75rem;margin-top:14px}
+
+.voice-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.voice-card{background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:18px 16px;position:relative;overflow:hidden;backdrop-filter:blur(12px);transition:border-color 0.2s}
+.voice-card:hover{border-color:rgba(124,58,237,0.3)}
+.voice-card .vc-icon{font-size:1.3rem;opacity:0.3;position:absolute;top:14px;right:14px}
+.voice-card .vc-label{font-size:0.68rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.voice-card .vc-value{font-size:1.3rem;font-weight:800;color:#fff;line-height:1.2}
+.voice-card .vc-sub{font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:4px}
+.voice-card .vc-empty{font-size:0.78rem;color:rgba(255,255,255,0.25);line-height:1.4}
+
+.upgrade-cta{background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(219,39,119,0.06));border:1px solid rgba(124,58,237,0.25);border-radius:16px;padding:28px 32px;margin-bottom:20px;display:none}
+.upgrade-cta h3{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:6px}
+.upgrade-cta .upgrade-sub{font-size:0.85rem;color:rgba(255,255,255,0.45);margin-bottom:18px;line-height:1.5}
+.upgrade-bullets{list-style:none;margin-bottom:22px}
+.upgrade-bullets li{padding:5px 0;font-size:0.85rem;color:rgba(255,255,255,0.6)}
+.upgrade-bullets li::before{content:'\2713';margin-right:10px;color:#22C55E;font-weight:700}
+.upgrade-cta .upgrade-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.upgrade-primary{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:14px 32px;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.upgrade-primary:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(124,58,237,0.5)}
+.upgrade-secondary{color:rgba(255,255,255,0.35);font-size:0.82rem;cursor:pointer;transition:color 0.2s}
+.upgrade-secondary:hover{color:#a78bfa}
+
+.section-title{font-size:1rem;font-weight:700;color:#c084fc;margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:20px;backdrop-filter:blur(12px);margin-bottom:14px}
+.card h3{font-size:0.88rem;color:#c084fc;margin-bottom:14px;font-weight:600}
+
+.playlist-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.playlist-search{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.2);color:#fff;padding:8px 14px;border-radius:8px;font-size:0.82rem;outline:none;flex:1;min-width:180px;transition:border 0.2s}
+.playlist-search:focus{border-color:#7c3aed}
+.filter-chip{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.15);color:rgba(255,255,255,0.5);padding:6px 12px;border-radius:8px;font-size:0.72rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.filter-chip.active,.filter-chip:hover{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border-color:transparent}
+.song-card{background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.08);border-radius:12px;padding:14px 16px;margin-bottom:10px;transition:all 0.2s;display:flex;align-items:center;gap:14px}
+.song-card:hover{border-color:rgba(168,85,247,0.25);background:rgba(255,255,255,0.05)}
+.song-card .song-info{flex:1}
+.song-card .song-title{font-weight:700;font-size:0.9rem;margin-bottom:3px}
+.song-card .song-artist{font-size:0.78rem;color:rgba(255,255,255,0.4)}
+.song-card .song-meta{font-size:0.7rem;color:rgba(255,255,255,0.25);margin-top:4px}
+.song-card .confidence{text-align:center;min-width:52px}
+.song-card .confidence .score{font-size:1.2rem;font-weight:800;color:#A855F7}
+.song-card .confidence .max{font-size:0.6rem;color:rgba(255,255,255,0.25)}
+.song-card .stars{color:#F59E0B;font-size:0.7rem;letter-spacing:1px}
+.song-card .actions{display:flex;gap:6px}
+.song-card .actions button{background:none;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:0.78rem;transition:all 0.2s;display:flex;align-items:center;justify-content:center}
+.song-card .actions button:hover{border-color:#7c3aed;color:#a78bfa}
+.song-card .actions .delete-btn:hover{border-color:#ef4444;color:#ef4444}
+.playlist-upsell{text-align:center;padding:14px;font-size:0.82rem;color:rgba(255,255,255,0.3);border-top:1px solid rgba(124,58,237,0.08);margin-top:10px}
+.playlist-upsell a{color:#a78bfa;font-weight:600}
+
+.share-card{background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:22px;margin-bottom:14px}
+.share-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.share-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.2);color:#e2e0f0;padding:10px 18px;border-radius:10px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
+.share-btn:hover{background:rgba(124,58,237,0.15);border-color:#7c3aed;color:#fff}
+
+.squad-card{background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:18px 20px;margin-bottom:12px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.squad-card:hover{border-color:rgba(236,72,153,0.35);background:rgba(255,255,255,0.06);transform:translateY(-1px)}
+.squad-card .squad-card-name{font-weight:700;font-size:0.95rem;color:#fff}
+.squad-card .squad-card-meta{font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:3px}
+.squad-card .squad-card-status{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.squad-card .status-active{background:rgba(34,197,94,0.15);color:#22C55E}
+.squad-card .status-pending{background:rgba(245,158,11,0.15);color:#F59E0B}
+.squad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.squad-member{background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.1);border-radius:12px;padding:14px;text-align:center;transition:all 0.2s}
+.squad-member:hover{border-color:rgba(168,85,247,0.3);transform:translateY(-1px)}
+.squad-member .name{font-weight:700;font-size:0.88rem;margin-bottom:4px}
+.squad-member .voice{font-size:0.7rem;color:#a78bfa;margin-bottom:4px}
+.squad-member .shared{font-size:0.72rem;color:rgba(255,255,255,0.35)}
+.squad-songs{background:rgba(168,85,247,0.06);border-radius:10px;padding:14px;margin-top:12px}
+.squad-songs .highlight{color:#F59E0B;font-weight:700;font-size:0.88rem;margin-bottom:8px}
+.squad-song-item{font-size:0.82rem;color:rgba(255,255,255,0.6);padding:4px 0}
+
+.hum-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:0.82rem}
+.hum-item:last-child{border-bottom:none}
+.hum-item .date{color:rgba(255,255,255,0.3);font-size:0.72rem;min-width:70px}
+.hum-item .song{flex:1;color:rgba(255,255,255,0.7)}
+.hum-item .score{font-weight:800;color:#c084fc;min-width:32px;text-align:right}
+
+.next-up{background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.1);border-radius:14px;padding:20px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.next-up .nu-icon{font-size:1.5rem;opacity:0.6}
+.next-up .nu-text{font-size:0.88rem;color:rgba(255,255,255,0.5);line-height:1.4}
+.next-up .nu-text strong{color:#e2e0f0}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.code-display{background:rgba(124,58,237,0.1);border:1px dashed rgba(124,58,237,0.3);border-radius:10px;padding:16px;text-align:center;margin:12px 0}
+.code-display .code{font-size:1.3rem;font-weight:800;color:#A855F7;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
+.code-remaining{font-size:0.78rem;color:rgba(255,255,255,0.4);margin-top:8px}
+.code-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.converted-list{margin-top:14px}
+.converted-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.8rem;color:rgba(255,255,255,0.5)}
+.converted-item .check{color:#22C55E}
+
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:0.72rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.form-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.2);color:#fff;padding:10px 14px;border-radius:8px;font-size:0.88rem;outline:none;transition:border 0.2s}
+.form-input:focus{border-color:#7c3aed}
+textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
+.request-list{margin-top:16px}
+.request-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:0.82rem}
+.request-item .status-icon{font-size:1rem}
+.request-item .info{flex:1;color:rgba(255,255,255,0.6)}
+.request-item .status-label{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;padding:3px 8px;border-radius:6px}
+.status-pending{background:rgba(245,158,11,0.15);color:#F59E0B}
+.status-added{background:rgba(34,197,94,0.15);color:#22C55E}
+.status-declined{background:rgba(239,68,68,0.15);color:#ef4444}
+
+.btn-sm{background:rgba(255,255,255,0.06);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;padding:8px 16px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.btn-sm:hover{background:rgba(124,58,237,0.15);border-color:#7c3aed}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;padding:10px 20px;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,0.3)}
+
+.settings-panel{display:none}
+.settings-panel.active{display:block}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.settings-row .label{font-size:0.82rem;color:rgba(255,255,255,0.5)}
+.settings-row .val{font-size:0.88rem;font-weight:600}
+.settings-row .val.premium{color:#F59E0B}
+.settings-row .val.active{color:#22C55E}
+.cancel-link{color:rgba(255,255,255,0.3);font-size:0.75rem;cursor:pointer;transition:color 0.2s}
+.cancel-link:hover{color:#ef4444}
+
+.empty-state{text-align:center;padding:30px;color:rgba(255,255,255,0.2);font-size:0.85rem}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(124,58,237,0.95);color:#fff;padding:12px 24px;border-radius:12px;font-size:0.85rem;font-weight:600;opacity:0;transition:all 0.3s;pointer-events:none;z-index:100;backdrop-filter:blur(12px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:768px){
+  .voice-row{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr}
+  .squad-grid{grid-template-columns:repeat(2,1fr)}
+  .dash-header{flex-direction:column;align-items:flex-start}
+  .playlist-controls{flex-direction:column;align-items:stretch}
+  .song-card{flex-direction:column;align-items:flex-start;gap:10px}
+  .song-card .confidence{align-self:flex-end}
+  .hero-card{padding:24px 20px}
+  .upgrade-cta{padding:22px 20px}
+  .share-btns{flex-direction:column}
+  .upgrade-cta .upgrade-actions{flex-direction:column;align-items:stretch;text-align:center}
+}
+@media(max-width:480px){
+  .voice-row{grid-template-columns:1fr 1fr}
+  .squad-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="logo-wrap">
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+      <defs><linearGradient id="lg1" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#EC4899"/></linearGradient></defs>
+      <rect x="19" y="4" width="14" height="22" rx="7" fill="url(#lg1)"/>
+      <path d="M10 24 Q10 38 26 38 Q42 38 42 24" stroke="url(#lg1)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <line x1="26" y1="38" x2="26" y2="47" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="18" y1="47" x2="34" y2="47" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M6 20 Q4 26 6 32" stroke="#A855F7" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+      <path d="M2 17 Q-1 26 2 35" stroke="#A855F7" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.35"/>
+      <path d="M46 20 Q48 26 46 32" stroke="#EC4899" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+      <path d="M50 17 Q53 26 50 35" stroke="#EC4899" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.35"/>
+    </svg>
+    <h1>My HQ</h1>
+  </div>
+  <p>Sign in to access your HQ</p>
+  <input type="email" class="login-input" id="login-email" placeholder="Email" autocomplete="email" style="margin-bottom:10px"/>
+  <input type="password" class="login-input" id="login-password" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+  <button class="login-btn" onclick="doLogin()" style="margin-top:10px">Log In</button>
+  <div class="login-error" id="login-error"></div>
+  <div style="margin-top:12px"><a href="/login?signup=1" style="font-size:0.82rem;color:#a78bfa">Don't have an account? Sign up</a></div>
+</div>
+
+<div id="dashboard">
+  <div class="dash-header">
+    <div class="logo-wrap">
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+        <img src="/hummatch-icon-bug-2x.png" alt="HumMatch" style="height:36px;width:36px;border-radius:8px" onerror="this.style.display='none'"/>
+        <h1>My HQ</h1>
+      </a>
+    </div>
+    <div class="user-info">
+      <a href="/" class="hum-btn">🎤 Find My Songs</a>
+      <span class="user-email" id="user-email"></span>
+      <span class="premium-badge" id="premium-badge" style="display:none">SQUAD LEADER</span>
+      <button class="settings-btn" onclick="toggleSettings()">Settings</button>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div id="hero-section"></div>
+  <div class="voice-row" id="voice-snapshot"></div>
+
+  <div class="upgrade-cta" id="upgrade-section">
+    <h3>You're on the Free plan</h3>
+    <div class="upgrade-sub">Unlock unlimited hums, saved playlists, SquadMatch hosting, and more with Squad Leader</div>
+    <ul class="upgrade-bullets">
+      <li>Unlimited hums</li>
+      <li>Unlimited saved playlists</li>
+      <li>Host SquadMatch sessions</li>
+      <li>5 friend discount codes each month</li>
+      <li>Full HumMatch HQ access</li>
+    </ul>
+    <div class="upgrade-actions">
+      <button class="upgrade-primary" onclick="startCheckout('monthly')">Upgrade &mdash; $7.99/mo</button>
+      <span class="upgrade-secondary" onclick="startCheckout('annual')">Or save 45% with annual</span>
+    </div>
+  </div>
+
+  <div class="section-title">🎵 My Playlist</div>
+  <div class="card" id="playlist-section">
+    <div id="playlist-header"></div>
+    <div id="playlist-container"><div class="empty-state">Your saved matches will appear here</div></div>
+    <div id="playlist-footer"></div>
+  </div>
+
+  <div class="section-title">📤 Share Your Result</div>
+  <div class="share-card" id="share-section"></div>
+
+  <div class="section-title">🎤 Your <span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">SquadMatch</span></div>
+  <div id="squad-list-container"></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+    <button class="btn-primary" onclick="showCreateSquad()">+ New Squad</button>
+  </div>
+  <div id="create-squad-form" style="display:none;margin-bottom:14px">
+    <div class="card">
+      <h3 style="margin-bottom:12px">Name Your Squad</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input class="form-input" id="new-squad-name" placeholder="e.g. Girls Night Crew, The Band, Road Trip Squad" style="flex:1;min-width:200px"/>
+        <button class="btn-primary" onclick="createSquad()">Create</button>
+        <button class="btn-sm" onclick="document.getElementById('create-squad-form').style.display='none'">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="squad-detail-section" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+      <div>
+        <div id="squad-detail-name" style="font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#EC4899,#A855F7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text"></div>
+        <div id="squad-detail-meta" style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:2px"></div>
+      </div>
+      <button class="btn-sm" onclick="closeSquadDetail()">Back to Squads</button>
+    </div>
+    <div class="squad-grid" id="squad-members"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <button class="btn-sm" onclick="showAddFriend()">+ Add Friend</button>
+      <button class="btn-sm" onclick="copyInviteLink()">Copy Invite Link</button>
+      <button class="btn-sm" style="background:rgba(239,68,68,0.15);color:#ef4444;border-color:rgba(239,68,68,0.3)" onclick="deleteSquad()">Delete Squad</button>
+    </div>
+    <div id="add-friend-form" style="display:none;margin-bottom:14px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input class="form-input" id="friend-name" placeholder="Friend's name" style="flex:1;min-width:120px"/>
+        <select class="form-input" id="friend-voice" style="width:120px">
+          <option value="">Voice type</option>
+          <option>Soprano</option><option>Alto</option><option>Tenor</option><option>Baritone</option><option>Bass</option>
+        </select>
+        <button class="btn-primary" onclick="addFriend()">Invite</button>
+      </div>
+    </div>
+    <div class="squad-songs" id="squad-songs">
+      <div class="highlight" id="squad-match-count">Squad Matches: calculating...</div>
+      <div id="squad-song-list"><div class="empty-state">Add friends to discover songs you can all sing together!</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">📊 Recent Hums</div>
+  <div class="card"><div id="hum-history"></div></div>
+
+  <div id="next-up-section"></div>
+
+  <div class="two-col" id="premium-extras" style="display:none">
+    <div class="card" id="friend-codes-section">
+      <h3>🎁 Squad Leader Friend Invites</h3>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:12px">Share HumMatch with friends &mdash; they get 20% off forever!</p>
+      <div class="code-display">
+        <div class="code" id="current-code">---</div>
+        <div class="code-remaining" id="codes-remaining">Loading...</div>
+      </div>
+      <div class="code-actions">
+        <button class="btn-sm" onclick="copyCode()">Copy Code</button>
+        <button class="btn-primary" onclick="generateCode()">Generate New</button>
+      </div>
+      <div class="converted-list" id="converted-list"></div>
+    </div>
+    <div class="card" id="song-requests-section">
+      <h3>🎵 Suggest a Song</h3>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:14px">Can't find a song? Request it and we'll add it!</p>
+      <div class="form-group"><label>Song Title</label><input class="form-input" id="req-title" placeholder="e.g. Purple Rain"/></div>
+      <div class="form-group"><label>Artist</label><input class="form-input" id="req-artist" placeholder="e.g. Prince"/></div>
+      <div class="form-group"><label>Your Notes <span style="color:rgba(255,255,255,0.2)">(optional)</span></label><textarea class="form-input" id="req-notes" placeholder="Why this song? Any details..."></textarea></div>
+      <button class="btn-primary" onclick="submitSongRequest()" style="width:100%">Submit Request</button>
+      <div class="request-list" id="request-list"></div>
+    </div>
+  </div>
+
+  <div class="settings-panel" id="settings-panel">
+    <div class="section-title">⚙️ Account Settings</div>
+    <div class="card">
+      <div class="settings-row"><div class="label">Email Address</div><div class="val" id="set-email">-</div></div>
+      <div class="settings-row"><div class="label">Subscription</div><div class="val premium" id="set-sub">Free</div></div>
+      <div class="settings-row"><div class="label">Member Since</div><div class="val" id="set-since">-</div></div>
+      <div class="settings-row"><div class="label">Billing</div><div class="val" id="set-billing">-</div></div>
+      <div class="settings-row">
+        <div class="label">Location (Zip Code)</div>
+        <div class="val" id="set-zip" style="display:flex;align-items:center;gap:8px">
+          <span id="set-zip-val">-</span>
+          <button class="btn-sm" onclick="editZip()" style="font-size:0.65rem;padding:3px 8px">Edit</button>
+        </div>
+      </div>
+      <div id="zip-edit-row" style="display:none;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+        <label style="font-size:0.72rem;color:rgba(255,255,255,0.4);display:block;margin-bottom:6px">Where are you located?</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input class="form-input" id="zip-input" placeholder="92614" maxlength="10" style="width:120px;font-size:0.88rem"/>
+          <button class="btn-primary" onclick="saveZip()" style="padding:8px 16px;font-size:0.78rem">Save</button>
+        </div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.3);margin-top:6px">Help us connect you with singers nearby (coming soon!)</div>
+      </div>
+      <div class="settings-row"><div class="label">Language</div><div class="val">English</div></div>
+      <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn-sm" onclick="changeEmail()">Change Email</button>
+        <span class="cancel-link" id="cancel-sub-link" style="display:none" onclick="if(confirm('Are you sure you want to cancel your subscription?'))toast('Cancellation request submitted')">Cancel Subscription</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- A2HS install prompt, subtle bottom card -->
+  <div id="a2hs-dash-banner" style="display:none;margin-top:20px;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:1.3rem;flex-shrink:0;">📲</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:0.8rem;font-weight:700;color:#e2e0f0;">Install HumMatch</div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.4);margin-top:1px;">Get instant access from your home screen</div>
+      </div>
+      <button onclick="installHumMatch()" style="flex-shrink:0;padding:7px 13px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.7rem;font-weight:700;cursor:pointer;">Install</button>
+      <button onclick="dismissA2HS('dash')" style="flex-shrink:0;background:none;border:none;color:rgba(255,255,255,0.25);font-size:1rem;cursor:pointer;padding:0 2px;">✕</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let token=localStorage.getItem('hm_dash_token'),userEmail='',isPremium=false,playlistData=[],dashData=null,authData=null,currentSort='date',squads=[],activeSquadId=null;
+const FREE_HUM_LIMIT=10;
+
+async function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const password=document.getElementById('login-password').value;
+  if(!email||!password)return;
+  const errEl=document.getElementById('login-error');
+  errEl.textContent='';
+  try{
+    const res=await fetch('/api/hummatch/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+    const data=await res.json();
+    if(!res.ok){
+      if(data.needsPasswordReset){window.location.href='/login';return}
+      errEl.textContent=data.error||'Login failed';return;
+    }
+    token=data.token;localStorage.setItem('hm_dash_token',token);localStorage.setItem('hm_token',token);userEmail=data.email;isPremium=data.is_premium;showDashboard();
+  }catch(e){errEl.textContent='Connection error. Please try again.'}
+}
+
+function doLogout(){localStorage.removeItem('hm_dash_token');token=null;document.getElementById('dashboard').classList.remove('active');document.getElementById('login-screen').style.display='flex';document.getElementById('login-email').value=''}
+
+async function checkAuth(){
+  if(!token){document.getElementById('login-screen').style.display='flex';return}
+  try{
+    const res=await fetch('/api/hummatch/auth/me?token='+token);
+    if(!res.ok){doLogout();return}
+    const data=await res.json();userEmail=data.email;isPremium=data.is_premium;showDashboard();
+  }catch(e){doLogout()}
+}
+
+function showDashboard(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('dashboard').classList.add('active');
+  document.getElementById('user-email').textContent=userEmail;
+  document.getElementById('premium-badge').style.display=isPremium?'':'none';
+  document.getElementById('upgrade-section').style.display=isPremium?'none':'block';
+  document.getElementById('premium-extras').style.display=isPremium?'grid':'none';
+  document.getElementById('cancel-sub-link').style.display=isPremium?'':'none';
+  document.getElementById('set-billing').textContent=isPremium?'Active':'-';
+  if(isPremium)document.getElementById('set-billing').classList.add('active');
+  loadAll();
+}
+
+function api(path,opts={}){
+  const headers={'Content-Type':'application/json','X-HM-Token':token,...(opts.headers||{})};
+  return fetch(path,{...opts,headers});
+}
+
+async function loadAll(){
+  try{
+    const[dashRes,playlistRes,authRes,squadRes]=await Promise.all([
+      api('/api/hummatch/dashboard'),api('/api/hummatch/playlist'),
+      fetch('/api/hummatch/auth/me?token='+token),api('/api/hummatch/squad')
+    ]);
+    if(dashRes.ok)dashData=await dashRes.json();
+    if(playlistRes.ok){const d=await playlistRes.json();playlistData=d.songs||[]}
+    if(authRes.ok)authData=await authRes.json();
+    if(squadRes.ok){const d=await squadRes.json();squads=d.squads||[]}
+  }catch(e){console.error('Load failed',e)}
+  renderAll();
+  if(isPremium){loadFriendCodes();loadSongRequests()}
+}
+
+function renderAll(){renderHero();renderVoiceSnapshot();renderPlaylist();renderShare();renderSquadList();renderHumHistory();renderNextUp();renderSettings()}
+
+function getHumsRemaining(){
+  if(isPremium)return Infinity;
+  const cm=new Date().toISOString().slice(0,7);
+  let used=0;
+  const sm=localStorage.getItem('hm_hum_month');
+  if(sm===cm)used=parseInt(localStorage.getItem('hm_hum_count')||'0');
+  if(authData&&authData.month_key===cm)used=Math.max(used,authData.hum_count||0);
+  return Math.max(0,FREE_HUM_LIMIT-used);
+}
+
+function hasHums(){return dashData&&dashData.stats&&dashData.stats.totalHums>0}
+
+function getTopMatch(){
+  const all=[...playlistData];
+  if(dashData&&dashData.recentHums)dashData.recentHums.forEach(h=>{if(!all.find(s=>s.song_title===h.song_title&&s.artist===h.artist))all.push(h)});
+  if(!all.length)return null;
+  const best=all.reduce((a,b)=>((b.confidence||0)>(a.confidence||0)?b:a));
+  return{title:best.song_title,artist:best.artist,confidence:best.confidence||0};
+}
+
+function getTopArtist(){
+  const all=[...playlistData];
+  if(dashData&&dashData.recentHums)dashData.recentHums.forEach(h=>{if(!all.find(s=>s.song_title===h.song_title&&s.artist===h.artist))all.push(h)});
+  if(!all.length)return null;
+  return all.reduce((a,b)=>((b.confidence||0)>(a.confidence||0)?b:a)).artist||null;
+}
+
+function getVoiceType(){const w=playlistData.find(s=>s.voice_type);return w?w.voice_type:null}
+
+function renderHero(){
+  const el=document.getElementById('hero-section');
+  const rem=getHumsRemaining();
+  const sub=isPremium?'':'<div class="hero-sub">Free plan: '+rem+' hum'+(rem!==1?'s':'')+' left this month</div>';
+  if(!hasHums()){
+    el.innerHTML='<div class="hero-card"><h2>Find the songs that fit your voice</h2><p>Hum a few notes and we\'ll match you to songs you can actually sing well.</p><a href="/" class="hero-cta">🎤 Find My Songs</a>'+sub+'</div>';
+  }else{
+    el.innerHTML='<div class="hero-card"><h2>Ready for your next match?</h2><p>Use one of your free hums to refresh your songs, artists, and playlist.</p><a href="/" class="hero-cta">🎤 Find My Songs</a>'+sub+'</div>';
+  }
+}
+
+function renderVoiceSnapshot(){
+  const el=document.getElementById('voice-snapshot');
+  const voice=getVoiceType(),topMatch=getTopMatch(),topArtist=getTopArtist(),rem=getHumsRemaining();
+  let c='';
+  c+='<div class="voice-card"><div class="vc-icon">🎙️</div><div class="vc-label">Your Voice</div>';
+  // If we have topMatch or topArtist, show voice type or building profile status
+  if(voice) {
+    c+='<div class="vc-value">'+esc(voice)+'</div>';
+  } else if(topMatch || topArtist) {
+    // Has hum data but voice type not determined yet
+    c+='<div class="vc-value" style="font-size:0.85rem;color:rgba(255,255,255,0.6);">Voice profile building</div>';
+    c+='<div class="vc-sub" style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:4px;">Take another HumMatch to refine</div>';
+  } else {
+    c+='<div class="vc-empty">Take your first HumMatch to unlock your voice profile</div>';
+  }
+  c+='</div>';
+  c+='<div class="voice-card"><div class="vc-icon">⭐</div><div class="vc-label">Top Match</div>';
+  c+=topMatch?'<div class="vc-value">'+esc(topMatch.title)+'</div><div class="vc-sub">'+topMatch.confidence+'% fit</div>':'<div class="vc-empty">Your best song match will appear here</div>';
+  c+='</div>';
+  c+='<div class="voice-card"><div class="vc-icon">🎤</div><div class="vc-label">Top Artist</div>';
+  c+=topArtist?'<div class="vc-value">'+esc(topArtist)+'</div>':'<div class="vc-empty">Your closest artist match will show here</div>';
+  c+='</div>';
+  c+='<div class="voice-card"><div class="vc-icon">🎵</div><div class="vc-label">Free Hums Left</div>';
+  c+=isPremium?'<div class="vc-value">Unlimited</div><div class="vc-sub">Squad Leader perk</div>':'<div class="vc-value">'+rem+'</div><div class="vc-sub">this month</div>';
+  c+='</div>';
+  el.innerHTML=c;
+}
+
+function renderPlaylist(){
+  const container=document.getElementById('playlist-container'),header=document.getElementById('playlist-header'),footer=document.getElementById('playlist-footer');
+  if(!playlistData.length){
+    header.innerHTML='';footer.innerHTML='';
+    container.innerHTML='<div class="empty-state"><div style="margin-bottom:8px;font-size:1rem;font-weight:600;color:rgba(255,255,255,0.35)">No playlist yet</div><div style="margin-bottom:16px">Your best-fit songs will show up here after your first HumMatch</div><a href="/" class="btn-primary" style="text-decoration:none;display:inline-block">🎤 Find My Songs</a>'+(!isPremium?'<div style="margin-top:12px;font-size:0.72rem;color:rgba(255,255,255,0.2)">Free plan includes 1 active playlist</div>':'')+'</div>';
+    return;
+  }
+  if(isPremium){
+    header.innerHTML='<div class="playlist-controls"><input class="playlist-search" id="playlist-search" placeholder="Search songs..." oninput="filterPlaylist()"/><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="filter-chip active" data-sort="date" onclick="sortPlaylist(\'date\',this)">Recent</button><button class="filter-chip" data-sort="confidence" onclick="sortPlaylist(\'confidence\',this)">Top Rated</button><button class="filter-chip" data-sort="artist" onclick="sortPlaylist(\'artist\',this)">Artist</button><button class="filter-chip" data-sort="genre" onclick="sortPlaylist(\'genre\',this)">Genre</button></div></div>';
+    footer.innerHTML='';renderPlaylistSongs(playlistData);
+  }else{
+    header.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px"><span style="font-size:0.82rem;font-weight:700;color:rgba(255,255,255,0.5)">My Starter Playlist</span><button class="btn-sm" onclick="exportPlaylist()">Export</button></div>';
+    const top5=[...playlistData].sort((a,b)=>(b.confidence||0)-(a.confidence||0)).slice(0,5);
+    renderPlaylistSongs(top5);
+    footer.innerHTML='<div class="playlist-upsell">Want more than one playlist? <a href="#" onclick="startCheckout(\'monthly\');return false">Upgrade to Squad Leader</a></div>';
+  }
+}
+
+function renderPlaylistSongs(songs){
+  const container=document.getElementById('playlist-container'),search=document.getElementById('playlist-search');
+  let filtered=[...songs];
+  if(search&&search.value){const q=search.value.toLowerCase();filtered=filtered.filter(s=>(s.song_title||'').toLowerCase().includes(q)||(s.artist||'').toLowerCase().includes(q)||(s.genre||'').toLowerCase().includes(q))}
+  if(currentSort==='confidence')filtered.sort((a,b)=>(b.confidence||0)-(a.confidence||0));
+  else if(currentSort==='artist')filtered.sort((a,b)=>(a.artist||'').localeCompare(b.artist||''));
+  else if(currentSort==='genre')filtered.sort((a,b)=>(a.genre||'').localeCompare(b.genre||''));
+  if(!filtered.length){container.innerHTML='<div class="empty-state">No songs found</div>';return}
+  container.innerHTML=filtered.map(s=>{
+    const stars=s.confidence>=90?'★★★★★':s.confidence>=75?'★★★★☆':s.confidence>=60?'★★★☆☆':s.confidence>=40?'★★☆☆☆':'★☆☆☆☆';
+    const date=s.matched_at?new Date(s.matched_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    const meta=[s.genre,s.song_key?'Key: '+s.song_key:'',s.voice_type].filter(Boolean).join(' | ');
+    return'<div class="song-card"><div class="confidence"><div class="score">'+(s.confidence||0)+'</div><div class="max">/100</div></div><div class="song-info"><div class="song-title">"'+esc(s.song_title)+'" &mdash; '+esc(s.artist)+'</div><div class="stars">'+stars+'</div><div class="song-meta">'+date+(meta?' | '+esc(meta):'')+'</div></div><div class="actions"><button title="Remove" class="delete-btn" onclick="removeSong('+s.id+')">🗑</button></div></div>';
+  }).join('');
+}
+
+function filterPlaylist(){renderPlaylist()}
+function sortPlaylist(sort,el){currentSort=sort;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));if(el)el.classList.add('active');renderPlaylist()}
+
+function exportPlaylist(){
+  const songs=playlistData.slice(0,isPremium?playlistData.length:5);
+  if(!songs.length){toast('No songs to export');return}
+  const text='My HumMatch Playlist\n\n'+songs.map((s,i)=>(i+1)+'. "'+s.song_title+'" by '+s.artist+' ('+(s.confidence||0)+'% match)').join('\n')+'\n\nMatched by HumMatch · hummatch.com';
+  navigator.clipboard.writeText(text).then(()=>toast('Playlist copied to clipboard!')).catch(()=>toast('Copy failed'));
+}
+
+async function removeSong(id){
+  if(!confirm('Remove this song from your playlist?'))return;
+  try{await api('/api/hummatch/playlist/'+id,{method:'DELETE'});playlistData=playlistData.filter(s=>s.id!==id);renderPlaylist();renderVoiceSnapshot();toast('Song removed')}catch(e){toast('Failed to remove')}
+}
+
+function renderShare(){
+  const el=document.getElementById('share-section');
+  if(!hasHums()){el.innerHTML='<div class="empty-state">Take your first HumMatch to unlock your share card</div>';return}
+  el.innerHTML='<div class="share-btns"><button class="share-btn" onclick="shareResult()">📤 Share My HumMatch</button><button class="share-btn" onclick="challengeFriend()">🤝 Challenge a Friend</button><a href="/squadmatch.html" class="share-btn" style="text-decoration:none">👥 Try SquadMatch</a></div><div style="font-size:0.72rem;color:rgba(255,255,255,0.25)">Show off your best matches or invite friends to compare voices</div>';
+}
+
+function shareResult(){
+  const top=getTopMatch(),voice=getVoiceType();
+  let text='My HumMatch result: ';
+  if(top)text+='"'+top.title+'" by '+top.artist+' ('+top.confidence+'% match)';
+  if(voice)text+=' | Voice: '+voice;
+  text+='\n\nFind songs that fit YOUR voice at hummatch.com';
+  if(navigator.share)navigator.share({title:'My HumMatch',text}).catch(()=>{});
+  else navigator.clipboard.writeText(text).then(()=>toast('Result copied!')).catch(()=>toast('Copy failed'));
+}
+
+function challengeFriend(){
+  const text='Think you can sing? Take a HumMatch and see which songs actually fit your voice. hummatch.com';
+  if(navigator.share)navigator.share({title:'HumMatch Challenge',text}).catch(()=>{});
+  else navigator.clipboard.writeText(text).then(()=>toast('Challenge link copied!')).catch(()=>toast('Copy failed'));
+}
+
+function renderSquadList(){
+  const container=document.getElementById('squad-list-container');
+  if(!squads.length){
+    container.innerHTML='<div class="card"><div class="empty-state"><div style="margin-bottom:8px;font-size:1rem;font-weight:600;color:rgba(255,255,255,0.35)">No squads yet</div><div style="margin-bottom:4px">Start a squad to find songs your friends can all sing together</div></div></div>'+(!isPremium?'<div style="font-size:0.72rem;color:rgba(255,255,255,0.2);margin-top:-8px;margin-bottom:14px">Free users can join squads. Squad Leaders can host unlimited squad sessions</div>':'');
+    return;
+  }
+  container.innerHTML=squads.map(s=>{
+    const mc=(s.members||[]).length,ac=(s.members||[]).filter(m=>m.status==='accepted'||m.status==='joined').length;
+    const sc=ac>0?'status-active':'status-pending',st=ac>0?'Active':(mc>0?'Pending':'New');
+    const name=s.session_name||s.squad_name||'My SquadMatch';
+    return'<div class="squad-card" onclick="openSquadDetail('+s.id+')"><div><div class="squad-card-name">'+esc(name)+'</div><div class="squad-card-meta">'+mc+' member'+(mc!==1?'s':'')+' &middot; Created '+new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'})+'</div></div><span class="squad-card-status '+sc+'">'+st+'</span></div>';
+  }).join('');
+}
+
+function openSquadDetail(id){activeSquadId=id;renderSquadDetail(id);document.getElementById('squad-detail-section').style.display='block'}
+function closeSquadDetail(){activeSquadId=null;document.getElementById('squad-detail-section').style.display='none';document.getElementById('add-friend-form').style.display='none'}
+
+function renderSquadDetail(id){
+  const squad=squads.find(s=>s.id===id);if(!squad)return;
+  const name=squad.session_name||squad.squad_name||'My SquadMatch';
+  document.getElementById('squad-detail-name').textContent=name;
+  const mc=(squad.members||[]).length;
+  document.getElementById('squad-detail-meta').textContent=mc+' member'+(mc!==1?'s':'')+' · Created '+new Date(squad.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  const membersEl=document.getElementById('squad-members'),songsEl=document.getElementById('squad-song-list'),countEl=document.getElementById('squad-match-count'),members=squad.members||[];
+  if(!members.length){membersEl.innerHTML='<div class="empty-state" style="grid-column:1/-1">No members yet. Add friends to get started!</div>';countEl.textContent='Squad Matches: Add friends to find shared songs!';songsEl.innerHTML='';return}
+  membersEl.innerHTML=members.map(m=>'<div class="squad-member"><div class="name">'+esc(m.display_name||'Friend')+'</div><div class="voice">'+esc(m.voice_type||'Unknown')+'</div><div class="shared">'+(m.status==='accepted'||m.status==='joined'?'Connected':'Pending')+'</div></div>').join('');
+  const ds=["Don't Stop Believin' - Journey",'Shallow - Lady Gaga','Sweet Caroline - Neil Diamond'];
+  countEl.textContent='Squad Matches: '+ds.length+' songs all can nail!';
+  songsEl.innerHTML=ds.map(s=>'<div class="squad-song-item">🎵 "'+s+'"</div>').join('');
+}
+
+function showAddFriend(){const f=document.getElementById('add-friend-form');f.style.display=f.style.display==='none'?'block':'none'}
+function showCreateSquad(){const f=document.getElementById('create-squad-form');f.style.display=f.style.display==='none'?'block':'none';if(f.style.display==='block')document.getElementById('new-squad-name').focus()}
+
+async function createSquad(){
+  const ni=document.getElementById('new-squad-name'),name=ni.value.trim()||'My SquadMatch';
+  try{const res=await api('/api/hummatch/squad',{method:'POST',body:JSON.stringify({session_name:name})});if(!res.ok)return;ni.value='';document.getElementById('create-squad-form').style.display='none';await loadSquadOnly();toast('Squad "'+name+'" created!');setTimeout(()=>showA2HSBanner('dash'),1500)}catch(e){toast('Failed to create squad')}
+}
+
+async function addFriend(){
+  const name=document.getElementById('friend-name').value.trim(),voice=document.getElementById('friend-voice').value;
+  if(!name){toast('Enter a name');return}if(!activeSquadId){toast('Select a squad first');return}
+  const squad=squads.find(s=>s.id===activeSquadId);
+  if(!isPremium&&squad&&squad.members&&squad.members.length>=4){toast('Free plan allows 4 friends max. Upgrade for more features!');return}
+  try{const res=await api('/api/hummatch/squad/'+activeSquadId+'/invite',{method:'POST',body:JSON.stringify({display_name:name,voice_type:voice})});if(!res.ok)return;document.getElementById('friend-name').value='';document.getElementById('friend-voice').value='';document.getElementById('add-friend-form').style.display='none';await loadSquadOnly();toast('Friend invited!')}catch(e){toast('Failed to invite friend')}
+}
+
+async function loadSquadOnly(){
+  try{const res=await api('/api/hummatch/squad');if(!res.ok)return;const d=await res.json();squads=d.squads||[];renderSquadList();if(activeSquadId)renderSquadDetail(activeSquadId)}catch(e){console.error('Squad load failed',e)}
+}
+
+function copyInviteLink(){
+  if(!activeSquadId)return;const squad=squads.find(s=>s.id===activeSquadId);
+  const name=squad?(squad.session_name||squad.squad_name||'SquadMatch'):'SquadMatch';
+  const text='Join '+name+' on HumMatch! '+window.location.origin+'/squadmatch?join='+activeSquadId;
+  navigator.clipboard.writeText(text).then(()=>toast('Invite link copied!')).catch(()=>toast('Copy failed'));
+}
+
+async function deleteSquad(){
+  if(!activeSquadId)return;
+  const squad=squads.find(s=>s.id===activeSquadId);
+  const name=squad?(squad.session_name||squad.squad_name||'My SquadMatch'):'this squad';
+  if(!confirm('Delete "'+name+'"? This cannot be undone.'))return;
+  try{
+    const res=await api('/api/hummatch/squad/'+activeSquadId,{method:'DELETE'});
+    if(!res.ok){toast('Failed to delete squad');return}
+    toast('Squad deleted');
+    closeSquadDetail();
+    await loadSquadOnly();
+  }catch(e){toast('Failed to delete squad')}
+}
+
+function renderHumHistory(){
+  const container=document.getElementById('hum-history'),hums=(dashData&&dashData.recentHums)||[];
+  if(!hums.length){container.innerHTML='<div class="empty-state"><div style="margin-bottom:8px;font-size:1rem;font-weight:600;color:rgba(255,255,255,0.35)">No hums recorded yet</div><div style="margin-bottom:16px">Your recent HumMatches will appear here</div><a href="/" class="btn-primary" style="text-decoration:none;display:inline-block">🎤 Start Your First HumMatch</a></div>';return}
+  container.innerHTML=hums.map(h=>{
+    const date=h.hummed_at?new Date(h.hummed_at).toLocaleDateString('en-US',{month:'short',day:'numeric'}):'';
+    return'<div class="hum-item"><div class="date">'+date+'</div><div class="song">"'+esc(h.song_title)+'" &mdash; '+esc(h.artist)+'</div><div class="score">'+(h.confidence||0)+'</div></div>';
+  }).join('');
+}
+
+function renderNextUp(){
+  const el=document.getElementById('next-up-section');let icon='💡',text='';
+  if(!hasHums()){icon='🎤';text='<strong>Take your first HumMatch</strong> to unlock your voice profile'}
+  else if(!playlistData.length){icon='🎵';text='<strong><a href="/" style="color:inherit;text-decoration:underline">Save your matches</a></strong> to build your first playlist'}
+  else if(squads.length===0){icon='👥';text='<strong>Start your first SquadMatch</strong> to find songs your crew can all sing'}
+  else if(!isPremium){icon='⭐';text='<strong>Upgrade to save more than one playlist</strong> and unlock full HQ access'}
+  else{icon='📤';text='<strong>Share your top result</strong> with a friend and see how your voices compare'}
+  el.innerHTML='<div class="next-up"><div class="nu-icon">'+icon+'</div><div class="nu-text">'+text+'</div></div>';
+}
+
+function renderSettings(){
+  if(!dashData||!dashData.user)return;const u=dashData.user;
+  document.getElementById('set-email').textContent=u.email||userEmail;
+  document.getElementById('set-sub').textContent=u.is_premium?'Squad Leader':'Free';
+  if(u.is_premium)document.getElementById('set-sub').classList.add('premium');
+  if(u.created_at)document.getElementById('set-since').textContent=new Date(u.created_at).toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  if(u.zip_code){document.getElementById('set-zip-val').textContent=u.zip_code;document.getElementById('zip-input').value=u.zip_code}
+}
+
+function toggleSettings(){const p=document.getElementById('settings-panel');p.classList.toggle('active');if(p.classList.contains('active'))p.scrollIntoView({behavior:'smooth',block:'start'})}
+function editZip(){const r=document.getElementById('zip-edit-row');r.style.display=r.style.display==='none'?'block':'none';if(r.style.display==='block')document.getElementById('zip-input').focus()}
+
+async function saveZip(){
+  const zip=document.getElementById('zip-input').value.trim();if(!zip){toast('Enter a zip code');return}
+  try{const res=await api('/api/hummatch/account',{method:'PUT',body:JSON.stringify({zip_code:zip})});const d=await res.json();if(d.error){toast(d.error);return}document.getElementById('set-zip-val').textContent=zip;document.getElementById('zip-edit-row').style.display='none';toast('Location updated!')}catch(e){toast('Failed to update')}
+}
+
+async function changeEmail(){
+  const ne=prompt('Enter new email address:');if(!ne)return;
+  try{const res=await api('/api/hummatch/account',{method:'PUT',body:JSON.stringify({email:ne})});const d=await res.json();if(d.error){toast(d.error);return}userEmail=ne;document.getElementById('user-email').textContent=ne;document.getElementById('set-email').textContent=ne;toast('Email updated!')}catch(e){toast('Failed to update email')}
+}
+
+async function loadFriendCodes(){
+  try{
+    const res=await api('/api/hummatch/friend-codes');if(!res.ok)return;const d=await res.json();
+    const codeEl=document.getElementById('current-code');
+    if(d.codes&&d.codes.length)codeEl.textContent=d.codes[0].code;
+    else{codeEl.textContent='Generate your first code!';codeEl.style.fontSize='0.9rem'}
+    const rem=document.getElementById('codes-remaining');
+    const rd=d.resetDate?new Date(d.resetDate).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'next month';
+    rem.textContent='Codes remaining: '+d.remaining+'/'+d.total+' | Resets: '+rd;
+    const convEl=document.getElementById('converted-list'),conv=(d.codes||[]).filter(c=>c.converted);
+    if(conv.length)convEl.innerHTML='<div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Friends Converted: '+conv.length+'</div>'+conv.map(c=>'<div class="converted-item"><span class="check">✅</span>'+esc(c.used_by_email||'Friend')+' &mdash; '+new Date(c.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'})+'</div>').join('');
+    else convEl.innerHTML='<div style="font-size:0.75rem;color:rgba(255,255,255,0.2);margin-top:10px">No conversions yet. Share your code!</div>';
+  }catch(e){console.error('Friend codes load failed',e)}
+}
+
+function copyCode(){const code=document.getElementById('current-code').textContent;if(!code||code.includes('Generate')){toast('Generate a code first');return}navigator.clipboard.writeText(code).then(()=>toast('Code copied!')).catch(()=>toast('Copy failed'))}
+
+async function generateCode(){
+  try{const res=await api('/api/hummatch/friend-codes',{method:'POST'});const d=await res.json();if(d.error){toast(d.error);return}await loadFriendCodes();toast('New code generated: '+d.code)}catch(e){toast('Failed to generate code')}
+}
+
+async function loadSongRequests(){
+  try{
+    const res=await api('/api/hummatch/song-requests');if(!res.ok)return;const d=await res.json();
+    const list=document.getElementById('request-list');
+    if(!d.requests||!d.requests.length){list.innerHTML='<div class="empty-state" style="padding:10px 0">No requests yet</div>';return}
+    list.innerHTML=d.requests.map(r=>{
+      const icon=r.status==='added'?'✅':r.status==='declined'?'❌':'⏳';
+      return'<div class="request-item"><div class="status-icon">'+icon+'</div><div class="info">"'+esc(r.song_title)+'" &mdash; '+esc(r.artist)+'</div><span class="status-label status-'+r.status+'">'+r.status+'</span></div>';
+    }).join('');
+  }catch(e){console.error('Song requests load failed',e)}
+}
+
+async function submitSongRequest(){
+  const title=document.getElementById('req-title').value.trim(),artist=document.getElementById('req-artist').value.trim(),notes=document.getElementById('req-notes').value.trim();
+  if(!title){toast('Song title is required');return}
+  try{const res=await api('/api/hummatch/song-requests',{method:'POST',body:JSON.stringify({song_title:title,artist,notes})});const d=await res.json();if(d.error){toast(d.error);return}document.getElementById('req-title').value='';document.getElementById('req-artist').value='';document.getElementById('req-notes').value='';await loadSongRequests();toast('Song request submitted!')}catch(e){toast('Failed to submit request')}
+}
+
+function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3000)}
+function startCheckout(plan){plan=plan||'monthly';window.location.href='/api/hummatch/checkout/'+plan+(token?'?token='+token:'')}
+
+checkAuth();
+
+// PWA install prompt, high-intent moments only
+let deferredInstallPrompt=null;
+const _a2hsInstalled=window.navigator.standalone||window.matchMedia('(display-mode: standalone)').matches;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;});
+window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;const el=document.getElementById('a2hs-dash-banner');if(el)el.style.display='none';});
+function showA2HSBanner(key){
+  if(_a2hsInstalled)return;
+  if(localStorage.getItem('hm_a2hs_dismiss_'+key))return;
+  const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  if(!deferredInstallPrompt&&!isIOS)return;
+  const el=document.getElementById('a2hs-'+key+'-banner');
+  if(el)el.style.display='block';
+}
+function dismissA2HS(key){
+  localStorage.setItem('hm_a2hs_dismiss_'+key,'1');
+  const el=document.getElementById('a2hs-'+key+'-banner');
+  if(el)el.style.display='none';
+}
+function installHumMatch(){
+  if(deferredInstallPrompt){deferredInstallPrompt.prompt();deferredInstallPrompt.userChoice.then(()=>{deferredInstallPrompt=null})}
+  else if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.navigator.standalone){alert('Tap the Share button ⬆ at the bottom of Safari, then tap "Add to Home Screen" to save HumMatch.')}
+  else if(window.navigator.standalone){alert('HumMatch is already on your home screen! ✅')}
+  else{alert('To save HumMatch: in Chrome tap the menu (⋮) and choose "Add to Home Screen".')}
+}
+// Show dash A2HS after auth loads
+setTimeout(()=>showA2HSBanner('dash'),2000);
+
+// Refresh user stats when page becomes visible (fixes stale hum count)
+document.addEventListener('visibilitychange', async () => {
+  if (!document.hidden && token) {
+    try {
+      // Add cache-busting timestamp to force fresh fetch
+      const authRes = await fetch('/api/hummatch/auth/me?token=' + token + '&_=' + Date.now(), {cache: 'no-store'});
+      if (authRes.ok) {
+        authData = await authRes.json();
+        renderAll(); // Re-render with fresh hum count
+      }
+    } catch (e) {
+      console.error('Failed to refresh auth data', e);
+    }
+  }
+});
+
+// Also refresh on page focus (Safari iOS doesn't always fire visibilitychange)
+window.addEventListener('focus', async () => {
+  if (token) {
+    try {
+      const authRes = await fetch('/api/hummatch/auth/me?token=' + token + '&_=' + Date.now(), {cache: 'no-store'});
+      if (authRes.ok) {
+        authData = await authRes.json();
+        renderAll();
+      }
+    } catch (e) {
+      console.error('Failed to refresh auth data on focus', e);
+    }
+  }
+});
+</script>
+</body>
+</html>

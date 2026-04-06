@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>SquadMatch – Find Songs Your Whole Crew Can Sing</title>
+<meta name="description" content="Invite friends, everyone hums once, find the songs your whole group can actually nail together."/>
+<link rel="icon" href="/favicon.ico"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0b1a;
+  --card:rgba(255,255,255,0.04);
+  --border:rgba(124,58,237,0.18);
+  --grad:linear-gradient(135deg,#A855F7,#EC4899);
+  --grad2:linear-gradient(135deg,#7c3aed,#db2777);
+  --text:#e2e0f0;
+  --muted:rgba(255,255,255,0.42);
+  --radius:14px;
+}
+html,body{min-height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-overflow-scrolling:touch}
+a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(13,11,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(124,58,237,0.1)}
+.nav-logo{display:flex;align-items:center;gap:8px;font-size:1rem;font-weight:800;color:#fff}
+.nav-logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:0.82rem;color:var(--muted);cursor:pointer;background:none;border:none;padding:6px 10px;border-radius:8px;transition:background 0.15s}
+.nav-back:hover{background:rgba(255,255,255,0.06);color:var(--text)}
+.screen{display:none;min-height:calc(100vh - 56px)}
+.screen.active{display:block}
+.si{max-width:420px;margin:0 auto;padding:28px 18px max(80px, calc(60px + env(safe-area-inset-bottom)));}
+.badge{display:inline-flex;align-items:center;padding:3px 12px;border-radius:20px;font-size:0.62rem;font-weight:800;letter-spacing:0.08em;background:var(--grad);color:#fff}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 18px}
+.btn{display:block;width:100%;padding:14px;border-radius:12px;font-size:0.9rem;font-weight:700;border:none;cursor:pointer;transition:opacity 0.15s,transform 0.1s;text-align:center;letter-spacing:0.02em}
+.btn:active{transform:scale(0.98)}
+.btn-primary{background:var(--grad);color:#fff}
+.btn-secondary{background:rgba(255,255,255,0.06);color:var(--text);border:1px solid rgba(255,255,255,0.1)}
+.btn-ghost{background:none;color:var(--muted);font-size:0.82rem;padding:10px;border:none;cursor:pointer;width:100%;display:block;text-align:center}
+.btn+.btn{margin-top:10px}
+input[type=text]{width:100%;padding:12px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:var(--text);font-size:0.9rem;outline:none;transition:border-color 0.15s}
+input[type=text]:focus{border-color:rgba(168,85,247,0.5)}
+input::placeholder{color:rgba(255,255,255,0.28)}
+label{display:block;font-size:0.75rem;color:var(--muted);margin-bottom:7px;letter-spacing:0.04em;text-transform:uppercase}
+.h1{font-size:1.5rem;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px}
+.sub{font-size:0.88rem;color:var(--muted);line-height:1.5;margin-bottom:22px}
+.divider{height:1px;background:rgba(255,255,255,0.07);margin:20px 0}
+.helper{font-size:0.77rem;color:var(--muted);text-align:center;margin-top:10px}
+.member-list{display:flex;flex-direction:column;gap:8px;margin:16px 0}
+.mrow{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px}
+.mname{font-size:0.88rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;flex-shrink:0}
+.mstatus{font-size:0.72rem;font-weight:600;padding:3px 9px;border-radius:20px}
+.s-done{background:rgba(74,222,128,0.15);color:#4ade80}
+.s-wait{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.38)}
+.s-join{background:rgba(168,85,247,0.15);color:#c084fc}
+.prog-wrap{margin:16px 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted);margin-bottom:6px}
+.prog-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:var(--grad);border-radius:4px;transition:width 0.4s}
+.hero-card{background:var(--grad2);border-radius:16px;padding:28px 22px;margin:20px 0;position:relative;overflow:hidden}
+.hero-card::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(255,255,255,0.08);border-radius:50%}
+.hc-label{font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:8px}
+.hc-title{font-size:1.5rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:6px}
+.hc-artist{font-size:0.9rem;color:rgba(255,255,255,0.7)}
+.song-list{display:flex;flex-direction:column;gap:8px}
+.srow{display:flex;align-items:center;gap:12px;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px}
+.snum{font-size:0.7rem;color:var(--muted);font-weight:700;width:16px;flex-shrink:0;text-align:right}
+.sinfo{flex:1}
+.stitle{font-size:0.88rem;font-weight:700;color:#fff}
+.sartist{font-size:0.74rem;color:var(--muted);margin-top:1px}
+.sscore{font-size:0.7rem;color:#a78bfa;font-weight:700}
+.name-chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.nchip{padding:9px 18px;border-radius:24px;font-size:0.84rem;font-weight:600;border:1.5px solid rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:var(--text);cursor:pointer;transition:all 0.15s}
+.nchip:hover{border-color:rgba(168,85,247,0.5)}
+.nchip.sel{background:var(--grad);border-color:transparent;color:#fff}
+.vote-row{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;margin-bottom:6px}
+.vname{font-size:0.85rem;font-weight:600;flex:1}
+.vbar-w{flex:1;height:4px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden}
+.vbar-f{height:100%;background:var(--grad);border-radius:4px;transition:width 0.4s}
+.vcnt{font-size:0.72rem;color:var(--muted);font-weight:600;min-width:30px;text-align:right}
+.card-tabs{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:2px}
+.ctab{flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:0.78rem;font-weight:600;border:1.5px solid rgba(124,58,237,0.3);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.15s}
+.ctab.active{background:var(--grad);border-color:transparent;color:#fff}
+canvas#share-canvas{width:100%;border-radius:14px;display:block}
+.id-card{background:var(--grad2);border-radius:16px;padding:32px 24px;text-align:center;margin:20px 0;position:relative;overflow:hidden}
+.id-card::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;background:rgba(255,255,255,0.05);border-radius:50%}
+.id-emoji{font-size:2.8rem;margin-bottom:12px}
+.id-name{font-size:1.8rem;font-weight:900;color:#fff;margin-bottom:6px}
+.id-sub{font-size:0.85rem;color:rgba(255,255,255,0.7)}
+.id-stats{display:flex;gap:20px;justify-content:center;margin-top:16px}
+.id-stat-n{font-size:1.4rem;font-weight:800;color:#fff}
+.id-stat-l{font-size:0.68rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.05em}
+.inv-box{display:flex;align-items:center;gap:8px;padding:11px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(124,58,237,0.25);border-radius:10px;margin:16px 0}
+.inv-url{flex:1;font-size:0.78rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.inv-copy{flex-shrink:0;padding:6px 14px;background:var(--grad);color:#fff;border:none;border-radius:8px;font-size:0.77rem;font-weight:700;cursor:pointer}
+.sbtns{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.sbtn{flex:1;min-width:calc(50% - 4px);padding:10px 8px;border-radius:10px;font-size:0.8rem;font-weight:600;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:var(--text);cursor:pointer;transition:background 0.15s;text-align:center}
+.sbtn:hover{background:rgba(255,255,255,0.09)}
+.sbtn.wa{border-color:rgba(37,211,102,0.25);color:#25d366}
+.sbtn.em{border-color:rgba(168,85,247,0.25);color:#c084fc}
+.teaser{background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin:14px 0}
+.teaser-icon{font-size:1.2rem;flex-shrink:0}
+.teaser-text{font-size:0.8rem;color:rgba(255,255,255,0.65);line-height:1.4}
+.spinner{width:32px;height:32px;border:3px solid rgba(168,85,247,0.2);border-top-color:#A855F7;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0}
+.vbtn{padding:14px 12px;border-radius:12px;border:1.5px solid rgba(124,58,237,0.2);background:rgba(255,255,255,0.04);cursor:pointer;transition:all 0.15s;text-align:center}
+.vbtn:hover{border-color:rgba(168,85,247,0.5)}
+.vbtn.sel{background:rgba(168,85,247,0.12);border-color:rgba(168,85,247,0.5)}
+.vbtn-icon{font-size:1.4rem;margin-bottom:4px}
+.vbtn-label{font-size:0.82rem;font-weight:700;color:#fff}
+.vbtn-desc{font-size:0.68rem;color:var(--muted);margin-top:2px}
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(60px);background:rgba(30,20,50,0.96);border:1px solid rgba(168,85,247,0.3);border-radius:10px;padding:11px 20px;font-size:0.82rem;color:#e2e0f0;z-index:999;transition:transform 0.3s;pointer-events:none;backdrop-filter:blur(8px)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.cn-row{display:flex;gap:8px;margin:12px 0}
+.cn-row input{flex:1}
+.cn-row button{flex-shrink:0;padding:12px 14px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:10px;color:#c084fc;font-weight:700;font-size:0.82rem;cursor:pointer;white-space:nowrap}
+.home-hero{text-align:center;padding:48px 18px 32px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);border-radius:20px;font-size:0.72rem;font-weight:700;color:#c084fc;letter-spacing:0.04em;margin-bottom:20px}
+.home-hero h1{font-size:2rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:14px}
+.home-hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.home-hero p{font-size:0.92rem;color:var(--muted);line-height:1.6;max-width:320px;margin:0 auto 28px}
+.steps{display:flex;flex-direction:column;gap:12px;max-width:380px;margin:0 auto 32px}
+.step{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px}
+.step-title{font-size:0.88rem;font-weight:700;color:#fff;margin-bottom:3px}
+.step-desc{font-size:0.78rem;color:var(--muted);line-height:1.4}
+.foot-links{display:flex;justify-content:center;gap:20px;padding:24px 18px;border-top:1px solid rgba(255,255,255,0.06)}
+.foot-links a{font-size:0.75rem;color:var(--muted)}
+.reveal-hint{display:none;margin-top:16px;text-align:center}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">🎤 <span>HumMatch</span></a>
+  <button class="nav-back" id="nav-back" onclick="goBack()" style="display:none">← Back</button>
+</nav>
+
+<!-- HOME -->
+<div id="screen-home" class="screen">
+  <div class="home-hero">
+    <div class="hero-badge">✦ NEW FEATURE</div>
+    <h1>Find songs your<br/><em>whole crew</em> can actually nail</h1>
+    <p>Invite friends. Everyone hums once. We find the songs your whole group can sing together.</p>
+    <button class="btn btn-primary" onclick="startCreate()" style="max-width:280px;margin:0 auto">Start a SquadMatch →</button>
+  </div>
+  <div class="si" style="padding-top:0">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div><div class="step-title">You hum first</div><div class="step-desc">HumMatch finds your voice range and top songs</div></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div><div class="step-title">Invite your squad</div><div class="step-desc">Share a link — up to 4 friends, each hums once</div></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div><div class="step-title">We do the rest</div><div class="step-desc">Your squad's shared song list unlocks when everyone finishes</div></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="startCreate()">Start a SquadMatch</button>
+    <button class="btn-ghost" onclick="window.location='/'">Try solo first →</button>
+  </div>
+  <div class="foot-links">
+    <a href="/">HumMatch</a><a href="/pricing">Pricing</a><a href="/how-it-works">How It Works</a>
+  </div>
+</div>
+
+<!-- SCREEN 2: CREATE -->
+<div id="screen-create" class="screen">
+  <div class="si">
+    <div class="badge" style="margin-bottom:12px;">SQUAD LEADER</div>
+    <div class="h1">Start your SquadMatch</div>
+    <div class="sub">You'll host the session and unlock songs your squad can sing together in harmony.</div>
+    
+    <div class="card" style="margin-bottom:14px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);">
+      <div style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:10px;">What Squad Leaders unlock</div>
+      <ul style="list-style:none;padding:0;margin:0;">
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Invite up to 5 friends
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Everyone hums once
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> HumMatch analyzes the group's range, timbre, and brightness
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Get song suggestions optimized for harmonic fit
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Track who's hummed, save shared playlists, manage everything in HumMatch HQ
+        </li>
+        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;padding-left:18px;position:relative;">
+          <span style="position:absolute;left:0;">•</span> Issue up to 5 exclusive 20% discount codes each month
+        </li>
+      </ul>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.55);margin-top:12px;font-style:italic;">
+        Discount codes are only available through a Squad Leader.
+      </div>
+    </div>
+    
+    <div class="card" style="margin-bottom:18px">
+      <label>Squad name (optional)</label>
+      <input type="text" id="squad-name-input" placeholder="Joe's Squad" maxlength="40"/>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Name it anything you want, or leave it blank.</div>
+    </div>
+    <button class="btn btn-primary" id="create-btn" onclick="confirmCreateSquad()">Create & Invite My Squad</button>
+    <div class="helper">Next, we'll generate your squad link to share by text, WhatsApp, email, or social.</div>
+    <div id="invite-section" style="display:none;margin-top:24px">
+      <div class="divider"></div>
+      <div style="font-size:0.75rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Share Your Invite Link</div>
+      <div class="inv-box">
+        <span class="inv-url" id="inv-url">…</span>
+        <button class="inv-copy" onclick="copyLink()">Copy</button>
+      </div>
+      <div class="sbtns">
+        <button class="sbtn" onclick="nativeShare()" style="grid-column:span 2;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-weight:700;">⬆️ Share</button>
+        <button class="sbtn" onclick="shareText()">💬 Text</button>
+        <button class="sbtn wa" onclick="shareWA()">📱 WhatsApp</button>
+        <button class="sbtn em" onclick="shareEmail()">✉️ Email</button>
+        <button class="sbtn" onclick="copyLink()" style="grid-column:span 2;">📋 Copy Link</button>
+      </div>
+      <button class="btn btn-secondary" style="margin-top:8px" onclick="goWaiting()">See Who's Joined →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: WAITING -->
+<div id="screen-waiting" class="screen">
+  <div class="si">
+    <div class="h1">Your SquadMatch is live</div>
+    <div class="prog-wrap">
+      <div class="prog-labels">
+        <span id="prog-text">0 of 0 joined</span>
+        <span id="prog-right" style="color:#a78bfa"></span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+    <div class="member-list" id="member-list"><div style="text-align:center;padding:24px"><div class="spinner"></div></div></div>
+    <div class="teaser"><span class="teaser-icon">🔒</span><span class="teaser-text">Your squad's best song unlocks when everyone finishes</span></div>
+    <div class="inv-box" style="margin-top:16px">
+      <span class="inv-url" id="wait-inv-url">…</span>
+      <button class="inv-copy" onclick="copyLink()">Copy</button>
+    </div>
+    <button class="btn btn-secondary" style="margin-top:10px" onclick="nativeShare()">Send Another Invite</button>
+    <div class="reveal-hint" id="reveal-hint">
+      <div style="color:#4ade80;font-weight:700;font-size:0.88rem;margin-bottom:10px">✓ Everyone's in! Reveal unlocked.</div>
+      <button class="btn btn-primary" onclick="goReveal()">See Your Squad's Songs 🎉</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4: JOIN -->
+<div id="screen-join" class="screen">
+  <div class="si">
+    <div class="badge" style="margin-bottom:14px">SQUAD INVITE</div>
+    <div class="h1" id="join-headline">Join the SquadMatch</div>
+    <div class="sub">Hum 3 quick notes and find songs your group can sing together</div>
+    <div class="card" style="margin-bottom:16px">
+      <label>Your Name</label>
+      <input type="text" id="join-name" placeholder="Your first name" maxlength="30"/>
+    </div>
+    <button class="btn btn-primary" id="join-btn" onclick="joinSquad()">Join Squad</button>
+    <div class="helper" id="join-info"></div>
+  </div>
+</div>
+
+<!-- SCREEN: VOICE -->
+<div id="screen-voice" class="screen">
+  <div class="si">
+    <div class="h1">What's your voice like?</div>
+    <div class="sub">Pick the range that feels most natural — we'll use this to find your squad's shared songs.</div>
+    <div class="vgrid">
+      <button class="vbtn" onclick="pickVoice('Bass')" data-v="Bass"><div class="vbtn-icon">🔊</div><div class="vbtn-label">Bass</div><div class="vbtn-desc">Very low, deep</div></button>
+      <button class="vbtn" onclick="pickVoice('Baritone')" data-v="Baritone"><div class="vbtn-icon">🎸</div><div class="vbtn-label">Baritone</div><div class="vbtn-desc">Low, rich</div></button>
+      <button class="vbtn" onclick="pickVoice('Tenor')" data-v="Tenor"><div class="vbtn-icon">🌟</div><div class="vbtn-label">Tenor</div><div class="vbtn-desc">Mid-high, bright</div></button>
+      <button class="vbtn" onclick="pickVoice('Alto/Contralto')" data-v="Alto/Contralto"><div class="vbtn-icon">🍷</div><div class="vbtn-label">Alto</div><div class="vbtn-desc">Low-mid, warm</div></button>
+      <button class="vbtn" onclick="pickVoice('Mezzo-soprano')" data-v="Mezzo-soprano"><div class="vbtn-icon">🔥</div><div class="vbtn-label">Mezzo</div><div class="vbtn-desc">Mid-range, powerful</div></button>
+      <button class="vbtn" onclick="pickVoice('Soprano')" data-v="Soprano"><div class="vbtn-icon">✨</div><div class="vbtn-label">Soprano</div><div class="vbtn-desc">High, soaring</div></button>
+    </div>
+    <button class="btn btn-primary" id="voice-btn" onclick="submitVoice()" disabled style="opacity:0.4">Find My Squad Songs →</button>
+    <div class="helper" id="voice-helper">Choose your voice type above</div>
+  </div>
+</div>
+
+<!-- SCREEN 5: REVEAL -->
+<div id="screen-reveal" class="screen">
+  <div class="si">
+    <div class="h1" id="reveal-h1">Your squad matched on songs</div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-bottom:4px" id="reveal-voices"></div>
+    <div class="hero-card">
+      <div class="hc-label">Best group song</div>
+      <div class="hc-title" id="best-title">—</div>
+      <div class="hc-artist" id="best-artist"></div>
+    </div>
+    <div style="font-size:0.78rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">All Shared Songs</div>
+    <div class="song-list" id="reveal-songs"></div>
+    <div class="divider"></div>
+    <button class="btn btn-primary" onclick="goVote()">Name Your Squad</button>
+    <button class="btn btn-secondary" onclick="goShare('reveal')">Share Result</button>
+  </div>
+</div>
+
+<!-- SCREEN 6: VOTE -->
+<div id="screen-vote" class="screen">
+  <div class="si">
+    <div class="h1">Pick your squad name</div>
+    <div class="sub">Everyone votes. The name with the most votes wins.</div>
+    <div class="name-chips" id="name-chips">
+      <button class="nchip" onclick="pickName(this,'The Peppertones')">The Peppertones</button>
+      <button class="nchip" onclick="pickName(this,'The Nerd Crew')">The Nerd Crew</button>
+      <button class="nchip" onclick="pickName(this,'The LOL Rascals')">The LOL Rascals</button>
+      <button class="nchip" onclick="pickName(this,'5 Non Redheads')">5 Non Redheads</button>
+      <button class="nchip" onclick="pickName(this,'The Explosions')">The Explosions</button>
+    </div>
+    <div class="cn-row">
+      <input type="text" id="custom-name" placeholder="Add your own…" maxlength="30"/>
+      <button onclick="addName()">Add</button>
+    </div>
+    <button class="btn btn-primary" id="vote-btn" onclick="castVote()" disabled style="opacity:0.4">Submit My Vote</button>
+    <div id="vote-results" style="margin-top:20px;display:none">
+      <div style="font-size:0.72rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px">Live Votes</div>
+      <div id="vote-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 7: FINAL -->
+<div id="screen-final" class="screen">
+  <div class="si">
+    <div class="h1" id="final-h1">Meet your squad</div>
+    <div class="id-card">
+      <div class="id-emoji">🎤</div>
+      <div class="id-name" id="final-name">The Peppertones</div>
+      <div class="id-sub" id="final-sub">Crew · Best group song: —</div>
+      <div class="id-stats">
+        <div class="id-stat-n" id="final-songs">—</div>
+        <div class="id-stat-l">Songs</div>
+        <div style="width:1px;background:rgba(255,255,255,0.2);margin:0 8px"></div>
+        <div class="id-stat-n" id="final-members">—</div>
+        <div class="id-stat-l">Members</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="goShare('final')">Share Our Card</button>
+    <button class="btn btn-secondary" onclick="savePlaylist()">Save Playlist</button>
+  </div>
+</div>
+
+<!-- SCREEN 8: SHARE -->
+<div id="screen-share" class="screen">
+  <div class="si">
+    <div class="h1">Share your squad</div>
+    <div class="sub">Pick a card to share with the world.</div>
+    <div class="card-tabs">
+      <button class="ctab active" onclick="selCard(1)">Best Song</button>
+      <button class="ctab" onclick="selCard(2)">Squad Identity</button>
+      <button class="ctab" onclick="selCard(3)">Shared Songs</button>
+    </div>
+    <canvas id="share-canvas" width="600" height="400"></canvas>
+    <button class="btn btn-primary" style="margin-top:16px" onclick="doShare()">Share This Card</button>
+    <button class="btn-ghost" onclick="goBack()">← Back</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+const S = {
+  squadId:null, token:null, memberId:null, inviteToken:null,
+  squadName:null, voiceType:null, selectedName:null,
+  songs:[], bestSong:null, bestArtist:null, memberCount:0,
+  votedName:null, shareFrom:'reveal', pollTimer:null, cardType:1
+};
+
+// ── Mini catalog for voice-type matching ──────────────────────────────────
+const VR = {
+  'Bass':{lo:38,hi:62},'Baritone':{lo:43,hi:68},'Tenor':{lo:48,hi:74},
+  'Alto/Contralto':{lo:44,hi:67},'Mezzo-soprano':{lo:50,hi:74},'Soprano':{lo:55,hi:79}
+};
+const CAT = [
+  {title:"Don't Stop Believin'",artist:"Journey",lo:47,hi:69},
+  {title:"Sweet Caroline",artist:"Neil Diamond",lo:43,hi:64},
+  {title:"September",artist:"Earth, Wind & Fire",lo:45,hi:67},
+  {title:"Mr. Brightside",artist:"The Killers",lo:44,hi:67},
+  {title:"Wonderwall",artist:"Oasis",lo:45,hi:67},
+  {title:"Africa",artist:"Toto",lo:46,hi:68},
+  {title:"Eye of the Tiger",artist:"Survivor",lo:44,hi:65},
+  {title:"Livin' on a Prayer",artist:"Bon Jovi",lo:46,hi:70},
+  {title:"Bohemian Rhapsody",artist:"Queen",lo:40,hi:79},
+  {title:"Total Eclipse of the Heart",artist:"Bonnie Tyler",lo:45,hi:70},
+  {title:"Come On Eileen",artist:"Dexys Midnight Runners",lo:46,hi:67},
+  {title:"Walking on Sunshine",artist:"Katrina and the Waves",lo:50,hi:72},
+  {title:"Girls Just Want to Have Fun",artist:"Cyndi Lauper",lo:52,hi:74},
+  {title:"Shake It Off",artist:"Taylor Swift",lo:51,hi:72},
+  {title:"Jolene",artist:"Dolly Parton",lo:48,hi:70},
+  {title:"I Will Always Love You",artist:"Whitney Houston",lo:50,hi:78},
+  {title:"Rolling in the Deep",artist:"Adele",lo:47,hi:73},
+  {title:"Hello",artist:"Adele",lo:46,hi:73},
+  {title:"Shallow",artist:"Lady Gaga",lo:43,hi:70},
+  {title:"Someone Like You",artist:"Adele",lo:47,hi:71},
+  {title:"All of Me",artist:"John Legend",lo:44,hi:67},
+  {title:"Perfect",artist:"Ed Sheeran",lo:44,hi:68},
+  {title:"Shape of You",artist:"Ed Sheeran",lo:45,hi:66},
+  {title:"Can't Help Falling in Love",artist:"Elvis Presley",lo:43,hi:65},
+  {title:"Stand by Me",artist:"Ben E. King",lo:42,hi:63},
+  {title:"Lean on Me",artist:"Bill Withers",lo:41,hi:63},
+  {title:"Let It Be",artist:"The Beatles",lo:44,hi:66},
+  {title:"Hey Jude",artist:"The Beatles",lo:42,hi:67},
+  {title:"Hallelujah",artist:"Leonard Cohen",lo:42,hi:67},
+  {title:"With or Without You",artist:"U2",lo:44,hi:68},
+  {title:"Fix You",artist:"Coldplay",lo:44,hi:70},
+  {title:"The Scientist",artist:"Coldplay",lo:43,hi:67},
+  {title:"Yellow",artist:"Coldplay",lo:44,hi:67},
+  {title:"Creep",artist:"Radiohead",lo:43,hi:72},
+  {title:"Killing Me Softly",artist:"Fugees",lo:46,hi:68},
+  {title:"Valerie",artist:"Amy Winehouse",lo:48,hi:71},
+  {title:"Somebody That I Used to Know",artist:"Gotye",lo:45,hi:71},
+  {title:"Take On Me",artist:"a-ha",lo:47,hi:74},
+  {title:"Come As You Are",artist:"Nirvana",lo:43,hi:65},
+  {title:"Under the Bridge",artist:"Red Hot Chili Peppers",lo:45,hi:68},
+  {title:"Purple Rain",artist:"Prince",lo:44,hi:72},
+  {title:"Superstition",artist:"Stevie Wonder",lo:43,hi:68},
+  {title:"Higher Love",artist:"Steve Winwood",lo:44,hi:69},
+  {title:"True Colors",artist:"Cyndi Lauper",lo:49,hi:72},
+  {title:"Time After Time",artist:"Cyndi Lauper",lo:48,hi:71},
+  {title:"What's Up",artist:"4 Non Blondes",lo:50,hi:75},
+  {title:"Zombie",artist:"The Cranberries",lo:48,hi:71},
+  {title:"Dreams",artist:"The Cranberries",lo:50,hi:73},
+  {title:"Eternal Flame",artist:"The Bangles",lo:49,hi:72},
+  {title:"Everybody Hurts",artist:"R.E.M.",lo:43,hi:67},
+  {title:"Losing My Religion",artist:"R.E.M.",lo:43,hi:66},
+  {title:"Champagne Supernova",artist:"Oasis",lo:44,hi:67},
+  {title:"Common People",artist:"Pulp",lo:42,hi:64},
+  {title:"Cruel Summer",artist:"Taylor Swift",lo:51,hi:72},
+  {title:"Anti-Hero",artist:"Taylor Swift",lo:49,hi:70},
+  {title:"Blinding Lights",artist:"The Weeknd",lo:45,hi:72},
+  {title:"Levitating",artist:"Dua Lipa",lo:50,hi:72},
+  {title:"Don't Start Now",artist:"Dua Lipa",lo:49,hi:71},
+  {title:"Uptown Funk",artist:"Mark Ronson ft. Bruno Mars",lo:45,hi:68},
+  {title:"Just the Way You Are",artist:"Bruno Mars",lo:44,hi:68},
+  {title:"Pompeii",artist:"Bastille",lo:46,hi:70},
+  {title:"Imagine",artist:"John Lennon",lo:43,hi:65},
+  {title:"Yesterday",artist:"The Beatles",lo:43,hi:65},
+  {title:"Angels",artist:"Robbie Williams",lo:45,hi:67},
+  {title:"Back to Black",artist:"Amy Winehouse",lo:46,hi:69},
+  {title:"Karma Police",artist:"Radiohead",lo:43,hi:67},
+  {title:"Semi-Charmed Life",artist:"Third Eye Blind",lo:44,hi:70},
+  {title:"Save Your Tears",artist:"The Weeknd",lo:44,hi:70},
+  {title:"Starboy",artist:"The Weeknd",lo:43,hi:69},
+  {title:"Physical",artist:"Dua Lipa",lo:50,hi:73},
+  {title:"Treasure",artist:"Bruno Mars",lo:44,hi:68},
+  {title:"Happier",artist:"Bastille",lo:46,hi:70},
+  {title:"Rehab",artist:"Amy Winehouse",lo:46,hi:70}
+];
+
+function songsForVoice(vt) {
+  const r = VR[vt] || VR['Tenor'], flex = 5;
+  return CAT.filter(s => s.lo >= r.lo - flex && s.hi <= r.hi + flex)
+    .map(s => {
+      const loF = 1 - Math.max(0, s.lo - r.lo) / 10;
+      const hiF = 1 - Math.max(0, r.hi - s.hi) / 10;
+      const score = Math.min(1, Math.max(0.5, (loF + hiF) / 2 * 0.4 + 0.6 + (Math.random() * 0.08 - 0.04)));
+      return {title:s.title, artist:s.artist, score};
+    }).sort((a,b) => b.score - a.score).slice(0, 20);
+}
+
+// ── Router ──────────────────────────────────────────────────────────────────
+function init() {
+  const p = new URLSearchParams(location.search);
+  const joinTok = p.get('join');
+  const sqId    = p.get('squad');
+  S.token = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
+
+  if (joinTok)             { loadJoin(joinTok); }
+  else if (sqId) {
+    S.squadId = parseInt(sqId);
+    S.memberId = parseInt(localStorage.getItem('hm_squad_member_' + S.squadId)) || null;
+    if (p.has('reveal'))   { loadReveal(); }
+    else if (p.has('vote')){ loadVote(); }
+    else if (p.has('final')){ loadFinal(); }
+    else if (p.has('share')){ S.shareFrom = p.get('share')||'reveal'; loadShare(); }
+    else                   { loadWaiting(); }
+  } else if (p.has('create') || p.get('action')==='create') {
+    loadCreate();
+  } else {
+    show('home');
+  }
+}
+
+function show(name) {
+  document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('screen-'+name);
+  if (el) el.classList.add('active');
+  document.getElementById('nav-back').style.display = name === 'home' ? 'none' : 'flex';
+}
+
+function goBack() {
+  const p = new URLSearchParams(location.search);
+  const sqId = p.get('squad');
+  if (sqId) window.location = '/squadmatch?squad=' + sqId;
+  else window.location = '/squadmatch';
+}
+
+// ── Screen 2: Create ────────────────────────────────────────────────────────
+function loadCreate() {
+  // Check if user is premium (Squad Leader required to create squads)
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  if (!isPremium) {
+    // Redirect to pricing page with squad intent
+    window.location = '/pricing?intent=squad';
+    return;
+  }
+  
+  show('create');
+  try {
+    const raw = localStorage.getItem('hm_squad_my_songs');
+    if (raw) S.songs = JSON.parse(raw);
+    S.voiceType = localStorage.getItem('hm_squad_voice_type') || '';
+  } catch(_) {}
+}
+
+function confirmCreateSquad() {
+  const nm = document.getElementById('squad-name-input').value.trim();
+  // Allow blank names
+  const confirmMsg = nm ? `Create squad "${nm}" and generate invite link?` : `Create squad and generate invite link?`;
+  if (!confirm(confirmMsg)) {
+    return;
+  }
+  createSquad();
+}
+
+async function createSquad() {
+  if (!S.token) {
+    localStorage.setItem('hm_squad_pending_create','1');
+    toast('Sign in first to create a squad');
+    setTimeout(() => { window.location = '/?signup=1&redirect=' + encodeURIComponent('/squadmatch?create=1'); }, 1400);
+    return;
+  }
+  const btn = document.getElementById('create-btn');
+  const nm  = document.getElementById('squad-name-input').value.trim();
+  btn.textContent = 'Creating…'; btn.disabled = true;
+  try {
+    const r = await api('/api/hummatch/squad', 'POST', {
+      squad_name: nm || undefined,
+      my_songs: S.songs.slice(0,20),
+      voice_type: S.voiceType
+    });
+    if (!r.ok) throw new Error(r.error || 'Failed');
+    S.squadId = r.id; S.inviteToken = r.invite_token; S.squadName = r.session_name;
+    const url = invUrl();
+    document.getElementById('inv-url').textContent = url;
+    document.getElementById('invite-section').style.display = 'block';
+    btn.textContent = '✓ Squad Created!';
+    btn.style.cssText = 'background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)';
+    localStorage.removeItem('hm_squad_my_songs');
+    localStorage.removeItem('hm_squad_voice_type');
+    localStorage.setItem('hm_active_squad_'+r.id, r.invite_token);
+  } catch(e) {
+    toast('Error: ' + e.message);
+    btn.textContent = 'Invite My Squad'; btn.disabled = false;
+  }
+}
+
+function invUrl() {
+  if (S.inviteToken) return location.origin + '/squadmatch?join=' + S.inviteToken;
+  if (S.squadId) {
+    const t = localStorage.getItem('hm_active_squad_' + S.squadId);
+    if (t) return location.origin + '/squadmatch?join=' + t;
+  }
+  return location.href;
+}
+
+function copyLink() {
+  const url = invUrl();
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => toast('Link copied!')).catch(() => fallbackCopy(url));
+  else fallbackCopy(url);
+}
+function fallbackCopy(url) {
+  const el = Object.assign(document.createElement('textarea'), {value:url});
+  document.body.appendChild(el); el.select(); document.execCommand('copy'); el.remove();
+  toast('Link copied!');
+}
+function shareText() { window.open('sms:?&body=' + encodeURIComponent('Join my SquadMatch! ' + invUrl())); }
+function shareWA()   { window.open('https://wa.me/?text=' + encodeURIComponent("Join my SquadMatch and let's find songs we can all sing together! " + invUrl())); }
+function shareEmail(){ window.open('mailto:?subject=' + encodeURIComponent("Join my SquadMatch!") + '&body=' + encodeURIComponent("Hey! Join my SquadMatch on HumMatch:\n" + invUrl())); }
+function nativeShare() {
+  const url = invUrl();
+  if (navigator.share) navigator.share({title:"Join my SquadMatch!", text:"Let's find songs we can all sing together.", url}).catch(() => copyLink());
+  else copyLink();
+}
+function goWaiting() { if (S.squadId) window.location = '/squadmatch?squad=' + S.squadId; }
+
+// ── Screen 3: Waiting ───────────────────────────────────────────────────────
+function loadWaiting() {
+  show('waiting');
+  pollStatus();
+  S.pollTimer = setInterval(pollStatus, 5000);
+}
+
+async function pollStatus() {
+  if (!S.squadId) return;
+  try {
+    const d = await api('/api/hummatch/squad/'+S.squadId+'/status');
+    if (d.error) return;
+    S.squadName = d.squad_name; S.inviteToken = d.invite_token;
+    S.memberCount = d.member_count; S.songs = d.shared_songs||[];
+    S.bestSong = d.best_song; S.bestArtist = d.best_artist;
+
+    const url = d.invite_token ? location.origin+'/squadmatch?join='+d.invite_token : '';
+    document.getElementById('wait-inv-url').textContent = url;
+
+    renderMembers(d.members);
+    const total = Math.max(d.member_count, 2);
+    const pct = total ? Math.round(d.done_count/total*100) : 0;
+    document.getElementById('prog-fill').style.width = pct+'%';
+    document.getElementById('prog-text').textContent = d.done_count+' of '+d.member_count+' hummed';
+    document.getElementById('prog-right').textContent = d.done_count > 0 ? d.done_count+' ready' : '';
+
+    if (d.all_done && d.member_count >= 2) {
+      clearInterval(S.pollTimer);
+      document.getElementById('reveal-hint').style.display = 'block';
+    }
+  } catch(_) {}
+}
+
+function renderMembers(members) {
+  const el = document.getElementById('member-list');
+  if (!members || !members.length) {
+    el.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:0.82rem;padding:20px">No members yet. Share your link!</div>';
+    return;
+  }
+  el.innerHTML = members.map((m,i) => {
+    const init = (m.display_name||'?').slice(0,2).toUpperCase();
+    const done = m.hum_done || m.status==='done';
+    const cls = done ? 's-done' : (m.status==='joined' ? 's-join' : 's-wait');
+    const lbl = done ? '✓ Hummed' : (m.status==='joined' ? 'Joined' : 'Invited');
+    return `<div class="mrow"><div class="mname"><div class="av" style="background:${avColors[i%avColors.length]}">${init}</div>${m.display_name||'Member'}</div><span class="mstatus ${cls}">${lbl}</span></div>`;
+  }).join('');
+}
+const avColors = ['linear-gradient(135deg,#A855F7,#7C3AED)','linear-gradient(135deg,#EC4899,#DB2777)','linear-gradient(135deg,#06B6D4,#0891B2)','linear-gradient(135deg,#F59E0B,#D97706)','linear-gradient(135deg,#10B981,#059669)'];
+function goReveal() { if (S.squadId) window.location = '/squadmatch?squad='+S.squadId+'&reveal=1'; }
+
+// ── Screen 4: Join ──────────────────────────────────────────────────────────
+async function loadJoin(tok) {
+  show('join');
+  try {
+    const d = await api('/api/hummatch/squad/join/'+tok);
+    if (d.error) {
+      document.getElementById('join-headline').textContent = 'Squad Not Found';
+      document.getElementById('join-btn').disabled = true;
+      document.getElementById('join-info').textContent = 'This invite link is invalid or the squad was deleted. Ask your friend to share a fresh link.';
+      return;
+    }
+    S.squadId = d.squad_id; S.squadName = d.squad_name; S.inviteToken = tok;
+    document.getElementById('join-headline').textContent = 'Join '+d.squad_name;
+    document.getElementById('join-info').textContent = d.member_count+' member'+(d.member_count!==1?'s':'')+' already in';
+  } catch(_) {
+    document.getElementById('join-info').textContent = 'Could not load squad details.';
+  }
+}
+
+async function joinSquad() {
+  const nm = document.getElementById('join-name').value.trim();
+  if (!nm) { toast('Enter your name to join'); return; }
+  const btn = document.getElementById('join-btn');
+  btn.textContent = 'Joining…'; btn.disabled = true;
+  try {
+    const d = await api('/api/hummatch/squad/'+S.squadId+'/join', 'POST', {display_name:nm, voice_type:''});
+    if (!d.ok) throw new Error(d.error || 'Failed to join');
+    S.memberId = d.id; S.memberName = nm;
+    localStorage.setItem('hm_squad_member_'+S.squadId, d.id);
+    localStorage.setItem('hm_squad_member_name_'+S.squadId, nm);
+    show('voice');
+  } catch(e) {
+    toast(e.message || 'Failed to join');
+    btn.textContent = 'Join Squad'; btn.disabled = false;
+  }
+}
+
+// ── Screen: Voice Pick ───────────────────────────────────────────────────────
+function pickVoice(vt) {
+  S.voiceType = vt;
+  document.querySelectorAll('.vbtn').forEach(b => b.classList.remove('sel'));
+  document.querySelector('.vbtn[data-v="'+vt+'"]')?.classList.add('sel');
+  const btn = document.getElementById('voice-btn');
+  btn.disabled = false; btn.style.opacity = '1';
+  document.getElementById('voice-helper').textContent = vt + ' selected — perfect!';
+}
+
+async function submitVoice() {
+  if (!S.voiceType) { toast('Pick a voice type first'); return; }
+  const btn = document.getElementById('voice-btn');
+  btn.textContent = 'Matching songs…'; btn.disabled = true;
+  const songs = songsForVoice(S.voiceType);
+  const range = VR[S.voiceType] || {lo:48,hi:72};
+  const mid = S.memberId || parseInt(localStorage.getItem('hm_squad_member_'+S.squadId));
+  if (!mid || !S.squadId) { toast('Session lost — please rejoin'); window.location = '/squadmatch?join='+(S.inviteToken||''); return; }
+  try {
+    await api('/api/hummatch/squad/'+S.squadId+'/hum', 'POST', {
+      member_id: mid, songs, voice_type: S.voiceType,
+      voice_low: range.lo, voice_high: range.hi
+    });
+    window.location = '/squadmatch?squad='+S.squadId;
+  } catch(_) {
+    toast('Error submitting — try again');
+    btn.textContent = 'Find My Squad Songs →'; btn.disabled = false; btn.style.opacity = '1';
+  }
+}
+
+// ── Screen 5: Reveal ────────────────────────────────────────────────────────
+async function loadReveal() {
+  show('reveal');
+  const d = await api('/api/hummatch/squad/'+S.squadId+'/status').catch(() => ({}));
+  if (d.error || !d.squad_id) return;
+  S.squadName = d.squad_name; S.songs = d.shared_songs||[];
+  S.bestSong = d.best_song; S.bestArtist = d.best_artist;
+  S.memberCount = d.member_count; S.votedName = d.voted_name;
+
+  document.getElementById('reveal-h1').textContent = 'Your squad matched on ' + S.songs.length + ' song' + (S.songs.length!==1?'s':'');
+  document.getElementById('reveal-voices').textContent = d.member_count + ' voice' + (d.member_count!==1?'s':'')+' matched this list';
+  document.getElementById('best-title').textContent = S.bestSong || (S.songs[0]?.title || 'No match yet');
+  document.getElementById('best-artist').textContent = S.bestArtist || (S.songs[0]?.artist || '');
+
+  const el = document.getElementById('reveal-songs');
+  if (!S.songs.length) {
+    el.innerHTML = '<div style="text-align:center;color:var(--muted);padding:24px;font-size:0.84rem">Not enough data yet — make sure everyone has hummed!</div>';
+  } else {
+    el.innerHTML = S.songs.slice(0,8).map((s,i) => `
+      <div class="srow"><span class="snum">${i+1}</span>
+      <div class="sinfo"><div class="stitle">${s.title}</div><div class="sartist">${s.artist}</div></div>
+      <span class="sscore">${Math.round((s.score||0)*100)}%</span></div>`).join('');
+  }
+}
+
+// ── Screen 6: Vote ──────────────────────────────────────────────────────────
+async function loadVote() {
+  show('vote');
+  pollVotes();
+}
+
+function pickName(el, name) {
+  document.querySelectorAll('.nchip').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  S.selectedName = name;
+  const btn = document.getElementById('vote-btn');
+  btn.disabled = false; btn.style.opacity = '1';
+}
+
+function addName() {
+  const val = document.getElementById('custom-name').value.trim();
+  if (!val) return;
+  const chips = document.getElementById('name-chips');
+  const b = document.createElement('button');
+  b.className = 'nchip'; b.textContent = val;
+  b.onclick = function() { pickName(this, val); };
+  chips.appendChild(b);
+  document.getElementById('custom-name').value = '';
+  pickName(b, val);
+}
+
+async function castVote() {
+  if (!S.selectedName) { toast('Pick a name first'); return; }
+  const mid = S.memberId || parseInt(localStorage.getItem('hm_squad_member_'+S.squadId));
+  if (!mid) { toast('Session lost — reload the page'); return; }
+  try {
+    const d = await api('/api/hummatch/squad/'+S.squadId+'/vote', 'POST', {member_id:mid, voted_name:S.selectedName});
+    if (d.ok) {
+      const btn = document.getElementById('vote-btn');
+      btn.textContent = '✓ Vote submitted!';
+      btn.style.cssText = 'background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3);border-radius:12px;padding:14px;font-size:0.9rem;font-weight:700;width:100%';
+      renderVotes(d.votes, d.total_members);
+      if (d.votes[0] && d.votes[0].count > d.total_members / 2) {
+        S.votedName = d.votes[0].voted_name;
+        setTimeout(() => goFinal(), 1600);
+      }
+    }
+  } catch(_) { toast('Failed to vote — try again'); }
+}
+
+async function pollVotes() {
+  if (!S.squadId) return;
+  const d = await api('/api/hummatch/squad/'+S.squadId+'/votes').catch(() => ({}));
+  if (d.votes) renderVotes(d.votes, d.total_members);
+  if (d.voted_name) S.votedName = d.voted_name;
+}
+
+function renderVotes(votes, total) {
+  if (!votes || !votes.length) return;
+  document.getElementById('vote-results').style.display = 'block';
+  const mx = votes[0]?.count || 1;
+  document.getElementById('vote-list').innerHTML = votes.map(v => `
+    <div class="vote-row"><span class="vname">${v.voted_name}</span>
+    <div class="vbar-w"><div class="vbar-f" style="width:${Math.round(v.count/mx*100)}%"></div></div>
+    <span class="vcnt">${v.count}/${total}</span></div>`).join('');
+}
+
+function goVote()  { if (S.squadId) window.location = '/squadmatch?squad='+S.squadId+'&vote=1'; }
+function goFinal() { if (S.squadId) window.location = '/squadmatch?squad='+S.squadId+'&final=1'; }
+
+// ── Screen 7: Final ─────────────────────────────────────────────────────────
+async function loadFinal() {
+  show('final');
+  const d = await api('/api/hummatch/squad/'+S.squadId+'/status').catch(() => ({}));
+  if (d.error) return;
+  const name = d.voted_name || d.squad_name || 'Your Squad';
+  S.squadName = name; S.songs = d.shared_songs||[];
+  S.bestSong = d.best_song; S.bestArtist = d.best_artist;
+  S.memberCount = d.member_count; S.votedName = d.voted_name;
+
+  document.getElementById('final-h1').textContent = 'Meet '+name;
+  document.getElementById('final-name').textContent = name;
+  document.getElementById('final-sub').textContent = 'Crew · Best group song: '+(d.best_song||'TBD');
+  document.getElementById('final-songs').textContent = S.songs.length || '—';
+  document.getElementById('final-members').textContent = d.member_count;
+}
+
+// ── Screen 8: Share ─────────────────────────────────────────────────────────
+async function loadShare() {
+  show('share');
+  if (S.squadId && !S.bestSong) {
+    const d = await api('/api/hummatch/squad/'+S.squadId+'/status').catch(() => ({}));
+    S.songs = d.shared_songs||[]; S.bestSong = d.best_song; S.bestArtist = d.best_artist;
+    S.memberCount = d.member_count; S.votedName = d.voted_name;
+    S.squadName = d.voted_name || d.squad_name;
+  }
+  renderCard(1);
+}
+
+function selCard(n) {
+  S.cardType = n;
+  document.querySelectorAll('.ctab').forEach((b,i) => b.classList.toggle('active', i+1===n));
+  renderCard(n);
+}
+
+function renderCard(type) {
+  const cv = document.getElementById('share-canvas');
+  const ctx = cv.getContext('2d');
+  const W = 600, H = 400;
+  cv.width = W; cv.height = H;
+
+  // Background
+  const bg = ctx.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,'#0d0b1a'); bg.addColorStop(1,'#1a0b35');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+  // Glow
+  const g1 = ctx.createRadialGradient(W*0.8,H*0.25,0,W*0.8,H*0.25,200);
+  g1.addColorStop(0,'rgba(168,85,247,0.22)'); g1.addColorStop(1,'transparent');
+  ctx.fillStyle = g1; ctx.fillRect(0,0,W,H);
+
+  // Border
+  ctx.strokeStyle = 'rgba(124,58,237,0.4)'; ctx.lineWidth = 2;
+  rRect(ctx,4,4,W-8,H-8,18); ctx.stroke();
+
+  // Logo
+  ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.38)';
+  ctx.fillText('🎤 HumMatch SquadMatch', 26, 36);
+
+  if (type===1) drawCard1(ctx,W,H);
+  else if (type===2) drawCard2(ctx,W,H);
+  else drawCard3(ctx,W,H);
+}
+
+function drawCard1(ctx,W,H) {
+  ctx.font = 'bold 11px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.42)';
+  ctx.fillText('BEST GROUP SONG', 26, 88);
+  ctx.font = 'bold 44px sans-serif'; ctx.fillStyle = '#ffffff';
+  wrapTxt(ctx, S.bestSong||'No match yet', 26, 145, W-52, 52);
+  ctx.font = '22px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.58)';
+  ctx.fillText(S.bestArtist||'', 26, 225);
+  const nm = S.votedName || S.squadName || '';
+  if (nm) {
+    const gr = ctx.createLinearGradient(26,0,300,0);
+    gr.addColorStop(0,'#A855F7'); gr.addColorStop(1,'#EC4899');
+    ctx.font = 'bold 18px sans-serif'; ctx.fillStyle = gr; ctx.fillText(nm, 26, H-34);
+  }
+  ctx.font = '13px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.32)';
+  ctx.fillText(S.memberCount+' voices · '+S.songs.length+' shared songs', 26, H-16);
+}
+
+function drawCard2(ctx,W,H) {
+  const nm = S.votedName || S.squadName || 'Your Squad';
+  ctx.font = '64px sans-serif'; ctx.fillText('🎤', W/2-32, H*0.38);
+  const gr = ctx.createLinearGradient(0,0,W,0);
+  gr.addColorStop(0,'#A855F7'); gr.addColorStop(1,'#EC4899');
+  ctx.font = 'bold 40px sans-serif'; ctx.fillStyle = gr;
+  ctx.textAlign = 'center'; ctx.fillText(nm, W/2, H*0.58);
+  ctx.font = '18px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.52)';
+  ctx.fillText(S.songs.length+' songs · '+S.memberCount+' members', W/2, H*0.72);
+  if (S.bestSong) {
+    ctx.font = '15px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.32)';
+    ctx.fillText('Best song: '+S.bestSong, W/2, H*0.84);
+  }
+  ctx.textAlign = 'left';
+}
+
+function drawCard3(ctx,W,H) {
+  ctx.font = 'bold 11px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.42)';
+  ctx.fillText("OUR SQUAD'S SONGS", 26, 88);
+  const nm = S.votedName || S.squadName || 'The Squad';
+  const gr = ctx.createLinearGradient(26,0,300,0);
+  gr.addColorStop(0,'#A855F7'); gr.addColorStop(1,'#EC4899');
+  ctx.font = 'bold 22px sans-serif'; ctx.fillStyle = gr; ctx.fillText(nm, 26, 118);
+  S.songs.slice(0,5).forEach((s,i) => {
+    const y = 155 + i*42;
+    ctx.font = 'bold 15px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.85)';
+    ctx.fillText((i+1)+'. '+s.title, 26, y);
+    ctx.font = '13px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.42)';
+    ctx.fillText(s.artist, 42, y+16);
+  });
+  ctx.font = '13px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.26)';
+  ctx.fillText(S.memberCount+' voices matched · hummatch.com', 26, H-20);
+}
+
+function rRect(ctx,x,y,w,h,r) {
+  ctx.beginPath(); ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r); ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h); ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r); ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
+}
+
+function wrapTxt(ctx,text,x,y,maxW,lh) {
+  const words = text.split(' '); let line = '';
+  for (let i = 0; i < words.length; i++) {
+    const test = line + words[i] + ' ';
+    if (ctx.measureText(test).width > maxW && i > 0) {
+      ctx.fillText(line, x, y); line = words[i]+' '; y += lh;
+    } else { line = test; }
+  }
+  ctx.fillText(line, x, y);
+}
+
+async function doShare() {
+  const cv = document.getElementById('share-canvas');
+  cv.toBlob(async (blob) => {
+    const file = new File([blob], 'squadmatch.png', {type:'image/png'});
+    if (navigator.canShare && navigator.canShare({files:[file]})) {
+      navigator.share({files:[file], title:'Our SquadMatch Results!', text:(S.votedName||S.squadName||'My Squad')+' — find songs your squad can sing on HumMatch!'})
+        .catch(() => dlCard(cv));
+    } else { dlCard(cv); }
+  });
+}
+
+function dlCard(cv) {
+  const a = document.createElement('a');
+  a.href = cv.toDataURL('image/png'); a.download = 'squadmatch-card.png'; a.click();
+  toast('Card saved!');
+}
+
+function goShare(from) {
+  S.shareFrom = from;
+  if (S.squadId) window.location = '/squadmatch?squad='+S.squadId+'&share='+from;
+  else { show('share'); setTimeout(() => renderCard(1), 100); }
+}
+
+async function savePlaylist() {
+  const tok = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
+  if (!tok) { toast('Sign in to save your playlist'); return; }
+  for (const s of S.songs) {
+    await fetch('/api/hummatch/playlist', {
+      method:'POST', headers:{'Content-Type':'application/json','X-HM-Token':tok},
+      body: JSON.stringify({song_title:s.title, artist:s.artist, confidence:Math.round((s.score||0)*100)})
+    }).catch(()=>{});
+  }
+  toast(S.songs.length+' songs saved to your playlist!');
+}
+
+// ── Utilities ────────────────────────────────────────────────────────────────
+function startCreate() {
+  const hasSongs = !!localStorage.getItem('hm_squad_my_songs');
+  if (!hasSongs) { localStorage.setItem('hm_squad_after_hum','1'); window.location = '/'; return; }
+  if (!S.token) { localStorage.setItem('hm_squad_pending_create','1'); window.location = '/?signup=1&redirect='+encodeURIComponent('/squadmatch?create=1'); return; }
+  loadCreate();
+}
+
+async function api(url, method='GET', body=null) {
+  const opts = {method, headers:{'Content-Type':'application/json'}};
+  if (S.token) opts.headers['X-HM-Token'] = S.token;
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(url, opts);
+  return r.json();
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+init();
+</script>
+</body>
+</html>

@@ -235,15 +235,31 @@ app.post('/api/hummatch/stripe/webhook', express.raw({ type: 'application/json' 
     const email = (session.customer_email || (session.customer_details && session.customer_details.email) || '').toLowerCase();
     if (email) {
       const user = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
+      let userId;
       if (user) {
         db.prepare("UPDATE users SET is_premium = 1, updated_at = datetime('now') WHERE id = ?").run(user.id);
+        userId = user.id;
         console.log(`Stripe webhook: upgraded ${email} to premium`);
         sendEmail(email, 'Welcome to Squad Leader!', emailSquadLeader(email));
       } else {
         const newToken = uuidv4();
-        db.prepare('INSERT INTO users (email, token, is_premium, month_key) VALUES (?, ?, 1, ?)').run(email, newToken, monthKey());
+        const result = db.prepare('INSERT INTO users (email, token, is_premium, month_key) VALUES (?, ?, 1, ?)').run(email, newToken, monthKey());
+        userId = result.lastInsertRowid;
         console.log(`Stripe webhook: created premium account for ${email}`);
         sendEmail(email, 'Welcome to Squad Leader!', emailSquadLeader(email));
+      }
+      
+      // Track discount code usage if present
+      if (session.metadata && session.metadata.discount_code) {
+        const discountCode = db.prepare('SELECT id FROM discount_codes WHERE code = ?').get(session.metadata.discount_code);
+        if (discountCode) {
+          const amountCents = session.amount_total || 0;
+          db.prepare('INSERT INTO discount_code_uses (code_id, user_id, stripe_session_id, amount_cents) VALUES (?, ?, ?, ?)').run(
+            discountCode.id, userId, session.id, amountCents
+          );
+          db.prepare('UPDATE discount_codes SET uses_count = uses_count + 1 WHERE id = ?').run(discountCode.id);
+          console.log(`Stripe webhook: tracked discount code ${session.metadata.discount_code} for ${email}`);
+        }
       }
     }
   }
@@ -367,6 +383,40 @@ db.exec(`
     status TEXT DEFAULT 'pending',
     joined_at TEXT DEFAULT (datetime('now')),
     FOREIGN KEY(squad_id) REFERENCES squad_matches(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS discount_codes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    code TEXT UNIQUE NOT NULL,
+    squad_leader_id INTEGER NOT NULL,
+    discount_percent INTEGER DEFAULT 20,
+    max_uses INTEGER DEFAULT 999,
+    uses_count INTEGER DEFAULT 0,
+    is_active INTEGER DEFAULT 1,
+    created_at TEXT DEFAULT (datetime('now')),
+    deactivated_at TEXT,
+    FOREIGN KEY(squad_leader_id) REFERENCES users(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS discount_code_uses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    code_id INTEGER NOT NULL,
+    user_id INTEGER,
+    stripe_session_id TEXT,
+    amount_cents INTEGER,
+    used_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY(code_id) REFERENCES discount_codes(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS squad_leader_code_quota (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    month_key TEXT NOT NULL,
+    codes_generated INTEGER DEFAULT 0,
+    max_codes INTEGER DEFAULT 5,
+    UNIQUE(user_id, month_key),
     FOREIGN KEY(user_id) REFERENCES users(id)
   );
 
@@ -1727,6 +1777,129 @@ app.post('/api/hummatch/friend-codes', requireAuth, requirePremium, (req, res) =
 });
 
 // ---------------------------------------------------------------------------
+// API: Squad Leader Discount Codes
+// ---------------------------------------------------------------------------
+
+// Generate a new discount code (max 5 per month)
+app.post('/api/hummatch/discount-codes/generate', requireAuth, requirePremium, (req, res) => {
+  const monthKey = new Date().toISOString().slice(0, 7);
+  
+  // Check/initialize quota
+  let quota = db.prepare('SELECT * FROM squad_leader_code_quota WHERE user_id = ? AND month_key = ?').get(req.user.id, monthKey);
+  if (!quota) {
+    db.prepare('INSERT INTO squad_leader_code_quota (user_id, month_key, codes_generated) VALUES (?, ?, 0)').run(req.user.id, monthKey);
+    quota = { codes_generated: 0, max_codes: 5 };
+  }
+  
+  if (quota.codes_generated >= quota.max_codes) {
+    return res.status(400).json({ error: `Monthly code limit reached (${quota.codes_generated}/${quota.max_codes})` });
+  }
+  
+  // Generate unique code
+  const prefix = req.user.email.split('@')[0].replace(/[^a-zA-Z0-9]/g, '').toUpperCase().slice(0, 6);
+  const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+  const code = `${prefix}${random}20`; // e.g., SINGER7G4X20
+  
+  try {
+    db.prepare('INSERT INTO discount_codes (code, squad_leader_id) VALUES (?, ?)').run(code, req.user.id);
+    db.prepare('UPDATE squad_leader_code_quota SET codes_generated = codes_generated + 1 WHERE user_id = ? AND month_key = ?').run(req.user.id, monthKey);
+    
+    const remaining = quota.max_codes - quota.codes_generated - 1;
+    res.json({ ok: true, code, remaining });
+  } catch (e) {
+    console.error('Code generation failed:', e.message);
+    res.status(500).json({ error: 'Failed to generate code' });
+  }
+});
+
+// Get all my codes and their usage stats
+app.get('/api/hummatch/discount-codes/my-codes', requireAuth, requirePremium, (req, res) => {
+  const codes = db.prepare(`
+    SELECT 
+      dc.code,
+      dc.discount_percent,
+      dc.uses_count,
+      dc.is_active,
+      dc.created_at,
+      COUNT(dcu.id) as total_uses,
+      COALESCE(SUM(dcu.amount_cents), 0) as total_revenue_cents
+    FROM discount_codes dc
+    LEFT JOIN discount_code_uses dcu ON dc.id = dcu.code_id
+    WHERE dc.squad_leader_id = ?
+    GROUP BY dc.id
+    ORDER BY dc.created_at DESC
+  `).all(req.user.id);
+  
+  const monthKey = new Date().toISOString().slice(0, 7);
+  const quota = db.prepare('SELECT * FROM squad_leader_code_quota WHERE user_id = ? AND month_key = ?').get(req.user.id, monthKey);
+  
+  res.json({ 
+    codes, 
+    quota: quota ? { generated: quota.codes_generated, max: quota.max_codes, remaining: quota.max_codes - quota.codes_generated } : { generated: 0, max: 5, remaining: 5 }
+  });
+});
+
+// Validate a discount code (public endpoint for checkout)
+app.post('/api/hummatch/discount-codes/validate', (req, res) => {
+  const { code } = req.body;
+  if (!code) return res.status(400).json({ error: 'Code required' });
+  
+  const discountCode = db.prepare('SELECT * FROM discount_codes WHERE UPPER(code) = UPPER(?) AND is_active = 1').get(code.trim());
+  
+  if (!discountCode) {
+    return res.json({ valid: false, error: 'Invalid or expired code' });
+  }
+  
+  res.json({ 
+    valid: true, 
+    discount_percent: discountCode.discount_percent,
+    code: discountCode.code 
+  });
+});
+
+// Track code usage (called after successful Stripe checkout)
+app.post('/api/hummatch/discount-codes/track-use', (req, res) => {
+  const { code, user_id, stripe_session_id, amount_cents } = req.body;
+  if (!code) return res.status(400).json({ error: 'Code required' });
+  
+  const discountCode = db.prepare('SELECT * FROM discount_codes WHERE UPPER(code) = UPPER(?)').get(code.trim());
+  if (!discountCode) {
+    return res.status(404).json({ error: 'Code not found' });
+  }
+  
+  try {
+    db.prepare('INSERT INTO discount_code_uses (code_id, user_id, stripe_session_id, amount_cents) VALUES (?, ?, ?, ?)').run(
+      discountCode.id, user_id || null, stripe_session_id || null, amount_cents || 0
+    );
+    db.prepare('UPDATE discount_codes SET uses_count = uses_count + 1 WHERE id = ?').run(discountCode.id);
+    res.json({ ok: true });
+  } catch (e) {
+    console.error('Track use failed:', e.message);
+    res.status(500).json({ error: 'Failed to track code usage' });
+  }
+});
+
+// Admin: Get all discount code stats
+app.get('/api/hummatch/admin/discount-codes/stats', requireAdmin, (req, res) => {
+  const stats = db.prepare(`
+    SELECT 
+      u.email as squad_leader_email,
+      dc.code,
+      dc.uses_count,
+      COUNT(dcu.id) as total_conversions,
+      COALESCE(SUM(dcu.amount_cents), 0) as total_revenue_cents,
+      dc.created_at
+    FROM discount_codes dc
+    JOIN users u ON dc.squad_leader_id = u.id
+    LEFT JOIN discount_code_uses dcu ON dc.id = dcu.code_id
+    GROUP BY dc.id
+    ORDER BY total_revenue_cents DESC
+  `).all();
+  
+  res.json({ stats });
+});
+
+// ---------------------------------------------------------------------------
 // API: Account Settings
 // ---------------------------------------------------------------------------
 app.put('/api/hummatch/account', requireAuth, (req, res) => {
@@ -1830,11 +2003,34 @@ app.get('/api/hummatch/checkout/:plan', async (req, res) => {
     cancel_url: `${req.protocol}://${req.get('host')}/`
   };
 
+  // Apply discount code if provided
+  const discountCode = req.query.code;
+  if (discountCode) {
+    const code = db.prepare('SELECT * FROM discount_codes WHERE UPPER(code) = UPPER(?) AND is_active = 1').get(discountCode.trim());
+    if (code) {
+      // Create Stripe coupon for this discount
+      try {
+        const coupon = await stripe.coupons.create({
+          percent_off: code.discount_percent,
+          duration: 'once',
+          name: `HumMatch Squad Leader Discount (${code.code})`
+        });
+        sessionOpts.discounts = [{ coupon: coupon.id }];
+        sessionOpts.metadata = { discount_code: code.code, squad_leader_id: code.squad_leader_id };
+      } catch (e) {
+        console.error('Failed to create Stripe coupon:', e.message);
+      }
+    }
+  }
+
   // Pre-fill email if user is logged in
   const token = req.headers['x-hm-token'] || req.query.token;
   if (token) {
     const user = stmts.getUserByToken.get(token);
-    if (user) sessionOpts.customer_email = user.email;
+    if (user) {
+      sessionOpts.customer_email = user.email;
+      if (sessionOpts.metadata) sessionOpts.metadata.user_id = user.id;
+    }
   }
 
   try {
@@ -1965,9 +2161,20 @@ app.get('/api/hummatch/shared-playlist/:token', (req, res) => {
 // ---------------------------------------------------------------------------
 // Static files & SPA routing
 // ---------------------------------------------------------------------------
+// Serve HTML with no-cache headers (always fresh)
+app.use((req, res, next) => {
+  if (req.path.endsWith('.html') || req.path === '/' || !req.path.includes('.')) {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname), {
   extensions: ['html'],
-  index: 'index.html'
+  index: 'index.html',
+  maxAge: 0  // No caching for HTML
 }));
 
 // Blog clean URLs (match render.yaml rewrites)

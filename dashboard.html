@@ -324,6 +324,13 @@ textarea.form-input{resize:vertical;min-height:60px;font-family:inherit}
       </div>
       <div class="converted-list" id="converted-list"></div>
     </div>
+    <div class="card" id="discount-codes-section">
+      <h3>🎫 Your Squad Leader Discount Codes</h3>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:12px">Generate up to 5 codes per month (20% off). Track your affiliate conversions below.</p>
+      <div class="code-quota" id="code-quota" style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-bottom:12px;">Loading...</div>
+      <button class="btn-primary" onclick="generateDiscountCode()" id="gen-discount-btn" style="width:100%;margin-bottom:16px;">Generate New Code</button>
+      <div id="discount-codes-list" style="margin-top:12px;"></div>
+    </div>
     <div class="card" id="song-requests-section">
       <h3>🎵 Suggest a Song</h3>
       <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:14px">Can't find a song? Request it and we'll add it!</p>
@@ -443,7 +450,7 @@ async function loadAll(){
     if(squadRes.ok){const d=await squadRes.json();squads=d.squads||[]}
   }catch(e){console.error('Load failed',e)}
   renderAll();
-  if(isPremium){loadFriendCodes();loadSongRequests()}
+  if(isPremium){loadFriendCodes();loadSongRequests();loadDiscountCodes()}
 }
 
 function renderAll(){renderHero();renderVoiceSnapshot();renderPlaylist();renderShare();renderSquadList();renderHumHistory();renderNextUp();renderSettings()}
@@ -737,6 +744,71 @@ async function submitSongRequest(){
   const title=document.getElementById('req-title').value.trim(),artist=document.getElementById('req-artist').value.trim(),notes=document.getElementById('req-notes').value.trim();
   if(!title){toast('Song title is required');return}
   try{const res=await api('/api/hummatch/song-requests',{method:'POST',body:JSON.stringify({song_title:title,artist,notes})});const d=await res.json();if(d.error){toast(d.error);return}document.getElementById('req-title').value='';document.getElementById('req-artist').value='';document.getElementById('req-notes').value='';await loadSongRequests();toast('Song request submitted!')}catch(e){toast('Failed to submit request')}
+}
+
+async function loadDiscountCodes(){
+  try{
+    const res=await api('/api/hummatch/discount-codes/my-codes');
+    if(!res.ok)return;
+    const d=await res.json();
+    const quotaEl=document.getElementById('code-quota');
+    const listEl=document.getElementById('discount-codes-list');
+    const btnEl=document.getElementById('gen-discount-btn');
+    
+    if(d.quota){
+      quotaEl.textContent=`${d.quota.generated}/${d.quota.max} codes generated this month (${d.quota.remaining} remaining)`;
+      btnEl.disabled=d.quota.remaining<=0;
+      if(d.quota.remaining<=0){
+        btnEl.textContent='Monthly Limit Reached';
+        btnEl.style.opacity='0.5';
+      }
+    }
+    
+    if(!d.codes||!d.codes.length){
+      listEl.innerHTML='<div class="empty-state" style="padding:10px 0;color:rgba(255,255,255,0.4);font-size:0.8rem;">No codes generated yet. Generate your first code above!</div>';
+      return;
+    }
+    
+    listEl.innerHTML=d.codes.map(c=>{
+      const revenue=(c.total_revenue_cents/100).toFixed(2);
+      return`<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px;margin-bottom:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <code style="font-size:0.9rem;font-weight:700;color:#a855f7;">${esc(c.code)}</code>
+          <button onclick="copyDiscountCode('${esc(c.code)}')" style="font-size:0.7rem;padding:4px 10px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:6px;color:#fff;cursor:pointer;">Copy</button>
+        </div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);">
+          <span style="color:#22c55e;font-weight:600;">${c.total_uses||0} uses</span> · 
+          <span>$${revenue} revenue</span> · 
+          <span style="color:rgba(255,255,255,0.35);">${new Date(c.created_at).toLocaleDateString()}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }catch(e){console.error('Discount codes load failed',e)}
+}
+
+async function generateDiscountCode(){
+  try{
+    const res=await api('/api/hummatch/discount-codes/generate',{method:'POST'});
+    const d=await res.json();
+    if(d.error){toast(d.error);return}
+    await loadDiscountCodes();
+    toast('New code generated: '+d.code);
+    copyDiscountCode(d.code);
+  }catch(e){toast('Failed to generate code')}
+}
+
+function copyDiscountCode(code){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(code).then(()=>toast('Code copied: '+code));
+  }else{
+    const el=document.createElement('textarea');
+    el.value=code;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    el.remove();
+    toast('Code copied: '+code);
+  }
 }
 
 function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
