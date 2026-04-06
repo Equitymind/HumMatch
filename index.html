@@ -149942,9 +149942,11 @@ const PHASES = [
     {"title":"Conteo Regresivo","artist":"Don Omar","lo":45,"hi":64,"brightness":48,"year":2010}
 ];
 
-// Sort SONGS by popularity BEFORE any matching (so popular songs get matched first)
+// Sort SONGS by Spotify popularity BEFORE any matching
+// Use real Spotify 'popularity' field (0-100) where available
+// Songs with Spotify data (2,300+) float to top automatically
 SONGS.sort((a, b) => {
-  const popDiff = (b.humMatchScore || 0) - (a.humMatchScore || 0);
+  const popDiff = (b.popularity || 0) - (a.popularity || 0);
   if (popDiff !== 0) return popDiff;
   // Tie-breaker: year (newer first)
   return (b.year || 0) - (a.year || 0);
@@ -150442,8 +150444,8 @@ function showResults() {
       return s.score > 0.45; // Also apply score threshold
     })
     .sort((a, b) => {
-      // Sort by popularity FIRST (humMatchScore), then by vocal fit (score)
-      const popDiff = (b.humMatchScore || 0) - (a.humMatchScore || 0);
+      // Sort by Spotify popularity FIRST, then by vocal fit
+      const popDiff = (b.popularity || 0) - (a.popularity || 0);
       if (popDiff !== 0) return popDiff;
       return b.score - a.score;
     })
