@@ -1636,10 +1636,8 @@ app.delete('/api/hummatch/squad/:id', requireAuth, (req, res) => {
   try {
     // Delete squad members first (foreign key constraint)
     db.prepare('DELETE FROM squad_members WHERE squad_id = ?').run(squadId);
-    // Delete name votes
-    db.prepare('DELETE FROM squad_name_votes WHERE squad_id = ?').run(squadId);
-    // Delete the squad
-    db.prepare('DELETE FROM squads WHERE id = ?').run(squadId);
+    // Delete the squad (table is named squad_matches, not squads)
+    db.prepare('DELETE FROM squad_matches WHERE id = ?').run(squadId);
     
     res.json({ ok: true });
   } catch (e) {
