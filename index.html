@@ -684,9 +684,10 @@
     
     <!-- LOGGED-OUT PRIMARY CTAs -->
     <div id="cta-logged-out" style="display:none;">
-      <button onclick="hmOpenSignupFromPrompt()" style="width:100%;padding:16px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:14px;color:#fff;font-size:1rem;font-weight:800;cursor:pointer;letter-spacing:0.02em;margin-bottom:12px;">
-        ✨ Create Free Account
-      </button>
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <button onclick="window.location.href='/login?signup=1'" style="flex:1;padding:14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">Create Account</button>
+        <button onclick="window.location.href='/login'" style="flex:1;padding:14px;background:transparent;border:2px solid rgba(168,85,247,0.5);border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">Log In</button>
+      </div>
       <button id="share-btn" onclick="shareHumMatch()" style="width:100%;padding:14px;background:transparent;border:1px solid rgba(168,85,247,0.4);border-radius:14px;color:var(--accent);font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:12px;">
         🎤 Share My HumMatch
       </button>
@@ -755,8 +756,11 @@
       <button onclick="hmDismissPosthumSignup()" style="position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(255,255,255,0.25);font-size:1rem;cursor:pointer;padding:0;" aria-label="Dismiss">✕</button>
       <div id="hm-posthum-content">
         <div style="font-size:0.85rem;font-weight:700;color:#e2e0f0;margin-bottom:4px;">Save these results &amp; track your progress</div>
-        <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">Create a free account — future hums auto-save</div>
-        <button onclick="hmOpenSignupFromPrompt()" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Create Free Account</button>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">Free account — future hums auto-save</div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="window.location.href='/login?signup=1'" style="flex:1;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Create Account</button>
+          <button onclick="window.location.href='/login'" style="flex:1;padding:12px;background:transparent;border:2px solid rgba(168,85,247,0.5);border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Log In</button>
+        </div>
       </div>
       <div id="hm-posthum-saved" style="display:none;text-align:center;padding:4px 0;">
         <div style="font-size:0.9rem;font-weight:700;color:#a855f7;">✓ Results saved!</div>
