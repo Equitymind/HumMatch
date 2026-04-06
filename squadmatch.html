@@ -516,7 +516,7 @@ function loadCreate() {
   const isPremium = localStorage.getItem('hm_premium') === 'true';
   if (!isPremium) {
     // Show explanation page with soft upgrade CTA (don't hard redirect)
-    show('explain');
+    show('home');
     return;
   }
   
