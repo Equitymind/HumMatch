@@ -150594,8 +150594,12 @@ function showResults() {
 
   // Sort by match percentage descending (best matches first)
   function sessionShuffle(songs) {
-    // Always sort by score descending - no randomization
-    return songs.slice().sort((a, b) => b.score - a.score);
+    // Sort by popularity first, then by match score
+    return songs.slice().sort((a, b) => {
+      const popDiff = (b.humMatchScore || 0) - (a.humMatchScore || 0);
+      if (popDiff !== 0) return popDiff;
+      return b.score - a.score;
+    });
   }
 
   const _confidentRaw = tieredSongs.filter(s => s.tier.key !== 'stretch' && !isDismissed(s));
