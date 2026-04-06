@@ -115028,7 +115028,7 @@ function showResults() {
   const _hasDecadeFilter = _interests && _interests.decades && _interests.decades.length;
   function _matchesInterests(s) {
     if (!_hasGenreFilter && !_hasDecadeFilter) return true;
-    const genreOk  = !_hasGenreFilter  || s.tags.some(g => _interests.genres.includes(g));
+    const genreOk  = !_hasGenreFilter  || (s.tags && s.tags.some(g => _interests.genres.includes(g)));
     const decadeOk = !_hasDecadeFilter || _interests.decades.includes(s.decade);
     return genreOk && decadeOk;
   }
