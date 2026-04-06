@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HumMatch Pricing | Find Songs That Match Your Voice</title>
+  <meta name="description" content="HumMatch pricing. Free to start, unlimited with Squad Leader for just $7.99/month or $49.99/year."/>
+  <link rel="icon" href="/hummatch-icon-bug-2x.png" type="image/png"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0b1a;
+      --white: #e2e0f0;
+      --text-muted: rgba(255,255,255,0.4);
+      --purple: #A855F7;
+      --pink: #EC4899;
+      --surface-border: rgba(124,58,237,0.12);
+      --radius: 14px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 60px 24px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* PRICING GRID */
+    .pricing-section {
+      padding: 40px 24px 80px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+      .hero h1 { font-size: 1.6rem; }
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+    }
+    .pricing-card.featured {
+      border-color: var(--purple);
+      background: rgba(168,85,247,0.06);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .pricing-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+    .pricing-price {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .pricing-price span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .pricing-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .pricing-save {
+      display: inline-block;
+      background: rgba(168,85,247,0.15);
+      color: var(--purple);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      text-align: left;
+    }
+    .pricing-features li {
+      padding: 8px 0;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      padding-left: 24px;
+      position: relative;
+    }
+    .pricing-features li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: var(--purple);
+      font-weight: 700;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+      border: 1px solid var(--surface-border);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    footer a { color: rgba(168,85,247,0.6); text-decoration: none; }
+    footer a:hover { color: var(--purple); }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">HumMatch</a>
+  <div class="nav-links">
+    <a href="/">Try HumMatch</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/squadmatch">SquadMatch</a>
+    <a href="/blog">Blog</a>
+    <a href="/dashboard" id="navLoginItem">Log In</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Free to start. Unlimited with <span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Squad Leader</span>.</h1>
+  <p>Use HumMatch free to find songs for your voice. Upgrade to Squad Leader to unlock harmonic group song matching powered by your squad's vocal range, timbre, and brightness.</p>
+</div>
+
+<section class="pricing-section">
+  <div class="pricing-grid">
+
+    <!-- FREE -->
+    <div class="pricing-card">
+      <h3>Free</h3>
+      <div class="pricing-price">$0</div>
+      <div class="pricing-sub">&nbsp;</div>
+      <ul class="pricing-features">
+        <li>Join a squad for free</li>
+        <li>Hum when invited by a Squad Leader</li>
+        <li>View shared song results</li>
+        <li>Save your setlist</li>
+      </ul>
+      <a href="/" class="btn btn-secondary">Get Started Free</a>
+    </div>
+
+    <!-- PREMIUM MONTHLY -->
+    <div class="pricing-card">
+      <div style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.65rem;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:0.08em;display:inline-block;margin-bottom:12px;text-transform:uppercase;">SQUAD LEADER TIER</div>
+      <h3 style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Squad Leader Monthly</h3>
+      <div class="pricing-price">$7<span>.99 / mo</span></div>
+      <div class="pricing-sub">Billed monthly</div>
+      <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.4;">Squad Leader unlocks harmonic group song matching powered by your squad's vocal range, timbre, and brightness.</div>
+      <div style="font-size:0.76rem;color:rgba(255,255,255,0.5);margin-bottom:14px;">Plus utilities:</div>
+      <ul class="pricing-features">
+        <li>Unlimited hums & SquadMatch sessions</li>
+        <li>Invite up to 4 friends per session</li>
+        <li>Squad HQ with shared playlists</li>
+        <li>Issue up to 5 exclusive 20% discount codes</li>
+      </ul>
+      <a href="/api/hummatch/checkout/monthly" class="btn btn-primary">Become a Squad Leader</a>
+    </div>
+
+    <!-- PREMIUM ANNUAL -->
+    <div class="pricing-card featured">
+      <div class="pricing-badge">BEST VALUE</div>
+      <div style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.65rem;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:0.08em;display:inline-block;margin-bottom:12px;text-transform:uppercase;">SQUAD LEADER TIER</div>
+      <h3 style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Squad Leader Annual</h3>
+      <div class="pricing-price">$49<span>.99 / yr</span></div>
+      <div class="pricing-sub">Billed annually</div>
+      <div class="pricing-save">Save 48%!</div>
+      <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.4;">Squad Leader unlocks harmonic group song matching powered by your squad's vocal range, timbre, and brightness.</div>
+      <div style="font-size:0.76rem;color:rgba(255,255,255,0.5);margin-bottom:14px;">Plus utilities:</div>
+      <ul class="pricing-features">
+        <li>Unlimited hums & SquadMatch sessions</li>
+        <li>Invite up to 4 friends per session</li>
+        <li>Squad HQ with shared playlists</li>
+        <li>Issue up to 5 exclusive 20% discount codes</li>
+      </ul>
+      <a href="/api/hummatch/checkout/annual" class="btn btn-primary">Become a Squad Leader, Save 45%</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 HumMatch &middot; <a href="/">Try HumMatch</a> &middot; <a href="/squadmatch">SquadMatch</a> &middot; <a href="/contact">Contact</a> &middot; <a href="/blog">Blog</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+</footer>
+<script>
+(function(){
+  var t = localStorage.getItem('hm_dash_token');
+  if(t){
+    var nav = document.getElementById('navLoginItem');
+    if(nav){ nav.textContent='My HQ'; }
+  }
+})();
+</script>
+</body>
+</html>
