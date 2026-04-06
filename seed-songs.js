@@ -107,8 +107,8 @@ console.log(`✓ Extracted ${songs.length} songs from HTML`);
 console.log('\n💾 Upserting songs into database...');
 
 const upsertStmt = db.prepare(`
-  INSERT INTO songs (title, artist, lo, hi, brightness, year, language, slug)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  INSERT INTO songs (title, artist, lo, hi, brightness, year, language, slug, popularity, hum_match_score)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   ON CONFLICT(slug) DO UPDATE SET
     title = excluded.title,
     artist = excluded.artist,
@@ -116,7 +116,9 @@ const upsertStmt = db.prepare(`
     hi = excluded.hi,
     brightness = excluded.brightness,
     year = excluded.year,
-    language = excluded.language
+    language = excluded.language,
+    popularity = excluded.popularity,
+    hum_match_score = excluded.hum_match_score
 `);
 
 let inserted = 0;
@@ -143,7 +145,9 @@ const upsertMany = db.transaction((songs) => {
         song.brightness || 50,
         song.year || null,
         song.language || 'en',
-        slug
+        slug,
+        song.popularity || 0,
+        song.humMatchScore || 0
       );
       
       if (info.changes === 1) {
