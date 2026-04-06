@@ -547,6 +547,49 @@ try {
   console.log('[migration] password_hash column already exists — OK');
 }
 
+// Add username column to users (for public profiles)
+try {
+  db.exec(`ALTER TABLE users ADD COLUMN username TEXT UNIQUE`);
+  console.log('[migration] Added username column to users table');
+} catch (_) {
+  console.log('[migration] username column already exists — OK');
+}
+
+// Create user_profiles table for public musical profiles
+db.exec(`
+  CREATE TABLE IF NOT EXISTS user_profiles (
+    user_id INTEGER PRIMARY KEY,
+    display_name TEXT,
+    bio TEXT,
+    profile_photo_url TEXT,
+    voice_type TEXT,
+    range_low INTEGER,
+    range_high INTEGER,
+    is_public INTEGER DEFAULT 1,
+    profile_views INTEGER DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+  );
+`);
+
+// Create hum_friends table for musical social network
+db.exec(`
+  CREATE TABLE IF NOT EXISTS hum_friends (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    friend_id INTEGER NOT NULL,
+    status TEXT DEFAULT 'accepted',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, friend_id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (friend_id) REFERENCES users(id)
+  );
+  CREATE INDEX IF NOT EXISTS idx_hum_friends_user ON hum_friends(user_id);
+  CREATE INDEX IF NOT EXISTS idx_hum_friends_friend ON hum_friends(friend_id);
+`);
+
+console.log('[migration] Profile system tables ready');
+
 // SquadMatch viral loop migrations
 try { db.exec(`ALTER TABLE squad_matches ADD COLUMN invite_token TEXT`); } catch(_){}
 try { db.exec(`ALTER TABLE squad_matches ADD COLUMN status TEXT DEFAULT 'active'`); } catch(_){}
