@@ -515,8 +515,8 @@ function loadCreate() {
   // Check if user is premium (Squad Leader required to create squads)
   const isPremium = localStorage.getItem('hm_premium') === 'true';
   if (!isPremium) {
-    // Redirect to pricing page with squad intent
-    window.location = '/pricing?intent=squad&v=2';
+    // Show explanation page with soft upgrade CTA (don't hard redirect)
+    show('explain');
     return;
   }
   
