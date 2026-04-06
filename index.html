@@ -150412,8 +150412,8 @@ function showResults() {
   const isMaleVoice = userHigh <= 65;  // C#4 or below = likely male
   const isFemaleVoice = userLow >= 48; // C3 or above = likely female
 
-  // Match from top 1,500 popular songs first (SONGS already sorted by humMatchScore)
-  const matchedSongs = SONGS.slice(0, 1500)
+  // Match from top 2,500 popular songs first (SONGS already sorted by humMatchScore)
+  const matchedSongs = SONGS.slice(0, 2500)
     .map(s => {
       const overlapLo = Math.max(userLow, s.lo);
       const overlapHi = Math.min(userHigh, s.hi);
@@ -150441,7 +150441,12 @@ function showResults() {
 
       return s.score > 0.45; // Also apply score threshold
     })
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => {
+      // Sort by popularity FIRST (humMatchScore), then by vocal fit (score)
+      const popDiff = (b.humMatchScore || 0) - (a.humMatchScore || 0);
+      if (popDiff !== 0) return popDiff;
+      return b.score - a.score;
+    })
     .reduce((acc, s) => {
       // Cap at 2 songs per artist to prevent Johnny Cash monopoly
       const artistCount = acc.filter(x => x.artist === s.artist).length;
