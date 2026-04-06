@@ -150849,23 +150849,23 @@ function showResults() {
       if (existingMore) existingMore.remove();
       if (existingTier) existingTier.remove();
 
-      // Show "Load 10 More" if more songs in current tier
-      if (slice.length < tierSongs.length) {
-        const remaining = tierSongs.length - slice.length;
-        const btn = document.createElement('button');
-        btn.id = 'hm-show-more';
-        btn.textContent = `Load ${Math.min(PAGE_SIZE, remaining)} More`;
-        btn.style.cssText = 'display:block;margin:12px auto 0;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:50px;padding:10px 24px;font-size:0.82rem;font-family:inherit;cursor:pointer;width:100%;max-width:400px;';
-        btn.onclick = () => { window._hmConfidentPage++; renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
-        yourSongsEl.after(btn);
-      }
-      
-      // Show tier exploration buttons at end of current tier
-      if (slice.length >= tierSongs.length && window._hmActiveTier < 3) {
+      // Show tier navigation buttons (side-by-side)
+      if (slice.length < tierSongs.length || window._hmActiveTier < 3) {
         const tierDiv = document.createElement('div');
-        tierDiv.id = 'hm-tier-buttons';
+        tierDiv.id = 'hm-tier-nav';
         tierDiv.style.cssText = 'display:flex;gap:8px;margin:16px auto 0;max-width:400px;';
         
+        // "Load 10 More" if more in current tier
+        if (slice.length < tierSongs.length) {
+          const remaining = tierSongs.length - slice.length;
+          const btn = document.createElement('button');
+          btn.textContent = `Load ${Math.min(PAGE_SIZE, remaining)} More`;
+          btn.style.cssText = 'flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
+          btn.onclick = () => { window._hmConfidentPage++; renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
+          tierDiv.appendChild(btn);
+        }
+        
+        // "Explore Deeper" tier button (always show if not in final tier)
         if (window._hmActiveTier === 1) {
           const btn = document.createElement('button');
           btn.textContent = '🔍 Explore Deeper';
@@ -150883,6 +150883,7 @@ function showResults() {
         
         yourSongsEl.after(tierDiv);
       }
+
     }
     renderSongPage();
     window._hmRenderSongPage = renderSongPage;
