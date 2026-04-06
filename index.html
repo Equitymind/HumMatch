@@ -150865,10 +150865,10 @@ function showResults() {
           tierDiv.appendChild(btn);
         }
         
-        // "Explore Deeper" tier button (always show if not in final tier)
+        // "Deep Dive" tier button (always show if not in final tier)
         if (window._hmActiveTier === 1) {
           const btn = document.createElement('button');
-          btn.textContent = '🔍 Explore Deeper';
+          btn.textContent = '🔍 Deep Dive';
           btn.style.cssText = 'flex:1;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
           btn.onclick = () => { window._hmActiveTier = 2; window._hmConfidentPage = Math.floor(TIER_1_LIMIT / PAGE_SIZE); renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
           tierDiv.appendChild(btn);
