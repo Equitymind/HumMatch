@@ -433,7 +433,7 @@
 <!-- Squad context banner (shown when joining squad via index.html) -->
 <div id="squad-context-banner" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(219,39,119,0.15));border-bottom:1px solid rgba(124,58,237,0.3);padding:10px 18px;text-align:center">
   <div style="font-size:0.82rem;color:#e2e0f0;font-weight:600" id="squad-banner-text">You're humming for a SquadMatch</div>
-  <div style="font-size:0.72rem;color:rgba(255,255,255,0.48);margin-top:2px">Complete your hum — your results will be added to the squad</div>
+  <div style="font-size:0.72rem;color:rgba(255,255,255,0.48);margin-top:2px">Complete your hum - your results will be added to the squad</div>
 </div>
 
 <!-- SCREEN 1: WELCOME -->
@@ -465,7 +465,7 @@
     <button class="cta-btn secondary" style="width:100%;" onclick="loadSavedProfile()">🎤 Use My Saved Voice</button>
     <div style="font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:6px;" id="saved-profile-date"></div>
   </div>
-  
+
   </div><!-- /cta-wrapper -->
 
   <!-- SquadMatch Post-Hum Prompt (Screen 1) - MOVED ABOVE UPGRADE CTA -->
@@ -574,7 +574,7 @@
     </div>
   </div>
 
-  <div class="auto-status" id="auto-status">🎤 Listening…</div>
+  <div class="auto-status" id="auto-status">🎤 Listening...</div>
 
   <div class="phase-dots" style="margin-top:20px;">
     <div class="phase-dot active" id="dot-0"></div>
@@ -584,14 +584,14 @@
 
   <!-- Hidden elements for pitch detection (still needed by audio engine) -->
   <div style="display:none;">
-    <div id="pitch-note">—</div>
+    <div id="pitch-note">-</div>
     <div id="pitch-hz"></div>
     <div id="pitch-bar"></div>
     <div id="signal-status"></div>
     <canvas id="waveform-canvas" width="360" height="60"></canvas>
-    <div id="low-note">—</div>
-    <div id="mid-note">—</div>
-    <div id="high-note">—</div>
+    <div id="low-note">-</div>
+    <div id="mid-note">-</div>
+    <div id="high-note">-</div>
   </div>
 </div>
 
@@ -603,7 +603,7 @@
         <div class="confetti-emoji" id="result-emoji">🎉</div>
         <span id="hm-account-badge" class="hm-account-indicator" style="display:none;" onclick="hmShowAccountInfo()"></span>
       </div>
-      <div class="voice-badge" id="voice-badge">⚡ Loading…</div>
+      <div class="voice-badge" id="voice-badge">⚡ Loading...</div>
       <div style="font-size:0.9rem;color:var(--text2);margin-bottom:4px;" id="range-text"></div>
       <div style="font-size:0.88rem;color:var(--text2);margin-bottom:8px;font-weight:600;" id="brightness-text"></div>
     </div>
@@ -666,7 +666,7 @@
 
   <!-- PRIMARY CTA STACK (state-based: logged-out vs logged-in) -->
   <div id="results-cta-stack" style="width:100%;max-width:400px;margin-top:24px;">
-    
+
     <!-- LOGGED-OUT PRIMARY CTAs -->
     <div id="cta-logged-out" style="display:none;">
       <div style="display:flex;gap:10px;margin-bottom:12px;">
@@ -720,7 +720,7 @@
             <span style="position:absolute;left:0;">•</span> Issue up to 5 exclusive 20% discount codes
           </li>
         </ul>
-        <button onclick="window.location.href='/pricing?v=2'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Become a Squad Leader — $7.99/mo</button>
+        <button onclick="window.location.href='/pricing?v=2'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Become a Squad Leader - $7.99/mo</button>
       </div>
     </div>
 
@@ -741,7 +741,7 @@
       <button onclick="hmDismissPosthumSignup()" style="position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(255,255,255,0.25);font-size:1rem;cursor:pointer;padding:0;" aria-label="Dismiss">✕</button>
       <div id="hm-posthum-content">
         <div style="font-size:0.85rem;font-weight:700;color:#e2e0f0;margin-bottom:4px;">Save these results &amp; track your progress</div>
-        <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">Free account — future hums auto-save</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">Free account - future hums auto-save</div>
         <div style="display:flex;gap:8px;">
           <button onclick="window.location.href='/login?signup=1'" style="flex:1;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Create Account</button>
           <button onclick="window.location.href='/login'" style="flex:1;padding:12px;background:transparent;border:2px solid rgba(168,85,247,0.5);border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Log In</button>
@@ -779,7 +779,7 @@
     <!-- Loading state -->
     <div id="karaoke-loading" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:1;">
       <div style="font-size:2.5rem;">🎤</div>
-      <div style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Finding your track…</div>
+      <div style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Finding your track...</div>
     </div>
     <!-- YouTube embed -->
     <iframe id="karaoke-frame" src="" frameborder="0"
@@ -787,8 +787,8 @@
       allowfullscreen style="width:100%;flex:1;border:none;display:none;min-height:240px;border-radius:12px;"></iframe>
   </div>
   <div style="padding:12px 0 4px;text-align:center;flex-shrink:0;">
-    <div style="font-size:1rem;font-weight:900;margin-bottom:2px;" id="karaoke-title">—</div>
-    <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:14px;" id="karaoke-artist">—</div>
+    <div style="font-size:1rem;font-weight:900;margin-bottom:2px;" id="karaoke-title">-</div>
+    <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:14px;" id="karaoke-artist">-</div>
     <button id="karaoke-yt-btn" onclick="" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;border-radius:50px;padding:10px 28px;font-size:0.82rem;font-weight:700;cursor:pointer;">
       ↗ Open in YouTube
     </button>
@@ -2515,7 +2515,7 @@ const SONGS = [
     "humMatchScore": 96
   },
   {
-    "title": "The Weeknd’s Dark Secret",
+    "title": "The Weeknd's Dark Secret",
     "artist": "The Weeknd",
     "lo": 44,
     "hi": 68,
@@ -10664,7 +10664,7 @@ const SONGS = [
     "humMatchScore": 77
   },
   {
-    "title": "Behind Blake Shelton’s Album Body Language",
+    "title": "Behind Blake Shelton's Album Body Language",
     "artist": "Blake Shelton",
     "lo": 40,
     "hi": 67,
@@ -13930,7 +13930,7 @@ const SONGS = [
     "humMatchScore": 65
   },
   {
-    "title": "That’s What I Call Home",
+    "title": "That's What I Call Home",
     "artist": "Blake Shelton",
     "lo": 40,
     "hi": 64,
@@ -31715,7 +31715,7 @@ const SONGS = [
     "humMatchScore": 40
   },
   {
-    "title": "Behind KAROL G’s KG0516",
+    "title": "Behind KAROL G's KG0516",
     "artist": "KAROL G",
     "lo": 42,
     "hi": 68,
@@ -32386,7 +32386,7 @@ const SONGS = [
     "humMatchScore": 40
   },
   {
-    "title": "ED SHEERAN’S SURPRISE",
+    "title": "ED SHEERAN'S SURPRISE",
     "artist": "DJ Psy",
     "lo": 44,
     "hi": 68,
@@ -32868,7 +32868,7 @@ const SONGS = [
     "humMatchScore": 40
   },
   {
-    "title": "Floatin’ This Creek (8-Bit Luke Bryan Emulation)",
+    "title": "Floatin' This Creek (8-Bit Luke Bryan Emulation)",
     "artist": "8-Bit Arcade",
     "lo": 40,
     "hi": 64,
@@ -32942,7 +32942,7 @@ const SONGS = [
     "humMatchScore": 40
   },
   {
-    "title": "The Girl Can’t Help It (8-Bit Blake Shelton Emulation)",
+    "title": "The Girl Can't Help It (8-Bit Blake Shelton Emulation)",
     "artist": "8-Bit Arcade",
     "lo": 40,
     "hi": 64,
@@ -33031,7 +33031,7 @@ const SONGS = [
     "humMatchScore": 40
   },
   {
-    "title": "Actin’ Up (8-Bit Miranda Lambert Emulation)",
+    "title": "Actin' Up (8-Bit Miranda Lambert Emulation)",
     "artist": "8-Bit Arcade",
     "lo": 40,
     "hi": 64,
@@ -55805,7 +55805,7 @@ const SONGS = [
     "humMatchScore": 38
   },
   {
-    "title": "Can’t Stop Dancin’ (J Balvin remix)",
+    "title": "Can't Stop Dancin' (J Balvin remix)",
     "artist": "Becky G",
     "lo": 42,
     "hi": 68,
@@ -56252,7 +56252,7 @@ const SONGS = [
     "humMatchScore": 38
   },
   {
-    "title": "Ariana’s Dilemma (Nelly vs. Ariana Grande)",
+    "title": "Ariana's Dilemma (Nelly vs. Ariana Grande)",
     "artist": "oneboredjeu",
     "lo": 40,
     "hi": 72,
@@ -56494,7 +56494,7 @@ const SONGS = [
     "humMatchScore": 38
   },
   {
-    "title": "Sheeran’s Supernova (Ed Sheeran vs. Oasis)",
+    "title": "Sheeran's Supernova (Ed Sheeran vs. Oasis)",
     "artist": "oneboredjeu",
     "lo": 43,
     "hi": 67,
@@ -56860,7 +56860,7 @@ const SONGS = [
     "humMatchScore": 38
   },
   {
-    "title": "We’re Finally Bruno Mars",
+    "title": "We're Finally Bruno Mars",
     "artist": "TheGuy",
     "lo": 40,
     "hi": 64,
@@ -57435,7 +57435,7 @@ const SONGS = [
     "humMatchScore": 38
   },
   {
-    "title": "God’s Country (8-Bit Blake Shelton Emulation)",
+    "title": "God's Country (8-Bit Blake Shelton Emulation)",
     "artist": "8-Bit Arcade",
     "lo": 40,
     "hi": 64,
@@ -57730,7 +57730,7 @@ const SONGS = [
   },
   {
     "title": "Mariah Carey",
-    "artist": "Kierre “TouchDown” Gilmore",
+    "artist": "Kierre "TouchDown" Gilmore",
     "lo": 40,
     "hi": 72,
     "brightness": 60,
@@ -79343,7 +79343,7 @@ const SONGS = [
   },
   {
     "title": "Fleetwood Mac",
-    "artist": "Ben Rogers’ Instrumental Asylum",
+    "artist": "Ben Rogers' Instrumental Asylum",
     "lo": 40,
     "hi": 64,
     "brightness": 50,
@@ -79678,7 +79678,7 @@ const SONGS = [
   },
   {
     "title": "Green Day",
-    "artist": "Mo’ Horizons",
+    "artist": "Mo' Horizons",
     "lo": 48,
     "hi": 67,
     "brightness": 55,
@@ -98463,7 +98463,7 @@ const SONGS = [
   },
   {
     "title": "Karaoke Queen",
-    "artist": "Younger Younger 28’s",
+    "artist": "Younger Younger 28's",
     "lo": 43,
     "hi": 67,
     "brightness": 55,
@@ -98662,7 +98662,7 @@ const SONGS = [
     "humMatchScore": 30
   },
   {
-    "title": "Foo Fighters ‘Everlong’",
+    "title": "Foo Fighters 'Everlong'",
     "artist": "Walt Ribeiro",
     "lo": 43,
     "hi": 67,
@@ -111721,7 +111721,7 @@ const SONGS = [
     "humMatchScore": 28
   },
   {
-    "title": "Say It Loud – I'm Black and I'm Proud",
+    "title": "Say It Loud - I'm Black and I'm Proud",
     "artist": "James Brown",
     "year": 1968,
     "tags": [
@@ -148955,7 +148955,7 @@ const SONGS = [
   },
   {
     "title": "Corrido de Macario Ozuna",
-    "artist": "Adán “Chalino” Sánchez",
+    "artist": "Adán "Chalino" Sánchez",
     "lo": 42,
     "hi": 68,
     "brightness": 55,
@@ -149943,6 +149943,14 @@ const PHASES = [
 
 ];
 
+// Sort SONGS by popularity BEFORE any matching (so popular songs get matched first)
+SONGS.sort((a, b) => {
+  const popDiff = (b.humMatchScore || 0) - (a.humMatchScore || 0);
+  if (popDiff !== 0) return popDiff;
+  // Tie-breaker: year (newer first)
+  return (b.year || 0) - (a.year || 0);
+});
+
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -149959,7 +149967,7 @@ function showScreen(id) {
     { id:'latin',     label:'Latin' },
     { id:'indie',     label:'Indie' },
     { id:'disco',     label:'Disco' },
-    { id:'50s60s',    label:'50s–60s' },
+    { id:'50s60s',    label:'50s-60s' },
     { id:'70s',       label:'70s' },
   ];
   const DECADES = [
@@ -150221,7 +150229,7 @@ function updatePhaseUI() {
   const emojiEl = document.getElementById('phase-emoji');
   if (emojiEl) emojiEl.textContent = p.emoji || '🎵';
   const statusEl = document.getElementById('auto-status');
-  if (statusEl) { statusEl.textContent = '🎤 Listening…'; statusEl.className = 'auto-status listening'; }
+  if (statusEl) { statusEl.textContent = '🎤 Listening...'; statusEl.className = 'auto-status listening'; }
   resetRing();
   [0,1,2].forEach(i => {
     const dot = document.getElementById('dot-'+i);
@@ -150239,7 +150247,7 @@ function runPhaseCapture() {
   capturing = true;
 
   const statusEl = document.getElementById('auto-status');
-  if (statusEl) { statusEl.innerHTML = '<span style="color:#A855F7;">Humming… hold it steady</span>'; statusEl.className = 'auto-status listening'; }
+  if (statusEl) { statusEl.innerHTML = '<span style="color:#A855F7;">Humming... hold it steady</span>'; statusEl.className = 'auto-status listening'; }
 
   const pitches = [];
   const brightnesses = [];
@@ -150257,7 +150265,7 @@ function runPhaseCapture() {
     for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
     rms = Math.sqrt(rms / buf.length);
     if (rms < 0.001) {
-      if (statusEl) statusEl.innerHTML = '🎤 Listening… hum now!';
+      if (statusEl) statusEl.innerHTML = '🎤 Listening... hum now!';
       return;
     }
 
@@ -150288,7 +150296,7 @@ function runPhaseCapture() {
 
     if (pitches.length < 3) {
       // Not enough signal, retry this phase automatically
-      if (statusEl) { statusEl.innerHTML = '<span style="color:#F59E0B;">Didn\'t catch that, trying again…</span>'; }
+      if (statusEl) { statusEl.innerHTML = '<span style="color:#F59E0B;">Didn\'t catch that, trying again...</span>'; }
       resetRing();
       setTimeout(() => runPhaseCapture(), 1200);
       return;
@@ -150316,7 +150324,7 @@ function runPhaseCapture() {
     } else {
       // All 3 phases done
       await showPhaseSuccess('All done!');
-      if (statusEl) { statusEl.innerHTML = '<span style="color:#22C55E;">🔍 Analyzing your voice…</span>'; }
+      if (statusEl) { statusEl.innerHTML = '<span style="color:#22C55E;">🔍 Analyzing your voice...</span>'; }
       setTimeout(showResults, 500);
     }
   }, 3000);
@@ -150404,7 +150412,7 @@ function showResults() {
   // Detect likely gender based on vocal range to filter out mismatches
   const isMaleVoice = userHigh <= 65;  // C#4 or below = likely male
   const isFemaleVoice = userLow >= 48; // C3 or above = likely female
-  
+
   const matchedSongs = SONGS
     .map(s => {
       const overlapLo = Math.max(userLow, s.lo);
@@ -150419,18 +150427,18 @@ function showResults() {
       // Female songs center around C4-C5 (60-72) AND are brighter (55+)
       // Male songs center around G2-G3 (43-55) AND are darker (30-55)
       const songMidpoint = (s.lo + s.hi) / 2;
-      
+
       // MALE VOICE FILTERING:
       // Block songs with female tessitura (midpoint >= 52)
       // OR songs with bright timbre (brightness > 60) even if range overlaps
       // This catches contraltos like Nina Simone, Etta James
       if (isMaleVoice && (songMidpoint >= 52 || s.brightness > 60)) return false;
-      
+
       // FEMALE VOICE FILTERING:
       // Block songs with male tessitura (midpoint < 58)
       // OR songs with dark timbre (brightness < 45)
       if (isFemaleVoice && (songMidpoint < 58 || s.brightness < 45)) return false;
-      
+
       return s.score > 0.45; // Also apply score threshold
     })
     .sort((a, b) => b.score - a.score)
@@ -150460,7 +150468,7 @@ function showResults() {
   // ── RENDER ──
   document.getElementById('voice-badge').innerHTML = `${typeEmoji[voiceType] || '🎤'} ${voiceType} Hummer`;
   document.getElementById('result-emoji').textContent = (topArtist && topArtist.emoji) ? topArtist.emoji : '🎉';
-  
+
   // Brightness descriptor based on score (only if captured)
   if (userBrightness && !isNaN(userBrightness)) {
     const brightnessLabel = userBrightness >= 70 ? 'Very Bright' :
@@ -150470,7 +150478,7 @@ function showResults() {
     document.getElementById('brightness-text').textContent =
       `✨ Timbre: ${Math.round(userBrightness)}/100 (${brightnessLabel})`;
   }
-  
+
   document.getElementById('range-text').textContent =
     `${midiToName(userLow)} to ${midiToName(userHigh)} · ${span} semitone range`;
 
@@ -150607,11 +150615,11 @@ function showResults() {
   console.log('[FILTER DEBUG] First 3 songs tags:', _confidentRaw.slice(0,3).map(s => ({title: s.title, tags: s.tags})));
   const _confidentFiltered = _confidentRaw.filter(_matchesInterests);
   console.log('[FILTER DEBUG] _confidentFiltered count:', _confidentFiltered.length);
-  
+
   // If genre/decade filter results in too few songs (<10), include stretch songs that match filter
   const needMoreSongs = _hasFilter && _confidentFiltered.length < 10;
   const _stretchFiltered = needMoreSongs ? tieredSongs.filter(s => s.tier.key === 'stretch' && !isDismissed(s) && _matchesInterests(s)) : [];
-  
+
   // Respect genre/decade filters, but fall back if empty (prevents stuck state)
   const confidentSongs = sessionShuffle(
     _hasFilter && _confidentFiltered.length > 0
@@ -150691,7 +150699,7 @@ function showResults() {
         // Hide squad prompt, show "submitted" message then redirect
         const prompt = document.getElementById('squad-prompt-module');
         if (prompt) {
-          prompt.innerHTML = '<div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);border-radius:14px;padding:18px 20px;text-align:center"><div style="color:#4ade80;font-weight:700;font-size:0.92rem;margin-bottom:6px">✓ Results submitted to your squad!</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-bottom:12px">Redirecting to your SquadMatch…</div><a href="/squadmatch?squad=' + _sqId + '" style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border-radius:10px;text-decoration:none;">See Squad Progress</a></div>';
+          prompt.innerHTML = '<div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);border-radius:14px;padding:18px 20px;text-align:center"><div style="color:#4ade80;font-weight:700;font-size:0.92rem;margin-bottom:6px">✓ Results submitted to your squad!</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-bottom:12px">Redirecting to your SquadMatch...</div><a href="/squadmatch?squad=' + _sqId + '" style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border-radius:10px;text-decoration:none;">See Squad Progress</a></div>';
         }
         setTimeout(() => { window.location = '/squadmatch?squad=' + _sqId; }, 2000);
       }).catch(() => {});
@@ -150820,11 +150828,11 @@ function showResults() {
     }
 
     const PAGE_SIZE = 10;
-    
+
     // Tier system: 2K → 5K → Everything
     const TIER_1_LIMIT = 2000; // Top popular songs
     const TIER_2_LIMIT = 5000; // + Next 3K
-    
+
     window._hmConfidentAll = confidentSongs;
     window._hmConfidentPage = 0;
     window._hmActiveTier = 1; // Start with tier 1 (top 2K)
@@ -150856,7 +150864,7 @@ function showResults() {
         const tierDiv = document.createElement('div');
         tierDiv.id = 'hm-tier-nav';
         tierDiv.style.cssText = 'display:flex;gap:8px;margin:16px auto 0;max-width:400px;';
-        
+
         // "Load 10 More" if more in current tier
         if (slice.length < tierSongs.length) {
           const remaining = tierSongs.length - slice.length;
@@ -150866,7 +150874,7 @@ function showResults() {
           btn.onclick = () => { window._hmConfidentPage++; renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
           tierDiv.appendChild(btn);
         }
-        
+
         // "Deep Dive" tier button (always show if not in final tier)
         if (window._hmActiveTier === 1) {
           const btn = document.createElement('button');
@@ -150881,7 +150889,7 @@ function showResults() {
           btn.onclick = () => { window._hmActiveTier = 3; window._hmConfidentPage = Math.floor(TIER_2_LIMIT / PAGE_SIZE); renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
           tierDiv.appendChild(btn);
         }
-        
+
         yourSongsEl.after(tierDiv);
       }
 
@@ -150905,17 +150913,17 @@ function showResults() {
 
   const topScore = confidentSongs[0] ? Math.round((confidentSongs[0].score || 0) * 100) : 0;
   hmTrack('results_view', { voice_type: voiceType, score: topScore });
-  
+
   // State-based CTA logic
   const isLoggedIn = typeof hmGetCurrentUser === 'function' && hmGetCurrentUser();
   const isPremium = isLoggedIn && (hmGetCurrentUser().is_premium || false);
-  
+
   // Show appropriate CTA stack
   const ctaLoggedOut = document.getElementById('cta-logged-out');
   const ctaLoggedIn = document.getElementById('cta-logged-in');
   const premiumSoftSell = document.getElementById('premium-soft-sell');
   const exportFallback = document.querySelectorAll('.export-btn-fallback');
-  
+
   if (!isLoggedIn) {
     // LOGGED-OUT: Create Account > Share > Challenge
     ctaLoggedOut.style.display = 'block';
@@ -150935,7 +150943,7 @@ function showResults() {
     premiumSoftSell.style.display = 'none'; // Hide premium upsell
     exportFallback.forEach(btn => btn.style.display = 'none');
   }
-  
+
   showScreen('screen-results');
   // Show SquadMatch prompt (if not already dismissed)
   try {
@@ -151158,7 +151166,7 @@ function togglePlaylistSong(title, artist, checked) {
   let list = loadPlaylist();
   const key = title + '__' + artist;
   const isPremium = localStorage.getItem('hm_premium') === 'true';
-  
+
   if (checked) {
     if (!list.find(s => s.title === title && s.artist === artist)) {
       // Check playlist limit for free users
@@ -151300,7 +151308,7 @@ async function openKaraoke(title, artist) {
   const loading = document.getElementById('karaoke-loading');
   frame.style.display = 'none';
   loading.style.display = 'flex';
-  document.getElementById('karaoke-yt-btn').textContent = '⏳ Finding track…';
+  document.getElementById('karaoke-yt-btn').textContent = '⏳ Finding track...';
 
   try {
     const q = encodeURIComponent(title + ' ' + artist + ' karaoke with lyrics');
@@ -151348,14 +151356,14 @@ function loadSavedProfile() {
     const raw = localStorage.getItem('hummatch_profile');
     if (!raw) return false;
     const p = JSON.parse(raw);
-    
+
     // Invalidate profiles from before gender filtering fixes (version 2)
     if (!p.version || p.version < 2) {
       console.log('Old profile detected, clearing...');
       localStorage.removeItem('hummatch_profile');
       return false;
     }
-    
+
     // Load saved notes and re-run matching algorithm
     // This ensures users get latest algorithm improvements + new songs
     capturedNotes = p.notes || [null, null, null];
@@ -151471,13 +151479,13 @@ function checkReturningUser() {
     const isReturningUser = localStorage.getItem('hummatch_visited') === 'true';
     const isLoggedIn = typeof hmGetCurrentUser === 'function' && hmGetCurrentUser();
     const isPremium = isLoggedIn && (hmGetCurrentUser().is_premium || false);
-    
+
     // Show upgrade CTA if: returning + not premium
     if (isReturningUser && !isPremium) {
       const upgradeEl = document.getElementById('homepage-returning-upgrade');
       if (upgradeEl) upgradeEl.style.display = 'block';
     }
-    
+
     // Mark as visited for next time
     if (!isReturningUser) {
       localStorage.setItem('hummatch_visited', 'true');
@@ -151491,10 +151499,10 @@ function resetTest() {
   phase = 0;
   capturedNotes = [null, null, null];
   capturedBrightness = [null, null, null];
-  document.getElementById('low-note').textContent = '—';
-  document.getElementById('mid-note').textContent = '—';
-  document.getElementById('high-note').textContent = '—';
-  document.getElementById('pitch-note').textContent = '—';
+  document.getElementById('low-note').textContent = '-';
+  document.getElementById('mid-note').textContent = '-';
+  document.getElementById('high-note').textContent = '-';
+  document.getElementById('pitch-note').textContent = '-';
   document.getElementById('pitch-hz').textContent = '';
   document.getElementById('pitch-bar').style.width = '0%';
   resetRing();
@@ -151566,7 +151574,7 @@ function buildShareCard() {
   // Song title, big, white, bold
   ctx.fillStyle = '#ffffff';
   const songTitle = shareTopSong ? shareTopSong.title : shareArtistName;
-  const displayTitle = songTitle.length > 20 ? songTitle.substring(0, 20) + '…' : songTitle;
+  const displayTitle = songTitle.length > 20 ? songTitle.substring(0, 20) + '...' : songTitle;
   const titleWords = displayTitle.split(' ');
   if (displayTitle.length > 14) {
     const half = Math.ceil(titleWords.length / 2);
@@ -151878,7 +151886,7 @@ function dismissSquadPrompt() {
     }
 
     btn.disabled = true;
-    btn.textContent = 'Creating account…';
+    btn.textContent = 'Creating account...';
     try {
       const r = await fetch('/api/hummatch/auth/register', {
         method: 'POST',
