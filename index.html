@@ -457,22 +457,7 @@
     </div>
   </div>
 
-  <!-- ── Interest Selector ── -->
-  <div style="width:100%;max-width:380px;padding:0 4px;margin-top:12px;">
-    <div id="interest-selector-panel" style="display:block !important;">
-
-      <div class="interest-chips" id="genre-chips"></div>
-
-
-      <div class="interest-chips" id="decade-chips"></div>
-
-      <div style="display:flex;gap:8px;margin-top:10px;">
-        <button onclick="saveInterests()" style="flex:1;padding:10px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;font-family:inherit;">Save Filter</button>
-        <button onclick="skipInterests()" style="flex:1;padding:10px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.45);font-size:0.78rem;font-weight:600;border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;font-family:inherit;">Show Everything</button>
-      </div>
-      <div style="font-size:0.64rem;color:rgba(255,255,255,0.2);text-align:center;margin-top:6px;">Preferences saved for next time</div>
-    </div>
-  </div>
+  <!-- Genre filters removed - discovery through popularity tiers instead -->
 
   <div style="width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;">
   <button class="cta-btn" style="width:100%;margin-top:12px;" onclick="startTest()">Find My Songs →</button>
@@ -150831,27 +150816,68 @@ function showResults() {
     }
 
     const PAGE_SIZE = 10;
+    
+    // Tier system: 2K → 5K → 10K+
+    const TIER_1_LIMIT = 2000; // Top popular songs
+    const TIER_2_LIMIT = 5000; // + Next 3K
+    const TIER_3_LIMIT = 10000; // + Final 5K
+    
     window._hmConfidentAll = confidentSongs;
     window._hmConfidentPage = 0;
+    window._hmActiveTier = 1; // Start with tier 1 (top 2K)
+
+    function getActiveTierSongs() {
+      let limit;
+      if (window._hmActiveTier === 1) limit = TIER_1_LIMIT;
+      else if (window._hmActiveTier === 2) limit = TIER_2_LIMIT;
+      else limit = window._hmConfidentAll.length;
+      return window._hmConfidentAll.slice(0, limit);
+    }
 
     function renderSongPage() {
+      const tierSongs = getActiveTierSongs();
       const page = window._hmConfidentPage;
-      const slice = window._hmConfidentAll.slice(0, (page + 1) * PAGE_SIZE);
+      const slice = tierSongs.slice(0, (page + 1) * PAGE_SIZE);
       yourSongsEl.innerHTML = slice.map(renderSongCard).join('');
 
-      // Remove old show-more button if present
-      const existing = document.getElementById('hm-show-more');
-      if (existing) existing.remove();
+      // Remove old buttons
+      const existingMore = document.getElementById('hm-show-more');
+      const existingTier = document.getElementById('hm-tier-buttons');
+      if (existingMore) existingMore.remove();
+      if (existingTier) existingTier.remove();
 
-      // Add show-more button if more songs remain
-      if (slice.length < window._hmConfidentAll.length) {
-        const remaining = window._hmConfidentAll.length - slice.length;
+      // Show "Load 10 More" if more songs in current tier
+      if (slice.length < tierSongs.length) {
+        const remaining = tierSongs.length - slice.length;
         const btn = document.createElement('button');
         btn.id = 'hm-show-more';
-        btn.textContent = `Show ${Math.min(PAGE_SIZE, remaining)} more songs`;
+        btn.textContent = `Load ${Math.min(PAGE_SIZE, remaining)} More`;
         btn.style.cssText = 'display:block;margin:12px auto 0;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:50px;padding:10px 24px;font-size:0.82rem;font-family:inherit;cursor:pointer;width:100%;max-width:400px;';
         btn.onclick = () => { window._hmConfidentPage++; renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
         yourSongsEl.after(btn);
+      }
+      
+      // Show tier exploration buttons at end of current tier
+      if (slice.length >= tierSongs.length && window._hmActiveTier < 3) {
+        const tierDiv = document.createElement('div');
+        tierDiv.id = 'hm-tier-buttons';
+        tierDiv.style.cssText = 'display:flex;gap:8px;margin:16px auto 0;max-width:400px;';
+        
+        if (window._hmActiveTier === 1) {
+          const btn = document.createElement('button');
+          btn.textContent = '🔍 Explore Deeper';
+          btn.style.cssText = 'flex:1;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
+          btn.onclick = () => { window._hmActiveTier = 2; window._hmConfidentPage = Math.floor(TIER_1_LIMIT / PAGE_SIZE); renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
+          tierDiv.appendChild(btn);
+        } else if (window._hmActiveTier === 2) {
+          const btn = document.createElement('button');
+          btn.textContent = '🎯 Dig Even Deeper';
+          btn.style.cssText = 'flex:1;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
+          btn.onclick = () => { window._hmActiveTier = 3; window._hmConfidentPage = Math.floor(TIER_2_LIMIT / PAGE_SIZE); renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
+          tierDiv.appendChild(btn);
+        }
+        
+        yourSongsEl.after(tierDiv);
       }
     }
     renderSongPage();
