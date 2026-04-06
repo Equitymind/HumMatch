@@ -125,6 +125,10 @@ let errors = 0;
 
 const upsertMany = db.transaction((songs) => {
   for (const song of songs) {
+    // Skip songs without vocal range data
+    if (!song.lo || !song.hi || song.lo === 0 || song.hi === 0) {
+      continue;
+    }
     try {
       const slug = `${song.title}-${song.artist}`
         .toLowerCase()
