@@ -2300,9 +2300,16 @@ app.get('*', (req, res) => {
 function autoSeedSongs() {
   try {
     const songsCount = db.prepare('SELECT COUNT(*) as cnt FROM songs').get().cnt;
-    if (songsCount > 0) {
+    // Force re-seed if count doesn't match expected (9728 songs)
+    const EXPECTED_SONGS = 9728;
+    if (songsCount === EXPECTED_SONGS) {
       console.log(`[seed] songs table already populated (${songsCount} rows) — skipping auto-seed`);
       return;
+    }
+    if (songsCount > 0 && songsCount !== EXPECTED_SONGS) {
+      console.log(`[seed] WARNING: songs table has ${songsCount} rows but expected ${EXPECTED_SONGS}`);
+      console.log(`[seed] FORCING RE-SEED to update database...`);
+      db.prepare('DELETE FROM songs').run();
     }
     console.log('[seed] songs table is EMPTY — auto-seeding from index.html...');
     const { execSync } = require('child_process');
