@@ -124373,6 +124373,8 @@ function startWaveform() {
 }
 
 function showResults() {
+  try {
+    console.log('[DEBUG] showResults() started');
   if (waveRaf) { cancelAnimationFrame(waveRaf); waveRaf = null; }
   if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
   if (audioCtx) { audioCtx.close(); audioCtx = null; }
@@ -124927,6 +124929,11 @@ function showResults() {
   if (typeof hmUpdateAccountBadge === 'function') hmUpdateAccountBadge();
   // Show A2HS banner after first successful result
   setTimeout(() => showA2HSBanner('results-banner'), 800);
+  } catch (err) {
+    console.error('[ERROR] showResults crashed:', err);
+    alert('Error loading results: ' + err.message + '. Please refresh and try again.');
+    showScreen('screen-welcome');
+  }
 }
 
 const YT_KEY = 'AIzaSyBCLnGsgv3Ocimiu5jlB7lwwn27t_EiWPY'; // restricted to hummatch.me only in GCP console
