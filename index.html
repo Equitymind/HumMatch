@@ -67115,13 +67115,13 @@ function showResults() {
 
   const _confidentRaw = tieredSongs.filter(s => s.tier.key !== 'stretch' && !isDismissed(s));
   const _confidentFiltered = _confidentRaw.filter(_matchesInterests);
-  // Always respect genre/decade filters - never fall back to unfiltered
+  // Respect genre/decade filters, but fall back if empty (prevents stuck state)
   const confidentSongs = sessionShuffle(
-    (_hasGenreFilter || _hasDecadeFilter)
+    (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length > 0
       ? _confidentFiltered
       : _confidentRaw
   );
-  const _tasteFilterActive = (_hasGenreFilter || _hasDecadeFilter);
+  const _tasteFilterActive = (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length > 0;
   const stretchSongs   = tieredSongs.filter(s => s.tier.key === 'stretch' && !isDismissed(s));
 
   // Set share song data now that confidentSongs is available
