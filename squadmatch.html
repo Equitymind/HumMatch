@@ -171,6 +171,7 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
 <div id="screen-create" class="screen">
   <div class="si">
     <div class="badge" style="margin-bottom:14px">SQUAD LEADER</div>
+    <div class="badge" style="margin-bottom:12px;">SQUAD LEADER</div>
     <div class="h1">Start your SquadMatch</div>
     <div class="sub">You'll host the session and unlock songs your squad can sing together in harmony.</div>
     
@@ -202,12 +203,12 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
     </div>
     
     <div class="card" style="margin-bottom:18px">
-      <label>Squad name (required)</label>
-      <input type="text" id="squad-name-input" placeholder="e.g., Karaoke Night Crew" maxlength="40" required/>
-      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Give your squad a memorable name.</div>
+      <label>Squad name (optional)</label>
+      <input type="text" id="squad-name-input" placeholder="e.g., Karaoke Night Crew" maxlength="40"/>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Name it anything you want, or leave it blank.</div>
     </div>
     <button class="btn btn-primary" id="create-btn" onclick="confirmCreateSquad()">Create & Invite My Squad</button>
-    <div class="helper">Next, we'll generate your squad link to share by text, WhatsApp, or social.</div>
+    <div class="helper">Next, we'll generate your squad link to share by text, WhatsApp, email, or social.</div>
     <div id="invite-section" style="display:none;margin-top:24px">
       <div class="divider"></div>
       <div style="font-size:0.75rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Share Your Invite Link</div>
