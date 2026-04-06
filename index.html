@@ -130250,10 +130250,13 @@ function showResults() {
     if (_interests.decades) _allFilters.push(..._interests.decades);
   }
   const _hasFilter = _allFilters.length > 0;
+  console.log('[FILTER DEBUG] _allFilters:', _allFilters);
+  console.log('[FILTER DEBUG] _hasFilter:', _hasFilter);
   function _matchesInterests(s) {
     if (!_hasFilter) return true;
     if (!s.tags || !s.tags.length) return false;
-    return s.tags.some(tag => _allFilters.includes(tag));
+    const matches = s.tags.some(tag => _allFilters.includes(tag));
+    return matches;
   }
 
   // Separate confident songs from stretch
@@ -130267,7 +130270,10 @@ function showResults() {
   }
 
   const _confidentRaw = tieredSongs.filter(s => s.tier.key !== 'stretch' && !isDismissed(s));
+  console.log('[FILTER DEBUG] _confidentRaw count:', _confidentRaw.length);
+  console.log('[FILTER DEBUG] First 3 songs tags:', _confidentRaw.slice(0,3).map(s => ({title: s.title, tags: s.tags})));
   const _confidentFiltered = _confidentRaw.filter(_matchesInterests);
+  console.log('[FILTER DEBUG] _confidentFiltered count:', _confidentFiltered.length);
   
   // If genre/decade filter results in too few songs (<10), include stretch songs that match filter
   const needMoreSongs = _hasFilter && _confidentFiltered.length < 10;
