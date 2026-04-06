@@ -150412,7 +150412,8 @@ function showResults() {
   const isMaleVoice = userHigh <= 65;  // C#4 or below = likely male
   const isFemaleVoice = userLow >= 48; // C3 or above = likely female
 
-  const matchedSongs = SONGS
+  // Match from top 1,500 popular songs first (SONGS already sorted by humMatchScore)
+  const matchedSongs = SONGS.slice(0, 1500)
     .map(s => {
       const overlapLo = Math.max(userLow, s.lo);
       const overlapHi = Math.min(userHigh, s.hi);
