@@ -150845,9 +150845,11 @@ function showResults() {
 
       // Remove old buttons
       const existingMore = document.getElementById('hm-show-more');
-      const existingTier = document.getElementById('hm-tier-buttons');
+      const existingTierOld = document.getElementById('hm-tier-buttons');
+      const existingTierNav = document.getElementById('hm-tier-nav');
       if (existingMore) existingMore.remove();
-      if (existingTier) existingTier.remove();
+      if (existingTierOld) existingTierOld.remove();
+      if (existingTierNav) existingTierNav.remove();
 
       // Show tier navigation buttons (side-by-side)
       if (slice.length < tierSongs.length || window._hmActiveTier < 3) {
