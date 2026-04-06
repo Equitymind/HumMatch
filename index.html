@@ -150875,7 +150875,7 @@ function showResults() {
         } else if (window._hmActiveTier === 2) {
           const remaining = window._hmConfidentAll.length - TIER_2_LIMIT;
           const btn = document.createElement('button');
-          btn.textContent = `🎯 Dig Even Deeper (+${remaining.toLocaleString()} songs)`;
+          btn.textContent = `🎯 Deeper Dive (+${remaining.toLocaleString()} songs)`;
           btn.style.cssText = 'flex:1;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
           btn.onclick = () => { window._hmActiveTier = 3; window._hmConfidentPage = Math.floor(TIER_2_LIMIT / PAGE_SIZE); renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
           tierDiv.appendChild(btn);
