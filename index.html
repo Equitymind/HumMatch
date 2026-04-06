@@ -115202,7 +115202,7 @@ function showResults() {
           Add to playlist
         </label>
         ${guideLink}
-        <span class="sing-btn" onclick="openKaraoke('${titleSafe}','${artistSafe}')">▶ Sing It</span>
+        <a href="/song/${song.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}-${song.artist.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}" class="sing-btn" style="text-decoration:none;color:inherit;display:inline-block;">▶ Sing It</a>
       </div>
     </li>`;
   }
