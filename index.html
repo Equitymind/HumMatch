@@ -115049,10 +115049,15 @@ function showResults() {
 
   const _confidentRaw = tieredSongs.filter(s => s.tier.key !== 'stretch' && !isDismissed(s));
   const _confidentFiltered = _confidentRaw.filter(_matchesInterests);
+  
+  // If genre/decade filter results in too few songs (<10), include stretch songs that match filter
+  const needMoreSongs = (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length < 10;
+  const _stretchFiltered = needMoreSongs ? tieredSongs.filter(s => s.tier.key === 'stretch' && !isDismissed(s) && _matchesInterests(s)) : [];
+  
   // Respect genre/decade filters, but fall back if empty (prevents stuck state)
   const confidentSongs = sessionShuffle(
     (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length > 0
-      ? _confidentFiltered
+      ? [..._confidentFiltered, ..._stretchFiltered]
       : _confidentRaw
   );
   const _tasteFilterActive = (_hasGenreFilter || _hasDecadeFilter) && _confidentFiltered.length > 0;
