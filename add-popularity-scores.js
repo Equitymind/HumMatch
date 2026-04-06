@@ -8,9 +8,9 @@
 const fs = require('fs');
 const path = require('path');
 
-// Use env vars or hardcode temporarily
-const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || '4d4e6c6d0a9e4f0d8c6e5b3a2f1e0d9c'; // Temporary test
-const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || 'a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6'; // Temporary test
+// Real Spotify credentials for HumMatch app
+const SPOTIFY_CLIENT_ID = '7fb671d75ec448abb430348a49ce9547';
+const SPOTIFY_CLIENT_SECRET = '510c5bfab0e6499aa1df993ff57aec6ea';
 
 let accessToken = null;
 
@@ -152,19 +152,6 @@ async function main() {
   
   console.log(`\n🎉 Done! Songs now sorted by popularity.`);
   console.log(`Next: Update UI to show tiered results (2K → 3K → 5K)`);
-}
-
-// Check if Spotify credentials are set
-if (SPOTIFY_CLIENT_ID === 'your_spotify_client_id') {
-  console.log('⚠️  Need Spotify API credentials!');
-  console.log('');
-  console.log('1. Go to: https://developer.spotify.com/dashboard');
-  console.log('2. Create an app (any name)');
-  console.log('3. Copy Client ID and Client Secret');
-  console.log('4. Update this script with credentials');
-  console.log('');
-  console.log('Or run: SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node add-popularity-scores.js');
-  process.exit(1);
 }
 
 main().catch(err => {
