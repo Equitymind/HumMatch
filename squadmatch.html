@@ -202,11 +202,11 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
     </div>
     
     <div class="card" style="margin-bottom:18px">
-      <label>Squad name (optional)</label>
-      <input type="text" id="squad-name-input" placeholder="Name it anything you want, or leave it blank" maxlength="40"/>
-      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Helper text: Name it anything you want, or leave it blank.</div>
+      <label>Squad name (required)</label>
+      <input type="text" id="squad-name-input" placeholder="e.g., Karaoke Night Crew" maxlength="40" required/>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Give your squad a memorable name.</div>
     </div>
-    <button class="btn btn-primary" id="create-btn" onclick="createSquad()">Create & Invite My Squad</button>
+    <button class="btn btn-primary" id="create-btn" onclick="confirmCreateSquad()">Create & Invite My Squad</button>
     <div class="helper">Next, we'll generate your squad link to share by text, WhatsApp, or social.</div>
     <div id="invite-section" style="display:none;margin-top:24px">
       <div class="divider"></div>
@@ -505,12 +505,34 @@ function goBack() {
 
 // ── Screen 2: Create ────────────────────────────────────────────────────────
 function loadCreate() {
+  // Check if user is premium (Squad Leader required to create squads)
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  if (!isPremium) {
+    // Redirect to pricing page with squad intent
+    window.location = '/pricing?intent=squad';
+    return;
+  }
+  
   show('create');
   try {
     const raw = localStorage.getItem('hm_squad_my_songs');
     if (raw) S.songs = JSON.parse(raw);
     S.voiceType = localStorage.getItem('hm_squad_voice_type') || '';
   } catch(_) {}
+}
+
+function confirmCreateSquad() {
+  const nm = document.getElementById('squad-name-input').value.trim();
+  if (!nm) {
+    toast('Please enter a squad name');
+    document.getElementById('squad-name-input').focus();
+    return;
+  }
+  // Optional: Add confirmation dialog
+  if (!confirm(`Create squad "${nm}" and generate invite link?`)) {
+    return;
+  }
+  createSquad();
 }
 
 async function createSquad() {
