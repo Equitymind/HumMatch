@@ -26,32 +26,20 @@
     }
     a { color: inherit; }
 
-    /* NAV */
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .nav-logo {
-      font-size: 1.2rem;
-      font-weight: 800;
-      text-decoration: none;
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .nav-links { display: flex; gap: 20px; }
-    .nav-links a {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--white); }
+    /* HAMBURGER NAV */
+    .hm-header { position:sticky; top:0; z-index:999; background:rgba(13,11,26,0.9); backdrop-filter:blur(16px); border-bottom:1px solid rgba(168,85,247,0.12); padding:14px 20px; display:flex; align-items:center; justify-content:space-between; }
+    .hm-header-logo { font-size:1.1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }
+    .hm-nav-toggle { background:none; border:1px solid rgba(168,85,247,0.3); color:rgba(255,255,255,0.7); font-size:1.3rem; width:40px; height:40px; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+    .hm-nav-toggle:hover { border-color:rgba(168,85,247,0.6); color:#fff; }
+    .hm-nav-drawer { position:fixed; top:0; left:0; width:240px; height:100%; background:rgba(8,6,15,0.97); backdrop-filter:blur(16px); border-right:1px solid rgba(168,85,247,0.15); z-index:9999; transform:translateX(-100%); visibility:hidden; transition:transform 0.28s, visibility 0.28s; padding:70px 0 24px; }
+    .hm-nav-drawer.open { transform:translateX(0); visibility:visible; }
+    .hm-nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9998; opacity:0; pointer-events:none; transition:opacity 0.28s; }
+    .hm-nav-overlay.open { opacity:1; pointer-events:all; }
+    .hm-nav-logo { padding:0 20px 20px; border-bottom:1px solid rgba(168,85,247,0.12); margin-bottom:8px; }
+    .hm-nav-logo span { font-size:1.1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hm-nav-item { display:block; padding:13px 24px; color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color 0.15s, background 0.15s; }
+    .hm-nav-item:hover { color:#fff; background:rgba(168,85,247,0.1); }
+    .hm-nav-divider { height:1px; background:rgba(168,85,247,0.1); margin:8px 20px; }
 
     /* HERO */
     .hero {
@@ -203,16 +191,31 @@
 </head>
 <body>
 
-<nav class="nav">
-  <a href="/" class="nav-logo">HumMatch</a>
-  <div class="nav-links">
-    <a href="/">Try HumMatch</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/squadmatch">SquadMatch</a>
-    <a href="/blog">Blog</a>
-    <a href="/dashboard" id="navLoginItem">Log In</a>
-  </div>
+<!-- Header Bar -->
+<header class="hm-header">
+  <a class="hm-header-logo" href="/">HumMatch</a>
+  <button class="hm-nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
+    <span style="font-size:1.5rem">☰</span>
+  </button>
+</header>
+
+<!-- Nav Drawer -->
+<nav class="hm-nav-drawer" id="navDrawer">
+  <div class="hm-nav-logo"><span>HumMatch</span></div>
+  <a class="hm-nav-item" href="/">🎤 Try HumMatch</a>
+  <a class="hm-nav-item" href="/how-it-works">How It Works</a>
+  <a class="hm-nav-item" href="/pricing" style="color:#c084fc;font-weight:700;">💎 Pricing</a>
+  <a class="hm-nav-item" href="/squadmatch">SquadMatch</a>
+  <a class="hm-nav-item" href="/es">🌎 Español</a>
+  <div class="hm-nav-divider"></div>
+  <a class="hm-nav-item" href="/affiliate">Affiliate</a>
+  <a class="hm-nav-item" href="/blog">Blog</a>
+  <a class="hm-nav-item" href="/contact">Contact</a>
+  <div class="hm-nav-divider"></div>
+  <a class="hm-nav-item" href="/login">Log In</a>
+  <a class="hm-nav-item" href="/login?signup=1" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Sign Up</a>
 </nav>
+<div class="hm-nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
 
 <div class="hero">
   <h1>Free to start. Unlimited with <span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Squad Leader</span>.</h1>
@@ -286,6 +289,20 @@
     if(nav){ nav.textContent='My HQ'; }
   }
 })();
+</script>
+<script>
+function toggleNav() {
+  const drawer = document.getElementById('navDrawer');
+  const overlay = document.getElementById('navOverlay');
+  const isOpen = drawer.classList.contains('open');
+  if (isOpen) {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+  } else {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+  }
+}
 </script>
 </body>
 </html>
