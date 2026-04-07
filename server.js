@@ -211,7 +211,9 @@ function emailGroupMatchWaitlist(email) {
 app.use(cors());
 app.use(helmet({
   contentSecurityPolicy: false,
-  crossOriginEmbedderPolicy: false
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+  crossOriginOpenerPolicy: false
 }));
 app.use(morgan('short'));
 
