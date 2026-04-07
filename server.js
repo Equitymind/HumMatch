@@ -873,8 +873,9 @@ function monthKey() {
 // Helper: admin auth middleware
 // ---------------------------------------------------------------------------
 function requireAdmin(req, res, next) {
-  const key = req.headers['x-reactr-api-key'] || req.query.key;
-  if (key !== ADMIN_KEY) return res.status(401).json({ error: 'Unauthorized' });
+  const key = req.headers['x-reactr-api-key'] || req.headers['x-admin-key'] || req.query.key;
+  const adminKey = process.env.HUMMATCH_ADMIN_KEY || '';
+  if (key !== ADMIN_KEY && key !== adminKey) return res.status(401).json({ error: 'Unauthorized' });
   next();
 }
 
@@ -2601,143 +2602,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// ---------------------------------------------------------------------------
-// Admin Campaign Email Endpoint
-// ---------------------------------------------------------------------------
-// Admin key read at request time (not cached at startup)
-let dailyCampaignSent = 0;
-let dailyCampaignDate = new Date().toISOString().slice(0, 10);
-
-function resetDailyCountIfNeeded() {
-  const today = new Date().toISOString().slice(0, 10);
-  if (today !== dailyCampaignDate) { dailyCampaignSent = 0; dailyCampaignDate = today; }
-}
-
-const campaignTemplates = {
-  'vocal-coach': {
-    subject: 'Quick question about your vocal students \uD83C\uDFA4',
-    body: (r) => `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#f0e6ff;max-width:600px;margin:0 auto;padding:24px;">
-<p>Hi ${r.firstName || 'there'},</p>
-<p>I\u2019ve been following your vocal coaching content on ${r.platform || 'YouTube'} and love how you help singers find their voice.</p>
-<p>I\u2019m reaching out because we\u2019ve built something your students might love: <strong><a href="https://hummatch.me" style="color:#a855f7;">HumMatch.me</a></strong> \u2014 a tool that instantly matches singers with songs in their vocal range.</p>
-<p><strong>Here\u2019s why I think it\u2019s perfect for your audience:</strong></p>
-<ul><li>Your students probably ask \u201Cwhat should I practice?\u201D constantly</li><li>Finding songs in the right range is frustratingly time-consuming</li><li>HumMatch solves this in seconds with personalized recommendations</li></ul>
-<p><strong>We\u2019re launching an exclusive affiliate program:</strong></p>
-<ul><li>25% recurring commission on every referral (lifetime)</li><li>10% discount code for your students</li><li>Limited to the first 100 vocal coaches/creators only</li></ul>
-<p>Your students get better song matches \u2192 faster improvement \u2192 you earn passive income every month.</p>
-<p>Would you be open to a 5-minute chat about partnering? I can show you the platform and how other vocal coaches are integrating it into their teaching.</p>
-<p>No pressure if it\u2019s not a fit \u2014 I just thought this could genuinely help your students while creating a revenue stream for you.</p>
-<p>\u2014 Joe</p>
-<p style="color:#7b6fa0;font-size:0.9em;">Founder, HumMatch<br><a href="https://hummatch.me" style="color:#a855f7;">hummatch.me</a></p>
-<p style="color:#7b6fa0;font-size:0.85em;">P.S. \u2014 We already have 37 affiliates approved. If you\u2019re interested, I\u2019d love to get you set up before we hit the 100-partner cap.</p>
-</div>`
-  },
-  'karaoke': {
-    subject: 'Love your karaoke content - partnership opportunity? \uD83C\uDFA4',
-    body: (r) => `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#f0e6ff;max-width:600px;margin:0 auto;padding:24px;">
-<p>Hey ${r.firstName || 'there'}!</p>
-<p>I\u2019m a huge fan of your karaoke channel \u2014 you\u2019ve clearly built a passionate community of singers who trust your recommendations.</p>
-<p>I wanted to reach out about <strong><a href="https://hummatch.me" style="color:#a855f7;">HumMatch.me</a></strong> \u2014 a new platform that helps singers instantly find karaoke songs in their perfect vocal range.</p>
-<p><strong>Why your audience will love it:</strong></p>
-<ul><li>No more scrolling through hundreds of songs hoping one fits</li><li>Get matched with songs based on voice type, range, and style</li><li>Perfect for karaoke nights, practice, or discovering new repertoire</li></ul>
-<p><strong>We\u2019re offering a first-100 affiliate program:</strong></p>
-<ul><li><strong>25% recurring commissions</strong> (earn every month they stay subscribed)</li><li><strong>10% discount code</strong> with your channel name</li><li>Custom graphics and promotional materials included</li></ul>
-<p>Imagine earning passive income just by recommending a tool your followers actually need.</p>
-<p>Want to check it out? I can set you up with a demo account and show you exactly how it works for creators.</p>
-<p>Rock on,</p>
-<p>\u2014 Joe</p>
-<p style="color:#7b6fa0;font-size:0.9em;">Founder, HumMatch<br><a href="https://hummatch.me" style="color:#a855f7;">hummatch.me</a></p>
-<p style="color:#7b6fa0;font-size:0.85em;">P.S. \u2014 We\u2019re limiting this to 100 partners to keep quality high. Already at 37, so if you\u2019re curious, don\u2019t wait too long!</p>
-</div>`
-  },
-  'music-blogger': {
-    subject: 'New singing app to review - partnership opportunity',
-    body: (r) => `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#f0e6ff;max-width:600px;margin:0 auto;padding:24px;">
-<p>Hi ${r.firstName || 'there'},</p>
-<p>I\u2019m reaching out to offer exclusive early access to <strong><a href="https://hummatch.me" style="color:#a855f7;">HumMatch.me</a></strong> \u2014 a new platform helping singers find songs perfectly matched to their vocal range.</p>
-<p><strong>Why it might interest your audience:</strong></p>
-<ul><li>Solves a massive pain point (finding singable songs)</li><li>Beautiful UX, actually works well (rare in music tech!)</li><li>Growing fast with vocal coaches and karaoke communities</li></ul>
-<p><strong>I\u2019d love to offer you:</strong></p>
-<ol><li><strong>Full review access</strong> \u2014 test it deeply, write honestly (good or bad)</li><li><strong>Affiliate partnership</strong> \u2014 25% recurring commission if you choose to promote</li><li><strong>Exclusive discount code</strong> for your readers (10% off)</li></ol>
-<p>You\u2019re under zero obligation to write positively \u2014 your honest opinion is what your readers trust. But if you do find value in it, the affiliate program could create meaningful recurring revenue.</p>
-<p><strong>Affiliate details:</strong></p>
-<ul><li>25% of every sale you refer, recurring monthly</li><li>Average subscriber stays 22+ months = ~$105 per referral lifetime value</li><li>Limited to first 100 partners (37 approved so far)</li></ul>
-<p>Would you be interested in checking it out? I can set up a demo account and send you media assets today.</p>
-<p>\u2014 Joe</p>
-<p style="color:#7b6fa0;font-size:0.9em;">Founder, HumMatch<br><a href="https://hummatch.me" style="color:#a855f7;">hummatch.me</a></p>
-<p style="color:#7b6fa0;font-size:0.85em;">P.S. \u2014 Happy to answer any technical questions or provide stats for your review. We\u2019re all about transparency.</p>
-</div>`
-  }
-};
-
-function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
-
-app.get('/api/hummatch/admin/campaign/status', (req, res) => {
-  const adminKey = process.env.HUMMATCH_ADMIN_KEY || '';
-  if (!adminKey || req.headers['x-admin-key'] !== adminKey) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-  resetDailyCountIfNeeded();
-  res.json({ emailConfigured: !!emailTransporter, dailySent: dailyCampaignSent, dailyLimit: 500 });
-});
-
-app.post('/api/hummatch/admin/campaign/send', async (req, res) => {
-  const adminKey = process.env.HUMMATCH_ADMIN_KEY || '';
-  if (!adminKey || req.headers['x-admin-key'] !== adminKey) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-  resetDailyCountIfNeeded();
-  const { recipients, template, dryRun } = req.body;
-  if (!recipients || !Array.isArray(recipients) || !template) {
-    return res.status(400).json({ error: 'recipients (array) and template required' });
-  }
-  if (!campaignTemplates[template]) {
-    return res.status(400).json({ error: `Unknown template: ${template}. Use: vocal-coach, karaoke, music-blogger` });
-  }
-  if (recipients.length > 50) {
-    return res.status(400).json({ error: 'Max 50 recipients per request' });
-  }
-  if (dailyCampaignSent + recipients.length > 500) {
-    return res.status(429).json({ error: `Daily limit would be exceeded. Sent today: ${dailyCampaignSent}, requested: ${recipients.length}, limit: 500` });
-  }
-  if (!emailTransporter && !dryRun) {
-    return res.status(500).json({ error: 'Email not configured (missing HUMMATCH_EMAIL_USER/PASS)' });
-  }
-
-  const tmpl = campaignTemplates[template];
-  let sent = 0, failed = 0;
-  const errors = [];
-
-  for (const r of recipients) {
-    try {
-      const subject = tmpl.subject;
-      const html = tmpl.body(r);
-      if (dryRun) {
-        console.log(`[campaign/dry-run] Would send to: ${r.email} | template: ${template}`);
-        sent++;
-      } else {
-        await emailTransporter.sendMail({
-          from: `"Joe from HumMatch" <${EMAIL_USER}>`,
-          to: r.email,
-          subject,
-          html
-        });
-        console.log(`[campaign] Sent to: ${r.email} | template: ${template}`);
-        sent++;
-        dailyCampaignSent++;
-      }
-      if (recipients.indexOf(r) < recipients.length - 1) await sleep(2000);
-    } catch (err) {
-      console.error(`[campaign] Failed to send to ${r.email}:`, err.message);
-      failed++;
-      errors.push({ email: r.email, error: err.message });
-    }
-  }
-
-  res.json({ sent, failed, errors, dryRun: !!dryRun, dailySentTotal: dailyCampaignSent });
-});
-
-// ---------------------------------------------------------------------------
 // Auto-seed songs if empty
 // ---------------------------------------------------------------------------
 function autoSeedSongs() {
