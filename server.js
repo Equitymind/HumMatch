@@ -7,11 +7,15 @@ const Database = require('better-sqlite3');
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const BUILD_VERSION = process.env.BUILD_VERSION || '1.0.0';
-const ADMIN_KEY = process.env.ADMIN_API_KEY || 'hummatch-admin-2026';
+const ADMIN_KEY = process.env.ADMIN_API_KEY || (() => {
+  console.warn('WARNING: ADMIN_API_KEY not set. Admin endpoints will be inaccessible.');
+  return require('crypto').randomUUID();
+})();
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || '';
 const stripe = STRIPE_SECRET_KEY ? require('stripe')(STRIPE_SECRET_KEY) : null;
@@ -268,10 +272,25 @@ app.post('/api/hummatch/stripe/webhook', express.raw({ type: 'application/json' 
 
 app.use(express.json({ limit: '1mb' }));
 
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { error: 'Too many attempts, please try again later' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+const contactLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  message: { error: 'Too many submissions, please try again later' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // ---------------------------------------------------------------------------
 // SQLite database (file-based, persists across restarts)
 // ---------------------------------------------------------------------------
-const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'hummatch.db');
+const DB_PATH = process.env.DB_PATH || path.join('/data', 'hummatch.db');
 
 // Ensure database directory exists
 const fs = require('fs');
@@ -918,7 +937,7 @@ app.post('/api/hummatch/event', (req, res) => {
 // ---------------------------------------------------------------------------
 // API: Auth - Register / Login
 // ---------------------------------------------------------------------------
-app.post('/api/hummatch/auth/register', async (req, res) => {
+app.post('/api/hummatch/auth/register', authLimiter, async (req, res) => {
   const email = (req.body.email || '').trim().toLowerCase();
   const password = req.body.password || '';
 
@@ -950,7 +969,7 @@ app.post('/api/hummatch/auth/register', async (req, res) => {
 // ---------------------------------------------------------------------------
 // API: Auth - Login with email + password
 // ---------------------------------------------------------------------------
-app.post('/api/hummatch/auth/login', async (req, res) => {
+app.post('/api/hummatch/auth/login', authLimiter, async (req, res) => {
   const email = (req.body.email || '').trim().toLowerCase();
   const password = req.body.password || '';
 
@@ -1024,7 +1043,7 @@ app.post('/api/hummatch/auth/set-password', async (req, res) => {
 // ---------------------------------------------------------------------------
 // API: Auth - Forgot password (sends magic login link via email)
 // ---------------------------------------------------------------------------
-app.post('/api/hummatch/auth/forgot-password', async (req, res) => {
+app.post('/api/hummatch/auth/forgot-password', authLimiter, async (req, res) => {
   const email = (req.body.email || '').trim().toLowerCase();
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Valid email required' });
@@ -1336,7 +1355,7 @@ app.get('/api/hummatch/songs', (_req, res) => {
 // ---------------------------------------------------------------------------
 // API: Contact form
 // ---------------------------------------------------------------------------
-app.post('/api/hummatch/contact', async (req, res) => {
+app.post('/api/hummatch/contact', contactLimiter, async (req, res) => {
   const { name, email, message } = req.body;
   if (!message || !message.trim()) {
     return res.status(400).json({ error: 'Message is required' });
@@ -2005,7 +2024,7 @@ app.get('/api/hummatch/checkout/success', async (req, res) => {
             db.prepare("UPDATE users SET is_premium = 1, updated_at = datetime('now') WHERE id = ?").run(user.id);
           } else {
             const newToken = uuidv4();
-            stmts.insertUser.run(email, newToken, monthKey());
+            stmts.insertUser.run(email, newToken, monthKey(), null);
             db.prepare("UPDATE users SET is_premium = 1 WHERE email = ?").run(email);
           }
           console.log(`Premium activated for ${email} via checkout success`);
@@ -2159,7 +2178,7 @@ app.post('/api/hummatch/playlist/save', (req, res) => {
     const isNew = !user;
     if (!user) {
       const token = uuidv4();
-      stmts.insertUser.run(email, token, monthKey());
+      stmts.insertUser.run(email, token, monthKey(), null);
       user = stmts.getUserByEmail.get(email);
     }
 
@@ -2231,6 +2250,29 @@ app.use((req, res, next) => {
   next();
 });
 
+// Block access to sensitive files
+app.use((req, res, next) => {
+  const blocked = [
+    /\.db$/i, /\.db-wal$/i, /\.db-shm$/i,
+    /\.json$/i, /\.js$/i, /\.md$/i,
+    /\.bak\d?$/i, /\.backup$/i,
+    /^\/\./,
+    /^\/node_modules/,
+    /^\/package/,
+    /^\/server\.js/i,
+    /^\/seed-songs/i,
+    /^\/fetch-popular/i,
+    /^\/add-genre/i,
+  ];
+  const allowed = [
+    /^\/sw\.js$/i,
+    /^\/manifest\.json$/i,
+  ];
+  if (allowed.some(p => p.test(req.path))) return next();
+  if (blocked.some(p => p.test(req.path))) return res.status(404).send('Not found');
+  next();
+});
+
 app.use(express.static(path.join(__dirname), {
   extensions: ['html'],
   index: 'index.html',
@@ -2252,7 +2294,7 @@ app.get('/blog', (_req, res) => {
 });
 
 // Dashboard page (requires authentication)
-app.get('/dashboard', requireAuth, (_req, res) => {
+app.get('/dashboard', (_req, res) => {
   res.sendFile(path.join(__dirname, 'dashboard.html'));
 });
 

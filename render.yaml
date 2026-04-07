@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: hummatch
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/hummatch/geo
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_API_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: HUMMATCH_EMAIL_USER
+        sync: false
+      - key: HUMMATCH_EMAIL_PASS
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: DB_PATH
+        value: /data/hummatch.db
+    disk:
+      name: hummatch-data
+      mountPath: /data
+      sizeGB: 5
