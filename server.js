@@ -10,7 +10,7 @@ const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const BUILD_VERSION = process.env.BUILD_VERSION || '1.0.0';
+const BUILD_VERSION = process.env.BUILD_VERSION || '2.0.0';
 const ADMIN_KEY = process.env.ADMIN_API_KEY || 'hummatch-admin-2026';
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || '';

@@ -377,11 +377,12 @@
   }
 
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2LE5Q48EG">
-  // Set language to English for main site
+<script>
+  // Set language to English for main site (MUST run before any async scripts)
   localStorage.setItem('hummatch_lang', 'en');
 </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2LE5Q48EG"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
