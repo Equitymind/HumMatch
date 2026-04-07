@@ -647,16 +647,6 @@
   <!-- SCROLLABLE SONG CONTENT -->
   <div style="padding: 0 16px; width: 100%;">
 
-  <!-- SQUADMATCH POST-HUM PROMPT -->
-  <div id="squad-results-prompt" style="width:100%;max-width:400px;margin:0 0 16px;display:none;">
-    <div style="background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.28);border-radius:14px;padding:16px 18px;position:relative;">
-      <button onclick="document.getElementById('squad-results-prompt').style.display='none';try{localStorage.setItem('hm_squad_prompt_dismissed','1');}catch(e){}" style="position:absolute;top:8px;right:10px;background:none;border:none;color:rgba(255,255,255,0.3);font-size:1rem;cursor:pointer;padding:4px;line-height:1;">✕</button>
-      <div style="font-size:0.95rem;font-weight:800;color:#fff;margin-bottom:4px;">🎤 Start a SquadMatch</div>
-      <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.45;margin-bottom:14px;">Invite friends and find songs your whole crew can nail together</div>
-      <button onclick="startSquadMatch()" style="width:100%;padding:11px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.85rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.01em;">Start SquadMatch</button>
-    </div>
-  </div>
-
   <!-- MAIN SONG LIST -->
   <div class="section-title" id="songs-section-title">SONGS YOU CAN CONFIDENTLY SING</div>
   <ul class="song-list" id="your-songs" style="width:100%;max-width:400px;"></ul>
