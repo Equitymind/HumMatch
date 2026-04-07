@@ -482,7 +482,7 @@ function getTopArtist(){
   return all.reduce((a,b)=>((b.confidence||0)>(a.confidence||0)?b:a)).artist||null;
 }
 
-function getVoiceType(){const w=playlistData.find(s=>s.voice_type);return w?w.voice_type:null}
+function getVoiceType(){if(dashData&&dashData.recentHums){const h=dashData.recentHums.find(s=>s.voice_type);if(h)return h.voice_type}const w=playlistData.find(s=>s.voice_type);if(w)return w.voice_type;if(authData&&authData.voice_type)return authData.voice_type;return null}
 
 function renderHero(){
   const el=document.getElementById('hero-section');
