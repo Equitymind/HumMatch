@@ -2604,7 +2604,7 @@ app.get('*', (req, res) => {
 // ---------------------------------------------------------------------------
 // Admin Campaign Email Endpoint
 // ---------------------------------------------------------------------------
-const HUMMATCH_ADMIN_KEY = process.env.HUMMATCH_ADMIN_KEY || '';
+// Admin key read at request time (not cached at startup)
 let dailyCampaignSent = 0;
 let dailyCampaignDate = new Date().toISOString().slice(0, 10);
 
@@ -2673,7 +2673,8 @@ const campaignTemplates = {
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
 app.get('/api/hummatch/admin/campaign/status', (req, res) => {
-  if (!HUMMATCH_ADMIN_KEY || req.headers['x-admin-key'] !== HUMMATCH_ADMIN_KEY) {
+  const adminKey = process.env.HUMMATCH_ADMIN_KEY || '';
+  if (!adminKey || req.headers['x-admin-key'] !== adminKey) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   resetDailyCountIfNeeded();
@@ -2681,7 +2682,8 @@ app.get('/api/hummatch/admin/campaign/status', (req, res) => {
 });
 
 app.post('/api/hummatch/admin/campaign/send', async (req, res) => {
-  if (!HUMMATCH_ADMIN_KEY || req.headers['x-admin-key'] !== HUMMATCH_ADMIN_KEY) {
+  const adminKey = process.env.HUMMATCH_ADMIN_KEY || '';
+  if (!adminKey || req.headers['x-admin-key'] !== adminKey) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   resetDailyCountIfNeeded();
