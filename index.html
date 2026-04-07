@@ -150581,17 +150581,17 @@ function showResults() {
         const songMidpoint = (s.lo + s.hi) / 2;
 
         // MALE VOICE FILTERING:
-        // Block songs with female tessitura (midpoint >= 52)
-        // OR songs with bright timbre (brightness > 60) even if range overlaps
-        // This catches contraltos like Nina Simone, Etta James
-        if (isMaleVoice && (songMidpoint >= 52 || s.brightness > 60)) return false;
+        // Block songs with clearly female tessitura (midpoint >= 65 = F4+)
+        // AND bright timbre (brightness > 70)
+        // Must satisfy BOTH conditions to block — prevents false filtering of male artists
+        if (isMaleVoice && songMidpoint >= 65 && s.brightness > 70) return false;
 
         // FEMALE VOICE FILTERING:
-        // Block songs with male tessitura (midpoint < 58)
-        // OR songs with dark timbre (brightness < 45)
-        if (isFemaleVoice && (songMidpoint < 58 || s.brightness < 45)) return false;
+        // Block songs with clearly male tessitura (midpoint < 48 = C3)
+        // AND dark timbre (brightness < 30)
+        if (isFemaleVoice && songMidpoint < 48 && s.brightness < 30) return false;
 
-        return s.score > 0.45; // Also apply score threshold
+        return s.score > 0.3; // Lower threshold to allow more matches
       });
   }
 
