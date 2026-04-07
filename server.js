@@ -1526,11 +1526,17 @@ app.post('/api/hummatch/squad/:id/invite', requireAuth, (req, res) => {
   const { display_name, voice_type } = req.body;
   const squadId = parseInt(req.params.id);
 
-  // Free users: 4-member limit
+  // Free users: 2-member limit (Duet = 2 people total)
+  // Premium users: 5-member limit (Squad = 5 people total)
   if (!req.user.is_premium) {
     const members = stmts.getSquadMembers.all(squadId);
-    if (members.length >= 4) {
-      return res.status(403).json({ error: 'Free plan allows 4 squad members. Upgrade for unlimited!' });
+    if (members.length >= 2) {
+      return res.status(403).json({ error: 'Free plan allows 2 members (Duet). Upgrade to Premium for Squads up to 5!' });
+    }
+  } else {
+    const members = stmts.getSquadMembers.all(squadId);
+    if (members.length >= 5) {
+      return res.status(403).json({ error: 'Squad full! Maximum 5 members.' });
     }
   }
 
