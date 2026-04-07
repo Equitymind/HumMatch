@@ -150554,8 +150554,16 @@ function showResults() {
   // Tier 2: Songs ranked 2,001-5,000 (secondary, on-demand)
   // Tier 3: Everything beyond 5,000 (tertiary, on-demand)
 
-  const verifiedSongs = SONGS.filter(s => s.verified === true)
-    .sort((a, b) => (b.humMatchScore || 0) - (a.humMatchScore || 0));
+  // Filter by language: English site shows English songs, Spanish site shows Spanish
+  const userLang = localStorage.getItem('hummatch_lang') || 'en';
+  const verifiedSongs = SONGS.filter(s => {
+    if (!s.verified) return false;
+    const songLang = (s.language || 'en').toLowerCase();
+    // On English site: show English + songs with no language tag
+    // On Spanish site: show Spanish + songs with no language tag
+    if (userLang === 'es') return songLang === 'es' || songLang === 'spanish' || !s.language;
+    return songLang !== 'es' && songLang !== 'spanish';
+  }).sort((a, b) => (b.humMatchScore || 0) - (a.humMatchScore || 0));
 
   const TIER_1_SIZE = 2000;
   const TIER_2_SIZE = 5000;
