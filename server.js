@@ -1994,118 +1994,66 @@ function delay(ms) {
 
 // Template A: Vocal Coaches
 function generateVocalCoachEmail(firstName, platform, specificContent) {
-  const subject = 'Quick question about your vocal students 🎤';
+  const subject = 'I built something for your singers';
   const html = emailWrapper(`
-    <p>Hi ${firstName},</p>
-    <p>I've been following your vocal coaching content on ${platform} and love how you help singers find their voice. Your approach to ${specificContent} really resonated with me.</p>
-    <p>I'm reaching out because we've built something your students might love: <strong>HumMatch.me</strong> - a tool that instantly matches singers with songs in their vocal range.</p>
-
-    <h3 style="color:#A855F7;font-size:15px;margin:16px 0 12px;">Here's why I think it's perfect for your audience:</h3>
-    <ul style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
-      <li style="margin-bottom:8px;">Your students probably ask "what should I practice?" constantly</li>
-      <li style="margin-bottom:8px;">Finding songs in the right range is frustratingly time-consuming</li>
-      <li style="margin-bottom:8px;">HumMatch solves this in seconds with personalized recommendations</li>
-    </ul>
-
-    <h3 style="color:#A855F7;font-size:15px;margin:16px 0 12px;">We're launching an exclusive affiliate program:</h3>
-    <ul style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
-      <li style="margin-bottom:8px;">25% recurring commission on every referral (lifetime)</li>
-      <li style="margin-bottom:8px;">10% discount code for your students</li>
-      <li style="margin-bottom:8px;">Limited to the first 100 vocal coaches/creators only</li>
-    </ul>
-
-    <p>Your students get better song matches → faster improvement → you earn passive income every month.</p>
-    <p>Would you be open to a 5-minute chat about partnering? I can show you the platform and how other vocal coaches are integrating it into their teaching.</p>
-    <p>No pressure if it's not a fit - I just thought this could genuinely help your students while creating a revenue stream for you.</p>
-
-    <p style="margin-top:24px;">Best,<br>
-    Joe<br>
-    <span style="color:rgba(255,255,255,0.5);font-size:13px;">Founder, HumMatch<br>https://hummatch.me</span></p>
-
-    <p style="margin-top:16px;font-size:13px;color:rgba(255,255,255,0.5);border-top:1px solid rgba(124,58,237,0.2);padding-top:12px;">P.S. - We already have 37 affiliates approved. If you're interested, I'd love to get you set up before we hit the 100-partner cap.</p>
-  `).replace('Joe</p>', ''); // Remove duplicate footer Joe signature since emailWrapper has footer
-
+    <p>Hey ${firstName},</p>
+    <p>I'm Joe, founder of HumMatch. Just launched and thought your students would love this.</p>
+    <p><strong>The problem:</strong> Most singers don't know which songs actually fit their voice. They pick songs that sound cool but sit outside their range. Then they strain, sound bad, and get discouraged.</p>
+    <p><strong>HumMatch fixes this:</strong> Hum 3 notes → instant song matches in your exact range.</p>
+    <p>It's free to use. No signup required. Works on any device.</p>
+    <p><strong>Why I'm reaching out:</strong> I'm offering vocal coaches like you a 25% affiliate commission (vs. our standard 20%) as a launch partner.</p>
+    <p>Your students get 10% off when they upgrade. You get credit for every conversion. First 100 coaches only.</p>
+    <p>Try it yourself: <a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+    <p>If it clicks, here's the affiliate signup: <a href="https://hummatch.me/affiliate" style="color:#A855F7;">https://hummatch.me/affiliate</a></p>
+    <p style="margin-top:24px;">- Joe</p>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;">Founder, HumMatch<br><a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+  `);
   return { subject, html };
 }
 
 // Template B: Karaoke Creators
 function generateKaraokeEmail(firstName, platform, specificContent) {
-  const subject = 'Love your karaoke content - partnership opportunity? 🎤';
+  const subject = 'Built something for your karaoke community';
   const html = emailWrapper(`
-    <p>Hey ${firstName}!</p>
-    <p>I'm a huge fan of your karaoke channel - your ${specificContent} is exactly the vibe I love. You've clearly built a passionate community of singers who trust your recommendations.</p>
-    <p>I wanted to reach out about <strong>HumMatch.me</strong> - a new platform that helps singers instantly find karaoke songs in their perfect vocal range.</p>
-
-    <h3 style="color:#A855F7;font-size:15px;margin:16px 0 12px;">Why your audience will love it:</h3>
+    <p>Hey ${firstName},</p>
+    <p>I'm Joe from HumMatch.</p>
+    <p><strong>Quick pitch:</strong> I built a tool that matches people to songs in their exact vocal range. Hum 3 notes → instant personalized song list.</p>
+    <p>No more "can I sing this?" guessing. Works for solo singers AND groups.</p>
+    <p><strong>Why you'd care:</strong></p>
     <ul style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
-      <li style="margin-bottom:8px;">No more scrolling through hundreds of songs hoping one fits</li>
-      <li style="margin-bottom:8px;">Get matched with songs based on voice type, range, and style</li>
-      <li style="margin-bottom:8px;">Perfect for karaoke nights, practice, or discovering new repertoire</li>
+      <li style="margin-bottom:8px;">Your audience gets better song recommendations</li>
+      <li style="margin-bottom:8px;">Makes karaoke less intimidating for newbies</li>
+      <li style="margin-bottom:8px;">Group feature finds songs everyone can sing</li>
     </ul>
-
-    <h3 style="color:#A855F7;font-size:15px;margin:16px 0 12px;">We're offering a first-100 affiliate program:</h3>
-    <ul style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
-      <li style="margin-bottom:8px;"><strong>25% recurring commissions</strong> (earn every month they stay subscribed)</li>
-      <li style="margin-bottom:8px;"><strong>10% discount code</strong> with your channel name</li>
-      <li style="margin-bottom:8px;">Custom graphics and promotional materials included</li>
-    </ul>
-
-    <p>Imagine earning passive income just by recommending a tool your followers actually need. Most karaoke lovers stay subscribed for 20+ months, so your commissions keep rolling in.</p>
-    <p><strong>Quick example:</strong> If 100 of your subscribers sign up at \$19/month, that's \$475/month in recurring revenue for you - \$5,700/year.</p>
-    <p>Want to check it out? I can set you up with a demo account and show you exactly how it works for creators.</p>
-    <p>Let me know if you're interested - happy to jump on a quick call or just email details!</p>
-
-    <p style="margin-top:24px;">Rock on,<br>
-    Joe<br>
-    <span style="color:rgba(255,255,255,0.5);font-size:13px;">Founder, HumMatch<br>https://hummatch.me</span></p>
-
-    <p style="margin-top:16px;font-size:13px;color:rgba(255,255,255,0.5);border-top:1px solid rgba(124,58,237,0.2);padding-top:12px;">P.S. - We're limiting this to 100 partners to keep quality high. Already at 37, so if you're curious, don't wait too long!</p>
-  `).replace('Joe</p>', '');
-
+    <p>It's completely free. No account needed: <a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+    <p><strong>Partnership opportunity:</strong> I'm offering 25% commission (higher than our standard 20%) to the first 100 creators who join.</p>
+    <p>Your community gets 10% off when they upgrade to premium ($7.99/mo). You earn 25% commission for 12 months on each referral — that's $2/month per subscriber.</p>
+    <p>Give it a spin. If you like it, affiliate signup is here: <a href="https://hummatch.me/affiliate" style="color:#A855F7;">https://hummatch.me/affiliate</a></p>
+    <p>Keep crushing it!</p>
+    <p style="margin-top:24px;">- Joe</p>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;">Founder, HumMatch<br><a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+  `);
   return { subject, html };
 }
 
 // Template C: Music Bloggers/Reviewers
 function generateMusicBloggerEmail(firstName) {
-  const subject = 'New singing app to review - partnership opportunity';
+  const subject = 'Worth covering? (vocal range tool launch)';
   const html = emailWrapper(`
-    <p>Hi ${firstName},</p>
-    <p>I love your blog, especially your reviews of music tools and apps. Your honest, in-depth analysis really helps musicians make informed decisions.</p>
-    <p>I'm reaching out to offer exclusive early access to <strong>HumMatch.me</strong> - a new platform helping singers find songs perfectly matched to their vocal range.</p>
-
-    <h3 style="color:#A855F7;font-size:15px;margin:16px 0 12px;">Why it might interest your audience:</h3>
-    <ul style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
-      <li style="margin-bottom:8px;">Solves a massive pain point (finding singable songs)</li>
-      <li style="margin-bottom:8px;">Beautiful UX, actually works well (rare in music tech!)</li>
-      <li style="margin-bottom:8px;">Growing fast with vocal coaches and karaoke communities</li>
-    </ul>
-
-    <h3 style="color:#A855F7;font-size:15px;margin:16px 0 12px;">I'd love to offer you:</h3>
-    <ol style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
-      <li style="margin-bottom:8px;"><strong>Full review access</strong> - test it deeply, write honestly (good or bad)</li>
-      <li style="margin-bottom:8px;"><strong>Affiliate partnership</strong> - 25% recurring commission if you choose to promote</li>
-      <li style="margin-bottom:8px;"><strong>Exclusive discount code</strong> for your readers (10% off)</li>
-    </ol>
-
-    <p>You're under zero obligation to write positively - your honest opinion is what your readers trust. But if you do find value in it (we think you will), the affiliate program could create meaningful recurring revenue.</p>
-
-    <h3 style="color:#A855F7;font-size:15px;margin:16px 0 12px;">Affiliate details:</h3>
-    <ul style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
-      <li style="margin-bottom:8px;">25% of every sale you refer, recurring monthly</li>
-      <li style="margin-bottom:8px;">Average subscriber stays 22+ months = ~\$105 per referral lifetime value</li>
-      <li style="margin-bottom:8px;">Limited to first 100 partners (37 approved so far)</li>
-    </ul>
-
-    <p>Would you be interested in checking it out? I can set up a demo account and send you media assets today.</p>
-    <p>Let me know!</p>
-
-    <p style="margin-top:24px;">Best regards,<br>
-    Joe<br>
-    <span style="color:rgba(255,255,255,0.5);font-size:13px;">Founder, HumMatch<br>https://hummatch.me</span></p>
-
-    <p style="margin-top:16px;font-size:13px;color:rgba(255,255,255,0.5);border-top:1px solid rgba(124,58,237,0.2);padding-top:12px;">P.S. - Happy to answer any technical questions or provide stats for your review. We're all about transparency.</p>
-  `).replace('Joe</p>', '');
-
+    <p>Hey ${firstName},</p>
+    <p>I'm Joe, founder of HumMatch. Came across your blog while researching the karaoke/vocal tech space.</p>
+    <p><strong>What it is:</strong> HumMatch analyzes your voice in 10 seconds (you just hum) and shows you which songs from our 10K+ library match your exact range.</p>
+    <p>No more picking songs that are too high or too low. Just instant personalized matches.</p>
+    <p><strong>Unique angle:</strong> We also do group matching (SquadMatch) — finds songs your whole crew can sing together. First tool I've seen that does this.</p>
+    <p><strong>Tech:</strong> Real-time pitch detection, vocal range mapping, genre filtering. Works on any device (web app, no download needed). Free tier + $7.99/mo premium.</p>
+    <p>Try it: <a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+    <p><strong>If you cover it:</strong> I'd offer you affiliate terms (25% commission, vs our standard 20%). Your readers get 10% off. First 100 partners only.</p>
+    <p>No pressure — just thought it might fit your audience.</p>
+    <p>Affiliate signup (if interested): <a href="https://hummatch.me/affiliate" style="color:#A855F7;">https://hummatch.me/affiliate</a></p>
+    <p>Thanks for reading!</p>
+    <p style="margin-top:24px;">- Joe</p>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;">Founder, HumMatch<br><a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+  `);
   return { subject, html };
 }
 
