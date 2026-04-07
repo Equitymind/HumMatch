@@ -150927,7 +150927,7 @@ function showResults() {
   if (!confidentSongs.length) {
     hmTrack("no_match");
     // Fallback: loosen threshold and show top 3 range-based suggestions
-    const fallbackSongs = songPool
+    const fallbackSongs = SONGS.slice(0, 250)
       .map(s => {
         const overlapLo = Math.max(userLow, s.lo);
         const overlapHi = Math.min(userHigh, s.hi);
