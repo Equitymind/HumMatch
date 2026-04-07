@@ -150271,59 +150271,111 @@ function showResults() {
   const isMaleVoice = userHigh <= 65;  // C#4 or below = likely male
   const isFemaleVoice = userLow >= 48; // C3 or above = likely female
 
-  // Match from top 250 songs (researched accurate vocal ranges for 13 artists)
-  // These have REAL researched vocal data, not AI guesses
-  const matchedSongs = SONGS.slice(0, 250)
-    .filter(s => s.verified === true) // Only match against verified songs (researched vocal ranges)
-    .map(s => {
-      const overlapLo = Math.max(userLow, s.lo);
-      const overlapHi = Math.min(userHigh, s.hi);
-      const overlap = Math.max(0, overlapHi - overlapLo);
-      const rangeFit = overlap / Math.max(1, s.hi - s.lo);
-      const brightFit = 1 - Math.abs(userBrightness - s.brightness) / 100;
-      return { ...s, score: rangeFit * 0.65 + brightFit * 0.35 };
-    })
-    .filter(s => {
-      // Gender filtering: DUAL approach (tessitura + brightness)
-      // Female songs center around C4-C5 (60-72) AND are brighter (55+)
-      // Male songs center around G2-G3 (43-55) AND are darker (30-55)
-      const songMidpoint = (s.lo + s.hi) / 2;
+  // ── TIERED DISCOVERY SYSTEM ──
+  // Organize verified songs into tiers based on humMatchScore (Spotify popularity)
+  // Tier 1: Top 2,000 songs (primary matching)
+  // Tier 2: Songs ranked 2,001-5,000 (secondary, on-demand)
+  // Tier 3: Everything beyond 5,000 (tertiary, on-demand)
 
-      // MALE VOICE FILTERING:
-      // Block songs with female tessitura (midpoint >= 52)
-      // OR songs with bright timbre (brightness > 60) even if range overlaps
-      // This catches contraltos like Nina Simone, Etta James
-      if (isMaleVoice && (songMidpoint >= 52 || s.brightness > 60)) return false;
+  const verifiedSongs = SONGS.filter(s => s.verified === true)
+    .sort((a, b) => (b.humMatchScore || 0) - (a.humMatchScore || 0));
 
-      // FEMALE VOICE FILTERING:
-      // Block songs with male tessitura (midpoint < 58)
-      // OR songs with dark timbre (brightness < 45)
-      if (isFemaleVoice && (songMidpoint < 58 || s.brightness < 45)) return false;
+  const TIER_1_SIZE = 2000;
+  const TIER_2_SIZE = 5000;
+  const tier1Songs = verifiedSongs.slice(0, TIER_1_SIZE);
+  const tier2Songs = verifiedSongs.slice(TIER_1_SIZE, TIER_2_SIZE);
+  const tier3Songs = verifiedSongs.slice(TIER_2_SIZE);
 
-      return s.score > 0.45; // Also apply score threshold
-    })
-    .sort((a, b) => {
-      // Sort by Spotify popularity FIRST, then by vocal fit
-      const popDiff = (b.popularity || 0) - (a.popularity || 0);
-      if (popDiff !== 0) return popDiff;
-      return b.score - a.score;
-    })
-    .reduce((acc, s) => {
-      // Cap at 2 songs per artist to prevent Johnny Cash monopoly
-      const artistCount = acc.filter(x => x.artist === s.artist).length;
-      if (artistCount < 2) acc.push(s);
-      return acc;
-    }, [])
-    .slice(0, 60);  // Keep full pool for dismissal backfill + show-more variety
+  // Helper: match a set of songs against user's vocal range + brightness
+  function matchSongsAgainstUser(songsToMatch) {
+    return songsToMatch
+      .map(s => {
+        const overlapLo = Math.max(userLow, s.lo);
+        const overlapHi = Math.min(userHigh, s.hi);
+        const overlap = Math.max(0, overlapHi - overlapLo);
+        const rangeFit = overlap / Math.max(1, s.hi - s.lo);
+        const brightFit = 1 - Math.abs(userBrightness - s.brightness) / 100;
+        return { ...s, score: rangeFit * 0.65 + brightFit * 0.35 };
+      })
+      .filter(s => {
+        // Gender filtering: DUAL approach (tessitura + brightness)
+        // Female songs center around C4-C5 (60-72) AND are brighter (55+)
+        // Male songs center around G2-G3 (43-55) AND are darker (30-55)
+        const songMidpoint = (s.lo + s.hi) / 2;
 
-  // Deduplicate by normalized title (removes "Walk the Line" / "I Walk the Line" dupes)
-  const seenTitles = new Set();
-  const deduped = matchedSongs.filter(s => {
-    const norm = s.title.toLowerCase().replace(/^(i |the |a |an )/,'').trim();
-    if (seenTitles.has(norm)) return false;
-    seenTitles.add(norm);
-    return true;
-  });
+        // MALE VOICE FILTERING:
+        // Block songs with female tessitura (midpoint >= 52)
+        // OR songs with bright timbre (brightness > 60) even if range overlaps
+        // This catches contraltos like Nina Simone, Etta James
+        if (isMaleVoice && (songMidpoint >= 52 || s.brightness > 60)) return false;
+
+        // FEMALE VOICE FILTERING:
+        // Block songs with male tessitura (midpoint < 58)
+        // OR songs with dark timbre (brightness < 45)
+        if (isFemaleVoice && (songMidpoint < 58 || s.brightness < 45)) return false;
+
+        return s.score > 0.45; // Also apply score threshold
+      });
+  }
+
+  // Helper: sort and deduplicate matched songs
+  function processMatchedSongs(matched) {
+    return matched
+      .sort((a, b) => {
+        // Sort by Spotify popularity FIRST, then by vocal fit
+        const popDiff = (b.humMatchScore || 0) - (a.humMatchScore || 0);
+        if (popDiff !== 0) return popDiff;
+        return b.score - a.score;
+      })
+      .reduce((acc, s) => {
+        // Cap at 2 songs per artist to prevent Johnny Cash monopoly
+        const artistCount = acc.filter(x => x.artist === s.artist).length;
+        if (artistCount < 2) acc.push(s);
+        return acc;
+      }, [])
+      .slice(0, 60);  // Keep full pool for dismissal backfill + show-more variety
+  }
+
+  // Match all three tiers upfront
+  const tier1Matches = processMatchedSongs(matchSongsAgainstUser(tier1Songs));
+  const tier2Matches = processMatchedSongs(matchSongsAgainstUser(tier2Songs));
+  const tier3Matches = processMatchedSongs(matchSongsAgainstUser(tier3Songs));
+
+  // Combine tiers: if Tier 1 < 10 matches, auto-include Tier 2
+  let matchedSongs;
+  if (tier1Matches.length < 10) {
+    matchedSongs = [...tier1Matches, ...tier2Matches];
+  } else {
+    matchedSongs = tier1Matches;
+  }
+
+  // Store all tier matches globally for progressive loading
+  window._hmTier1Matches = tier1Matches;
+  window._hmTier2Matches = tier2Matches;
+  window._hmTier3Matches = tier3Matches;
+  window._hmTier2Count = tier2Matches.length;
+  window._hmTier3Count = tier3Matches.length;
+
+  // Helper: deduplicate by normalized title
+  function deduplicateSongs(songs) {
+    const seenTitles = new Set();
+    return songs.filter(s => {
+      const norm = s.title.toLowerCase().replace(/^(i |the |a |an )/,'').trim();
+      if (seenTitles.has(norm)) return false;
+      seenTitles.add(norm);
+      return true;
+    });
+  }
+
+  // Deduplicate all tier matches
+  const deduped = deduplicateSongs(matchedSongs);
+  const deduped2 = deduplicateSongs(tier2Matches);
+  const deduped3 = deduplicateSongs(tier3Matches);
+
+  // Store all deduplicated tiers for tier navigation
+  window._hmTier1Deduped = deduplicateSongs(tier1Matches);
+  window._hmTier2Deduped = deduped2;
+  window._hmTier3Deduped = deduped3;
 
   // Store full pool globally, dismissals pull next song from here
   window._hmFullPool = deduped;
@@ -150487,6 +150539,16 @@ function showResults() {
   const _stretchFiltered = needMoreSongs ? tieredSongs.filter(s => s.tier.key === 'stretch' && !isDismissed(s) && _matchesInterests(s)) : [];
 
   // Respect genre/decade filters, but fall back if empty (prevents stuck state)
+  // For tiered discovery, include all tiers (Tier 1, 2, 3) so they can be progressively loaded
+  const allTieredSongs = [...deduped, ...deduped2, ...deduped3];
+  const tieredWithMeta = allTieredSongs.map(s => ({
+    ...s,
+    tier: getTier(s.score),
+    tags: getTags(s),
+    decade: getDecadeTag(s),
+    familiar: isFamiliar(s.title)
+  }));
+
   const confidentSongs = sessionShuffle(
     _hasFilter && _confidentFiltered.length > 0
       ? [..._confidentFiltered, ..._stretchFiltered]
@@ -150696,19 +150758,41 @@ function showResults() {
     const PAGE_SIZE = 10;
 
     // Tier system: 2K → 5K → Everything
-    const TIER_1_LIMIT = 2000; // Top popular songs
-    const TIER_2_LIMIT = 5000; // + Next 3K
+    // Use pre-computed tier matches with full metadata
+    window._hmTier1AllSongs = deduped.map(s => ({
+      ...s,
+      tier: getTier(s.score),
+      tags: getTags(s),
+      decade: getDecadeTag(s),
+      familiar: isFamiliar(s.title)
+    }));
+    window._hmTier2AllSongs = deduped2.map(s => ({
+      ...s,
+      tier: getTier(s.score),
+      tags: getTags(s),
+      decade: getDecadeTag(s),
+      familiar: isFamiliar(s.title)
+    }));
+    window._hmTier3AllSongs = deduped3.map(s => ({
+      ...s,
+      tier: getTier(s.score),
+      tags: getTags(s),
+      decade: getDecadeTag(s),
+      familiar: isFamiliar(s.title)
+    }));
 
+    // For backwards compatibility, also set confidentSongs
     window._hmConfidentAll = confidentSongs;
     window._hmConfidentPage = 0;
-    window._hmActiveTier = 1; // Start with tier 1 (top 2K)
+    window._hmActiveTier = 1; // Start with tier 1
 
     function getActiveTierSongs() {
-      let limit;
-      if (window._hmActiveTier === 1) limit = TIER_1_LIMIT;
-      else if (window._hmActiveTier === 2) limit = TIER_2_LIMIT;
-      else limit = window._hmConfidentAll.length;
-      return window._hmConfidentAll.slice(0, limit);
+      if (window._hmActiveTier === 1) return window._hmTier1AllSongs;
+      else if (window._hmActiveTier === 2) {
+        // Tier 2 is shown after Tier 1
+        return [...window._hmTier1AllSongs, ...window._hmTier2AllSongs];
+      }
+      else return [...window._hmTier1AllSongs, ...window._hmTier2AllSongs, ...window._hmTier3AllSongs];
     }
 
     function renderSongPage() {
@@ -150729,29 +150813,33 @@ function showResults() {
       if (slice.length < tierSongs.length || window._hmActiveTier < 3) {
         const tierDiv = document.createElement('div');
         tierDiv.id = 'hm-tier-nav';
-        tierDiv.style.cssText = 'display:flex;gap:8px;margin:16px auto 0;max-width:400px;';
+        tierDiv.style.cssText = 'display:flex;gap:8px;margin:16px auto 0;max-width:400px;flex-wrap:wrap;justify-content:center;';
 
         // "Load 10 More" if more in current tier
         if (slice.length < tierSongs.length) {
           const remaining = tierSongs.length - slice.length;
           const btn = document.createElement('button');
           btn.textContent = `Load ${Math.min(PAGE_SIZE, remaining)} More`;
-          btn.style.cssText = 'flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
+          btn.style.cssText = 'flex:1;min-width:140px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
           btn.onclick = () => { window._hmConfidentPage++; renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
           tierDiv.appendChild(btn);
         }
 
-        // "Deep Dive" tier button (always show if not in final tier)
+        // "Explore Deeper 🎵" tier button (from Tier 1 to Tier 2)
         if (window._hmActiveTier === 1) {
           const btn = document.createElement('button');
-          btn.textContent = '🔍 Deep Dive';
-          btn.style.cssText = 'flex:1;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
+          const tier2Count = window._hmTier2Count || 0;
+          const countText = tier2Count > 0 ? ` (${tier2Count} more)` : '';
+          btn.textContent = `Explore Deeper 🎵${countText}`;
+          btn.style.cssText = 'flex:1;min-width:140px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
           btn.onclick = () => { window._hmActiveTier = 2; window._hmConfidentPage = Math.floor(TIER_1_LIMIT / PAGE_SIZE); renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
           tierDiv.appendChild(btn);
         } else if (window._hmActiveTier === 2) {
           const btn = document.createElement('button');
-          btn.textContent = '🎯 Deeper Dive';
-          btn.style.cssText = 'flex:1;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
+          const tier3Count = window._hmTier3Count || 0;
+          const countText = tier3Count > 0 ? ` (${tier3Count} more)` : '';
+          btn.textContent = `Dig Even Deeper 🎶${countText}`;
+          btn.style.cssText = 'flex:1;min-width:140px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
           btn.onclick = () => { window._hmActiveTier = 3; window._hmConfidentPage = Math.floor(TIER_2_LIMIT / PAGE_SIZE); renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
           tierDiv.appendChild(btn);
         }
