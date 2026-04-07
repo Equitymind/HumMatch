@@ -221,6 +221,7 @@ async function handleLogin(e) {
     const res = await fetch('/api/hummatch/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
       body: JSON.stringify({ email, password })
     });
     const data = await res.json();
@@ -247,7 +248,8 @@ async function handleLogin(e) {
     if (data.is_premium) localStorage.setItem('hm_premium', 'true');
     window.location.href = returnUrl;
   } catch (err) {
-    errEl.textContent = 'Connection error. Please try again.';
+    console.error('Login fetch error:', err);
+    errEl.textContent = 'Connection error: ' + (err.message || err) + '. Please try again.';
     errEl.style.display = 'block';
   }
   btn.disabled = false;
