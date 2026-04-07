@@ -158497,9 +158497,9 @@ const PHASES = [
     {"title":"Conteo Regresivo","artist":"Don Omar","lo":45,"hi":64,"brightness":48,"year":2010,"language":"es"}
 ];
 
-// Sort SONGS by Spotify popularity BEFORE any matching
-// Use real Spotify 'popularity' field (0-100) where available
-// Songs with Spotify data (2,300+) float to top automatically
+// Sort SONGS by song popularity BEFORE any matching
+// Use real song 'popularity' field (0-100) where available
+// Songs with popularity data (2,300+) float to top automatically
 SONGS.sort((a, b) => {
   const popDiff = (b.popularity || 0) - (a.popularity || 0);
   if (popDiff !== 0) return popDiff;
@@ -159833,7 +159833,7 @@ function togglePlaylistSong(title, artist, checked) {
         showToast('🎶 Nice playlist! Want to export it?');
         // Show upgrade modal
         setTimeout(() => {
-          if (confirm('🎵 Export Your Playlist?\n\n20 songs ready! Upgrade to export to Spotify/Apple Music:\n\n✓ Unlimited playlist exports\n✓ Unlimited saved songs\n✓ Create singing squads\n✓ Share with friends\n\nOnly $7.99/mo (14-day free trial)')) {
+          if (confirm('🎵 Export Your Playlist?\n\n20 songs ready! Upgrade to export your playlist:\n\n✓ Unlimited playlist exports\n✓ Unlimited saved songs\n✓ Create singing squads\n✓ Share with friends\n\nOnly $7.99/mo (14-day free trial)')) {
             window.location.href = '/pricing';
           }
         }, 500);
