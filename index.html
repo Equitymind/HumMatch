@@ -158635,7 +158635,7 @@ function applyPromoCode() {
 
 // ── startTest: route to primer screen (checks hum limit first) ──
 async function startTest() {
-  // Check free hum limit (10 hums per month for non-premium)
+  // Check free hum limit (5 hums per month for non-premium)
   const isPremium = localStorage.getItem('hm_premium') === 'true';
   if (!isPremium) {
     const monthKey = new Date().toISOString().slice(0,7);
