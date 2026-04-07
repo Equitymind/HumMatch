@@ -150554,9 +150554,9 @@ function showResults() {
   const isMaleVoice = userHigh <= 65;  // C#4 or below = likely male
   const isFemaleVoice = userLow >= 48; // C3 or above = likely female
 
-  // Match from top 2,300 songs with REAL Spotify popularity data
-  // (SONGS sorted by Spotify popularity - songs with data float to top)
-  const matchedSongs = SONGS.slice(0, 2300)
+  // Match from top 250 songs (researched accurate vocal ranges for 13 artists)
+  // These have REAL researched vocal data, not AI guesses
+  const matchedSongs = SONGS.slice(0, 250)
     .map(s => {
       const overlapLo = Math.max(userLow, s.lo);
       const overlapHi = Math.min(userHigh, s.hi);
