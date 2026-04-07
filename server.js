@@ -2367,21 +2367,10 @@ function autoSeedSongs() {
   try {
     const songsCount = db.prepare('SELECT COUNT(*) as cnt FROM songs').get().cnt;
     // Force re-seed if count doesn't match expected (10172 songs with popularity scores)
-    const EXPECTED_SONGS = 10172;
-    if (songsCount === EXPECTED_SONGS) {
-      // Check if popularity data exists
-      const withPop = db.prepare('SELECT COUNT(*) as cnt FROM songs WHERE popularity > 0').get().cnt;
-      if (withPop > 0) {
-        console.log(`[seed] songs table already populated (${songsCount} rows with popularity) — skipping auto-seed`);
-        return;
-      }
-      console.log(`[seed] songs exist but missing popularity scores — forcing re-seed`);
-      db.prepare('DELETE FROM songs').run();
-    }
-    if (songsCount > 0 && songsCount !== EXPECTED_SONGS) {
-      console.log(`[seed] WARNING: songs table has ${songsCount} rows but expected ${EXPECTED_SONGS}`);
-      console.log(`[seed] FORCING RE-SEED to update database...`);
-      db.prepare('DELETE FROM songs').run();
+    // Only auto-seed if songs table is truly empty (never force re-seed on count mismatch)
+    if (songsCount > 0) {
+      console.log(`[seed] songs table already populated (${songsCount} rows) — skipping auto-seed`);
+      return;
     }
     console.log('[seed] songs table is EMPTY — auto-seeding from index.html...');
     const { execSync } = require('child_process');
