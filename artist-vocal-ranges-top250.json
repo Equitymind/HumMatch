@@ -1,0 +1,96 @@
+{
+  "artists": [
+    {
+      "name": "Adele",
+      "range": "C3-C6",
+      "loMIDI": 48,
+      "hiMIDI": 84,
+      "type": "Mezzo-soprano"
+    },
+    {
+      "name": "Ariana Grande",
+      "range": "D3-B5",
+      "loMIDI": 50,
+      "hiMIDI": 83,
+      "type": "Soprano"
+    },
+    {
+      "name": "Bad Bunny",
+      "range": "G2-G4",
+      "loMIDI": 43,
+      "hiMIDI": 67,
+      "type": "Baritone"
+    },
+    {
+      "name": "Beyoncé",
+      "range": "F3-C6",
+      "loMIDI": 53,
+      "hiMIDI": 84,
+      "type": "Mezzo-soprano"
+    },
+    {
+      "name": "Billie Eilish",
+      "range": "D3-B5",
+      "loMIDI": 50,
+      "hiMIDI": 83,
+      "type": "Soprano (light)"
+    },
+    {
+      "name": "Dua Lipa",
+      "range": "D3-D6",
+      "loMIDI": 50,
+      "hiMIDI": 86,
+      "type": "Mezzo-soprano"
+    },
+    {
+      "name": "Ed Sheeran",
+      "range": "E2-Bb5",
+      "loMIDI": 40,
+      "hiMIDI": 70,
+      "type": "Tenor/Baritone"
+    },
+    {
+      "name": "Imagine Dragons",
+      "range": "F2-Bb5",
+      "loMIDI": 41,
+      "hiMIDI": 70,
+      "type": "Baritone (Dan Reynolds)"
+    },
+    {
+      "name": "J Balvin",
+      "range": "G2-A4",
+      "loMIDI": 43,
+      "hiMIDI": 69,
+      "type": "Baritone/Tenor"
+    },
+    {
+      "name": "Justin Bieber",
+      "range": "F2-C#5",
+      "loMIDI": 41,
+      "hiMIDI": 73,
+      "type": "Tenor"
+    },
+    {
+      "name": "Post Malone",
+      "range": "E2-G#4",
+      "loMIDI": 40,
+      "hiMIDI": 68,
+      "type": "Baritone"
+    },
+    {
+      "name": "Taylor Swift",
+      "range": "F3-E6",
+      "loMIDI": 53,
+      "hiMIDI": 88,
+      "type": "Soprano (light-lyric)"
+    },
+    {
+      "name": "The Weeknd",
+      "range": "C3-C6",
+      "loMIDI": 48,
+      "hiMIDI": 84,
+      "type": "Tenor (high)"
+    }
+  ],
+  "notes": "Vocal ranges researched April 6, 2026 for top 250 Spotify songs. MIDI numbers represent practical singing range, not absolute limits."
+}
