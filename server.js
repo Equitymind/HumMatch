@@ -21,18 +21,29 @@ const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || '';
 const stripe = STRIPE_SECRET_KEY ? require('stripe')(STRIPE_SECRET_KEY) : null;
 
 // ---------------------------------------------------------------------------
-// Email (Zoho Mail SMTP)
+// Email (ZeptoMail SMTP for campaigns, Zoho Mail SMTP as fallback)
 // ---------------------------------------------------------------------------
+const ZEPTO_USER = process.env.ZEPTOMAIL_USER || 'emailapikey';
+const ZEPTO_PASS = process.env.ZEPTOMAIL_PASS || '';
 const EMAIL_USER = process.env.HUMMATCH_EMAIL_USER || '';
 const EMAIL_PASS = process.env.HUMMATCH_EMAIL_PASS || '';
-const emailTransporter = EMAIL_USER && EMAIL_PASS
+const EMAIL_FROM = process.env.HUMMATCH_EMAIL_FROM || 'joe@hummatch.me';
+
+const emailTransporter = ZEPTO_PASS
   ? nodemailer.createTransport({
-      host: 'smtp.zoho.com',
+      host: 'smtp.zeptomail.com',
       port: 465,
       secure: true,
-      auth: { user: EMAIL_USER, pass: EMAIL_PASS }
+      auth: { user: ZEPTO_USER, pass: ZEPTO_PASS }
     })
-  : null;
+  : (EMAIL_USER && EMAIL_PASS
+    ? nodemailer.createTransport({
+        host: 'smtp.zoho.com',
+        port: 465,
+        secure: true,
+        auth: { user: EMAIL_USER, pass: EMAIL_PASS }
+      })
+    : null);
 
 async function sendEmail(to, subject, html) {
   if (!emailTransporter) {
@@ -41,7 +52,7 @@ async function sendEmail(to, subject, html) {
   }
   try {
     await emailTransporter.sendMail({
-      from: `"Joe from HumMatch" <${EMAIL_USER}>`,
+      from: `"Joe from HumMatch" <${EMAIL_FROM}>`,
       to,
       subject,
       html
@@ -1326,6 +1337,12 @@ app.get('/api/hummatch/analytics', requireAdmin, (req, res) => {
     AND json_extract(data, '$.referrer') IS NOT NULL AND json_extract(data, '$.referrer') != ''
     GROUP BY ref ORDER BY cnt DESC LIMIT 10
   `).all(sinceDate);
+
+  // No-match count (hums that produced zero results)
+  const noMatch = db.prepare(`
+    SELECT COUNT(*) as cnt FROM events
+    WHERE event = 'no_match' AND created_at >= ?
+  `).get(sinceDate).cnt;
 
   // Voice Type Distribution
   const voiceTypes = db.prepare(`
