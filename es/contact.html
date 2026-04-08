@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto | HumMatch</title>
+  <meta name="description" content="Ponte en contacto con HumMatch. Preguntas, comentarios o consultas de asociación."/>
+  <link rel="icon" href="/hummatch-icon-bug-2x.png" type="image/png"/>
+  <link rel="alternate" hreflang="en" href="https://hummatch.me/contact" />
+  <link rel="alternate" hreflang="es" href="https://hummatch.me/es/contact" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0b1a;
+      --white: #e2e0f0;
+      --text-muted: rgba(255,255,255,0.4);
+      --purple: #A855F7;
+      --pink: #EC4899;
+      --surface-border: rgba(124,58,237,0.12);
+      --radius: 14px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .hero {
+      text-align: center;
+      padding: 60px 24px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .form-section {
+      padding: 40px 24px 80px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .form-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--surface-border);
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--purple);
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.9; }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 32px;
+    }
+    .success-msg h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+    .success-msg p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .error-msg {
+      color: #f87171;
+      font-size: 0.85rem;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+    .footer a { text-decoration: none; }
+    .footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/es/" class="nav-logo">HumMatch</a>
+    <div class="nav-links">
+      <a href="/es/">Prueba HumMatch</a>
+      <a href="/es/blog">Blog</a>
+      <a href="/">English</a>
+      <a href="/dashboard" id="navLoginItem">Iniciar Sesión</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Contáctanos</h1>
+    <p>¿Preguntas, comentarios o ideas de asociación? Nos encantaría saber de ti.</p>
+  </div>
+
+  <div class="form-section">
+    <div class="form-card" id="formCard">
+      <form id="contactForm" onsubmit="submitContact(event)">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" placeholder="Tu nombre (opcional)"/>
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" placeholder="tu@correo.com (opcional)"/>
+        </div>
+        <div class="form-group">
+          <label for="message">Mensaje *</label>
+          <textarea id="message" placeholder="¿Qué tienes en mente?" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">Enviar Mensaje</button>
+        <div class="error-msg" id="errorMsg"></div>
+      </form>
+      <div class="success-msg" id="successMsg">
+        <h3>¡Mensaje Enviado!</h3>
+        <p>Gracias por escribirnos. Te responderemos pronto.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2026 HumMatch &nbsp;&middot;&nbsp; <a href="/es/">Prueba HumMatch</a> &nbsp;&middot;&nbsp; <a href="/es/blog">Blog</a> &nbsp;&middot;&nbsp; <a href="/">English</a> &nbsp;&middot;&nbsp; <a href="/privacy">Privacidad</a> &nbsp;&middot;&nbsp; <a href="/terms">Términos</a></p>
+  </div>
+
+  <script>
+  async function submitContact(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const errEl = document.getElementById('errorMsg');
+    errEl.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    try {
+      const res = await fetch('/api/hummatch/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: document.getElementById('name').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          message: document.getElementById('message').value.trim()
+        })
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Error al enviar');
+      }
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    } catch (err) {
+      errEl.textContent = err.message;
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Enviar Mensaje';
+    }
+  }
+  (function(){
+    var t = localStorage.getItem('hm_dash_token');
+    if(t){
+      var nav = document.getElementById('navLoginItem');
+      if(nav){ nav.textContent='Mi HQ'; }
+    }
+  })();
+  </script>
+</body>
+</html>

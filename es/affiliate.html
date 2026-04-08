@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Programa de Afiliados | HumMatch</title>
+  <meta name="description" content="Comparte HumMatch con tu audiencia y gana comisiones. Registro instantáneo, código QR inmediato, sin necesidad de aprobación."/>
+  <link rel="icon" href="/hummatch-icon-bug-2x.png" type="image/png"/>
+  <link rel="alternate" hreflang="en" href="https://hummatch.me/affiliate" />
+  <link rel="alternate" hreflang="es" href="https://hummatch.me/es/affiliate" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0b1a;
+      --white: #e2e0f0;
+      --text-muted: rgba(255,255,255,0.4);
+      --purple: #A855F7;
+      --pink: #EC4899;
+      --surface-border: rgba(124,58,237,0.12);
+      --radius: 14px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+
+    /* Hamburger Nav */
+    .hm-header { position:sticky; top:0; z-index:100; background:rgba(8,6,15,0.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.12); display:flex; align-items:center; justify-content:space-between; padding:14px 18px; }
+    .hm-header-logo { font-size:1.15rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }
+    .hm-nav-toggle { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; padding:0; flex-shrink:0; }
+    .hm-nav-toggle span { display:block; width:20px; height:2px; background:rgba(168,85,247,0.9); border-radius:2px; transition:all 0.25s; }
+    .hm-nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hm-nav-toggle.open span:nth-child(2) { opacity:0; }
+    .hm-nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .hm-nav-drawer { position:fixed; top:0; left:0; width:240px; height:100%; background:rgba(8,6,15,0.97); backdrop-filter:blur(16px); border-right:1px solid rgba(168,85,247,0.15); z-index:9999; transform:translateX(-100%); visibility:hidden; transition:transform 0.28s cubic-bezier(.4,0,.2,1), visibility 0.28s; padding:70px 0 24px; }
+    .hm-nav-drawer.open { transform:translateX(0); visibility:visible; }
+    .hm-nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9998; opacity:0; pointer-events:none; transition:opacity 0.28s; }
+    .hm-nav-overlay.open { opacity:1; pointer-events:all; }
+    .hm-nav-logo { padding:0 20px 20px; border-bottom:1px solid rgba(168,85,247,0.12); margin-bottom:8px; }
+    .hm-nav-logo span { font-size:1.1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hm-nav-item { display:block; padding:13px 24px; color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color 0.15s, background 0.15s; }
+    .hm-nav-item:hover { color:#fff; background:rgba(168,85,247,0.1); }
+    .hm-nav-divider { height:1px; background:rgba(168,85,247,0.1); margin:8px 20px; }
+
+    .hero {
+      text-align: center;
+      padding: 60px 24px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto 24px;
+    }
+    .hero .cta-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      cursor: pointer;
+    }
+    .hero .cta-btn:hover { opacity: 0.9; }
+
+    .perfect-for {
+      text-align: center;
+      padding: 20px 24px;
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+    .perfect-for h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+    .perfect-for ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .perfect-for li {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .content {
+      padding: 0 24px 80px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .steps {
+      display: grid;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .step-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .step-num {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      text-align: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+    .step-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .step-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 12px;
+    }
+    .step-card ul {
+      list-style: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+    .step-card ul li:before {
+      content: "•";
+      color: var(--purple);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: 8px;
+    }
+
+    .earnings-section {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      margin-bottom: 40px;
+    }
+    .earnings-section h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .earnings-section > p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    .earnings-section ul {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .earnings-section ul li {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .earnings-section ul li:before {
+      content: "✓";
+      color: #4ade80;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .earnings-section .note {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-top: 12px;
+    }
+
+    .why-section {
+      margin-bottom: 40px;
+    }
+    .why-section h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .why-section p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+    .why-section ul {
+      list-style: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .why-section ul li:before {
+      content: "→";
+      color: var(--purple);
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .creator-section {
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.1));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .creator-section h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .creator-section p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .creator-section .cta-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border: 1px solid rgba(168,85,247,0.6);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .creator-section .cta-btn:hover {
+      background: rgba(168,85,247,0.2);
+      border-color: rgba(168,85,247,0.8);
+    }
+
+    .cta-section {
+      text-align: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 40px 28px;
+    }
+    .cta-section h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .cta-section p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <header class="hm-header">
+    <a class="hm-header-logo" href="/es/">HumMatch</a>
+    <button class="hm-nav-toggle" id="navToggle" aria-label="Menú" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
+  <nav class="hm-nav-drawer" id="navDrawer">
+    <div class="hm-nav-logo"><span>HumMatch</span></div>
+    <a class="hm-nav-item" href="/es/">🎤 Prueba HumMatch</a>
+    <a class="hm-nav-item" href="/">🌎 English</a>
+    <div class="hm-nav-divider"></div>
+    <a class="hm-nav-item" href="/es/affiliate">Afiliados</a>
+    <a class="hm-nav-item" href="/es/blog">Blog</a>
+    <a class="hm-nav-item" href="/es/contact">Contacto</a>
+    <div class="hm-nav-divider"></div>
+    <a class="hm-nav-item" href="/login" id="navLoginItem">Iniciar Sesión</a>
+    <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Registrarse</a>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Programa de Afiliados</h1>
+    <p>Comparte HumMatch con tu audiencia y gana comisiones cuando tus referidos mejoren a Squad Leader.</p>
+    <p style="margin-bottom:28px;">Obtén tu enlace de referido y código QR al instante. Sin necesidad de aprobación.</p>
+    <a href="#signup" class="cta-btn">Obtener Mi Código QR →</a>
+  </div>
+
+  <!-- Perfect For -->
+  <div class="perfect-for">
+    <h3>Perfecto para:</h3>
+    <ul>
+      <li>Creadores de contenido</li>
+      <li>Conductores de karaoke</li>
+      <li>Influencers de música</li>
+      <li>Profesores de canto</li>
+      <li>Organizadores de comunidades</li>
+      <li>Cualquiera que recomiende HumMatch</li>
+    </ul>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <h2 class="section-title">Cómo funciona</h2>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Obtén tu enlace</h3>
+        <p>Regístrate con tu correo electrónico y recibe tu enlace de referido único y código QR al instante.</p>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.88rem;margin-bottom:8px;">Compártelo donde quieras:</p>
+        <ul>
+          <li>TikTok</li>
+          <li>Instagram</li>
+          <li>YouTube</li>
+          <li>Tu blog</li>
+          <li>Tu newsletter</li>
+          <li>Chats grupales</li>
+          <li>Eventos en vivo</li>
+        </ul>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Comparte HumMatch</h3>
+        <p>Tu audiencia hace clic en tu enlace y prueba HumMatch gratis.</p>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;">Pueden descubrir su voz, encontrar canciones y artistas que coincidan, y explorar SquadMatch antes de mejorar su plan.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Gana comisiones</h3>
+        <p>Cuando tus referidos mejoren a Squad Leader, ganas comisión por cada mejora elegible.</p>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;">Los miembros de tu audiencia también pueden usar tu código para obtener un 10% de descuento, facilitando la conversión.</p>
+      </div>
+    </div>
+
+    <!-- Earnings Section -->
+    <div class="earnings-section">
+      <h2>Gana hasta un 20% de comisión</h2>
+      <p>Nuestro programa de afiliados está diseñado para recompensar a los socios que generan mejoras reales.</p>
+      <ul>
+        <li>Registro instantáneo</li>
+        <li>Enlace de referido único</li>
+        <li>Código QR personalizado</li>
+        <li>Panel de seguimiento</li>
+        <li>Descuento para tu audiencia</li>
+        <li>Oportunidades de asociación para creadores</li>
+      </ul>
+      <p class="note">Los mejores creadores y socios estratégicos pueden calificar para términos mejorados.</p>
+    </div>
+
+    <!-- Why Section -->
+    <div class="why-section">
+      <h2>Por qué a los afiliados les gusta HumMatch</h2>
+      <p>HumMatch es fácil de demostrar, fácil de explicar y fácil de compartir.</p>
+      <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;margin-bottom:12px;">Tu audiencia puede:</p>
+      <ul>
+        <li>Tararear 3 notas</li>
+        <li>Ver qué canciones se adaptan a su voz</li>
+        <li>Comparar con amigos usando SquadMatch</li>
+        <li>Mejorar a Squad Leader para más funciones</li>
+      </ul>
+      <p style="margin-top:20px;color:rgba(255,255,255,0.65);">Eso hace que HumMatch sea un mejor producto de afiliación que algo que necesita una explicación larga o un gran compromiso inicial.</p>
+    </div>
+
+    <!-- What Audience Gets -->
+    <div class="why-section">
+      <h2>Lo que obtiene tu audiencia</h2>
+      <p>Cuando las personas usan tu enlace de afiliado, obtienen:</p>
+      <ul>
+        <li>Acceso para probar HumMatch</li>
+        <li>Una experiencia rápida y compartible</li>
+        <li>Un 10% de descuento cuando mejoran a través de tu código</li>
+      </ul>
+      <p style="margin-top:20px;color:rgba(255,255,255,0.65);">Eso les da a los afiliados una razón más fuerte para promocionar en lugar de solo compartir un enlace genérico.</p>
+    </div>
+
+    <!-- Creator Partnerships -->
+    <div class="creator-section">
+      <h2>Asociaciones con creadores</h2>
+      <p>¿Eres un creador musical, conductor de karaoke, profesor de canto o influencer con una audiencia comprometida? Ofrecemos oportunidades de asociación mejoradas para creadores que puedan generar resultados sólidos.</p>
+      <a href="mailto:partners@hummatch.com?subject=Consulta de Asociación de Creadores" class="cta-btn">Escríbenos Sobre Asociaciones →</a>
+    </div>
+
+    <!-- Final CTA -->
+    <div class="cta-section" id="signup">
+      <h2>¿Listo para empezar?</h2>
+      <p>Obtén tu código QR personalizado y enlace de afiliado al instante.<br>Sin aprobación. Sin esperas.</p>
+      
+      <form id="affiliate-signup-form" style="max-width:400px;margin:24px auto 0;">
+        <input type="email" id="affiliate-email" placeholder="Tu correo electrónico" required 
+          style="width:100%;padding:14px;border-radius:10px;border:1px solid rgba(168,85,247,0.3);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;margin-bottom:12px;">
+        <input type="text" id="venue-name" placeholder="Nombre / Lugar (opcional)" 
+          style="width:100%;padding:14px;border-radius:10px;border:1px solid rgba(168,85,247,0.3);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;margin-bottom:12px;">
+        <input type="text" id="venue-city" placeholder="Ciudad, Estado (opcional)" 
+          style="width:100%;padding:14px;border-radius:10px;border:1px solid rgba(168,85,247,0.3);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;margin-bottom:12px;">
+        <input type="text" id="payout-venmo" placeholder="Venmo/PayPal para pagos" required 
+          style="width:100%;padding:14px;border-radius:10px;border:1px solid rgba(168,85,247,0.3);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;margin-bottom:16px;">
+        <button type="submit" class="cta-btn" style="width:100%;cursor:pointer;">Obtener Mi Código QR →</button>
+      </form>
+      
+      <div id="signup-success" style="display:none;margin-top:24px;padding:20px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:12px;">
+        <div style="font-size:1.5rem;margin-bottom:12px;">✅</div>
+        <h3 style="font-size:1.2rem;margin-bottom:8px;">¡Todo listo!</h3>
+        <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin-bottom:4px;">Tu código de afiliado: <strong id="affiliate-code-display" style="color:#4ade80;"></strong></p>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:16px;">Rastrea clics, referidos y conversiones desde un solo lugar.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <a id="download-qr-btn" class="cta-btn" style="font-size:0.9rem;padding:10px 20px;">Descargar Código QR</a>
+          <a href="/affiliate/dashboard" class="cta-btn" style="font-size:0.9rem;padding:10px 20px;background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.4);">Ver Panel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="width:100%;margin-top:32px;padding:20px 0 24px;border-top:1px solid rgba(255,255,255,0.06);">
+    <div style="display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;">
+      <a href="/es/" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Prueba HumMatch</a>
+      <a href="/" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">English</a>
+      <a href="/es/affiliate" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Afiliados</a>
+      <a href="/es/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
+      <a href="/es/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contacto</a>
+      <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacidad</a>
+      <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Términos</a>
+      <a href="/login" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Iniciar Sesión</a>
+    </div>
+    <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.2);">&copy; 2026 HumMatch</div>
+  </footer>
+
+<script>
+// Affiliate Signup Handler
+document.getElementById('affiliate-signup-form')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('affiliate-email').value;
+  const venueName = document.getElementById('venue-name').value || '';
+  const city = document.getElementById('venue-city').value || '';
+  const payoutMethod = document.getElementById('payout-venmo').value;
+  
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  submitBtn.textContent = 'Creando tu cuenta...';
+  submitBtn.disabled = true;
+  
+  try {
+    const response = await fetch('/api/hummatch/affiliate/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, venueName, city, payoutMethod })
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      document.getElementById('affiliate-signup-form').style.display = 'none';
+      document.getElementById('signup-success').style.display = 'block';
+      document.getElementById('affiliate-code-display').textContent = data.affiliateCode;
+      
+      const downloadBtn = document.getElementById('download-qr-btn');
+      downloadBtn.href = data.qrUrl;
+      downloadBtn.download = `hummatch-qr-${data.affiliateCode}.png`;
+      
+      localStorage.setItem('hm_affiliate_code', data.affiliateCode);
+      localStorage.setItem('hm_affiliate_email', email);
+      localStorage.setItem('hm_affiliate_venue', venueName);
+      
+      if (data.alreadyExists) {
+        alert('¡Bienvenido de nuevo! Tu código de afiliado ha sido reenviado a tu correo.');
+      }
+    } else {
+      alert(data.error || 'Algo salió mal. Por favor, inténtalo de nuevo.');
+      submitBtn.textContent = 'Obtener Mi Código QR →';
+      submitBtn.disabled = false;
+    }
+  } catch (err) {
+    console.error('Signup error:', err);
+    alert('Error de red. Por favor, revisa tu conexión e inténtalo de nuevo.');
+    submitBtn.textContent = 'Obtener Mi Código QR →';
+    submitBtn.disabled = false;
+  }
+});
+
+function toggleNav() {
+  const tog = document.getElementById('navToggle');
+  const drw = document.getElementById('navDrawer');
+  const ovl = document.getElementById('navOverlay');
+  tog.classList.toggle('open');
+  drw.classList.toggle('open');
+  ovl.classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navToggle').classList.remove('open');
+  document.getElementById('navDrawer').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+}
+(function(){
+  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
+  if(t){
+    var nav = document.getElementById('navLoginItem');
+    var foot = document.getElementById('footerLoginItem');
+    var signup = document.getElementById('navSignupItem');
+    if(nav){ nav.textContent='🎯 Mi HQ'; nav.href='/dashboard'; }
+    if(foot){ foot.textContent='Mi HQ'; foot.href='/dashboard'; }
+    if(signup){ signup.style.display='none'; }
+  }
+})();
+</script>
+</body>
+</html>
