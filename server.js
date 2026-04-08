@@ -2564,12 +2564,15 @@ app.get('/contact', (_req, res) => {
   res.sendFile(path.join(__dirname, 'contact.html'));
 });
 app.get('/es/contact', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'hummatch-es.html'));
+  res.sendFile(path.join(__dirname, 'es', 'contact.html'));
 });
 
 // Affiliate page
 app.get('/affiliate', (_req, res) => {
   res.sendFile(path.join(__dirname, 'affiliate.html'));
+});
+app.get('/es/affiliate', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'affiliate.html'));
 });
 
 // Privacy & Terms
