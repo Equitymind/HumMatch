@@ -2,25 +2,25 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-<title>HumMatch | Vocal Match Canciones que van con mi voz</title>
-<meta name="description" content="Tararea 3 notas y descubre las canciones de karaoke que van con tu voz. Prueba gratuita de rango vocal. Encuentra las canciones perfectas para tu voz."/>
-<meta name="keywords" content="canciones que van con mi voz, karaoke en español, canciones para mi voz, prueba de rango vocal, qué canciones puedo cantar, karaoke latino"/>
-<link rel="canonical" href="https://hummatch.me/es"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
+<title>HumCoincidencia | Find Songs That Coincidencia My Voice | Vocal Match</title>
+<meta name="description" content="Tararea por 10 segundos. Encuentra canciones perfectas para tu voz. Gratis, sin app."/>
+<meta name="keywords" content="songs that match my voice, karaoke songs for my voice, find songs for my voice, vocal range test, what songs can I sing, songs for my voice type, karaoke song finder"/>
+<link rel="canonical" href="https://hummatch.me/es/"/>
 <link rel="manifest" href="/hummatch-manifest.json"/>
 <link rel="apple-touch-icon" href="/hummatch-icon-180.png"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="HumMatch"/>
 <meta name="theme-color" content="#a855f7"/>
-<meta property="og:title" content="HumMatch | Canciones que van con mi voz | Karaoke en Español"/>
-<meta property="og:description" content="Tararea 3 notas y descubre las canciones de karaoke que van con tu voz. Prueba gratuita de rango vocal. Encuentra las canciones perfectas para tu voz."/>
-<meta property="og:url" content="https://hummatch.me/es"/>
+<meta property="og:title" content="HumCoincidencia – Canciones que van con tu voz"/>
+<meta property="og:description" content="Tararea por 10 segundos. Encuentra canciones perfectas para tu voz."/>
+<meta property="og:url" content="https://hummatch.me"/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://hummatch.me/hummatch-og.jpg"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="HumMatch | Canciones que van con mi voz | Karaoke en Español"/>
-<meta name="twitter:description" content="Hum 3 notes and instantly find the karaoke songs that match your voice. Free vocal range test."/>
+<meta name="twitter:title" content="HumCoincidencia | Songs That Coincidencia My Voice | Karaoke"/>
+<meta name="twitter:description" content="Hum 3 notes and instantly find the karaoke songs that match your voice. Gratis vocal range test."/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   :root {
@@ -39,7 +39,7 @@
     font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; overflow: hidden; }
 
   .screen { display: none; flex-direction: column; align-items: center;
-    justify-content: center; min-height: 100vh; padding: 28px 24px;
+    justify-content: space-evenly; min-height: 100vh; padding: 8px 24px;
     text-align: center; position: fixed; inset: 0; overflow-y: auto; }
   .screen.active { display: flex; }
 
@@ -49,14 +49,9 @@
   .app-name { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.04em;
     background: linear-gradient(135deg, #A855F7, #EC4899); -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; background-clip: text; }
-  .app-tagline { font-size: 0.82rem; color: var(--text2); margin: 4px 0 6px; line-height: 1.4; max-width: 280px; }
+  .app-tagline { font-size: 0.85rem; color: var(--text2); margin: 4px 0 10px; line-height: 1.4; max-width: 280px; }
 
 
-  .filter-bar { width:100%; max-width:400px; display:flex; gap:8px; overflow-x:auto; padding:8px 0 14px; scrollbar-width:none; -webkit-overflow-scrolling:touch; position:relative; z-index:10; }
-  .filter-bar::-webkit-scrollbar { display:none; }
-  .filter-chip { flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:0.72rem; font-weight:700; cursor:pointer; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.55); transition:all 0.15s; }
-  .filter-chip.active { background:rgba(168,85,247,0.25); border-color:rgba(168,85,247,0.7); color:#c4b5fd; }
-  .filter-chip:active { transform:scale(0.95); }
   .cta-btn { background: linear-gradient(135deg, #A855F7, #7C3AED);
     color: #fff; border: none; border-radius: 50px; padding: 18px 48px;
     font-size: 1.05rem; font-weight: 800; cursor: pointer; letter-spacing: 0.02em;
@@ -65,14 +60,18 @@
   .cta-btn.secondary { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
     box-shadow: none; color: var(--text2); font-size: 0.9rem; padding: 14px 36px; margin-top: 12px; }
 
-  .how-it-works { display: flex; gap: 8px; margin: 6px 0; max-width: 320px; }
+  .how-it-works { display: flex; gap: 10px; margin: 8px 0; max-width: 320px; }
   .step { flex: 1; background: var(--surface); border-radius: 14px; padding: 16px 10px;
     border: 1px solid rgba(255,255,255,0.07); }
-  .step-num { font-size: 1.1rem; margin-bottom: 4px; }
-  .step-txt { font-size: 0.64rem; color: var(--text2); line-height: 1.3; }
+  .step-num { font-size: 1.3rem; margin-bottom: 6px; }
+  .step-txt { font-size: 0.68rem; color: var(--text2); line-height: 1.4; }
+
+  /* ── WELCOME SCREEN (mobile scroll fix) ── */
+  #screen-welcome { justify-content: flex-start; padding-top: 64px; padding-bottom: max(40px, env(safe-area-inset-bottom, 40px)); overflow-y: auto; -webkit-overflow-scrolling: touch; gap: 0; }
+  #screen-welcome > * { flex-shrink: 0; }
 
   /* ── HUM TEST ── */
-  #screen-test { justify-content: flex-start; padding-top: 60px; }
+  #screen-test { justify-content: flex-start; padding-top: 68px; padding-bottom: max(60px, env(safe-area-inset-bottom, 60px)); overflow-y: auto; -webkit-overflow-scrolling: touch; }
   .test-phase { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
   .test-title { font-size: 1.7rem; font-weight: 900; margin-bottom: 6px; line-height: 1.2; }
@@ -106,30 +105,46 @@
     transition: transform 0.15s; display: flex; align-items: center; justify-content: center;
     position: relative; }
   .mic-btn.recording { animation: pulse-ring 1.2s ease-out infinite; }
+  .mic-btn.ready { animation: none; }
+  .mic-btn-wrap { position: fixed; bottom: max(32px, env(safe-area-inset-bottom, 32px)); left: 0; right: 0; display: flex; align-items: center; justify-content: center; z-index: 200; }
+  .mic-btn-wrap::before { content:''; position:absolute; width:108px; height:108px; border-radius:50%; background: conic-gradient(#EC4899 0deg, #A855F7 120deg, transparent 180deg, transparent 360deg); animation: orbit 1.2s linear infinite; opacity: 0; transition: opacity 0.3s; pointer-events:none; }
+  .mic-btn-wrap.ready::before { opacity: 1; }
+  @keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   .mic-btn:active { transform: scale(0.95); }
   @keyframes pulse-ring {
     0% { box-shadow: 0 0 0 0 rgba(168,85,247,0.6); }
     70% { box-shadow: 0 0 0 24px rgba(168,85,247,0); }
     100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); }
   }
-  .mic-label { font-size: 1.15rem; font-weight: 800; color: #fff; margin-top: 10px; text-shadow: 0 1px 8px rgba(0,0,0,0.5); padding: 8px 16px; text-align: center; }
+  @keyframes tap-ring {
+    0% { box-shadow: 0 0 0 0 rgba(236,72,153,0.7); }
+    70% { box-shadow: 0 0 0 28px rgba(236,72,153,0); }
+    100% { box-shadow: 0 0 0 0 rgba(236,72,153,0); }
+  }
+  .mic-label { font-size: 1.15rem; font-weight: 800; color: #fff; margin-top: 10px; letter-spacing: 0.02em; position: fixed; bottom: max(8px, calc(env(safe-area-inset-bottom, 8px) - 8px)); left: 0; right: 0; text-align: center; z-index: 200; text-shadow: 0 1px 8px rgba(0,0,0,0.5); padding: 8px 16px; }
   .mic-countdown { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 2rem; font-weight: 900; color: #fff; pointer-events: none; text-shadow: 0 0 12px rgba(168,85,247,0.8); display: none; }
   .mic-countdown.visible { display: block; }
   .hum-step-banner { font-size: 1.3rem; font-weight: 800; color: #fff; text-align: center; padding: 12px 20px; border-radius: 14px; background: linear-gradient(135deg, rgba(168,85,247,0.25), rgba(236,72,153,0.25)); border: 1px solid rgba(168,85,247,0.3); margin-bottom: 12px; min-height: 52px; display: flex; align-items: center; justify-content: center; line-height: 1.3; }
+  .phase-flash { position:fixed; top:0; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center; z-index:500; pointer-events:none; opacity:0; transition:opacity 0.15s; }
+  .phase-flash.show { opacity:1; }
+  .phase-flash-text { font-size:5rem; font-weight:900; color:#fff; text-shadow: 0 0 40px rgba(168,85,247,0.9); letter-spacing:0.05em; }
 
   .phase-dots { display: flex; gap: 12px; margin: 20px 0; align-items: center; }
   .phase-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.3s, transform 0.3s; border: 2px solid rgba(255,255,255,0.1); }
-  .phase-dot.done { background: var(--green); transform: scale(1); border-color: var(--green); }
-  .phase-dot.active { background: var(--accent); transform: scale(1.2); border-color: var(--accent); }
+  .phase-dot.active { transform: scale(1.2); border-color: var(--accent); }
+  .phase-dot.done { transform: scale(1); border-color: var(--green); }
+  .phase-dot.done { background: var(--green); }
+  .phase-dot.active { background: var(--accent); }
 
   /* ── RESULTS ── */
-  #screen-results { justify-content: flex-start; padding-top: 44px; padding-bottom: 160px; overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 100%; }
-  .results-header { width: 100%; max-width: 400px; }
+  #screen-results { justify-content: flex-start; padding: 52px 0 160px; overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 100%; gap: 0; }
+  .results-sticky-top { position: sticky; top: 0; z-index: 20; background: var(--bg); padding: 12px 16px 0; width: 100%; }
+  .results-header { width: 100%; max-width: 400px; margin-bottom: 6px; }
   .voice-badge { display: inline-flex; align-items: center; gap: 8px;
     background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(124,58,237,0.2));
     border: 1px solid rgba(168,85,247,0.4); border-radius: 50px;
-    padding: 8px 20px; font-size: 0.9rem; font-weight: 800;
-    color: var(--accent); margin-bottom: 16px; }
+    padding: 6px 16px; font-size: 0.88rem; font-weight: 800;
+    color: var(--accent); margin-bottom: 6px; }
 
   .section-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.1em; color: var(--text3); margin: 20px 0 10px; width: 100%; max-width: 400px; text-align: left; }
@@ -144,16 +159,63 @@
   .comp-card.yours .comp-card-title { color: var(--accent); }
   .comp-card.generic .comp-card-title { color: var(--text3); }
 
-  .song-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-  .song-item { display: flex; flex-direction: column; padding: 8px 10px;
-    background: rgba(255,255,255,0.04); border-radius: 10px; }
-  .song-title { font-size: 0.75rem; font-weight: 700; line-height: 1.2; }
-  .song-artist { font-size: 0.65rem; color: var(--text3); margin-top: 2px; }
-  .song-match { font-size: 0.6rem; color: var(--green); font-weight: 700; margin-top: 2px; }
+  /* ── Category Badge (pill) ── */
+  .cat-badge { display: inline-flex; align-items: center; gap: 3px;
+    border-radius: 50px; padding: 2px 8px; font-size: 0.58rem; font-weight: 700;
+    letter-spacing: 0.02em; white-space: nowrap; margin-top: 4px; }
+  .cat-best   { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+  .cat-top    { background: rgba(250,204,21,0.15); color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
+  .cat-stretch{ background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+  .cat-duet   { background: rgba(168,85,247,0.15); color: #a78bfa; border: 1px solid rgba(168,85,247,0.3); }
+  .cat-trans  { background: rgba(96,165,250,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+
+  /* ── Confidence Tiers ── */
+  .tier-badge { display: inline-flex; align-items: center; gap: 4px;
+    border-radius: 50px; padding: 3px 10px; font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 0.04em; white-space: nowrap; }
+  .tier-nail  { background: rgba(16,185,129,0.18); color: #10b981; border: 1px solid rgba(16,185,129,0.35); }
+  .tier-strong{ background: rgba(168,85,247,0.18); color: #a78bfa; border: 1px solid rgba(168,85,247,0.35); }
+  .tier-stretch{ background: rgba(251,146,60,0.18); color: #fb923c; border: 1px solid rgba(251,146,60,0.35); }
+
+  /* ── Filter Bar ── */
+  .filter-bar { width: 100%; max-width: 400px; display: flex; gap: 8px;
+    overflow-x: auto; padding: 8px 0 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    position: relative; z-index: 10; }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-chip { flex-shrink: 0; padding: 7px 14px; border-radius: 50px;
+    font-size: 0.72rem; font-weight: 700; cursor: pointer; border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.55); transition: all 0.15s; }
+  .filter-chip.active { background: rgba(168,85,247,0.25); border-color: rgba(168,85,247,0.7);
+    color: #c4b5fd; }
+  .filter-chip:active { transform: scale(0.95); }
+
+  /* ── Song List ── */
+  .song-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .song-item { display: flex; flex-direction: column; padding: 12px 14px;
+    background: rgba(255,255,255,0.04); border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.06); cursor: pointer; transition: border-color 0.15s; }
+  .song-item:active { border-color: rgba(168,85,247,0.5); background: rgba(168,85,247,0.07); }
+  .song-item-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .song-title { font-size: 0.82rem; font-weight: 800; line-height: 1.25; flex: 1; }
+  .song-meta { font-size: 0.68rem; color: var(--text3); margin-top: 3px; display: flex; align-items: center; gap: 6px; }
+  .song-meta .dot { opacity: 0.4; }
+  .song-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+  .song-item.hidden-song { display: none; }
+  .song-item.generic .song-match { color: #EF4444; }
+  .sing-btn { font-size: 0.62rem; background: linear-gradient(135deg,#A855F7,#7C3AED);
+    color: #fff; padding: 4px 12px; border-radius: 50px; font-weight: 700; white-space: nowrap; }
+
+  /* ── Desafío Section ── */
+  .stretch-section { width: 100%; max-width: 400px; margin-top: 8px; }
+  .stretch-toggle { width: 100%; text-align: center; padding: 10px;
+    background: rgba(251,146,60,0.08); border: 1px dashed rgba(251,146,60,0.3);
+    border-radius: 12px; color: #fb923c; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+
+  .song-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .song-item.generic .song-match { color: #EF4444; }
 
   .range-bar-wrap { width: 100%; max-width: 400px; background: var(--surface);
-    border-radius: 16px; padding: 16px; margin-bottom: 16px;
+    border-radius: 12px; padding: 10px 14px; margin-bottom: 10px;
     border: 1px solid rgba(255,255,255,0.07); }
   .range-bar-label { font-size: 0.65rem; color: var(--text3); text-transform: uppercase;
     letter-spacing: 0.08em; margin-bottom: 10px; }
@@ -168,19 +230,21 @@
     color: var(--text2); border-radius: 50px; padding: 14px 36px;
     font-size: 0.88rem; font-weight: 700; cursor: pointer; margin-top: 8px; }
 
-  .confetti-emoji { font-size: 2.5rem; margin-bottom: 4px; }
+  .confetti-emoji { font-size: 1.8rem; margin-bottom: 2px; }
+
+  /* ── Mobile Header Bar ─────────────────────────────── */
+  .hm-header { position:fixed; top:0; left:0; right:0; z-index:10000; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:rgba(8,6,15,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.1); }
+  .hm-header-logo { text-decoration:none; font-size:1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 
   /* ── Hamburger Nav ──────────────────────────────────── */
-  .hm-header { position:fixed; top:0; left:0; right:0; z-index:1001; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:rgba(8,6,15,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.1); }
-  .hm-header-logo { text-decoration:none; font-size:1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .hm-nav-toggle { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; }
+  .hm-nav-toggle { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; padding:0; flex-shrink:0; }
   .hm-nav-toggle span { display:block; width:20px; height:2px; background:rgba(168,85,247,0.9); border-radius:2px; transition:all 0.25s; }
   .hm-nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
   .hm-nav-toggle.open span:nth-child(2) { opacity:0; }
   .hm-nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-  .hm-nav-drawer { position:fixed; top:0; left:0; width:240px; height:100%; background:rgba(8,6,15,0.97); backdrop-filter:blur(16px); border-right:1px solid rgba(168,85,247,0.15); z-index:999; transform:translateX(-100%); transition:transform 0.28s cubic-bezier(.4,0,.2,1); padding:70px 0 24px; }
-  .hm-nav-drawer.open { transform:translateX(0); }
-  .hm-nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:998; opacity:0; pointer-events:none; transition:opacity 0.28s; }
+  .hm-nav-drawer { position:fixed; top:0; left:0; width:240px; height:100%; background:rgba(8,6,15,0.97); backdrop-filter:blur(16px); border-right:1px solid rgba(168,85,247,0.15); z-index:9999; transform:translateX(-100%); visibility:hidden; transition:transform 0.28s cubic-bezier(.4,0,.2,1), visibility 0.28s; padding:70px 0 24px; }
+  .hm-nav-drawer.open { transform:translateX(0); visibility:visible; }
+  .hm-nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9998; opacity:0; pointer-events:none; transition:opacity 0.28s; }
   .hm-nav-overlay.open { opacity:1; pointer-events:all; }
   .hm-nav-logo { padding:0 20px 20px; border-bottom:1px solid rgba(168,85,247,0.12); margin-bottom:8px; }
   .hm-nav-logo span { font-size:1.1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
@@ -189,180 +253,519 @@
   .hm-nav-item.active { color:#A855F7; }
   .hm-nav-divider { height:1px; background:rgba(168,85,247,0.1); margin:8px 20px; }
 
+  /* ── Account indicator ── */
+  .hm-account-indicator { display:inline-flex; align-items:center; gap:4px; font-size:0.68rem; font-weight:700; color:var(--text3); margin-left:8px; cursor:pointer; }
+  .hm-account-dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .hm-account-dot.premium { background:#22c55e; }
+  .hm-account-dot.free { background:rgba(255,255,255,0.3); }
+
+  /* ── PRIMER SCREEN ── */
+  #screen-primer { justify-content: center; gap: 0; padding: 24px 24px max(40px, env(safe-area-inset-bottom, 40px)); }
+  .primer-icon { font-size: 4rem; margin-bottom: 24px; }
+  .primer-title { font-size: 1.6rem; font-weight: 900; line-height: 1.25; margin-bottom: 10px; max-width: 280px; }
+  .primer-sub { font-size: 0.92rem; color: var(--text2); line-height: 1.6; max-width: 280px; margin-bottom: 28px; }
+  .primer-steps { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 300px; margin-bottom: 32px; }
+  .primer-step { display: flex; align-items: center; gap: 14px; text-align: left; }
+  .primer-step-num { width: 36px; height: 36px; border-radius: 50%; background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+  .primer-step-text { font-size: 0.88rem; color: var(--text2); line-height: 1.4; }
+  .primer-step-text strong { color: #fff; }
+  .primer-ready-btn { width: 100%; max-width: 300px; padding: 18px; background: linear-gradient(135deg, #A855F7, #7C3AED); color: #fff; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; letter-spacing: 0.02em; box-shadow: 0 0 40px rgba(168,85,247,0.35); }
+  .primer-ready-btn:active { transform: scale(0.97); }
+  .primer-tip { font-size: 0.72rem; color: var(--text3); margin-top: 16px; max-width: 260px; line-height: 1.5; }
+
+  /* ── COUNTDOWN RING (SVG) ── */
+  .countdown-ring-wrap { position: relative; width: 120px; height: 120px; margin: 0 auto; }
+  .countdown-ring-svg { width: 120px; height: 120px; transform: rotate(-90deg); }
+  .countdown-ring-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 6; }
+  .countdown-ring-progress { fill: none; stroke: url(#ring-grad); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 339.292; stroke-dashoffset: 0; transition: stroke-dashoffset 0.1s linear; }
+  .countdown-ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .countdown-ring-number { font-size: 2.2rem; font-weight: 900; color: #fff; line-height: 1; }
+  .countdown-ring-label { font-size: 0.65rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+  /* ── AUTO-FLOW TEST SCREEN ── */
+  .auto-phase-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .auto-phase-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; line-height: 1.2; }
+  .auto-phase-sub { font-size: 0.85rem; color: var(--text2); line-height: 1.5; max-width: 280px; margin-bottom: 24px; }
+  .auto-phase-emoji { font-size: 3rem; margin-bottom: 16px; transition: transform 0.3s; }
+  .auto-status { font-size: 0.82rem; color: var(--text2); margin-top: 16px; min-height: 24px; font-weight: 600; }
+  .auto-status.listening { color: var(--accent); }
+  .auto-status.success { color: var(--green); }
+
+  /* Phase success flash */
+  .phase-success-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 500; pointer-events: none; opacity: 0; transition: opacity 0.2s; background: rgba(8,6,15,0.85); }
+  .phase-success-overlay.show { opacity: 1; }
+  .phase-success-check { font-size: 4rem; margin-bottom: 8px; }
+  .phase-success-text { font-size: 1.3rem; font-weight: 800; color: #22C55E; }
+
+  /* ── Signup bottom sheet ── */
+  .hm-login-sheet { position:fixed; bottom:0; left:0; right:0; z-index:2500; background:rgba(18,16,26,0.98); backdrop-filter:blur(16px); border-top:1px solid rgba(168,85,247,0.25); border-radius:20px 20px 0 0; padding:24px 24px max(24px, env(safe-area-inset-bottom, 24px)); transform:translateY(100%); transition:transform 0.35s cubic-bezier(.4,0,.2,1); max-height:90vh; overflow-y:auto; }
+  .hm-login-sheet.show { transform:translateY(0); }
+  .hm-login-sheet h3 { font-size:1.05rem; font-weight:800; margin-bottom:8px; }
+  .hm-login-sheet p { font-size:0.82rem; color:var(--text2); line-height:1.5; margin-bottom:16px; }
+  .hm-login-sheet input { width:100%; padding:14px 16px; background:rgba(255,255,255,0.07); border:1px solid rgba(168,85,247,0.3); border-radius:12px; color:#fff; font-size:0.95rem; outline:none; font-family:inherit; margin-bottom:10px; }
+  .hm-login-sheet input:focus { border-color:rgba(168,85,247,0.7); }
+  .hm-login-sheet .hm-login-btn { width:100%; padding:14px; background:linear-gradient(135deg,#7c3aed,#a855f7); color:#fff; border:none; border-radius:12px; font-size:0.95rem; font-weight:800; cursor:pointer; font-family:inherit; }
+  .hm-login-sheet .hm-login-btn:disabled { opacity:0.5; cursor:default; }
+  .hm-login-dismiss { background:none; border:none; color:rgba(255,255,255,0.3); font-size:0.82rem; cursor:pointer; margin-top:10px; width:100%; text-align:center; font-family:inherit; }
+  .hm-login-sheet .hm-field-error { color:#ef4444; font-size:0.75rem; margin:-6px 0 8px 4px; display:none; }
+  .hm-login-sheet .hm-sheet-link { color:#a78bfa; font-size:0.82rem; text-align:center; display:block; margin-top:8px; cursor:pointer; background:none; border:none; font-family:inherit; }
+
+  @media (min-width: 768px) {
+    body { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .app-tagline { max-width: 900px; }
+    .how-it-works { max-width: 1000px; }
+    .test-sub { max-width: 900px; }
+    .pitch-display { max-width: 1000px; }
+    .waveform-canvas { max-width: 1000px; }
+    .range-summary { max-width: 1000px; }
+    .results-header { max-width: 1200px; }
+    .comparison-grid { max-width: 1200px; grid-template-columns: repeat(3, 1fr); }
+    .filter-bar { max-width: 1200px; }
+    .dashboard-container { max-width: 1600px; margin: 0 auto; }
+    .hum-card { max-width: 1200px; }
+  }
+
+  @media (max-width: 767px) {
+    #screen-welcome {
+      padding-bottom: max(80px, env(safe-area-inset-bottom, 80px));
+      overscroll-behavior-y: contain;
+    }
+    footer {
+      position: relative;
+      margin-top: 40px;
+      padding-bottom: max(32px, env(safe-area-inset-bottom, 32px)) !important;
+    }
+  }
+
+  /* ── Interest Selector ── */
+  .interest-chips { display:flex; flex-wrap:wrap; gap:7px; }
+  .interest-chip {
+    padding: 6px 13px;
+    border-radius: 50px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(124,58,237,0.3);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.5);
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .interest-chip.selected {
+    background: linear-gradient(135deg,#7c3aed,#db2777);
+    border-color: transparent;
+    color: #fff;
+  }
+  #interest-selector-panel {
+    display: none;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(124,58,237,0.22);
+    border-radius: 14px;
+    padding: 18px 16px;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 380px;
+  }
+  #interest-active-badge {
+    display: none;
+    font-size: 0.72rem;
+    color: #a855f7;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 6px;
+    cursor: pointer;
+  }
+
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2LE5Q48EG">
-  // Set language to Spanish for Spanish site
-  localStorage.setItem('hummatch_lang', 'es');
+<script>
+  // Set language to English for main site (MUST run before any async scripts)
+  localStorage.setItem('hummatch_lang', 'en');
 </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2LE5Q48EG"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
   gtag("config", "G-M2LE5Q48EG");
 </script>
-</head>
+<script>
+// PWA auto-update: check build version on load, force reload if stale
+(function() {
+  const KEY = 'hm_build_v';
+  fetch('/api/hummatch/version', { cache: 'no-store' })
+    .then(r => r.json())
+    .then(data => {
+      const stored = localStorage.getItem(KEY);
+      if (stored && stored !== data.v) {
+        localStorage.setItem(KEY, data.v);
+        location.reload(true);
+      } else {
+        localStorage.setItem(KEY, data.v);
+      }
+    })
+    .catch(() => {}); // silent fail, never block the app
+})();
+</script>
+    <link rel="alternate" hreflang="en" href="https://hummatch.me/" />
+    <link rel="alternate" hreflang="es" href="https://hummatch.me/es/" />
+  </head>
 <body>
 <!-- Header Bar -->
 <header class="hm-header">
   <a class="hm-header-logo" href="/">HumMatch</a>
-  <button class="hm-nav-toggle" id="navToggle" aria-label="Menú" onclick="toggleNav()">
+  <button class="hm-nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </button>
 </header>
 <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
 <nav class="hm-nav-drawer" id="navDrawer">
   <div class="hm-nav-logo"><span>HumMatch</span></div>
-  <a class="hm-nav-item" href="/es" style="color:#c084fc;font-weight:700;">🎤 Probar HumMatch</a>
-  <a class="hm-nav-item" href="/es/how-it-works">Cómo Funciona</a>
-  <a class="hm-nav-item" href="/pricing">Precios</a>
+  <a class="hm-nav-item" href="/" style="color:#c084fc;font-weight:700;">🎤 Try HumMatch</a>
+  <a class="hm-nav-item" href="/how-it-works">Cómo Funciona</a>
+  <!-- Precios link removed -->
   <a class="hm-nav-item" href="/squadmatch">SquadMatch</a>
-  <a class="hm-nav-item" href="/">🌎 English</a>
+  <a class="hm-nav-item" href="/es">🌎 Español</a>
   <div class="hm-nav-divider"></div>
-  <a class="hm-nav-item" href="/es/affiliate">Afiliados</a>
-  <a class="hm-nav-item" href="/blog">Blog</a>
-  <a class="hm-nav-item" href="/es/contact">Contacto</a>
+  <a class="hm-nav-item" href="/affiliate">Affiliate</a>
+  <a class="hm-nav-item" href="/es/blog">Blog</a>
+  <a class="hm-nav-item" href="/contact">Contact</a>
   <div class="hm-nav-divider"></div>
-  <a class="hm-nav-item" href="/dashboard" id="navLoginItem">Iniciar Sesión</a>
+  <a class="hm-nav-item" href="/login?return=/" id="navLoginItem">Iniciar Sesión</a>
+  <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Become a Hummer</a>
 </nav>
 
 
+<!-- Squad context banner (shown when joining squad via index.html) -->
+<div id="squad-context-banner" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(219,39,119,0.15));border-bottom:1px solid rgba(124,58,237,0.3);padding:10px 18px;text-align:center">
+  <div style="font-size:0.82rem;color:#e2e0f0;font-weight:600" id="squad-banner-text">Estás tarareando para a SquadMatch</div>
+  <div style="font-size:0.72rem;color:rgba(255,255,255,0.48);margin-top:2px">Complete your hum - your results will be added to the squad</div>
+</div>
+
 <!-- SCREEN 1: WELCOME -->
 <div id="screen-welcome" class="screen active">
-  <div style="text-align:center;"><img src="/hummatch-logo.png" alt="HumMatch" style="height:130px;display:inline-block;"/></div>
-  <div class="app-tagline">Tararea 3 notas. Encuentra las canciones que van con tu voz.<br>Prueba gratuita de rango vocal para karaoke.</div>
+  <div style="text-align:center;"><img src="/hummatch-logo.png" alt="HumMatch" style="height:100px;display:inline-block;"/></div>
+  <div class="app-tagline" style="font-size:1.05rem;color:var(--text1);font-weight:800;max-width:300px;">Tararea por 10 segundos. Encuentra canciones hechas para tu voz.</div>
+  <div style="font-size:0.78rem;color:var(--text3);max-width:280px;line-height:1.5;margin-bottom:10px;">No singing required. Just hum, we do the rest.</div>
 
   <div class="how-it-works">
     <div class="step">
-      <div class="step-num">🎵</div>
-      <div class="step-txt">Tararea tu nota grave, media y aguda por 3 segundos cada una</div>
+      <div class="step-num">🎤</div>
+      <div class="step-txt">Tap once and hum 3 notes (we walk you through it)</div>
     </div>
     <div class="step">
       <div class="step-num">🧬</div>
-      <div class="step-txt">Analizamos tu rango vocal y tu timbre de voz</div>
+      <div class="step-txt">We map your vocal range and tone in real time</div>
     </div>
     <div class="step">
       <div class="step-num">🎯</div>
-      <div class="step-txt">Encuentra canciones y artistas perfectos para tu voz</div>
+      <div class="step-txt">Get a list of songs you can actually nail</div>
     </div>
   </div>
+
+  <!-- Genre filters removed - discovery through popularity tiers instead -->
 
   <div style="width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;">
-  <button class="cta-btn" style="width:100%;margin-top:8px;" onclick="startTest()">Encontrar Mis Canciones →</button>
+  <button class="cta-btn" style="width:100%;margin-top:12px;" onclick="startTest()">Encontrar Mis Canciones →</button>
   <div id="saved-profile-btn" style="display:none;margin-top:12px;width:100%;max-width:300px;">
-    <button class="cta-btn secondary" style="width:100%;" onclick="loadSavedProfile()">🎤 Usar Mi Voz Guardada</button>
+    <button class="cta-btn secondary" style="width:100%;" onclick="loadSavedProfile()">🎤 Use My Guardado hace Voice</button>
     <div style="font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:6px;" id="saved-profile-date"></div>
   </div>
+
   </div><!-- /cta-wrapper -->
-  <a href="/pricing" style="display:inline-block;margin-top:20px;font-size:0.78rem;color:rgba(168,85,247,0.7);text-decoration:none;letter-spacing:0.03em;">
-    ✦ Hazte Squad Leader: Hums ilimitados y más
-  </a>
-  <button id="install-btn" onclick="installHumMatch()" style="display:block;margin-top:6px;background:none;border:1px solid rgba(168,85,247,0.35);border-radius:20px;color:rgba(168,85,247,0.8);font-size:0.8rem;font-weight:600;padding:8px 20px;cursor:pointer;">
-    📲 Agregar a Inicio
-  </button>
+
+  <!-- SquadCoincidencia Post-Hum Prompt (Screen 1) - MOVED ABOVE UPGRADE CTA -->
+  <div id="squad-prompt-module" style="width:100%;max-width:380px;margin-top:16px;padding:0 4px;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.18);border-radius:14px;padding:24px 20px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-30px;right:-30px;width:110px;height:110px;background:radial-gradient(circle,rgba(168,85,247,0.14),transparent 70%);pointer-events:none;"></div>
+      <div style="font-size:1.05rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:8px;" id="squad-prompt-title">Iniciar un Dueto</div>
+      <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:18px;" id="squad-prompt-desc">Invita a un amigo, ambos tararean, encuentra canciones para cantar juntos.</div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;">
+        <button id="squad-start-btn" onclick="startSquadMatch()" style="flex:1;padding:11px 8px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.01em;">Iniciar un Dueto 🎤</button>
+        <button onclick="dismissSquadPrompt()" style="flex:1;padding:11px 8px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);font-size:0.82rem;font-weight:600;border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;">Maybe later</button>
+      </div>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.35);text-align:center;line-height:1.5;"><span id="squad-prompt-details">Invita a 1 amigo. Todos tararean una vez. Nosotros hacemos el resto.</span><br><span style="font-size:0.68rem;margin-top:4px;display:inline-block;">Gratis tier: Duets (2 people). Premium: Full Squads up to 5.</span></div>
+    </div>
+  </div>
+
+  <!-- RETURNING USER UPGRADE CTA (shown only for returning non-premium users) - MOVED BELOW SQUADMATCH -->
+  <div id="homepage-returning-upgrade" style="display:none;margin-top:14px;width:100%;max-width:380px;padding:0 4px;">
+    <div style="background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.06));border:1px solid rgba(168,85,247,0.25);border-radius:12px;padding:18px;text-align:left;">
+      <div style="font-size:0.95rem;font-weight:800;color:#fff;margin-bottom:8px;">Lead your squad's next singalong</div>
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.55;margin-bottom:10px;">
+        Invite up to 4 friends and unlock shared song suggestions based on your group's range, timbre, and brightness.
+      </div>
+      <ul style="list-style:none;padding:0;margin:0 0 10px 0;text-align:left;">
+        <li style="font-size:0.76rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:4px;padding-left:18px;position:relative;"><span style="position:absolute;left:0;">•</span> Track who's hummed</li>
+        <li style="font-size:0.76rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:4px;padding-left:18px;position:relative;"><span style="position:absolute;left:0;">•</span> Save shared playlists in HQ</li>
+        <li style="font-size:0.76rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:10px;padding-left:18px;position:relative;"><span style="position:absolute;left:0;">•</span> Unlock harmonic-fit group song matching</li>
+      </ul>
+      <div style="font-size:0.73rem;color:rgba(255,255,255,0.5);margin-bottom:14px;font-style:italic;">Only Squad Leaders can issue 20% discount codes.</div>
+      <button onclick="window.location.href='/pricing?v=2'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Become a Squad Leader</button>
+    </div>
+  </div>
+
+  <!-- Mi Perfil: Active Squads Module -->
+  <div id="my-hq-squads" style="width:100%;max-width:380px;margin-top:14px;padding:0 4px;display:none;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:18px 18px;">
+      <div style="font-size:0.68rem;color:rgba(255,255,255,0.32);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">MY SQUADS</div>
+      <div id="my-squads-list"></div>
+      <a href="/squadmatch" style="display:block;margin-top:10px;text-align:center;font-size:0.78rem;color:rgba(168,85,247,0.8);font-weight:600;">+ New SquadMatch</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="width:100%;margin-top:32px;padding:20px 0 max(24px, env(safe-area-inset-bottom, 24px));border-top:1px solid rgba(255,255,255,0.06);">
+    <div style="display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;">
+      <a href="/how-it-works" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Cómo Funciona</a>
+      <a href="/es/precios" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Precios</a>
+      <a href="/squadmatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">SquadMatch</a>
+      <a href="/es" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Español</a>
+      <a href="/affiliate" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Affiliate</a>
+      <a href="/songs" style="font-size:0.9rem;color:#a855f7;text-decoration:none;font-weight:600;">🎵 Explorar Canciones</a>
+      <a href="/es/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
+      <a href="/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contact</a>
+      <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
+      <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
+      <a href="/login?return=/" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Iniciar Sesión</a>
+    </div>
+    <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.2);">&copy; 2026 HumMatch</div>
+  </footer>
+
 </div>
 
-<!-- SCREEN 2: HUM TEST -->
+<!-- SCREEN: PRIMER (drunk-proof prep screen) -->
+<div id="screen-primer" class="screen">
+  <div class="primer-icon">🎤</div>
+  <div class="primer-title">Quick voice check, takes 10 seconds</div>
+  <div class="primer-sub">You'll hum 3 times. No singing, no skill needed. Just make a "hmmmm" sound.</div>
+
+  <div class="primer-steps">
+    <div class="primer-step">
+      <div class="primer-step-num">1</div>
+      <div class="primer-step-text"><strong>Low hum</strong>: as deep as you can go</div>
+    </div>
+    <div class="primer-step">
+      <div class="primer-step-num">2</div>
+      <div class="primer-step-text"><strong>Normal voice</strong>: your everyday hum</div>
+    </div>
+    <div class="primer-step">
+      <div class="primer-step-num">3</div>
+      <div class="primer-step-text"><strong>High hum</strong>: as high as you can go</div>
+    </div>
+  </div>
+
+  <button class="primer-ready-btn" onclick="beginAutoCapture()">I'm Ready →</button>
+  <div class="primer-tip">We only listen to the pitch. No audio is recorded or stored.</div>
+</div>
+
+<!-- SCREEN 2: HUM TEST (auto-flow) -->
+<div class="phase-success-overlay" id="phase-success"><div class="phase-success-check">✅</div><div class="phase-success-text" id="phase-success-text">Got it!</div></div>
+
 <div id="screen-test" class="screen">
-  <div class="test-phase" id="phase-label">FASE 1 DE 3</div>
-  <div class="test-title" id="phase-title">Tararea tu nota más grave</div>
-  <div class="test-sub" id="phase-sub">Baja lo más que puedas cómodamente y mantén el tono</div>
+  <div class="auto-phase-label" id="phase-label">HUM 1 OF 3</div>
+  <div class="auto-phase-emoji" id="phase-emoji">⬇️</div>
+  <div class="auto-phase-title" id="phase-title">Hum your lowest note</div>
+  <div class="auto-phase-sub" id="phase-sub">Go as deep as you comfortably can. Hold it steady.</div>
 
-  <div class="pitch-display">
-    <div class="pitch-note" id="pitch-note">—</div>
-    <div class="pitch-hz" id="pitch-hz">esperando señal…</div>
-    <div class="pitch-bar-wrap"><div class="pitch-bar" id="pitch-bar"></div></div>
-  </div>
-
-  <canvas class="waveform-canvas" id="waveform-canvas" width="360" height="60"></canvas>
-
-  <div class="range-summary">
-    <div class="range-box">
-      <div class="range-box-label">Grave</div>
-      <div class="range-box-value" id="low-note">—</div>
-    </div>
-    <div class="range-box">
-      <div class="range-box-label">Media</div>
-      <div class="range-box-value" id="mid-note">—</div>
-    </div>
-    <div class="range-box">
-      <div class="range-box-label">Aguda</div>
-      <div class="range-box-value" id="high-note">—</div>
+  <div class="countdown-ring-wrap" id="countdown-ring-wrap">
+    <svg class="countdown-ring-svg" viewBox="0 0 120 120">
+      <defs><linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#EC4899"/></linearGradient></defs>
+      <circle class="countdown-ring-bg" cx="60" cy="60" r="54"/>
+      <circle class="countdown-ring-progress" id="countdown-ring" cx="60" cy="60" r="54"/>
+    </svg>
+    <div class="countdown-ring-center">
+      <div class="countdown-ring-number" id="ring-number">3</div>
+      <div class="countdown-ring-label" id="ring-label">seconds</div>
     </div>
   </div>
 
-  <div class="phase-dots">
+  <div class="auto-status" id="auto-status">🎤 Listening...</div>
+
+  <div class="phase-dots" style="margin-top:20px;">
     <div class="phase-dot active" id="dot-0"></div>
     <div class="phase-dot" id="dot-1"></div>
     <div class="phase-dot" id="dot-2"></div>
   </div>
-  <div id="phase-progress-text" style="font-size:0.9rem;font-weight:700;color:#A855F7;margin-bottom:8px;min-height:22px;"></div>
 
-  <div class="hum-step-banner" id="hum-step-banner">👇 Toca el botón para comenzar a tararear</div>
-
-  <button class="mic-btn" id="mic-btn" onclick="toggleCapture()" style="position:relative;">🎤<span class="mic-countdown" id="mic-countdown"></span></button>
-  <div class="mic-label" id="mic-label">TOCA PARA EMPEZAR</div>
+  <!-- Hidden elements for pitch detection (still needed by audio engine) -->
+  <div style="display:none;">
+    <div id="pitch-note">-</div>
+    <div id="pitch-hz"></div>
+    <div id="pitch-bar"></div>
+    <div id="signal-status"></div>
+    <canvas id="waveform-canvas" width="360" height="60"></canvas>
+    <div id="low-note">-</div>
+    <div id="mid-note">-</div>
+    <div id="high-note">-</div>
+  </div>
 </div>
 
 <!-- SCREEN 3: RESULTS -->
 <div id="screen-results" class="screen">
-  <div class="results-header">
-    <div class="confetti-emoji" id="result-emoji">🎉</div>
-    <div class="voice-badge" id="voice-badge">⚡ Cargando…</div>
-    <div style="font-size:0.9rem;color:var(--text2);margin-bottom:4px;" id="range-text"></div>
-  </div>
-
-  <div class="range-bar-wrap" id="range-bar-section">
-    <div class="range-bar-label">Tu Rango Vocal</div>
-    <div class="range-bar-track">
-      <div class="range-bar-fill" id="range-bar-fill" style="left:20%;width:40%;"></div>
+  <div class="results-sticky-top">
+    <div class="results-header">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div class="confetti-emoji" id="result-emoji">🎉</div>
+        <span id="hm-account-badge" class="hm-account-indicator" style="display:none;" onclick="hmShowAccountInfo()"></span>
+      </div>
+      <div class="voice-badge" id="voice-badge">⚡ Loading...</div>
+      <div style="font-size:0.9rem;color:var(--text2);margin-bottom:4px;" id="range-text"></div>
+      <div style="font-size:0.88rem;color:var(--text2);margin-bottom:8px;font-weight:600;" id="brightness-text"></div>
     </div>
-    <div class="range-bar-ticks">
-      <span>E1</span><span>A2</span><span>E3</span><span>A4</span><span>E5</span><span>C7</span>
+
+    <div class="range-bar-wrap" id="range-bar-section">
+      <div class="range-bar-label">Your Rango Vocal</div>
+      <div class="range-bar-track">
+        <div class="range-bar-fill" id="range-bar-fill" style="left:20%;width:40%;"></div>
+      </div>
+      <div class="range-bar-ticks">
+        <span>E1</span><span>A2</span><span>E3</span><span>A4</span><span>E5</span><span>C7</span>
+      </div>
     </div>
-  </div>
 
-
-  <!-- FILTER BAR -->
-  <div class="filter-bar" id="filter-bar">
-    <div class="filter-chip active" data-filter="all" onclick="setFilter('all',this)">🎵 Todas</div>
+    <!-- FILTER BAR -->
+    <div class="filter-bar" id="filter-bar">
+    <div class="filter-chip active" data-filter="all" onclick="setFilter('all',this)">🎵 Todas Songs</div>
+    <div class="filter-chip" data-filter="nail" onclick="setFilter('nail',this)">✅ Ideal</div>
+    <div class="filter-chip" data-filter="car" onclick="setFilter('car',this)">🚗 Canciones de Auto</div>
+    <div class="filter-chip" data-filter="solo" onclick="setFilter('solo',this)">🎧 Canta Solo</div>
+    <div class="filter-chip" data-filter="group" onclick="setFilter('group',this)">👯 Canta en Grupo</div>
+    <div class="filter-chip" data-filter="familiar" onclick="setFilter('familiar',this)">⭐ La Conozco</div>
+    <div class="filter-chip" data-filter="pop" onclick="setFilter('pop',this)">🎤 Pop</div>
+    <div class="filter-chip" data-filter="rock" onclick="setFilter('rock',this)">🎸 Rock</div>
     <div class="filter-chip" data-filter="country" onclick="setFilter('country',this)">🤠 Country</div>
-  </div>
-
-  <div class="section-title" id="songs-section-title">TUS CANCIONES</div>
-  <div id="filter-chips" style="display:flex;gap:6px;overflow-x:auto;padding:4px 0 12px;max-width:100%;-webkit-overflow-scrolling:touch;"></div>
-  <h3 style="font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">TUS CANCIONES</h3>
-  <ul id="your-songs" class="song-list"></ul>
-
-  <div style="display:flex;gap:10px;margin-top:24px;width:100%;max-width:400px;">
-    <button class="retry-btn" style="flex:1;" onclick="resetTest()">🔄 Volver a Probar</button>
-    <button class="retry-btn" style="flex:1;border-color:rgba(168,85,247,0.4);color:var(--accent);" onclick="showScreen('screen-welcome')">🏠 Inicio</button>
-  </div>
-
-  <!-- EXPORTAR LISTA -->
-  <div style="width:100%;max-width:400px;margin-top:20px;" id="export-block-es">
-    <div style="font-size:0.7rem;font-weight:800;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;text-align:center;margin-bottom:6px;">Guarda tu playlist</div>
-    <div id="export-count-label-es" style="font-size:0.72rem;color:rgba(168,85,247,0.7);text-align:center;margin-bottom:10px;min-height:16px;font-weight:600;"></div>
-    <div style="display:flex;gap:8px;">
-      <button onclick="exportSongListEs('copy')" style="flex:1;padding:13px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.85);font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">📋 Copiar lista</button>
-      <button onclick="exportSongListEs('csv')" style="flex:1;padding:13px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.85);font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">⬇ Descargar CSV</button>
+    <div class="filter-chip" data-filter="classic" onclick="setFilter('classic',this)">🕰 Clásicos</div>
+    <div class="filter-chip" data-filter="party" onclick="setFilter('party',this)">🎉 Éxitos</div>
+    <div class="filter-chip" data-filter="stretch" onclick="setFilter('stretch',this)">💪 Desafío</div>
+    <div class="filter-chip" data-filter="recent" onclick="setFilter('recent',this)">🔥 Recientes</div>
+    <div class="filter-chip" data-filter="90s" onclick="setFilter('90s',this)">📼 90s</div>
+    <div class="filter-chip" data-filter="80s" onclick="setFilter('80s',this)">🕹 80s</div>
+    <div class="filter-chip" data-filter="en" onclick="setFilter('en',this)">🇺🇸 English</div>
+    <div class="filter-chip" data-filter="es" onclick="setFilter('es',this)">🇪🇸 Español</div>
     </div>
-    <div style="font-size:0.68rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;line-height:1.5;">La forma más fácil de crear una playlist. Selecciona las canciones que quieras, luego copia o descarga a tu app de música favorita.</div>
+  </div><!-- end results-sticky-top -->
+
+  <!-- SCROLLABLE SONG CONTENT -->
+  <div style="padding: 0 16px; width: 100%;">
+
+  <!-- MAIN SONG LIST -->
+  <div class="section-title" id="songs-section-title">SONGS YOU CAN CONFIDENTLY SING</div>
+  <ul class="song-list" id="your-songs" style="width:100%;max-width:400px;"></ul>
+
+  <!-- STRETCH SECTION -->
+  <div class="stretch-section" id="stretch-section" style="display:none;">
+    <div class="stretch-toggle" onclick="toggleDesafío()">💪 Show stretch songs, great with a small key change</div>
+    <ul class="song-list" id="stretch-songs" style="margin-top:8px;display:none;"></ul>
   </div>
 
-  <!-- SHARE SECTION -->
-  <div style="width:100%;max-width:400px;margin-top:16px;border-top:1px solid rgba(168,85,247,0.2);padding-top:20px;text-align:center;">
-    <div style="font-size:0.68rem;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px;">Comparte tu resultado</div>
-    <button id="share-btn" onclick="shareHumMatch()" style="width:100%;padding:16px;background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;border-radius:14px;color:#fff;font-size:1rem;font-weight:800;cursor:pointer;letter-spacing:0.02em;margin-bottom:10px;">
-      🎤 Compartir Mi HumMatch
-    </button>
-    <button onclick="challengeFriend()" style="width:100%;padding:14px;background:transparent;border:1px solid rgba(168,85,247,0.35);border-radius:14px;color:var(--accent);font-size:0.9rem;font-weight:700;cursor:pointer;">
-      🎯 Retar a un Amigo
-    </button>
+
+  <!-- PRIMARY CTA STACK (state-based: logged-out vs logged-in) -->
+  <div id="results-cta-stack" style="width:100%;max-width:400px;margin-top:24px;">
+
+    <!-- LOGGED-OUT PRIMARY CTAs -->
+    <div id="cta-logged-out" style="display:none;">
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <button onclick="window.location.href='/login?signup=1'" style="flex:1;padding:14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">Become a Hummer</button>
+        <button onclick="window.location.href='/login'" style="flex:1;padding:14px;background:transparent;border:2px solid rgba(168,85,247,0.5);border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">Iniciar Sesión</button>
+      </div>
+      <button id="share-btn" onclick="shareHumMatch()" style="width:100%;padding:14px;background:transparent;border:1px solid rgba(168,85,247,0.4);border-radius:14px;color:var(--accent);font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:12px;">
+        🎤 Compartir My HumMatch
+      </button>
+      <button onclick="challengeFriend()" style="width:100%;padding:14px;background:transparent;border:1px solid rgba(168,85,247,0.35);border-radius:14px;color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:12px;">
+        🎯 Challenge a Friend
+      </button>
+    </div>
+
+    <!-- LOGGED-IN PRIMARY CTAs -->
+    <div id="cta-logged-in" style="display:none;">
+      <div id="export-block-inline" style="margin-bottom:12px;">
+        <div style="font-size:0.7rem;font-weight:800;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;text-align:center;margin-bottom:6px;">Save Your Playlist</div>
+        <div id="export-count-label-inline" style="font-size:0.72rem;color:rgba(168,85,247,0.7);text-align:center;margin-bottom:6px;min-height:16px;font-weight:600;"></div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="exportSongList('copy')" style="flex:1;padding:13px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.85);font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">📋 Copiar Playlist</button>
+          <button onclick="exportSongList('csv')" style="flex:1;padding:13px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:rgba(255,255,255,0.85);font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">⬇ Exportar Playlist</button>
+        </div>
+      </div>
+      <button onclick="startSquadMatch()" style="width:100%;padding:14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:14px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:12px;">
+        🎤 Try SquadMatch
+      </button>
+      <button id="share-btn-loggedin" onclick="shareHumMatch()" style="width:100%;padding:14px;background:transparent;border:1px solid rgba(168,85,247,0.35);border-radius:14px;color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:12px;">
+        🎤 Compartir My HumMatch
+      </button>
+    </div>
+
+    <!-- PREMIUM SOFT-SELL (shows for logged-out + free users) -->
+    <div id="premium-soft-sell" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid rgba(168,85,247,0.15);">
+      <div style="background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.06));border:1px solid rgba(168,85,247,0.25);border-radius:14px;padding:18px;">
+        <div style="font-size:0.95rem;font-weight:800;color:#fff;margin-bottom:8px;">✨ Unlock more with Squad Leader</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.55;margin-bottom:14px;">
+          Host your squad, unlock harmonic song matches, and manage everything from HumCoincidencia HQ.
+        </div>
+        <ul style="list-style:none;padding:0;margin:0 0 16px;">
+          <li style="font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:6px;padding-left:20px;position:relative;">
+            <span style="position:absolute;left:0;">•</span> Unlimited hums
+          </li>
+          <li style="font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:6px;padding-left:20px;position:relative;">
+            <span style="position:absolute;left:0;">•</span> Unlimited saved playlists
+          </li>
+          <li style="font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:6px;padding-left:20px;position:relative;">
+            <span style="position:absolute;left:0;">•</span> Host SquadCoincidencia sessions
+          </li>
+          <li style="font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.6;padding-left:20px;position:relative;">
+            <span style="position:absolute;left:0;">•</span> Issue up to 5 exclusive 20% discount codes
+          </li>
+        </ul>
+        <button onclick="window.location.href='/pricing?v=2'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Become a Squad Leader - $7.99/mo</button>
+      </div>
+    </div>
+
+    <!-- SECONDARY CTAs (always visible) -->
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button onclick="exportSongList('copy')" class="export-btn-fallback" style="flex:1;padding:13px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);border-radius:12px;color:rgba(255,255,255,0.7);font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;display:none;">📋 Copiar Playlist</button>
+      <button onclick="exportSongList('csv')" class="export-btn-fallback" style="flex:1;padding:13px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);border-radius:12px;color:rgba(255,255,255,0.7);font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;display:none;">⬇ Exportar Playlist</button>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:10px;">
+      <button class="retry-btn" style="flex:1;" onclick="resetTest()">🔄 Retest Voice</button>
+      <button class="retry-btn" style="flex:1;border-color:rgba(168,85,247,0.4);color:var(--accent);" onclick="showScreen('screen-welcome')">🏠 Inicio</button>
+    </div>
+  </div>
+
+  <!-- POST-HUM SIGNUP PROMPT (legacy, kept for compatibility) -->
+  <div id="hm-posthum-signup" style="display:none;width:100%;max-width:400px;margin-top:16px;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(168,85,247,0.35);border-radius:14px;padding:18px 18px 14px;position:relative;">
+      <button onclick="hmDescartarPosthumSignup()" style="position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(255,255,255,0.25);font-size:1rem;cursor:pointer;padding:0;" aria-label="Descartar">✕</button>
+      <div id="hm-posthum-content">
+        <div style="font-size:0.85rem;font-weight:700;color:#e2e0f0;margin-bottom:4px;">Save these results &amp; track your progress</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">Gratis account - future hums auto-save</div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="window.location.href='/login?signup=1'" style="flex:1;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Create Account</button>
+          <button onclick="window.location.href='/login'" style="flex:1;padding:12px;background:transparent;border:2px solid rgba(168,85,247,0.5);border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Iniciar Sesión</button>
+        </div>
+      </div>
+      <div id="hm-posthum-saved" style="display:none;text-align:center;padding:4px 0;">
+        <div style="font-size:0.9rem;font-weight:700;color:#a855f7;">✓ Results saved!</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:3px;">Future hums will auto-save to your account</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A2HS prompt, shown after first successful result -->
+  <div id="a2hs-results-banner" style="display:none;width:100%;max-width:400px;margin-top:16px;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:1.4rem;flex-shrink:0;">📲</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:0.82rem;font-weight:700;color:#e2e0f0;">Keep HumCoincidencia one tap away</div>
+        <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:2px;">Add to Inicio Screen for faster access next time</div>
+      </div>
+      <button onclick="installHumMatch()" style="flex-shrink:0;padding:8px 14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.72rem;font-weight:700;cursor:pointer;">Add</button>
+      <button onclick="dismissA2HS('results')" style="flex-shrink:0;background:none;border:none;color:rgba(255,255,255,0.25);font-size:1rem;cursor:pointer;padding:0 2px;">✕</button>
+    </div>
   </div>
 
   <!-- Hidden canvas for share card generation -->
   <canvas id="share-canvas" style="display:none;" width="1200" height="630"></canvas>
+  </div><!-- end scrollable song content -->
 </div>
 
 <!-- KARAOKE MODAL -->
@@ -372,7 +775,7 @@
     <!-- Loading state -->
     <div id="karaoke-loading" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:1;">
       <div style="font-size:2.5rem;">🎤</div>
-      <div style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Finding your track…</div>
+      <div style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Finding your track...</div>
     </div>
     <!-- YouTube embed -->
     <iframe id="karaoke-frame" src="" frameborder="0"
@@ -380,8 +783,8 @@
       allowfullscreen style="width:100%;flex:1;border:none;display:none;min-height:240px;border-radius:12px;"></iframe>
   </div>
   <div style="padding:12px 0 4px;text-align:center;flex-shrink:0;">
-    <div style="font-size:1rem;font-weight:900;margin-bottom:2px;" id="karaoke-title">—</div>
-    <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:14px;" id="karaoke-artist">—</div>
+    <div style="font-size:1rem;font-weight:900;margin-bottom:2px;" id="karaoke-title">-</div>
+    <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:14px;" id="karaoke-artist">-</div>
     <button id="karaoke-yt-btn" onclick="" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;border-radius:50px;padding:10px 28px;font-size:0.82rem;font-weight:700;cursor:pointer;">
       ↗ Abrir en YouTube
     </button>
@@ -1422,7 +1825,7 @@ const SONGS = [
   { title:'Viva la Vida', artist:'Coldplay', lo:43, hi:70, brightness:55, year:2008 },
   { title:'Stubborn Love', artist:'The Lumineers', lo:41, hi:67, brightness:50, year:2012 },
   { title:'Midnight Rain', artist:'Taylor Swift', lo:50, hi:74, brightness:60, year:2022 },
-  { title:'All Too Well (10 Min)', artist:'Taylor Swift', lo:50, hi:75, brightness:60, year:2021 },
+  { title:'Todas Too Well (10 Min)', artist:'Taylor Swift', lo:50, hi:75, brightness:60, year:2021 },
   { title:'Hasta Que Dios Diga', artist:'Anuel AA / Ozuna', lo:44, hi:70, brightness:72, year:2019 },
   { title:'Read My Mind', artist:'The Killers', lo:43, hi:70, brightness:56, year:2006 },
   { title:'R U Mine?', artist:'Arctic Monkeys', lo:42, hi:68, brightness:52, year:2012 },
@@ -1619,7 +2022,7 @@ const SONGS = [
   { title:'Ay Jalisco No Te Rajes', artist:'Pedro Infante', lo:43, hi:69, brightness:42, year:1941 },
   { title:'México Lindo y Querido', artist:'Jorge Negrete', lo:43, hi:69, brightness:42, year:1945 },
   { title:'Cocula', artist:'Jorge Negrete', lo:43, hi:71, brightness:44, year:1945 },
-  { title:'Allá en el Rancho Grande', artist:'Jorge Negrete', lo:43, hi:69, brightness:42, year:1936 },
+  { title:'Todasá en el Rancho Grande', artist:'Jorge Negrete', lo:43, hi:69, brightness:42, year:1936 },
   { title:'China de los Ojos Negros', artist:'Jorge Negrete', lo:45, hi:71, brightness:45, year:1947 },
   { title:'La Feria de las Flores', artist:'Jorge Negrete', lo:45, hi:69, brightness:42, year:1943 },
   { title:'El Rancho Grande', artist:'Jorge Negrete', lo:43, hi:69, brightness:42, year:1936 },
@@ -2021,7 +2424,6 @@ const SONGS = [
   { title:'El Perdedor', artist:'Maluma', lo:45, hi:65, brightness:50, year:2015 },
 ];
 
-// Lista genérica de karaoke (lo que te toca en un shuffle típico)
 const GENERIC_LIST = [
   { title:'Despacito',                artist:'Luis Fonsi' },
   { title:'La Copa de la Vida',       artist:'Ricky Martin' },
@@ -2034,11 +2436,6 @@ const GENERIC_LIST = [
   { title:'Vivir Mi Vida',            artist:'Marc Anthony' },
   { title:'El Rey',                   artist:'Vicente Fernández' },
 ];
-
-// ════════════════════════════════════════════════════════════
-// MIDI helpers
-// ════════════════════════════════════════════════════════════
-const NOTE_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 function midiToName(midi) {
   const oct = Math.floor(midi / 12) - 1;
   return NOTE_NAMES[midi % 12] + oct;
@@ -2116,45 +2513,214 @@ let capturedNotes = [null, null, null];        // MIDI notes
 let capturedBrightness = [null, null, null];   // 0-100
 let shareArtistName = '';
 let shareVoiceType = '';
-let shareCoincidenciaPct = 0;
+let shareMatchPct = 0;
 let shareTopSong = null;
 let waveRaf = null;
 
 const PHASES = [
-  { label:'TARAREO 1 DE 3', title:'Tararea tu nota más grave', sub:'Baja lo más que puedas y mantén el tono' },
-  { label:'TARAREO 2 DE 3', title:'Tararea tu nota media', sub:'Tararea a tu tono más natural y relajado' },
-  { label:'TARAREO 3 DE 3', title:'Tararea tu nota más aguda', sub:'Sube lo más que puedas y mantén el tono' },
+  { label:'TARAREO 1 DE 3', title:'Tararea tu nota más grave',  sub:'Lo más grave que puedas cómodamente. Mantenla estable.', emoji:'⬇️' },
+  { label:'TARAREO 2 DE 3', title:'Ahora tu voz normal',        sub:'Tararea como si estuvieras cantando una canción para ti.', emoji:'🎵' },
+  { label:'TARAREO 3 DE 3', title:'Ahora ve agudo',             sub:'Lo más agudo que puedas cómodamente. Mantenla estable.', emoji:'⬆️' }
 ];
 
+// Sort SONGS by song popularity BEFORE any matching
+// Use real song 'popularity' field (0-100) where available
+// Songs with popularity data (2,300+) float to top automatically
+SONGS.sort((a, b) => {
+  const popDiff = (b.popularity || 0) - (a.popularity || 0);
+  if (popDiff !== 0) return popDiff;
+  // Tie-breaker: year (newer first)
+  return (b.year || 0) - (a.year || 0);
+});
+
 function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorTodas('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
+// ── Interest Selector ──────────────────────────────────────────────────────
+(function initInterestSelector() {
+  const GENRES  = [
+    { id:'pop',       label:'Pop' },
+    { id:'rock',      label:'Rock' },
+    { id:'country',   label:'Country' },
+    { id:'rnb',       label:'R&B' },
+    { id:'hiphop',    label:'Hip-Hop' },
+    { id:'latin',     label:'Latin' },
+    { id:'indie',     label:'Indie' },
+    { id:'disco',     label:'Disco' },
+    { id:'50s60s',    label:'50s-60s' },
+    { id:'70s',       label:'70s' },
+  ];
+  const DECADES = [
+    { id:'80s',    label:'80s' },
+    { id:'90s',    label:'90s' },
+    { id:'2000s',  label:'2000s' },
+    { id:'2010s',  label:'2010s' },
+    { id:'2020s',  label:'2020s' },
+  ];
+
+  function buildChips(containerId, items, selectedIds) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = items.map(item => `
+      <div class="interest-chip${selectedIds.includes(item.id) ? ' selected' : ''}"
+           data-id="${item.id}"
+           onclick="toggleChip(this,'${containerId}')">
+        ${item.label}
+      </div>`).join('');
+  }
+
+  // Load saved prefs
+  let saved = { genres: [], decades: [] };
+  try { saved = JSON.parse(localStorage.getItem('hm_interests') || 'null') || { genres: [], decades: [] }; } catch(_) {}
+
+  buildChips('genre-chips',  GENRES,  saved.genres  || []);
+  buildChips('decade-chips', DECADES, saved.decades || []);
+
+  // Show active badge if filter is on
+  if ((saved.genres && saved.genres.length) || (saved.decades && saved.decades.length)) {
+    const badge = document.getElementById('interest-active-badge');
+    if (badge) badge.style.display = 'block';
+  }
+})();
+
+window.toggleChip = function(el, containerId) {
+  el.classList.toggle('selected');
+};
+
+window.toggleInterestPanel = function() {
+  const panel  = document.getElementById('interest-selector-panel');
+  const badge  = document.getElementById('interest-active-badge');
+  const btn    = document.getElementById('interest-toggle-btn');
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  if (btn) btn.style.display = isOpen ? 'inline-block' : 'none';
+  if (badge && isOpen) badge.style.display = 'none';
+};
+
+window.saveInterests = function() {
+  const genres  = [...document.querySelectorTodas('#genre-chips .interest-chip.selected')].map(c => c.dataset.id);
+  const decades = [...document.querySelectorTodas('#decade-chips .interest-chip.selected')].map(c => c.dataset.id);
+  localStorage.setItem('hm_interests', JSON.stringify({ genres, decades }));
+  const panel = document.getElementById('interest-selector-panel');
+  const btn   = document.getElementById('interest-toggle-btn');
+  const badge = document.getElementById('interest-active-badge');
+  if (panel) panel.style.display = 'none';
+  if (btn)   btn.style.display   = 'inline-block';
+  if (badge) badge.style.display = (genres.length || decades.length) ? 'block' : 'none';
+};
+
+window.skipInterests = function() {
+  localStorage.setItem('hm_interests', JSON.stringify({ genres: [], decades: [] }));
+  const panel = document.getElementById('interest-selector-panel');
+  const btn   = document.getElementById('interest-toggle-btn');
+  const badge = document.getElementById('interest-active-badge');
+  if (panel) panel.style.display = 'none';
+  if (btn)   btn.style.display   = 'inline-block';
+  if (badge) badge.style.display = 'none';
+};
+
+window.clearInterests = function() {
+  localStorage.setItem('hm_interests', JSON.stringify({ genres: [], decades: [] }));
+  // Reset chips
+  document.querySelectorTodas('.interest-chip').forEach(c => c.classList.remove('selected'));
+  const badge = document.getElementById('interest-active-badge');
+  if (badge) badge.style.display = 'none';
+  // Re-run results with no filter
+  showResults();
+};
+// ── End Interest Selector ──────────────────────────────────────────────────
+
 function retryHum() {
+  // Clean up no-match banner if present
   const banner = document.getElementById('no-match-banner');
   if (banner) banner.remove();
   showScreen('screen-welcome');
 }
 
+function applyPromoCode() {
+  const input = document.getElementById('promo-input');
+  const msg = document.getElementById('promo-msg');
+  const code = (input ? input.value.trim().toUpperCase() : '');
+  const validCodes = ['HMFRIEND', 'HUMMATCH20'];
+  if (validCodes.includes(code)) {
+    localStorage.setItem('hm_premium', 'true');
+    localStorage.removeItem('hm_hum_count');
+    if (msg) { msg.style.color = '#22c55e'; msg.textContent = '✅ ¡Código aplicado! Disfruta tarareos ilimitados.'; }
+    setTimeout(() => {
+      const modal = document.getElementById('limit-modal');
+      if (modal) modal.remove();
+      startTest();
+    }, 1200);
+  } else {
+    if (msg) { msg.style.color = '#f87171'; msg.textContent = 'Código inválido. Intenta de nuevo.'; }
+    if (input) input.value = '';
+  }
+}
+
+// ── startTest: route to primer screen (checks hum limit first) ──
 async function startTest() {
-  // Create AudioContext first (must happen inside gesture handler on iOS)
+  // Check free hum limit (5 hums per month for non-premium)
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  if (!isPremium) {
+    const monthKey = new Date().toISOString().slice(0,7);
+    const storedMonth = localStorage.getItem('hm_hum_month');
+    if (storedMonth !== monthKey) {
+      localStorage.setItem('hm_hum_month', monthKey);
+      localStorage.setItem('hm_hum_count', '0');
+    }
+    const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
+    if (humCount >= 5) {
+      showScreen('screen-welcome');
+      const modal = document.createElement('div');
+      modal.id = 'limit-modal';
+      modal.style.cssText = 'position:fixed;inset:0;z-index:3000;background:rgba(8,6,15,0.96);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;';
+      const isLoggedIn = !!localStorage.getItem('hm_token');
+      const limitSubtext = isLoggedIn
+        ? 'Unlock Squad Leader for unlimited hums and exports.'
+        : 'Create a free account to track your usage across devices, or unlock Squad Leader.';
+      modal.innerHTML = `
+        <div style="font-size:2.5rem;margin-bottom:16px;">🎤</div>
+        <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">Gratis hums available when invited by a Squad Leader</h2>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:28px;max-width:300px;">${limitSubtext}</p>
+
+        <div style="width:100%;max-width:300px;margin-bottom:8px;">
+          <div style="display:flex;gap:8px;">
+            <input id="promo-input" type="text" placeholder="Promo code" autocapitalize="characters" style="flex:1;padding:12px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(168,85,247,0.3);border-radius:10px;color:#fff;font-size:0.95rem;outline:none;"/>
+            <button onclick="applyPromoCode()" style="padding:12px 16px;background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.4);border-radius:10px;color:#a855f7;font-size:0.9rem;font-weight:700;cursor:pointer;">Apply</button>
+          </div>
+          <div id="promo-msg" style="font-size:0.8rem;margin-top:6px;min-height:18px;"></div>
+        </div>
+        <button onclick="document.getElementById('limit-modal').remove()" style="background:none;border:none;color:rgba(255,255,255,0.35);font-size:0.85rem;cursor:pointer;padding:8px;">Not now</button>
+      `;
+      document.body.appendChild(modal);
+      return;
+    }
+    localStorage.setItem('hm_hum_count', humCount + 1);
+    if (typeof hmSyncCounts === 'function') hmSyncCounts();
+  }
+  // Show primer screen instead of jumping straight to test
+  showScreen('screen-primer');
+}
+
+// ── beginAutoCapture: the drunk-proof tap-once auto-flow ──
+async function beginAutoCapture() {
+  // Create AudioContext (must be inside gesture handler on iOS)
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  // iOS Safari starts AudioContext in 'suspended', resume immediately
   if (audioCtx.state === 'suspended') {
     try { await audioCtx.resume(); } catch(e) {}
   }
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } });
   } catch(e) {
-    alert('Se necesita acceso al micrófono. Por favor permite el acceso e intenta de nuevo.');
+    alert('Microphone access is required. Please allow mic access and try again.');
     return;
   }
   analyser = audioCtx.createAnalyser();
-  analyser.fftSize = 4096;  // 4096 works better on mobile (8192 can stall)
+  analyser.fftSize = 4096;
   source = audioCtx.createMediaStreamSource(stream);
   source.connect(analyser);
-  // Resume again after stream connect (some iOS versions need this)
   if (audioCtx.state === 'suspended') {
     try { await audioCtx.resume(); } catch(e) {}
   }
@@ -2166,61 +2732,124 @@ async function startTest() {
 
   updatePhaseUI();
   showScreen('screen-test');
-  startWaveform();
+
+  // Auto-start first capture after a brief pause to let user see the instruction
+  setTimeout(() => runPhaseCapture(), 800);
 }
 
+// ── Countdown ring animation ──
+const RING_CIRCUMFERENCE = 2 * Math.PI * 54; // ~339.292
+let ringAnimFrame = null;
+
+function animateRing(durationMs, onComplete) {
+  const ring = document.getElementById('countdown-ring');
+  const numEl = document.getElementById('ring-number');
+  const labelEl = document.getElementById('ring-label');
+  if (!ring) return;
+
+  ring.style.strokeDasharray = RING_CIRCUMFERENCE;
+  ring.style.strokeDashoffset = '0';
+  ring.style.transition = 'none';
+
+  const startTime = performance.now();
+  let lastSecond = Math.ceil(durationMs / 1000);
+  if (numEl) numEl.textContent = lastSecond;
+  if (labelEl) labelEl.textContent = 'seconds';
+
+  function tick(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / durationMs, 1);
+    const offset = progress * RING_CIRCUMFERENCE;
+    ring.style.strokeDashoffset = offset;
+
+    // Update countdown number
+    const remaining = Math.ceil((durationMs - elapsed) / 1000);
+    if (remaining !== lastSecond && remaining >= 0) {
+      lastSecond = remaining;
+      if (numEl) numEl.textContent = remaining <= 0 ? '✓' : remaining;
+    }
+
+    if (progress < 1) {
+      ringAnimFrame = requestAnimationFrame(tick);
+    } else {
+      if (numEl) numEl.textContent = '✓';
+      if (labelEl) labelEl.textContent = '';
+      if (onComplete) onComplete();
+    }
+  }
+  ringAnimFrame = requestAnimationFrame(tick);
+}
+
+function resetRing() {
+  if (ringAnimFrame) { cancelAnimationFrame(ringAnimFrame); ringAnimFrame = null; }
+  const ring = document.getElementById('countdown-ring');
+  if (ring) { ring.style.strokeDashoffset = '0'; ring.style.transition = 'none'; }
+  const numEl = document.getElementById('ring-number');
+  if (numEl) numEl.textContent = '3';
+}
+
+// ── Phase success flash ──
+function showPhaseSuccess(text) {
+  return new Promise(resolve => {
+    const overlay = document.getElementById('phase-success');
+    const textEl = document.getElementById('phase-success-text');
+    if (textEl) textEl.textContent = text || 'Got it!';
+    if (overlay) overlay.classList.add('show');
+    setTimeout(() => {
+      if (overlay) overlay.classList.remove('show');
+      resolve();
+    }, 900);
+  });
+}
+
+// ── Update phase UI for auto-flow ──
 function updatePhaseUI() {
   const p = PHASES[phase];
   document.getElementById('phase-label').textContent = p.label;
   document.getElementById('phase-title').textContent = p.title;
   document.getElementById('phase-sub').textContent = p.sub;
-  document.getElementById('mic-label').textContent = 'TOCA PARA EMPEZAR';
-  const banner = document.getElementById('hum-step-banner');
-  if (banner) banner.textContent = '👇 Toca el botón para tararear ' + (phase === 0 ? 'tu nota grave' : phase === 1 ? 'tu nota media' : 'tu nota aguda');
-  document.getElementById('mic-btn').classList.remove('recording');
-  // Reset countdown
-  const cd = document.getElementById('mic-countdown');
-  if (cd) { cd.classList.remove('visible'); cd.textContent = ''; }
+  const emojiEl = document.getElementById('phase-emoji');
+  if (emojiEl) emojiEl.textContent = p.emoji || '🎵';
+  const statusEl = document.getElementById('auto-status');
+  if (statusEl) { statusEl.textContent = '🎤 Listening...'; statusEl.className = 'auto-status listening'; }
+  resetRing();
   [0,1,2].forEach(i => {
     const dot = document.getElementById('dot-'+i);
+    if (!dot) return;
     dot.classList.remove('active','done');
     if (i < phase) dot.classList.add('done');
     if (i === phase) dot.classList.add('active');
   });
 }
 
-function toggleCapture() {
-  if (capturing) return; // prevent double tap
+// ── Run a single phase capture (auto-flow: no tap needed) ──
+function runPhaseCapture() {
+  if (capturing) return;
+  hmTrack('hum_start', { phase: phase });
   capturing = true;
-  document.getElementById('mic-btn').classList.add('recording');
-  document.getElementById('mic-label').textContent = 'TARAREANDO… ¡SIGUE ASÍ!';
-  const banner = document.getElementById('hum-step-banner');
-  if (banner) banner.textContent = '🎙️ Mantén el tono…';
 
-  // Countdown inside button
-  const cd = document.getElementById('mic-countdown');
-  if (cd) { cd.classList.add('visible'); cd.textContent = '3'; }
-  let countdown = 3;
-  const cdInterval = setInterval(() => {
-    countdown--;
-    if (cd && countdown > 0) cd.textContent = countdown;
-    else if (cd && countdown <= 0) { cd.textContent = '✓'; clearInterval(cdInterval); }
-  }, 1000);
+  const statusEl = document.getElementById('auto-status');
+  if (statusEl) { statusEl.innerHTML = '<span style="color:#A855F7;">Tarareando... mantenla estable</span>'; statusEl.className = 'auto-status listening'; }
 
   const pitches = [];
   const brightnesses = [];
   const buf = new Float32Array(analyser.fftSize);
   const freqBuf = new Uint8Array(analyser.frequencyBinCount);
 
+  // Start the countdown ring
+  animateRing(3000, null);
+
   const interval = setInterval(() => {
     analyser.getFloatTimeDomainData(buf);
     analyser.getByteFrequencyData(freqBuf);
 
-    // Check signal level
     let rms = 0;
     for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
     rms = Math.sqrt(rms / buf.length);
-    if (rms < 0.001) return; // too quiet
+    if (rms < 0.001) {
+      if (statusEl) statusEl.innerHTML = '🎤 Escuchando... ¡tararea ahora!';
+      return;
+    }
 
     const freq = detectPitch(buf, audioCtx.sampleRate);
     if (freq > 50 && freq < 1400) {
@@ -2228,27 +2857,30 @@ function toggleCapture() {
       pitches.push(midi);
       brightnesses.push(spectralCentroid(freqBuf));
 
-      const note = midiToName(midi);
-      document.getElementById('pitch-note').textContent = note;
+      // Update hidden elements (still used by results engine)
+      document.getElementById('pitch-note').textContent = midiToName(midi);
       document.getElementById('pitch-hz').textContent = Math.round(freq) + ' Hz';
-      // Bar: map 36-90 MIDI to 0-100%
       const pct = Math.min(100, Math.max(0, ((midi - 36) / 54) * 100));
       document.getElementById('pitch-bar').style.width = pct + '%';
+
+      if (statusEl) {
+        if (rms > 0.02) { statusEl.innerHTML = '<span style="color:#22C55E;">✓ ¡Bien, sigue tarareando!</span>'; }
+        else { statusEl.innerHTML = '<span style="color:#F59E0B;">Tararea un poco más fuerte</span>'; }
+      }
+    } else {
+      if (statusEl && rms > 0.001) statusEl.innerHTML = '<span style="color:#F59E0B;">Tararea un poco más fuerte</span>';
     }
   }, 100);
 
-  captureTimer = setTimeout(() => {
+  captureTimer = setTimeout(async () => {
     clearInterval(interval);
-    clearInterval(cdInterval);
     capturing = false;
-    document.getElementById('mic-btn').classList.remove('recording');
-    // Hide countdown
-    if (cd) { cd.classList.remove('visible'); cd.textContent = ''; }
 
     if (pitches.length < 3) {
-      document.getElementById('mic-label').textContent = 'NO SE DETECTÓ. TOCA PARA REINTENTAR';
-      if (banner) banner.textContent = '🔄 ¡Tararea más fuerte! Toca el botón otra vez.';
-      document.getElementById('pitch-note').textContent = '?';
+      // Not enough signal, retry this phase automatically
+      if (statusEl) { statusEl.innerHTML = '<span style="color:#F59E0B;">Didn\'t catch that, trying again...</span>'; }
+      resetRing();
+      setTimeout(() => runPhaseCapture(), 1200);
       return;
     }
 
@@ -2258,30 +2890,24 @@ function toggleCapture() {
     capturedNotes[phase] = median;
 
     const avgBrightness = brightnesses.reduce((a, b) => a + b, 0) / brightnesses.length;
-    // Normalize centroid to 0-100 scale (centroid is 0-analyser.frequencyBinCount/2)
     const normBrightness = Math.min(100, Math.round((avgBrightness / (analyser.frequencyBinCount / 8)) * 100));
     capturedBrightness[phase] = normBrightness;
 
-    // Update range display
     const ids = ['low-note', 'mid-note', 'high-note'];
     document.getElementById(ids[phase]).textContent = midiToName(median);
 
-    // Update phase progress text
-    const progEl = document.getElementById('phase-progress-text');
-
     if (phase < 2) {
-      const nextNum = phase + 2;
-      if (progEl) progEl.textContent = 'Tarareo ' + (phase + 1) + ' de 3 listo ✓';
-      document.getElementById('mic-label').textContent = '✓ ¡LISTO!';
-      if (banner) banner.textContent = '✅ ¡Tarareo ' + (phase + 1) + ' completo! Toca para el tarareo ' + nextNum;
+      // Show success flash, then auto-advance
+      await showPhaseSuccess('Got it! ' + midiToName(median));
       phase++;
-      setTimeout(updatePhaseUI, 1200);
+      updatePhaseUI();
+      // Auto-start next phase after a brief breath
+      setTimeout(() => runPhaseCapture(), 600);
     } else {
-      // All 3 phases done
-      if (progEl) progEl.textContent = 'Los 3 tarareos completos ✓';
-      document.getElementById('mic-label').textContent = '🎉 ¡TODO LISTO!';
-      if (banner) banner.textContent = '🔍 Analizando tu voz…';
-      setTimeout(showResults, 900);
+      // Todas 3 phases done
+      await showPhaseSuccess('Todas done!');
+      if (statusEl) { statusEl.innerHTML = '<span style="color:#22C55E;">🔍 Analizando tu voz...</span>'; }
+      setTimeout(showResults, 500);
     }
   }, 3000);
 }
@@ -2322,10 +2948,13 @@ function showResults() {
   const notes = capturedNotes.filter(n => n !== null);
   if (notes.length < 2) { showScreen('screen-welcome'); return; }
 
-  // Apply generous range extrapolation (matching English logic)
+  // Apply generous range extrapolation, humming 3 notes captures the comfortable middle
+  // Real singing range extends ~4 semitonos below and ~8-10 above the hummed range
+  // This corrects the common problem of narrow hum range → too few song matches
   const humLow  = Math.min(...notes);
   const humHigh = Math.max(...notes);
   const humSpan = humHigh - humLow;
+  // If span is very narrow (<8 semitonos), user likely only hummed comfortable middle, expand
   const extraLow  = humSpan < 10 ? 4 : 2;
   const extraHigh = humSpan < 10 ? 10 : 4;
   const userLow  = humLow  - extraLow;
@@ -2333,7 +2962,7 @@ function showResults() {
   const userBrightness = capturedBrightness.filter(b => b !== null).reduce((a, b) => a + b, 0) /
                          capturedBrightness.filter(b => b !== null).length;
 
-  // Determine voice type (Spanish labels)
+  // Determine voice type
   let voiceType = 'Barítono';
   const span = userHigh - userLow;
   if (userLow <= 40 && userHigh <= 62) voiceType = 'Bajo';
@@ -2345,104 +2974,9 @@ function showResults() {
   else if (userLow >= 52 && userHigh >= 76) voiceType = 'Soprano';
   else if (userHigh >= 74) voiceType = 'Tenor';
 
-  // Fixed emoji map with Spanish keys
   const typeEmoji = { 'Bajo':'🔊','Bajo-Barítono':'🎸','Barítono':'🎭','Tenor':'🌟','Contralto':'🍷','Mezzosoprano':'🔥','Soprano':'✨' };
 
-  // Gender filtering via tessitura (matching English logic)
-  const mid = (userLow + userHigh) / 2;
-  const isMasc = mid < 56;
-
-  // Score all songs
-  const pool = SONGS;
-  const scoredSongs = pool
-    .map(s => {
-      const sRange = s.hi - s.lo;
-      const overlapLo = Math.max(userLow, s.lo);
-      const overlapHi = Math.min(userHigh, s.hi);
-      const overlap = Math.max(0, overlapHi - overlapLo);
-      const rangeFit = overlap / Math.max(1, sRange);
-      const brightFit = 1 - Math.abs(userBrightness - s.brightness) / 100;
-      const score = rangeFit * 0.65 + brightFit * 0.35;
-      // Gender mismatch penalty
-      const sMid = (s.lo + s.hi) / 2;
-      const songMasc = sMid < 56;
-      const genderOk = (isMasc === songMasc) || Math.abs(mid - sMid) < 8;
-      return { ...s, score, genderOk };
-    })
-    .filter(s => s.score > 0.45 && s.genderOk)
-    .sort((a, b) => b.score - a.score);
-
-  // Artist deduplication: max 2 per artist
-  const artistCount = {};
-  const confidentSongs = [];
-  for (const s of scoredSongs) {
-    const aKey = s.artist.toLowerCase();
-    artistCount[aKey] = (artistCount[aKey] || 0) + 1;
-    if (artistCount[aKey] <= 2) confidentSongs.push(s);
-  }
-
-  // Confidence tier function
-  function getTier(score) {
-    if (score >= 0.78) return { tier: 'ideal', label: 'Ideal', color: '#4ade80' };
-    if (score >= 0.60) return { tier: 'buena', label: 'Buena Opción', color: '#facc15' };
-    return { tier: 'desafio', label: 'Desafío', color: '#f97316' };
-  }
-
-  // Genre auto-tagging
-  function autoTag(song) {
-    const tags = [];
-    const t = (song.title + ' ' + song.artist).toLowerCase();
-    const artistTags = {
-      'reggaeton': ['bad bunny','daddy yankee','don omar','ozuna','anuel','farruko','nicky jam','wisin','yandel','plan b','zion','lennox','tego','j balvin','maluma','rauw alejandro','myke towers','jhay cortez','sech'],
-      'regional': ['fernández','fernandez','aguilar','nodal','carin leon','carín león','peso pluma','fuerza regida','grupo frontera','eslabon','junior h','natanael','marca registrada','calibre','banda ms','julión','tigres del norte','intocable','tucanes','ramón ayala','bronco','bukis','temerarios','rieleros','recodo','fantasma','larry hernández','lupillo','pepe aguilar','ángeles azules','sonora dinamita','celso piña','grupo límite','acosta','rehenes','original banda','little joe'],
-      'bachata': ['romeo santos','aventura','prince royce','juan luis guerra'],
-      'salsa': ['héctor lavoe','willie colón','rubén blades','celia cruz','joe arroyo','marc anthony','la india','oscar de león','van van','el gran combo','fania'],
-      'rock': ['maná','caifanes','soda stereo','cerati','fito páez','fabulosos cadillacs','café tacvba','molotov','la ley','bunkers','zoé','aterciopelados','el gran silencio','héroes del silencio','los prisioneros','enanitos verdes'],
-      'balada': ['luis miguel','josé josé','juan gabriel','rocío dúrcal','ana gabriel','ricardo arjona','alejandro sanz','sin bandera','reik','camila','jesse & joy','chayanne','david bisbal','pablo alborán'],
-      'pop': ['shakira','enrique iglesias','ricky martin','thalía','paulina rubio','belinda','danna paola','sebastián yatra','camilo','morat','piso 21','carlos rivera','ha*ash','juanes','carlos vives','julieta venegas','natalia lafourcade','belanova','la oreja de van gogh','tini','lali'],
-      'cumbia': ['ángeles azules','sonora dinamita','celso piña','grupo límite'],
-      'trap': ['duki','trueno','wos','nicki nicole','maria becerra','anuel','bad bunny'],
-      'urbano': ['karol g','becky g','natti natasha','ivy queen','anitta','rosalía'],
-    };
-    for (const [genre, artists] of Object.entries(artistTags)) {
-      if (artists.some(a => t.includes(a))) { tags.push(genre); break; }
-    }
-    if (!tags.length) tags.push('pop'); // default
-    return tags;
-  }
-
-  // Assign tags and tiers
-  const displaySongs = confidentSongs.slice(0, 60).map((s, i) => {
-    const tier = getTier(s.score);
-    const tags = autoTag(s);
-    let catBadge = '';
-    if (i === 0) catBadge = 'Mejor Coincidencia';
-    else if (i < 3 && tier.tier === 'ideal') catBadge = 'Selección Top';
-    else if (tier.tier === 'desafio') catBadge = 'Desafío';
-    return { ...s, tierInfo: tier, tags, catBadge };
-  });
-
-  // Filter chip data
-  const filterCounts = {};
-  const allTags = ['todas','ideal','pop','rock','reggaeton','regional','bachata','balada','salsa','urbano','trap','cumbia','clásicos','desafío','recientes'];
-  allTags.forEach(t => filterCounts[t] = 0);
-  displaySongs.forEach(s => {
-    filterCounts['todas']++;
-    if (s.tierInfo.tier === 'ideal') filterCounts['ideal']++;
-    if (s.tierInfo.tier === 'desafio') filterCounts['desafío']++;
-    if (s.year && s.year >= 2015) filterCounts['recientes']++;
-    if (s.year && s.year < 1990) filterCounts['clásicos']++;
-    s.tags.forEach(t => { if (filterCounts[t] !== undefined) filterCounts[t]++; });
-  });
-
-  const filterLabels = {
-    'todas':'Todas','ideal':'Ideal','pop':'Pop','rock':'Rock','reggaeton':'Reggaetón',
-    'regional':'Regional','bachata':'Bachata','balada':'Balada','salsa':'Salsa',
-    'urbano':'Urbano','trap':'Trap','cumbia':'Cumbia','clásicos':'Clásicos',
-    'desafío':'Desafío','recientes':'Recientes'
-  };
-
-  // ── Find closest artist match ──
+  // Find closest artist match (range overlap + brightness similarity)
   const scored = ARTISTS.map(a => {
     const overlapLo = Math.max(userLow, a.low);
     const overlapHi = Math.min(userHigh, a.high);
@@ -2452,13 +2986,149 @@ function showResults() {
     const score = rangeCover * 0.7 + (1 - brightnessDiff) * 0.3;
     return { ...a, score };
   }).sort((a, b) => b.score - a.score);
+
   const topArtist = scored[0];
+  const topArtists = scored.slice(0, 4);
+
+  // Coincidencia songs to user range + brightness, keep top matches
+  // Detect likely gender based on vocal range to filter out mismatches
+  const isMaleVoice = userHigh <= 65;  // C#4 or below = likely male
+  const isFemaleVoice = userLow >= 48; // C3 or above = likely female
+
+  // ── TIERED DISCOVERY SYSTEM ──
+  // Organize verified songs into tiers based on humMatchScore (Spotify popularity)
+  // Tier 1: Top 2,000 songs (primary matching)
+  // Tier 2: Songs ranked 2,001-5,000 (secondary, on-demand)
+  // Tier 3: Everything beyond 5,000 (tertiary, on-demand)
+
+  // Filter by language: English site shows English songs, Spanish site shows Spanish
+  const userLang = localStorage.getItem('hummatch_lang') || 'en';
+  const verifiedSongs = SONGS.filter(s => {
+    if (!s.verified) return false;
+    const songLang = (s.language || 'en').toLowerCase();
+    // On English site: show English + both (bilingual)
+    // On Spanish site: show Spanish + both (bilingual)
+    if (userLang === 'es') return songLang === 'es' || songLang === 'spanish' || songLang === 'both' || !s.language;
+    return songLang !== 'es' && songLang !== 'spanish' || songLang === 'both';
+  }).sort((a, b) => (b.humMatchScore || 0) - (a.humMatchScore || 0));
+
+  const TIER_1_SIZE = 2000;
+  const TIER_2_SIZE = 5000;
+  const tier1Songs = verifiedSongs.slice(0, TIER_1_SIZE);
+  const tier2Songs = verifiedSongs.slice(TIER_1_SIZE, TIER_2_SIZE);
+  const tier3Songs = verifiedSongs.slice(TIER_2_SIZE);
+
+  // Helper: match a set of songs against user's vocal range + brightness
+  function matchSongsAgainstUser(songsToMatch) {
+    return songsToMatch
+      .map(s => {
+        const overlapLo = Math.max(userLow, s.lo);
+        const overlapHi = Math.min(userHigh, s.hi);
+        const overlap = Math.max(0, overlapHi - overlapLo);
+        const rangeFit = overlap / Math.max(1, s.hi - s.lo);
+        const brightFit = 1 - Math.abs(userBrightness - s.brightness) / 100;
+        return { ...s, score: rangeFit * 0.65 + brightFit * 0.35 };
+      })
+      .filter(s => {
+        // Gender filtering: DUAL approach (tessitura + brightness)
+        // Female songs center around C4-C5 (60-72) AND are brighter (55+)
+        // Male songs center around G2-G3 (43-55) AND are darker (30-55)
+        const songMidpoint = (s.lo + s.hi) / 2;
+
+        // MALE VOICE FILTERING:
+        // Block songs with clearly female tessitura (midpoint >= 65 = F4+)
+        // AND bright timbre (brightness > 70)
+        // Must satisfy BOTH conditions to block — prevents false filtering of male artists
+        if (isMaleVoice && songMidpoint >= 65 && s.brightness > 70) return false;
+
+        // FEMALE VOICE FILTERING:
+        // Block songs with clearly male tessitura (midpoint < 48 = C3)
+        // AND dark timbre (brightness < 30)
+        if (isFemaleVoice && songMidpoint < 48 && s.brightness < 30) return false;
+
+        return s.score > 0.3; // Lower threshold to allow more matches
+      });
+  }
+
+  // Helper: sort and deduplicate matched songs
+  function processMatchedSongs(matched) {
+    return matched
+      .sort((a, b) => {
+        // Sort by MATCH SCORE (rangeFit 65% + brightFit 35%) - determines best vocal fit
+        return b.score - a.score;
+      })
+      .reduce((acc, s) => {
+        // Cap at 2 songs per artist to prevent Johnny Cash monopoly
+        const artistCount = acc.filter(x => x.artist === s.artist).length;
+        if (artistCount < 2) acc.push(s);
+        return acc;
+      }, [])
+      .slice(0, 60);  // Keep full pool for dismissal backfill + show-more variety
+  }
+
+  // Coincidencia all three tiers upfront
+  const tier1Matches = processMatchedSongs(matchSongsAgainstUser(tier1Songs));
+  const tier2Matches = processMatchedSongs(matchSongsAgainstUser(tier2Songs));
+  const tier3Matches = processMatchedSongs(matchSongsAgainstUser(tier3Songs));
+
+  // Combine tiers: if Tier 1 < 10 matches, auto-include Tier 2
+  let matchedSongs;
+  if (tier1Matches.length < 10) {
+    matchedSongs = [...tier1Matches, ...tier2Matches];
+  } else {
+    matchedSongs = tier1Matches;
+  }
+
+  // Store all tier matches globally for progressive loading
+  window._hmTier1Matches = tier1Matches;
+  window._hmTier2Matches = tier2Matches;
+  window._hmTier3Matches = tier3Matches;
+  window._hmTier2Count = tier2Matches.length;
+  window._hmTier3Count = tier3Matches.length;
+
+  // Helper: deduplicate by normalized title
+  function deduplicateSongs(songs) {
+    const seenTitles = new Set();
+    return songs.filter(s => {
+      const norm = s.title.toLowerCase().replace(/^(i |the |a |an )/,'').trim();
+      if (seenTitles.has(norm)) return false;
+      seenTitles.add(norm);
+      return true;
+    });
+  }
+
+  // Deduplicate all tier matches
+  const deduped = deduplicateSongs(matchedSongs);
+  const deduped2 = deduplicateSongs(tier2Matches);
+  const deduped3 = deduplicateSongs(tier3Matches);
+
+  // Store all deduplicated tiers for tier navigation
+  window._hmTier1Deduped = deduplicateSongs(tier1Matches);
+  window._hmTier2Deduped = deduped2;
+  window._hmTier3Deduped = deduped3;
+
+  // Store full pool globally, dismissals pull next song from here
+  window._hmFullPool = deduped;
+  // Restore dismissed songs from localStorage so they persist across sessions
+  const savedDescartared = JSON.parse(localStorage.getItem('hm_dismissed') || '[]');
+  window._hmDescartared = new Set(savedDescartared);
 
   // ── RENDER ──
-  document.getElementById('voice-badge').innerHTML = `${typeEmoji[voiceType] || '🎤'} ${voiceType}`;
+  document.getElementById('voice-badge').innerHTML = `${typeEmoji[voiceType] || '🎤'} ${voiceType} Hummer`;
   document.getElementById('result-emoji').textContent = (topArtist && topArtist.emoji) ? topArtist.emoji : '🎉';
+
+  // Brightness descriptor based on score (only if captured)
+  if (userBrightness && !isNaN(userBrightness)) {
+    const brightnessLabel = userBrightness >= 70 ? 'Very Bright' :
+                            userBrightness >= 55 ? 'Bright' :
+                            userBrightness >= 45 ? 'Neutral' :
+                            userBrightness >= 30 ? 'Dark & Warm' : 'Very Dark';
+    document.getElementById('brightness-text').textContent =
+      `✨ Timbre: ${Math.round(userBrightness)}/100 (${brightnessLabel})`;
+  }
+
   document.getElementById('range-text').textContent =
-    `${midiToName(userLow)} a ${midiToName(userHigh)} · ${span} semitonos de rango`;
+    `${midiToName(userLow)} to ${midiToName(userHigh)} · ${span} semitonos de rango`;
 
   // Range bar
   const fullSpan = 90 - 36;
@@ -2467,12 +3137,12 @@ function showResults() {
   document.getElementById('range-bar-fill').style.left = leftPct + '%';
   document.getElementById('range-bar-fill').style.width = widthPct + '%';
 
-  // Share data
+  // Compartir data (topSong set after confidentSongs is built below)
   shareVoiceType = voiceType;
-  shareCoincidenciaPct = topArtist ? Math.round(topArtist.score * 100) : 0;
-  hmTrack("hum_complete", { voice_type: voiceType, score: shareCoincidenciaPct });
+  shareMatchPct = topArtist ? Math.round(topArtist.score * 100) : 0;
+  hmTrack("hum_complete", { voice_type: voiceType, score: shareMatchPct });
 
-  // Log hum to user's hum_history (if logged in)
+  // ── Log hum to user's hum_history (if logged in) ──
   const _humToken = typeof hmGetToken === 'function' ? hmGetToken() : null;
   function logHumMatch(title, artist, confidence) {
     if (!_humToken) return;
@@ -2483,33 +3153,291 @@ function showResults() {
     }).catch(() => {});
   }
 
-  const topSong = displaySongs[0];
-  shareArtistName = topSong ? topSong.title + ' - ' + topSong.artist : (topArtist ? topArtist.name : '');
+  // ── Confidence tier assignment ──
+  function getTier(score) {
+    if (score >= 0.78) return { key: 'nail',   label: '✅ Ideal',    cls: 'tier-nail' };
+    if (score >= 0.60) return { key: 'strong', label: '🎯 Buena Opción', cls: 'tier-strong' };
+    return                     { key: 'stretch',label: '💪 Desafío',   cls: 'tier-stretch' };
+  }
+
+  // Familiar song keywords, crowd-recognizable titles
+  const FAMILIAR_WORDS = ['love','night','dream','heart','world','baby','fire','home','run','free','time','life','forever','angel','sky','gold','girl','dancing','shine','feel','hello','don\'t','can\'t','won\'t','isn\'t'];
+  function isFamiliar(title) {
+    const t = title.toLowerCase();
+    return FAMILIAR_WORDS.some(w => t.includes(w));
+  }
+
+  // Genre/mood/context tagging
+  function getTags(s) {
+    const t = (s.title + ' ' + s.artist).toLowerCase();
+    const tags = [];
+    if (/elvis|sinatra|cash|dean martin|tony bennett|nat king/i.test(t)) tags.push('classic');
+    if (/beatles|queen|bowie|journey|bon jovi|aerosmith|petty|springsteen|eagles|guns n roses|led zeppelin|u2|the who|rolling stones|david bowie|fleetwood mac|creedence|lynyrd skynyrd|acdc|ac\/dc|metallica|iron maiden|black sabbath|ozzy|nirvana|pearl jam|soundgarden|alice in chains|foo fighters|green day|weezer|radiohead|oasis|blur|the strokes|arctic monkeys|the killers|the cure|depeche mode|linkin park|system of a down|tool|pantera|megadeth|slayer|judas priest|van halen/i.test(t)) tags.push('rock');
+    if (/ed sheeran|bruno mars|michael jackson|katy perry|taylor swift|adele|beyonce|lady gaga|ariana grande|justin bieber|selena gomez|dua lipa|charlie puth|shawn mendes|halsey|billie eilish|olivia rodrigo|harry styles|the weeknd|post malone|lizzo|meghan trainor|sam smith|john legend|sia|kelly clarkson|pink|britney spears|backstreet boys|nsync|spice girls|one direction|coldplay|imagine dragons|maroon 5|train|onerepublic|jason mraz|colbie caillat/i.test(t)) tags.push('pop');
+    if (/cash|stapleton|morgan wallen|luke combs|zach bryan|tyler childers|luke bryan|blake shelton|keith urban|kenny chesney|garth brooks|tim mcgraw|alan jackson|carrie underwood|miranda lambert|kacey musgraves|maren morris|dolly parton|willie nelson|kenny rogers|hank williams|patsy cline|merle haggard|waylon jennings|loretta lynn|george jones|randy travis|shania twain|faith hill|brooks & dunn|george strait|reba mcentire|toby keith|zac brown|jason aldean|eric church|dierks bentley|thomas rhett|john denver|brad paisley|jimmie allen|brett eldredge|old dominion|little big town|chris young/i.test(t)) tags.push('country');
+    // R&B
+    if (/beyonce|alicia keys|marvin gaye|sam cooke|otis redding|al green|stevie wonder|aretha franklin|amy winehouse|usher|chris brown|rihanna|frank ocean|john legend|d'angelo|erykah badu|maxwell|brian mcknight|boyz ii men|boys ii men|r kelly|joe|neyo|ne-yo|toni braxton|mary j blige|lauryn hill|whitney houston|janet jackson|sza|h.e.r|her|giveon|daniel caesar/i.test(t)) tags.push('rnb');
+    // Hip-Hop
+    if (/drake|kanye|kendrick lamar|jay.z|eminem|post malone|travis scott|lil wayne|lil baby|future|21 savage|cardi b|nicki minaj|j cole|big sean|chance|childish gambino|logic|macklemore|old school rap|hip.hop|hip hop|rap/i.test(t)) tags.push('hiphop');
+    // Latin
+    if (/shakira|j balvin|bad bunny|marc anthony|luis miguel|jennifer lopez|ricky martin|enrique iglesias|pitbull|maluma|ozuna|daddy yankee|reggaeton|latin|bachata|salsa|juan gabriel|jose jose|camila cabello|gloria estefan|carlos santana|celia cruz/i.test(t)) tags.push('latin');
+    // Christian/Gospel
+    if (/lauren daigle|hillsong|chris tomlin|casting crowns|lecrae|tauren wells|for king|david crowder|tobymac|toby mac|matthew west|michael w. smith|michael w smith|amy grant|steven curtis chapman|dc talk|skillet|third day|newsboys|mercy me|mercyme|mandisa|plumb|bebo norman|jeremy camp|elevation|bethel|maverick|cain|brandon lake|zach williams|phil wickham|gateway worship|kristian stanfill/i.test(t)) tags.push('christian');
+    // Indie
+    if (/radiohead|arcade fire|death cab|the national|fleet foxes|bon iver|sufjan stevens|iron & wine|vampire weekend|the strokes|modest mouse|of montreal|beirut|jose gonzalez|jose gonzález|the lumineers|mumford|the head|lord huron|father john misty|phoebe bridgers|boygenius|lucy dacus|hozier|james blake|alt.j|alt j|tame impala|king krule|frank turner/i.test(t)) tags.push('indie');
+    // Metal
+    if (/metallica|iron maiden|black sabbath|ozzy osbourne|slayer|megadeth|pantera|tool|korn|linkin park|system of a down|disturbed|slipknot|five finger|breaking benjamin|halestorm|evanescence|within temptation|nightwish|epica|dimmu borgir|children of bodom|lamb of god|as i lay dying/i.test(t)) tags.push('metal');
+    // Jazz / Standards
+    if (/sinatra|nat king cole|ella fitzgerald|michael bublé|michael buble|chet baker|billie holiday|louis armstrong|tony bennett|dean martin|miles davis|john coltrane|diana krall|norah jones|frank sinatra|johnny hartman|peggy lee|sarah vaughan|bossa nova|swing|big band/i.test(t)) tags.push('jazz');
+    // Disco / Funk
+    if (/abba|bee gees|donna summer|earth wind|kool & the gang|kool and the gang|chic|sister sledge|gloria gaynor|village people|rick james|sly & the family|sly and the family|george clinton|parliament|funkadelic|james brown|jackson 5|michael jackson.*disco|disco|funky/i.test(t)) tags.push('disco');
+
+    if (/party|dance|tonight|celebrate|good time/i.test(t)) tags.push('party');
+    if (isFamiliar(s.title)) tags.push('familiar');
+    // Context tags
+    if (/don\'t stop|bohemian|sweet home|livin\' on a prayer|born to run|highway|take me home|africa|september|tiny dancer|mr\. brightside|rolling|journey|survivor|eye of the tiger|thunder|sweet caroline|don\'t stop believin|shake it off|uptown funk|can\'t stop/i.test(t)) tags.push('car');
+    if (tags.includes('rock') || tags.includes('classic')) tags.push('car');
+    if (/falling|alone|missing|broken|hold on|without you|one more|someone like|fix you|yellow|hallelujah|tears|cry|prayer|believe|in my life|yesterday|imagine|hero/i.test(t)) tags.push('solo');
+    if (/love shack|september|sweet caroline|living on a prayer|don\'t stop believin|thriller|girls just|shake it|dancing queen|i will survive|mr\. brightside|africa|uptown|happy|party|tonight|everyone|group|together/i.test(t)) tags.push('group');
+    if (tags.includes('party')) tags.push('group');
+    return tags;
+  }
+
+  // Decade tag from year
+  function getDecadeTag(s) {
+    const yr = s.year || 0;
+    if (yr >= 2020) return '2020s';
+    if (yr >= 2010) return '2010s';
+    if (yr >= 2000) return '2000s';
+    if (yr >= 1990) return '90s';
+    if (yr >= 1980) return '80s';
+    if (yr >= 1970) return '70s';
+    return '50s60s'; // pre-1970 or unknown
+  }
+
+  // Extend matchedSongs with tiers + tags + decade
+  const tieredSongs = deduped.map(s => ({
+    ...s,
+    tier: getTier(s.score),
+    tags: getTags(s),
+    decade: getDecadeTag(s),
+    familiar: isFamiliar(s.title)
+  }));
+
+  // ── Apply user interest filter ──
+  const _interests = (function() {
+    try { return JSON.parse(localStorage.getItem('hm_interests') || 'null'); } catch(_) { return null; }
+  })();
+  // Merge genres and decades into one filter (decades are now genre tags)
+  const _allFilters = [];
+  if (_interests) {
+    if (_interests.genres) _allFilters.push(..._interests.genres);
+    if (_interests.decades) _allFilters.push(..._interests.decades);
+  }
+  const _hasFilter = _allFilters.length > 0;
+  console.log('[FILTER DEBUG] _allFilters:', _allFilters);
+  console.log('[FILTER DEBUG] _hasFilter:', _hasFilter);
+  function _matchesInterests(s) {
+    if (!_hasFilter) return true;
+    if (!s.tags || !s.tags.length) return false;
+    const matches = s.tags.some(tag => _allFilters.includes(tag));
+    return matches;
+  }
+
+  // Separate confident songs from stretch
+  // Filter out previously dismissed songs
+  const isDescartared = s => window._hmDescartared && window._hmDescartared.has((s.title + '__' + s.artist).replace(/['"]/g,''));
+
+  // Sort by match percentage descending (best matches first)
+  function sessionShuffle(songs) {
+    // Sort by popularity first, then by match score
+    return songs.slice().sort((a, b) => {
+      const popDiff = (b.humMatchScore || 0) - (a.humMatchScore || 0);
+      if (popDiff !== 0) return popDiff;
+      return b.score - a.score;
+    });
+  }
+
+  const _confidentRaw = tieredSongs.filter(s => s.tier.key !== 'stretch' && !isDescartared(s));
+  console.log('[FILTER DEBUG] _confidentRaw count:', _confidentRaw.length);
+  console.log('[FILTER DEBUG] First 3 songs tags:', _confidentRaw.slice(0,3).map(s => ({title: s.title, tags: s.tags})));
+  const _confidentFiltered = _confidentRaw.filter(_matchesInterests);
+  console.log('[FILTER DEBUG] _confidentFiltered count:', _confidentFiltered.length);
+
+  // If genre/decade filter results in too few songs (<10), include stretch songs that match filter
+  const needMoreSongs = _hasFilter && _confidentFiltered.length < 10;
+  const _stretchFiltered = needMoreSongs ? tieredSongs.filter(s => s.tier.key === 'stretch' && !isDescartared(s) && _matchesInterests(s)) : [];
+
+  // Respect genre/decade filters, but fall back if empty (prevents stuck state)
+  // For tiered discovery, include all tiers (Tier 1, 2, 3) so they can be progressively loaded
+  const allTieredSongs = [...deduped, ...deduped2, ...deduped3];
+  const tieredWithMeta = allTieredSongs.map(s => ({
+    ...s,
+    tier: getTier(s.score),
+    tags: getTags(s),
+    decade: getDecadeTag(s),
+    familiar: isFamiliar(s.title)
+  }));
+
+  const confidentSongs = sessionShuffle(
+    _hasFilter && _confidentFiltered.length > 0
+      ? [..._confidentFiltered, ..._stretchFiltered]
+      : _confidentRaw
+  );
+  const _tasteFilterActive = _hasFilter && _confidentFiltered.length > 0;
+  const stretchSongs   = tieredSongs.filter(s => s.tier.key === 'stretch' && !isDescartared(s));
+
+  // Set share song data now that confidentSongs is available
+  const topSong = confidentSongs[0] || deduped[0];
+  shareArtistName = topSong ? topSong.title + ' by ' + topSong.artist : (topArtist ? topArtist.name : '');
   shareTopSong = topSong ? { title: topSong.title, artist: topSong.artist } : null;
 
-  // Track top matches
-  displaySongs.slice(0, 6).forEach(s => {
+  // ── Store hum data for retroactive save (if user signs up after) ──
+  window._pendingHumData = {
+    low_note: capturedNotes[0],
+    normal_note: capturedNotes[1],
+    high_note: capturedNotes[2],
+    voice_type: voiceType,
+    top_song: topSong ? topSong.title : '',
+    top_artist: topSong ? topSong.artist : '',
+    match_score: topSong ? Math.round((topSong.score || 0) * 100) : 0
+  };
+
+  // ── Immediately sync hum_count + log hum session to server ──
+  if (typeof hmSyncCounts === 'function') hmSyncCounts();
+  if (_humToken) {
+    const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
+    fetch('/api/hummatch/hum/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-HM-Token': _humToken },
+      body: JSON.stringify({
+        low_note: capturedNotes[0],
+        normal_note: capturedNotes[1],
+        high_note: capturedNotes[2],
+        voice_type: voiceType,
+        top_song: topSong ? topSong.title : '',
+        top_artist: topSong ? topSong.artist : '',
+        match_score: topSong ? Math.round((topSong.score || 0) * 100) : 0,
+        hum_count: humCount
+      })
+    }).catch(() => {});
+  }
+
+  // Store globally for filter re-render
+  window._hmSongs = tieredSongs;
+  window._hmDesafío = stretchSongs;
+
+  // ── SquadMatch: store songs for squad creation ──
+  // Always save top 20 songs to localStorage so SquadCoincidencia can pick them up
+  const _squadSongs = confidentSongs.slice(0, 20).map(s => ({ title: s.title, artist: s.artist, score: s.score || 0 }));
+  try {
+    localStorage.setItem('hm_squad_my_songs', JSON.stringify(_squadSongs));
+    if (voiceType) localStorage.setItem('hm_squad_voice_type', voiceType);
+  } catch(_) {}
+
+  // If returning from squad join flow (index.html?squad=X&member=Y), submit results to squad
+  (function() {
+    const _sqp = new URLSearchParams(location.search);
+    const _sqId = _sqp.get('squad');
+    const _sqMid = _sqp.get('member');
+    if (_sqId && _sqMid) {
+      const _sqSongs = confidentSongs.slice(0, 20).map(s => ({ title: s.title, artist: s.artist, score: s.score || 0 }));
+      const _sqRange = window._humRange || { lo: userLow, hi: userHigh };
+      fetch('/api/hummatch/squad/' + _sqId + '/hum', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          member_id: parseInt(_sqMid),
+          songs: _sqSongs,
+          voice_type: voiceType || '',
+          voice_low: _sqRange.lo || userLow,
+          voice_high: _sqRange.hi || userHigh
+        })
+      }).then(() => {
+        // Hide squad prompt, show "submitted" message then redirect
+        const prompt = document.getElementById('squad-prompt-module');
+        if (prompt) {
+          prompt.innerHTML = '<div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);border-radius:14px;padding:18px 20px;text-align:center"><div style="color:#4ade80;font-weight:700;font-size:0.92rem;margin-bottom:6px">✓ ¡Resultados enviados a tu squad!</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-bottom:12px">Redirigiendo a tu SquadMatch...</div><a href="/squadmatch?squad=' + _sqId + '" style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border-radius:10px;text-decoration:none;">Ver Progreso del Squad</a></div>';
+        }
+        setTimeout(() => { window.location = '/squadmatch?squad=' + _sqId; }, 2000);
+      }).catch(() => {});
+    }
+  })();
+
+  // Era tagging
+  function getEra(s) {
+    const yr = s.year || 0;
+    if (yr >= 2015) return 'recent';
+    if (yr >= 2000) return '2000s';
+    if (yr >= 1990) return '90s';
+    if (yr >= 1980) return '80s';
+    if (yr >= 1970) return '70s';
+    return 'classic';
+  }
+
+  // Render song card
+  let _renderIdx = 0;
+  function renderSongCard(s) {
+    const idx = _renderIdx++;
     hmTrack("song_matched", { title: s.title, artist: s.artist, score: Math.round((s.score || 0) * 100) });
     logHumMatch(s.title, s.artist, Math.round((s.score || 0) * 100));
-  });
+    const tags = s.tags || [];
+    const era  = getEra(s);
+    const tierBadge = `<span class="tier-badge ${s.tier.cls}">${s.tier.label}</span>`;
+    // Category badge logic
+    const scorePct = Math.round((s.score || 0) * 100);
+    const songRange = (s.hi || 0) - (s.lo || 0);
+    const hiDiff = Math.abs((s.hi || 0) - userHigh);
+    const isDuet = /duet/i.test(s.title) || songRange >= 20;
+    const isDesafíoRange = s.tier.key === 'stretch';
+    let catBadge = '';
+    if (scorePct >= 85) { catBadge = '<span class="cat-badge cat-best">🎯 Mejor Coincidencia</span>'; }
+    else if (idx < 3) { catBadge = '<span class="cat-badge cat-top">⭐ Selección Top</span>'; }
+    else if (hiDiff <= 2 && s.hi > userHigh) { catBadge = '<span class="cat-badge cat-stretch">🔥 Desafío</span>'; }
+    else if (isDuet) { catBadge = '<span class="cat-badge cat-duet">🎤 Gran Dueto</span>'; }
+    else if (isDesafíoRange) { catBadge = '<span class="cat-badge cat-trans">🔑 Prueba con Transposición</span>'; }
+    const titleSafe  = s.title.replace(/'/g,"\\'");
+    const artistSafe = s.artist.replace(/'/g,"\\'");
+    const songKey = (s.title + '__' + s.artist).replace(/['"]/g,'');
+    const genreLabel = tags.includes('rock') ? 'Rock' : tags.includes('pop') ? 'Pop' : tags.includes('country') ? 'Country' : tags.includes('classic') ? 'Classic' : '';
+    const pageSlug = toSlug(s.title) + '-' + toSlug(s.artist);
+    const guideLink = `<a href="${getSongLink(pageSlug)}" style="color:rgba(168,85,247,0.7);font-size:0.68rem;font-weight:600;text-decoration:none;white-space:nowrap;" title="Guía vocal de ${s.title}">Guía Vocal →</a>`;
+    return `<li class="song-item"
+      id="song-${songKey}"
+      data-tier="${s.tier.key}"
+      data-tags="${tags.join(',')}"
+      data-era="${era}"
+      data-lang="${s.lang || 'en'}"
+      data-familiar="${s.familiar}">
+      <div class="song-item-top">
+        <span class="song-title" onclick="openKaraoke('${titleSafe}','${artistSafe}')">${s.title}</span>
+        ${tierBadge}
+      </div>
+      <div class="song-meta">
+        <span>${s.artist}</span>
+        ${genreLabel ? `<span class="dot">·</span><span>${genreLabel}</span>` : ''}
+        ${s.year    ? `<span class="dot">·</span><span>${s.year}</span>` : ''}
+        ${s.score ? `<span class="dot">·</span><span style="color:#4ade80;font-weight:700;">✓ ${Math.round(s.score * 100)}% match</span>` : ''}
+      </div>
+      ${catBadge}
+      <div class="song-bottom">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:rgba(255,255,255,0.4);font-size:0.68rem;font-weight:600;user-select:none;">
+          <input type="checkbox" class="hm-song-check" data-title="${s.title.replace(/"/g,'&quot;')}" data-artist="${s.artist.replace(/"/g,'&quot;')}" onchange="togglePlaylistSong(this.dataset.title,this.dataset.artist,this.checked)" style="accent-color:#A855F7;width:14px;height:14px;cursor:pointer;flex-shrink:0;"/>
+          Agregar a playlist
+        </label>
+        ${guideLink}
+        <a href="${getSongLink(s.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')+'-'+s.artist.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''))}" class="sing-btn" style="text-decoration:none;color:inherit;display:inline-block;">▶ Cantar</a>
+      </div>
+    </li>`;
+  }
 
-  // ── RENDER FILTER CHIPS ──
-  const filterContainer = document.getElementById('filter-chips') || (() => {
-    const el = document.createElement('div');
-    el.id = 'filter-chips';
-    el.style.cssText = 'display:flex;gap:6px;overflow-x:auto;padding:4px 0 12px;max-width:100%;-webkit-overflow-scrolling:touch;';
-    return el;
-  })();
-  filterContainer.innerHTML = allTags
-    .filter(t => filterCounts[t] > 0 || t === 'todas')
-    .map(t => `<button class="filter-chip${t === 'todas' ? ' active' : ''}" data-filter="${t}" onclick="setFilterEs('${t}', this)" style="flex-shrink:0;padding:6px 14px;border-radius:50px;border:1px solid rgba(255,255,255,0.15);background:${t === 'todas' ? 'rgba(168,85,247,0.3)' : 'rgba(255,255,255,0.06)'};color:rgba(255,255,255,${t === 'todas' ? '0.95' : '0.6'});font-size:0.72rem;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;">${filterLabels[t] || t}</button>`)
-    .join('');
-
-  // ── NO MATCHES FALLBACK ──
+  // Render all confident songs
+  _renderIdx = 0; // reset category badge index
   const yourSongsEl = document.getElementById('your-songs');
-  if (!displaySongs.length) {
+  if (!confidentSongs.length) {
     hmTrack("no_match");
-    const fallbackSongs = SONGS
+    // Fallback: loosen threshold and show top 3 sugerencias basadas en rango
+const fallbackSongs = verifiedSongs
       .map(s => {
         const overlapLo = Math.max(userLow, s.lo);
         const overlapHi = Math.min(userHigh, s.hi);
@@ -2521,135 +3449,542 @@ function showResults() {
       .filter(s => s.score > 0)
       .sort((a, b) => b.score - a.score)
       .slice(0, 3);
-    yourSongsEl.insertAdjacentHTML('beforebegin', `
-      <div id="no-match-banner" style="width:100%;max-width:400px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;margin-bottom:12px;text-align:center;">
-        <div style="font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Mejor coincidencia por rango</div>
-        <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">No encontramos una coincidencia perfecta. Aquí hay 3 canciones que valen la pena intentar.</div>
-        <button onclick="retryHum()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:50px;padding:8px 20px;font-size:0.82rem;cursor:pointer;font-family:inherit;">🎤 ¿Quieres intentarlo de nuevo?</button>
-      </div>`);
-    yourSongsEl.innerHTML = fallbackSongs.map(s => renderSongCardEs(s, -1)).join('');
-    showScreen('screen-results');
+
+    if (fallbackSongs.length) {
+      yourSongsEl.innerHTML = fallbackSongs.map(renderSongCard).join('');
+      // Insert fallback header before the list
+      yourSongsEl.insertAdjacentHTML('beforebegin', `
+        <div id="no-match-banner" style="width:100%;max-width:400px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;margin-bottom:12px;text-align:center;">
+          <div style="font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Best Range Match</div>
+          <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">We could not find a perfect fit. Here are 3 songs worth trying based on your range.</div>
+          <button onclick="retryHum()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:50px;padding:8px 20px;font-size:0.82rem;cursor:pointer;font-family:inherit;">🎤 ¿Quieres intentarlo de nuevo?</button>
+        </div>`);
+    } else {
+      yourSongsEl.insertAdjacentHTML('beforebegin', `
+        <div id="no-match-banner" style="width:100%;max-width:400px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;margin-bottom:12px;text-align:center;">
+          <div style="font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">No Coincidencia Found</div>
+          <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">Try humming in a quieter space and hold each note for a full 2 seconds.</div>
+          <button onclick="retryHum()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:50px;padding:8px 20px;font-size:0.82rem;cursor:pointer;font-family:inherit;">🎤 ¿Quieres intentarlo de nuevo?</button>
+        </div>`);
+      yourSongsEl.innerHTML = '';
+    }
+  } else {
+    // ── Taste filter banner ──
+    const _existingTasteBanner = document.getElementById('hm-taste-banner');
+    if (_existingTasteBanner) _existingTasteBanner.remove();
+    if (_tasteFilterActive) {
+      const _filterLabels = { pop:'Pop', rock:'Rock', country:'Country', rnb:'R&B', hiphop:'Hip-Hop', latin:'Latin', indie:'Indie', disco:'Disco', '50s60s':'50s/60s', '70s':'70s', '80s':'80s', '90s':'90s', '2000s':'2000s', '2010s':'2010s', '2020s':'2020s' };
+      const _filterDesc = _allFilters.map(f => _filterLabels[f] || f).join(', ');
+      yourSongsEl.insertAdjacentHTML('beforebegin', `
+        <div id="hm-taste-banner" style="width:100%;max-width:400px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.22);border-radius:12px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <div>
+            <div style="font-size:0.78rem;font-weight:700;color:#c084fc;margin-bottom:2px;">🎯 ${confidentSongs.length} songs match your voice &amp; taste</div>
+            <div style="font-size:0.68rem;color:rgba(255,255,255,0.35);">${_filterDesc}</div>
+          </div>
+          <button onclick="clearInterests()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);border-radius:8px;padding:5px 10px;font-size:0.68rem;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;">Show Todas</button>
+        </div>`);
+    }
+
+    const PAGE_SIZE = 10;
+
+    // Tier system: 2K → 5K → Everything
+    // Use pre-computed tier matches with full metadata
+    window._hmTier1TodasSongs = deduped.map(s => ({
+      ...s,
+      tier: getTier(s.score),
+      tags: getTags(s),
+      decade: getDecadeTag(s),
+      familiar: isFamiliar(s.title)
+    }));
+    window._hmTier2TodasSongs = deduped2.map(s => ({
+      ...s,
+      tier: getTier(s.score),
+      tags: getTags(s),
+      decade: getDecadeTag(s),
+      familiar: isFamiliar(s.title)
+    }));
+    window._hmTier3TodasSongs = deduped3.map(s => ({
+      ...s,
+      tier: getTier(s.score),
+      tags: getTags(s),
+      decade: getDecadeTag(s),
+      familiar: isFamiliar(s.title)
+    }));
+
+    // For backwards compatibility, also set confidentSongs
+    window._hmConfidentTodas = confidentSongs;
+    window._hmConfidentPage = 0;
+    window._hmActiveTier = 1; // Start with tier 1
+
+    function getActiveTierSongs() {
+      if (window._hmActiveTier === 1) return window._hmTier1TodasSongs;
+      else if (window._hmActiveTier === 2) {
+        // Tier 2 is shown after Tier 1
+        return [...window._hmTier1TodasSongs, ...window._hmTier2TodasSongs];
+      }
+      else return [...window._hmTier1TodasSongs, ...window._hmTier2TodasSongs, ...window._hmTier3TodasSongs];
+    }
+
+    function renderSongPage() {
+      const tierSongs = getActiveTierSongs();
+      const page = window._hmConfidentPage;
+      const slice = tierSongs.slice(0, (page + 1) * PAGE_SIZE);
+      yourSongsEl.innerHTML = slice.map(renderSongCard).join('');
+
+      // Remove old buttons
+      const existingMore = document.getElementById('hm-show-more');
+      const existingTierOld = document.getElementById('hm-tier-buttons');
+      const existingTierNav = document.getElementById('hm-tier-nav');
+      if (existingMore) existingMore.remove();
+      if (existingTierOld) existingTierOld.remove();
+      if (existingTierNav) existingTierNav.remove();
+
+      // Show tier navigation buttons (side-by-side)
+      if (slice.length < tierSongs.length || window._hmActiveTier < 3) {
+        const tierDiv = document.createElement('div');
+        tierDiv.id = 'hm-tier-nav';
+        tierDiv.style.cssText = 'display:flex;gap:8px;margin:16px auto 0;max-width:400px;flex-wrap:wrap;justify-content:center;';
+
+        // "Load 10 More" if more in current tier
+        if (slice.length < tierSongs.length) {
+          const remaining = tierSongs.length - slice.length;
+          const btn = document.createElement('button');
+          btn.textContent = `Load ${Math.min(PAGE_SIZE, remaining)} More`;
+          btn.style.cssText = 'flex:1;min-width:140px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
+          btn.onclick = () => { window._hmConfidentPage++; renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
+          tierDiv.appendChild(btn);
+        }
+
+        // "Explore Deeper 🎵" tier button (from Tier 1 to Tier 2)
+        if (window._hmActiveTier === 1) {
+          const btn = document.createElement('button');
+          const tier2Count = window._hmTier2Count || 0;
+          const countText = tier2Count > 0 ? ` (${tier2Count} more)` : '';
+          btn.textContent = `Explore Deeper 🎵${countText}`;
+          btn.style.cssText = 'flex:1;min-width:140px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
+          btn.onclick = () => { window._hmActiveTier = 2; window._hmConfidentPage = 0; renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
+          tierDiv.appendChild(btn);
+        } else if (window._hmActiveTier === 2) {
+          const btn = document.createElement('button');
+          const tier3Count = window._hmTier3Count || 0;
+          const countText = tier3Count > 0 ? ` (${tier3Count} more)` : '';
+          btn.textContent = `Dig Even Deeper 🎶${countText}`;
+          btn.style.cssText = 'flex:1;min-width:140px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;';
+          btn.onclick = () => { window._hmActiveTier = 3; window._hmConfidentPage = 0; renderSongPage(); setTimeout(restorePlaylistChecks, 50); };
+          tierDiv.appendChild(btn);
+        }
+
+        yourSongsEl.after(tierDiv);
+      }
+
+    }
+    renderSongPage();
+    window._hmRenderSongPage = renderSongPage;
+    setTimeout(restorePlaylistChecks, 50);
+  }
+  // Store full confident list for language filter re-pagination
+  window._hmConfidentTodasFull = confidentSongs.filter ? confidentSongs.filter(s => s.tier.key !== 'stretch') : [];
+
+  // Render stretch section
+  const stretchEl = document.getElementById('stretch-songs');
+  const stretchSec = document.getElementById('stretch-section');
+  if (stretchSongs.length > 0) {
+    stretchEl.innerHTML = stretchSongs.map(renderSongCard).join('');
+    stretchSec.style.display = 'block';
+  } else {
+    stretchSec.style.display = 'none';
+  }
+
+  const topScore = confidentSongs[0] ? Math.round((confidentSongs[0].score || 0) * 100) : 0;
+  hmTrack('results_view', { voice_type: voiceType, score: topScore });
+
+  // State-based CTA logic
+  const isLoggedIn = typeof hmGetCurrentUser === 'function' && hmGetCurrentUser();
+  const isPremium = isLoggedIn && (hmGetCurrentUser().is_premium || false);
+
+  // Show appropriate CTA stack
+  const ctaLoggedOut = document.getElementById('cta-logged-out');
+  const ctaLoggedIn = document.getElementById('cta-logged-in');
+  const premiumSoftSell = document.getElementById('premium-soft-sell');
+  const exportFallback = document.querySelectorTodas('.export-btn-fallback');
+
+  if (!isLoggedIn) {
+    // LOGGED-OUT: Create Account > Compartir > Challenge
+    ctaLoggedOut.style.display = 'block';
+    ctaLoggedIn.style.display = 'none';
+    premiumSoftSell.style.display = 'block'; // Show premium soft-sell
+    exportFallback.forEach(btn => btn.style.display = 'inline-block'); // Show export as fallback
+  } else if (!isPremium) {
+    // LOGGED-IN FREE: Save/Export > Try SquadCoincidencia > Compartir
+    ctaLoggedOut.style.display = 'none';
+    ctaLoggedIn.style.display = 'block';
+    premiumSoftSell.style.display = 'block'; // Show premium upsell
+    exportFallback.forEach(btn => btn.style.display = 'none');
+  } else {
+    // PREMIUM: Save/Export > Try SquadCoincidencia > Compartir
+    ctaLoggedOut.style.display = 'none';
+    ctaLoggedIn.style.display = 'block';
+    premiumSoftSell.style.display = 'none'; // Hide premium upsell
+    exportFallback.forEach(btn => btn.style.display = 'none');
+  }
+
+  showScreen('screen-results');
+  // Show SquadCoincidencia prompt (if not already dismissed)
+  try {
+    if (!localStorage.getItem('hm_squad_prompt_dismissed')) {
+      const sqEl = document.getElementById('squad-results-prompt');
+      if (sqEl) sqEl.style.display = 'block';
+    }
+  } catch(e) {}
+  // Restore saved language filter (default to English for new users)
+  const savedLangFilter = (() => { try { return localStorage.getItem('hm_lang_filter'); } catch(e) { return null; } })();
+  const langToApply = (savedLangFilter && ['en','es','all'].includes(savedLangFilter)) ? savedLangFilter : 'en';
+  const langChip = document.querySelector(`.filter-chip[data-filter="${langToApply}"]`);
+  if (langChip) setTimeout(() => setFilter(langToApply, langChip), 50);
+  saveProfile();
+  checkSavedProfile(); // refresh welcome screen button
+  setTimeout(() => { restorePlaylistChecks(); updateExportCount(); }, 100);
+  // Show login prompt after first hum + update account badge
+  if (typeof hmMaybeShowLoginPrompt === 'function') hmMaybeShowLoginPrompt();
+  if (typeof hmUpdateAccountBadge === 'function') hmUpdateAccountBadge();
+  // Show A2HS banner after first successful result
+  setTimeout(() => showA2HSBanner('results-banner'), 800);
+  } catch (err) {
+    console.error('[ERROR] showResults crashed:', err);
+    alert('Error al cargar resultados: ' + err.message + '. Actualiza la página e intenta de nuevo.');
+    showScreen('screen-welcome');
+  }
+}
+
+const YT_KEY = 'AIzaSyBCLnGsgv3Ocimiu5jlB7lwwn27t_EiWPY'; // restricted to hummatch.me only in GCP console
+
+// ── Filter bar logic ──────────────────────────────────────────────────────────
+function setFilter(filter, el) {
+  // Update chip styles
+  document.querySelectorTodas('.filter-chip').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+
+  const songs = document.querySelectorTodas('#your-songs .song-item');
+  const titleEl = document.getElementById('songs-section-title');
+  const titles = {
+    all:      'SONGS YOU CAN CONFIDENTLY SING',
+    nail:     '✅ SONGS YOU CAN NAIL',
+    car:      '🚗 SONGS TO DOMINATE THE CAR',
+    solo:     '🎧 SONGS FOR WHEN IT\'S JUST YOU',
+    group:    '👯 SONGS TO KILL IT AT KARAOKE',
+    familiar: '⭐ SONGS YOU LIKELY KNOW',
+    pop:      '🎤 POP MATCHES',
+    rock:     '🎸 ROCK MATCHES',
+    country:  '🤠 COUNTRY MATCHES',
+    classic:  '🕰 CLASSIC MATCHES',
+    party:    '🎉 CROWD PLEASER MATCHES',
+    stretch:  '💪 STRETCH SONGS',
+    recent:   '🔥 RECENT SONGS YOU CAN NAIL',
+    '90s':    '📼 90s SONGS IN YOUR RANGE',
+    '80s':    '🕹 80s SONGS IN YOUR RANGE',
+    en:       '🇺🇸 ENGLISH SONGS IN YOUR RANGE',
+    es:       '🇪🇸 CANCIONES EN TU RANGO'
+  };
+  if (titleEl) titleEl.textContent = titles[filter] || 'TUS CANCIONES';
+  try { localStorage.setItem('hm_lang_filter', filter); } catch(e) {}
+
+  // Show/hide stretch section
+  const stretchSec = document.getElementById('stretch-section');
+  if (filter === 'stretch') {
+    // Move stretch songs into main list temporarily
+    const stretchEl = document.getElementById('stretch-songs');
+    const mainEl = document.getElementById('your-songs');
+    if (stretchEl && mainEl) mainEl.innerHTML = stretchEl.innerHTML;
+    if (stretchSec) stretchSec.style.display = 'none';
+    window._hmInDesafío = true;
+    const existing = document.getElementById('hm-show-more');
+    if (existing) existing.remove();
     return;
   }
 
-  // ── RENDER SONG CARDS ──
-  window._hmEsAll = displaySongs;
-  window._hmEsFilter = 'todas';
-  const ES_PAGE_SIZE = 10;
-  window._hmEsPage = 0;
-
-  // Insert filter chips before song list
-  const filtersParent = yourSongsEl.parentElement;
-  const existingFilters = document.getElementById('filter-chips');
-  if (existingFilters) existingFilters.remove();
-  filtersParent.insertBefore(filterContainer, yourSongsEl);
-
-  renderSongListEs();
-
-  showScreen('screen-results');
-  saveProfile();
-  checkSavedProfile();
-
-  } catch (err) {
-    console.error('[showResults ERROR]', err);
-    alert('Error al cargar resultados: ' + err.message + '. Actualiza la página e intenta de nuevo.');
-  }
-}
-
-function renderSongCardEs(s, idx) {
-  const titleSafe = s.title.replace(/'/g, "\\'");
-  const artistSafe = s.artist.replace(/'/g, "\\'");
-  const titleData = s.title.replace(/"/g, '&quot;');
-  const artistData = s.artist.replace(/"/g, '&quot;');
-  const tier = s.tierInfo || { tier: 'buena', label: 'Buena Opción', color: '#facc15' };
-  const matchPct = Math.round((s.score || 0) * 100);
-  const tagsStr = (s.tags || []).join(',');
-  const tierAttr = tier.tier;
-  const slug = (s.title + '-' + s.artist).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
-
-  return `<li class="song-item" data-tier="${tierAttr}" data-tags="${tagsStr}" data-era="${s.year && s.year >= 2015 ? 'recientes' : s.year && s.year < 1990 ? 'clasicos' : ''}" style="position:relative;">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-      <div style="flex:1;">
-        <span class="song-title" style="cursor:pointer;" onclick="openKaraoke('${titleSafe}','${artistSafe}')">${s.title}</span>
-        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:2px;">
-          <span class="song-artist">${s.artist}</span>
-          ${s.year ? '<span style="color:rgba(255,255,255,0.25);font-size:0.65rem;">·</span><span style="color:rgba(255,255,255,0.35);font-size:0.65rem;">' + s.year + '</span>' : ''}
-          <span style="color:rgba(255,255,255,0.25);font-size:0.65rem;">·</span>
-          <span style="color:${tier.color};font-size:0.65rem;font-weight:600;">Coincidencia ${matchPct}%</span>
-        </div>
-      </div>
-      <span style="flex-shrink:0;font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:50px;background:${tier.tier === 'ideal' ? 'rgba(74,222,128,0.15)' : tier.tier === 'buena' ? 'rgba(250,204,21,0.15)' : 'rgba(249,115,22,0.15)'};color:${tier.color};margin-left:8px;">${tier.label}</span>
-    </div>
-    ${s.catBadge ? '<div style="margin-top:4px;"><span style="font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:rgba(168,85,247,0.9);background:rgba(168,85,247,0.12);padding:2px 8px;border-radius:50px;">' + s.catBadge + '</span></div>' : ''}
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
-      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:rgba(255,255,255,0.4);font-size:0.68rem;font-weight:600;user-select:none;">
-        <input type="checkbox" class="hm-song-check-es" data-title="${titleData}" data-artist="${artistData}" onchange="updateExportCountEs()" style="accent-color:#A855F7;width:14px;height:14px;cursor:pointer;flex-shrink:0;"/>
-        Agregar a playlist
-      </label>
-      <div style="display:flex;gap:6px;align-items:center;">
-        <a href="/es/cancion/${slug}" style="font-size:0.6rem;color:rgba(255,255,255,0.4);text-decoration:none;font-weight:600;" target="_blank">Guía Vocal</a>
-        <span style="font-size:0.65rem;background:linear-gradient(135deg,#A855F7,#7C3AED);color:#fff;padding:3px 10px;border-radius:50px;font-weight:700;cursor:pointer;" onclick="openKaraoke('${titleSafe}','${artistSafe}')">▶ Cantar</span>
-      </div>
-    </div>
-  </li>`;
-}
-
-function renderSongListEs() {
-  const yourSongsEl = document.getElementById('your-songs');
-  const filter = window._hmEsFilter || 'todas';
-  const page = window._hmEsPage || 0;
-  const ES_PAGE_SIZE = 10;
-
-  let filtered = window._hmEsAll;
-  if (filter !== 'todas') {
-    if (filter === 'ideal') filtered = filtered.filter(s => s.tierInfo && s.tierInfo.tier === 'ideal');
-    else if (filter === 'desafío') filtered = filtered.filter(s => s.tierInfo && s.tierInfo.tier === 'desafio');
-    else if (filter === 'recientes') filtered = filtered.filter(s => s.year && s.year >= 2015);
-    else if (filter === 'clásicos') filtered = filtered.filter(s => s.year && s.year < 1990);
-    else filtered = filtered.filter(s => s.tags && s.tags.includes(filter));
+  // Restore from stretch: re-paginate using the proper render function
+  if (window._hmInDesafío) {
+    window._hmInDesafío = false;
+    const full = window._hmConfidentTodasFull || (window._hmSongs || []).filter(s => s.tier.key !== 'stretch');
+    window._hmConfidentTodas = full;
+    window._hmConfidentTodasFull = full;
+    window._hmConfidentPage = 0;
+    if (window._hmRenderSongPage) { window._hmRenderSongPage(); setTimeout(restorePlaylistChecks, 50); }
+    if (window._hmDesafío && window._hmDesafío.length && stretchSec) stretchSec.style.display = 'block';
   }
 
-  const slice = filtered.slice(0, (page + 1) * ES_PAGE_SIZE);
-  yourSongsEl.innerHTML = slice.map((s, i) => renderSongCardEs(s, i)).join('');
-
-  const existing = document.getElementById('hm-es-show-more');
-  if (existing) existing.remove();
-  if (slice.length < filtered.length) {
-    const remaining = filtered.length - slice.length;
-    const btn = document.createElement('button');
-    btn.id = 'hm-es-show-more';
-    btn.textContent = `Mostrar ${Math.min(ES_PAGE_SIZE, remaining)} canciones más`;
-    btn.style.cssText = 'display:block;margin:12px auto 0;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);border-radius:50px;padding:10px 24px;font-size:0.82rem;font-family:inherit;cursor:pointer;width:100%;max-width:400px;';
-    btn.onclick = () => { window._hmEsPage++; renderSongListEs(); };
-    yourSongsEl.after(btn);
+  // Language filters: re-paginate from full dataset so all pages are filtered
+  if (filter === 'en' || filter === 'es') {
+    const all = window._hmConfidentTodasFull || window._hmConfidentTodas || [];
+    if (!window._hmConfidentTodasFull) window._hmConfidentTodasFull = all.slice();
+    const filtered = all.filter(s => {
+      const slang = s.lang || 'en';
+      const stags = s.tags || [];
+      if (filter === 'en') return slang !== 'es' && !stags.includes('latin');
+      return slang === 'es' || stags.includes('latin');
+    });
+    window._hmConfidentTodas = filtered;
+    window._hmConfidentPage = 0;
+    if (window._hmRenderSongPage) { window._hmRenderSongPage(); setTimeout(restorePlaylistChecks, 50); }
+    return;
   }
-}
 
-function setFilterEs(filter, el) {
-  window._hmEsFilter = filter;
-  window._hmEsPage = 0;
-  document.querySelectorAll('.filter-chip').forEach(c => {
-    c.style.background = 'rgba(255,255,255,0.06)';
-    c.style.color = 'rgba(255,255,255,0.6)';
-    c.classList.remove('active');
+  // Non-language filter after language filter: restore full list
+  if (window._hmConfidentTodasFull && window._hmConfidentTodas !== window._hmConfidentTodasFull) {
+    window._hmConfidentTodas = window._hmConfidentTodasFull.slice();
+    window._hmConfidentPage = 0;
+    if (window._hmRenderSongPage) { window._hmRenderSongPage(); setTimeout(restorePlaylistChecks, 50); }
+  }
+
+  // Apply show/hide filter to visible songs
+  document.querySelectorTodas('#your-songs .song-item').forEach(item => {
+    const tier  = item.dataset.tier || '';
+    const tags  = (item.dataset.tags || '').split(',');
+    const fam   = item.dataset.familiar === 'true';
+    const era   = item.dataset.era  || '';
+    const lang  = item.dataset.lang || 'en';
+    let show = false;
+    if (filter === 'all')       show = true;
+    else if (filter === 'nail')     show = tier === 'nail';
+    else if (filter === 'familiar') show = fam;
+    else if (filter === 'car')      show = tags.includes('car');
+    else if (filter === 'solo')     show = tags.includes('solo');
+    else if (filter === 'group')    show = tags.includes('group');
+    else if (filter === 'pop')      show = tags.includes('pop');
+    else if (filter === 'rock')     show = tags.includes('rock');
+    else if (filter === 'country')  show = tags.includes('country');
+    else if (filter === 'classic')  show = tags.includes('classic');
+    else if (filter === 'party')    show = tags.includes('party');
+    else if (filter === 'recent')   show = era === 'recent' || era === '2000s';
+    else if (filter === '90s')      show = era === '90s';
+    else if (filter === '80s')      show = era === '80s';
+    else if (filter === 'en')       show = lang !== 'es' && !(item.dataset.tags && item.dataset.tags.includes('latin'));
+    else if (filter === 'es')       show = lang === 'es' || (item.dataset.tags && item.dataset.tags.includes('latin'));
+    item.style.display = show ? '' : 'none';
   });
-  el.style.background = 'rgba(168,85,247,0.3)';
-  el.style.color = 'rgba(255,255,255,0.95)';
-  el.classList.add('active');
-  renderSongListEs();
 }
 
+// ── Descartar song ("Don't know it") → replace with next best from pool ────────
+function dismissSong(songKey, btn) {
+  const parts = songKey.split('__');
+  hmTrack("song_dismissed", { title: parts[0] || songKey, artist: parts[1] || "" });
+  const li = document.getElementById('song-' + songKey);
+  if (!li) return;
 
-const YT_KEY = 'AIzaSyBCLnGsgv3Ocimiu5jlB7lwwn27t_EiWPY';
+  // Mark dismissed + persist to localStorage
+  window._hmDescartared = window._hmDescartared || new Set();
+  window._hmDescartared.add(songKey);
+  localStorage.setItem('hm_dismissed', JSON.stringify([...window._hmDescartared]));
+
+  // Animate out
+  li.style.transition = 'opacity 0.2s, transform 0.2s';
+  li.style.opacity = '0';
+  li.style.transform = 'translateX(30px)';
+
+  setTimeout(() => {
+    li.remove();
+    // Find next undismissed, unshown song from full pool
+    const shown = new Set(
+      Array.from(document.querySelectorTodas('#your-songs .song-item, #stretch-songs .song-item'))
+        .map(el => el.id.replace('song-',''))
+    );
+    const pool = window._hmFullPool || [];
+    const next = pool.find(s => {
+      const k = (s.title + '__' + s.artist).replace(/['"]/g,'');
+      return !window._hmDescartared.has(k) && !shown.has(k);
+    });
+
+    if (next) {
+      // Re-tag + tier the replacement
+      next.tags = next.tags || getTags ? getTags(next) : [];
+      next.tier = next.tier || (next.score >= 0.78 ? {key:'nail',label:'✅ Ideal',cls:'tier-nail'} : next.score >= 0.60 ? {key:'strong',label:'🎯 Buena Opción',cls:'tier-strong'} : {key:'stretch',label:'💪 Desafío',cls:'tier-stretch'});
+      next.familiar = next.familiar !== undefined ? next.familiar : false;
+      const html = renderSongCard(next);
+      const container = document.getElementById('your-songs');
+      if (container) {
+        const tmp = document.createElement('ul');
+        tmp.innerHTML = html;
+        const newLi = tmp.firstElementChild;
+        newLi.style.opacity = '0';
+        newLi.style.transform = 'translateX(-20px)';
+        container.appendChild(newLi);
+        requestAnimationFrame(() => {
+          newLi.style.transition = 'opacity 0.25s, transform 0.25s';
+          newLi.style.opacity = '1';
+          newLi.style.transform = 'translateX(0)';
+        });
+      }
+    }
+  }, 200);
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+function toggleDesafío() {
+  const stretchEl = document.getElementById('stretch-songs');
+  const btn = document.querySelector('.stretch-toggle');
+  if (!stretchEl) return;
+  const open = stretchEl.style.display !== 'none';
+  stretchEl.style.display = open ? 'none' : 'flex';
+  stretchEl.style.flexDirection = 'column';
+  if (btn) btn.textContent = open
+    ? '💪 Show stretch songs, great with a small key change'
+    : '💪 Hide stretch songs';
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── PERSISTENT PLAYLIST ──────────────────────────────────────────────────────
+const HM_PLAYLIST_KEY = 'hm_playlist';
+
+function loadPlaylist() {
+  try { return JSON.parse(localStorage.getItem(HM_PLAYLIST_KEY) || '[]'); } catch(e) { return []; }
+}
+
+function savePlaylist(list) {
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  // Gratis users: cap at 20 saved songs
+  const capped = isPremium ? list : list.slice(0, 20);
+  localStorage.setItem(HM_PLAYLIST_KEY, JSON.stringify(capped));
+}
+
+function togglePlaylistSong(title, artist, checked) {
+  let list = loadPlaylist();
+  const key = title + '__' + artist;
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+
+  if (checked) {
+    if (!list.find(s => s.title === title && s.artist === artist)) {
+      // Check playlist limit for free users
+      if (!isPremium && list.length >= 20) {
+        // Show upgrade prompt
+        showToast('🎶 Nice playlist! Want to export it?');
+        // Show upgrade modal
+        setTimeout(() => {
+          if (confirm('🎵 Export Your Playlist?\n\n20 songs ready! Upgrade to export your playlist:\n\n✓ Unlimited playlist exports\n✓ Unlimited saved songs\n✓ Create singing squads\n✓ Compartir with friends\n\nOnly $7.99/mo (14-day free trial)')) {
+            window.location.href = '/pricing';
+          }
+        }, 500);
+        // Uncheck the checkbox
+        const checkbox = document.querySelector(`input[data-title="${title.replace(/"/g,'&quot;')}"][data-artist="${artist.replace(/"/g,'&quot;')}"]`);
+        if (checkbox) checkbox.checked = false;
+        return;
+      }
+      list.push({ title, artist });
+    }
+  } else {
+    list = list.filter(s => !(s.title === title && s.artist === artist));
+  }
+  savePlaylist(list);
+  updateExportCount();
+  if (typeof hmSyncCounts === 'function') hmSyncCounts();
+}
+
+function restorePlaylistChecks() {
+  const list = loadPlaylist();
+  if (!list.length) return;
+  const keys = new Set(list.map(s => s.title + '__' + s.artist));
+  document.querySelectorTodas('.hm-song-check').forEach(cb => {
+    const k = cb.dataset.title + '__' + cb.dataset.artist;
+    if (keys.has(k)) cb.checked = true;
+  });
+  updateExportCount();
+}
+
+function clearPlaylist() {
+  localStorage.removeItem(HM_PLAYLIST_KEY);
+  document.querySelectorTodas('.hm-song-check').forEach(cb => cb.checked = false);
+  updateExportCount();
+  showToast('Playlist cleared');
+}
+
+function updateExportCount() {
+  const label = document.getElementById('export-count-label');
+  const clearRow = document.getElementById('playlist-clear-row');
+  if (!label) return;
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  const playlist = loadPlaylist();
+  const total = playlist.length;
+  if (total === 0) {
+    label.textContent = '';
+    if (clearRow) clearRow.style.display = 'none';
+  } else {
+    const cap = isPremium ? '' : total >= 10 ? ' · limit reached' : ` · ${10 - total} more free`;
+    label.textContent = `${total} canción${total !== 1 ? 'es' : ''} en tu playlist${cap}`;
+    if (clearRow) clearRow.style.display = 'block';
+  }
+}
+
+function exportSongList(mode) {
+  // Check monthly export limit for free users
+  const isPremiumExport = localStorage.getItem('hm_premium') === 'true';
+  if (!isPremiumExport) {
+    const monthKey = new Date().toISOString().slice(0,7);
+    if (localStorage.getItem('hm_export_month') !== monthKey) {
+      localStorage.setItem('hm_export_month', monthKey);
+      localStorage.setItem('hm_export_count', '0');
+    }
+    const exportCount = parseInt(localStorage.getItem('hm_export_count') || '0');
+    if (exportCount >= 20) {
+      const isLoggedIn = !!localStorage.getItem('hm_token');
+      showToast(isLoggedIn
+        ? 'Export limit reached. Unlock Squad Leader for unlimited exports. ✨'
+        : 'Export limit reached. Create a free account or unlock Squad Leader. ✨');
+      return;
+    }
+    localStorage.setItem('hm_export_count', exportCount + 1);
+    if (typeof hmSyncCounts === 'function') hmSyncCounts();
+  }
+
+  // Use saved playlist if populated, otherwise export full matched pool
+  const playlist = loadPlaylist();
+  const pool = playlist.length > 0 ? playlist : (window._hmConfidentTodas || window._hmFullPool || []);
+  if (!pool.length) { showToast('Hum first to get your song list!'); return; }
+
+  if (mode === 'copy') {
+    const text = pool.map((s, i) => `${i + 1}. ${s.title} by ${s.artist}`).join('\n');
+    navigator.clipboard.writeText(text)
+      .then(() => showToast('Song list copied! Paste in your music app, Notes, or anywhere 📋'))
+      .catch(() => {
+        // Fallback for browsers that block clipboard
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Song list copied! 📋');
+      });
+    hmTrack('export_copy', { count: pool.length });
+  }
+
+  if (mode === 'csv') {
+    const header = 'Song,Artist,Coincidencia %\n';
+    const rows = pool.map(s => `"${s.title.replace(/"/g,'""')}","${s.artist.replace(/"/g,'""')}","${Math.round((s.score||0)*100)}%"`).join('\n');
+    const blob = new Blob([header + rows], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'my-hummatch-songs.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('CSV downloaded. Open in Excel, Google Sheets, or your music app ⬇');
+    hmTrack('export_csv', { count: pool.length });
+  }
+  // Show A2HS after playlist save action
+  setTimeout(() => showA2HSBanner('results-banner'), 1200);
+}
+
 
 async function openKaraoke(title, artist) {
+  hmTrack('song_click', { title, artist });
   hmTrack("song_sung", { title, artist });
   const modal = document.getElementById('karaoke-modal');
   document.getElementById('karaoke-title').textContent = title;
   document.getElementById('karaoke-artist').textContent = artist;
   modal.style.display = 'flex';
 
-  const fallbackUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(title+' '+artist+' karaoke con letra')}`;
+  const fallbackUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(title+' '+artist+' karaoke with lyrics')}`;
   document.getElementById('karaoke-yt-btn').onclick = () => window.open(fallbackUrl, '_blank');
 
   // Show loading state
@@ -2657,10 +3992,10 @@ async function openKaraoke(title, artist) {
   const loading = document.getElementById('karaoke-loading');
   frame.style.display = 'none';
   loading.style.display = 'flex';
-  document.getElementById('karaoke-yt-btn').textContent = '⏳ Buscando pista…';
+  document.getElementById('karaoke-yt-btn').textContent = '⏳ Buscando pista...';
 
   try {
-    const q = encodeURIComponent(title + ' ' + artist + ' karaoke con letra');
+    const q = encodeURIComponent(title + ' ' + artist + ' karaoke with lyrics');
     const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video&maxResults=1&videoCategoryId=10&key=${YT_KEY}`);
     const data = await res.json();
     const videoId = data.items && data.items[0] && data.items[0].id.videoId;
@@ -2675,8 +4010,8 @@ async function openKaraoke(title, artist) {
     }
   } catch(e) {
     // Fallback, open YouTube directly
-    loading.innerHTML = `<div style="font-size:1.5rem;margin-bottom:12px;">🎤</div><div style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Toca abajo para abrir en YouTube</div>`;
-    document.getElementById('karaoke-yt-btn').textContent = '▶ ¡Cántala Ahora!';
+    loading.innerHTML = `<div style="font-size:1.5rem;margin-bottom:12px;">🎤</div><div style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Tap below to open on YouTube</div>`;
+    document.getElementById('karaoke-yt-btn').textContent = '▶ Now Cantar';
     document.getElementById('karaoke-yt-btn').onclick = () => window.open(fallbackUrl, '_blank');
   }
 }
@@ -2694,7 +4029,8 @@ function saveProfile() {
   const profile = {
     notes: capturedNotes,
     brightness: capturedBrightness,
-    savedAt: Date.now()
+    savedAt: Date.now(),
+    version: 2 // Increment when matching algorithm changes
   };
   try { localStorage.setItem('hummatch_profile', JSON.stringify(profile)); } catch(e) {}
 }
@@ -2704,9 +4040,19 @@ function loadSavedProfile() {
     const raw = localStorage.getItem('hummatch_profile');
     if (!raw) return false;
     const p = JSON.parse(raw);
+
+    // Invalidate profiles from before gender filtering fixes (version 2)
+    if (!p.version || p.version < 2) {
+      console.log('Old profile detected, clearing...');
+      localStorage.removeItem('hummatch_profile');
+      return false;
+    }
+
+    // Load saved notes and re-run matching algorithm
+    // This ensures users get latest algorithm improvements + new songs
     capturedNotes = p.notes || [null, null, null];
     capturedBrightness = p.brightness || [null, null, null];
-    showResults();
+    showResults(); // Re-run algorithm with current song catalog
     return true;
   } catch(e) { return false; }
 }
@@ -2720,35 +4066,46 @@ function checkSavedProfile() {
     const btn = document.getElementById('saved-profile-btn');
     const lbl = document.getElementById('saved-profile-date');
     if (btn) btn.style.display = 'block';
-    if (lbl) lbl.textContent = days === 0 ? 'Guardado hoy' : `Guardado hace ${days} día${days !== 1 ? 's' : ''}`;
+    if (lbl) lbl.textContent = days === 0 ? 'Guardado hoy' : `Guardado hace ${days} day${days !== 1 ? 's' : ''} ago`;
   } catch(e) {}
 }
 
-// PWA install prompt
+// PWA install prompt, shown at high-intent moments only
 let deferredInstallPrompt = null;
+const _a2hsInstalled = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredInstallPrompt = e;
-  const btn = document.getElementById('install-btn');
-  if (btn) btn.style.display = 'inline-block';
 });
 window.addEventListener('appinstalled', () => {
   hmTrack("pwa_install");
   deferredInstallPrompt = null;
-  const btn = document.getElementById('install-btn');
-  if (btn) btn.style.display = 'none';
+  document.querySelectorTodas('[id^="a2hs-"]').forEach(el => el.style.display = 'none');
 });
-if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+// Standalone detection, fires on first launch after Add to Inicio Screen (any browser)
+if (_a2hsInstalled) {
   if (!localStorage.getItem('hm_pwa_tracked')) {
     localStorage.setItem('hm_pwa_tracked', '1');
     hmTrack('pwa_install');
   }
 }
-if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.navigator.standalone) {
-  window.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('install-btn');
-    if (btn) btn.style.display = 'inline-block';
-  });
+function _a2hsCanShow(key) {
+  if (_a2hsInstalled) return false;
+  if (localStorage.getItem('hm_a2hs_dismiss_' + key)) return false;
+  return true;
+}
+function showA2HSBanner(key) {
+  if (!_a2hsCanShow(key)) return;
+  // On iOS, beforeinstallprompt doesn't fire but we still show the banner
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if (!deferredInstallPrompt && !isIOS) return;
+  const el = document.getElementById('a2hs-' + key);
+  if (el) el.style.display = 'block';
+}
+function dismissA2HS(key) {
+  localStorage.setItem('hm_a2hs_dismiss_' + key, '1');
+  const el = document.getElementById('a2hs-' + key);
+  if (el) el.style.display = 'none';
 }
 function installHumMatch() {
   hmTrack("a2hs_tap");
@@ -2756,33 +4113,14 @@ function installHumMatch() {
     deferredInstallPrompt.prompt();
     deferredInstallPrompt.userChoice.then(() => { deferredInstallPrompt = null; });
   } else if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.navigator.standalone) {
-    alert('Toca el botón Compartir ⬆ en Safari y luego "Agregar a pantalla de inicio" para guardar HumMatch.');
+    alert('Tap the Compartir button ⬆ at the bottom of Safari, then tap "Add to Inicio Screen" to save HumMatch.');
   } else if (window.navigator.standalone) {
-    alert('¡HumMatch ya está en tu pantalla de inicio! ✅');
+    alert('HumCoincidencia is already on your home screen! ✅');
   } else {
-    alert('Para guardar HumMatch: en Chrome toca el menú (⋮) y elige "Agregar a pantalla de inicio".');
+    alert('To save HumMatch: in Chrome tap the menu (⋮) and choose "Add to Inicio Screen".');
   }
 }
 
-
-// ── Filter bar logic ──────────────────────────────────────────────────────────
-function setFilter(filter, el) {
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  if (el) el.classList.add('active');
-  const titleEl = document.getElementById('songs-section-title');
-  const titles = {
-    all:     'TUS CANCIONES VS LISTA GENÉRICA',
-    country: '🤠 CANCIONES COUNTRY'
-  };
-  if (titleEl) titleEl.textContent = titles[filter] || 'TUS CANCIONES';
-  document.querySelectorAll('#your-songs .song-item').forEach(item => {
-    const tags = (item.dataset.tags || '').split(',');
-    let show = false;
-    if (filter === 'all') show = true;
-    else if (filter === 'country') show = tags.includes('country');
-    item.style.display = show ? '' : 'none';
-  });
-}
 
 // Capture affiliate ref from URL and store
 (function() {
@@ -2793,43 +4131,76 @@ function setFilter(filter, el) {
 // Load songs from API, fall back to inline SONGS array
 let SONGS_LOADED = false;
 async function loadSongs() {
-  if (SONGS_LOADED) return;
-  try {
-    const res = await fetch('/api/hummatch/songs?lang=es');
-    if (res.ok) {
-      const data = await res.json();
-      if (data && data.length > 10) {
-        SONGS.length = 0;
-        data.forEach(s => SONGS.push(s));
-        SONGS_LOADED = true;
-      }
-    }
-  } catch(e) { /* use inline fallback */ }
+  // Use hardcoded JS array as authoritative source. DB endpoint is for admin management only
+  // This prevents duplicates from DB + inline array merging
+  SONGS_LOADED = true;
   hmTrack("page_view");
 }
+
+// ── SESSION TIME TRACKING ──────────────────────────────────
+const _sessionStart = Date.now();
+function _trackSessionEnd() {
+  const duration = Math.round((Date.now() - _sessionStart) / 1000);
+  if (duration < 3) return; // ignore bounces under 3 seconds
+  if (duration > 1800) return; // ignore sessions over 30 min (open tab, analytics dashboard, etc.)
+  hmTrack('session_end', { duration_sec: duration });
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') _trackSessionEnd();
+});
+window.addEventListener('beforeunload', _trackSessionEnd);
 
 // Run on page load
 window.addEventListener('DOMContentLoaded', async () => {
   await loadSongs();
   checkSavedProfile();
+  checkReturningUser();
 });
+
+// Check if returning user and show homepage upgrade CTA
+function checkReturningUser() {
+  try {
+    const isReturningUser = localStorage.getItem('hummatch_visited') === 'true';
+    const isLoggedIn = typeof hmGetCurrentUser === 'function' && hmGetCurrentUser();
+    const isPremium = isLoggedIn && (hmGetCurrentUser().is_premium || false);
+
+    // Show upgrade CTA if: returning + not premium
+    if (isReturningUser && !isPremium) {
+      const upgradeEl = document.getElementById('homepage-returning-upgrade');
+      if (upgradeEl) upgradeEl.style.display = 'block';
+    }
+
+    // Mark as visited for next time
+    if (!isReturningUser) {
+      localStorage.setItem('hummatch_visited', 'true');
+    }
+  } catch(e) {
+    console.log('checkReturningUser error:', e);
+  }
+}
 
 function resetTest() {
   phase = 0;
   capturedNotes = [null, null, null];
   capturedBrightness = [null, null, null];
-  document.getElementById('low-note').textContent = '—';
-  document.getElementById('mid-note').textContent = '—';
-  document.getElementById('high-note').textContent = '—';
-  document.getElementById('pitch-note').textContent = '—';
-  document.getElementById('pitch-hz').textContent = 'esperando señal…';
+  document.getElementById('low-note').textContent = '-';
+  document.getElementById('mid-note').textContent = '-';
+  document.getElementById('high-note').textContent = '-';
+  document.getElementById('pitch-note').textContent = '-';
+  document.getElementById('pitch-hz').textContent = '';
   document.getElementById('pitch-bar').style.width = '0%';
-  startTest();
+  resetRing();
+  // Re-test doesn't count against the free hum limit, it's the same session
+  const prev = parseInt(localStorage.getItem('hm_hum_count') || '0');
+  if (prev > 0) localStorage.setItem('hm_hum_count', prev - 1);
+  // Go straight to primer (skip limit check, already passed)
+  showScreen('screen-primer');
 }
 
 // ── SHARE FUNCTIONS ──────────────────────────────────────────────
-function buildShareCard() {
+function buildCompartirCard() {
   const canvas = document.getElementById('share-canvas');
+  // Landscape 1200x630 @ 2x for crispness
   const SCALE = 2;
   const W = 1200, H = 630;
   canvas.width  = W * SCALE;
@@ -2839,7 +4210,7 @@ function buildShareCard() {
   const ctx = canvas.getContext('2d');
   ctx.scale(SCALE, SCALE);
 
-  // Background
+  // ── Background ──
   const bg = ctx.createLinearGradient(0, 0, W, H);
   bg.addColorStop(0, '#0a0614');
   bg.addColorStop(0.5, '#130a22');
@@ -2847,33 +4218,47 @@ function buildShareCard() {
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
 
+  // Left glow
   const glowL = ctx.createRadialGradient(320, H/2, 0, 320, H/2, 280);
   glowL.addColorStop(0, 'rgba(168,85,247,0.28)');
   glowL.addColorStop(1, 'rgba(168,85,247,0)');
-  ctx.fillStyle = glowL; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = glowL;
+  ctx.fillRect(0, 0, W, H);
 
-  const glowR = ctx.createRadialGradient(W-260, H/2, 0, W-260, H/2, 220);
+  // Right glow
+  const glowR = ctx.createRadialGradient(W - 260, H/2, 0, W - 260, H/2, 220);
   glowR.addColorStop(0, 'rgba(236,72,153,0.18)');
   glowR.addColorStop(1, 'rgba(236,72,153,0)');
-  ctx.fillStyle = glowR; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = glowR;
+  ctx.fillRect(0, 0, W, H);
 
-  ctx.strokeStyle = 'rgba(168,85,247,0.06)'; ctx.lineWidth = 1;
-  for (let x = 0; x < W; x += 60) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
-  for (let y = 0; y < H; y += 60) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+  // Subtle grid lines for depth
+  ctx.strokeStyle = 'rgba(168,85,247,0.06)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 60) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for (let y = 0; y < H; y += 60) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
 
-  // LEFT: Artist result
-  const LX = 320;
-  ctx.font = '110px serif'; ctx.textAlign = 'center';
+  // ── LEFT PANEL: Artist result ──────────────────────────────────
+  const LX = 320; // center of left panel
+
+  // Mic emoji large
+  ctx.font = '110px serif';
+  ctx.textAlign = 'center';
   ctx.fillText('🎤', LX, 170);
 
+  // Label
   ctx.font = '600 18px Arial, sans-serif';
   ctx.fillStyle = 'rgba(192,132,252,0.75)';
-  ctx.fillText('MI CANCIÓN HUMMATCH', LX, 228);
+  ctx.fillText('MY TOP HUMMATCH SONG', LX, 230);
 
   // Song title, big, white, bold
   ctx.fillStyle = '#ffffff';
   const songTitle = shareTopSong ? shareTopSong.title : shareArtistName;
-  const displayTitle = songTitle.length > 20 ? songTitle.substring(0, 20) + '…' : songTitle;
+  const displayTitle = songTitle.length > 20 ? songTitle.substring(0, 20) + '...' : songTitle;
   const titleWords = displayTitle.split(' ');
   if (displayTitle.length > 14) {
     const half = Math.ceil(titleWords.length / 2);
@@ -2895,84 +4280,105 @@ function buildShareCard() {
     ctx.fillText(shareTopSong.artist, LX, artistY);
   }
 
-  const pillTxt = shareVoiceType + '  ·  ' + shareCoincidenciaPct + '% Coincidencia';
-  ctx.font = '600 19px Arial, sans-serif';
+  // Voice type + match pill
+  const pillTxt = `${shareVoiceType}  ·  ${shareMatchPct}% Match`;
+  ctx.font = '600 20px Arial, sans-serif';
   const pillW = ctx.measureText(pillTxt).width + 48;
   const pillX = LX - pillW/2;
   const pillY = displayTitle.length > 14 ? 425 : 400;
   ctx.fillStyle = 'rgba(168,85,247,0.22)';
-  ctx.strokeStyle = 'rgba(168,85,247,0.55)'; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.roundRect(pillX, pillY, pillW, 44, 22); ctx.fill(); ctx.stroke();
+  ctx.strokeStyle = 'rgba(168,85,247,0.55)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.roundRect(pillX, pillY, pillW, 44, 22);
+  ctx.fill(); ctx.stroke();
   ctx.fillStyle = '#c084fc';
   ctx.fillText(pillTxt, LX, pillY + 28);
 
-  // Divider
+  // ── VERTICAL DIVIDER ──
   const divX = 640;
-  const divGrad = ctx.createLinearGradient(divX, 60, divX, H-60);
-  divGrad.addColorStop(0, 'rgba(168,85,247,0)');
-  divGrad.addColorStop(0.3, 'rgba(168,85,247,0.4)');
-  divGrad.addColorStop(0.7, 'rgba(236,72,153,0.4)');
-  divGrad.addColorStop(1, 'rgba(236,72,153,0)');
-  ctx.strokeStyle = divGrad; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.moveTo(divX, 60); ctx.lineTo(divX, H-60); ctx.stroke();
+  const grad = ctx.createLinearGradient(divX, 60, divX, H - 60);
+  grad.addColorStop(0, 'rgba(168,85,247,0)');
+  grad.addColorStop(0.3, 'rgba(168,85,247,0.4)');
+  grad.addColorStop(0.7, 'rgba(236,72,153,0.4)');
+  grad.addColorStop(1, 'rgba(236,72,153,0)');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(divX, 60); ctx.lineTo(divX, H - 60);
+  ctx.stroke();
 
-  // RIGHT: CTA
-  const RX = divX + (W - divX) / 2;
-  const logoGrad = ctx.createLinearGradient(RX-120, 0, RX+120, 0);
-  logoGrad.addColorStop(0, '#A855F7'); logoGrad.addColorStop(1, '#EC4899');
+  // ── RIGHT PANEL: CTA ───────────────────────────────────────────
+  const RX = divX + (W - divX) / 2; // center of right panel
+
+  // HumCoincidencia logo text
+  const logoGrad = ctx.createLinearGradient(RX - 120, 0, RX + 120, 0);
+  logoGrad.addColorStop(0, '#A855F7');
+  logoGrad.addColorStop(1, '#EC4899');
   ctx.font = 'bold 42px Arial, sans-serif';
   ctx.fillStyle = logoGrad;
-  ctx.fillText('HumMatch', RX, 138);
+  ctx.fillText('HumMatch', RX, 140);
 
+  // Tagline
   ctx.font = '400 24px Arial, sans-serif';
   ctx.fillStyle = 'rgba(255,255,255,0.65)';
-  ctx.fillText('¿Qué canción va con tu voz?', RX, 210);
+  ctx.fillText('What song matches', RX, 210);
+  ctx.fillText('YOUR voice?', RX, 246);
 
+  // Hum 3 notes CTA
   ctx.font = '500 20px Arial, sans-serif';
   ctx.fillStyle = 'rgba(192,132,252,0.8)';
-  ctx.fillText('Tararea 3 notas. Descubrelo en 30 seg.', RX, 272);
+  ctx.fillText('Hum 3 notes. Find out in 30 seconds.', RX, 308);
 
-  const btnW = 360, btnH = 62, btnX = RX - btnW/2, btnY = 308;
-  const btnGrad = ctx.createLinearGradient(btnX, 0, btnX+btnW, 0);
-  btnGrad.addColorStop(0, '#7C3AED'); btnGrad.addColorStop(1, '#A855F7');
+  // CTA button
+  const btnW = 340, btnH = 62, btnX = RX - btnW/2, btnY = 340;
+  const btnGrad = ctx.createLinearGradient(btnX, 0, btnX + btnW, 0);
+  btnGrad.addColorStop(0, '#7C3AED');
+  btnGrad.addColorStop(1, '#A855F7');
   ctx.fillStyle = btnGrad;
-  ctx.beginPath(); ctx.roundRect(btnX, btnY, btnW, btnH, 31); ctx.fill();
-  ctx.font = 'bold 24px Arial, sans-serif'; ctx.fillStyle = '#ffffff';
-  ctx.fillText('Prueba Gratis → hummatch.me/es', RX, btnY + 39);
+  ctx.beginPath();
+  ctx.roundRect(btnX, btnY, btnW, btnH, 31);
+  ctx.fill();
+  ctx.font = 'bold 24px Arial, sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('Try Gratis → hummatch.me', RX, btnY + 39);
 
-  ctx.font = '600 17px Arial, sans-serif';
+  // Promo code
+  ctx.font = '600 18px Arial, sans-serif';
   ctx.fillStyle = 'rgba(192,132,252,0.7)';
-  ctx.fillText('Codigo HUMMATCH20 para 20% de descuento', RX, 418);
+  // Upgrade text removed
 
+  // Hashtag
   ctx.font = '500 18px Arial, sans-serif';
   ctx.fillStyle = 'rgba(168,85,247,0.5)';
-  ctx.fillText('#HumMatchChallenge #EncontréMiVoz', RX, H-50);
+  ctx.fillText('#HumMatchChallenge', RX, H - 50);
 
+  // URL large at bottom right panel
   ctx.font = 'bold 22px Arial, sans-serif';
   ctx.fillStyle = 'rgba(168,85,247,0.9)';
-  ctx.fillText('hummatch.me/es', RX, H-22);
+  ctx.fillText('hummatch.me', RX, H - 22);
 
   return canvas;
 }
 
 async function shareHumMatch() {
   hmTrack("share_card");
-  const canvas = buildShareCard();
+  const canvas = buildCompartirCard();
   const songLabel = shareTopSong ? ('"' + shareTopSong.title + '" by ' + shareTopSong.artist) : shareArtistName;
-  const shareText = 'Mi canci\u00F3n HumMatch es ' + songLabel + '! \uD83C\uDFA4 Tararea 3 notas para encontrar la tuya \u2192 hummatch.me #HumMatchChallenge';
+  const shareText = 'My top HumCoincidencia song is ' + songLabel + '! \uD83C\uDFA4 Hum 3 notes to find yours \u2192 hummatch.me #HumMatchChallenge';
 
-  // Try Web Share API with image
-  if (navigator.share && navigator.canShare) {
+  // Try Web Compartir API with image
+  if (navigator.share && navigator.canCompartir) {
     try {
       const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
       const file = new File([blob], 'my-hummatch.png', { type: 'image/png' });
-      if (navigator.canShare({ files: [file] })) {
+      if (navigator.canCompartir({ files: [file] })) {
         await navigator.share({ files: [file], text: shareText });
         return;
       }
     } catch(e) {}
   }
-  // Fallback: Web Share without image
+  // Fallback: Web Compartir without image
   if (navigator.share) {
     try {
       await navigator.share({ text: shareText, url: 'https://hummatch.me' });
@@ -2985,13 +4391,13 @@ async function shareHumMatch() {
   link.href = canvas.toDataURL('image/png');
   link.click();
   try { await navigator.clipboard.writeText(shareText); } catch(e) {}
-  showToast('¡Imagen guardada! Texto copiado al portapapeles 📋');
+  showToast('Image saved! Text copied to clipboard 📋');
 }
 
 function challengeFriend() {
   hmTrack("challenge_tap");
   const songLabel = shareTopSong ? ('"' + shareTopSong.title + '" by ' + shareTopSong.artist) : shareArtistName;
-  const text = 'Mi canci\u00F3n HumMatch es ' + songLabel + ' \uD83C\uDFA4 A que no la igualas. Prueba \u2192 hummatch.me/es #HumMatchChallenge';
+  const text = 'My top HumCoincidencia song is ' + songLabel + ' \uD83C\uDFA4 Bet you can match it. Try it \u2192 hummatch.me #HumMatchChallenge';
   if (navigator.share) {
     navigator.share({ text, url: 'https://hummatch.me' }).catch(() => copyChallenge(text));
   } else {
@@ -3000,7 +4406,7 @@ function challengeFriend() {
 }
 
 function copyChallenge(text) {
-  navigator.clipboard.writeText(text).then(() => showToast('¡Reto copiado! Pégalo donde quieras 🎯')).catch(() => {});
+  navigator.clipboard.writeText(text).then(() => showToast('Challenge copied! Paste it anywhere 🎯')).catch(() => {});
 }
 
 function showToast(msg) {
@@ -3010,59 +4416,6 @@ function showToast(msg) {
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 3000);
 }
-
-function updateExportCountEs() {
-  const checked = document.querySelectorAll('.hm-song-check-es:checked');
-  const label = document.getElementById('export-count-label-es');
-  if (!label) return;
-  label.textContent = checked.length > 0 ? `${checked.length} canción${checked.length !== 1 ? 'es' : ''} seleccionada${checked.length !== 1 ? 's' : ''}` : '';
-}
-
-function exportSongListEs(mode) {
-  const checked = document.querySelectorAll('.hm-song-check-es:checked');
-  let pool;
-  if (checked.length > 0) {
-    pool = Array.from(checked).map(el => ({ title: el.dataset.title, artist: el.dataset.artist, score: 1 }));
-  } else {
-    pool = window._hmEsAll || [];
-  }
-  if (!pool.length) { showToast('¡Primero tararea para obtener tu lista!'); return; }
-
-  if (mode === 'copy') {
-    const text = pool.map((s, i) => `${i + 1}. ${s.title} by ${s.artist}`).join('\n');
-    navigator.clipboard.writeText(text)
-      .then(() => showToast('¡Lista copiada! Pégala en tu app de música, Notas o donde quieras 📋'))
-      .catch(() => {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('¡Lista copiada! 📋');
-      });
-    hmTrack('export_copy', { count: pool.length });
-  }
-
-  if (mode === 'csv') {
-    const header = 'Canción,Artista,Coincidencia\n';
-    const rows = pool.map(s => `"${s.title.replace(/"/g,'""')}","${s.artist.replace(/"/g,'""')}","${Math.round((s.score||0)*100)}%"`).join('\n');
-    const blob = new Blob([header + rows], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'mis-canciones-hummatch.csv';
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast('CSV descargado. Ábrelo en Excel, Google Sheets o tu app de música ⬇');
-    hmTrack('export_csv', { count: pool.length });
-  }
-}
-
-
-
 </script>
 <script>
 function toggleNav() {
@@ -3078,13 +4431,379 @@ function closeNav() {
   document.getElementById('navDrawer').classList.remove('open');
   document.getElementById('navOverlay').classList.remove('open');
 }
+// Swap Iniciar Sesión / Registrarse → Mi Perfil if logged in
 (function(){
-  var t = localStorage.getItem('hm_dash_token');
+  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
   if(t){
     var nav = document.getElementById('navLoginItem');
-    if(nav){ nav.textContent='🎯 Mi HQ'; }
+    var foot = document.getElementById('footerLoginItem');
+    var signup = document.getElementById('navSignupItem');
+    if(nav){ nav.textContent='🎯 Mi Perfil'; nav.href='/dashboard'; }
+    if(foot){ foot.textContent='Mi Perfil'; foot.href='/dashboard'; }
+    if(signup){ signup.style.display='none'; }
   }
 })();
+
+// ── Squad context detection (when joining via ?squad=X&member=Y) ────────────
+(function() {
+  var p = new URLSearchParams(location.search);
+  var sqId  = p.get('squad');
+  var sqMid = p.get('member');
+  if (sqId && sqMid) {
+    var banner = document.getElementById('squad-context-banner');
+    if (banner) banner.style.display = 'block';
+    // Fetch squad name to personalise the banner
+    fetch('/api/hummatch/squad/' + sqId + '/status')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        var txt = document.getElementById('squad-banner-text');
+        if (txt && d.squad_name) txt.textContent = "Estás tarareando para " + d.squad_name;
+      }).catch(function(){});
+    // Store member id for post-hum submission
+    try { localStorage.setItem('hm_squad_member_' + sqId, sqMid); } catch(_) {}
+  }
+})();
+
+// ── SquadCoincidencia post-hum prompt functions ────────────────────────────────────
+function updateSquadPromptText() {
+  var isPremium = localStorage.getItem('hm_premium') === 'true';
+  var title = document.getElementById('squad-prompt-title');
+  var desc = document.getElementById('squad-prompt-desc');
+  var btn = document.getElementById('squad-start-btn');
+  var details = document.getElementById('squad-prompt-details');
+
+  if (isPremium) {
+    if (title) title.textContent = 'Crear un Squad';
+    if (desc) desc.textContent = 'Invita hasta 4 amigos, todos tararean, encuentra canciones para todo el grupo.';
+    if (btn) btn.textContent = 'Crear un Squad 🎵';
+    if (details) details.textContent = 'Invita hasta 4 amigos. Todos tararean una vez. Nosotros hacemos el resto.';
+  } else {
+    if (title) title.textContent = 'Iniciar un Dueto';
+    if (desc) desc.textContent = 'Invita a un amigo, ambos tararean, encuentra canciones para cantar juntos.';
+    if (btn) btn.textContent = 'Iniciar un Dueto 🎤';
+    if (details) details.textContent = 'Invita a 1 amigo. Todos tararean una vez. Nosotros hacemos el resto.';
+  }
+}
+
+function startSquadMatch() {
+  // Songs should already be in localStorage from the hum session
+  // If not logged in, redirect to signup with squad intent
+  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
+  if (!t) {
+    localStorage.setItem('hm_squad_pending_create', '1');
+    window.location = '/squadmatch?create=1';
+    return;
+  }
+  window.location = '/squadmatch?create=1';
+}
+
+function dismissSquadPrompt() {
+  var el = document.getElementById('squad-prompt-module');
+  if (el) { el.style.opacity = '0'; setTimeout(function(){ el.style.display = 'none'; }, 250); }
+  try { sessionStorage.setItem('hm_squad_dismissed', '1'); } catch(_) {}
+}
+
+// Initialize squad prompt text on load
+(function initSquadPrompt() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateSquadPromptText);
+  } else {
+    updateSquadPromptText();
+  }
+})();
+
+// ── Mi Perfil Squads loader ─────────────────────────────────────────────────────
+(function() {
+  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
+  if (!t) return;
+  fetch('/api/hummatch/squad', { headers: { 'X-HM-Token': t } })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (!d.squads || !d.squads.length) return;
+      var el = document.getElementById('my-hq-squads');
+      var list = document.getElementById('my-squads-list');
+      if (!el || !list) return;
+      var html = d.squads.slice(0, 3).map(function(sq) {
+        var members = sq.members || [];
+        var done = members.filter(function(m){ return m.hum_done; }).length;
+        var statusText = sq.status === 'complete' ? '✓ Complete' : (done + '/' + members.length + ' hummed');
+        var statusColor = sq.status === 'complete' ? '#4ade80' : '#a78bfa';
+        return '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)">' +
+          '<div><div style="font-size:0.84rem;font-weight:700;color:#e2e0f0">' + (sq.squad_name || 'My Squad') + '</div>' +
+          '<div style="font-size:0.72rem;color:rgba(255,255,255,0.38);margin-top:2px">' + members.length + ' member' + (members.length!==1?'s':'') + '</div></div>' +
+          '<a href="/squadmatch?squad=' + sq.id + '" style="font-size:0.75rem;font-weight:700;color:' + statusColor + ';text-decoration:none;padding:5px 10px;background:rgba(255,255,255,0.04);border-radius:8px">' + statusText + '</a>' +
+          '</div>';
+      }).join('');
+      list.innerHTML = html;
+      el.style.display = 'block';
+    }).catch(function(){});
+})();
+</script>
+
+<!-- Signup Bottom Sheet -->
+<div class="hm-login-sheet" id="hm-login-sheet">
+  <h3>Guarda tus resultados</h3>
+  <p>Crea una cuenta o inicia sesión para guardar tu playlist.</p>
+  <div style="display:flex;gap:10px;margin-top:16px;">
+    <button onclick="window.location.href='/login?mode=signup'" style="flex:1;padding:14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">Create Account</button>
+    <button onclick="window.location.href='/login?return='+ encodeURIComponent(window.location.pathname)" style="flex:1;padding:14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:12px;color:#fff;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:inherit;">Iniciar Sesión</button>
+  </div>
+  <button class="hm-login-dismiss" onclick="hmDescartarLogin()" style="margin-top:12px;width:100%;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:rgba(255,255,255,0.5);font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit;">Not now</button>
+</div>
+
+<script>
+// ── HUMMATCH ACCOUNT SYSTEM ───────────────────────────────────────────────────
+(function() {
+  const TOKEN_KEY = 'hm_token';
+  const EMAIL_KEY = 'hm_user_email';
+  const DISMISS_KEY = 'hm_login_dismissed';
+  const HAS_HUMMED_KEY = 'hm_has_hummed';
+
+  // ── Get / set token ──
+  window.hmGetToken = () => localStorage.getItem(TOKEN_KEY);
+  window.hmGetCorreo electrónico = () => localStorage.getItem(EMAIL_KEY);
+
+  // ── Auth: register/login ──
+  window.hmSubmitLogin = async function() {
+    const input = document.getElementById('hm-login-email');
+    const pwInput = document.getElementById('hm-login-password');
+    const pwConfirm = document.getElementById('hm-login-password-confirm');
+    const pwError = document.getElementById('hm-pw-error');
+    const pwConfirmError = document.getElementById('hm-pw-confirm-error');
+    const btn = document.getElementById('hm-login-submit');
+
+    // Reset errors
+    [input, pwInput, pwConfirm].forEach(el => el.style.borderColor = '');
+    pwError.style.display = 'none';
+    pwConfirmError.style.display = 'none';
+
+    const email = (input.value || '').trim();
+    const password = pwInput.value || '';
+    const confirm = pwConfirm.value || '';
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      input.style.borderColor = '#ef4444';
+      return;
+    }
+    if (password.length < 8) {
+      pwInput.style.borderColor = '#ef4444';
+      pwError.textContent = 'Contraseña must be at least 8 characters';
+      pwError.style.display = 'block';
+      return;
+    }
+    if (password !== confirm) {
+      pwConfirm.style.borderColor = '#ef4444';
+      pwConfirmError.textContent = 'Contraseñas do not match';
+      pwConfirmError.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Creating account...';
+    try {
+      const r = await fetch('/api/hummatch/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await r.json();
+      if (!r.ok) {
+        showToast(data.error || 'Registration failed');
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+        return;
+      }
+      if (data.token) {
+        localStorage.setItem(TOKEN_KEY, data.token);
+        localStorage.setItem('hm_dash_token', data.token);
+        localStorage.setItem(EMAIL_KEY, data.email || email.toLowerCase());
+        if (data.is_premium) localStorage.setItem('hm_premium', 'true');
+
+        // Sync current playlist to server
+        const playlist = loadPlaylist();
+        const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
+        const exportCount = parseInt(localStorage.getItem('hm_export_count') || '0');
+        await fetch('/api/hummatch/auth/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: data.token, playlist, hum_count: humCount, export_count: exportCount })
+        }).catch(() => {});
+
+        hmHideLoginSheet();
+        hmUpdateAccountBadge();
+
+        // Retroactively save hum data if user signed up after humming
+        if (window._pendingHumData) {
+          const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
+          fetch('/api/hummatch/hum/session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-HM-Token': data.token },
+            body: JSON.stringify({ ...window._pendingHumData, hum_count: humCount })
+          }).catch(() => {});
+          window._pendingHumData = null;
+          // Show "saved" state in inline card
+          const posthumContent = document.getElementById('hm-posthum-content');
+          const posthumGuardado hace = document.getElementById('hm-posthum-saved');
+          const posthumCard = document.getElementById('hm-posthum-signup');
+          if (posthumContent) posthumContent.style.display = 'none';
+          if (posthumSaved) posthumSaved.style.display = 'block';
+          if (posthumCard) posthumCard.style.display = 'block';
+          showToast('Account created! Results saved.');
+        } else {
+          showToast('Account created! Playlist synced.');
+        }
+
+        hmTrack('account_register', { isNew: true });
+
+        // Update nav links
+        var nav = document.getElementById('navLoginItem');
+        var foot = document.getElementById('footerLoginItem');
+        var signupNav = document.getElementById('navSignupItem');
+        if(nav){ nav.textContent='🎯 Mi Perfil'; nav.href='/dashboard'; }
+        if(foot){ foot.textContent='Mi Perfil'; foot.href='/dashboard'; }
+        if(signupNav){ signupNav.style.display='none'; }
+      } else {
+        showToast('Something went wrong. Try again.');
+      }
+    } catch(e) {
+      showToast('Connection error. Try again.');
+    }
+    btn.disabled = false;
+    btn.textContent = 'Create Account';
+  };
+
+  // ── Descartar login for 7 days ──
+  window.hmDescartarLogin = function() {
+    localStorage.setItem(DISMISS_KEY, Date.now().toString());
+    hmHideLoginSheet();
+  };
+
+  function hmHideLoginSheet() {
+    const sheet = document.getElementById('hm-login-sheet');
+    if (sheet) sheet.classList.remove('show');
+  }
+
+  // ── Show inline signup prompt after hum results (once per session) ──
+  window.hmMaybeShowLoginPrompt = function() {
+    if (localStorage.getItem(TOKEN_KEY)) return; // already logged in
+    if (sessionStorage.getItem('hm_signup_prompt_shown')) return; // already shown this session
+    sessionStorage.setItem('hm_signup_prompt_shown', '1');
+    const card = document.getElementById('hm-posthum-signup');
+    if (card) card.style.display = 'block';
+  };
+
+  // ── Descartar inline signup prompt ──
+  window.hmDescartarPosthumSignup = function() {
+    const card = document.getElementById('hm-posthum-signup');
+    if (card) card.style.display = 'none';
+  };
+
+  // ── Open signup sheet from inline prompt ──
+  window.hmOpenSignupFromPrompt = function() {
+    window._signupFromPrompt = true;
+    const sheet = document.getElementById('hm-login-sheet');
+    if (sheet) sheet.classList.add('show');
+  };
+
+  // ── Update account badge in results header ──
+  window.hmUpdateAccountBadge = function() {
+    const badge = document.getElementById('hm-account-badge');
+    if (!badge) return;
+    const email = localStorage.getItem(EMAIL_KEY);
+    if (!email) { badge.style.display = 'none'; return; }
+    const isPremium = localStorage.getItem('hm_premium') === 'true';
+    const initial = email.charAt(0).toUpperCase();
+    badge.innerHTML = `<span class="hm-account-dot ${isPremium ? 'premium' : 'free'}"></span> ${initial}`;
+    badge.style.display = 'inline-flex';
+  };
+
+  // ── Show account info on badge tap ──
+  window.hmShowAccountInfo = function() {
+    const email = localStorage.getItem(EMAIL_KEY);
+    const isPremium = localStorage.getItem('hm_premium') === 'true';
+    if (!email) return;
+    showToast(`${email} · ${isPremium ? 'Squad Leader' : 'Gratis'}`);
+  };
+
+  // ── Load user data on page load ──
+  window.hmLoadAccount = async function() {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) return;
+    try {
+      const r = await fetch(`/api/hummatch/auth/me?token=${encodeURIComponent(token)}`);
+      if (!r.ok) {
+        // Invalid token, clear it
+        if (r.status === 404) {
+          localStorage.removeItem(TOKEN_KEY);
+          localStorage.removeItem(EMAIL_KEY);
+        }
+        return;
+      }
+      const data = await r.json();
+      localStorage.setItem(EMAIL_KEY, data.email);
+      if (data.is_premium) {
+        localStorage.setItem('hm_premium', 'true');
+      }
+      // Sync server counts to localStorage
+      localStorage.setItem('hm_hum_month', data.month_key);
+      localStorage.setItem('hm_hum_count', String(data.hum_count));
+      localStorage.setItem('hm_export_month', data.month_key);
+      localStorage.setItem('hm_export_count', String(data.export_count));
+
+      // Merge server playlist with local playlist (union, deduplicate)
+      const serverPlaylist = data.playlist || [];
+      const localPlaylist = loadPlaylist();
+      const merged = [...localPlaylist];
+      const localKeys = new Set(localPlaylist.map(s => s.title + '__' + s.artist));
+      for (const s of serverPlaylist) {
+        const k = s.title + '__' + s.artist;
+        if (!localKeys.has(k)) {
+          merged.push(s);
+          localKeys.add(k);
+        }
+      }
+      savePlaylist(merged);
+
+      // If merged playlist differs from server, push back
+      if (merged.length !== serverPlaylist.length) {
+        fetch('/api/hummatch/auth/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, playlist: merged })
+        }).catch(() => {});
+      }
+
+      hmUpdateAccountBadge();
+    } catch(e) { /* silent fail */ }
+  };
+
+  // ── Sync counts to server after hum or export ──
+  window.hmSyncCounts = function() {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) return;
+    const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
+    const exportCount = parseInt(localStorage.getItem('hm_export_count') || '0');
+    const playlist = loadPlaylist();
+    fetch('/api/hummatch/auth/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token, playlist, hum_count: humCount, export_count: exportCount })
+    }).catch(() => {});
+  };
+
+  // Hook into page load
+  const origDCL = window.addEventListener;
+  document.addEventListener('DOMContentLoaded', () => {
+    hmLoadAccount();
+  });
+})();
+
+function startCheckout(plan) {
+  plan = plan || 'monthly';
+  const token = localStorage.getItem('hm_token') || localStorage.getItem('hm_dash_token');
+  const url = '/api/hummatch/checkout/' + plan + (token ? '?token=' + token : '');
+  window.location.href = url;
+}
 </script>
 </body>
 </html>
