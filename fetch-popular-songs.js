@@ -11,7 +11,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const ANTHROPIC_API_KEY = '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';
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+if (!ANTHROPIC_API_KEY) {
+  console.error('ANTHROPIC_API_KEY environment variable is required');
+  process.exit(1);
+}
 
 // Popular songs by genre/era to fill gaps
 const SEARCH_QUERIES = [
