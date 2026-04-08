@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | HumMatch</title>
+  <meta name="description" content="Historias, novedades y el pensamiento detrás de HumMatch -- la app de inteligencia vocal que empareja tu voz con canciones que realmente puedes clavar." />
+  <link rel="icon" href="/hummatch-logo.png" />
+  <link rel="canonical" href="https://hummatch.me/es/blog/" />
+  <link rel="alternate" hreflang="en" href="https://hummatch.me/blog" />
+  <link rel="alternate" hreflang="es" href="https://hummatch.me/es/blog/" />
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --surface: #1a1a2e;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+      --text1: #f0e6ff;
+      --text2: #b39ddb;
+      --text3: #7b6fa0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.6;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,26,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(135deg, #A855F7, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-cta {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .page-header {
+      max-width: 740px;
+      margin: 60px auto 40px;
+      padding: 0 24px;
+    }
+    .page-header p {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .page-header h1 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #f0e6ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .posts {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .post-card {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 20px;
+      padding: 28px 32px;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .post-card:hover {
+      border-color: rgba(168,85,247,0.45);
+      transform: translateY(-2px);
+    }
+    .post-emoji {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 14px;
+    }
+    .post-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 3px 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 12px rgba(168,85,247,0.25), 0 0 4px rgba(168,85,247,0.15);
+    }
+    .post-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .post-excerpt {
+      font-size: 0.95rem;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .post-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text3);
+      font-size: 0.8rem;
+    }
+    .post-bottom-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .post-bottom-arrow {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: transform 0.2s;
+    }
+    .post-card:hover .post-bottom-arrow {
+      transform: translateX(4px);
+    }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text3);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(168,85,247,0.1);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    .footer-nav {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px 20px;
+      margin-bottom: 14px;
+    }
+    @media (min-width: 768px) {
+      .page-header {
+        max-width: 1100px;
+      }
+      .posts {
+        max-width: 1100px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/es/"><span style="background: linear-gradient(135deg, #A855F7, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">HumMatch</span></a>
+  <a class="nav-cta" href="/es/">Pru&eacute;balo Gratis</a>
+</nav>
+
+<header class="page-header">
+  <p>Del equipo</p>
+  <h1>Blog</h1>
+</header>
+
+<main class="posts">
+  <a class="post-card" href="/es/blog/vocal-timbre-brightness-science">
+    <span class="post-emoji">🎵</span>
+    <span class="post-tag">Ciencia</span>
+    <h2 class="post-title">Entendiendo el Timbre Vocal: La Ciencia Detr&aacute;s de HumMatch</h2>
+    <p class="post-excerpt">Por qu&eacute; dos cantantes con el mismo rango suenan diferente -- y c&oacute;mo HumMatch usa el an&aacute;lisis espectral para medir el brillo y el timbre vocal de forma cient&iacute;fica.</p>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>4 de abril de 2026</span>
+        <span>10 min de lectura</span>
+      </div>
+      <span class="post-bottom-arrow">&rarr;</span>
+    </div>
+  </a>
+
+  <a class="post-card" href="/es/blog/squad-leader-best-practices">
+    <span class="post-emoji">👑</span>
+    <span class="post-tag">Squad Leader</span>
+    <h2 class="post-title">Mejores Pr&aacute;cticas para Ser un Squad Leader</h2>
+    <p class="post-excerpt">C&oacute;mo los mejores Squad Leaders dirigen sesiones incre&iacute;bles de SquadMatch. Consejos sobre selecci&oacute;n de canciones, configuraci&oacute;n de sesiones y los errores que todos cometen al principio.</p>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>3 de abril de 2026</span>
+        <span>7 min de lectura</span>
+      </div>
+      <span class="post-bottom-arrow">&rarr;</span>
+    </div>
+  </a>
+
+  <a class="post-card" href="/es/blog/introducing-squadmatch">
+    <span class="post-emoji">🎤</span>
+    <span class="post-tag">Novedad</span>
+    <h2 class="post-title">Presentamos SquadMatch: Encuentra Canciones que Todo Tu Grupo Pueda Clavar</h2>
+    <p class="post-excerpt">SquadMatch analiza cada voz de tu grupo y encuentra canciones que todos puedan cantar juntos. Perfecto para noches de karaoke, viajes por carretera, previas y duetos.</p>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>2 de abril de 2026</span>
+        <span>6 min de lectura</span>
+      </div>
+      <span class="post-bottom-arrow">&rarr;</span>
+    </div>
+  </a>
+
+  <a class="post-card" href="/es/blog/red-flag-playlists">
+    <span class="post-emoji">🚩</span>
+    <span class="post-tag">Cultura</span>
+    <h2 class="post-title">Playlists de Alerta Roja: Lo que Su Spotify Dice de &Eacute;l</h2>
+    <p class="post-excerpt">La playlist de Spotify de tu cita acaba de revelar todo. Descubre 10 patrones musicales de alerta roja que dicen mucho m&aacute;s que su biograf&iacute;a.</p>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>1 de abril de 2026</span>
+        <span>5 min de lectura</span>
+      </div>
+      <span class="post-bottom-arrow">&rarr;</span>
+    </div>
+  </a>
+
+  <a class="post-card" href="/es/blog/find-songs-you-can-nail">
+    <span class="post-emoji">📖</span>
+    <span class="post-tag">Gu&iacute;a de Usuario</span>
+    <h2 class="post-title">C&oacute;mo Encontrar Canciones que Realmente Puedas Clavar (y Exportar Tu Playlist)</h2>
+    <p class="post-excerpt">Los filtros, la exportaci&oacute;n de playlist, el flujo de descarte y los mejores casos de uso para cada tipo de cantante. Saca m&aacute;s provecho de HumMatch desde el primer d&iacute;a.</p>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>29 de marzo de 2026</span>
+        <span>6 min de lectura</span>
+      </div>
+      <span class="post-bottom-arrow">&rarr;</span>
+    </div>
+  </a>
+
+  <a class="post-card" href="/es/blog/how-hummatch-works">
+    <span class="post-emoji">⚙️</span>
+    <span class="post-tag">Bajo el Cap&oacute;</span>
+    <h2 class="post-title">C&oacute;mo Funciona Realmente HumMatch</h2>
+    <p class="post-excerpt">La verdadera ciencia detr&aacute;s del an&aacute;lisis de centroide espectral, por qu&eacute; el tono por s&iacute; solo no es suficiente, y qu&eacute; pasa en los tres segundos entre tu tarareo y tus resultados.</p>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>29 de marzo de 2026</span>
+        <span>7 min de lectura</span>
+      </div>
+      <span class="post-bottom-arrow">&rarr;</span>
+    </div>
+  </a>
+
+  <a class="post-card" href="/es/blog/how-hummatch-was-built">
+    <span class="post-emoji">🏗️</span>
+    <span class="post-tag">Historia de Origen</span>
+    <h2 class="post-title">C&oacute;mo Se Construy&oacute; HumMatch en Una Noche</h2>
+    <p class="post-excerpt">Una canci&oacute;n de Madonna en la 405, un agente de IA llamado Clayton, y la noche en que una app de emparejamiento vocal coincidi&oacute; con Elvis en el primer intento. La historia completa detr&aacute;s de HumMatch.</p>
+    <div class="post-bottom">
+      <div class="post-bottom-left">
+        <span>28 de marzo de 2026</span>
+        <span>8 min de lectura</span>
+      </div>
+      <span class="post-bottom-arrow">&rarr;</span>
+    </div>
+  </a>
+</main>
+
+<footer>
+  <div class="footer-nav">
+    <a href="/es/" style="color:#c084fc;font-weight:600;font-size:0.75rem;">Prueba HumMatch</a>
+    <a href="/es/como-funciona" style="font-size:0.75rem;">C&oacute;mo Funciona</a>
+    <a href="/es/precios" style="font-size:0.75rem;">Precios</a>
+    <a href="/es/squadmatch" style="font-size:0.75rem;">SquadMatch</a>
+    <a href="/" style="font-size:0.75rem;">English</a>
+    <a href="/es/blog/" style="font-size:0.75rem;">Blog</a>
+    <a href="/es/contacto" style="font-size:0.75rem;">Contacto</a>
+    <a href="/es/privacidad" style="font-size:0.72rem;">Privacidad</a>
+    <a href="/es/terminos" style="font-size:0.72rem;">T&eacute;rminos</a>
+  </div>
+  <p>&copy; 2026 HumMatch. Creado por <a href="https://equitymind.com">Equitymind</a>.</p>
+</footer>
+
+</body>
+</html>

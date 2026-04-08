@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cómo Funciona HumMatch: Encuentra Canciones que Coinciden con Tu Tipo de Voz Tarareando | HumMatch</title>
+  <meta name="description" content="Por qué el tono solo no es suficiente para encontrar canciones que se adapten a tu voz. La ciencia del spectral centroid, el timbre vocal y cómo HumMatch identifica tu tipo de voz y te conecta con canciones que puedes cantar con confianza en 3 segundos." />
+  <meta name="keywords" content="encontrar canciones que coincidan con tu tipo de voz, coincidencia de timbre vocal, qué canciones puedo cantar según mi voz, test de tipo de voz tarareando, análisis de voz spectral centroid, canciones para mi tipo de voz sin cantar" />
+  <meta property="og:title" content="Cómo Funciona HumMatch: Encuentra Canciones que Coinciden con Tu Tipo de Voz Tarareando" />
+  <meta property="og:description" content="Por qué el tono solo no es suficiente para encontrar canciones que se adapten a tu voz, y cómo HumMatch utiliza el análisis de spectral centroid para conectar tu tipo de voz con canciones que puedes dominar con confianza." />
+  <meta property="og:image" content="/hummatch-logo-full.png" />
+  <meta property="og:url" content="https://hummatch.me/es/blog/how-hummatch-works" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/hummatch-logo.png" />
+  <link rel="canonical" href="https://hummatch.me/es/blog/how-hummatch-works" />
+  <link rel="alternate" hreflang="en" href="https://hummatch.me/blog/how-hummatch-works" />
+  <link rel="alternate" hreflang="es" href="https://hummatch.me/es/blog/how-hummatch-works" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Cómo Funciona HumMatch: Encuentra Canciones que Coinciden con Tu Tipo de Voz Tarareando",
+    "description": "La ciencia del spectral centroid, el timbre vocal y cómo HumMatch identifica tu tipo de voz y te conecta con canciones que puedes dominar con confianza en 3 segundos.",
+    "author": { "@type": "Organization", "name": "El Equipo de HumMatch", "url": "https://hummatch.me" },
+    "publisher": { "@type": "Organization", "name": "HumMatch", "url": "https://hummatch.me", "logo": { "@type": "ImageObject", "url": "https://hummatch.me/hummatch-logo.png" } },
+    "datePublished": "2026-03-29",
+    "dateModified": "2026-04-02",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hummatch.me/es/blog/how-hummatch-works" },
+    "image": "https://hummatch.me/hummatch-logo-full.png",
+    "keywords": ["encontrar canciones que coincidan con tu tipo de voz", "coincidencia de timbre vocal", "test de tipo de voz tarareando", "spectral centroid", "qué canciones puedo cantar", "canciones para mi tipo de voz"]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --surface: #1a1a2e;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+      --text1: #f0e6ff;
+      --text2: #b39ddb;
+      --text3: #7b6fa0;
+      --card: #16213e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.75;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,26,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(135deg, #A855F7, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-cta {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .hero {
+      max-width: 740px;
+      margin: 60px auto 0;
+      padding: 0 24px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text3);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); }
+    .hero-emoji {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(168,85,247,0.25), 0 0 4px rgba(168,85,247,0.15);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #f0e6ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text3);
+      font-size: 0.875rem;
+      margin-bottom: 36px;
+    }
+    .hero-meta .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text2);
+      font-weight: 600;
+    }
+    .hero-meta .author-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 900; color: white;
+    }
+    article {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    article p {
+      font-size: 1.075rem;
+      color: var(--text1);
+      margin-bottom: 24px;
+    }
+    article h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      margin: 48px 0 16px;
+    }
+    article blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 32px 0;
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: var(--text2);
+      font-size: 1.1rem;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(124,58,237,0.08));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 36px 0;
+    }
+    .highlight-box p { margin-bottom: 0; }
+    .highlight-box strong { color: var(--accent); }
+    .step-list {
+      list-style: none;
+      margin: 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .step-list li {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .step-num {
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: white;
+      margin-top: 2px;
+    }
+    .step-text { font-size: 1rem; color: var(--text1); line-height: 1.65; }
+    .step-text strong { color: var(--accent); }
+    .voice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 28px 0;
+    }
+    .voice-card {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .voice-card .voice-name { font-weight: 800; color: var(--accent); font-size: 0.95rem; margin-bottom: 4px; }
+    .voice-card .voice-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.5; }
+    @media (max-width: 500px) { .voice-grid { grid-template-columns: 1fr; } }
+    .cta-block {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      margin: 56px 0 0;
+    }
+    .cta-block h3 { font-size: 1.4rem; font-weight: 800; margin: 0 0 10px; color: var(--text1); }
+    .cta-block p { color: var(--text2); margin-bottom: 24px; font-size: 0.975rem; }
+    .cta-block a {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 24px;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .bottom-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      margin-top: 48px;
+      border-top: 1px solid rgba(168,85,247,0.1);
+      color: var(--text3);
+      font-size: 0.85rem;
+    }
+    .bottom-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .bottom-meta-arrow {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .bottom-meta-arrow:hover { transform: translateX(4px); }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text3);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(168,85,247,0.1);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/es/"><span>HumMatch</span></a>
+  <a class="nav-cta" href="/es/">Pruébalo Gratis</a>
+</nav>
+
+<header class="hero">
+  <a class="back-link" href="/es/blog/">← Blog</a>
+  <span class="hero-emoji">⚙️</span>
+  <span class="hero-tag">Bajo el Capó</span>
+  <h1>Cómo Funciona HumMatch Realmente</h1>
+  <div class="hero-meta">
+    <div class="author">
+      <div class="author-dot">HM</div>
+      El Equipo de HumMatch
+    </div>
+    <span>29 de marzo de 2026</span>
+    <span>7 min de lectura</span>
+  </div>
+</header>
+
+<article>
+
+  <p>La mayoría de las apps de voz miden el tono. Te escuchan cantar, calculan el rango de notas que puedes alcanzar y usan eso para decirte algo sobre tu voz. Es un comienzo razonable. Pero pasan por alto lo más importante de cómo suena realmente una voz.</p>
+
+  <p>El tono te dice qué notas puedes alcanzar. No te dice cómo suenas cuando las alcanzas. Y cómo suenas lo es todo.</p>
+
+  <p>Aquí tienes una forma sencilla de escuchar la diferencia. Barry White y Elvis Presley pueden cantar en el mismo rango de notas. Pero no suenan nada parecido. Barry White es oscuro, cálido y bajo en el espectro de frecuencias. Elvis es brillante, claro y más alto en la mezcla incluso cuando está cantando notas graves. Si solo midieras sus rangos de tono pensarías que son voces similares. No lo son. Y no deberías estar cantando las mismas canciones.</p>
+
+  <p>Esa brecha entre el rango de tono y el carácter vocal real es lo que HumMatch fue creado para cerrar.</p>
+
+  <h2>Lo que Nadie Más Mide: El Timbre</h2>
+
+  <p>La cualidad que hace que tu voz suene como tú, y como nadie más, se llama timbre. Los ingenieros de audio a veces lo llaman color tonal. Es la razón por la que un violín y una guitarra tocando la misma nota al mismo volumen suenan completamente diferente. Mismo tono, mismo volumen, carácter completamente diferente.</p>
+
+  <p>Cada voz tiene una firma de timbre. Está moldeada por el tamaño y la forma de tu tracto vocal, la densidad de tus cuerdas vocales, la resonancia de tu pecho y cabeza, y docenas de otros factores físicos que son completamente únicos en ti. No puedes cambiar tu timbre practicando. No es una habilidad. Es quien eres.</p>
+
+  <blockquote>"El tono te dice qué notas puedes alcanzar. El timbre te dice cómo suenas cuando las alcanzas. Las canciones están escritas para voces específicas, no solo para rangos específicos."</blockquote>
+
+  <p>Cuando una canción fue escrita para un barítono cálido y oscuro, va a sonar mal saliendo de un tenor brillante y penetrante. Las notas técnicamente pueden estar en rango. Pero algo no encajará. La canción luchará contra tu voz en lugar de asentarse dentro de ella.</p>
+
+  <p>HumMatch mide el timbre. Esa es la esencia de lo que lo hace diferente.</p>
+
+  <h2>Cómo Lo Medimos: Spectral Centroid</h2>
+
+  <p>Cuando tarareas, tu voz produce una onda sonora compleja compuesta por muchas frecuencias diferentes superpuestas unas sobre otras. La frecuencia más baja es tu tono fundamental, la nota real que estás tarareando. Todo lo que está por encima se llama armónicos, y el patrón de armónicos es lo que le da a tu voz su carácter.</p>
+
+  <p>El spectral centroid es el centro de gravedad de todas esas frecuencias combinadas. Piensa en él como un solo número que describe dónde vive la energía de tu voz. Una voz con un spectral centroid bajo tiene la mayor parte de su energía en las frecuencias graves. Suena oscura, cálida y llena. Una voz con un spectral centroid alto tiene la mayor parte de su energía en las frecuencias agudas. Suena brillante, clara y penetrante.</p>
+
+  <div class="highlight-box">
+    <p><strong>En términos simples:</strong> El spectral centroid es el número más predictivo que hemos encontrado para emparejar una voz con canciones en las que realmente sonará bien. Más predictivo que el rango solo. Más predictivo que cualquier autodescripción. Tu voz produce este número automáticamente cada vez que tarareas. No puedes fingirlo y no puedes manipularlo.</p>
+  </div>
+
+  <p>HumMatch captura tu spectral centroid a través de tres tarareos a diferentes tonos — grave, medio y agudo — y los promedia para construir un perfil estable. Tres puntos de datos son suficientes para obtener una lectura fiable. No necesitamos que cantes una canción entera.</p>
+
+  <h2>Los Seis Tipos de Voz</h2>
+
+  <p>Basándose en la combinación de tu rango de tono y tu spectral centroid, HumMatch clasifica tu voz en uno de seis tipos. Estos corresponden directamente al sistema tradicional de clasificación vocal utilizado en la formación vocal clásica, que se ha perfeccionado durante siglos y funciona notablemente bien para emparejar música popular.</p>
+
+  <div class="voice-grid">
+    <div class="voice-card">
+      <div class="voice-name">Bass-Baritone</div>
+      <div class="voice-desc">Profundo, oscuro, con cuerpo. Centroid bajo, rango bajo. Johnny Cash, Barry White, Leonard Cohen.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Baritone</div>
+      <div class="voice-desc">El tipo de voz masculina más común. Centroid medio, rango medio-bajo. Elvis, Frank Sinatra, Freddie Mercury.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Tenor</div>
+      <div class="voice-desc">Brillante, potente, agudos que vuelan. Centroid más alto, rango más amplio. Michael Jackson, Chris Martin, Bruno Mars.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Alto</div>
+      <div class="voice-desc">Cálido, rico, distintivo. Rango femenino bajo. Adele, Amy Winehouse, Tina Turner.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Mezzo-Soprano</div>
+      <div class="voice-desc">Equilibrado, versátil, expresivo. Rango femenino medio. Beyonce, Whitney Houston, Madonna.</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-name">Soprano</div>
+      <div class="voice-desc">Brillante, claro, registro agudo. Mariah Carey, Celine Dion, Christina Aguilera.</div>
+    </div>
+  </div>
+
+  <p>Cada tipo de voz se asocia a un conjunto curado de canciones donde ese tipo de voz sonará mejor. No canciones que técnicamente puedas cantar. Canciones que se sentirán naturales, cómodas y bien desde la primera línea.</p>
+
+  <h2>El Proceso Completo: Lo que Ocurre en Tres Segundos</h2>
+
+  <p>Desde el momento en que tocas el micrófono hasta el momento en que aparecen tus resultados, esto es exactamente lo que hace HumMatch.</p>
+
+  <ul class="step-list">
+    <li>
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Captura:</strong> La Web Audio API de tu navegador abre un flujo directo desde tu micrófono. Capturamos audio PCM sin procesar a 44.1kHz, la misma tasa de muestreo utilizada en grabación profesional. Sin compresión, sin procesamiento, sin filtrado en esta etapa.</div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Verificación de señal:</strong> Antes de que comience el análisis, HumMatch comprueba que tu señal es lo suficientemente fuerte para ser útil. Si estás tarareando demasiado bajo o hay demasiado ruido de fondo, la app te lo indica. Una mala entrada produce malos resultados. Preferimos que vuelvas a tararear antes que darte una respuesta incorrecta con confianza.</div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Análisis de frecuencia:</strong> El búfer de audio pasa por una Transformada Rápida de Fourier (FFT), que descompone tu tarareo en sus frecuencias componentes. Esto sucede completamente en tu navegador usando el AnalyserNode de la Web Audio API. Tu audio nunca sale de tu dispositivo.</div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Detección de frecuencia fundamental:</strong> Identificamos la frecuencia dominante en tu tarareo — la nota que realmente estás tarareando — y la convertimos a Hz. Esto nos da los datos de tono para ese tarareo.</div>
+    </li>
+    <li>
+      <div class="step-num">5</div>
+      <div class="step-text"><strong>Cálculo del spectral centroid:</strong> Calculamos el promedio ponderado de todas las frecuencias presentes en tu tarareo, ponderadas por su amplitud. Esta es tu firma de timbre para ese tarareo.</div>
+    </li>
+    <li>
+      <div class="step-num">6</div>
+      <div class="step-text"><strong>Construcción del perfil:</strong> Después de tres tarareos, promediamos tu rango de tono y las lecturas de spectral centroid en un solo perfil vocal. El perfil se almacena localmente en tu dispositivo para que las coincidencias futuras sean instantáneas.</div>
+    </li>
+    <li>
+      <div class="step-num">7</div>
+      <div class="step-text"><strong>Puntuación de confianza:</strong> Cada canción del catálogo tiene un rango de tono definido y un spectral centroid objetivo. Evaluamos tu perfil contra cada canción y asignamos un porcentaje de confianza. 78% o más obtiene Mejor Coincidencia. De 60 a 77% es un Buen Ajuste. Por debajo del 60% es un Reto.</div>
+    </li>
+    <li>
+      <div class="step-num">8</div>
+      <div class="step-text"><strong>Resultados:</strong> Las canciones se ordenan por confianza y se filtran según tus preferencias. Ves lo que tu voz realmente puede dominar, ahora mismo, esta noche.</div>
+    </li>
+  </ul>
+
+  <h2>Por Qué Tararear y No Cantar</h2>
+
+  <p>Nos hacen mucho esta pregunta. Si quieres saber cómo canta alguien, ¿por qué no simplemente hacer que cante?</p>
+
+  <p>Dos razones. Una es técnica y otra es humana.</p>
+
+  <p>La razón técnica: tararear produce una señal más limpia y estable para el análisis espectral que el canto abierto. Cuando cantas con vocales abiertas, consonantes y letra, la señal se llena de ruido. Tararear aísla el carácter tonal puro de tu voz sin interferencias. Los datos que extraemos de un tarareo son más precisos que los que obtendríamos de una frase cantada.</p>
+
+  <p>La razón humana: la mayoría de las personas no van a cantar frente a una app. Ni frente a nadie. Cantar se siente como una actuación. Tararear no. Tararear es algo que haces sin pensar, en el coche, en la ducha, caminando por un pasillo. Cuando les pedimos a las personas que tarareen, lo hacen de inmediato y sin autoconciencia. Cuando les pedimos que canten, se paralizan.</p>
+
+  <p>La psicología de la entrada es tan importante como la acústica. HumMatch funciona precisamente porque no te pide que actúes.</p>
+
+  <h2>Lo que Estamos Construyendo a Continuación</h2>
+
+  <p>El HumMatch actual mide tu voz en un solo momento. Estamos avanzando hacia el seguimiento longitudinal, la capacidad de entender cómo cambia tu voz en diferentes días, horarios, entornos y niveles de energía. La mayoría de los cantantes saben que su voz es diferente a las 10 de la mañana que a las 10 de la noche. HumMatch eventualmente capturará ese perfil y mostrará las canciones adecuadas para donde tu voz realmente está ahora mismo, no solo donde se ubica en promedio.</p>
+
+  <p>También viene el emparejamiento grupal. La idea: un grupo de personas tararean sus perfiles, y HumMatch encuentra canciones que todo el grupo puede cantar junto. Para bares de karaoke, fiestas de bodas, o simplemente una sala llena de personas que quieren sonar realmente bien.</p>
+
+  <p>La base de todo es el mismo tarareo de tres segundos que haces hoy. Construimos bien la capa de medición. Todo lo demás se construye encima de ella.</p>
+
+  <div class="cta-block">
+    <h3>Descubre lo que tu voz puede hacer. 🎤</h3>
+    <p>Tres tarareos. Resultados reales. No necesitas cantar.</p>
+    <a href="/es/">Prueba HumMatch Gratis</a>
+  </div>
+
+  <div class="bottom-meta">
+    <div class="bottom-meta-left">
+      <span>29 de marzo de 2026</span>
+      <span>7 min de lectura</span>
+    </div>
+    <a class="bottom-meta-arrow" href="/es/blog/find-songs-you-can-nail">Siguiente →</a>
+  </div>
+
+</article>
+
+<footer>
+  <p>&copy; 2026 HumMatch. Creado por <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/es/">Prueba HumMatch</a> &nbsp;|&nbsp; <a href="/es/blog/">Blog</a></p>
+</footer>
+
+</body>
+</html>

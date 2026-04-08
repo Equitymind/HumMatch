@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentamos SquadMatch: Encuentra Canciones Que Todo Tu Grupo Pueda Cantar | HumMatch</title>
+  <meta name="description" content="SquadMatch analiza cada voz de tu grupo y encuentra canciones que todos pueden cantar juntos. Perfecto para noches de karaoke, viajes en coche, previas y duetos." />
+  <meta name="keywords" content="canciones de karaoke en grupo, canciones para varias voces, encontrar canciones a dueto, playlist grupal de karaoke, app para cantar en grupo, playlist noche de karaoke, canciones que todos pueden cantar, coincidencia vocal para grupos" />
+  <meta property="og:title" content="Presentamos SquadMatch: Encuentra Canciones Que Todo Tu Grupo Pueda Cantar" />
+  <meta property="og:description" content="SquadMatch analiza cada voz de tu grupo y encuentra canciones que todos pueden cantar juntos. Perfecto para noches de karaoke, viajes en coche, previas y duetos." />
+  <meta property="og:image" content="/hummatch-logo-full.png" />
+  <meta property="og:url" content="https://hummatch.me/es/blog/introducing-squadmatch" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/hummatch-logo.png" />
+  <link rel="canonical" href="https://hummatch.me/es/blog/introducing-squadmatch" />
+  <link rel="alternate" hreflang="en" href="https://hummatch.me/blog/introducing-squadmatch" />
+  <link rel="alternate" hreflang="es" href="https://hummatch.me/es/blog/introducing-squadmatch" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Presentamos SquadMatch: Encuentra Canciones Que Todo Tu Grupo Pueda Cantar",
+    "description": "SquadMatch analiza cada voz de tu grupo y encuentra canciones que todos pueden cantar juntos. Perfecto para noches de karaoke, viajes en coche, previas y duetos.",
+    "author": { "@type": "Organization", "name": "El Equipo de HumMatch", "url": "https://hummatch.me" },
+    "publisher": { "@type": "Organization", "name": "HumMatch", "url": "https://hummatch.me", "logo": { "@type": "ImageObject", "url": "https://hummatch.me/hummatch-logo.png" } },
+    "datePublished": "2026-04-02",
+    "image": "https://hummatch.me/hummatch-logo-full.png",
+    "keywords": ["canciones de karaoke en grupo", "canciones para varias voces", "encontrar canciones a dueto", "playlist grupal de karaoke", "app para cantar en grupo"]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --surface: #1a1a2e;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+      --text1: #f0e6ff;
+      --text2: #b39ddb;
+      --text3: #7b6fa0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.75;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,26,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(135deg, #A855F7, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-cta {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .hero {
+      max-width: 740px;
+      margin: 60px auto 0;
+      padding: 0 24px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text3);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); }
+    .hero-emoji {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(168,85,247,0.25), 0 0 4px rgba(168,85,247,0.15);
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #f0e6ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text3);
+      font-size: 0.875rem;
+      margin-bottom: 36px;
+    }
+    .hero-meta .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text2);
+      font-weight: 600;
+    }
+    .hero-meta .author-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 900; color: white;
+    }
+    article {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    article p {
+      font-size: 1.075rem;
+      color: var(--text1);
+      margin-bottom: 24px;
+    }
+    article h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      margin: 48px 0 16px;
+    }
+    article h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 32px 0 10px;
+    }
+    article blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 32px 0;
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: var(--text2);
+      font-size: 1.1rem;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(124,58,237,0.08));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 36px 0;
+    }
+    .highlight-box p { margin-bottom: 0; }
+    .highlight-box strong { color: var(--accent); }
+    .use-case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .use-case-card {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 16px;
+      padding: 20px 22px;
+    }
+    .use-case-card .uc-emoji { font-size: 1.6rem; margin-bottom: 10px; display: block; }
+    .use-case-card .uc-title { font-weight: 800; color: var(--text1); font-size: 1rem; margin-bottom: 6px; }
+    .use-case-card .uc-desc { font-size: 0.875rem; color: var(--text2); line-height: 1.55; }
+    @media (max-width: 520px) { .use-case-grid { grid-template-columns: 1fr; } }
+    .step-block {
+      border-left: 2px solid rgba(168,85,247,0.3);
+      padding-left: 20px;
+      margin: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .step-item { display: flex; gap: 14px; align-items: flex-start; }
+    .step-n {
+      min-width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 900; color: white;
+      margin-top: 2px;
+    }
+    .step-t { font-size: 1rem; color: var(--text1); line-height: 1.65; }
+    .step-t strong { color: var(--accent); }
+    .benefit-list {
+      list-style: none;
+      margin: 24px 0;
+      padding: 0;
+    }
+    .benefit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+      color: var(--text1);
+    }
+    .benefit-list li span {
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+    .cta-block {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      margin: 56px 0 0;
+    }
+    .cta-block h3 { font-size: 1.4rem; font-weight: 800; margin: 0 0 10px; color: var(--text1); }
+    .cta-block p { color: var(--text2); margin-bottom: 24px; font-size: 0.975rem; }
+    .cta-block a {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 24px;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .bottom-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      margin-top: 48px;
+      border-top: 1px solid rgba(168,85,247,0.1);
+      color: var(--text3);
+      font-size: 0.85rem;
+    }
+    .bottom-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .bottom-meta-arrow {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .bottom-meta-arrow:hover { transform: translateX(4px); }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text3);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(168,85,247,0.1);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/es/"><span>HumMatch</span></a>
+  <a class="nav-cta" href="/es/">Pruébalo Gratis</a>
+</nav>
+
+<header class="hero">
+  <a class="back-link" href="/es/blog/">← Blog</a>
+  <span class="hero-emoji">🎤</span>
+  <span class="hero-tag">Actualización de Producto</span>
+  <h1>Presentamos SquadMatch: Encuentra Canciones Que Todo Tu Grupo Pueda Cantar</h1>
+  <div class="hero-meta">
+    <div class="author">
+      <div class="author-dot">HM</div>
+      El Equipo de HumMatch
+    </div>
+    <span>2 de abril de 2026</span>
+    <span>6 min de lectura</span>
+  </div>
+</header>
+
+<article>
+
+  <p>Conoces ese momento. Alguien abre la lista de canciones de karaoke y el grupo se queda en silencio. No porque nadie quiera cantar. Sino porque nadie se pone de acuerdo en una canción que todos puedan manejar. Una persona es barítono. Otra apenas sale de su voz de pecho. Alguien más solo conoce a Taylor Swift. Y el amigo que realmente canta bien elige algo que nadie más puede seguir.</p>
+
+  <p>Elegir canciones de karaoke en grupo siempre ha sido un juego de adivinanzas. Recorres una lista, alguien sugiere "Bohemian Rhapsody" y tres personas saben en silencio que no pueden dar ni una sola nota del estribillo. La canción se elige de todas formas. La mitad del grupo murmura durante toda la canción. Nadie suena bien.</p>
+
+  <p>Ese problema es la razón por la que creamos SquadMatch.</p>
+
+  <h2>¿Qué es SquadMatch?</h2>
+
+  <p>SquadMatch es una nueva función de HumMatch que analiza cada voz de tu grupo y encuentra canciones que todos pueden cantar juntos de verdad. No solo canciones donde los rangos se solapan en el papel, sino canciones donde el carácter vocal de cada persona del grupo encaja con la pista.</p>
+
+  <p>Piénsalo como HumMatch para grupos. Cada persona tararea tres notas, SquadMatch construye un perfil vocal compuesto para todo el grupo, y luego devuelve una playlist de canciones que funcionan para todos. No son compromisos. No son "más o menos". Son canciones con las que tu grupo va a sonar genuinamente bien.</p>
+
+  <blockquote>"Cantar solo está genial. Pero los mejores momentos de karaoke ocurren cuando toda la sala participa junta."</blockquote>
+
+  <h2>Por Qué Esto Importa</h2>
+
+  <p>La mayoría de las apps de karaoke tratan el canto como una actividad en solitario. Encuentras tus canciones, cantas tus canciones. Pero la vida real no es así. El karaoke es social. Los viajes en coche son sociales. Las previas son sociales. Los momentos que la gente recuerda son aquellos en los que todo el grupo cantaba junto y realmente sonaba bien.</p>
+
+  <p>El problema es que encontrar canciones para varias voces es genuinamente difícil. Cada persona tiene un rango diferente, un tono diferente y una zona de confort diferente. Lo que funciona para un tenor no funciona para una contralto. Lo que funciona para una soprano no funciona para un barítono. Y "simplemente elige algo que todos conozcan" ignora el hecho de que conocer una canción y poder cantarla son dos cosas completamente diferentes.</p>
+
+  <p>SquadMatch resuelve esto construyendo un perfil vocal grupal que tiene en cuenta a cada miembro. No busca simplemente el mínimo común denominador. Encuentra canciones donde cada voz del grupo tiene algo que aportar.</p>
+
+  <h2>Cómo Funciona</h2>
+
+  <div class="step-block">
+    <div class="step-item">
+      <div class="step-n">1</div>
+      <div class="step-t"><strong>El Squad Leader crea una sesión.</strong> Abre SquadMatch desde tu panel, ponle nombre a tu grupo y comparte el enlace de invitación con los demás. No se necesita descargar ninguna app. Todos se unen desde el navegador de su teléfono.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">2</div>
+      <div class="step-t"><strong>Todos tararean tres notas.</strong> Cada miembro graba un tarareo grave, medio y agudo. Toma unos 30 segundos por persona. HumMatch analiza cada voz individualmente y construye un perfil grupal compuesto a partir de los datos combinados.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">3</div>
+      <div class="step-t"><strong>Obtén tu playlist grupal.</strong> SquadMatch devuelve canciones clasificadas según qué tan bien encajan con todo el grupo. Filtra por género, década o vibra. Exporta la lista y tendrás una playlist de karaoke grupal lista para usar que todos pueden cantar de verdad.</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>La diferencia clave:</strong> SquadMatch no solo busca rangos que se solapan. Utiliza el mismo análisis espectral que impulsa los resultados individuales de HumMatch para encontrar canciones donde el carácter tonal combinado de tu grupo encaja con la pista. Un grupo de tres barítonos obtiene resultados diferentes que un grupo mixto con una soprano, un tenor y una contralto. Ese es el punto.</p>
+  </div>
+
+  <h2>Dónde Brilla SquadMatch</h2>
+
+  <div class="use-case-grid">
+    <div class="use-case-card">
+      <span class="uc-emoji">🎤</span>
+      <div class="uc-title">Noche de Karaoke</div>
+      <div class="uc-desc">Deja de discutir por la lista de canciones. SquadMatch le da a tu grupo una playlist de canciones que todos pueden dominar juntos. Llega al bar con tu repertorio ya decidido.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🚗</span>
+      <div class="uc-title">Viajes en Coche</div>
+      <div class="uc-desc">Crea una playlist para el coche donde nadie tenga que quedarse callado. Cada canción encaja con cada voz en el auto. Cuatro horas, cero canciones saltadas y todos cantando.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🎉</span>
+      <div class="uc-title">Previas</div>
+      <div class="uc-desc">La playlist de una previa marca la energía. SquadMatch crea una donde todos en la sala pueden cantar. Así es como se empieza bien la noche.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🎵</span>
+      <div class="uc-title">Duetos</div>
+      <div class="uc-desc">Encontrar canciones a dueto que encajen con ambas voces es más difícil de lo que parece. SquadMatch con dos personas muestra duetos y armonías que realmente funcionan para tu par específico.</div>
+    </div>
+    <div class="use-case-card">
+      <span class="uc-emoji">🎼</span>
+      <div class="uc-title">Coros y Grupos Vocales</div>
+      <div class="uc-desc">Directores y grupos vocales pequeños usan SquadMatch para encontrar repertorio que se ajuste a su mezcla específica de voces. Se acabó transponer cada arreglo para que encaje.</div>
+    </div>
+  </div>
+
+  <h2>Lo Que Obtienen los Squad Leaders</h2>
+
+  <p>SquadMatch está disponible para los Squad Leaders, el nivel premium de HumMatch. Esto es lo que desbloqueas.</p>
+
+  <ul class="benefit-list">
+    <li><span>&#10003;</span> <strong>Sesiones de SquadMatch ilimitadas.</strong> Crea todos los grupos que quieras. Invita a tantos miembros como necesites. Sin límites.</li>
+    <li><span>&#10003;</span> <strong>Exportación de playlist grupal.</strong> Copia o descarga la playlist de tu grupo para compartirla con todos. Funciona con cualquier app de música.</li>
+    <li><span>&#10003;</span> <strong>Tarareos personales ilimitados.</strong> Sin límites en tu propio análisis de voz. Tararea todas las veces que quieras para refinar tus resultados personales.</li>
+    <li><span>&#10003;</span> <strong>Playlists guardadas.</strong> Guarda tus playlists personales y grupales favoritas en tu panel. Vuelve a ellas cuando quieras.</li>
+    <li><span>&#10003;</span> <strong>Acceso prioritario a nuevas funciones.</strong> Los Squad Leaders reciben cada nueva función primero en cuanto se lanza.</li>
+  </ul>
+
+  <p>Squad Leader cuesta $7.99/mes o $49.99/año (ahorra un 48%). Los miembros de tu grupo se unen gratis. Solo necesitan el enlace de invitación y 30 segundos para tararear.</p>
+
+  <div class="highlight-box">
+    <p><strong>Tus amigos cantan gratis.</strong> Solo el Squad Leader necesita una suscripción. Todos los demás se unen a tu sesión sin costo. Una persona paga, todo el grupo se beneficia. Así es como debería funcionar.</p>
+  </div>
+
+  <h2>Creado para Grupos Reales</h2>
+
+  <p>Probamos SquadMatch con grupos de dos, grupos de seis y todo lo que hay en medio. Una pareja eligiendo duetos para la recepción de su boda. Un grupo de amigos universitarios armando una playlist de karaoke para la previa. Un cuarteto de barbershop buscando nuevas canciones que encajen con su mezcla a cuatro voces. Un viaje familiar en coche donde los hijos y los padres realmente se pusieron de acuerdo en algo.</p>
+
+  <p>El hilo conductor siempre fue el mismo. La gente se sorprendía de cuántas canciones funcionaban para su grupo específico que nunca se les habría ocurrido probar. Ese es el valor. SquadMatch no solo confirma lo que ya sabes. Descubre canciones que nunca habrías encontrado por tu cuenta.</p>
+
+  <p>Los grupos cantan mejor juntos cuando cada voz encaja con la canción. Eso no es un eslogan. Es simplemente lo que pasa cuando dejas de adivinar y empiezas a hacer match.</p>
+
+  <div class="cta-block">
+    <h3>Tu grupo tiene un sonido. Encuentra canciones que encajen.</h3>
+    <p>Conviértete en Squad Leader y crea tu primera playlist grupal esta noche.</p>
+    <a href="/es/">Prueba SquadMatch Gratis</a>
+  </div>
+
+  <div class="bottom-meta">
+    <div class="bottom-meta-left">
+      <span>2 de abril de 2026</span>
+      <span>6 min de lectura</span>
+    </div>
+    <a class="bottom-meta-arrow" href="/es/blog/">Todos los Posts →</a>
+  </div>
+
+</article>
+
+<footer>
+  <p>&copy; 2026 HumMatch. Creado por <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/es/">Prueba HumMatch</a> &nbsp;|&nbsp; <a href="/es/blog/">Blog</a></p>
+</footer>
+
+</body>
+</html>

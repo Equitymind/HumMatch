@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Entendiendo el Timbre Vocal: La Ciencia Detrás de la Puntuación de Brillo de HumMatch | HumMatch</title>
+  <meta name="description" content="Por qué dos cantantes con el mismo rango suenan diferente - y cómo HumMatch usa el análisis espectral para medir el brillo y el timbre vocal científicamente."/>
+  <meta name="keywords" content="timbre vocal, puntuación de brillo, centroide espectral, análisis de voz, rango vocal, coincidencia de karaoke, compatibilidad armónica"/>
+  <link rel="icon" href="/hummatch-icon-bug-2x.png" type="image/png"/>
+
+  <!-- Canonical & Hreflang -->
+  <link rel="canonical" href="https://hummatch.me/es/blog/vocal-timbre-brightness-science" />
+  <link rel="alternate" hreflang="en" href="https://hummatch.me/blog/vocal-timbre-brightness-science" />
+  <link rel="alternate" hreflang="es" href="https://hummatch.me/es/blog/vocal-timbre-brightness-science" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Entendiendo el Timbre Vocal: La Ciencia Detrás de HumMatch"/>
+  <meta property="og:description" content="Cómo HumMatch mide el brillo vocal usando análisis espectral - y por qué importa para encontrar canciones que coincidan con TU voz."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://hummatch.me/es/blog/vocal-timbre-brightness-science"/>
+
+  <!-- Schema.org Article Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Entendiendo el Timbre Vocal: La Ciencia Detrás de la Puntuación de Brillo de HumMatch",
+    "description": "Por qué dos cantantes con el mismo rango suenan diferente - y cómo HumMatch usa el análisis espectral para medir el brillo vocal científicamente.",
+    "author": {
+      "@type": "Organization",
+      "name": "HumMatch"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "HumMatch",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hummatch.me/hummatch-icon-bug-2x.png"
+      }
+    },
+    "datePublished": "2026-04-04",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://hummatch.me/es/blog/vocal-timbre-brightness-science"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0b1a;
+      --white: #e2e0f0;
+      --text-muted: rgba(255,255,255,0.65);
+      --purple: #A855F7;
+      --pink: #EC4899;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+    }
+
+    header {
+      background: rgba(8,6,15,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(168,85,247,0.12);
+      padding: 18px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin: 48px 0 20px;
+      color: var(--white);
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 32px 0 16px;
+      color: rgba(168,85,247,0.9);
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: var(--text-muted);
+    }
+
+    ul, ol {
+      margin: 20px 0 20px 24px;
+      color: var(--text-muted);
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    th {
+      background: rgba(168,85,247,0.1);
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--text-muted);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.1));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .cta-box h3 {
+      margin-top: 0;
+      color: var(--white);
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      margin-top: 16px;
+      transition: opacity 0.2s;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.9;
+    }
+
+    .highlight-box {
+      background: rgba(168,85,247,0.08);
+      border-left: 3px solid #A855F7;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 8px;
+    }
+
+    code {
+      background: rgba(255,255,255,0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      color: #EC4899;
+    }
+
+    pre {
+      background: rgba(0,0,0,0.3);
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 24px 0;
+      border: 1px solid rgba(168,85,247,0.2);
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: rgba(255,255,255,0.8);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: rgba(168,85,247,0.7);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--purple);
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.3rem; }
+      article { padding: 40px 20px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/es/" class="header-logo">HumMatch</a>
+</header>
+
+<article>
+  <h1>Entendiendo el Timbre Vocal: La Ciencia Detrás de la Puntuación de Brillo de HumMatch</h1>
+  <p class="subtitle">Por qué dos cantantes con el mismo rango pueden sonar completamente diferente - y cómo HumMatch lo mide.</p>
+
+  <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:40px 0;">
+
+  <h2>¿Qué Es el Timbre Vocal?</h2>
+  <p>Lo has escuchado antes: dos cantantes cantan exactamente la misma nota, pero uno suena brillante y penetrante mientras que el otro suena cálido y aterciopelado. Esa diferencia no es el tono - es el <strong>timbre</strong>, el "color" o "textura" único de una voz.</p>
+
+  <p>En la pedagogía vocal clásica, el timbre se describe subjetivamente:</p>
+  <ul>
+    <li><strong>Soprano:</strong> Brillante, claro, cristalino</li>
+    <li><strong>Mezzosoprano:</strong> Cálido, rico, con cuerpo</li>
+    <li><strong>Contralto:</strong> Profundo, suave, aterciopelado</li>
+    <li><strong>Tenor:</strong> Brillante, resonante, penetrante</li>
+    <li><strong>Barítono:</strong> Rico, versátil, robusto</li>
+    <li><strong>Bajo:</strong> Profundo, resonante, autoritario</li>
+  </ul>
+
+  <p>Pero <strong>HumMatch va más allá - lo medimos científicamente.</strong></p>
+
+  <h2>La Ciencia: Centroide Espectral</h2>
+  <p>Cuando cantas una nota, no estás produciendo solo una frecuencia - estás creando una onda compleja compuesta por:</p>
+  <ol>
+    <li><strong>La frecuencia fundamental</strong> (la nota que escuchas: "Do central")</li>
+    <li><strong>Armónicos superiores</strong> (frecuencias más altas que añaden carácter)</li>
+  </ol>
+
+  <p>El <strong>centroide espectral</strong> mide dónde se encuentra el "centro de masa" de esas frecuencias:</p>
+  <ul>
+    <li><strong>Centroide espectral más alto</strong> = Más armónicos superiores = <strong>Voz más brillante</strong></li>
+    <li><strong>Centroide espectral más bajo</strong> = Más frecuencias graves = <strong>Voz más oscura</strong></li>
+  </ul>
+
+  <div class="highlight-box">
+    <p><strong>Piénsalo así:</strong></p>
+    <ul style="margin-bottom:0;">
+      <li><strong>Voz brillante</strong> (Ariana Grande, Freddie Mercury): Mucho "brillo" en las frecuencias altas</li>
+      <li><strong>Voz oscura</strong> (Barry White, Johnny Cash): Más "peso" en las frecuencias bajas</li>
+    </ul>
+  </div>
+
+  <h2>La Escala de Brillo 0-100 de HumMatch</h2>
+  <p>Convertimos la medición bruta del centroide espectral en una escala simple e intuitiva:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Puntuación</th>
+        <th>Descripción</th>
+        <th>Artistas de Ejemplo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>0-30</strong></td>
+        <td>Muy Oscuro</td>
+        <td>Barry White, Leonard Cohen, Cher</td>
+      </tr>
+      <tr>
+        <td><strong>31-50</strong></td>
+        <td>Oscuro-Medio</td>
+        <td>Johnny Cash, Elvis Presley, Adele</td>
+      </tr>
+      <tr>
+        <td><strong>51-70</strong></td>
+        <td>Medio-Brillante</td>
+        <td>Frank Sinatra, Michael Bublé, Beyoncé</td>
+      </tr>
+      <tr>
+        <td><strong>71-100</strong></td>
+        <td>Muy Brillante</td>
+        <td>Freddie Mercury, Adam Levine, Ariana Grande</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Tu puntuación de brillo se calcula <strong>durante tu tarareo</strong> - el algoritmo de HumMatch analiza el perfil armónico de tu voz en tiempo real usando la misma tecnología utilizada en software profesional de ingeniería de audio.</p>
+
+  <h2>Por Qué la Coincidencia de Timbre Importa para el Karaoke</h2>
+
+  <h3>Problema: El rango por sí solo no predice una buena coincidencia.</h3>
+  <p>Podrías tener el mismo rango vocal que Freddie Mercury (Bajo-Barítono, F2-F4), pero si tu voz es naturalmente oscura y cálida como la de Johnny Cash, cantar "Bohemian Rhapsody" sonará mal - necesita un <strong>tono brillante y penetrante</strong> para funcionar.</p>
+
+  <h3>Solución: HumMatch coincide tanto el rango COMO el brillo.</h3>
+  <p>Cuando tarareas, medimos:</p>
+  <ol>
+    <li>✅ <strong>Tu rango vocal</strong> (F2 a C#4 = Bajo-Barítono)</li>
+    <li>✅ <strong>Tu puntuación de brillo</strong> (42/100 = Voz oscura, cálida)</li>
+  </ol>
+
+  <p>Luego encontramos canciones que coinciden con AMBOS:</p>
+  <ul>
+    <li>✅ Se ajustan a tu rango (puedes alcanzar las notas)</li>
+    <li>✅ Coinciden con tu timbre (sonarás BIEN cantándolas)</li>
+  </ul>
+
+  <div class="highlight-box">
+    <p><strong>Resultado:</strong> En lugar de "canciones genéricas para barítono," obtienes:</p>
+    <ul style="margin-bottom:0;">
+      <li><strong>Para voces oscuras:</strong> Johnny Cash, Barry White, Leonard Cohen</li>
+      <li><strong>Para voces brillantes:</strong> Elvis (rock temprano), Frank Sinatra (swing animado)</li>
+    </ul>
+  </div>
+
+  <h2>SquadMatch: La Armonía Se Trata de Mezclar Timbres</h2>
+  <p>Aquí es donde se pone aún más interesante - <strong>SquadMatch</strong> usa la compatibilidad de timbre para construir mejores grupos vocales.</p>
+
+  <h3>El Problema de la Armonía:</h3>
+  <p>Cuatro personas con rangos diferentes PUEDEN cantar juntas... pero si sus timbres chocan, suena desordenado:</p>
+  <ul>
+    <li><strong>Sarah:</strong> Soprano, brillo 85 (muy brillante, penetrante)</li>
+    <li><strong>Mike:</strong> Tenor, brillo 45 (oscuro, suave)</li>
+    <li><strong>Resultado:</strong> La voz de Sarah DOMINARÁ, Mike sonará apagado</li>
+  </ul>
+
+  <h3>La Solución de HumMatch:</h3>
+  <p>Analizamos el <strong>brillo promedio</strong> de tu grupo y priorizamos canciones donde:</p>
+  <ol>
+    <li>✅ Todos los rangos están cubiertos (soprano + contralto + tenor + bajo)</li>
+    <li>✅ Los timbres se mezclan naturalmente (puntuaciones de brillo similares)</li>
+    <li>✅ Existen partes de armonía (canciones etiquetadas con arreglos SATB)</li>
+  </ol>
+
+  <div class="cta-box">
+    <h3>Pruébalo Tú Mismo</h3>
+    <p>¿Listo para descubrir tu brillo vocal?</p>
+    <a href="/es/" class="cta-btn">Tararea Ahora en HumMatch →</a>
+    <p style="margin-top:16px;font-size:0.9rem;color:rgba(255,255,255,0.5);">Sin registro. Sin descargas. Solo tararea y descubre.</p>
+  </div>
+
+  <h2>La Ciencia Detrás de la Magia</h2>
+  <p><strong>Cómo HumMatch Mide el Timbre:</strong></p>
+  <ol>
+    <li><strong>Análisis FFT</strong> (Transformada Rápida de Fourier) → Descompone la voz en componentes de frecuencia</li>
+    <li><strong>Cálculo del Centroide Espectral</strong> → Encuentra el "centro de masa" de las frecuencias</li>
+    <li><strong>Normalización</strong> → Convierte la medición bruta en Hz a una escala de 0-100</li>
+    <li><strong>Procesamiento en Tiempo Real</strong> → Todo el análisis ocurre durante tu tarareo de 3 segundos</li>
+  </ol>
+
+  <h3>Referencias:</h3>
+  <ul>
+    <li>McAdams, S. (2019). <em>The Perceptual Representation of Timbre</em>. McGill University</li>
+    <li>Pfitzner, K. (2025). <em>Voice Type Test: Understanding Your Vocal Identity</em></li>
+    <li>Grey, J. M. (1977). <em>Multidimensional perceptual scaling of musical timbres</em>. Journal of the Acoustical Society of America</li>
+  </ul>
+
+  <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:48px 0 40px;">
+
+  <div class="cta-box">
+    <h3>¿Listo para descubrir tu voz?</h3>
+    <p><strong>HumMatch no es solo una app de karaoke - es la primera plataforma de análisis vocal del mundo diseñada para todos.</strong></p>
+    <p>Ya seas un cantante de ducha, entusiasta del karaoke, director de coro o líder de banda — medimos lo que importa: <strong>Rango + Timbre + Compatibilidad.</strong></p>
+    <a href="/es/" class="cta-btn">Empieza a Tararear →</a>
+  </div>
+
+</article>
+
+<footer>
+  <p>&copy; 2026 HumMatch &middot; Construido con ciencia, diseñado para cantantes.</p>
+  <p style="margin-top:12px;">
+    <a href="/es/">Prueba HumMatch</a> &middot;
+    <a href="/es/squadmatch">SquadMatch</a> &middot;
+    <a href="/es/blog/">Blog</a> &middot;
+    <a href="/contact">Contacto</a> &middot;
+    <a href="/privacy">Privacidad</a> &middot;
+    <a href="/terms">Términos</a>
+  </p>
+</footer>
+
+</body>
+</html>
