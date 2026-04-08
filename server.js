@@ -1436,7 +1436,7 @@ app.post('/api/hummatch/contact', contactLimiter, async (req, res) => {
 
   // Send notification email to Joe (don't fail if email fails)
   try {
-    await sendEmail('joe@hummatch.com', 'New HumMatch Contact Form Submission', `
+    await sendEmail(EMAIL_FROM, 'New HumMatch Contact Form Submission', `
       <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:0 auto;background:#0d0b1a;color:#e2e0f0;padding:32px;border-radius:14px;">
         <h2 style="margin:0 0 24px;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">New Contact Form Submission</h2>
         <p style="margin:0 0 8px;"><strong style="color:#A855F7;">Name:</strong> ${(name || 'Not provided').replace(/</g, '&lt;')}</p>
