@@ -28,6 +28,11 @@ a:hover{color:#c084fc}
 .auth-input:focus{border-color:#7c3aed}
 .auth-input.error{border-color:#ef4444}
 
+.password-field-wrap{position:relative;display:flex;align-items:center;margin-bottom:10px}
+.password-field-wrap .auth-input{margin-bottom:0}
+.password-toggle{position:absolute;right:12px;background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:1.1rem;padding:4px 8px;transition:color 0.2s;font-family:inherit}
+.password-toggle:hover{color:rgba(255,255,255,0.8)}
+
 .field-error{color:#ef4444;font-size:0.75rem;text-align:left;margin:-6px 0 8px 4px;display:none}
 .form-error{color:#ef4444;font-size:0.82rem;min-height:20px;margin-bottom:8px}
 
@@ -76,7 +81,10 @@ a:hover{color:#c084fc}
   <!-- Login Form -->
   <form class="auth-form" id="form-login" onsubmit="handleLogin(event)">
     <input type="email" class="auth-input" id="login-email" placeholder="Email" autocomplete="email" autocapitalize="off" required/>
-    <input type="password" class="auth-input" id="login-password" placeholder="Password" autocomplete="current-password" required/>
+    <div class="password-field-wrap">
+      <input type="password" class="auth-input" id="login-password" placeholder="Password" autocomplete="current-password" required/>
+      <button type="button" class="password-toggle" onclick="togglePasswordVisibility('login-password')">👁️</button>
+    </div>
     <div class="form-error" id="login-error"></div>
     <button type="submit" class="auth-btn" id="login-btn">Log In</button>
     <button type="button" class="auth-link-btn" onclick="showForgotPassword()">Forgot password?</button>
@@ -95,7 +103,10 @@ a:hover{color:#c084fc}
   <!-- Signup Form -->
   <form class="auth-form hidden" id="form-signup" onsubmit="handleSignup(event)">
     <input type="email" class="auth-input" id="signup-email" placeholder="Email" autocomplete="email" autocapitalize="off" required/>
-    <input type="password" class="auth-input" id="signup-password" placeholder="Password (8+ characters)" autocomplete="new-password" minlength="8" required/>
+    <div class="password-field-wrap">
+      <input type="password" class="auth-input" id="signup-password" placeholder="Password (8+ characters)" autocomplete="new-password" minlength="8" required/>
+      <button type="button" class="password-toggle" onclick="togglePasswordVisibility('signup-password')">👁️</button>
+    </div>
     <div class="field-error" id="signup-pw-error"></div>
     <input type="password" class="auth-input" id="signup-password-confirm" placeholder="Confirm password" autocomplete="new-password" minlength="8" required/>
     <div class="field-error" id="signup-confirm-error"></div>
@@ -107,7 +118,10 @@ a:hover{color:#c084fc}
   <div class="set-pw-section" id="set-pw-section">
     <div class="set-pw-note">Your account was created before we added passwords. Please set a password to continue.</div>
     <form class="auth-form" id="form-set-pw" onsubmit="handleSetPassword(event)">
-      <input type="password" class="auth-input" id="setpw-password" placeholder="New password (8+ characters)" autocomplete="new-password" minlength="8" required/>
+      <div class="password-field-wrap">
+        <input type="password" class="auth-input" id="setpw-password" placeholder="New password (8+ characters)" autocomplete="new-password" minlength="8" required/>
+        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('setpw-password')">👁️</button>
+      </div>
       <div class="field-error" id="setpw-pw-error"></div>
       <input type="password" class="auth-input" id="setpw-password-confirm" placeholder="Confirm password" autocomplete="new-password" minlength="8" required/>
       <div class="field-error" id="setpw-confirm-error"></div>
@@ -123,6 +137,16 @@ a:hover{color:#c084fc}
 
 <script>
 let legacyEmail = '';
+
+// Toggle password visibility
+function togglePasswordVisibility(inputId) {
+  const input = document.getElementById(inputId);
+  if (input.type === 'password') {
+    input.type = 'text';
+  } else {
+    input.type = 'password';
+  }
+}
 
 // Check if already logged in or has magic link token in URL
 (function() {
@@ -197,6 +221,7 @@ async function handleLogin(e) {
     const res = await fetch('/api/hummatch/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
       body: JSON.stringify({ email, password })
     });
     const data = await res.json();
@@ -223,7 +248,8 @@ async function handleLogin(e) {
     if (data.is_premium) localStorage.setItem('hm_premium', 'true');
     window.location.href = returnUrl;
   } catch (err) {
-    errEl.textContent = 'Connection error. Please try again.';
+    console.error('Login fetch error:', err);
+    errEl.textContent = 'Connection error: ' + (err.message || err) + '. Please try again.';
     errEl.style.display = 'block';
   }
   btn.disabled = false;

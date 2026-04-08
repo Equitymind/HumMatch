@@ -1,0 +1,930 @@
+[
+  {
+    "artist": "Adele",
+    "lo": 48,
+    "hi": 84,
+    "loNote": "C3",
+    "hiNote": "C6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Ariana Grande",
+    "lo": 50,
+    "hi": 83,
+    "loNote": "D3",
+    "hiNote": "B5",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Beyonc\u00e9",
+    "lo": 53,
+    "hi": 84,
+    "loNote": "F3",
+    "hiNote": "C6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Billie Eilish",
+    "lo": 50,
+    "hi": 83,
+    "loNote": "D3",
+    "hiNote": "B5",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Dua Lipa",
+    "lo": 50,
+    "hi": 86,
+    "loNote": "D3",
+    "hiNote": "D6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Taylor Swift",
+    "lo": 53,
+    "hi": 88,
+    "loNote": "F3",
+    "hiNote": "E6",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Bad Bunny",
+    "lo": 43,
+    "hi": 67,
+    "loNote": "G2",
+    "hiNote": "G4",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Ed Sheeran",
+    "lo": 40,
+    "hi": 70,
+    "loNote": "E2",
+    "hiNote": "Bb4",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Imagine Dragons",
+    "lo": 41,
+    "hi": 70,
+    "loNote": "F2",
+    "hiNote": "Bb4",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "J Balvin",
+    "lo": 43,
+    "hi": 69,
+    "loNote": "G2",
+    "hiNote": "A4",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Justin Bieber",
+    "lo": 41,
+    "hi": 73,
+    "loNote": "F2",
+    "hiNote": "C#5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Post Malone",
+    "lo": 40,
+    "hi": 68,
+    "loNote": "E2",
+    "hiNote": "G#4",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "The Weeknd",
+    "lo": 48,
+    "hi": 84,
+    "loNote": "C3",
+    "hiNote": "C6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Bruno Mars",
+    "lo": 44,
+    "hi": 84,
+    "loNote": "G#2",
+    "hiNote": "C6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Drake",
+    "lo": 40,
+    "hi": 73,
+    "loNote": "E2",
+    "hiNote": "C#5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Maluma",
+    "lo": 50,
+    "hi": 65,
+    "loNote": "D3",
+    "hiNote": "F4",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Ozuna",
+    "lo": 44,
+    "hi": 58,
+    "loNote": "G#2",
+    "hiNote": "A#3",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Daddy Yankee",
+    "lo": 57,
+    "hi": 69,
+    "loNote": "A3",
+    "hiNote": "A4",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Karol G",
+    "lo": 53,
+    "hi": 72,
+    "loNote": "F3",
+    "hiNote": "C5",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "OneRepublic",
+    "lo": 43,
+    "hi": 83,
+    "loNote": "G2",
+    "hiNote": "B5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Rihanna",
+    "lo": 47,
+    "hi": 86,
+    "loNote": "B2",
+    "hiNote": "D6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Coldplay",
+    "lo": 38,
+    "hi": 85,
+    "loNote": "D2",
+    "hiNote": "C#6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Selena Gomez",
+    "lo": 46,
+    "hi": 81,
+    "loNote": "Bb2",
+    "hiNote": "A5",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Shawn Mendes",
+    "lo": 41,
+    "hi": 84,
+    "loNote": "F2",
+    "hiNote": "C6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Lady Gaga",
+    "lo": 42,
+    "hi": 84,
+    "loNote": "F#2",
+    "hiNote": "C6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "John Legend",
+    "lo": 36,
+    "hi": 91,
+    "loNote": "C2",
+    "hiNote": "G6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Luis Fonsi",
+    "lo": 52,
+    "hi": 72,
+    "loNote": "E3",
+    "hiNote": "C5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Maroon 5",
+    "lo": 40,
+    "hi": 82,
+    "loNote": "E2",
+    "hiNote": "Bb5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Carrie Underwood",
+    "lo": 50,
+    "hi": 80,
+    "loNote": "D3",
+    "hiNote": "G#5",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Whitney Houston",
+    "lo": 45,
+    "hi": 82,
+    "loNote": "A2",
+    "hiNote": "A#5",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Katy Perry",
+    "lo": 52,
+    "hi": 85,
+    "loNote": "E3",
+    "hiNote": "C#6",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Sia",
+    "lo": 50,
+    "hi": 81,
+    "loNote": "D3",
+    "hiNote": "A5",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Luke Bryan",
+    "lo": 43,
+    "hi": 69,
+    "loNote": "G2",
+    "hiNote": "A4",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Shakira",
+    "lo": 51,
+    "hi": 81,
+    "loNote": "D#3",
+    "hiNote": "A5",
+    "voiceType": "Alto"
+  },
+  {
+    "artist": "Blake Shelton",
+    "lo": 39,
+    "hi": 77,
+    "loNote": "D#2",
+    "hiNote": "F5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Journey",
+    "lo": 46,
+    "hi": 84,
+    "loNote": "Bb2",
+    "hiNote": "C6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Keith Urban",
+    "lo": 43,
+    "hi": 74,
+    "loNote": "G2",
+    "hiNote": "D5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Foo Fighters",
+    "lo": 38,
+    "hi": 79,
+    "loNote": "D2",
+    "hiNote": "G5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Miranda Lambert",
+    "lo": 50,
+    "hi": 81,
+    "loNote": "D3",
+    "hiNote": "A5",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Bon Jovi",
+    "lo": 38,
+    "hi": 79,
+    "loNote": "D2",
+    "hiNote": "G5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Guns N' Roses",
+    "lo": 29,
+    "hi": 94,
+    "loNote": "F1",
+    "hiNote": "Bb6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Def Leppard",
+    "lo": 38,
+    "hi": 80,
+    "loNote": "D2",
+    "hiNote": "G#5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Green Day",
+    "lo": 41,
+    "hi": 76,
+    "loNote": "F2",
+    "hiNote": "E5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "The Rolling Stones",
+    "lo": 37,
+    "hi": 85,
+    "loNote": "C#2",
+    "hiNote": "C#6",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Eagles",
+    "lo": 42,
+    "hi": 79,
+    "loNote": "F#2",
+    "hiNote": "G5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Michael Jackson",
+    "lo": 40,
+    "hi": 84,
+    "loNote": "E2",
+    "hiNote": "C6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "U2",
+    "lo": 40,
+    "hi": 80,
+    "loNote": "E2",
+    "hiNote": "G#5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Muse",
+    "lo": 45,
+    "hi": 86,
+    "loNote": "A2",
+    "hiNote": "D6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Sam Smith",
+    "lo": 48,
+    "hi": 82,
+    "loNote": "C3",
+    "hiNote": "Bb5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Arctic Monkeys",
+    "lo": 42,
+    "hi": 78,
+    "loNote": "F#2",
+    "hiNote": "F#5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Hozier",
+    "lo": 40,
+    "hi": 72,
+    "loNote": "E2",
+    "hiNote": "C5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Johnny Cash",
+    "lo": 40,
+    "hi": 71,
+    "loNote": "E2",
+    "hiNote": "B4",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Alicia Keys",
+    "lo": 46,
+    "hi": 86,
+    "loNote": "Bb2",
+    "hiNote": "D6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Panic! at the Disco",
+    "lo": 38,
+    "hi": 84,
+    "loNote": "D2",
+    "hiNote": "C6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Queen",
+    "lo": 41,
+    "hi": 89,
+    "loNote": "F2",
+    "hiNote": "F6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Elton John",
+    "lo": 45,
+    "hi": 72,
+    "loNote": "A2",
+    "hiNote": "C5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Halsey",
+    "lo": 50,
+    "hi": 80,
+    "loNote": "D3",
+    "hiNote": "G#5",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Aerosmith",
+    "lo": 36,
+    "hi": 88,
+    "loNote": "C2",
+    "hiNote": "E6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Lewis Capaldi",
+    "lo": 39,
+    "hi": 74,
+    "loNote": "Eb2",
+    "hiNote": "D5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Doja Cat",
+    "lo": 50,
+    "hi": 88,
+    "loNote": "D3",
+    "hiNote": "E6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Charlie Puth",
+    "lo": 40,
+    "hi": 82,
+    "loNote": "E2",
+    "hiNote": "Bb5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Khalid",
+    "lo": 41,
+    "hi": 70,
+    "loNote": "F2",
+    "hiNote": "Bb4",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Nirvana",
+    "lo": 36,
+    "hi": 85,
+    "loNote": "C2",
+    "hiNote": "C#6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Red Hot Chili Peppers",
+    "lo": 31,
+    "hi": 85,
+    "loNote": "G1",
+    "hiNote": "C#6",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Michael Bubl\u00e9",
+    "lo": 39,
+    "hi": 77,
+    "loNote": "Eb2",
+    "hiNote": "F5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Kings of Leon",
+    "lo": 45,
+    "hi": 76,
+    "loNote": "A2",
+    "hiNote": "E5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Fall Out Boy",
+    "lo": 40,
+    "hi": 84,
+    "loNote": "E2",
+    "hiNote": "C6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Pink Floyd",
+    "lo": 36,
+    "hi": 83,
+    "loNote": "C2",
+    "hiNote": "B5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Fleetwood Mac",
+    "lo": 41,
+    "hi": 89,
+    "loNote": "F2",
+    "hiNote": "F6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "AC/DC",
+    "lo": 34,
+    "hi": 84,
+    "loNote": "Bb1",
+    "hiNote": "C6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Metallica",
+    "lo": 35,
+    "hi": 82,
+    "loNote": "B1",
+    "hiNote": "Bb5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Heart",
+    "lo": 48,
+    "hi": 88,
+    "loNote": "C3",
+    "hiNote": "E6",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Led Zeppelin",
+    "lo": 43,
+    "hi": 85,
+    "loNote": "G2",
+    "hiNote": "C#6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Diana Ross",
+    "lo": 48,
+    "hi": 86,
+    "loNote": "C3",
+    "hiNote": "D6",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Aretha Franklin",
+    "lo": 43,
+    "hi": 86,
+    "loNote": "G2",
+    "hiNote": "D6",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "The Temptations",
+    "lo": 40,
+    "hi": 72,
+    "loNote": "E2",
+    "hiNote": "C5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Madonna",
+    "lo": 45,
+    "hi": 84,
+    "loNote": "A2",
+    "hiNote": "C6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Cyndi Lauper",
+    "lo": 48,
+    "hi": 94,
+    "loNote": "C3",
+    "hiNote": "Bb6",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Blondie",
+    "lo": 43,
+    "hi": 86,
+    "loNote": "G2",
+    "hiNote": "D6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Joan Jett",
+    "lo": 47,
+    "hi": 90,
+    "loNote": "B2",
+    "hiNote": "F#6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Eurythmics",
+    "lo": 47,
+    "hi": 85,
+    "loNote": "B2",
+    "hiNote": "C#6",
+    "voiceType": "Alto"
+  },
+  {
+    "artist": "Chris Stapleton",
+    "lo": 43,
+    "hi": 79,
+    "loNote": "G2",
+    "hiNote": "G5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Chappell Roan",
+    "lo": 53,
+    "hi": 79,
+    "loNote": "F3",
+    "hiNote": "G5",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Benson Boone",
+    "lo": 45,
+    "hi": 81,
+    "loNote": "A2",
+    "hiNote": "A5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Camila Cabello",
+    "lo": 48,
+    "hi": 87,
+    "loNote": "C3",
+    "hiNote": "Eb6",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Train",
+    "lo": 40,
+    "hi": 78,
+    "loNote": "E2",
+    "hiNote": "F#5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Ashanti",
+    "lo": 53,
+    "hi": 84,
+    "loNote": "F3",
+    "hiNote": "C6",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Bailey Zimmerman",
+    "lo": 59,
+    "hi": 81,
+    "loNote": "B3",
+    "hiNote": "A5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "The Doors",
+    "lo": 38,
+    "hi": 89,
+    "loNote": "D2",
+    "hiNote": "F6",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Kacey Musgraves",
+    "lo": 50,
+    "hi": 78,
+    "loNote": "D3",
+    "hiNote": "F#5",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Marvin Gaye",
+    "lo": 45,
+    "hi": 75,
+    "loNote": "A2",
+    "hiNote": "D#5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Olivia Rodrigo",
+    "lo": 51,
+    "hi": 80,
+    "loNote": "D#3",
+    "hiNote": "G#5",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "Stevie Wonder",
+    "lo": 41,
+    "hi": 87,
+    "loNote": "F2",
+    "hiNote": "D#6",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Simon & Garfunkel",
+    "lo": 50,
+    "hi": 72,
+    "loNote": "D3",
+    "hiNote": "C5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "The Killers",
+    "lo": 42,
+    "hi": 80,
+    "loNote": "F#2",
+    "hiNote": "G#5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Sabrina Carpenter",
+    "lo": 48,
+    "hi": 86,
+    "loNote": "C3",
+    "hiNote": "D6",
+    "voiceType": "Soprano"
+  },
+  {
+    "artist": "B.B. King",
+    "lo": 40,
+    "hi": 79,
+    "loNote": "E2",
+    "hiNote": "G5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Harry Styles",
+    "lo": 45,
+    "hi": 83,
+    "loNote": "A2",
+    "hiNote": "B5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "The Who",
+    "lo": 47,
+    "hi": 83,
+    "loNote": "B2",
+    "hiNote": "B5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "John Prine",
+    "lo": 41,
+    "hi": 74,
+    "loNote": "F2",
+    "hiNote": "D5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Four Tops",
+    "lo": 45,
+    "hi": 73,
+    "loNote": "A2",
+    "hiNote": "C#5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "The Allman Brothers Band",
+    "lo": 43,
+    "hi": 79,
+    "loNote": "G2",
+    "hiNote": "G5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Mahalia Jackson",
+    "lo": 50,
+    "hi": 75,
+    "loNote": "D3",
+    "hiNote": "D#5",
+    "voiceType": "Alto"
+  },
+  {
+    "artist": "Robert Johnson",
+    "lo": 43,
+    "hi": 72,
+    "loNote": "G2",
+    "hiNote": "C5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Buffalo Springfield",
+    "lo": 48,
+    "hi": 76,
+    "loNote": "C3",
+    "hiNote": "E5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "SZA",
+    "lo": 47,
+    "hi": 79,
+    "loNote": "B2",
+    "hiNote": "G5",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Tate McRae",
+    "lo": 52,
+    "hi": 76,
+    "loNote": "E3",
+    "hiNote": "E5",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Lana Del Rey",
+    "lo": 48,
+    "hi": 85,
+    "loNote": "C3",
+    "hiNote": "C#6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Lizzo",
+    "lo": 53,
+    "hi": 82,
+    "loNote": "F3",
+    "hiNote": "A#5",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Miley Cyrus",
+    "lo": 49,
+    "hi": 85,
+    "loNote": "C#3",
+    "hiNote": "C#6",
+    "voiceType": "Mezzo-soprano"
+  },
+  {
+    "artist": "Cardi B",
+    "lo": 50,
+    "hi": 81,
+    "loNote": "D3",
+    "hiNote": "A5",
+    "voiceType": "Alto"
+  },
+  {
+    "artist": "Kendrick Lamar",
+    "lo": 36,
+    "hi": 79,
+    "loNote": "C2",
+    "hiNote": "G5",
+    "voiceType": "Tenor"
+  },
+  {
+    "artist": "Travis Scott",
+    "lo": 48,
+    "hi": 72,
+    "loNote": "C3",
+    "hiNote": "C5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Frank Sinatra",
+    "lo": 43,
+    "hi": 76,
+    "loNote": "G2",
+    "hiNote": "E5",
+    "voiceType": "Baritone"
+  },
+  {
+    "artist": "Etta James",
+    "lo": 44,
+    "hi": 83,
+    "loNote": "G#2",
+    "hiNote": "B5",
+    "voiceType": "Contralto"
+  },
+  {
+    "artist": "Bob Dylan",
+    "lo": 36,
+    "hi": 74,
+    "loNote": "C2",
+    "hiNote": "D5",
+    "voiceType": "Baritone"
+  }
+]

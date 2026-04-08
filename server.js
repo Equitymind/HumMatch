@@ -11,7 +11,7 @@ const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const BUILD_VERSION = process.env.BUILD_VERSION || '1.0.0';
+const BUILD_VERSION = process.env.BUILD_VERSION || '2.0.0';
 const ADMIN_KEY = process.env.ADMIN_API_KEY || (() => {
   console.warn('WARNING: ADMIN_API_KEY not set. Admin endpoints will be inaccessible.');
   return require('crypto').randomUUID();
@@ -215,7 +215,9 @@ function emailGroupMatchWaitlist(email) {
 app.use(cors());
 app.use(helmet({
   contentSecurityPolicy: false,
-  crossOriginEmbedderPolicy: false
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+  crossOriginOpenerPolicy: false
 }));
 app.use(morgan('short'));
 
@@ -890,8 +892,9 @@ function monthKey() {
 // Helper: admin auth middleware
 // ---------------------------------------------------------------------------
 function requireAdmin(req, res, next) {
-  const key = req.headers['x-reactr-api-key'] || req.query.key;
-  if (key !== ADMIN_KEY) return res.status(401).json({ error: 'Unauthorized' });
+  const key = req.headers['x-reactr-api-key'] || req.headers['x-admin-key'] || req.query.key;
+  const adminKey = process.env.HUMMATCH_ADMIN_KEY || '';
+  if (key !== ADMIN_KEY && key !== adminKey) return res.status(401).json({ error: 'Unauthorized' });
   next();
 }
 
@@ -1324,6 +1327,52 @@ app.get('/api/hummatch/analytics', requireAdmin, (req, res) => {
     GROUP BY ref ORDER BY cnt DESC LIMIT 10
   `).all(sinceDate);
 
+  // Voice Type Distribution
+  const voiceTypes = db.prepare(`
+    SELECT voice_type, COUNT(*) as cnt FROM hums
+    WHERE voice_type IS NOT NULL AND created_at >= ?
+    GROUP BY voice_type ORDER BY cnt DESC
+  `).all(sinceDate);
+
+  // Device Breakdown (parse user_agent)
+  const deviceRows = db.prepare(`
+    SELECT user_agent, COUNT(*) as cnt FROM events
+    WHERE event = 'page_view' AND created_at >= ? AND user_agent IS NOT NULL
+    GROUP BY user_agent
+  `).all(sinceDate);
+  const deviceCounts = { Mobile: 0, Desktop: 0, Tablet: 0 };
+  for (const r of deviceRows) {
+    const ua = (r.user_agent || '').toLowerCase();
+    if (/ipad|tablet/i.test(ua)) deviceCounts.Tablet += r.cnt;
+    else if (/mobile|iphone|android/i.test(ua)) deviceCounts.Mobile += r.cnt;
+    else deviceCounts.Desktop += r.cnt;
+  }
+  const devices = Object.entries(deviceCounts).map(([device, cnt]) => ({ device, cnt })).filter(d => d.cnt > 0);
+
+  // Top Songs Matched
+  const topMatched = db.prepare(`
+    SELECT json_extract(data, '$.song') as song, json_extract(data, '$.artist') as artist, COUNT(*) as cnt
+    FROM events WHERE event = 'song_match' AND created_at >= ?
+    AND json_extract(data, '$.song') IS NOT NULL
+    GROUP BY song, artist ORDER BY cnt DESC LIMIT 10
+  `).all(sinceDate);
+
+  // Top Songs Dismissed
+  const topDismissed = db.prepare(`
+    SELECT json_extract(data, '$.song') as song, json_extract(data, '$.artist') as artist, COUNT(*) as cnt
+    FROM events WHERE event = 'song_dismiss' AND created_at >= ?
+    AND json_extract(data, '$.song') IS NOT NULL
+    GROUP BY song, artist ORDER BY cnt DESC LIMIT 10
+  `).all(sinceDate);
+
+  // Top Songs Exported
+  const topExported = db.prepare(`
+    SELECT json_extract(data, '$.song') as song, json_extract(data, '$.artist') as artist, COUNT(*) as cnt
+    FROM events WHERE event = 'playlist_export' AND created_at >= ?
+    AND json_extract(data, '$.song') IS NOT NULL
+    GROUP BY song, artist ORDER BY cnt DESC LIMIT 10
+  `).all(sinceDate);
+
   res.json({
     totalVisits, enVisits, esVisits,
     totalHums, enHums, esHums,
@@ -1331,7 +1380,8 @@ app.get('/api/hummatch/analytics', requireAdmin, (req, res) => {
     pwaInstalls, monthlyPurchases,
     convRate, avgSessionSec, returnVisitors,
     daily, topSongs, topReferrers,
-    anonHumCount, registeredHummerCount, humSignupConvRate, humConvTrend
+    anonHumCount, registeredHummerCount, humSignupConvRate, humConvTrend,
+    voiceTypes, devices, topMatched, topDismissed, topExported
   });
 });
 
@@ -1545,11 +1595,17 @@ app.post('/api/hummatch/squad/:id/invite', requireAuth, (req, res) => {
   const { display_name, voice_type } = req.body;
   const squadId = parseInt(req.params.id);
 
-  // Free users: 4-member limit
+  // Free users: 2-member limit (Duet = 2 people total)
+  // Premium users: 5-member limit (Squad = 5 people total)
   if (!req.user.is_premium) {
     const members = stmts.getSquadMembers.all(squadId);
-    if (members.length >= 4) {
-      return res.status(403).json({ error: 'Free plan allows 4 squad members. Upgrade for unlimited!' });
+    if (members.length >= 2) {
+      return res.status(403).json({ error: 'Free plan allows 2 members (Duet). Upgrade to Premium for Squads up to 5!' });
+    }
+  } else {
+    const members = stmts.getSquadMembers.all(squadId);
+    if (members.length >= 5) {
+      return res.status(403).json({ error: 'Squad full! Maximum 5 members.' });
     }
   }
 
@@ -1979,6 +2035,193 @@ app.get('/api/hummatch/admin/discount-codes/stats', requireAdmin, (req, res) => 
 });
 
 // ---------------------------------------------------------------------------
+// Campaign Email System (Admin)
+// ---------------------------------------------------------------------------
+
+// In-memory tracking for daily email limits
+const campaignState = {
+  dailySent: 0,
+  lastResetDate: new Date().toISOString().split('T')[0],
+  dailyLimit: 500
+};
+
+function resetDailySentIfNeeded() {
+  const today = new Date().toISOString().split('T')[0];
+  if (campaignState.lastResetDate !== today) {
+    campaignState.dailySent = 0;
+    campaignState.lastResetDate = today;
+  }
+}
+
+// Helper: delay between emails to avoid SMTP throttling
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Template A: Vocal Coaches
+function generateVocalCoachEmail(firstName, platform, specificContent) {
+  const subject = 'I built something for your singers';
+  const html = emailWrapper(`
+    <p>Hey ${firstName},</p>
+    <p>I'm Joe, founder of HumMatch. Just launched and thought your students would love this.</p>
+    <p><strong>The problem:</strong> Most singers don't know which songs actually fit their voice. They pick songs that sound cool but sit outside their range. Then they strain, sound bad, and get discouraged.</p>
+    <p><strong>HumMatch fixes this:</strong> Hum 3 notes → instant song matches in your exact range.</p>
+    <p>It's free to use. No signup required. Works on any device.</p>
+    <p><strong>Why I'm reaching out:</strong> I'm offering vocal coaches like you a 25% affiliate commission (vs. our standard 20%) as a launch partner.</p>
+    <p>Your students get 10% off when they upgrade. You get credit for every conversion. First 100 coaches only.</p>
+    <p>Try it yourself: <a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+    <p>If it clicks, here's the affiliate signup: <a href="https://hummatch.me/affiliate" style="color:#A855F7;">https://hummatch.me/affiliate</a></p>
+    <p style="margin-top:24px;">- Joe</p>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;">Founder, HumMatch<br><a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+  `);
+  return { subject, html };
+}
+
+// Template B: Karaoke Creators
+function generateKaraokeEmail(firstName, platform, specificContent) {
+  const subject = 'Built something for your karaoke community';
+  const html = emailWrapper(`
+    <p>Hey ${firstName},</p>
+    <p>I'm Joe from HumMatch.</p>
+    <p><strong>Quick pitch:</strong> I built a tool that matches people to songs in their exact vocal range. Hum 3 notes → instant personalized song list.</p>
+    <p>No more "can I sing this?" guessing. Works for solo singers AND groups.</p>
+    <p><strong>Why you'd care:</strong></p>
+    <ul style="color:#e2e0f0;padding-left:20px;margin:0 0 20px;">
+      <li style="margin-bottom:8px;">Your audience gets better song recommendations</li>
+      <li style="margin-bottom:8px;">Makes karaoke less intimidating for newbies</li>
+      <li style="margin-bottom:8px;">Group feature finds songs everyone can sing</li>
+    </ul>
+    <p>It's completely free. No account needed: <a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+    <p><strong>Partnership opportunity:</strong> I'm offering 25% commission (higher than our standard 20%) to the first 100 creators who join.</p>
+    <p>Your community gets 10% off when they upgrade to premium ($7.99/mo). You earn 25% commission for 12 months on each referral — that's $2/month per subscriber.</p>
+    <p>Give it a spin. If you like it, affiliate signup is here: <a href="https://hummatch.me/affiliate" style="color:#A855F7;">https://hummatch.me/affiliate</a></p>
+    <p>Keep crushing it!</p>
+    <p style="margin-top:24px;">- Joe</p>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;">Founder, HumMatch<br><a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+  `);
+  return { subject, html };
+}
+
+// Template C: Music Bloggers/Reviewers
+function generateMusicBloggerEmail(firstName) {
+  const subject = 'Worth covering? (vocal range tool launch)';
+  const html = emailWrapper(`
+    <p>Hey ${firstName},</p>
+    <p>I'm Joe, founder of HumMatch. Came across your blog while researching the karaoke/vocal tech space.</p>
+    <p><strong>What it is:</strong> HumMatch analyzes your voice in 10 seconds (you just hum) and shows you which songs from our 10K+ library match your exact range.</p>
+    <p>No more picking songs that are too high or too low. Just instant personalized matches.</p>
+    <p><strong>Unique angle:</strong> We also do group matching (SquadMatch) — finds songs your whole crew can sing together. First tool I've seen that does this.</p>
+    <p><strong>Tech:</strong> Real-time pitch detection, vocal range mapping, genre filtering. Works on any device (web app, no download needed). Free tier + $7.99/mo premium.</p>
+    <p>Try it: <a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+    <p><strong>If you cover it:</strong> I'd offer you affiliate terms (25% commission, vs our standard 20%). Your readers get 10% off. First 100 partners only.</p>
+    <p>No pressure — just thought it might fit your audience.</p>
+    <p>Affiliate signup (if interested): <a href="https://hummatch.me/affiliate" style="color:#A855F7;">https://hummatch.me/affiliate</a></p>
+    <p>Thanks for reading!</p>
+    <p style="margin-top:24px;">- Joe</p>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;">Founder, HumMatch<br><a href="https://hummatch.me" style="color:#A855F7;">https://hummatch.me</a></p>
+  `);
+  return { subject, html };
+}
+
+// Admin: Send batch campaign emails
+app.post('/api/hummatch/admin/campaign/send', requireAdmin, async (req, res) => {
+  const { recipients, template, dryRun } = req.body;
+
+  if (!Array.isArray(recipients) || recipients.length === 0) {
+    return res.status(400).json({ error: 'recipients must be a non-empty array' });
+  }
+
+  if (!['vocal-coach', 'karaoke', 'music-blogger'].includes(template)) {
+    return res.status(400).json({ error: 'template must be vocal-coach, karaoke, or music-blogger' });
+  }
+
+  if (recipients.length > 50) {
+    return res.status(400).json({ error: 'Max 50 recipients per request' });
+  }
+
+  resetDailySentIfNeeded();
+
+  const sent = [];
+  const failed = [];
+  const errors = [];
+
+  for (const recipient of recipients) {
+    const { email, firstName, lastName, category, platform, followers, url } = recipient;
+
+    if (!email || !firstName) {
+      errors.push({ email: email || 'unknown', error: 'Missing email or firstName' });
+      failed.push(email);
+      continue;
+    }
+
+    try {
+      // Generate email based on template
+      let emailData;
+      if (template === 'vocal-coach') {
+        const content = category || 'teaching technique';
+        emailData = generateVocalCoachEmail(firstName, platform || 'your platform', content);
+      } else if (template === 'karaoke') {
+        const content = category || 'recent karaoke series';
+        emailData = generateKaraokeEmail(firstName, platform || 'your channel', content);
+      } else if (template === 'music-blogger') {
+        emailData = generateMusicBloggerEmail(firstName);
+      }
+
+      if (!dryRun) {
+        // Check daily limit
+        if (campaignState.dailySent >= campaignState.dailyLimit) {
+          errors.push({ email, error: 'Daily limit reached' });
+          failed.push(email);
+          continue;
+        }
+
+        // Send email with rate limiting (2 second delay)
+        const sendSuccess = await sendEmail(email, emailData.subject, emailData.html);
+        if (sendSuccess) {
+          sent.push(email);
+          campaignState.dailySent++;
+        } else {
+          errors.push({ email, error: 'Email send failed' });
+          failed.push(email);
+        }
+      } else {
+        // Dry run: just log
+        console.log(`[DRY RUN] Would send "${emailData.subject}" to ${email}`);
+        sent.push(email);
+      }
+
+      // 2-second delay between sends to avoid SMTP throttling
+      if (recipients.indexOf(recipient) < recipients.length - 1) {
+        await delay(2000);
+      }
+    } catch (err) {
+      console.error(`Campaign email error (${email}):`, err.message);
+      errors.push({ email, error: err.message });
+      failed.push(email);
+    }
+  }
+
+  res.json({
+    sent: sent.length,
+    failed: failed.length,
+    errors,
+    dryRun: !!dryRun
+  });
+});
+
+// Admin: Get campaign status
+app.get('/api/hummatch/admin/campaign/status', requireAdmin, (req, res) => {
+  resetDailySentIfNeeded();
+
+  res.json({
+    emailConfigured: !!emailTransporter,
+    dailySent: campaignState.dailySent,
+    dailyLimit: campaignState.dailyLimit,
+    remaining: campaignState.dailyLimit - campaignState.dailySent
+  });
+});
+
+// ---------------------------------------------------------------------------
 // API: Account Settings
 // ---------------------------------------------------------------------------
 app.put('/api/hummatch/account', requireAuth, (req, res) => {
@@ -2396,28 +2639,16 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// ---------------------------------------------------------------------------
 // Auto-seed songs if empty
 // ---------------------------------------------------------------------------
 function autoSeedSongs() {
   try {
     const songsCount = db.prepare('SELECT COUNT(*) as cnt FROM songs').get().cnt;
     // Force re-seed if count doesn't match expected (10172 songs with popularity scores)
-    const EXPECTED_SONGS = 10172;
-    if (songsCount === EXPECTED_SONGS) {
-      // Check if popularity data exists
-      const withPop = db.prepare('SELECT COUNT(*) as cnt FROM songs WHERE popularity > 0').get().cnt;
-      if (withPop > 0) {
-        console.log(`[seed] songs table already populated (${songsCount} rows with popularity) — skipping auto-seed`);
-        return;
-      }
-      console.log(`[seed] songs exist but missing popularity scores — forcing re-seed`);
-      db.prepare('DELETE FROM songs').run();
-    }
-    if (songsCount > 0 && songsCount !== EXPECTED_SONGS) {
-      console.log(`[seed] WARNING: songs table has ${songsCount} rows but expected ${EXPECTED_SONGS}`);
-      console.log(`[seed] FORCING RE-SEED to update database...`);
-      db.prepare('DELETE FROM songs').run();
+    // Only auto-seed if songs table is truly empty (never force re-seed on count mismatch)
+    if (songsCount > 0) {
+      console.log(`[seed] songs table already populated (${songsCount} rows) — skipping auto-seed`);
+      return;
     }
     console.log('[seed] songs table is EMPTY — auto-seeding from index.html...');
     const { execSync } = require('child_process');

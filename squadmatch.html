@@ -170,55 +170,40 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
 <!-- SCREEN 2: CREATE -->
 <div id="screen-create" class="screen">
   <div class="si">
-    <div class="badge" style="margin-bottom:12px;">SQUAD LEADER</div>
-    <div class="h1">Start your SquadMatch</div>
-    <div class="sub">You'll host the session and unlock songs your squad can sing together in harmony.</div>
-    
-    <div class="card" style="margin-bottom:14px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);">
-      <div style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:10px;">What Squad Leaders unlock</div>
-      <ul style="list-style:none;padding:0;margin:0;">
-        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
-          <span style="position:absolute;left:0;">•</span> Invite up to 4 friends
-        </li>
-        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
-          <span style="position:absolute;left:0;">•</span> Everyone hums once
-        </li>
-        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
-          <span style="position:absolute;left:0;">•</span> HumMatch analyzes the group's range, timbre, and brightness
-        </li>
-        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
-          <span style="position:absolute;left:0;">•</span> Get song suggestions optimized for harmonic fit
-        </li>
-        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;padding-left:18px;position:relative;">
-          <span style="position:absolute;left:0;">•</span> Track who's hummed, save shared playlists, manage everything in HumMatch HQ
-        </li>
-        <li style="font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.6;padding-left:18px;position:relative;">
-          <span style="position:absolute;left:0;">•</span> Issue up to 5 exclusive 20% discount codes each month
-        </li>
-      </ul>
-      <div style="font-size:0.72rem;color:rgba(255,255,255,0.55);margin-top:12px;font-style:italic;">
-        Discount codes are only available through a Squad Leader.
-      </div>
-    </div>
-    
+    <div class="badge" style="margin-bottom:12px;" id="create-badge">DUET</div>
+    <div class="h1" id="create-title">Start a Duet</div>
+    <div class="sub" id="create-subtitle">Invite 1 friend, both hum, find songs you can sing together.</div>
+
+    <!-- Name Input (FIRST) -->
     <div class="card" style="margin-bottom:18px">
-      <label>Squad name</label>
-      <input type="text" id="squad-name-input" placeholder="Joe's Squad" maxlength="40"/>
-      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Pick a name now — you can change it anytime in HQ.</div>
+      <label>Your Group Name</label>
+      <input type="text" id="squad-name-input" placeholder="Joe's Duet" maxlength="40" onkeyup="updateCreateBtnState()"/>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:6px;">Pick a name now — you can change it anytime.</div>
     </div>
-    <button class="btn btn-primary" id="create-btn" onclick="confirmCreateSquad()">Create & Invite My Squad</button>
-    <div class="helper">Next, we'll generate your squad link to share by text, WhatsApp, email, or social.</div>
+
+    <!-- Invite Inputs (SECOND) -->
+    <div style="margin-bottom:18px">
+      <label style="display:block;font-size:0.75rem;color:var(--muted);margin-bottom:10px;letter-spacing:0.04em;text-transform:uppercase">Invite Friends</label>
+      <div id="invites-container">
+        <div class="invite-row" style="display:flex;gap:8px;margin-bottom:10px;">
+          <input type="text" class="invite-input" placeholder="Phone number or email" style="flex:1;padding:12px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:var(--text);font-size:0.9rem;outline:none;transition:border-color 0.15s" onkeyup="updateCreateBtnState()"/>
+          <button class="invite-remove-btn" style="flex-shrink:0;padding:12px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:var(--muted);font-weight:700;font-size:0.82rem;cursor:pointer;opacity:0;" disabled>✕</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" id="add-invite-btn" onclick="addInviteSlot()" style="margin-top:10px;display:none;">+ Add Another Friend</button>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:10px;">We'll send them your invite link via text or email.</div>
+    </div>
+
+    <!-- Create Button (LAST - disabled until name + at least 1 invite) -->
+    <button class="btn btn-primary" id="create-btn" onclick="confirmCreateSquad()" disabled style="opacity:0.5">Create & Invite</button>
+    <div class="helper">Next, we'll confirm and show sharing options.</div>
+
+    <!-- Success State: Show after squad created -->
     <div id="invite-section" style="display:none;margin-top:24px">
       <div class="divider"></div>
-      <div style="font-size:0.75rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Invite Your First Friend</div>
-      <div style="margin-bottom:16px;">
-        <input type="text" id="invite-contact" placeholder="Phone number or email" style="width:100%;padding:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(168,85,247,0.3);border-radius:12px;color:#fff;font-size:0.95rem;margin-bottom:8px;"/>
-        <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">We'll send them your squad invite link.</div>
-      </div>
-      <button class="btn btn-primary" onclick="sendFirstInvite()" style="margin-bottom:12px;">Send Invite & Continue</button>
+      <div style="font-size:0.75rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Share Your Invite</div>
       <div style="text-align:center;margin:12px 0;">
-        <div style="font-size:0.75rem;color:var(--muted);margin-bottom:8px;">Or share manually:</div>
-        <div class="inv-box" style="margin-bottom:8px;">
+        <div class="inv-box" style="margin-bottom:12px;">
           <span class="inv-url" id="inv-url">…</span>
           <button class="inv-copy" onclick="copyLink()">Copy</button>
         </div>
@@ -229,6 +214,19 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- UPGRADE MODAL (shown when free user tries to add more than 1 invite) -->
+<div id="upgrade-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:var(--bg);border:1px solid rgba(124,58,237,0.2);border-radius:16px;padding:28px 24px;max-width:320px;text-align:center;">
+    <div style="font-size:1.8rem;margin-bottom:12px;">🎵</div>
+    <div style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;">Unlock Full Squads</div>
+    <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:16px;">
+      Upgrade to Premium to invite up to 4 friends and unlock harmonic group song matching.
+    </div>
+    <button onclick="window.location.href='/pricing'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:8px;">Upgrade to Premium</button>
+    <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="width:100%;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--muted);font-size:0.85rem;cursor:pointer;">Maybe later</button>
   </div>
 </div>
 
@@ -512,32 +510,114 @@ function goBack() {
 
 // ── Screen 2: Create ────────────────────────────────────────────────────────
 function loadCreate() {
-  // Check if user is premium (Squad Leader required to create squads)
-  const isPremium = localStorage.getItem('hm_premium') === 'true';
-  if (!isPremium) {
-    // Show explanation page with soft upgrade CTA (don't hard redirect)
-    show('home');
+  // Check if user is logged in (required for all)
+  if (!S.token) {
+    localStorage.setItem('hm_squad_pending_create','1');
+    window.location = '/?signup=1&redirect=' + encodeURIComponent('/squadmatch?create=1');
     return;
   }
-  
+
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  S.isPremium = isPremium;
+
   show('create');
+
+  // Update UI based on premium status
+  const badge = document.getElementById('create-badge');
+  const title = document.getElementById('create-title');
+  const subtitle = document.getElementById('create-subtitle');
+  const addBtn = document.getElementById('add-invite-btn');
+
+  if (isPremium) {
+    badge.textContent = 'SQUAD';
+    title.textContent = 'Create a Squad';
+    subtitle.textContent = 'Invite up to 4 friends, everyone hums, find songs for your whole group.';
+    addBtn.style.display = 'block';
+  } else {
+    badge.textContent = 'DUET';
+    title.textContent = 'Start a Duet';
+    subtitle.textContent = 'Invite 1 friend, both hum, find songs you can sing together.';
+    addBtn.style.display = 'none';
+  }
+
+  // Update name input placeholder
+  document.getElementById('squad-name-input').placeholder = isPremium ? "My Squad" : "My Duet";
+
   try {
     const raw = localStorage.getItem('hm_squad_my_songs');
     if (raw) S.songs = JSON.parse(raw);
     S.voiceType = localStorage.getItem('hm_squad_voice_type') || '';
   } catch(_) {}
+
+  updateCreateBtnState();
+}
+
+function addInviteSlot() {
+  const isPremium = S.isPremium;
+  const container = document.getElementById('invites-container');
+  const currentCount = container.querySelectorAll('.invite-row').length;
+  const maxInvites = isPremium ? 4 : 1;
+
+  if (currentCount >= maxInvites) {
+    if (!isPremium) {
+      document.getElementById('upgrade-modal').style.display = 'flex';
+    } else {
+      toast('Squad full! Maximum 4 invite slots.');
+    }
+    return;
+  }
+
+  const row = document.createElement('div');
+  row.className = 'invite-row';
+  row.style.cssText = 'display:flex;gap:8px;margin-bottom:10px;';
+  row.innerHTML = `
+    <input type="text" class="invite-input" placeholder="Phone number or email" style="flex:1;padding:12px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:var(--text);font-size:0.9rem;outline:none;transition:border-color 0.15s" onkeyup="updateCreateBtnState()"/>
+    <button class="invite-remove-btn" onclick="removeInviteSlot(this)" style="flex-shrink:0;padding:12px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:var(--muted);font-weight:700;font-size:0.82rem;cursor:pointer;">✕</button>
+  `;
+  container.appendChild(row);
+  updateCreateBtnState();
+}
+
+function removeInviteSlot(btn) {
+  btn.closest('.invite-row').remove();
+  updateCreateBtnState();
+}
+
+function getFilledInvites() {
+  const inputs = document.querySelectorAll('.invite-input');
+  return Array.from(inputs).filter(inp => inp.value.trim()).length;
+}
+
+function updateCreateBtnState() {
+  const nameInput = document.getElementById('squad-name-input');
+  const createBtn = document.getElementById('create-btn');
+  const name = nameInput.value.trim();
+  const filledInvites = getFilledInvites();
+
+  const isValid = name.length > 0 && filledInvites > 0;
+  createBtn.disabled = !isValid;
+  createBtn.style.opacity = isValid ? '1' : '0.5';
 }
 
 function confirmCreateSquad() {
   const nm = document.getElementById('squad-name-input').value.trim();
+  const filledInvites = getFilledInvites();
+
   if (!nm) {
-    toast('Please name your squad');
+    toast('Please name your group');
     document.getElementById('squad-name-input').focus();
     return;
   }
-  if (!confirm(`Create squad "${nm}" and generate invite link?`)) {
+
+  if (filledInvites === 0) {
+    toast('Please enter at least 1 friend\'s contact');
     return;
   }
+
+  if (!confirm(`Create "${nm}" and invite ${filledInvites} friend${filledInvites !== 1 ? 's' : ''}?`)) {
+    return;
+  }
+
   createSquad();
 }
 
