@@ -2534,7 +2534,7 @@ SONGS.sort((a, b) => {
 });
 
 function showScreen(id) {
-  document.querySelectorTodas('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
@@ -2600,8 +2600,8 @@ window.toggleInterestPanel = function() {
 };
 
 window.saveInterests = function() {
-  const genres  = [...document.querySelectorTodas('#genre-chips .interest-chip.selected')].map(c => c.dataset.id);
-  const decades = [...document.querySelectorTodas('#decade-chips .interest-chip.selected')].map(c => c.dataset.id);
+  const genres  = [...document.querySelectorAll('#genre-chips .interest-chip.selected')].map(c => c.dataset.id);
+  const decades = [...document.querySelectorAll('#decade-chips .interest-chip.selected')].map(c => c.dataset.id);
   localStorage.setItem('hm_interests', JSON.stringify({ genres, decades }));
   const panel = document.getElementById('interest-selector-panel');
   const btn   = document.getElementById('interest-toggle-btn');
@@ -2624,7 +2624,7 @@ window.skipInterests = function() {
 window.clearInterests = function() {
   localStorage.setItem('hm_interests', JSON.stringify({ genres: [], decades: [] }));
   // Reset chips
-  document.querySelectorTodas('.interest-chip').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.interest-chip').forEach(c => c.classList.remove('selected'));
   const badge = document.getElementById('interest-active-badge');
   if (badge) badge.style.display = 'none';
   // Re-run results with no filter
@@ -3606,7 +3606,7 @@ const fallbackSongs = verifiedSongs
   const ctaLoggedOut = document.getElementById('cta-logged-out');
   const ctaLoggedIn = document.getElementById('cta-logged-in');
   const premiumSoftSell = document.getElementById('premium-soft-sell');
-  const exportFallback = document.querySelectorTodas('.export-btn-fallback');
+  const exportFallback = document.querySelectorAll('.export-btn-fallback');
 
   if (!isLoggedIn) {
     // LOGGED-OUT: Create Account > Compartir > Challenge
@@ -3661,10 +3661,10 @@ const YT_KEY = 'AIzaSyBCLnGsgv3Ocimiu5jlB7lwwn27t_EiWPY'; // restricted to humma
 // ── Filter bar logic ──────────────────────────────────────────────────────────
 function setFilter(filter, el) {
   // Update chip styles
-  document.querySelectorTodas('.filter-chip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
   if (el) el.classList.add('active');
 
-  const songs = document.querySelectorTodas('#your-songs .song-item');
+  const songs = document.querySelectorAll('#your-songs .song-item');
   const titleEl = document.getElementById('songs-section-title');
   const titles = {
     all:      'SONGS YOU CAN CONFIDENTLY SING',
@@ -3737,7 +3737,7 @@ function setFilter(filter, el) {
   }
 
   // Apply show/hide filter to visible songs
-  document.querySelectorTodas('#your-songs .song-item').forEach(item => {
+  document.querySelectorAll('#your-songs .song-item').forEach(item => {
     const tier  = item.dataset.tier || '';
     const tags  = (item.dataset.tags || '').split(',');
     const fam   = item.dataset.familiar === 'true';
@@ -3785,7 +3785,7 @@ function dismissSong(songKey, btn) {
     li.remove();
     // Find next undismissed, unshown song from full pool
     const shown = new Set(
-      Array.from(document.querySelectorTodas('#your-songs .song-item, #stretch-songs .song-item'))
+      Array.from(document.querySelectorAll('#your-songs .song-item, #stretch-songs .song-item'))
         .map(el => el.id.replace('song-',''))
     );
     const pool = window._hmFullPool || [];
@@ -3882,7 +3882,7 @@ function restorePlaylistChecks() {
   const list = loadPlaylist();
   if (!list.length) return;
   const keys = new Set(list.map(s => s.title + '__' + s.artist));
-  document.querySelectorTodas('.hm-song-check').forEach(cb => {
+  document.querySelectorAll('.hm-song-check').forEach(cb => {
     const k = cb.dataset.title + '__' + cb.dataset.artist;
     if (keys.has(k)) cb.checked = true;
   });
@@ -3891,7 +3891,7 @@ function restorePlaylistChecks() {
 
 function clearPlaylist() {
   localStorage.removeItem(HM_PLAYLIST_KEY);
-  document.querySelectorTodas('.hm-song-check').forEach(cb => cb.checked = false);
+  document.querySelectorAll('.hm-song-check').forEach(cb => cb.checked = false);
   updateExportCount();
   showToast('Playlist cleared');
 }
@@ -4080,7 +4080,7 @@ window.addEventListener('beforeinstallprompt', e => {
 window.addEventListener('appinstalled', () => {
   hmTrack("pwa_install");
   deferredInstallPrompt = null;
-  document.querySelectorTodas('[id^="a2hs-"]').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('[id^="a2hs-"]').forEach(el => el.style.display = 'none');
 });
 // Standalone detection, fires on first launch after Add to Inicio Screen (any browser)
 if (_a2hsInstalled) {
