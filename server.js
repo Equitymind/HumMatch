@@ -1308,6 +1308,52 @@ app.get('/api/hummatch/analytics', requireAdmin, (req, res) => {
     GROUP BY ref ORDER BY cnt DESC LIMIT 10
   `).all(sinceDate);
 
+  // Voice Type Distribution
+  const voiceTypes = db.prepare(`
+    SELECT voice_type, COUNT(*) as cnt FROM hums
+    WHERE voice_type IS NOT NULL AND created_at >= ?
+    GROUP BY voice_type ORDER BY cnt DESC
+  `).all(sinceDate);
+
+  // Device Breakdown (parse user_agent)
+  const deviceRows = db.prepare(`
+    SELECT user_agent, COUNT(*) as cnt FROM events
+    WHERE event = 'page_view' AND created_at >= ? AND user_agent IS NOT NULL
+    GROUP BY user_agent
+  `).all(sinceDate);
+  const deviceCounts = { Mobile: 0, Desktop: 0, Tablet: 0 };
+  for (const r of deviceRows) {
+    const ua = (r.user_agent || '').toLowerCase();
+    if (/ipad|tablet/i.test(ua)) deviceCounts.Tablet += r.cnt;
+    else if (/mobile|iphone|android/i.test(ua)) deviceCounts.Mobile += r.cnt;
+    else deviceCounts.Desktop += r.cnt;
+  }
+  const devices = Object.entries(deviceCounts).map(([device, cnt]) => ({ device, cnt })).filter(d => d.cnt > 0);
+
+  // Top Songs Matched
+  const topMatched = db.prepare(`
+    SELECT json_extract(data, '$.song') as song, json_extract(data, '$.artist') as artist, COUNT(*) as cnt
+    FROM events WHERE event = 'song_match' AND created_at >= ?
+    AND json_extract(data, '$.song') IS NOT NULL
+    GROUP BY song, artist ORDER BY cnt DESC LIMIT 10
+  `).all(sinceDate);
+
+  // Top Songs Dismissed
+  const topDismissed = db.prepare(`
+    SELECT json_extract(data, '$.song') as song, json_extract(data, '$.artist') as artist, COUNT(*) as cnt
+    FROM events WHERE event = 'song_dismiss' AND created_at >= ?
+    AND json_extract(data, '$.song') IS NOT NULL
+    GROUP BY song, artist ORDER BY cnt DESC LIMIT 10
+  `).all(sinceDate);
+
+  // Top Songs Exported
+  const topExported = db.prepare(`
+    SELECT json_extract(data, '$.song') as song, json_extract(data, '$.artist') as artist, COUNT(*) as cnt
+    FROM events WHERE event = 'playlist_export' AND created_at >= ?
+    AND json_extract(data, '$.song') IS NOT NULL
+    GROUP BY song, artist ORDER BY cnt DESC LIMIT 10
+  `).all(sinceDate);
+
   res.json({
     totalVisits, enVisits, esVisits,
     totalHums, enHums, esHums,
@@ -1315,7 +1361,8 @@ app.get('/api/hummatch/analytics', requireAdmin, (req, res) => {
     pwaInstalls, monthlyPurchases,
     convRate, avgSessionSec, returnVisitors,
     daily, topSongs, topReferrers,
-    anonHumCount, registeredHummerCount, humSignupConvRate, humConvTrend
+    anonHumCount, registeredHummerCount, humSignupConvRate, humConvTrend,
+    voiceTypes, devices, topMatched, topDismissed, topExported
   });
 });
 
