@@ -2552,6 +2552,44 @@ app.get('/blog/how-hummatch-was-built', (_req, res) => {
 app.get('/blog', (_req, res) => {
   res.sendFile(path.join(__dirname, 'blog', 'index.html'));
 });
+app.get('/blog/introducing-squadmatch', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'blog', 'introducing-squadmatch.html'));
+});
+app.get('/blog/red-flag-playlists', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'blog', 'red-flag-playlists.html'));
+});
+app.get('/blog/squad-leader-best-practices', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'blog', 'squad-leader-best-practices.html'));
+});
+app.get('/blog/vocal-timbre-brightness-science', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'blog', 'vocal-timbre-brightness-science.html'));
+});
+
+// Spanish blog routes
+app.get('/es/blog', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'blog', 'index.html'));
+});
+app.get('/es/blog/find-songs-you-can-nail', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'blog', 'find-songs-you-can-nail.html'));
+});
+app.get('/es/blog/how-hummatch-works', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'blog', 'how-hummatch-works.html'));
+});
+app.get('/es/blog/how-hummatch-was-built', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'blog', 'how-hummatch-was-built.html'));
+});
+app.get('/es/blog/introducing-squadmatch', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'blog', 'introducing-squadmatch.html'));
+});
+app.get('/es/blog/red-flag-playlists', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'blog', 'red-flag-playlists.html'));
+});
+app.get('/es/blog/squad-leader-best-practices', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'blog', 'squad-leader-best-practices.html'));
+});
+app.get('/es/blog/vocal-timbre-brightness-science', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'blog', 'vocal-timbre-brightness-science.html'));
+});
 
 // Dashboard page (requires authentication)
 app.get('/dashboard', (_req, res) => {
