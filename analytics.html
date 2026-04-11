@@ -115,7 +115,7 @@ tr:hover td{background:rgba(124,58,237,0.05)}
     <div class="stat-card"><div class="label">Total Visits</div><div class="value" id="s-visits">-</div><div class="trend" id="t-visits"></div></div>
     <div class="stat-card"><div class="label">Hums Completed</div><div class="value" id="s-hums">-</div><div class="trend" id="t-hums"></div></div>
     <div class="stat-card"><div class="label">Conversion Rate</div><div class="value" id="s-conv">-</div><div class="trend" id="t-conv"></div></div>
-    <div class="stat-card"><div class="label">List Exports</div><div class="value" id="s-sung">-</div><div class="trend" id="t-sung"></div></div>
+    <div class="stat-card"><div class="label">List Exports</div><div class="value" id="s-exports">-</div><div class="trend" id="t-exports"></div></div>
   </div>
 
   <!-- Row 2: Language breakdown -->
@@ -223,7 +223,7 @@ tr:hover td{background:rgba(124,58,237,0.05)}
     </div>
     <div class="table-card">
       <h3>Top Songs Exported</h3>
-      <table><thead><tr><th>#</th><th>Song</th><th>Artist</th><th>Count</th></tr></thead><tbody id="tbl-sung"></tbody></table>
+      <table><thead><tr><th>#</th><th>Song</th><th>Artist</th><th>Count</th></tr></thead><tbody id="tbl-exported"></tbody></table>
     </div>
   </div>
 </div>
@@ -340,7 +340,7 @@ function render(d) {
   document.getElementById('s-visits').textContent = fmt(d.totalVisits);
   document.getElementById('s-hums').textContent = fmt(d.totalHums);
   document.getElementById('s-conv').textContent = d.convRate + '%';
-  document.getElementById('s-sung').textContent = fmt(d.totalSung);
+  document.getElementById('s-exports').textContent = fmt(d.listExports ?? 0);
   // Trend arrows (placeholder, will show real data once prev period API is added)
   function setTrend(id, pct) {
     const el = document.getElementById(id);
@@ -376,7 +376,7 @@ function render(d) {
     document.getElementById('s-duration').textContent = m > 0 ? `${m}m ${s}s` : `${s}s`;
   }
   document.getElementById('s-affiliates').textContent = fmt(d.affiliateCount);
-  const noMatchRate = d.totalHums > 0 ? Math.round((d.noMatch / d.totalHums) * 100) : 0;
+  const noMatchRate = d.totalHums > 0 ? Math.round(((d.noMatch ?? 0) / d.totalHums) * 100) : 0;
   document.getElementById('s-nomatch').textContent = noMatchRate + '%';
 
   // Hum → Signup conversion
@@ -390,10 +390,10 @@ function render(d) {
   renderTable('tbl-matched', d.topMatched, true);
   renderTable('tbl-sung', d.topSung, true);
   renderTable('tbl-dismissed', d.topDismissed, true);
-  renderTable('tbl-sung', d.topSung, true);
+  renderTable('tbl-exported', d.topExported, true);
 
   // Charts
-  renderTrendChart(d.dailyTrend);
+  renderTrendChart(d.dailyTrend || Object.entries(d.daily || {}).map(([day, e]) => ({day, visits: e.page_view||0, hums: e.hum_complete||0, sung: e.song_sung||0})));
   renderVoiceChart(d.voiceTypes);
   renderDeviceChart(d.devices);
   renderFunnelChart(d);
