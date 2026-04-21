@@ -389,6 +389,52 @@
       gap: 10px;
       margin-top: 12px;
     }
+    .roster-card {
+      margin-top: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .roster-title {
+      font-size: 0.82rem;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .roster-list {
+      display: grid;
+      gap: 10px;
+    }
+    .roster-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .roster-name {
+      font-weight: 700;
+      color: #fff;
+    }
+    .roster-role {
+      font-size: 0.86rem;
+      color: var(--text2);
+    }
+    .roster-status {
+      font-size: 0.82rem;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.28);
+      color: #e9d5ff;
+      white-space: nowrap;
+    }
     .mini-metric {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -558,8 +604,17 @@
             <div class="mini-metric"><span>Ready</span><strong id="metricReady">3</strong></div>
             <div class="mini-metric"><span>Waiting</span><strong id="metricWaiting">1</strong></div>
           </div>
+          <div class="roster-card">
+            <div class="roster-title">Session roster</div>
+            <div class="roster-list" id="rideRosterList">
+              <div class="roster-item"><div><div class="roster-name">Joe</div><div class="roster-role">Saved voice • Driver</div></div><span class="roster-status">Ready</span></div>
+              <div class="roster-item"><div><div class="roster-name">Nora</div><div class="roster-role">Lead</div></div><span class="roster-status">Ready</span></div>
+              <div class="roster-item"><div><div class="roster-name">Jasmine</div><div class="roster-role">Harmony</div></div><span class="roster-status">Ready</span></div>
+              <div class="roster-item"><div><div class="roster-name">Bobby</div><div class="roster-role">Either</div></div><span class="roster-status">Next up</span></div>
+            </div>
+          </div>
           <div class="cta-row">
-            <button class="btn btn-secondary" type="button">Next up: Bobby</button>
+            <button class="btn btn-secondary" type="button" id="nextUpButton">Next up: Bobby</button>
             <button class="btn btn-secondary" type="button">Remind next rider</button>
             <button class="btn btn-primary" type="button" onclick="showRideResults()">Show Results</button>
           </div>
@@ -892,6 +947,8 @@
       const joined = document.getElementById('metricJoined');
       const ready = document.getElementById('metricReady');
       const waiting = document.getElementById('metricWaiting');
+      const roster = document.getElementById('rideRosterList');
+      const nextUpButton = document.getElementById('nextUpButton');
       if (!session || !joined || !ready || !waiting) return;
       const joinedCount = Number(session.joinedCount || 0);
       const readyCount = Number(session.readyCount || 0);
@@ -899,6 +956,24 @@
       joined.textContent = String(joinedCount);
       ready.textContent = String(readyCount);
       waiting.textContent = String(Math.max(expected - readyCount, 0));
+
+      if (roster) {
+        const participants = Array.isArray(session.participants) ? session.participants : [];
+        if (participants.length) {
+          roster.innerHTML = participants.map(function(participant, index) {
+            const status = index === participants.length - 1 ? 'Next up' : 'Joined';
+            return '<div class="roster-item"><div><div class="roster-name">' +
+              String(participant.name || 'Guest') +
+              '</div><div class="roster-role">' +
+              String(participant.preference || 'Either') +
+              '</div></div><span class="roster-status">' + status + '</span></div>';
+          }).join('');
+          if (nextUpButton) {
+            const next = participants[participants.length - 1];
+            nextUpButton.textContent = 'Next up: ' + String((next && next.name) || 'Guest');
+          }
+        }
+      }
     }
 
     async function createRideSessionFromForm() {
