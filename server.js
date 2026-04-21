@@ -2782,6 +2782,41 @@ app.listen(PORT, () => {
     console.error('  [diag] users table check error:', e.message);
   }
 });
+const { createSession: createRideSession, joinSession: joinRideSession, endSession: endRideSession, getSession: getRideSession } = require('./src/sessionManager');
+
 app.get('/ride-mode', (req, res) => {
     res.sendFile(path.join(__dirname, 'ride-mode.html'));
+});
+
+app.post('/api/ride-mode/session', (req, res) => {
+  try {
+    const { sessionName, expectedRiderCount, vibePreset } = req.body || {};
+    const session = createRideSession(
+      sessionName || 'Ride Mode Session',
+      Number(expectedRiderCount) || 4,
+      vibePreset || 'Easy Wins'
+    );
+    return res.json({ ok: true, session });
+  } catch (error) {
+    return res.status(500).json({ ok: false, error: error.message });
+  }
+});
+
+app.get('/api/ride-mode/session/:sessionId', (req, res) => {
+  const session = getRideSession(req.params.sessionId);
+  if (!session) return res.status(404).json({ ok: false, error: 'Session not found' });
+  return res.json({ ok: true, session });
+});
+
+app.post('/api/ride-mode/session/:sessionId/join', (req, res) => {
+  const { participantName, preference } = req.body || {};
+  const session = joinRideSession(req.params.sessionId, participantName || 'Guest', preference || 'Either');
+  if (!session) return res.status(404).json({ ok: false, error: 'Session not found or inactive' });
+  return res.json({ ok: true, session });
+});
+
+app.post('/api/ride-mode/session/:sessionId/end', (req, res) => {
+  const session = endRideSession(req.params.sessionId);
+  if (!session) return res.status(404).json({ ok: false, error: 'Session not found' });
+  return res.json({ ok: true, session });
 });

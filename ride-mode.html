@@ -522,7 +522,7 @@
             </div>
           </div>
           <div class="cta-row">
-            <button class="btn btn-primary" type="button" onclick="setRideModeState('join')">Start Session</button>
+            <button class="btn btn-primary" type="button" onclick="createRideSessionFromForm()">Start Session</button>
             <button class="btn btn-secondary" type="button">Show Large QR</button>
           </div>
         </div>
@@ -545,7 +545,7 @@
             </div>
           </div>
           <div class="cta-row">
-            <button class="btn btn-primary" type="button" onclick="simulateJoin()">Join Session</button>
+            <button class="btn btn-primary" type="button" onclick="joinRideSessionFromForm()">Join Session</button>
             <button class="btn btn-secondary" type="button" onclick="setRideModeState('progress')">Skip to waiting room</button>
           </div>
         </div>
@@ -561,7 +561,7 @@
           <div class="cta-row">
             <button class="btn btn-secondary" type="button">Next up: Bobby</button>
             <button class="btn btn-secondary" type="button">Remind next rider</button>
-            <button class="btn btn-primary" type="button" onclick="setRideModeState('results')">Show Results</button>
+            <button class="btn btn-primary" type="button" onclick="showRideResults()">Show Results</button>
           </div>
         </div>
 
@@ -886,19 +886,72 @@
       }
     }
 
-    function simulateJoin() {
+    let currentRideSessionId = null;
+
+    function updateRideMetrics(session) {
       const joined = document.getElementById('metricJoined');
       const ready = document.getElementById('metricReady');
       const waiting = document.getElementById('metricWaiting');
-      if (joined && ready && waiting) {
-        joined.textContent = '5';
-        ready.textContent = '4';
-        waiting.textContent = '1';
+      if (!session || !joined || !ready || !waiting) return;
+      const joinedCount = Number(session.joinedCount || 0);
+      const readyCount = Number(session.readyCount || 0);
+      const expected = Number(session.expectedCount || joinedCount || 0);
+      joined.textContent = String(joinedCount);
+      ready.textContent = String(readyCount);
+      waiting.textContent = String(Math.max(expected - readyCount, 0));
+    }
+
+    async function createRideSessionFromForm() {
+      const sessionName = document.getElementById('rideSessionName')?.value || 'Ride Mode Session';
+      const expectedRiderCount = (document.getElementById('rideRiderCount')?.value || '4 riders').split(' ')[0];
+      const vibePreset = document.getElementById('rideVibe')?.value || 'Easy Wins';
+
+      const response = await fetch('/api/ride-mode/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionName, expectedRiderCount, vibePreset })
+      });
+      const data = await response.json();
+      if (!data.ok || !data.session) return alert('Could not start Ride Mode session.');
+      currentRideSessionId = data.session.id;
+      updateRideMetrics(data.session);
+      setRideModeState('join');
+    }
+
+    async function joinRideSessionFromForm() {
+      if (!currentRideSessionId) {
+        return alert('Start a Ride Mode session first.');
       }
+      const participantName = document.getElementById('joinName')?.value || 'Guest';
+      const preference = document.getElementById('joinPref')?.value || 'Either';
+      const response = await fetch('/api/ride-mode/session/' + currentRideSessionId + '/join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ participantName, preference })
+      });
+      const data = await response.json();
+      if (!data.ok || !data.session) return alert('Could not join session.');
+      updateRideMetrics(data.session);
       setRideModeState('progress');
     }
 
-    function resetRideModeDemo() {
+    async function showRideResults() {
+      if (!currentRideSessionId) {
+        return setRideModeState('results');
+      }
+      const response = await fetch('/api/ride-mode/session/' + currentRideSessionId);
+      const data = await response.json();
+      if (data.ok && data.session) updateRideMetrics(data.session);
+      setRideModeState('results');
+    }
+
+    async function resetRideModeDemo() {
+      if (currentRideSessionId) {
+        try {
+          await fetch('/api/ride-mode/session/' + currentRideSessionId + '/end', { method: 'POST' });
+        } catch (_) {}
+      }
+      currentRideSessionId = null;
       const joined = document.getElementById('metricJoined');
       const ready = document.getElementById('metricReady');
       const waiting = document.getElementById('metricWaiting');
