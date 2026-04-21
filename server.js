@@ -2782,3 +2782,6 @@ app.listen(PORT, () => {
     console.error('  [diag] users table check error:', e.message);
   }
 });
+app.get('/ride-mode', (req, res) => {
+    res.sendFile(path.join(__dirname, 'ride-mode.html'));
+});

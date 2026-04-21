@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Introducing HumMatch Ride Mode | HumMatch Blog</title>
+  <meta name="description" content="Introducing HumMatch Ride Mode, a new way for rideshare drivers and passengers to discover what songs a car can actually sing together." />
+  <meta property="og:title" content="Introducing HumMatch Ride Mode" />
+  <meta property="og:description" content="A new way for rideshare drivers and passengers to find the best songs for the car, assign the right singers, and turn one fun moment into a shared HumMatch experience." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://hummatch.me/blog/introducing-ride-mode" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://hummatch.me/blog/introducing-ride-mode" />
+  <meta name="theme-color" content="#a855f7" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #08060F;
+      --surface: #12101A;
+      --surface2: #1C1926;
+      --accent: #A855F7;
+      --accent2: #7C3AED;
+      --text1: #FFFFFF;
+      --text2: rgba(255,255,255,0.7);
+      --text3: rgba(255,255,255,0.45);
+    }
+    html, body { background: var(--bg); color: var(--text1); font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; line-height: 1.6; }
+    body { padding: 0; }
+    nav { display: flex; align-items: center; justify-content: space-between; max-width: 720px; margin: 0 auto; padding: 20px 20px 0; }
+    .nav-logo { text-decoration: none; font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-cta { font-size: 0.82rem; font-weight: 700; color: var(--accent); text-decoration: none; border: 1px solid rgba(168,85,247,0.3); padding: 7px 18px; border-radius: 20px; transition: background 0.2s; }
+    .nav-cta:hover { background: rgba(168,85,247,0.1); }
+    .blog-container { max-width: 720px; margin: 0 auto; padding: 40px 20px; }
+    .blog-header { margin-bottom: 40px; }
+    .back-link { display: inline-block; color: var(--text3); text-decoration: none; font-size: 0.875rem; margin-bottom: 24px; font-weight: 600; }
+    .back-link:hover { color: var(--accent); }
+    .hero-emoji { font-size: 3.5rem; display: block; margin-bottom: 20px; }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(168,85,247,0.25), 0 0 4px rgba(168,85,247,0.15);
+    }
+    h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text3);
+      font-size: 0.875rem;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .hero-meta .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text2);
+      font-weight: 600;
+    }
+    .hero-meta .author-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 900; color: white;
+    }
+    .blog-content { color: var(--text2); font-size: 1.05rem; line-height: 1.8; }
+    .blog-content p { margin-bottom: 1.5em; }
+    .blog-content h2 { font-size: 1.8rem; font-weight: 800; color: var(--text1); margin-top: 2em; margin-bottom: 1em; }
+    .blog-content ul, .blog-content ol { margin: 0 0 1.5em 1.5em; }
+    .blog-content li { margin-bottom: 0.7em; }
+    .quote { background: var(--surface2); border-left: 4px solid var(--accent); padding: 16px; border-radius: 10px; margin-bottom: 22px; color: var(--text1); }
+    .cta-section { background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(124,58,237,0.1)); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 30px; text-align: center; margin-top: 3em; }
+    .cta-section h2 { font-size: 1.6rem; margin-top: 0; margin-bottom: 0.8em; }
+    .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; padding: 14px 36px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 1rem; margin-top: 12px; transition: transform 0.2s; }
+    .cta-btn:hover { transform: scale(1.05); }
+    .bottom-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      margin-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--text3);
+      font-size: 0.85rem;
+    }
+    .bottom-meta-arrow {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .bottom-meta-arrow:hover { transform: translateX(4px); }
+    footer { text-align: center; padding: 40px 20px 60px; color: var(--text3); font-size: 0.9rem; }
+    footer a { color: var(--text2); text-decoration: none; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">HumMatch</a>
+  <a class="nav-cta" href="/">Try It Free</a>
+</nav>
+<div class="blog-container">
+  <div class="blog-header">
+    <a href="/blog" class="back-link">← Blog</a>
+    <span class="hero-emoji">🚗</span>
+    <span class="hero-tag">Product Update</span>
+    <h1>Introducing HumMatch Ride Mode</h1>
+    <div class="hero-meta">
+      <div class="author">
+        <div class="author-dot">HM</div>
+        The HumMatch Team
+      </div>
+      <span>April 21, 2026</span>
+      <span>5 min read</span>
+    </div>
+  </div>
+
+  <div class="blog-content">
+    <p>HumMatch started with a simple idea. Most people do not know which songs actually fit their voice. Now we are bringing that same intelligence into one of the most social places music already lives: the ride.</p>
+
+    <p>Today we are introducing <strong>HumMatch Ride Mode</strong>.</p>
+
+    <div class="quote">HumMatch Ride Mode helps everyone in the ride figure out what to sing, who should sing it, and which songs this car can actually pull off together.</div>
+
+    <h2>What Ride Mode is</h2>
+    <p>Ride Mode is not a karaoke player. It does not replace Spotify, Apple Music, YouTube, or the car stereo.</p>
+    <p>Ride Mode is the intelligence layer for in-car singalongs.</p>
+    <p>It helps answer one simple question:</p>
+    <div class="quote">What should this car sing next?</div>
+
+    <h2>How it works</h2>
+    <ol>
+      <li>A driver starts a Ride Mode session.</li>
+      <li>The app shows a large QR code for passengers to scan.</li>
+      <li>Passengers join the ride session on their phones.</li>
+      <li>Each person hums a short calibration sequence or uses a saved voice profile.</li>
+      <li>HumMatch analyzes the voices in the car and recommends songs that fit the group.</li>
+      <li>The group sees who should take lead, who fits harmony, and which songs are easiest to pull off together.</li>
+      <li>When the group chooses a song, Ride Mode hands off to YouTube karaoke results so everyone can get lyrics fast.</li>
+    </ol>
+
+    <h2>Why this matters</h2>
+    <p>Most social music products start with a song and hope the people can keep up. HumMatch starts with the people.</p>
+    <p>That means Ride Mode can do things regular music apps do not do well:</p>
+    <ul>
+      <li>Recommend songs that fit the actual vocal ranges in the car</li>
+      <li>Suggest who should take lead</li>
+      <li>Suggest duet pairings</li>
+      <li>Highlight harmony-friendly songs</li>
+      <li>Point the group toward easy wins instead of songs that fall apart halfway through</li>
+    </ul>
+
+    <h2>Built for rideshare, useful everywhere</h2>
+    <p>Ride Mode is especially exciting for rideshare because it creates a natural real-world distribution channel.</p>
+    <p>A rideshare driver already has what most products spend heavily to acquire:</p>
+    <ul>
+      <li>constant passenger traffic</li>
+      <li>a shared environment</li>
+      <li>music already playing</li>
+      <li>a social moment waiting to happen</li>
+    </ul>
+    <p>Instead of hard-selling an app, the driver can simply say:</p>
+    <div class="quote">What should this car sing next? Scan this and HumMatch will figure it out.</div>
+
+    <h2>Why drivers matter</h2>
+    <p>In Ride Mode, the driver is not the karaoke operator.</p>
+    <p>The driver is the session starter, the QR distribution point, the saved-voice anchor, and the affiliate origin for the experience.</p>
+    <p>Passengers become the participants, the social sharers, the future Squad Leaders, and the likely upgrade candidates.</p>
+    <p>That gives HumMatch something powerful: a live demo that happens in the exact moment people are already singing.</p>
+
+    <h2>What you will see in Ride Mode</h2>
+    <p>The first version of Ride Mode focuses on the pieces that matter most in a short real-world ride.</p>
+    <ul>
+      <li><strong>Fast session start</strong> so the driver can get the experience going quickly</li>
+      <li><strong>QR join flow</strong> so passengers can join without friction</li>
+      <li><strong>Sequential hum capture</strong> to keep the flow organized</li>
+      <li><strong>Best For This Car</strong> recommendations for group fit</li>
+      <li><strong>Best Duets</strong> for strong pairs</li>
+      <li><strong>Easy Wins</strong> for crowd-pleasing songs with a high chance of sounding good</li>
+      <li><strong>Harmony Picks</strong> for stronger arrangement potential</li>
+      <li><strong>YouTube karaoke handoff</strong> so lyrics are easy to access on the spot</li>
+    </ul>
+
+    <h2>Where this goes next</h2>
+    <p>Ride Mode is the rideshare wedge. It can lead into much more over time.</p>
+    <ul>
+      <li>party buses</li>
+      <li>limos</li>
+      <li>shuttles</li>
+      <li>karaoke vans</li>
+      <li>road trip sessions with friends and family</li>
+      <li>event transportation experiences</li>
+      <li>future OEM and infotainment partnerships</li>
+    </ul>
+    <p>But the reason we like this launch path is simple. We do not need to wait for a car company to approve anything. We can start with real humans, real rides, and real singing.</p>
+
+    <h2>The bigger HumMatch vision</h2>
+    <p>HumMatch has always been bigger than karaoke. It is about helping groups of people understand what they can sound like together.</p>
+    <p>Ride Mode brings that vision into one of the most immediate and memorable places possible.</p>
+    <div class="quote">HumMatch Ride Mode turns any rideshare car into a live singalong intelligence session.</div>
+
+    <div class="cta-section">
+      <h2>Coming soon</h2>
+      <p>We are actively building HumMatch Ride Mode now. If you are a rideshare driver, party bus operator, or hospitality partner who wants early access, keep an eye on HumMatch as we roll this out.</p>
+      <a class="cta-btn" href="/">Try HumMatch</a>
+    </div>
+
+    <div class="bottom-meta">
+      <span>Written by The HumMatch Team</span>
+      <a class="bottom-meta-arrow" href="/blog">All Posts →</a>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a> &nbsp;|&nbsp; <a href="/blog">Blog</a></p>
+</footer>
+</body>
+</html>

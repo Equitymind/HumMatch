@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>HumMatch Ride Mode</title>
+  <meta name="description" content="HumMatch Ride Mode helps everyone in the ride figure out what to sing, who should sing it, and which songs this car can actually pull off together." />
+  <meta name="theme-color" content="#a855f7" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #08060F;
+      --surface: #12101A;
+      --surface2: #1C1926;
+      --accent: #A855F7;
+      --accent2: #7C3AED;
+      --pink: #EC4899;
+      --text1: #FFFFFF;
+      --text2: rgba(255,255,255,0.72);
+      --text3: rgba(255,255,255,0.42);
+    }
+    html, body { background: var(--bg); color: var(--text1); font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; line-height: 1.6; }
+    body { padding: 0; }
+    nav { display: flex; align-items: center; justify-content: space-between; max-width: 1040px; margin: 0 auto; padding: 20px 20px 0; }
+    .nav-logo { text-decoration: none; font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .nav-links a { color: var(--text3); text-decoration: none; font-size: 0.9rem; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 20px 72px; }
+    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: stretch; }
+    .hero-card, .panel { background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 28px; }
+    .eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); border-radius: 999px; padding: 6px 12px; margin-bottom: 16px; }
+    h1 { font-size: clamp(2.2rem, 4vw, 4.1rem); line-height: 1.06; margin-bottom: 16px; }
+    .subhead { font-size: 1.1rem; color: var(--text2); max-width: 700px; margin-bottom: 24px; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 20px; border-radius: 999px; text-decoration: none; font-weight: 800; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--pink)); color: white; }
+    .btn-secondary { border: 1px solid rgba(255,255,255,0.12); color: var(--text1); background: rgba(255,255,255,0.02); }
+    .qr-card { display: flex; flex-direction: column; justify-content: space-between; }
+    .qr-box { aspect-ratio: 1 / 1; width: 100%; border-radius: 22px; background: linear-gradient(135deg, rgba(168,85,247,0.14), rgba(236,72,153,0.14)); border: 1px solid rgba(168,85,247,0.28); display: flex; align-items: center; justify-content: center; color: var(--text1); font-weight: 900; font-size: 1.1rem; text-align: center; padding: 20px; margin-bottom: 18px; }
+    .section { margin-top: 28px; }
+    .section h2 { font-size: 1.7rem; margin-bottom: 14px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .mini-card { background: var(--surface2); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 20px; }
+    .mini-card h3 { font-size: 1rem; margin-bottom: 8px; }
+    .mini-card p, .panel p, .panel li { color: var(--text2); }
+    .quote { background: rgba(168,85,247,0.08); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px; color: var(--text1); margin-top: 12px; }
+    ul, ol { margin-left: 20px; }
+    li { margin-bottom: 8px; }
+    footer { text-align: center; padding: 20px 20px 60px; color: var(--text3); font-size: 0.88rem; }
+    footer a { color: var(--text2); text-decoration: none; }
+    @media (max-width: 860px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="/">HumMatch</a>
+    <div class="nav-links">
+      <a href="/squadmatch">SquadMatch</a>
+      <a href="/ride-mode" style="color:#fff;font-weight:700;">Ride Mode</a>
+      <a href="/blog">Blog</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">New Product Surface</div>
+        <h1>HumMatch Ride Mode</h1>
+        <p class="subhead">HumMatch Ride Mode helps everyone in the ride figure out what to sing, who should sing it, and which songs this car can actually pull off together.</p>
+        <p class="subhead">HumMatch is not the karaoke player. It is the intelligence layer for in-car singalongs.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/">Try HumMatch</a>
+          <a class="btn btn-secondary" href="/blog/introducing-ride-mode">Read the Ride Mode blog post</a>
+        </div>
+      </div>
+      <div class="hero-card qr-card">
+        <div>
+          <div class="qr-box">What should this car sing next?<br /><br />Scan to join HumMatch.</div>
+          <p style="color:var(--text2);">Built for rideshare, hosted rides, shuttles, party buses, and any social singalong moment that starts in motion.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>How Ride Mode works</h2>
+      <div class="grid">
+        <div class="mini-card">
+          <h3>1. Start the ride session</h3>
+          <p>A driver or host opens Ride Mode and shows a large QR code for the car.</p>
+        </div>
+        <div class="mini-card">
+          <h3>2. Passengers join</h3>
+          <p>Each rider scans, joins on their phone, and completes a quick hum or uses a saved voice profile.</p>
+        </div>
+        <div class="mini-card">
+          <h3>3. Get the best songs for the car</h3>
+          <p>HumMatch recommends the best songs, duet pairings, harmony picks, and easy wins for the group.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <h2>Why this matters</h2>
+        <p>Most apps start with the song and hope the people can keep up. HumMatch starts with the people in the car and works backward from their voices.</p>
+        <div class="quote">That means better lead picks, better duet suggestions, better harmony fits, and far fewer songs that collapse halfway through.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <h2>Why rideshare is the right wedge</h2>
+        <ul>
+          <li>Drivers already create repeated social music moments</li>
+          <li>Passengers are in one shared environment with low friction</li>
+          <li>A simple QR code turns the ride into a live HumMatch demo</li>
+          <li>The driver can become the affiliate origin for future upgrades</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <h2>What happens next</h2>
+        <p>Ride Mode is being introduced in stages. The first stage makes the product visible on-site and explains the concept clearly. Later stages will add session flow, passenger sequencing, results tabs, affiliate attribution, and driver dashboards.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/blog/introducing-ride-mode">See how Ride Mode works</a>
+          <a class="btn btn-secondary" href="/squadmatch">Explore SquadMatch</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a> &nbsp;|&nbsp; <a href="/blog">Blog</a></p>
+  </footer>
+</body>
+</html>

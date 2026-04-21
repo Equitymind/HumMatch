@@ -1,9 +1,29 @@
 # HumMatch Affiliate System - Technical Spec
-## Automated KJ/Bar Sign-Up & QR Code Generation
+## Automated KJ/Bar Sign-Up, Rideshare Partner Sign-Up & QR Code Generation
 
 **Created:** April 4, 2026  
 **Priority:** URGENT (needed for TikTok launch)  
 **Goal:** Zero-friction affiliate signup → instant custom QR code delivery
+
+## New Partner Category: Rideshare / Ride Mode Partners
+Ride Mode extends the affiliate system to rideshare drivers and similar mobile hosts.
+
+### Core rules
+- rideshare drivers should be able to become affiliates with minimal friction
+- each driver should have a unique affiliate identity and QR flow
+- Ride Mode scans/joins should preserve affiliate attribution to the originating driver
+- riders referred from a Ride Mode session may receive an automatic 10% discount on upgrade offers
+- originating driver may receive 20% affiliate commission on attributed monthly/annual paid conversions
+
+### Dashboard implications
+Ride Mode affiliate dashboards should eventually track:
+- rides started
+- scans
+- joined sessions
+- completed hum sessions
+- new accounts
+- paid upgrades
+- commissions earned
 
 ---
 
