@@ -313,6 +313,102 @@
     .youtube { border-color: rgba(239,68,68,0.28); color: #fecaca; }
     .panel ul { margin-left: 20px; }
     .panel li { margin-bottom: 8px; }
+    .flow-toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+    .flow-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: var(--text2);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .flow-pill.active {
+      background: linear-gradient(135deg, rgba(168,85,247,0.22), rgba(236,72,153,0.18));
+      border-color: rgba(168,85,247,0.35);
+      color: #fff;
+    }
+    .proto-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .proto-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 20px;
+    }
+    .proto-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .proto-copy {
+      color: var(--text2);
+      font-size: 0.96rem;
+      margin-bottom: 16px;
+    }
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .field-label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .field-input, .field-select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      font: inherit;
+    }
+    .field-input::placeholder { color: rgba(255,255,255,0.35); }
+    .mini-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .mini-metric {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+    .mini-metric span {
+      display: block;
+      color: var(--text3);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .mini-metric strong {
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    .proto-hidden { display: none; }
     footer {
       text-align: center;
       padding: 24px 20px 60px;
@@ -321,7 +417,7 @@
     }
     footer a { color: var(--text2); text-decoration: none; }
     @media (max-width: 980px) {
-      .hero, .step-grid, .song-meta { grid-template-columns: 1fr; }
+      .hero, .step-grid, .song-meta, .proto-grid, .field-grid, .mini-metrics { grid-template-columns: 1fr; }
       .song-top { align-items: flex-start; }
     }
   </style>
@@ -340,7 +436,7 @@
     <section class="hero">
       <div class="hero-card driver-board">
         <div class="driver-status">
-          <span class="status-badge">● Session active • Friday Night Drive</span>
+          <span class="status-badge" id="rideStatusBadge">● Session setup • Friday Night Drive</span>
           <button class="btn btn-danger">End Session</button>
         </div>
         <div>
@@ -355,8 +451,8 @@
       </div>
 
       <div class="hero-card qr-card">
-        <div class="qr-box">What should this car sing next?<br /><br />SCAN TO JOIN HUMMATCH</div>
-        <p class="qr-caption">Big QR. Big type. Fast scan for the back seat.</p>
+        <div class="qr-box" id="rideQrBox">What should this car sing next?<br /><br />SCAN TO JOIN HUMMATCH</div>
+        <p class="qr-caption" id="rideQrCaption">Big QR. Big type. Fast scan for the back seat.</p>
       </div>
     </section>
 
@@ -383,8 +479,111 @@
     </section>
 
     <section class="section">
-      <h2>Ride Mode flow shell</h2>
-      <p class="section-lead">This is the next practical layer after the landing page. It shows what a believable Ride Mode session looks like from start to join to waiting room to results, without pretending the full backend session system is already finished.</p>
+      <h2>Ride Mode interactive prototype</h2>
+      <p class="section-lead">Use the controls below to step through a believable Ride Mode session. This is still front-end prototype logic, but now you can move through setup, join, progress, and results as one integrated experience.</p>
+
+      <div class="flow-toolbar">
+        <button class="flow-pill active" data-state-btn="setup" type="button">1. Setup</button>
+        <button class="flow-pill" data-state-btn="join" type="button">2. Join</button>
+        <button class="flow-pill" data-state-btn="progress" type="button">3. Progress</button>
+        <button class="flow-pill" data-state-btn="results" type="button">4. Results</button>
+      </div>
+
+      <div class="proto-grid">
+        <div class="proto-card" data-flow-state="setup">
+          <div class="proto-title">Start Ride Session</div>
+          <p class="proto-copy">This is the driver-first setup step. Create the ride, choose the vibe, and get the QR ready for the car.</p>
+          <div class="field-grid">
+            <div>
+              <label class="field-label" for="rideSessionName">Session name</label>
+              <input class="field-input" id="rideSessionName" type="text" value="Friday Night Drive" />
+            </div>
+            <div>
+              <label class="field-label" for="rideRiderCount">Riders expected</label>
+              <select class="field-select" id="rideRiderCount">
+                <option>2 riders</option>
+                <option selected>4 riders</option>
+                <option>5 riders</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="rideVibe">Vibe preset</label>
+              <select class="field-select" id="rideVibe">
+                <option>Sing Along</option>
+                <option selected>Easy Wins</option>
+                <option>Duets</option>
+                <option>Harmony Picks</option>
+                <option>Road Trip Classics</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label">Driver voice</label>
+              <div class="field-input">Use saved voice profile</div>
+            </div>
+          </div>
+          <div class="cta-row">
+            <button class="btn btn-primary" type="button" onclick="setRideModeState('join')">Start Session</button>
+            <button class="btn btn-secondary" type="button">Show Large QR</button>
+          </div>
+        </div>
+
+        <div class="proto-card proto-hidden" data-flow-state="join">
+          <div class="proto-title">Join Ride Session</div>
+          <p class="proto-copy">Passengers scan and join in seconds. This keeps the flow simple enough for a real ride.</p>
+          <div class="field-grid">
+            <div>
+              <label class="field-label" for="joinName">First name</label>
+              <input class="field-input" id="joinName" type="text" value="Jasmine" />
+            </div>
+            <div>
+              <label class="field-label" for="joinPref">Vocal preference</label>
+              <select class="field-select" id="joinPref">
+                <option>Lead</option>
+                <option selected>Harmony</option>
+                <option>Either</option>
+              </select>
+            </div>
+          </div>
+          <div class="cta-row">
+            <button class="btn btn-primary" type="button" onclick="simulateJoin()">Join Session</button>
+            <button class="btn btn-secondary" type="button" onclick="setRideModeState('progress')">Skip to waiting room</button>
+          </div>
+        </div>
+
+        <div class="proto-card proto-hidden" data-flow-state="progress">
+          <div class="proto-title">Waiting Room / Progress</div>
+          <p class="proto-copy">The driver can see who joined, who finished humming, and whose turn is next. End Session stays available the whole time.</p>
+          <div class="mini-metrics">
+            <div class="mini-metric"><span>Joined</span><strong id="metricJoined">4</strong></div>
+            <div class="mini-metric"><span>Ready</span><strong id="metricReady">3</strong></div>
+            <div class="mini-metric"><span>Waiting</span><strong id="metricWaiting">1</strong></div>
+          </div>
+          <div class="cta-row">
+            <button class="btn btn-secondary" type="button">Next up: Bobby</button>
+            <button class="btn btn-secondary" type="button">Remind next rider</button>
+            <button class="btn btn-primary" type="button" onclick="setRideModeState('results')">Show Results</button>
+          </div>
+        </div>
+
+        <div class="proto-card proto-hidden" data-flow-state="results">
+          <div class="proto-title">Results Ready</div>
+          <p class="proto-copy">When everyone is done, the session resolves into the large-format Top 5 display below. The driver chooses the final song and playback handoff.</p>
+          <div class="cta-row">
+            <button class="btn btn-primary" type="button" onclick="document.getElementById('top5-results').scrollIntoView({behavior:'smooth'})">Jump to Top 5</button>
+            <button class="btn btn-danger" type="button" onclick="resetRideModeDemo()">End Session</button>
+          </div>
+        </div>
+
+        <div class="proto-card">
+          <div class="proto-title">Driver display notes</div>
+          <p class="proto-copy">For MVP, the driver phone is the main screen. Passenger sync can come later. That keeps the build reliable while still making the experience feel live and social.</p>
+          <div class="mini-metrics">
+            <div class="mini-metric"><span>Main display</span><strong>Driver</strong></div>
+            <div class="mini-metric"><span>Default results</span><strong>Top 5</strong></div>
+            <div class="mini-metric"><span>Playback owner</span><strong>Driver</strong></div>
+          </div>
+        </div>
+      </div>
 
       <div class="large-results">
         <article class="song-card">
@@ -507,6 +706,7 @@
             </div>
           </div>
           <div class="handoff-row">
+            <span class="handoff-btn" style="border-color:rgba(245,158,11,0.28);color:#fde68a;">Driver selects final song</span>
             <a class="handoff-btn spotify" href="https://open.spotify.com/search/Sweet%20Caroline%20Neil%20Diamond" target="_blank" rel="noopener">Play in Spotify</a>
             <a class="handoff-btn apple" href="https://music.apple.com/us/search?term=Sweet%20Caroline%20Neil%20Diamond" target="_blank" rel="noopener">Play in Apple Music</a>
             <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=Sweet+Caroline+karaoke" target="_blank" rel="noopener">Karaoke Lyrics</a>
@@ -652,5 +852,71 @@
   <footer>
     <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a> &nbsp;|&nbsp; <a href="/blog">Blog</a></p>
   </footer>
+
+  <script>
+    function setRideModeState(state) {
+      document.querySelectorAll('[data-flow-state]').forEach(function(el) {
+        el.classList.toggle('proto-hidden', el.getAttribute('data-flow-state') !== state);
+      });
+      document.querySelectorAll('[data-state-btn]').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-state-btn') === state);
+      });
+
+      var badge = document.getElementById('rideStatusBadge');
+      var qrBox = document.getElementById('rideQrBox');
+      var qrCaption = document.getElementById('rideQrCaption');
+      if (badge && qrBox && qrCaption) {
+        if (state === 'setup') {
+          badge.textContent = '● Session setup • Friday Night Drive';
+          qrBox.innerHTML = 'What should this car sing next?<br /><br />SCAN TO JOIN HUMMATCH';
+          qrCaption.textContent = 'Big QR. Big type. Fast scan for the back seat.';
+        } else if (state === 'join') {
+          badge.textContent = '● Riders joining • Friday Night Drive';
+          qrBox.innerHTML = 'JOIN NOW<br /><br />4 riders expected';
+          qrCaption.textContent = 'Passengers scan and join in seconds.';
+        } else if (state === 'progress') {
+          badge.textContent = '● Session in progress • Bobby is next';
+          qrBox.innerHTML = '4 JOINED<br /><br />3 READY • 1 WAITING';
+          qrCaption.textContent = 'Keep the car aligned while the last rider finishes.';
+        } else if (state === 'results') {
+          badge.textContent = '● Results ready • Top 5 songs live';
+          qrBox.innerHTML = 'TOP 5 READY<br /><br />DRIVER PICKS THE SONG';
+          qrCaption.textContent = 'The driver now chooses playback in Spotify, Apple Music, or karaoke lyrics.';
+        }
+      }
+    }
+
+    function simulateJoin() {
+      const joined = document.getElementById('metricJoined');
+      const ready = document.getElementById('metricReady');
+      const waiting = document.getElementById('metricWaiting');
+      if (joined && ready && waiting) {
+        joined.textContent = '5';
+        ready.textContent = '4';
+        waiting.textContent = '1';
+      }
+      setRideModeState('progress');
+    }
+
+    function resetRideModeDemo() {
+      const joined = document.getElementById('metricJoined');
+      const ready = document.getElementById('metricReady');
+      const waiting = document.getElementById('metricWaiting');
+      if (joined && ready && waiting) {
+        joined.textContent = '4';
+        ready.textContent = '3';
+        waiting.textContent = '1';
+      }
+      setRideModeState('setup');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.btn-danger').forEach(function(btn) {
+      btn.addEventListener('click', function(event) {
+        event.preventDefault();
+        resetRideModeDemo();
+      });
+    });
+  </script>
 </body>
 </html>
