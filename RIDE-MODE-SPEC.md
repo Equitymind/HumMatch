@@ -98,9 +98,15 @@ Driver screen shows:
 - joined count
 - ready count
 - waiting count
+- whose turn is next
+- a clear **End Session** button for when riders leave and the next ride begins
+
 Passenger screens show:
 - whose turn it is
 - when results appear
+
+### Driver control requirement
+The driver should be able to explicitly end the current Ride Mode session so the next ride starts cleanly without confusion or accidental carryover.
 
 ### 6. Results
 Tabs:
@@ -110,6 +116,9 @@ Tabs:
 - Harmony Picks
 - Road Trip Songs
 
+#### MVP display priority
+For Ride Mode, default to a **top 5 songs** presentation in a much larger format than standard HumMatch so the car can see the results clearly on the driver's device.
+
 Song cards should show:
 - overall fit
 - who should take lead
@@ -118,9 +127,38 @@ Song cards should show:
 - key shift suggestions when available
 - action button to YouTube karaoke search
 
+#### Large-format driver view
+The driver's phone should act as the main display for MVP.
+That view should emphasize:
+- very large QR code during join phase
+- very large song recommendation text in results
+- top 5 songs only by default
+- clear playback handoff buttons
+- clear session controls including **End Session**
+
+#### Future synced group view
+Longer term, all joined passengers should be able to see the same matched playlist/session view on their own phones during an active ride session.
+That synced group view is a later enhancement, not a hard MVP dependency.
+
 ### 7. Playback handoff
 Ride Mode does not play songs.
-Ride Mode hands off to YouTube karaoke results for lyrics and singalong support.
+The **driver should be the one who selects the final song** for the car and loads playback in the music service already running for the ride.
+
+#### MVP handoff targets
+- **Spotify**
+- **Apple Music**
+- **YouTube karaoke results**
+
+#### Product behavior
+- HumMatch recommends the best group songs
+- the driver chooses the song
+- Ride Mode hands off to the driver's playback service of choice
+- YouTube remains the lyrics/karaoke fallback path when needed
+
+#### Important implementation note
+For MVP, prefer **simple app/open/search handoff** over deep playlist integration.
+Do not assume playlist write access, partner status, or advanced API permissions are available.
+The goal is to let the driver quickly open the recommended song in Spotify or Apple Music, or fall back to YouTube karaoke.
 
 ## Affiliate Layer
 ### Rideshare drivers should be automatic affiliates
@@ -193,3 +231,9 @@ Scan to join HumMatch.
 ## Immediate Build Direction
 Build **Ride Mode MVP first**.
 Then later generalize into consumer-facing **Car Mode**.
+
+## Stage 5 requirement
+When Ride Mode is ready for broader launch/polish, Stage 5 should include:
+- adding relevant Ride Mode pages to the sitemap
+- updating on-page schema / structured data where appropriate
+- making sure new blog and product surfaces are discoverable by search engines

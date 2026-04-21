@@ -12,44 +12,317 @@
       --bg: #08060F;
       --surface: #12101A;
       --surface2: #1C1926;
+      --surface3: #211D2E;
       --accent: #A855F7;
       --accent2: #7C3AED;
       --pink: #EC4899;
+      --green: #22C55E;
+      --gold: #F59E0B;
       --text1: #FFFFFF;
       --text2: rgba(255,255,255,0.72);
       --text3: rgba(255,255,255,0.42);
     }
-    html, body { background: var(--bg); color: var(--text1); font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; line-height: 1.6; }
+    html, body {
+      background: var(--bg);
+      color: var(--text1);
+      font-family: -apple-system, 'SF Pro Display', Arial, sans-serif;
+      line-height: 1.55;
+    }
     body { padding: 0; }
-    nav { display: flex; align-items: center; justify-content: space-between; max-width: 1040px; margin: 0 auto; padding: 20px 20px 0; }
-    .nav-logo { text-decoration: none; font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .nav-links { display: flex; gap: 16px; flex-wrap: wrap; }
-    .nav-links a { color: var(--text3); text-decoration: none; font-size: 0.9rem; }
-    .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 20px 72px; }
-    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: stretch; }
-    .hero-card, .panel { background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 28px; }
-    .eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); border-radius: 999px; padding: 6px 12px; margin-bottom: 16px; }
-    h1 { font-size: clamp(2.2rem, 4vw, 4.1rem); line-height: 1.06; margin-bottom: 16px; }
-    .subhead { font-size: 1.1rem; color: var(--text2); max-width: 700px; margin-bottom: 24px; }
-    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 20px; border-radius: 999px; text-decoration: none; font-weight: 800; }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px 20px 0;
+    }
+    .nav-logo {
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text3);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .nav-links a.active {
+      color: #fff;
+      font-weight: 700;
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+    .hero-card, .panel, .song-card, .step-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.22);
+    }
+    .hero-card, .panel { padding: 28px; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 999px;
+      padding: 6px 12px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 4vw, 4.3rem);
+      line-height: 1.04;
+      margin-bottom: 16px;
+    }
+    .subhead {
+      font-size: 1.14rem;
+      color: var(--text2);
+      max-width: 720px;
+      margin-bottom: 18px;
+    }
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
     .btn-primary { background: linear-gradient(135deg, var(--accent), var(--pink)); color: white; }
-    .btn-secondary { border: 1px solid rgba(255,255,255,0.12); color: var(--text1); background: rgba(255,255,255,0.02); }
-    .qr-card { display: flex; flex-direction: column; justify-content: space-between; }
-    .qr-box { aspect-ratio: 1 / 1; width: 100%; border-radius: 22px; background: linear-gradient(135deg, rgba(168,85,247,0.14), rgba(236,72,153,0.14)); border: 1px solid rgba(168,85,247,0.28); display: flex; align-items: center; justify-content: center; color: var(--text1); font-weight: 900; font-size: 1.1rem; text-align: center; padding: 20px; margin-bottom: 18px; }
-    .section { margin-top: 28px; }
-    .section h2 { font-size: 1.7rem; margin-bottom: 14px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .mini-card { background: var(--surface2); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 20px; }
-    .mini-card h3 { font-size: 1rem; margin-bottom: 8px; }
-    .mini-card p, .panel p, .panel li { color: var(--text2); }
-    .quote { background: rgba(168,85,247,0.08); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px; color: var(--text1); margin-top: 12px; }
-    ul, ol { margin-left: 20px; }
-    li { margin-bottom: 8px; }
-    footer { text-align: center; padding: 20px 20px 60px; color: var(--text3); font-size: 0.88rem; }
+    .btn-secondary { border: 1px solid rgba(255,255,255,0.12); color: var(--text1); background: rgba(255,255,255,0.03); }
+    .btn-danger { background: rgba(239,68,68,0.16); color: #fecaca; border: 1px solid rgba(239,68,68,0.3); }
+    .driver-board {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .driver-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: #bbf7d0;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    .driver-title {
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .driver-sub {
+      font-size: 1rem;
+      color: var(--text2);
+    }
+    .qr-box {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(168,85,247,0.18), rgba(236,72,153,0.18));
+      border: 1px solid rgba(168,85,247,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text1);
+      font-weight: 900;
+      font-size: clamp(1.3rem, 2vw, 1.8rem);
+      text-align: center;
+      padding: 28px;
+      min-height: 340px;
+    }
+    .qr-caption {
+      color: var(--text2);
+      font-size: 1rem;
+      text-align: center;
+    }
+    .section { margin-top: 30px; }
+    .section h2 {
+      font-size: 1.9rem;
+      margin-bottom: 14px;
+    }
+    .section-lead {
+      color: var(--text2);
+      margin-bottom: 20px;
+      font-size: 1.02rem;
+      max-width: 860px;
+    }
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .step-card {
+      padding: 22px;
+      background: var(--surface2);
+      border-radius: 22px;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .step-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+    .step-card p, .panel p, .panel li {
+      color: var(--text2);
+    }
+    .large-results {
+      display: grid;
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .song-card {
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(168,85,247,0.09), rgba(236,72,153,0.06));
+      border-radius: 24px;
+    }
+    .song-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .song-rank {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .song-title {
+      font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+      line-height: 1.05;
+      margin-bottom: 4px;
+    }
+    .song-artist {
+      font-size: 1.05rem;
+      color: var(--text2);
+    }
+    .fit-chip {
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: #bbf7d0;
+      font-size: 1rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .song-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .meta-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .meta-label {
+      display: block;
+      color: var(--text3);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .meta-value {
+      font-size: 1rem;
+      color: var(--text1);
+      font-weight: 700;
+    }
+    .handoff-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .handoff-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.92rem;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+    }
+    .spotify { border-color: rgba(34,197,94,0.28); color: #bbf7d0; }
+    .apple { border-color: rgba(255,255,255,0.18); color: #fff; }
+    .youtube { border-color: rgba(239,68,68,0.28); color: #fecaca; }
+    .panel ul { margin-left: 20px; }
+    .panel li { margin-bottom: 8px; }
+    footer {
+      text-align: center;
+      padding: 24px 20px 60px;
+      color: var(--text3);
+      font-size: 0.88rem;
+    }
     footer a { color: var(--text2); text-decoration: none; }
-    @media (max-width: 860px) {
-      .hero, .grid { grid-template-columns: 1fr; }
+    @media (max-width: 980px) {
+      .hero, .step-grid, .song-meta { grid-template-columns: 1fr; }
+      .song-top { align-items: flex-start; }
     }
   </style>
 </head>
@@ -58,77 +331,224 @@
     <a class="nav-logo" href="/">HumMatch</a>
     <div class="nav-links">
       <a href="/squadmatch">SquadMatch</a>
-      <a href="/ride-mode" style="color:#fff;font-weight:700;">Ride Mode</a>
+      <a href="/ride-mode" class="active">Ride Mode</a>
       <a href="/blog">Blog</a>
     </div>
   </nav>
 
   <div class="wrap">
     <section class="hero">
-      <div class="hero-card">
-        <div class="eyebrow">New Product Surface</div>
-        <h1>HumMatch Ride Mode</h1>
-        <p class="subhead">HumMatch Ride Mode helps everyone in the ride figure out what to sing, who should sing it, and which songs this car can actually pull off together.</p>
-        <p class="subhead">HumMatch is not the karaoke player. It is the intelligence layer for in-car singalongs.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="/">Try HumMatch</a>
-          <a class="btn btn-secondary" href="/blog/introducing-ride-mode">Read the Ride Mode blog post</a>
+      <div class="hero-card driver-board">
+        <div class="driver-status">
+          <span class="status-badge">● Session active • Friday Night Drive</span>
+          <button class="btn btn-danger">End Session</button>
         </div>
-      </div>
-      <div class="hero-card qr-card">
         <div>
-          <div class="qr-box">What should this car sing next?<br /><br />Scan to join HumMatch.</div>
-          <p style="color:var(--text2);">Built for rideshare, hosted rides, shuttles, party buses, and any social singalong moment that starts in motion.</p>
+          <div class="eyebrow">Driver View</div>
+          <h1 class="driver-title">Large-format Ride Mode built for the car</h1>
+          <p class="driver-sub">The driver's phone is the main display for MVP. Riders in the back seat should be able to scan quickly, see the Top 5 songs clearly, and let the driver choose the final playback handoff.</p>
         </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>How Ride Mode works</h2>
-      <div class="grid">
-        <div class="mini-card">
-          <h3>1. Start the ride session</h3>
-          <p>A driver or host opens Ride Mode and shows a large QR code for the car.</p>
-        </div>
-        <div class="mini-card">
-          <h3>2. Passengers join</h3>
-          <p>Each rider scans, joins on their phone, and completes a quick hum or uses a saved voice profile.</p>
-        </div>
-        <div class="mini-card">
-          <h3>3. Get the best songs for the car</h3>
-          <p>HumMatch recommends the best songs, duet pairings, harmony picks, and easy wins for the group.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="panel">
-        <h2>Why this matters</h2>
-        <p>Most apps start with the song and hope the people can keep up. HumMatch starts with the people in the car and works backward from their voices.</p>
-        <div class="quote">That means better lead picks, better duet suggestions, better harmony fits, and far fewer songs that collapse halfway through.</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="panel">
-        <h2>Why rideshare is the right wedge</h2>
-        <ul>
-          <li>Drivers already create repeated social music moments</li>
-          <li>Passengers are in one shared environment with low friction</li>
-          <li>A simple QR code turns the ride into a live HumMatch demo</li>
-          <li>The driver can become the affiliate origin for future upgrades</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="panel">
-        <h2>What happens next</h2>
-        <p>Ride Mode is being introduced in stages. The first stage makes the product visible on-site and explains the concept clearly. Later stages will add session flow, passenger sequencing, results tabs, affiliate attribution, and driver dashboards.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="/blog/introducing-ride-mode">See how Ride Mode works</a>
-          <a class="btn btn-secondary" href="/squadmatch">Explore SquadMatch</a>
+          <a class="btn btn-primary" href="/blog/introducing-ride-mode">Read the Ride Mode blog post</a>
+          <a class="btn btn-secondary" href="#top5-results">Jump to Top 5 results</a>
         </div>
+      </div>
+
+      <div class="hero-card qr-card">
+        <div class="qr-box">What should this car sing next?<br /><br />SCAN TO JOIN HUMMATCH</div>
+        <p class="qr-caption">Big QR. Big type. Fast scan for the back seat.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>How the driver-first flow works</h2>
+      <p class="section-lead">This slice is intentionally optimized for simplicity. The driver starts the session, riders scan, HumMatch recommends the best Top 5 group songs, and the driver is the one who loads playback in Spotify, Apple Music, or karaoke lyrics.</p>
+      <div class="step-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Start the ride session</h3>
+          <p>The driver opens Ride Mode and shows a large QR code so riders can join quickly from anywhere in the car.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Passengers hum</h3>
+          <p>Each rider scans, joins the session, and hums once or uses a saved profile. Results stay simple and visible.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Driver picks the song</h3>
+          <p>HumMatch suggests the best group songs. The driver picks the final song and hands off playback to the service already running in the car.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="top5-results">
+      <h2>Top 5 Songs for This Car</h2>
+      <p class="section-lead">Ride Mode should default to only five recommendations so everyone in the car can read them fast. Big cards. Big scores. Clear lead and harmony suggestions. No clutter.</p>
+
+      <div class="large-results">
+        <article class="song-card">
+          <div class="song-top">
+            <div>
+              <div class="song-rank">#1 Best For This Car</div>
+              <h3 class="song-title">Sweet Caroline</h3>
+              <p class="song-artist">Neil Diamond</p>
+            </div>
+            <div class="fit-chip">94% car fit</div>
+          </div>
+          <div class="song-meta">
+            <div class="meta-box">
+              <span class="meta-label">Lead</span>
+              <span class="meta-value">Nora</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Harmony</span>
+              <span class="meta-value">Joe</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Key</span>
+              <span class="meta-value">Original</span>
+            </div>
+          </div>
+          <div class="handoff-row">
+            <a class="handoff-btn spotify" href="https://open.spotify.com/search/Sweet%20Caroline%20Neil%20Diamond" target="_blank" rel="noopener">Play in Spotify</a>
+            <a class="handoff-btn apple" href="https://music.apple.com/us/search?term=Sweet%20Caroline%20Neil%20Diamond" target="_blank" rel="noopener">Play in Apple Music</a>
+            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=Sweet+Caroline+karaoke" target="_blank" rel="noopener">Karaoke Lyrics</a>
+          </div>
+        </article>
+
+        <article class="song-card">
+          <div class="song-top">
+            <div>
+              <div class="song-rank">#2 Best Duet</div>
+              <h3 class="song-title">Shallow</h3>
+              <p class="song-artist">Lady Gaga & Bradley Cooper</p>
+            </div>
+            <div class="fit-chip">91% car fit</div>
+          </div>
+          <div class="song-meta">
+            <div class="meta-box">
+              <span class="meta-label">Lead</span>
+              <span class="meta-value">Nora</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Duet</span>
+              <span class="meta-value">Joe</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Key</span>
+              <span class="meta-value">-1 semitone</span>
+            </div>
+          </div>
+          <div class="handoff-row">
+            <a class="handoff-btn spotify" href="https://open.spotify.com/search/Shallow%20Lady%20Gaga%20Bradley%20Cooper" target="_blank" rel="noopener">Play in Spotify</a>
+            <a class="handoff-btn apple" href="https://music.apple.com/us/search?term=Shallow%20Lady%20Gaga%20Bradley%20Cooper" target="_blank" rel="noopener">Play in Apple Music</a>
+            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=Shallow+karaoke" target="_blank" rel="noopener">Karaoke Lyrics</a>
+          </div>
+        </article>
+
+        <article class="song-card">
+          <div class="song-top">
+            <div>
+              <div class="song-rank">#3 Easy Win</div>
+              <h3 class="song-title">Valerie</h3>
+              <p class="song-artist">Amy Winehouse / Mark Ronson</p>
+            </div>
+            <div class="fit-chip">89% car fit</div>
+          </div>
+          <div class="song-meta">
+            <div class="meta-box">
+              <span class="meta-label">Lead</span>
+              <span class="meta-value">Jasmine</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Harmony</span>
+              <span class="meta-value">Either</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Key</span>
+              <span class="meta-value">Original</span>
+            </div>
+          </div>
+          <div class="handoff-row">
+            <a class="handoff-btn spotify" href="https://open.spotify.com/search/Valerie%20Amy%20Winehouse%20Mark%20Ronson" target="_blank" rel="noopener">Play in Spotify</a>
+            <a class="handoff-btn apple" href="https://music.apple.com/us/search?term=Valerie%20Amy%20Winehouse%20Mark%20Ronson" target="_blank" rel="noopener">Play in Apple Music</a>
+            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=Valerie+karaoke" target="_blank" rel="noopener">Karaoke Lyrics</a>
+          </div>
+        </article>
+
+        <article class="song-card">
+          <div class="song-top">
+            <div>
+              <div class="song-rank">#4 Harmony Pick</div>
+              <h3 class="song-title">I Want It That Way</h3>
+              <p class="song-artist">Backstreet Boys</p>
+            </div>
+            <div class="fit-chip">87% car fit</div>
+          </div>
+          <div class="song-meta">
+            <div class="meta-box">
+              <span class="meta-label">Lead</span>
+              <span class="meta-value">Bobby</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Chorus Fit</span>
+              <span class="meta-value">Full car</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Key</span>
+              <span class="meta-value">Original</span>
+            </div>
+          </div>
+          <div class="handoff-row">
+            <a class="handoff-btn spotify" href="https://open.spotify.com/search/I%20Want%20It%20That%20Way%20Backstreet%20Boys" target="_blank" rel="noopener">Play in Spotify</a>
+            <a class="handoff-btn apple" href="https://music.apple.com/us/search?term=I%20Want%20It%20That%20Way%20Backstreet%20Boys" target="_blank" rel="noopener">Play in Apple Music</a>
+            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=I+Want+It+That+Way+karaoke" target="_blank" rel="noopener">Karaoke Lyrics</a>
+          </div>
+        </article>
+
+        <article class="song-card">
+          <div class="song-top">
+            <div>
+              <div class="song-rank">#5 Road Trip Pick</div>
+              <h3 class="song-title">Don’t Stop Believin’</h3>
+              <p class="song-artist">Journey</p>
+            </div>
+            <div class="fit-chip">85% car fit</div>
+          </div>
+          <div class="song-meta">
+            <div class="meta-box">
+              <span class="meta-label">Lead</span>
+              <span class="meta-value">Joe</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Harmony</span>
+              <span class="meta-value">Jasmine</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Key</span>
+              <span class="meta-value">-2 semitones</span>
+            </div>
+          </div>
+          <div class="handoff-row">
+            <a class="handoff-btn spotify" href="https://open.spotify.com/search/Dont%20Stop%20Believin%20Journey" target="_blank" rel="noopener">Play in Spotify</a>
+            <a class="handoff-btn apple" href="https://music.apple.com/us/search?term=Dont%20Stop%20Believin%20Journey" target="_blank" rel="noopener">Play in Apple Music</a>
+            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=Dont+Stop+Believin+karaoke" target="_blank" rel="noopener">Karaoke Lyrics</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <h2>Why this driver-first view is the right MVP</h2>
+        <ul>
+          <li>The driver already controls the music in most rides</li>
+          <li>Large text makes the result set visible to the whole car</li>
+          <li>Top 5 songs reduce clutter and make group choice faster</li>
+          <li>Playback handoff stays simple without requiring deep Spotify or Apple Music integrations</li>
+          <li>Future synced passenger views can still be added later on top of the same session model</li>
+        </ul>
       </div>
     </section>
   </div>
