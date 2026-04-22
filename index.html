@@ -423,6 +423,7 @@
   <a class="hm-nav-item" href="/how-it-works">How It Works</a>
   <!-- Pricing link removed -->
   <a class="hm-nav-item" href="/squadmatch">SquadMatch</a>
+  <a class="hm-nav-item" href="/ride-mode">🚗 Ride Mode</a>
   <a class="hm-nav-item" href="/es">🌎 Español</a>
   <div class="hm-nav-divider"></div>
   <a class="hm-nav-item" href="/affiliate">Affiliate</a>
@@ -430,7 +431,7 @@
   <a class="hm-nav-item" href="/contact">Contact</a>
   <div class="hm-nav-divider"></div>
   <a class="hm-nav-item" href="/login?return=/" id="navLoginItem">Log In</a>
-  <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Become a Hummer</a>
+  <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Sign Up</a>
 </nav>
 
 
@@ -472,18 +473,29 @@
 
   </div><!-- /cta-wrapper -->
 
-  <!-- SquadMatch Post-Hum Prompt (Screen 1) - MOVED ABOVE UPGRADE CTA -->
-  <div id="squad-prompt-module" style="width:100%;max-width:380px;margin-top:16px;padding:0 4px;">
-    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.18);border-radius:14px;padding:24px 20px;position:relative;overflow:hidden;">
+  <!-- Squad + Ride Mode surface teasers (always visible after hum) -->
+  <div id="squad-prompt-module" style="width:100%;max-width:380px;margin-top:16px;padding:0 4px;display:flex;flex-direction:column;gap:12px;">
+
+    <!-- SquadMatch teaser -->
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.18);border-radius:14px;padding:20px;position:relative;overflow:hidden;">
       <div style="position:absolute;top:-30px;right:-30px;width:110px;height:110px;background:radial-gradient(circle,rgba(168,85,247,0.14),transparent 70%);pointer-events:none;"></div>
-      <div style="font-size:1.05rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:8px;" id="squad-prompt-title">Start a Duet</div>
-      <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:18px;" id="squad-prompt-desc">Invite a friend, both hum, find songs you can sing together.</div>
-      <div style="display:flex;gap:8px;margin-bottom:14px;">
-        <button id="squad-start-btn" onclick="startSquadMatch()" style="flex:1;padding:11px 8px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.01em;">Start a Duet 🎤</button>
+      <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.09em;text-transform:uppercase;color:rgba(168,85,247,0.7);margin-bottom:6px;">SquadMatch</div>
+      <div style="font-size:1rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:6px;" id="squad-prompt-title">Sing with friends</div>
+      <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:14px;" id="squad-prompt-desc">Everyone hums once. HumMatch finds songs your whole group can actually nail — up to 5 people.</div>
+      <div style="display:flex;gap:8px;">
+        <button id="squad-start-btn" onclick="startSquadMatch()" style="flex:1;padding:11px 8px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.01em;">Try SquadMatch 🎵</button>
         <button onclick="dismissSquadPrompt()" style="flex:1;padding:11px 8px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);font-size:0.82rem;font-weight:600;border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;">Maybe later</button>
       </div>
-      <div style="font-size:0.72rem;color:rgba(255,255,255,0.35);text-align:center;line-height:1.5;"><span id="squad-prompt-details">Invite 1 friend. Everyone hums once. We do the rest.</span><br><span style="font-size:0.68rem;margin-top:4px;display:inline-block;">Free tier: Duets (2 people). Premium: Full Squads up to 5.</span></div>
     </div>
+
+    <!-- Ride Mode teaser -->
+    <a href="/ride-mode" style="display:block;text-decoration:none;background:linear-gradient(135deg,rgba(168,85,247,0.07),rgba(236,72,153,0.05));border:1px solid rgba(168,85,247,0.22);border-radius:14px;padding:18px;">
+      <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.09em;text-transform:uppercase;color:rgba(168,85,247,0.7);margin-bottom:6px;">Ride Mode</div>
+      <div style="font-size:1rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:4px;">🚗 In a rideshare?</div>
+      <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.5;margin-bottom:10px;">Driver starts a session. Passengers scan the QR and hum. HumMatch picks the top 5 songs this car can sing.</div>
+      <div style="font-size:0.78rem;font-weight:700;color:#a855f7;">Start Ride Mode →</div>
+    </a>
+
   </div>
 
   <!-- RETURNING USER UPGRADE CTA (shown only for returning non-premium users) - MOVED BELOW SQUADMATCH -->
@@ -491,7 +503,7 @@
     <div style="background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.06));border:1px solid rgba(168,85,247,0.25);border-radius:12px;padding:18px;text-align:left;">
       <div style="font-size:0.95rem;font-weight:800;color:#fff;margin-bottom:8px;">Lead your squad's next singalong</div>
       <div style="font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.55;margin-bottom:10px;">
-        Invite up to 4 friends and unlock shared song suggestions based on your group's range, timbre, and brightness.
+        Invite up to 4 additional friends (5 total) and unlock shared song suggestions based on your group's range, timbre, and brightness.
       </div>
       <ul style="list-style:none;padding:0;margin:0 0 10px 0;text-align:left;">
         <li style="font-size:0.76rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:4px;padding-left:18px;position:relative;"><span style="position:absolute;left:0;">•</span> Track who's hummed</li>
@@ -665,7 +677,7 @@
     <!-- LOGGED-OUT PRIMARY CTAs -->
     <div id="cta-logged-out" style="display:none;">
       <div style="display:flex;gap:10px;margin-bottom:12px;">
-        <button onclick="window.location.href='/login?signup=1'" style="flex:1;padding:14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">Become a Hummer</button>
+        <button onclick="window.location.href='/login?signup=1'" style="flex:1;padding:14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">Sign Up Free</button>
         <button onclick="window.location.href='/login'" style="flex:1;padding:14px;background:transparent;border:2px solid rgba(168,85,247,0.5);border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">Log In</button>
       </div>
       <button id="share-btn" onclick="shareHumMatch()" style="width:100%;padding:14px;background:transparent;border:1px solid rgba(168,85,247,0.4);border-radius:14px;color:var(--accent);font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:12px;">
@@ -155304,10 +155316,10 @@ function updateSquadPromptText() {
   var details = document.getElementById('squad-prompt-details');
 
   if (isPremium) {
-    if (title) title.textContent = 'Create a Squad';
-    if (desc) desc.textContent = 'Invite up to 4 friends, everyone hums, find songs for your whole group.';
-    if (btn) btn.textContent = 'Create a Squad 🎵';
-    if (details) details.textContent = 'Invite up to 4 friends. Everyone hums once. We do the rest.';
+    if (title) title.textContent = 'Sing with your squad';
+    if (desc) desc.textContent = 'Everyone hums once. HumMatch finds songs your whole group can actually nail — up to 5 people.';
+    if (btn) btn.textContent = 'Try SquadMatch 🎵';
+    if (details) details.textContent = 'Up to 5 people total. Everyone hums once. We do the rest.';
   } else {
     if (title) title.textContent = 'Start a Duet';
     if (desc) desc.textContent = 'Invite a friend, both hum, find songs you can sing together.';

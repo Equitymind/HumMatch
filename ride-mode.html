@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>HumMatch Ride Mode</title>
-  <meta name="description" content="HumMatch Ride Mode helps everyone in the ride figure out what to sing, who should sing it, and which songs this car can actually pull off together." />
+  <title>HumMatch Ride Mode — Driver-First In-Car Session</title>
+  <meta name="description" content="HumMatch Ride Mode. Driver starts the session, passengers scan the QR and hum, HumMatch surfaces the top 5 songs this car can actually sing together. Driver chooses playback." />
   <meta name="theme-color" content="#a855f7" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,7 +68,7 @@
     }
     .hero {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 0.9fr 1.1fr;
       gap: 26px;
       align-items: stretch;
     }
@@ -160,20 +160,20 @@
       color: var(--text2);
     }
     .qr-box {
-      aspect-ratio: 1 / 1;
       width: 100%;
       border-radius: 28px;
-      background: linear-gradient(135deg, rgba(168,85,247,0.18), rgba(236,72,153,0.18));
-      border: 1px solid rgba(168,85,247,0.35);
+      background: linear-gradient(135deg, rgba(168,85,247,0.20), rgba(236,72,153,0.20));
+      border: 2px solid rgba(168,85,247,0.45);
+      box-shadow: 0 0 60px rgba(168,85,247,0.12);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       color: var(--text1);
       font-weight: 900;
-      font-size: clamp(1.3rem, 2vw, 1.8rem);
       text-align: center;
-      padding: 28px;
-      min-height: 340px;
+      padding: 32px 28px;
+      min-height: 380px;
     }
     .qr-caption {
       color: var(--text2);
@@ -480,53 +480,62 @@
 
   <div class="wrap">
     <section class="hero">
+      <!-- QR panel — dominant left column on desktop, top on mobile -->
+      <div class="hero-card qr-card">
+        <div class="qr-box" id="rideQrBox">
+          <div style="font-size:clamp(1.1rem,2vw,1.5rem);font-weight:900;line-height:1.25;margin-bottom:18px;">What should this car sing next?</div>
+          <div style="width:180px;height:180px;background:rgba(255,255,255,0.9);border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;">
+            <div style="color:#08060F;font-size:0.72rem;font-weight:800;text-align:center;line-height:1.5;">QR<br />placeholder</div>
+          </div>
+          <div style="font-size:1rem;font-weight:800;letter-spacing:0.04em;">Scan to join HumMatch</div>
+          <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Hum once. See the best songs for this ride.</div>
+        </div>
+        <p class="qr-caption" id="rideQrCaption" style="margin-top:14px;">Big QR. Big type. Easy scan from the back seat.</p>
+      </div>
+
+      <!-- Driver status + controls -->
       <div class="hero-card driver-board">
         <div class="driver-status">
           <span class="status-badge" id="rideStatusBadge">● Session setup • Friday Night Drive</span>
-          <button class="btn btn-danger">End Session</button>
+          <button class="btn btn-danger" id="heroEndSessionBtn">End Session</button>
         </div>
         <div>
-          <div class="eyebrow">Driver View</div>
-          <h1 class="driver-title">Large-format Ride Mode built for the car</h1>
-          <p class="driver-sub">The driver's phone is the main display for MVP. Riders in the back seat should be able to scan quickly, see the Top 5 songs clearly, and let the driver choose the final playback handoff.</p>
+          <div class="eyebrow">HumMatch Ride Mode · Driver View</div>
+          <h1 class="driver-title">What should this car sing next?</h1>
+          <p class="driver-sub">Start a session. Passengers scan and hum. HumMatch surfaces the top 5 songs this car can actually pull off — lead and harmony assigned. Driver chooses playback.</p>
         </div>
         <div class="cta-row">
-          <a class="btn btn-primary" href="/blog/introducing-ride-mode">Read the Ride Mode blog post</a>
-          <a class="btn btn-secondary" href="#top5-results">Jump to Top 5 results</a>
+          <button class="btn btn-primary" type="button" onclick="document.querySelector('.flow-pill[data-state-btn=setup]').click();document.querySelector('.proto-card[data-flow-state=setup]').scrollIntoView({behavior:'smooth'})">Start a Ride Session</button>
+          <a class="btn btn-secondary" href="#top5-results">Preview Top 5 Results</a>
         </div>
-      </div>
-
-      <div class="hero-card qr-card">
-        <div class="qr-box" id="rideQrBox">What should this car sing next?<br /><br />SCAN TO JOIN HUMMATCH</div>
-        <p class="qr-caption" id="rideQrCaption">Big QR. Big type. Fast scan for the back seat.</p>
       </div>
     </section>
 
     <section class="section">
-      <h2>How the driver-first flow works</h2>
-      <p class="section-lead">This slice is intentionally optimized for simplicity. The driver starts the session, riders scan, HumMatch recommends the best Top 5 group songs, and the driver is the one who loads playback in Spotify, Apple Music, or karaoke lyrics.</p>
+      <h2>How it works</h2>
+      <p class="section-lead">Driver-first. Optimized for the car. Done in under 90 seconds.</p>
       <div class="step-grid">
         <div class="step-card">
           <div class="step-number">1</div>
-          <h3>Start the ride session</h3>
-          <p>The driver opens Ride Mode and shows a large QR code so riders can join quickly from anywhere in the car.</p>
+          <h3>Setup</h3>
+          <p>Driver opens Ride Mode, names the session, and shows the large QR code. Passengers scan from any seat.</p>
         </div>
         <div class="step-card">
           <div class="step-number">2</div>
-          <h3>Passengers hum</h3>
-          <p>Each rider scans, joins the session, and hums once or uses a saved profile. Results stay simple and visible.</p>
+          <h3>Join &amp; hum</h3>
+          <p>Each rider scans, enters a name, and hums once. Up to 5 total riders per session. Driver uses saved voice profile.</p>
         </div>
         <div class="step-card">
           <div class="step-number">3</div>
-          <h3>Driver picks the song</h3>
-          <p>HumMatch suggests the best group songs. The driver picks the final song and hands off playback to the service already running in the car.</p>
+          <h3>Driver picks</h3>
+          <p>HumMatch surfaces the top 5. Lead and harmony assigned. Driver chooses the song and opens it in Spotify, Apple Music, or karaoke lyrics.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <h2>Ride Mode interactive prototype</h2>
-      <p class="section-lead">Use the controls below to step through a believable Ride Mode session. This is still front-end prototype logic, but now you can move through setup, join, progress, and results as one integrated experience.</p>
+      <h2>Try the session flow</h2>
+      <p class="section-lead">Step through a Ride Mode session: Setup → Join → Progress → Results. Front-end prototype — lightweight and real enough to demo in the car.</p>
 
       <div class="flow-toolbar">
         <button class="flow-pill active" data-state-btn="setup" type="button">1. Setup</button>
@@ -548,8 +557,9 @@
               <label class="field-label" for="rideRiderCount">Riders expected</label>
               <select class="field-select" id="rideRiderCount">
                 <option>2 riders</option>
-                <option selected>4 riders</option>
-                <option>5 riders</option>
+                <option>3 riders</option>
+                <option>4 riders</option>
+                <option selected>5 riders</option>
               </select>
             </div>
             <div>
@@ -657,7 +667,7 @@
             </div>
             <div class="meta-box">
               <span class="meta-label">Riders expected</span>
-              <span class="meta-value">4 total</span>
+              <span class="meta-value">5 total (max)</span>
             </div>
             <div class="meta-box">
               <span class="meta-label">Vibe preset</span>
@@ -712,7 +722,7 @@
           <div class="song-meta">
             <div class="meta-box">
               <span class="meta-label">Joined</span>
-              <span class="meta-value">4 riders</span>
+              <span class="meta-value">5 riders</span>
             </div>
             <div class="meta-box">
               <span class="meta-label">Ready</span>
@@ -733,8 +743,11 @@
     </section>
 
     <section class="section" id="top5-results">
-      <h2>Top 5 Songs for This Car</h2>
-      <p class="section-lead">Ride Mode should default to only five recommendations so everyone in the car can read them fast. Big cards. Big scores. Clear lead and harmony suggestions. No clutter.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;">
+        <h2 style="margin-bottom:0;">Top 5 Songs for This Car</h2>
+        <button class="btn btn-danger" type="button" onclick="resetRideModeDemo()" style="white-space:nowrap;">End Session</button>
+      </div>
+      <p class="section-lead">Five songs. Big cards. Lead and harmony assigned. Driver picks playback. No clutter.</p>
 
       <div class="large-results">
         <article class="song-card">
@@ -892,13 +905,13 @@
 
     <section class="section">
       <div class="panel">
-        <h2>Why this driver-first view is the right MVP</h2>
+        <h2>Why driver-first is the right MVP</h2>
         <ul>
-          <li>The driver already controls the music in most rides</li>
-          <li>Large text makes the result set visible to the whole car</li>
-          <li>Top 5 songs reduce clutter and make group choice faster</li>
-          <li>Playback handoff stays simple without requiring deep Spotify or Apple Music integrations</li>
-          <li>Future synced passenger views can still be added later on top of the same session model</li>
+          <li>The driver already controls the music — this just makes the choice smarter</li>
+          <li>Large text and top 5 only means everyone in the car can read the results at a glance</li>
+          <li>Simple playback handoff works today without any Spotify or Apple Music API partnership</li>
+          <li>Up to 5 total riders per session, including the driver’s saved voice as participant 1</li>
+          <li>Synced passenger view is a natural Stage 3 addition — not a hard dependency for MVP</li>
         </ul>
       </div>
     </section>
@@ -923,20 +936,20 @@
       if (badge && qrBox && qrCaption) {
         if (state === 'setup') {
           badge.textContent = '● Session setup • Friday Night Drive';
-          qrBox.innerHTML = 'What should this car sing next?<br /><br />SCAN TO JOIN HUMMATCH';
-          qrCaption.textContent = 'Big QR. Big type. Fast scan for the back seat.';
+          qrBox.innerHTML = '<div style="font-size:clamp(1.1rem,2vw,1.5rem);font-weight:900;line-height:1.25;margin-bottom:18px;">What should this car sing next?<\/div><div style="width:180px;height:180px;background:rgba(255,255,255,0.9);border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;"><div style="color:#08060F;font-size:0.72rem;font-weight:800;text-align:center;line-height:1.5;">QR<br \/>placeholder<\/div><\/div><div style="font-size:1rem;font-weight:800;letter-spacing:0.04em;">Scan to join HumMatch<\/div><div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Hum once. See the best songs for this ride.<\/div>';
+          qrCaption.textContent = 'Big QR. Big type. Easy scan from the back seat.';
         } else if (state === 'join') {
           badge.textContent = '● Riders joining • Friday Night Drive';
-          qrBox.innerHTML = 'JOIN NOW<br /><br />4 riders expected';
+          qrBox.innerHTML = '<div style="font-size:1.5rem;font-weight:900;margin-bottom:10px;">Joining now<\/div><div style="font-size:1rem;color:rgba(255,255,255,0.6);">Up to 5 riders • Scan &amp; hum once<\/div>';
           qrCaption.textContent = 'Passengers scan and join in seconds.';
         } else if (state === 'progress') {
           badge.textContent = '● Session in progress • Bobby is next';
-          qrBox.innerHTML = '4 JOINED<br /><br />3 READY • 1 WAITING';
+          qrBox.innerHTML = '<div style="font-size:2rem;font-weight:900;margin-bottom:10px;">4 joined<\/div><div style="font-size:1.2rem;font-weight:800;margin-bottom:6px;">3 ready • 1 waiting<\/div><div style="font-size:0.9rem;color:rgba(255,255,255,0.55);">Bobby is next<\/div>';
           qrCaption.textContent = 'Keep the car aligned while the last rider finishes.';
         } else if (state === 'results') {
           badge.textContent = '● Results ready • Top 5 songs live';
-          qrBox.innerHTML = 'TOP 5 READY<br /><br />DRIVER PICKS THE SONG';
-          qrCaption.textContent = 'The driver now chooses playback in Spotify, Apple Music, or karaoke lyrics.';
+          qrBox.innerHTML = '<div style="font-size:1.3rem;font-weight:900;margin-bottom:10px;">🎤 Top 5 ready<\/div><div style="font-size:1rem;color:rgba(255,255,255,0.7);margin-bottom:6px;">Driver picks the song<\/div><div style="font-size:0.85rem;color:rgba(255,255,255,0.45);">Scroll down to choose playback<\/div>';
+          qrCaption.textContent = 'Driver chooses playback — Spotify, Apple Music, or karaoke.';
         }
       }
     }
@@ -978,7 +991,7 @@
 
     async function createRideSessionFromForm() {
       const sessionName = document.getElementById('rideSessionName')?.value || 'Ride Mode Session';
-      const expectedRiderCount = (document.getElementById('rideRiderCount')?.value || '4 riders').split(' ')[0];
+      const expectedRiderCount = (document.getElementById('rideRiderCount')?.value || '5 riders').split(' ')[0];
       const vibePreset = document.getElementById('rideVibe')?.value || 'Easy Wins';
 
       const response = await fetch('/api/ride-mode/session', {

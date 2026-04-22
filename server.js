@@ -2793,7 +2793,7 @@ app.post('/api/ride-mode/session', (req, res) => {
     const { sessionName, expectedRiderCount, vibePreset } = req.body || {};
     const session = createRideSession(
       sessionName || 'Ride Mode Session',
-      Number(expectedRiderCount) || 4,
+      Number(expectedRiderCount) || 5,
       vibePreset || 'Easy Wins'
     );
     return res.json({ ok: true, session });
