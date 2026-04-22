@@ -2782,7 +2782,7 @@ app.listen(PORT, () => {
     console.error('  [diag] users table check error:', e.message);
   }
 });
-const { createSession: createRideSession, joinSession: joinRideSession, assignHost: assignRideHost, advanceSession: advanceRideSession, endSession: endRideSession, getSession: getRideSession, getSessionForViewer: getRideSessionForViewer } = require('./src/sessionManager');
+const { createSession: createRideSession, joinSession: joinRideSession, assignHost: assignRideHost, advanceSession: advanceRideSession, endSession: endRideSession, getSession: getRideSession, getSessionForViewer: getRideSessionForViewer, storeHumData: storeRideHumData } = require('./src/sessionManager');
 
 app.get('/ride-mode', (req, res) => {
     res.sendFile(path.join(__dirname, 'ride-mode.html'));
@@ -2790,11 +2790,12 @@ app.get('/ride-mode', (req, res) => {
 
 app.post('/api/ride-mode/session', (req, res) => {
   try {
-    const { sessionName, expectedRiderCount, vibePreset } = req.body || {};
+    const { sessionName, expectedRiderCount, vibePreset, driverAlias } = req.body || {};
     const session = createRideSession(
       sessionName || 'Ride Mode Session',
       Number(expectedRiderCount) || 5,
-      vibePreset || 'Easy Wins'
+      vibePreset || 'Easy Wins',
+      driverAlias || null
     );
     return res.json({ ok: true, session });
   } catch (error) {
@@ -2828,7 +2829,44 @@ app.post('/api/ride-mode/session/:sessionId/host', (req, res) => {
   return res.json({ ok: true, session });
 });
 
+// Store hum capture data for the current participant, then advance.
+// Body: { participantId, low, normal, high, capturedAt }
+// participantId is optional; if omitted the current participant is used.
+app.post('/api/ride-mode/session/:sessionId/hum', (req, res) => {
+  const { sessionId } = req.params;
+  const { participantId, low, normal, high, capturedAt } = req.body || {};
+
+  // Resolve participant: use provided id or fall back to the current participant
+  // from a raw getSession call so we do not expose the internal sessions object.
+  let resolvedParticipantId = participantId;
+  if (!resolvedParticipantId) {
+    const current = getRideSession(sessionId);
+    if (!current) return res.status(404).json({ ok: false, error: 'Session not found' });
+    resolvedParticipantId = current.currentParticipant ? current.currentParticipant.id : null;
+  }
+  if (!resolvedParticipantId) {
+    return res.status(400).json({ ok: false, error: 'Could not resolve current participant' });
+  }
+
+  // Store hum data
+  const humPayload = {
+    low:        typeof low    === 'number' ? low    : null,
+    normal:     typeof normal === 'number' ? normal : null,
+    high:       typeof high   === 'number' ? high   : null,
+    capturedAt: capturedAt || new Date().toISOString()
+  };
+  const afterHum = storeRideHumData(sessionId, resolvedParticipantId, humPayload);
+  if (!afterHum) return res.status(404).json({ ok: false, error: 'Session or participant not found' });
+
+  // Advance the session (mark current ready, move to next)
+  const afterAdvance = advanceRideSession(sessionId);
+  if (!afterAdvance) return res.status(422).json({ ok: false, error: 'Could not advance session' });
+
+  return res.json({ ok: true, session: afterAdvance });
+});
+
 // Mark the current participant ready and advance to the next one.
+// Kept for backwards compatibility; /hum is preferred when hum data is available.
 app.post('/api/ride-mode/session/:sessionId/advance', (req, res) => {
   const session = advanceRideSession(req.params.sessionId);
   if (!session) return res.status(404).json({ ok: false, error: 'Session not found or already complete' });

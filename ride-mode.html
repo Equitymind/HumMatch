@@ -723,9 +723,9 @@
 
             <!-- Hum success flash -->
             <div id="humSuccess" style="display:none;">
-              <div style="font-size:2rem;margin-bottom:8px;">&#127908;</div>
-              <div style="font-size:1rem;font-weight:800;color:#22c55e;">Nice, you're in.</div>
-              <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:4px;">Advancing...</div>
+              <div style="font-size:2rem;margin-bottom:8px;">&#10003;</div>
+              <div style="font-size:1.05rem;font-weight:800;color:#22c55e;">3 notes saved.</div>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:4px;">Moving to next rider...</div>
             </div>
 
             <!-- Hum retry prompt -->
@@ -778,7 +778,7 @@
       <!-- Session-complete banner — shown when all participants are ready -->
       <div class="complete-banner proto-hidden" id="sessionCompleteBanner">
         <h3>🎤 This car is ready to sing</h3>
-        <p id="sessionCompleteSubtitle">All riders hummed. Here are the best 5 songs for this group.</p>
+        <p id="sessionCompleteSubtitle">Here are the top 5 songs for this ride.</p>
         <button class="btn btn-primary" type="button" onclick="document.querySelector('#top5-results .song-card').scrollIntoView({behavior:'smooth'})">See the songs</button>
       </div>
 
@@ -984,16 +984,20 @@
     return participants.map(function(p) {
       var statusClass = 'status--' + (p.status || 'waiting');
       var statusLabel = {
-        ready:   'Ready ✓',
-        current: 'Now 🎤',
+        ready:   'Done',
+        current: 'Humming 🎤',
         waiting: 'Waiting',
         joined:  'Joined'
       }[p.status] || 'Joined';
+      // Green dot indicates hum data has been captured and stored
+      var humDot = p.hasHumData
+        ? '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;margin-left:5px;vertical-align:middle;"></span>'
+        : '';
       var isCurrent = p.status === 'current';
       return [
         '<div class="roster-item' + (isCurrent ? ' is-current' : '') + '">',
         '  <div>',
-        '    <div class="roster-name">' + esc(p.name) + (p.name === 'Driver' ? ' 🚗' : '') + '</div>',
+        '    <div class="roster-name">' + esc(p.name) + (p.name === 'Driver' ? ' 🚗' : '') + humDot + '</div>',
         '    <div class="roster-role">' + esc(p.rolePreference || p.preference || 'Either') + '</div>',
         '  </div>',
         '  <span class="roster-status ' + statusClass + '">' + statusLabel + '</span>',
@@ -1117,9 +1121,11 @@
     var top5Lead         = document.getElementById('top5Lead');
     if (session.isComplete) {
       if (completeBanner) completeBanner.classList.remove('proto-hidden');
-      if (completeSubtitle && session.participants) {
-        var names = session.participants.map(function(p) { return p.name; }).join(', ');
-        completeSubtitle.textContent = 'Session: ' + esc(session.name) + ' · ' + session.participants.length + ' riders hummed. Here are the best 5 songs for this group.';
+      if (completeSubtitle) {
+        var riderCount = session.totalCount || (session.participants ? session.participants.length : 0);
+        var humCount   = session.completedHumCount || 0;
+        var humNote    = humCount > 0 ? ' · ' + humCount + ' of ' + riderCount + ' hums captured' : '';
+        completeSubtitle.textContent = esc(session.name) + ' · ' + riderCount + ' riders' + humNote + '.';
       }
       if (top5Lead) top5Lead.style.display = 'none';
     } else {
@@ -1156,7 +1162,7 @@
       var response = await fetch('/api/ride-mode/session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionName: sessionName, expectedRiderCount: expectedRiderCount, vibePreset: vibePreset })
+        body: JSON.stringify({ sessionName: sessionName, expectedRiderCount: expectedRiderCount, vibePreset: vibePreset, driverAlias: null })
       });
       var data = await response.json();
       if (!data.ok || !data.session) { alert('Could not start Ride Mode session.'); return; }
@@ -1353,7 +1359,7 @@
         // All 3 phases done: show success and advance session
         showHumState('success');
         stopRideHumCapture();
-        rideHumTimer = setTimeout(function() { advanceCurrentParticipant(); }, 900);
+        rideHumTimer = setTimeout(function() { submitHumAndAdvance(); }, 900);
       }
     }, 3000);
   }
@@ -1385,6 +1391,37 @@
     }
 
     rideRunPhase();
+  }
+
+  // ── Submit hum data then advance ────────────────────────────────────────────────
+  // Called after all 3 hum phases complete. Posts captured MIDI notes + advance
+  // to /hum endpoint (atomic store+advance). Falls back to /advance if needed.
+  async function submitHumAndAdvance() {
+    if (!currentRideSessionId) return;
+    try {
+      var response = await fetch('/api/ride-mode/session/' + currentRideSessionId + '/hum', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          low:        rideHumNotes[0],
+          normal:     rideHumNotes[1],
+          high:       rideHumNotes[2],
+          capturedAt: new Date().toISOString()
+        })
+      });
+      var data = await response.json();
+      if (data.ok && data.session) {
+        applySessionToUI(data.session);
+        refreshQrBox('progress', data.session);
+        if (data.session.isComplete) {
+          setTimeout(function() { showRideResults(data.session); }, 600);
+        }
+        return;
+      }
+      // /hum failed: fall back to plain advance
+    } catch(_) {}
+    // Fallback path
+    advanceCurrentParticipant();
   }
 
   // ── End of Ride Mode Hum Capture Engine ───────────────────────────────────
@@ -1446,6 +1483,9 @@
       try { await fetch('/api/ride-mode/session/' + currentRideSessionId + '/end', { method: 'POST' }); } catch (_) {}
     }
     currentRideSessionId = null;
+    // Zero out captured hum notes so they cannot leak into the next session
+    rideHumNotes = [null, null, null];
+    rideHumPhase = 0;
 
     // Clear all live UI state
     ['metricJoined','metricReady','metricWaiting'].forEach(function(id) {

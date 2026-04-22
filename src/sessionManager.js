@@ -1,6 +1,6 @@
 // src/sessionManager.js
-// Stage 2B+privacy: participant state model with roster, status, advance logic,
-// host assignment, and role-aware session views.
+// Stage 2B/3/4: participant state model with roster, status, advance logic,
+// host assignment, role-aware session views, and per-participant hum data storage.
 
 const sessions = {};
 
@@ -32,7 +32,8 @@ function syncStatuses(session) {
 // Build the full public session shape used by driver and host views.
 function fullSessionView(session) {
   if (!session) return null;
-  const readyCount = session.participants.filter(function(p) { return p.status === 'ready'; }).length;
+  const readyCount         = session.participants.filter(function(p) { return p.status === 'ready'; }).length;
+  const completedHumCount  = session.participants.filter(function(p) { return !!p.humData; }).length;
   const currentP = session.participants[session.currentParticipantIndex] || null;
   const nextP    = session.participants[session.currentParticipantIndex + 1] || null;
   return {
@@ -44,6 +45,13 @@ function fullSessionView(session) {
     isActive:                session.isActive,
     isComplete:              session.isComplete,
     hostParticipantId:       session.hostParticipantId || null,
+    // Driver identity
+    driverAlias:             session.driverAlias             || null,
+    driverSessionOwner:      session.driverSessionOwner      || null,
+    captureMode:             session.captureMode             || 'driver_device',
+    // Hum data summary
+    hasHumData:              completedHumCount > 0,
+    completedHumCount:       completedHumCount,
     joinedCount:             session.participants.length,
     readyCount:              readyCount,
     totalCount:              session.participants.length,
@@ -58,7 +66,8 @@ function fullSessionView(session) {
         rolePreference: p.rolePreference,
         joinedAt:       p.joinedAt,
         status:         p.status,
-        preference:     p.rolePreference   // legacy alias
+        preference:     p.rolePreference,  // legacy alias
+        hasHumData:     !!p.humData        // true once hum captured; data itself not exposed in roster
       };
     }),
     viewerRole: 'driver'   // tag so callers know which view was returned
@@ -140,14 +149,15 @@ function publicSession(session) {
 
 // ── public API ─────────────────────────────────────────────────────────────────
 
-function createSession(sessionName, expectedRiderCount, vibePreset) {
+function createSession(sessionName, expectedRiderCount, vibePreset, driverAlias) {
   const sessionId = Date.now().toString();
   const driverParticipant = {
     id:             makeParticipantId(),
     name:           'Driver',
     rolePreference: 'Lead',
     joinedAt:       new Date(),
-    status:         'current'
+    status:         'current',
+    humData:        null
   };
   sessions[sessionId] = {
     id:                      sessionId,
@@ -159,7 +169,11 @@ function createSession(sessionName, expectedRiderCount, vibePreset) {
     currentParticipantIndex: 0,
     hostParticipantId:       null,
     isActive:                true,
-    isComplete:              false
+    isComplete:              false,
+    // Driver identity fields (non-billing, prepared for later affiliate linkage)
+    driverAlias:             driverAlias || null,
+    driverSessionOwner:      null,
+    captureMode:             'driver_device'
   };
   return publicSession(sessions[sessionId]);
 }
@@ -174,7 +188,8 @@ function joinSession(sessionId, participantName, rolePreference) {
     name:           participantName || 'Guest',
     rolePreference: rolePreference  || 'Either',
     joinedAt:       new Date(),
-    status:         'waiting'
+    status:         'waiting',
+    humData:        null
   };
   session.participants.push(newParticipant);
   syncStatuses(session);
@@ -248,6 +263,23 @@ function getSessionForViewer(sessionId, viewerRole, viewerParticipantId) {
   return sessionForViewer(session, effectiveRole, viewerParticipantId);
 }
 
+// Store hum capture data for a specific participant.
+// Called before /advance so data is persisted regardless of advancement outcome.
+// humPayload: { low, normal, high, capturedAt }
+function storeHumData(sessionId, participantId, humPayload) {
+  const session = sessions[sessionId];
+  if (!session) return null;
+  const participant = session.participants.find(function(p) { return p.id === participantId; });
+  if (!participant) return null;
+  participant.humData = {
+    low:         humPayload.low         || null,
+    normal:      humPayload.normal      || null,
+    high:        humPayload.high        || null,
+    capturedAt:  humPayload.capturedAt  || new Date().toISOString()
+  };
+  return publicSession(session);
+}
+
 module.exports = {
   createSession,
   joinSession,
@@ -255,5 +287,6 @@ module.exports = {
   advanceSession,
   endSession,
   getSession,
-  getSessionForViewer
+  getSessionForViewer,
+  storeHumData
 };
