@@ -672,7 +672,7 @@
         <!-- ── 3. PROGRESS ──────────────────────────────────────────────────── -->
         <div class="proto-card proto-hidden" data-flow-state="progress" id="protoProgressCard">
           <div class="proto-title">Session Progress</div>
-          <p class="proto-copy">See who's joined and who's up next. Tap <strong style="color:#e9d5ff;">Mark Ready</strong> to advance.</p>
+          <p class="proto-copy">Each rider hums three notes in turn. The session advances automatically.</p>
 
           <!-- Metrics row -->
           <div class="mini-metrics">
@@ -689,16 +689,62 @@
             </div>
           </div>
 
-          <!-- Next-up indicator -->
+          <!-- Current participant hum turn -->
+          <div id="humTurnPanel" style="display:none;margin-top:16px;padding:20px 18px;border-radius:16px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.28);text-align:center;">
+            <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.09em;text-transform:uppercase;color:rgba(168,85,247,0.7);margin-bottom:6px;">Now humming</div>
+            <div style="font-weight:900;color:#fff;font-size:1.2rem;margin-bottom:2px;" id="nextUpName">—</div>
+            <div style="font-size:0.85rem;color:var(--text2);margin-bottom:16px;" id="nextUpRole">—</div>
+
+            <!-- Hum prompt (shown before capture starts) -->
+            <div id="humPrompt">
+              <div style="font-size:1rem;font-weight:700;color:#e9d5ff;margin-bottom:12px;">Your turn to hum</div>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:16px;">Low, normal, high. Hold each note for 3 seconds.</div>
+              <button class="btn btn-success" type="button" id="startHumBtn" onclick="startRideHum()">Start Humming</button>
+            </div>
+
+            <!-- Hum capture in progress -->
+            <div id="humCapturing" style="display:none;">
+              <div style="position:relative;width:80px;height:80px;margin:0 auto 12px;">
+                <svg width="80" height="80" style="transform:rotate(-90deg);">
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(168,85,247,0.15)" stroke-width="6"/>
+                  <circle id="rideHumRing" cx="40" cy="40" r="34" fill="none" stroke="#a855f7" stroke-width="6"
+                    stroke-dasharray="213.6" stroke-dashoffset="213.6"
+                    style="transition:stroke-dashoffset 0.1s linear;"/>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                  <div style="font-size:1.4rem;font-weight:900;color:#fff;" id="rideHumPhaseNum">1</div>
+                  <div style="font-size:0.6rem;color:rgba(255,255,255,0.5);">of 3</div>
+                </div>
+              </div>
+              <div style="font-size:1rem;font-weight:800;color:#e9d5ff;margin-bottom:4px;" id="rideHumPhaseLabel">Hum your lowest note</div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-bottom:10px;" id="rideHumPhaseSub">Go as low as you comfortably can</div>
+              <div style="font-size:0.82rem;font-weight:600;min-height:20px;" id="rideHumStatus">Listening...</div>
+            </div>
+
+            <!-- Hum success flash -->
+            <div id="humSuccess" style="display:none;">
+              <div style="font-size:2rem;margin-bottom:8px;">&#127908;</div>
+              <div style="font-size:1rem;font-weight:800;color:#22c55e;">Nice, you're in.</div>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:4px;">Advancing...</div>
+            </div>
+
+            <!-- Hum retry prompt -->
+            <div id="humRetry" style="display:none;">
+              <div style="font-size:0.95rem;font-weight:700;color:#f59e0b;margin-bottom:8px;">Didn't catch that. Try again.</div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-bottom:12px;">Hum a little louder and hold each note steady.</div>
+              <button class="btn btn-success" type="button" onclick="startRideHum()">Try Again</button>
+            </div>
+          </div>
+
+          <!-- Next-up indicator (shown when no hum is in progress) -->
           <div id="nextUpBanner" style="margin-top:14px;padding:14px 16px;border-radius:14px;background:rgba(168,85,247,0.10);border:1px solid rgba(168,85,247,0.25);display:none;">
             <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:rgba(168,85,247,0.7);margin-bottom:4px;">Current</div>
-            <div style="font-weight:800;color:#fff;font-size:1.05rem;" id="nextUpName">—</div>
-            <div style="font-size:0.84rem;color:var(--text2);margin-top:2px;" id="nextUpRole">—</div>
+            <div style="font-weight:800;color:#fff;font-size:1.05rem;" id="nextUpNameFallback">—</div>
+            <div style="font-size:0.84rem;color:var(--text2);margin-top:2px;" id="nextUpRoleFallback">—</div>
           </div>
 
           <div class="cta-row">
-            <button class="btn btn-success"   type="button" id="markReadyBtn"  onclick="advanceCurrentParticipant()">Mark Ready → Next</button>
-            <button class="btn btn-primary"   type="button" id="showResultsBtn" onclick="showRideResults()" style="display:none;">See Results</button>
+            <button class="btn btn-primary" type="button" id="showResultsBtn" onclick="showRideResults()" style="display:none;">See Results</button>
             <button class="btn btn-secondary" type="button" onclick="setRideModeState('join')">+ Add Rider</button>
           </div>
         </div>
@@ -1028,30 +1074,41 @@
         : 'Session is full — go to progress';
     }
 
-    // Next-up banner
+    // Hum turn panel + next-up banner
+    var humPanel   = document.getElementById('humTurnPanel');
     var nextBanner = document.getElementById('nextUpBanner');
     var nextName   = document.getElementById('nextUpName');
     var nextRole   = document.getElementById('nextUpRole');
+    var nextNameFB = document.getElementById('nextUpNameFallback');
+    var nextRoleFB = document.getElementById('nextUpRoleFallback');
     var current    = session.currentParticipant;
-    if (current && nextBanner && nextName && nextRole) {
-      nextBanner.style.display = '';
-      nextName.textContent = current.name || '—';
-      // find role from participants array
+
+    if (session.isComplete) {
+      // Session done: hide hum panel and next-up banner
+      if (humPanel)   humPanel.style.display   = 'none';
+      if (nextBanner) nextBanner.style.display  = 'none';
+    } else if (current) {
+      // Show focused hum panel for current participant
+      if (humPanel) humPanel.style.display = '';
+      if (nextBanner) nextBanner.style.display = 'none';
       var fullP = (session.participants || []).find(function(p) { return p.id === current.id; });
-      nextRole.textContent = fullP ? (fullP.rolePreference || fullP.preference || 'Either') : '—';
-    } else if (nextBanner) {
-      nextBanner.style.display = 'none';
+      var roleTxt = fullP ? (fullP.rolePreference || fullP.preference || 'Either') : 'Either';
+      if (nextName) nextName.textContent = current.name || 'Rider';
+      if (nextRole) nextRole.textContent = roleTxt;
+      // Reset hum panel to prompt state (don't interrupt an active capture)
+      if (!rideHumCapturing) {
+        showHumState('prompt');
+      }
+    } else {
+      // No current participant yet
+      if (humPanel)   humPanel.style.display   = 'none';
+      if (nextBanner) nextBanner.style.display  = 'none';
     }
 
-    // Mark-ready / See-results button toggle
-    var markReadyBtn  = document.getElementById('markReadyBtn');
+    // See-results button
     var showResultsBtn = document.getElementById('showResultsBtn');
-    if (session.isComplete) {
-      if (markReadyBtn)   { markReadyBtn.style.display   = 'none'; }
-      if (showResultsBtn) { showResultsBtn.style.display = ''; }
-    } else {
-      if (markReadyBtn)   { markReadyBtn.style.display   = ''; }
-      if (showResultsBtn) { showResultsBtn.style.display = 'none'; }
+    if (showResultsBtn) {
+      showResultsBtn.style.display = session.isComplete ? '' : 'none';
     }
 
     // Session-complete banner in Top 5 section
@@ -1140,10 +1197,200 @@
   }
 
   // ── API: advance (mark current ready, move to next) ──────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  Ride Mode Hum Capture Engine
+  //  Reuses the same audio analysis approach as the main HumMatch hum flow.
+  //  Self-contained: no dependency on index.html globals.
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  var rideAudioCtx     = null;
+  var rideAnalyser     = null;
+  var rideStream       = null;
+  var rideHumCapturing = false;
+  var rideHumTimer     = null;
+  var rideHumInterval  = null;
+  var rideHumPhase     = 0;          // 0=low 1=normal 2=high
+  var rideHumNotes     = [null, null, null];
+  var rideRingRaf      = null;
+
+  var RIDE_PHASES = [
+    { label: 'Hum your lowest note',  sub: 'Go as low as you comfortably can. Hold it steady.' },
+    { label: 'Now your normal voice', sub: 'Hum like you are humming a song to yourself.' },
+    { label: 'Now go high',           sub: 'As high as you comfortably can. Hold it steady.' }
+  ];
+  var RIDE_RING_CIRC = 2 * Math.PI * 34; // matches r=34 in SVG
+
+  // ── UI state switcher ──────────────────────────────────────────────────────
+  function showHumState(state) {
+    var els = { prompt: 'humPrompt', capturing: 'humCapturing', success: 'humSuccess', retry: 'humRetry' };
+    Object.keys(els).forEach(function(k) {
+      var el = document.getElementById(els[k]);
+      if (el) el.style.display = k === state ? '' : 'none';
+    });
+  }
+
+  // ── Pitch helpers (same algorithm as main HumMatch) ────────────────────────
+  function rideDetectPitch(buf, sampleRate) {
+    var MIN_LAG = Math.floor(sampleRate / 1400);
+    var MAX_LAG = Math.floor(sampleRate / 50);
+    var MAX_SAMPLES = Math.min(buf.length, 2048);
+    var rmsTotal = 0;
+    for (var i = 0; i < MAX_SAMPLES; i++) rmsTotal += buf[i] * buf[i];
+    rmsTotal = Math.sqrt(rmsTotal / MAX_SAMPLES);
+    if (rmsTotal < 0.001) return 0;
+    var best = MIN_LAG, bestCorr = -1;
+    for (var lag = MIN_LAG; lag <= MAX_LAG; lag++) {
+      var c = 0;
+      for (var j = 0; j < MAX_SAMPLES; j++) c += buf[j] * buf[j + lag];
+      c /= (MAX_SAMPLES * rmsTotal * rmsTotal + 0.001);
+      if (c > bestCorr) { bestCorr = c; best = lag; }
+    }
+    if (bestCorr < 0.1) return 0;
+    return sampleRate / best;
+  }
+
+  function rideFreqToMidi(freq) {
+    return Math.round(12 * Math.log2(freq / 440) + 69);
+  }
+
+  // ── Ring animation ─────────────────────────────────────────────────────────
+  function rideAnimateRing(durationMs, onComplete) {
+    var ring  = document.getElementById('rideHumRing');
+    if (!ring) return;
+    ring.style.strokeDashoffset = RIDE_RING_CIRC;
+    var start = performance.now();
+    function tick(now) {
+      var progress = Math.min((now - start) / durationMs, 1);
+      ring.style.strokeDashoffset = String(RIDE_RING_CIRC * (1 - progress));
+      if (progress < 1) {
+        rideRingRaf = requestAnimationFrame(tick);
+      } else {
+        if (onComplete) onComplete();
+      }
+    }
+    rideRingRaf = requestAnimationFrame(tick);
+  }
+
+  function rideCancelRing() {
+    if (rideRingRaf) { cancelAnimationFrame(rideRingRaf); rideRingRaf = null; }
+    var ring = document.getElementById('rideHumRing');
+    if (ring) ring.style.strokeDashoffset = String(RIDE_RING_CIRC);
+  }
+
+  // ── Stop and clean up audio ────────────────────────────────────────────────
+  function stopRideHumCapture() {
+    rideHumCapturing = false;
+    if (rideHumTimer)    { clearTimeout(rideHumTimer);    rideHumTimer    = null; }
+    if (rideHumInterval) { clearInterval(rideHumInterval); rideHumInterval = null; }
+    rideCancelRing();
+    if (rideStream)   { rideStream.getTracks().forEach(function(t) { t.stop(); }); rideStream = null; }
+    if (rideAudioCtx) { try { rideAudioCtx.close(); } catch(_) {} rideAudioCtx = null; }
+    rideAnalyser = null;
+  }
+
+  // ── Run a single phase ────────────────────────────────────────────────────
+  function rideRunPhase() {
+    if (rideHumCapturing) return;
+    rideHumCapturing = true;
+
+    var p = RIDE_PHASES[rideHumPhase];
+    var phaseNum  = document.getElementById('rideHumPhaseNum');
+    var phaseLabel = document.getElementById('rideHumPhaseLabel');
+    var phaseSub  = document.getElementById('rideHumPhaseSub');
+    var statusEl  = document.getElementById('rideHumStatus');
+    if (phaseNum)   phaseNum.textContent  = String(rideHumPhase + 1);
+    if (phaseLabel) phaseLabel.textContent = p.label;
+    if (phaseSub)   phaseSub.textContent  = p.sub;
+    if (statusEl)   statusEl.textContent  = 'Listening...';
+    if (statusEl)   statusEl.style.color  = 'rgba(255,255,255,0.6)';
+
+    var pitches = [];
+    var buf     = new Float32Array(rideAnalyser.fftSize);
+
+    rideAnimateRing(3000, null);
+
+    rideHumInterval = setInterval(function() {
+      if (!rideAnalyser) return;
+      rideAnalyser.getFloatTimeDomainData(buf);
+      var rms = 0;
+      for (var i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
+      rms = Math.sqrt(rms / buf.length);
+      if (rms < 0.001) return;
+      var freq = rideDetectPitch(buf, rideAudioCtx.sampleRate);
+      if (freq > 50 && freq < 1400) {
+        pitches.push(rideFreqToMidi(freq));
+        if (statusEl) {
+          statusEl.textContent = rms > 0.02 ? 'Good, keep going!' : 'Hum a little louder';
+          statusEl.style.color = rms > 0.02 ? '#22c55e' : '#f59e0b';
+        }
+      } else if (rms > 0.001 && statusEl) {
+        statusEl.textContent = 'Hum a little louder';
+        statusEl.style.color = '#f59e0b';
+      }
+    }, 100);
+
+    rideHumTimer = setTimeout(function() {
+      clearInterval(rideHumInterval); rideHumInterval = null;
+      rideCancelRing();
+      rideHumCapturing = false;
+
+      if (pitches.length < 3) {
+        // Not enough signal: retry automatically after a pause
+        if (statusEl) { statusEl.textContent = 'Didn\'t catch that, trying again...'; statusEl.style.color = '#f59e0b'; }
+        rideHumTimer = setTimeout(function() { rideRunPhase(); }, 1200);
+        return;
+      }
+
+      // Median pitch
+      pitches.sort(function(a, b) { return a - b; });
+      rideHumNotes[rideHumPhase] = pitches[Math.floor(pitches.length / 2)];
+
+      if (rideHumPhase < 2) {
+        // Advance to next phase
+        rideHumPhase++;
+        rideHumTimer = setTimeout(function() { rideRunPhase(); }, 500);
+      } else {
+        // All 3 phases done: show success and advance session
+        showHumState('success');
+        stopRideHumCapture();
+        rideHumTimer = setTimeout(function() { advanceCurrentParticipant(); }, 900);
+      }
+    }, 3000);
+  }
+
+  // ── Public entry point ────────────────────────────────────────────────────
+  async function startRideHum() {
+    if (!currentRideSessionId) return;
+
+    // Reset state
+    rideHumPhase = 0;
+    rideHumNotes = [null, null, null];
+    stopRideHumCapture();
+    showHumState('capturing');
+
+    try {
+      rideAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (rideAudioCtx.state === 'suspended') { try { await rideAudioCtx.resume(); } catch(_) {} }
+      rideStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } });
+      rideAnalyser = rideAudioCtx.createAnalyser();
+      rideAnalyser.fftSize = 2048;
+      var src = rideAudioCtx.createMediaStreamSource(rideStream);
+      src.connect(rideAnalyser);
+    } catch(e) {
+      stopRideHumCapture();
+      showHumState('retry');
+      var statusEl = document.getElementById('rideHumStatus');
+      if (statusEl) { statusEl.textContent = 'Mic access needed. Allow it and try again.'; statusEl.style.color = '#f87171'; }
+      return;
+    }
+
+    rideRunPhase();
+  }
+
+  // ── End of Ride Mode Hum Capture Engine ───────────────────────────────────
+
   async function advanceCurrentParticipant() {
-    if (!currentRideSessionId) { alert('No active session.'); return; }
-    var btn = document.getElementById('markReadyBtn');
-    if (btn) btn.disabled = true;
+    if (!currentRideSessionId) return;
 
     try {
       var response = await fetch('/api/ride-mode/session/' + currentRideSessionId + '/advance', {
@@ -1151,19 +1398,22 @@
         headers: { 'Content-Type': 'application/json' }
       });
       var data = await response.json();
-      if (!data.ok || !data.session) { if (btn) btn.disabled = false; return; }
+      if (!data.ok || !data.session) {
+        // Advance failed: show retry prompt
+        showHumState('retry');
+        return;
+      }
 
       applySessionToUI(data.session);
       refreshQrBox('progress', data.session);
 
       if (data.session.isComplete) {
-        // All done — transition to results
+        // All participants done: transition to results
         setTimeout(function() { showRideResults(data.session); }, 600);
       }
     } catch (e) {
-      // no-op — keep button enabled for retry
-    } finally {
-      if (btn) btn.disabled = false;
+      // Network error: show retry prompt
+      showHumState('retry');
     }
   }
 
@@ -1216,8 +1466,10 @@
     if (completeBanner) completeBanner.classList.add('proto-hidden');
     var top5Lead = document.getElementById('top5Lead');
     if (top5Lead) top5Lead.style.display = '';
-    var markReadyBtn = document.getElementById('markReadyBtn');
-    if (markReadyBtn) { markReadyBtn.style.display = ''; markReadyBtn.disabled = false; }
+    // Stop any active hum capture and reset the hum panel
+    stopRideHumCapture();
+    var humPanel = document.getElementById('humTurnPanel');
+    if (humPanel) humPanel.style.display = 'none';
     var showResultsBtn = document.getElementById('showResultsBtn');
     if (showResultsBtn) showResultsBtn.style.display = 'none';
 
