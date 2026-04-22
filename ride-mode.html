@@ -789,24 +789,33 @@
         <p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">Results will appear here after all riders hum.</p>
       </div>
 
-      <!-- Stage 8: Ride-originated conversion panel -->
+      <!-- Stage 8: Ride-originated conversion panel (primary, individual upsell) -->
       <div id="rideConversionPanel" style="display:none; margin-top:28px; background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.12)); border:1px solid rgba(168,85,247,0.28); border-radius:16px; padding:28px 24px; text-align:center;">
-        <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px;">Save your vocal range and best song matches</h3>
-        <p id="rideDiscountCopy" style="font-size:0.875rem;color:rgba(255,255,255,0.65);margin-bottom:20px;line-height:1.5;">Get 10% off courtesy of your driver for 7 days</p>
+        <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px;">Keep your vocal range and your best matches</h3>
+        <p id="rideDiscountCopy" style="font-size:0.875rem;color:rgba(255,255,255,0.65);margin-bottom:20px;line-height:1.5;">10% off courtesy of your driver, good for 7 days</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
           <button onclick="rideConvertNow()" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;font-size:0.9rem;cursor:pointer;">Save My HumMatch</button>
           <button onclick="showRideReminder()" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:12px 20px;border-radius:10px;font-size:0.875rem;cursor:pointer;">Remind Me Later</button>
         </div>
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:14px;line-height:1.5;">This ride is session only. Saving is per person and won't rebuild the group.</p>
       </div>
 
       <!-- Stage 8: Remind Me Later sub-panel -->
       <div id="rideReminderPanel" style="display:none; margin-top:16px; background:rgba(255,255,255,0.04); border:1px solid rgba(124,58,237,0.15); border-radius:12px; padding:20px 24px;">
-        <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-bottom:14px;">Send yourself a reminder with your discount link:</p>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-bottom:14px;">Send yourself your 10% driver discount link:</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
           <input id="rideReminderDest" type="text" placeholder="Email or phone number" style="flex:1;min-width:180px;background:rgba(255,255,255,0.07);border:1px solid rgba(124,58,237,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:0.875rem;outline:none;" />
           <button onclick="submitRideReminder()" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:700;font-size:0.875rem;cursor:pointer;">Send Link</button>
         </div>
         <p id="rideReminderStatus" style="font-size:0.8rem;color:rgba(255,255,255,0.45);min-height:18px;"></p>
+      </div>
+
+      <!-- Stage 12: Secondary conversion bridge: Ride Mode -> SquadMatch -->
+      <div id="rideSquadBridge" style="margin-top:22px; background:rgba(255,255,255,0.03); border:1px dashed rgba(124,58,237,0.35); border-radius:14px; padding:22px 22px; text-align:center;">
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(168,85,247,0.85);margin-bottom:8px;">Want to keep this group together?</div>
+        <h4 style="font-size:1rem;font-weight:700;color:#fff;margin:0 0 6px;">Ride Mode ends when the ride ends.</h4>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin:0 0 16px;line-height:1.5;">SquadMatch is the persistent, host-owned version. Save your group, invite them back, and explore a deeper song list together over time.</p>
+        <a href="/squadmatch" style="display:inline-block;background:rgba(168,85,247,0.18);border:1px solid rgba(168,85,247,0.4);color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">Explore SquadMatch →</a>
       </div>
     </section>
 
@@ -1461,7 +1470,10 @@
       notice = '<p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:16px;">Based on ' + scored.hummedCount + ' of ' + scored.participantCount + ' riders who hummed.</p>';
     }
 
-    var cards = scored.results.map(function(song, i) {
+    // Ride Mode is Top 5 only: decisive, in-the-moment picks for this car.
+    // Deeper exploration lives in SquadMatch.
+    var rideTop5 = scored.results.slice(0, 5);
+    var cards = rideTop5.map(function(song, i) {
       var titleEnc  = encodeURIComponent(song.title + ' ' + song.artist);
       var titleEncPlus = (song.title + ' ' + song.artist).replace(/\s+/g, '+').replace(/[^A-Za-z0-9+]/g, '');
       return [

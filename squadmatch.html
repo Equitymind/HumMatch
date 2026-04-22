@@ -139,10 +139,11 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
 <!-- HOME -->
 <div id="screen-home" class="screen">
   <div class="home-hero">
-    <div class="hero-badge">✦ NEW FEATURE</div>
-    <h1>Find songs your<br/><em>whole crew</em> can actually nail</h1>
-    <p>Invite friends. Everyone hums once. We find the songs your whole group can sing together.</p>
+    <div class="hero-badge">✦ SQUAD LEADER</div>
+    <h1>Your crew. Your songs.<br/><em>Together, over time.</em></h1>
+    <p>Invite your group once. Everyone hums. Come back anytime to explore a deeper shared song list. SquadMatch is the persistent, host-owned version of HumMatch.</p>
     <button class="btn btn-primary" onclick="window.location='/pricing'" style="max-width:280px;margin:0 auto">Become a Squad Leader →</button>
+    <div style="margin-top:14px;font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.5;">Share 20% off with up to 5 friends each month. Keep your squad. Sing again.</div>
   </div>
   <div class="si" style="padding-top:0">
     <div class="steps">
@@ -152,18 +153,21 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div><div class="step-title">Invite your squad</div><div class="step-desc">Share a link — up to 4 friends, each hums once</div></div>
+        <div><div class="step-title">Invite your squad</div><div class="step-desc">Share a link with up to 4 friends. They hum once, they're in.</div></div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div><div class="step-title">We do the rest</div><div class="step-desc">Your squad's shared song list unlocks when everyone finishes</div></div>
+        <div><div class="step-title">Keep the squad</div><div class="step-desc">Your shared song list stays saved. Come back, go deeper, sing more.</div></div>
       </div>
     </div>
     <button class="btn btn-primary" onclick="window.location='/pricing'">Become a Squad Leader</button>
     <button class="btn-ghost" onclick="window.location='/'">Try solo first →</button>
+    <div style="margin-top:18px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.2);border-radius:12px;font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.55;text-align:center;">
+      <strong style="color:#fff;">SquadMatch vs Ride Mode:</strong> SquadMatch is persistent and host-owned. You save the group, invite them back, and go beyond the Top 5. Ride Mode is for one ride only.
+    </div>
   </div>
   <div class="foot-links">
-    <a href="/">HumMatch</a><a href="/pricing">Pricing</a><a href="/how-it-works">How It Works</a>
+    <a href="/">HumMatch</a><a href="/pricing">Pricing</a><a href="/how-it-works">How It Works</a><a href="/ride-mode">Ride Mode</a>
   </div>
 </div>
 
@@ -222,9 +226,10 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
   <div style="background:var(--bg);border:1px solid rgba(124,58,237,0.2);border-radius:16px;padding:28px 24px;max-width:320px;text-align:center;">
     <div style="font-size:1.8rem;margin-bottom:12px;">🎵</div>
     <div style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;">Unlock Full Squads</div>
-    <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:16px;">
-      Upgrade to Premium to invite up to 4 friends and unlock harmonic group song matching.
+    <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:10px;">
+      Upgrade to Squad Leader to invite up to 4 friends, save your squad, and unlock a deeper shared song list you can return to anytime.
     </div>
+    <div style="font-size:0.78rem;color:rgba(168,85,247,0.85);line-height:1.5;margin-bottom:16px;">Share 20% off with up to 5 friends each month.</div>
     <button onclick="window.location.href='/pricing'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:8px;">Upgrade to Premium</button>
     <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="width:100%;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--muted);font-size:0.85rem;cursor:pointer;">Maybe later</button>
   </div>
@@ -298,7 +303,7 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
       <div class="hc-title" id="best-title">—</div>
       <div class="hc-artist" id="best-artist"></div>
     </div>
-    <div style="font-size:0.78rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">All Shared Songs</div>
+    <div style="font-size:0.78rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Your squad's shared song list · saved for this crew</div>
     <div class="song-list" id="reveal-songs"></div>
     <div class="divider"></div>
     <button class="btn btn-primary" onclick="goVote()">Name Your Squad</button>
@@ -842,7 +847,9 @@ async function loadReveal() {
   if (!S.songs.length) {
     el.innerHTML = '<div style="text-align:center;color:var(--muted);padding:24px;font-size:0.84rem">Not enough data yet — make sure everyone has hummed!</div>';
   } else {
-    el.innerHTML = S.songs.slice(0,8).map((s,i) => `
+    // SquadMatch is the deeper, host-owned product: show the full shared list,
+    // not a Top 5 teaser. Ride Mode caps at 5; SquadMatch goes as deep as the hums allow.
+    el.innerHTML = S.songs.map((s,i) => `
       <div class="srow"><span class="snum">${i+1}</span>
       <div class="sinfo"><div class="stitle">${s.title}</div><div class="sartist">${s.artist}</div></div>
       <span class="sscore">${Math.round((s.score||0)*100)}%</span></div>`).join('');
