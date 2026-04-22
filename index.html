@@ -465,7 +465,7 @@
   <!-- Genre filters removed - discovery through popularity tiers instead -->
 
   <div style="width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;">
-  <button class="cta-btn" style="width:100%;margin-top:12px;" onclick="startTest()">Find My Songs →</button>
+  <button id="hm-primary-cta" class="cta-btn" style="width:100%;margin-top:12px;" onclick="startTest()">Find My Songs →</button>
   <div id="saved-profile-btn" style="display:none;margin-top:12px;width:100%;max-width:300px;">
     <button class="cta-btn secondary" style="width:100%;" onclick="loadSavedProfile()">🎤 Use My Saved Voice</button>
     <div style="font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:6px;" id="saved-profile-date"></div>
@@ -153508,45 +153508,164 @@ function applyPromoCode() {
   }
 }
 
-// ── startTest: route to primer screen (checks hum limit first) ──
-async function startTest() {
-  // Check free hum limit (5 hums per month for non-premium)
-  const isPremium = localStorage.getItem('hm_premium') === 'true';
-  if (!isPremium) {
-    const monthKey = new Date().toISOString().slice(0,7);
-    const storedMonth = localStorage.getItem('hm_hum_month');
-    if (storedMonth !== monthKey) {
-      localStorage.setItem('hm_hum_month', monthKey);
-      localStorage.setItem('hm_hum_count', '0');
-    }
-    const humCount = parseInt(localStorage.getItem('hm_hum_count') || '0');
-    if (humCount >= 5) {
-      showScreen('screen-welcome');
-      const modal = document.createElement('div');
-      modal.id = 'limit-modal';
-      modal.style.cssText = 'position:fixed;inset:0;z-index:3000;background:rgba(8,6,15,0.96);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;';
-      const isLoggedIn = !!localStorage.getItem('hm_token');
-      const limitSubtext = isLoggedIn
-        ? 'Unlock Squad Leader for unlimited hums and exports.'
-        : 'Create a free account to track your usage across devices, or unlock Squad Leader.';
-      modal.innerHTML = `
-        <div style="font-size:2.5rem;margin-bottom:16px;">🎤</div>
-        <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">Free hums available when invited by a Squad Leader</h2>
-        <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:28px;max-width:300px;">${limitSubtext}</p>
+// ── Stage 11 entitlement model ──────────────────────────────────────────────
+// Single source of truth for personal free hum allowance.
+const HM_FREE_HUM_LIMIT = 3;
 
-        <div style="width:100%;max-width:300px;margin-bottom:8px;">
-          <div style="display:flex;gap:8px;">
-            <input id="promo-input" type="text" placeholder="Promo code" autocapitalize="characters" style="flex:1;padding:12px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(168,85,247,0.3);border-radius:10px;color:#fff;font-size:0.95rem;outline:none;"/>
-            <button onclick="applyPromoCode()" style="padding:12px 16px;background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.4);border-radius:10px;color:#a855f7;font-size:0.9rem;font-weight:700;cursor:pointer;">Apply</button>
-          </div>
-          <div id="promo-msg" style="font-size:0.8rem;margin-top:6px;min-height:18px;"></div>
+// Is the current page load inside a sponsored SquadMatch session?
+// Detected via URL params ?squad=<id>&member=<id> set when a Squad Leader's
+// invite link lands on index.html for a member hum. This is session-scoped;
+// no leakage to solo mode after.
+function hmInSponsoredSquadSession() {
+  try {
+    const p = new URLSearchParams(location.search);
+    return !!(p.get('squad') && p.get('member'));
+  } catch(_) { return false; }
+}
+
+// Is the current user inside an active Ride Mode session? Ride Mode captures
+// live in ride-mode.html, so on index.html this is only relevant if a ride
+// flow bounced the user back here (rare). Kept for completeness.
+function hmInSponsoredRideSession() {
+  try {
+    const p = new URLSearchParams(location.search);
+    if (p.get('ride') || p.get('rideSession')) return true;
+  } catch(_) {}
+  try { return sessionStorage.getItem('hm_ride_active') === '1'; } catch(_) { return false; }
+}
+
+// Returns { state, remaining } where state is one of:
+//   'personal'    -- user has personal free hums left
+//   'sponsoredSquad' -- 0 personal but in eligible squad session
+//   'sponsoredRide'  -- 0 personal but in active ride session
+//   'none'        -- blocked
+function hmGetEntitlement() {
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  if (isPremium) return { state: 'personal', remaining: Infinity };
+  const monthKey = new Date().toISOString().slice(0,7);
+  if (localStorage.getItem('hm_hum_month') !== monthKey) {
+    localStorage.setItem('hm_hum_month', monthKey);
+    localStorage.setItem('hm_hum_count', '0');
+  }
+  const used = parseInt(localStorage.getItem('hm_hum_count') || '0');
+  const remaining = Math.max(0, HM_FREE_HUM_LIMIT - used);
+  if (remaining > 0) return { state: 'personal', remaining };
+  if (hmInSponsoredSquadSession()) return { state: 'sponsoredSquad', remaining: 0 };
+  if (hmInSponsoredRideSession())  return { state: 'sponsoredRide',  remaining: 0 };
+  return { state: 'none', remaining: 0 };
+}
+
+// Read-only helper used for countdown copy after a hum completes.
+function hmPersonalRemaining() {
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  if (isPremium) return Infinity;
+  const used = parseInt(localStorage.getItem('hm_hum_count') || '0');
+  return Math.max(0, HM_FREE_HUM_LIMIT - used);
+}
+
+// True if the user has a dashboard/session token. Authenticated users see the
+// full result list; anonymous users see Top 3 + unlock gate.
+function hmIsAuthed() {
+  try { return !!(localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token')); } catch(_) { return false; }
+}
+
+// Stage 11: Top 3 results gate for anonymous users. After the results list
+// renders, clip it to 3 cards and insert an unlock prompt. Authenticated
+// users are unaffected.
+function hmApplyTop3Gate() {
+  if (hmIsAuthed()) return; // authed users see full list
+  // Squad/Ride session hums route results elsewhere; don't gate inside them.
+  if (hmInSponsoredSquadSession() || hmInSponsoredRideSession()) return;
+  const ul = document.getElementById('your-songs');
+  if (!ul) return;
+  const cards = ul.querySelectorAll('li');
+  if (cards.length <= 3) return; // nothing to clip
+  for (let i = 3; i < cards.length; i++) cards[i].style.display = 'none';
+
+  // Hide tier/load-more buttons beneath the list while gated
+  const tierNav = document.getElementById('hm-tier-nav');
+  if (tierNav) tierNav.style.display = 'none';
+  const stretchSec = document.getElementById('stretch-section');
+  if (stretchSec) stretchSec.style.display = 'none';
+
+  // Insert a single unlock gate card immediately after the 3rd result
+  const existing = document.getElementById('hm-unlock-gate');
+  if (existing) existing.remove();
+  const gate = document.createElement('div');
+  gate.id = 'hm-unlock-gate';
+  gate.style.cssText = 'width:100%;max-width:400px;margin:14px auto 0;padding:18px;background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.35);border-radius:14px;text-align:center;';
+  gate.innerHTML = `
+    <div style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:6px;">Unlock the rest of your matches</div>
+    <div style="font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:14px;">Save your vocal range and song matches. Free account, no card required.</div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="window.location.href='/login?signup=1'" style="flex:1;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.88rem;font-weight:800;cursor:pointer;font-family:inherit;">Create account</button>
+      <button onclick="window.location.href='/login'" style="flex:1;padding:12px;background:transparent;border:2px solid rgba(168,85,247,0.55);border-radius:10px;color:#fff;font-size:0.88rem;font-weight:800;cursor:pointer;font-family:inherit;">Log in</button>
+    </div>
+  `;
+  ul.after(gate);
+}
+
+// Stage 11: calm countdown messaging after a successful hum.
+// 2 remaining -> "2 free hums remaining" (inline, calm)
+// 1 remaining -> "Last free hum -- make it count" (urgency, uses -- not em dash)
+function hmShowCountdownMessage() {
+  const isPremium = localStorage.getItem('hm_premium') === 'true';
+  if (isPremium) return;
+  // Only show for fresh solo hums, not for sponsored session hums
+  if (hmInSponsoredSquadSession() || hmInSponsoredRideSession()) return;
+  const remaining = hmPersonalRemaining();
+  if (remaining !== 1 && remaining !== 2) return;
+
+  const ul = document.getElementById('your-songs');
+  if (!ul) return;
+  const existing = document.getElementById('hm-countdown-msg');
+  if (existing) existing.remove();
+
+  const msg = document.createElement('div');
+  msg.id = 'hm-countdown-msg';
+  const text = remaining === 1 ? 'Last free hum -- make it count' : '2 free hums remaining';
+  const color = remaining === 1 ? '#f59e0b' : 'rgba(255,255,255,0.55)';
+  msg.style.cssText = 'width:100%;max-width:400px;margin:0 auto 10px;padding:9px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;text-align:center;font-size:0.8rem;font-weight:700;color:' + color + ';';
+  msg.textContent = text;
+  ul.parentNode.insertBefore(msg, ul);
+}
+
+// ── startTest: route to primer screen (checks entitlement first) ──
+async function startTest() {
+  const ent = hmGetEntitlement();
+  if (ent.state === 'none') {
+    showScreen('screen-welcome');
+    const modal = document.createElement('div');
+    modal.id = 'limit-modal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:3000;background:rgba(8,6,15,0.96);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;';
+    const isLoggedIn = !!localStorage.getItem('hm_token');
+    const limitSubtext = isLoggedIn
+      ? 'Unlock Squad Leader for unlimited hums and exports.'
+      : 'Create a free account to save your vocal range, or unlock Squad Leader for unlimited hums.';
+    modal.innerHTML = `
+      <div style="font-size:2.5rem;margin-bottom:16px;">🎤</div>
+      <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">You've used your free hums</h2>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:24px;max-width:300px;">${limitSubtext}</p>
+
+      <button onclick="window.location.href='/pricing?v=2'" style="width:100%;max-width:300px;padding:14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.95rem;font-weight:800;cursor:pointer;margin-bottom:12px;font-family:inherit;">Unlock more hums</button>
+
+      <div style="width:100%;max-width:300px;margin-bottom:8px;">
+        <div style="display:flex;gap:8px;">
+          <input id="promo-input" type="text" placeholder="Promo code" autocapitalize="characters" style="flex:1;padding:12px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(168,85,247,0.3);border-radius:10px;color:#fff;font-size:0.95rem;outline:none;"/>
+          <button onclick="applyPromoCode()" style="padding:12px 16px;background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.4);border-radius:10px;color:#a855f7;font-size:0.9rem;font-weight:700;cursor:pointer;">Apply</button>
         </div>
-        <button onclick="document.getElementById('limit-modal').remove()" style="background:none;border:none;color:rgba(255,255,255,0.35);font-size:0.85rem;cursor:pointer;padding:8px;">Not now</button>
-      `;
-      document.body.appendChild(modal);
-      return;
-    }
-    localStorage.setItem('hm_hum_count', humCount + 1);
+        <div id="promo-msg" style="font-size:0.8rem;margin-top:6px;min-height:18px;"></div>
+      </div>
+      <button onclick="document.getElementById('limit-modal').remove()" style="background:none;border:none;color:rgba(255,255,255,0.35);font-size:0.85rem;cursor:pointer;padding:8px;">Not now</button>
+    `;
+    document.body.appendChild(modal);
+    return;
+  }
+
+  // Sponsored sessions do NOT consume personal free hums.
+  if (ent.state === 'personal' && !(localStorage.getItem('hm_premium') === 'true')) {
+    const prev = parseInt(localStorage.getItem('hm_hum_count') || '0');
+    localStorage.setItem('hm_hum_count', String(prev + 1));
     if (typeof hmSyncCounts === 'function') hmSyncCounts();
   }
   // Show primer screen instead of jumping straight to test
@@ -154478,6 +154597,9 @@ const fallbackSongs = verifiedSongs
   }
 
   showScreen('screen-results');
+  // Stage 11: Top 3 gate for anonymous users + free-hum countdown messaging
+  try { hmApplyTop3Gate(); } catch(_) {}
+  try { hmShowCountdownMessage(); } catch(_) {}
   // Reveal the welcome-screen squad/ride teasers now that the user has a result
   try { if (typeof showSquadPromptIfEligible === 'function') showSquadPromptIfEligible(); } catch(_) {}
   // Show SquadMatch prompt (if not already dismissed)
@@ -154911,15 +155033,42 @@ function loadSavedProfile() {
 function checkSavedProfile() {
   try {
     const raw = localStorage.getItem('hummatch_profile');
-    if (!raw) return;
-    const p = JSON.parse(raw);
-    const days = Math.floor((Date.now() - p.savedAt) / 86400000);
+    const hasSaved = !!raw;
     const btn = document.getElementById('saved-profile-btn');
     const lbl = document.getElementById('saved-profile-date');
-    if (btn) btn.style.display = 'block';
-    if (lbl) lbl.textContent = days === 0 ? 'Saved today' : `Saved ${days} day${days !== 1 ? 's' : ''} ago`;
-    // Returning user with a saved hum: also surface the squad/ride teasers (unless dismissed this session)
-    if (typeof showSquadPromptIfEligible === 'function') showSquadPromptIfEligible();
+    if (hasSaved) {
+      const p = JSON.parse(raw);
+      const days = Math.floor((Date.now() - p.savedAt) / 86400000);
+      if (btn) btn.style.display = 'block';
+      if (lbl) lbl.textContent = days === 0 ? 'Saved today' : `Saved ${days} day${days !== 1 ? 's' : ''} ago`;
+      // Returning user with a saved hum: also surface the squad/ride teasers (unless dismissed this session)
+      if (typeof showSquadPromptIfEligible === 'function') showSquadPromptIfEligible();
+    }
+
+    // Stage 11: adjust primary CTA + saved-profile wording based on entitlement
+    // so out-of-hums users are not misled into tapping "Find My Songs".
+    const primary = document.getElementById('hm-primary-cta');
+    const ent = (typeof hmGetEntitlement === 'function') ? hmGetEntitlement() : { state: 'personal', remaining: Infinity };
+    if (primary) {
+      if (ent.state === 'none') {
+        primary.textContent = 'Unlock more hums';
+        primary.onclick = function() { window.location.href = '/pricing?v=2'; };
+      } else {
+        primary.textContent = 'Find My Songs →';
+        primary.onclick = function() { startTest(); };
+      }
+    }
+    // When out of hums but saved matches exist, relabel the saved-profile CTA
+    // so users can still see their last matches but do not believe a new hum is free.
+    const savedBtnInner = btn ? btn.querySelector('button') : null;
+    if (hasSaved && savedBtnInner) {
+      if (ent.state === 'none') {
+        savedBtnInner.textContent = '🎤 Your saved matches';
+        if (lbl) lbl.textContent = (lbl.textContent || '') + ' -- refresh requires another hum';
+      } else {
+        savedBtnInner.textContent = '🎤 Use My Saved Voice';
+      }
+    }
   } catch(e) {}
 }
 

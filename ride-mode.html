@@ -1281,13 +1281,16 @@
       rms = Math.sqrt(rms / buf.length);
       if (rms < 0.001) return;
       var freq = rideDetectPitch(buf, rideAudioCtx.sampleRate);
+      // Stage 11: align with solo hum UX -- if we already have a valid pitch,
+      // show "Good, keep going!" regardless of rms level. Only nag "louder"
+      // when there's audible signal but no detectable pitch.
       if (freq > 50 && freq < 1400) {
         pitches.push(rideFreqToMidi(freq));
         if (statusEl) {
-          statusEl.textContent = rms > 0.02 ? 'Good, keep going!' : 'Hum a little louder';
-          statusEl.style.color = rms > 0.02 ? '#22c55e' : '#f59e0b';
+          statusEl.textContent = 'Good, keep going!';
+          statusEl.style.color = '#22c55e';
         }
-      } else if (rms > 0.001 && statusEl) {
+      } else if (rms > 0.003 && statusEl) {
         statusEl.textContent = 'Hum a little louder';
         statusEl.style.color = '#f59e0b';
       }
@@ -1337,7 +1340,8 @@
       if (rideAudioCtx.state === 'suspended') { try { await rideAudioCtx.resume(); } catch(_) {} }
       rideStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } });
       rideAnalyser = rideAudioCtx.createAnalyser();
-      rideAnalyser.fftSize = 2048;
+      // Stage 11: match solo hum analyser resolution for better low-pitch capture
+      rideAnalyser.fftSize = 4096;
       var src = rideAudioCtx.createMediaStreamSource(rideStream);
       src.connect(rideAnalyser);
     } catch(e) {
