@@ -538,30 +538,26 @@
       <!-- QR panel — dominant column -->
       <div class="hero-card qr-card">
         <div class="qr-box" id="rideQrBox">
-          <div style="font-size:clamp(1.1rem,2vw,1.5rem);font-weight:900;line-height:1.25;margin-bottom:18px;">What should this car sing next?</div>
-          <div class="qr-placeholder">
-            <div class="qr-placeholder-label">Passenger QR</div>
-          </div>
-          <div style="font-size:1rem;font-weight:800;letter-spacing:0.04em;">Scan to join HumMatch</div>
-          <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Hum once. See the best songs for this ride.</div>
+          <div style="font-size:clamp(1rem,2vw,1.3rem);font-weight:900;line-height:1.3;margin-bottom:20px;color:rgba(255,255,255,0.65);">Your session QR appears here once you start a ride.</div>
+          <button class="btn btn-primary" type="button" onclick="scrollToSetup()" style="font-size:1rem;padding:14px 28px;">Start Ride Session</button>
         </div>
-        <p class="qr-caption" id="rideQrCaption" style="margin-top:14px;">Show this to your passengers to join.</p>
+        <p class="qr-caption" id="rideQrCaption" style="margin-top:14px;">Passengers will scan this QR to join your ride.</p>
       </div>
 
       <!-- Driver status + controls -->
       <div class="hero-card driver-board">
         <div class="driver-status">
-          <span class="status-badge" id="rideStatusBadge">● Session setup</span>
+          <span class="status-badge" id="rideStatusBadge">● No active session</span>
           <button class="btn btn-danger" id="heroEndSessionBtn">End Session</button>
         </div>
         <div>
-          <div class="eyebrow">HumMatch Ride Mode · Driver View</div>
+          <div class="eyebrow">HumMatch Ride Mode</div>
           <h1 class="driver-title">What should this car sing next?</h1>
           <p class="driver-sub">Start a session. Passengers scan and hum. HumMatch surfaces the top 5 songs this car can actually pull off — lead and harmony assigned. Driver chooses playback.</p>
         </div>
         <div class="cta-row">
           <button class="btn btn-primary" type="button" onclick="scrollToSetup()">Start a Ride Session</button>
-          <a class="btn btn-secondary" href="#top5-results">Preview Top 5 Results</a>
+          <a class="btn btn-secondary" href="#protoSetupCard" onclick="scrollToSetup();return false;">How it works</a>
         </div>
       </div>
     </section>
@@ -569,7 +565,7 @@
     <!-- ── How it works ─────────────────────────────────────────────────────── -->
     <section class="section">
       <h2>How it works</h2>
-      <p class="section-lead">Driver-first. Optimized for the car. Done in under 90 seconds.</p>
+      <p class="section-lead">Start a session. Passengers scan and hum. Top 5 results in under 90 seconds.</p>
       <div class="step-grid">
         <div class="step-card">
           <div class="step-number">1</div>
@@ -716,7 +712,7 @@
           <div id="resultsSummaryRoster" style="margin-bottom:16px;"></div>
 
           <div class="cta-row">
-            <button class="btn btn-primary" type="button" onclick="document.getElementById('top5-results').scrollIntoView({behavior:'smooth'})">Jump to Top 5</button>
+            <button class="btn btn-primary" type="button" onclick="document.getElementById('top5-results').scrollIntoView({behavior:'smooth'})">See Top 5</button>
             <button class="btn btn-danger"  type="button" onclick="resetRideModeDemo()">End Session</button>
           </div>
         </div>
@@ -726,8 +722,8 @@
       </div><!-- /proto-grid -->
     </section>
 
-    <!-- ── Top 5 results ────────────────────────────────────────────────────── -->
-    <section class="section" id="top5-results">
+    <!-- ── Top 5 results (hidden until session completes) ──────────────────── -->
+    <section class="section proto-hidden" id="top5-results">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;">
         <h2 style="margin-bottom:0;">Top 5 Songs for This Car</h2>
         <button class="btn btn-danger" type="button" onclick="resetRideModeDemo()" style="white-space:nowrap;">End Session</button>
@@ -740,7 +736,7 @@
         <button class="btn btn-primary" type="button" onclick="document.querySelector('#top5-results .song-card').scrollIntoView({behavior:'smooth'})">See the songs</button>
       </div>
 
-      <p class="section-lead" id="top5Lead">Five songs. Big cards. Lead and harmony assigned. Driver picks playback. No clutter.</p>
+      <p class="section-lead" id="top5Lead">Pick a song and choose where to play it.</p>
 
       <div class="large-results">
 
@@ -754,8 +750,6 @@
             <div class="fit-chip">94% car fit</div>
           </div>
           <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Lead</span><span class="meta-value">Nora</span></div>
-            <div class="meta-box"><span class="meta-label">Harmony</span><span class="meta-value">Joe</span></div>
             <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">Original</span></div>
           </div>
           <div class="handoff-row">
@@ -776,8 +770,6 @@
             <div class="fit-chip">91% car fit</div>
           </div>
           <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Lead</span><span class="meta-value">Nora</span></div>
-            <div class="meta-box"><span class="meta-label">Duet</span><span class="meta-value">Joe</span></div>
             <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">-1 semitone</span></div>
           </div>
           <div class="handoff-row">
@@ -797,8 +789,6 @@
             <div class="fit-chip">89% car fit</div>
           </div>
           <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Lead</span><span class="meta-value">Jasmine</span></div>
-            <div class="meta-box"><span class="meta-label">Harmony</span><span class="meta-value">Either</span></div>
             <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">Original</span></div>
           </div>
           <div class="handoff-row">
@@ -818,7 +808,6 @@
             <div class="fit-chip">87% car fit</div>
           </div>
           <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Lead</span><span class="meta-value">Bobby</span></div>
             <div class="meta-box"><span class="meta-label">Chorus Fit</span><span class="meta-value">Full car</span></div>
             <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">Original</span></div>
           </div>
@@ -839,8 +828,6 @@
             <div class="fit-chip">85% car fit</div>
           </div>
           <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Lead</span><span class="meta-value">Joe</span></div>
-            <div class="meta-box"><span class="meta-label">Harmony</span><span class="meta-value">Jasmine</span></div>
             <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">-2 semitones</span></div>
           </div>
           <div class="handoff-row">
@@ -897,14 +884,12 @@
 
     if (state === 'setup') {
       badge.className = 'status-badge';
-      badge.textContent = '● Session setup';
+      badge.textContent = '● No active session';
       qrBox.innerHTML = [
-        '<div style="font-size:clamp(1.1rem,2vw,1.5rem);font-weight:900;line-height:1.25;margin-bottom:18px;">What should this car sing next?</div>',
-        '<div class="qr-placeholder"><div class="qr-placeholder-label">Passenger QR</div></div>',
-        '<div style="font-size:1rem;font-weight:800;letter-spacing:0.04em;">Scan to join HumMatch</div>',
-        '<div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Hum once. See the best songs for this ride.</div>'
+        '<div style="font-size:clamp(1rem,2vw,1.3rem);font-weight:900;line-height:1.3;margin-bottom:20px;color:rgba(255,255,255,0.65);">Your session QR appears here once you start a ride.</div>',
+        '<button class="btn btn-primary" type="button" onclick="scrollToSetup()" style="font-size:1rem;padding:14px 28px;">Start Ride Session</button>'
       ].join('');
-      qrCaption.textContent = 'Show this to your passengers to join.';
+      qrCaption.textContent = 'Passengers will scan this QR to join your ride.';
 
     } else if (state === 'join') {
       var joined = session ? session.joinedCount : 1;
@@ -1198,6 +1183,10 @@
       } catch (_) {}
     }
     setRideModeState('results');
+    // Reveal the Top 5 section now that the session is complete
+    var top5Section = document.getElementById('top5-results');
+    if (top5Section) top5Section.classList.remove('proto-hidden');
+    top5Section && top5Section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     refreshQrBox('results', preloadedSession || null);
   }
 
@@ -1231,6 +1220,10 @@
     if (markReadyBtn) { markReadyBtn.style.display = ''; markReadyBtn.disabled = false; }
     var showResultsBtn = document.getElementById('showResultsBtn');
     if (showResultsBtn) showResultsBtn.style.display = 'none';
+
+    // Re-hide Top 5 section until next completed session
+    var top5Section = document.getElementById('top5-results');
+    if (top5Section) top5Section.classList.add('proto-hidden');
 
     setRideModeState('setup');
     refreshQrBox('setup', null);
