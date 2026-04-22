@@ -535,7 +535,7 @@
   <div class="wrap">
     <!-- ── Hero ────────────────────────────────────────────────────────────── -->
     <section class="hero">
-      <!-- QR panel — dominant column -->
+      <!-- QR panel -- dominant column -->
       <div class="hero-card qr-card">
         <div class="qr-box" id="rideQrBox">
           <div style="font-size:clamp(1rem,2vw,1.3rem);font-weight:900;line-height:1.3;margin-bottom:20px;color:rgba(255,255,255,0.65);">Your session QR appears here once you start a ride.</div>
@@ -676,9 +676,9 @@
 
           <!-- Metrics row -->
           <div class="mini-metrics">
-            <div class="mini-metric"><span>Joined</span><strong id="metricJoined">—</strong></div>
-            <div class="mini-metric"><span>Ready</span><strong id="metricReady">—</strong></div>
-            <div class="mini-metric"><span>Waiting</span><strong id="metricWaiting">—</strong></div>
+            <div class="mini-metric"><span>Joined</span><strong id="metricJoined">--</strong></div>
+            <div class="mini-metric"><span>Ready</span><strong id="metricReady">--</strong></div>
+            <div class="mini-metric"><span>Waiting</span><strong id="metricWaiting">--</strong></div>
           </div>
 
           <!-- Live roster -->
@@ -692,8 +692,8 @@
           <!-- Current participant hum turn -->
           <div id="humTurnPanel" style="display:none;margin-top:16px;padding:20px 18px;border-radius:16px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.28);text-align:center;">
             <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.09em;text-transform:uppercase;color:rgba(168,85,247,0.7);margin-bottom:6px;">Now humming</div>
-            <div style="font-weight:900;color:#fff;font-size:1.2rem;margin-bottom:2px;" id="nextUpName">—</div>
-            <div style="font-size:0.85rem;color:var(--text2);margin-bottom:16px;" id="nextUpRole">—</div>
+            <div style="font-weight:900;color:#fff;font-size:1.2rem;margin-bottom:2px;" id="nextUpName">--</div>
+            <div style="font-size:0.85rem;color:var(--text2);margin-bottom:16px;" id="nextUpRole">--</div>
 
             <!-- Hum prompt (shown before capture starts) -->
             <div id="humPrompt">
@@ -739,8 +739,8 @@
           <!-- Next-up indicator (shown when no hum is in progress) -->
           <div id="nextUpBanner" style="margin-top:14px;padding:14px 16px;border-radius:14px;background:rgba(168,85,247,0.10);border:1px solid rgba(168,85,247,0.25);display:none;">
             <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:rgba(168,85,247,0.7);margin-bottom:4px;">Current</div>
-            <div style="font-weight:800;color:#fff;font-size:1.05rem;" id="nextUpNameFallback">—</div>
-            <div style="font-size:0.84rem;color:var(--text2);margin-top:2px;" id="nextUpRoleFallback">—</div>
+            <div style="font-weight:800;color:#fff;font-size:1.05rem;" id="nextUpNameFallback">--</div>
+            <div style="font-size:0.84rem;color:var(--text2);margin-top:2px;" id="nextUpRoleFallback">--</div>
           </div>
 
           <div class="cta-row">
@@ -775,7 +775,7 @@
         <button class="btn btn-danger" type="button" onclick="resetRideModeDemo()" style="white-space:nowrap;">End Session</button>
       </div>
 
-      <!-- Session-complete banner — shown when all participants are ready -->
+      <!-- Session-complete banner -- shown when all participants are ready -->
       <div class="complete-banner proto-hidden" id="sessionCompleteBanner">
         <h3>🎤 This car is ready to sing</h3>
         <p id="sessionCompleteSubtitle">Here are the top 5 songs for this ride.</p>
@@ -814,12 +814,21 @@
   </div>
 
   <footer>
-    <p>&copy; 2026 HumMatch. Built by <a href="https://equitymind.com">Equitymind</a>. &nbsp;|&nbsp; <a href="/">Try HumMatch</a> &nbsp;|&nbsp; <a href="/blog">Blog</a></p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px;margin-bottom:10px;">
+      <a href="/" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">Try HumMatch</a>
+      <a href="/how-it-works" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">How It Works</a>
+      <a href="/pricing" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">Pricing</a>
+      <a href="/blog" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">Blog</a>
+      <a href="/contact" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">Contact</a>
+      <a href="/privacy" style="color:var(--text3);text-decoration:none;font-size:0.8rem;">Privacy</a>
+      <a href="/terms" style="color:var(--text3);text-decoration:none;font-size:0.8rem;">Terms</a>
+    </div>
+    <p>&copy; 2026 HumMatch.</p>
   </footer>
 
   <script>
   // ────────────────────────────────────────────────────────────────────────────
-  //  Ride Mode — session state, roster, advance logic
+  //  Ride Mode -- session state, roster, advance logic
   // ────────────────────────────────────────────────────────────────────────────
 
   var currentRideSessionId = null;
@@ -851,7 +860,7 @@
     refreshQrBox(state, null);
   }
 
-  // ── QR box renderer — driven by state + optional live session data ─────────
+  // ── QR box renderer -- driven by state + optional live session data ─────────
   function refreshQrBox(state, session) {
     var badge    = document.getElementById('rideStatusBadge');
     var qrBox    = document.getElementById('rideQrBox');
@@ -892,7 +901,7 @@
       var joinedCount = session ? session.joinedCount : 0;
       var readyCount  = session ? session.readyCount  : 0;
       var waiting     = joinedCount - readyCount;
-      var currentName = (session && session.currentParticipant) ? session.currentParticipant.name : '—';
+      var currentName = (session && session.currentParticipant) ? session.currentParticipant.name : '--';
       badge.className = 'status-badge active-ride';
       badge.textContent = '● In progress • ' + sessionName;
       qrBox.innerHTML = [
@@ -953,7 +962,7 @@
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  // Privacy-safe roster for passenger viewers — only shows viewer's own record + aggregate counts.
+  // Privacy-safe roster for passenger viewers -- only shows viewer's own record + aggregate counts.
   function buildPassengerSummaryHTML(counts, self) {
     var selfStatusLabel = self && self.status === 'ready' ? 'Ready' : self && self.status === 'current' ? 'Up Next' : 'Waiting';
     return '<li class="roster-item self-item">' +
@@ -970,7 +979,7 @@
   function applySessionToUI(session) {
     if (!session) return;
 
-    // Metrics — role-aware (passenger gets aggregate counts; driver/host derive from participants)
+    // Metrics -- role-aware (passenger gets aggregate counts; driver/host derive from participants)
     var joinedCount = viewerRole === 'passenger'
       ? (session.counts ? session.counts.total : 0)
       : (session.participants ? session.participants.length : 0);
@@ -988,7 +997,7 @@
     if (elReady)   elReady.textContent   = String(readyCount);
     if (elWaiting) elWaiting.textContent = String(waitingCount);
 
-    // Main progress roster — role-aware
+    // Main progress roster -- role-aware
     var mainRoster = document.getElementById('rideRosterList');
     if (mainRoster) {
       mainRoster.innerHTML = viewerRole === 'passenger'
@@ -996,7 +1005,7 @@
         : buildRosterHTML(session.participants || []);
     }
 
-    // Join-screen mini roster — role-aware
+    // Join-screen mini roster -- role-aware
     var joinRoster = document.getElementById('joinRosterList');
     var joinPreview = document.getElementById('joinRosterPreview');
     if (joinRoster) {
@@ -1071,19 +1080,19 @@
       if (top5Lead) top5Lead.style.display = '';
     }
 
-    // Results card summary roster — role-aware
+    // Results card summary roster -- role-aware
     var summaryRoster = document.getElementById('resultsSummaryRoster');
     if (summaryRoster) {
       if (viewerRole === 'passenger') {
         summaryRoster.innerHTML =
           '<div class="roster-card" style="margin-top:0;">' +
-          '<div class="roster-title">Session roster — ' + esc(session.name) + '</div>' +
+          '<div class="roster-title">Session roster -- ' + esc(session.name) + '</div>' +
           '<div class="roster-list">' + buildPassengerSummaryHTML(session.counts || {}, session.self) + '</div>' +
           '</div>';
       } else if (session.participants) {
         summaryRoster.innerHTML =
           '<div class="roster-card" style="margin-top:0;">' +
-          '<div class="roster-title">Session roster — ' + esc(session.name) + '</div>' +
+          '<div class="roster-title">Session roster -- ' + esc(session.name) + '</div>' +
           '<div class="roster-list">' + buildRosterHTML(session.participants) + '</div>' +
           '</div>';
       }
@@ -1597,7 +1606,7 @@
     // Clear all live UI state
     ['metricJoined','metricReady','metricWaiting'].forEach(function(id) {
       var el = document.getElementById(id);
-      if (el) el.textContent = '—';
+      if (el) el.textContent = '--';
     });
     var mainRoster = document.getElementById('rideRosterList');
     if (mainRoster) mainRoster.innerHTML = '';

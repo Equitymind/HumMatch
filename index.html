@@ -473,14 +473,14 @@
 
   </div><!-- /cta-wrapper -->
 
-  <!-- Visual separator before secondary teasers -->
-  <div style="width:100%;max-width:380px;margin:24px 0 0;">
+  <!-- Visual separator before secondary teasers (shown only when squad module is shown) -->
+  <div id="squad-prompt-separator" style="width:100%;max-width:380px;margin:24px 0 0;display:none;">
     <div style="height:1px;background:rgba(255,255,255,0.06);margin-bottom:16px;"></div>
     <div style="font-size:0.68rem;color:rgba(255,255,255,0.28);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;text-align:center;">More ways to match</div>
   </div>
 
-  <!-- Squad + Ride Mode surface teasers (always visible after hum) -->
-  <div id="squad-prompt-module" style="width:100%;max-width:380px;padding:0 4px;display:flex;flex-direction:column;gap:12px;">
+  <!-- Squad + Ride Mode surface teasers (hidden until after first hum result) -->
+  <div id="squad-prompt-module" style="width:100%;max-width:380px;padding:0 4px;display:none;flex-direction:column;gap:12px;">
 
     <!-- SquadMatch teaser -->
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.18);border-radius:14px;padding:20px;position:relative;overflow:hidden;">
@@ -153887,7 +153887,7 @@ function showResults() {
         // MALE VOICE FILTERING:
         // Block songs with clearly female tessitura (midpoint >= 65 = F4+)
         // AND bright timbre (brightness > 70)
-        // Must satisfy BOTH conditions to block — prevents false filtering of male artists
+        // Must satisfy BOTH conditions to block -- prevents false filtering of male artists
         if (isMaleVoice && songMidpoint >= 65 && s.brightness > 70) return false;
 
         // FEMALE VOICE FILTERING:
@@ -154478,6 +154478,8 @@ const fallbackSongs = verifiedSongs
   }
 
   showScreen('screen-results');
+  // Reveal the welcome-screen squad/ride teasers now that the user has a result
+  try { if (typeof showSquadPromptIfEligible === 'function') showSquadPromptIfEligible(); } catch(_) {}
   // Show SquadMatch prompt (if not already dismissed)
   try {
     if (!localStorage.getItem('hm_squad_prompt_dismissed')) {
@@ -154916,6 +154918,8 @@ function checkSavedProfile() {
     const lbl = document.getElementById('saved-profile-date');
     if (btn) btn.style.display = 'block';
     if (lbl) lbl.textContent = days === 0 ? 'Saved today' : `Saved ${days} day${days !== 1 ? 's' : ''} ago`;
+    // Returning user with a saved hum: also surface the squad/ride teasers (unless dismissed this session)
+    if (typeof showSquadPromptIfEligible === 'function') showSquadPromptIfEligible();
   } catch(e) {}
 }
 
@@ -155348,8 +155352,20 @@ function startSquadMatch() {
 
 function dismissSquadPrompt() {
   var el = document.getElementById('squad-prompt-module');
+  var sep = document.getElementById('squad-prompt-separator');
   if (el) { el.style.opacity = '0'; setTimeout(function(){ el.style.display = 'none'; }, 250); }
+  if (sep) { sep.style.display = 'none'; }
   try { sessionStorage.setItem('hm_squad_dismissed', '1'); } catch(_) {}
+}
+
+function showSquadPromptIfEligible() {
+  try {
+    if (sessionStorage.getItem('hm_squad_dismissed') === '1') return;
+  } catch(_) {}
+  var squad = document.getElementById('squad-prompt-module');
+  var sep = document.getElementById('squad-prompt-separator');
+  if (squad) squad.style.display = 'flex';
+  if (sep) sep.style.display = '';
 }
 
 // Initialize squad prompt text on load
