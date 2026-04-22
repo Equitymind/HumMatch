@@ -779,110 +779,14 @@
       <div class="complete-banner proto-hidden" id="sessionCompleteBanner">
         <h3>🎤 This car is ready to sing</h3>
         <p id="sessionCompleteSubtitle">Here are the top 5 songs for this ride.</p>
-        <button class="btn btn-primary" type="button" onclick="document.querySelector('#top5-results .song-card').scrollIntoView({behavior:'smooth'})">See the songs</button>
+        <button class="btn btn-primary" type="button" onclick="document.getElementById('rideResultsGrid').scrollIntoView({behavior:'smooth'})">See the songs</button>
       </div>
 
       <p class="section-lead" id="top5Lead">Pick a song and choose where to play it.</p>
 
-      <div class="large-results">
-
-        <article class="song-card">
-          <div class="song-top">
-            <div>
-              <div class="song-rank">#1 Best For This Car</div>
-              <h3 class="song-title">Sweet Caroline</h3>
-              <p class="song-artist">Neil Diamond</p>
-            </div>
-            <div class="fit-chip">94% car fit</div>
-          </div>
-          <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">Original</span></div>
-          </div>
-          <div class="handoff-row">
-            <span class="handoff-btn" style="border-color:rgba(245,158,11,0.28);color:#fde68a;">Driver selects final song</span>
-            <a class="handoff-btn spotify" href="https://open.spotify.com/search/Sweet%20Caroline%20Neil%20Diamond"         target="_blank" rel="noopener">Play in Spotify</a>
-            <a class="handoff-btn apple"   href="https://music.apple.com/us/search?term=Sweet%20Caroline%20Neil%20Diamond"  target="_blank" rel="noopener">Play in Apple Music</a>
-            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=Sweet+Caroline+karaoke"       target="_blank" rel="noopener">Karaoke Lyrics</a>
-          </div>
-        </article>
-
-        <article class="song-card">
-          <div class="song-top">
-            <div>
-              <div class="song-rank">#2 Best Duet</div>
-              <h3 class="song-title">Shallow</h3>
-              <p class="song-artist">Lady Gaga &amp; Bradley Cooper</p>
-            </div>
-            <div class="fit-chip">91% car fit</div>
-          </div>
-          <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">-1 semitone</span></div>
-          </div>
-          <div class="handoff-row">
-            <a class="handoff-btn spotify" href="https://open.spotify.com/search/Shallow%20Lady%20Gaga%20Bradley%20Cooper"        target="_blank" rel="noopener">Play in Spotify</a>
-            <a class="handoff-btn apple"   href="https://music.apple.com/us/search?term=Shallow%20Lady%20Gaga%20Bradley%20Cooper"  target="_blank" rel="noopener">Play in Apple Music</a>
-            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=Shallow+karaoke"                    target="_blank" rel="noopener">Karaoke Lyrics</a>
-          </div>
-        </article>
-
-        <article class="song-card">
-          <div class="song-top">
-            <div>
-              <div class="song-rank">#3 Easy Win</div>
-              <h3 class="song-title">Valerie</h3>
-              <p class="song-artist">Amy Winehouse / Mark Ronson</p>
-            </div>
-            <div class="fit-chip">89% car fit</div>
-          </div>
-          <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">Original</span></div>
-          </div>
-          <div class="handoff-row">
-            <a class="handoff-btn spotify" href="https://open.spotify.com/search/Valerie%20Amy%20Winehouse%20Mark%20Ronson"         target="_blank" rel="noopener">Play in Spotify</a>
-            <a class="handoff-btn apple"   href="https://music.apple.com/us/search?term=Valerie%20Amy%20Winehouse%20Mark%20Ronson"  target="_blank" rel="noopener">Play in Apple Music</a>
-            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=Valerie+karaoke"                     target="_blank" rel="noopener">Karaoke Lyrics</a>
-          </div>
-        </article>
-
-        <article class="song-card">
-          <div class="song-top">
-            <div>
-              <div class="song-rank">#4 Harmony Pick</div>
-              <h3 class="song-title">I Want It That Way</h3>
-              <p class="song-artist">Backstreet Boys</p>
-            </div>
-            <div class="fit-chip">87% car fit</div>
-          </div>
-          <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Chorus Fit</span><span class="meta-value">Full car</span></div>
-            <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">Original</span></div>
-          </div>
-          <div class="handoff-row">
-            <a class="handoff-btn spotify" href="https://open.spotify.com/search/I%20Want%20It%20That%20Way%20Backstreet%20Boys"        target="_blank" rel="noopener">Play in Spotify</a>
-            <a class="handoff-btn apple"   href="https://music.apple.com/us/search?term=I%20Want%20It%20That%20Way%20Backstreet%20Boys"  target="_blank" rel="noopener">Play in Apple Music</a>
-            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=I+Want+It+That+Way+karaoke"               target="_blank" rel="noopener">Karaoke Lyrics</a>
-          </div>
-        </article>
-
-        <article class="song-card">
-          <div class="song-top">
-            <div>
-              <div class="song-rank">#5 Road Trip Pick</div>
-              <h3 class="song-title">Don't Stop Believin'</h3>
-              <p class="song-artist">Journey</p>
-            </div>
-            <div class="fit-chip">85% car fit</div>
-          </div>
-          <div class="song-meta">
-            <div class="meta-box"><span class="meta-label">Key</span><span class="meta-value">-2 semitones</span></div>
-          </div>
-          <div class="handoff-row">
-            <a class="handoff-btn spotify" href="https://open.spotify.com/search/Dont%20Stop%20Believin%20Journey"        target="_blank" rel="noopener">Play in Spotify</a>
-            <a class="handoff-btn apple"   href="https://music.apple.com/us/search?term=Dont%20Stop%20Believin%20Journey"  target="_blank" rel="noopener">Play in Apple Music</a>
-            <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=Dont+Stop+Believin+karaoke" target="_blank" rel="noopener">Karaoke Lyrics</a>
-          </div>
-        </article>
-
+      <!-- Results grid: populated dynamically by renderRideResults() -->
+      <div class="large-results" id="rideResultsGrid">
+        <p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">Results will appear here after all riders hum.</p>
       </div>
     </section>
 
@@ -1455,6 +1359,76 @@
   }
 
   // ── Show results ───────────────────────────────────────────────────────────
+  // ── Driver pick state ────────────────────────────────────────────────────────
+  var rideDriverPick = null;  // { title, artist } of driver-selected song
+
+  function selectDriverPick(title, artist) {
+    rideDriverPick = { title: title, artist: artist };
+    // Visually highlight the selected card and grey out others
+    var cards = document.querySelectorAll('#rideResultsGrid .song-card');
+    cards.forEach(function(card) {
+      var isSelected = card.dataset.title === title && card.dataset.artist === artist;
+      card.style.outline = isSelected ? '2px solid #a855f7' : '';
+      card.style.opacity = isSelected ? '1' : '0.55';
+    });
+    // Update all "Driver selects" chips to show the pick
+    document.querySelectorAll('.driver-pick-chip').forEach(function(el) {
+      el.textContent = el.closest('.song-card') && el.closest('.song-card').dataset.title === title
+        ? 'Driver Pick'
+        : 'Select this song';
+      el.style.borderColor = el.closest('.song-card') && el.closest('.song-card').dataset.title === title
+        ? 'rgba(168,85,247,0.7)'
+        : 'rgba(245,158,11,0.28)';
+      el.style.color = el.closest('.song-card') && el.closest('.song-card').dataset.title === title
+        ? '#e9d5ff'
+        : '#fde68a';
+    });
+  }
+
+  // ── Dynamic results rendering ────────────────────────────────────────────────
+  function renderRideResults(scored) {
+    var grid = document.getElementById('rideResultsGrid');
+    if (!grid) return;
+
+    if (!scored || !scored.results || scored.results.length === 0) {
+      grid.innerHTML = '<p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">No results available for this session.</p>';
+      return;
+    }
+
+    // Partial data notice
+    var notice = '';
+    if (!scored.hasRealData) {
+      notice = '<p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:16px;">No hum data captured. Showing general suggestions.</p>';
+    } else if (scored.hummedCount < scored.participantCount) {
+      notice = '<p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:16px;">Based on ' + scored.hummedCount + ' of ' + scored.participantCount + ' riders who hummed.</p>';
+    }
+
+    var cards = scored.results.map(function(song, i) {
+      var titleEnc  = encodeURIComponent(song.title + ' ' + song.artist);
+      var titleEncPlus = (song.title + ' ' + song.artist).replace(/\s+/g, '+').replace(/[^A-Za-z0-9+]/g, '');
+      return [
+        '<article class="song-card" data-title="' + esc(song.title) + '" data-artist="' + esc(song.artist) + '">',
+        '  <div class="song-top">',
+        '    <div>',
+        '      <div class="song-rank">#' + song.rank + ' ' + esc(song.label) + '</div>',
+        '      <h3 class="song-title">' + esc(song.title) + '</h3>',
+        '      <p class="song-artist">' + esc(song.artist) + '</p>',
+        '    </div>',
+        '    <div class="fit-chip">' + song.fitScore + '% fit</div>',
+        '  </div>',
+        '  <div class="handoff-row">',
+        '    <span class="handoff-btn driver-pick-chip" style="cursor:pointer;border-color:rgba(245,158,11,0.28);color:#fde68a;" onclick="selectDriverPick(' + JSON.stringify(song.title) + ',' + JSON.stringify(song.artist) + ')">Select this song</span>',
+        '    <a class="handoff-btn spotify" href="https://open.spotify.com/search/' + titleEnc + '" target="_blank" rel="noopener">Play in Spotify</a>',
+        '    <a class="handoff-btn apple" href="https://music.apple.com/us/search?term=' + titleEnc + '" target="_blank" rel="noopener">Play in Apple Music</a>',
+        '    <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=' + titleEncPlus + '+karaoke" target="_blank" rel="noopener">Karaoke Lyrics</a>',
+        '  </div>',
+        '</article>'
+      ].join('');
+    }).join('');
+
+    grid.innerHTML = notice + cards;
+  }
+
   async function showRideResults(preloadedSession) {
     if (!currentRideSessionId && !preloadedSession) {
       setRideModeState('results');
@@ -1469,6 +1443,21 @@
         if (data.ok && data.session) applySessionToUI(data.session);
       } catch (_) {}
     }
+
+    // Fetch session-aware scored results
+    if (currentRideSessionId) {
+      try {
+        var rRes = await fetch('/api/ride-mode/session/' + currentRideSessionId + '/results');
+        var rData = await rRes.json();
+        if (rData.ok && rData.scored) {
+          renderRideResults(rData.scored);
+        }
+      } catch (_) {
+        // Render with no data gracefully
+        renderRideResults(null);
+      }
+    }
+
     setRideModeState('results');
     // Reveal the Top 5 section now that the session is complete
     var top5Section = document.getElementById('top5-results');
@@ -1483,9 +1472,13 @@
       try { await fetch('/api/ride-mode/session/' + currentRideSessionId + '/end', { method: 'POST' }); } catch (_) {}
     }
     currentRideSessionId = null;
-    // Zero out captured hum notes so they cannot leak into the next session
+    // Zero out captured hum notes and driver pick so nothing leaks into the next session
     rideHumNotes = [null, null, null];
     rideHumPhase = 0;
+    rideDriverPick = null;
+    // Clear the results grid so stale cards never show
+    var resultsGrid = document.getElementById('rideResultsGrid');
+    if (resultsGrid) resultsGrid.innerHTML = '<p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">Results will appear here after all riders hum.</p>';
 
     // Clear all live UI state
     ['metricJoined','metricReady','metricWaiting'].forEach(function(id) {

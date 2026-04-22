@@ -2782,7 +2782,7 @@ app.listen(PORT, () => {
     console.error('  [diag] users table check error:', e.message);
   }
 });
-const { createSession: createRideSession, joinSession: joinRideSession, assignHost: assignRideHost, advanceSession: advanceRideSession, endSession: endRideSession, getSession: getRideSession, getSessionForViewer: getRideSessionForViewer, storeHumData: storeRideHumData } = require('./src/sessionManager');
+const { createSession: createRideSession, joinSession: joinRideSession, assignHost: assignRideHost, advanceSession: advanceRideSession, endSession: endRideSession, getSession: getRideSession, getSessionForViewer: getRideSessionForViewer, storeHumData: storeRideHumData, scoreResultsById: scoreRideResultsById } = require('./src/sessionManager');
 
 app.get('/ride-mode', (req, res) => {
     res.sendFile(path.join(__dirname, 'ride-mode.html'));
@@ -2877,4 +2877,16 @@ app.post('/api/ride-mode/session/:sessionId/end', (req, res) => {
   const session = endRideSession(req.params.sessionId);
   if (!session) return res.status(404).json({ ok: false, error: 'Session not found' });
   return res.json({ ok: true, session });
+});
+
+// Return session-aware scored results for a completed session.
+// scoreResultsById uses the raw internal session (with humData intact) so scoring
+// is driven by actual captured notes, not the privacy-filtered public view.
+app.get('/api/ride-mode/session/:sessionId/results', (req, res) => {
+  const { sessionId } = req.params;
+  const sessionView = getRideSession(sessionId);
+  if (!sessionView) return res.status(404).json({ ok: false, error: 'Session not found' });
+  const scored = scoreRideResultsById(sessionId, 5);
+  if (!scored) return res.status(404).json({ ok: false, error: 'Session not found' });
+  return res.json({ ok: true, session: sessionView, scored: scored });
 });

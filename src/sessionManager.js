@@ -1,6 +1,20 @@
 // src/sessionManager.js
-// Stage 2B/3/4: participant state model with roster, status, advance logic,
-// host assignment, role-aware session views, and per-participant hum data storage.
+// Stage 2B/3/4/5: participant state model with roster, status, advance logic,
+// host assignment, role-aware session views, per-participant hum data storage,
+// and session-aware song scoring from the shared songs.json catalog.
+
+const path = require('path');
+let _songCatalog = null;
+function getSongCatalog() {
+  if (_songCatalog) return _songCatalog;
+  try {
+    const raw = require(path.join(__dirname, '..', 'songs.json'));
+    _songCatalog = Array.isArray(raw) ? raw : (raw.songs || []);
+  } catch (_) {
+    _songCatalog = [];
+  }
+  return _songCatalog;
+}
 
 const sessions = {};
 
@@ -280,6 +294,101 @@ function storeHumData(sessionId, participantId, humPayload) {
   return publicSession(session);
 }
 
+// ── Session-aware song scoring ────────────────────────────────────────────────
+//
+// Derives a group vocal envelope from all participants with humData, then
+// scores every song in the catalog by how well its range overlaps that envelope.
+// Returns up to `limit` scored results sorted by descending fit score.
+//
+// Scoring formula (all capped 0-100):
+//   overlap  = max(0, min(groupHi, songHi) - max(groupLo, songLo))
+//   envelope = groupHi - groupLo (min 1 to avoid div/0)
+//   rangeFit = overlap / envelope * 100
+//   fitScore = 0.7 * rangeFit + 0.2 * (1 - abs(songSpan - groupSpan) / 24 * 100) + 0.1 * brightness
+//            clamped to [0, 100]
+//
+// Label assignment (exclusive, by rank):
+//   rank 1  -> 'Best for Everyone'  (highest fit)
+//   rank 2  -> 'Easy Win'           (wide enough for the group)
+//   rank 3  -> 'Harmony Pick'       (moderately challenging)
+//   rank 4  -> 'Strong Duet'        (tighter range songs)
+//   rank 5  -> 'Road Trip Pick'     (crowd classic, brightness-boosted)
+//
+function scoreSessionResults(session, limit) {
+  limit = limit || 5;
+  const catalog = getSongCatalog();
+  if (!catalog.length) return [];
+
+  // Collect participants with real humData
+  const withHum = (session.participants || []).filter(function(p) {
+    return p.humData && typeof p.humData.low === 'number' && typeof p.humData.high === 'number';
+  });
+
+  let groupLo, groupHi, hasRealData;
+  if (withHum.length > 0) {
+    // Group envelope: lowest low across all riders, highest high across all riders
+    groupLo = Math.min.apply(null, withHum.map(function(p) { return p.humData.low;  }));
+    groupHi = Math.max.apply(null, withHum.map(function(p) { return p.humData.high; }));
+    hasRealData = true;
+  } else {
+    // No hum data at all: use a comfortable mid-range default so we still return results
+    groupLo = 48;  // C3 approximate
+    groupHi = 69;  // A4 approximate
+    hasRealData = false;
+  }
+
+  const groupSpan = Math.max(groupHi - groupLo, 1);
+
+  const scored = catalog.map(function(song) {
+    const songLo   = song.lo  || 40;
+    const songHi   = song.hi  || 72;
+    const songSpan = Math.max(songHi - songLo, 1);
+    const brightness = song.brightness || 50;
+
+    // Overlap of [groupLo, groupHi] with [songLo, songHi]
+    const overlap    = Math.max(0, Math.min(groupHi, songHi) - Math.max(groupLo, songLo));
+    const rangeFit   = (overlap / groupSpan) * 100;
+
+    // Span compatibility (penalise songs whose range differs greatly from group's)
+    const spanDiff   = Math.abs(songSpan - groupSpan);
+    const spanFit    = Math.max(0, 100 - (spanDiff / 24) * 100);
+
+    const raw = 0.65 * rangeFit + 0.20 * spanFit + 0.15 * brightness;
+    const fitScore = Math.min(100, Math.max(0, Math.round(raw)));
+
+    return { title: song.title, artist: song.artist, fitScore: fitScore, lo: songLo, hi: songHi };
+  });
+
+  // Sort descending by fitScore
+  scored.sort(function(a, b) { return b.fitScore - a.fitScore; });
+
+  // Take top N (limit + buffer to allow deduplication if needed)
+  const top = scored.slice(0, limit);
+
+  // Assign labels by rank
+  var LABELS = ['Best for Everyone', 'Easy Win', 'Harmony Pick', 'Strong Duet', 'Road Trip Pick'];
+  top.forEach(function(result, i) {
+    result.rank   = i + 1;
+    result.label  = LABELS[i] || 'Pick';
+  });
+
+  return {
+    results:         top,
+    hasRealData:     hasRealData,
+    participantCount: session.participants ? session.participants.length : 0,
+    hummedCount:     withHum.length,
+    groupLo:         groupLo,
+    groupHi:         groupHi
+  };
+}
+
+// Score results for a session by its ID (uses raw internal session with humData intact).
+function scoreResultsById(sessionId, limit) {
+  const session = sessions[sessionId];
+  if (!session) return null;
+  return scoreSessionResults(session, limit || 5);
+}
+
 module.exports = {
   createSession,
   joinSession,
@@ -288,5 +397,7 @@ module.exports = {
   endSession,
   getSession,
   getSessionForViewer,
-  storeHumData
+  storeHumData,
+  scoreSessionResults,
+  scoreResultsById
 };
