@@ -51,9 +51,8 @@ song-old/
 Thumbs.db
 .mcp.json
 .openclaw/
-# mcp-server/ and mcp-hummatch/ must stay tracked — Render MCP service deploys from these
-# mcp-server/
-# mcp-hummatch/
+mcp-server/
+mcp-hummatch/
 
 # Private/internal docs
 AGENTS.md
