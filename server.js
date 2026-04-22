@@ -278,6 +278,48 @@ app.post('/api/hummatch/stripe/webhook', express.raw({ type: 'application/json' 
           console.log(`Stripe webhook: tracked discount code ${session.metadata.discount_code} for ${email}`);
         }
       }
+
+      // Stage 8: ride-originated conversion tracking
+      if (session.metadata && session.metadata.ride_discount_code) {
+        try {
+          const rideCode = db.prepare('SELECT * FROM ride_discount_codes WHERE code = ?').get(session.metadata.ride_discount_code);
+          if (rideCode) {
+            db.prepare(`
+              UPDATE ride_discount_codes
+                 SET used_by_email = ?, used_at = datetime('now'), stripe_session_id = ?, is_active = 0
+               WHERE code = ?
+            `).run(email, session.id, rideCode.code);
+
+            if (rideCode.affiliate_code) {
+              try {
+                db.prepare(
+                  'INSERT INTO affiliate_conversions (affiliate_code, user_id, event_type, commission_amount) VALUES (?, ?, ?, 0)'
+                ).run(rideCode.affiliate_code, userId || null, 'ride_originated_conversion');
+              } catch (_) { /* non-fatal */ }
+            }
+
+            db.prepare(`
+              UPDATE ride_sessions
+                 SET commission_eligible = 1,
+                     commission_basis_cents = ?,
+                     conversion_completed_at = datetime('now')
+               WHERE session_id = ?
+            `).run(session.amount_total || 0, rideCode.ride_session_id);
+
+            try {
+              db.prepare(`
+                UPDATE ride_reminders
+                   SET conversion_completed_at = datetime('now')
+                 WHERE discount_code = ?
+              `).run(rideCode.code);
+            } catch (_) { /* non-fatal */ }
+
+            console.log('[ride-mode] ride-originated conversion recorded for session', rideCode.ride_session_id);
+          }
+        } catch (e) {
+          console.error('[ride-mode] ride conversion webhook error:', e.message);
+        }
+      }
     }
   }
   res.json({ received: true });
@@ -685,6 +727,49 @@ try {
   console.log('[migration] ride_sessions table ready');
 } catch (e) {
   console.log('[migration] ride_sessions table error (non-fatal):', e.message);
+}
+
+// Stage 8: extend ride_sessions with commission/conversion columns
+try { db.exec(`ALTER TABLE ride_sessions ADD COLUMN commission_eligible INTEGER DEFAULT 0`); } catch(_){}
+try { db.exec(`ALTER TABLE ride_sessions ADD COLUMN commission_basis_cents INTEGER DEFAULT 0`); } catch(_){}
+try { db.exec(`ALTER TABLE ride_sessions ADD COLUMN conversion_completed_at TEXT`); } catch(_){}
+
+// Stage 8: ride-originated discount codes and reminder tracking
+try {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS ride_discount_codes (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      code TEXT UNIQUE NOT NULL,
+      ride_session_id TEXT NOT NULL,
+      driver_user_id INTEGER,
+      affiliate_code TEXT,
+      discount_percent INTEGER DEFAULT 10,
+      expires_at TEXT NOT NULL,
+      used_by_email TEXT,
+      used_at TEXT,
+      stripe_session_id TEXT,
+      is_active INTEGER DEFAULT 1,
+      created_at TEXT DEFAULT (datetime('now'))
+    );
+    CREATE TABLE IF NOT EXISTS ride_reminders (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      ride_session_id TEXT NOT NULL,
+      driver_user_id INTEGER,
+      affiliate_code TEXT,
+      discount_code TEXT,
+      discount_expires_at TEXT,
+      reminder_channel TEXT NOT NULL,
+      reminder_destination TEXT NOT NULL,
+      reminder_sent_at TEXT,
+      conversion_completed_at TEXT,
+      created_at TEXT DEFAULT (datetime('now'))
+    );
+    CREATE INDEX IF NOT EXISTS idx_ride_discount_session ON ride_discount_codes(ride_session_id);
+    CREATE INDEX IF NOT EXISTS idx_ride_reminders_session ON ride_reminders(ride_session_id);
+  `);
+  console.log('[migration] ride_discount_codes and ride_reminders tables ready');
+} catch (e) {
+  console.log('[migration] ride_discount tables error (non-fatal):', e.message);
 }
 
 /// Backfill: any squad missing an invite_token gets a permanent one generated now
@@ -2389,6 +2474,48 @@ app.get('/api/hummatch/checkout/:plan', async (req, res) => {
     }
   }
 
+  // Stage 8: ride-originated discount + attribution pass-through.
+  // Uses ?rideDiscountCode= to avoid collision with the squad leader ?code= path.
+  const rideDiscountCode   = (req.query.rideDiscountCode   || '').toString().trim();
+  const rideSessionId      = (req.query.rideSessionId      || '').toString().trim();
+  const rideAffiliateCode  = (req.query.rideAffiliateCode  || '').toString().trim();
+  if (rideDiscountCode || rideSessionId || rideAffiliateCode) {
+    sessionOpts.metadata = sessionOpts.metadata || {};
+    if (rideSessionId)     sessionOpts.metadata.ride_session_id    = rideSessionId;
+    if (rideAffiliateCode) sessionOpts.metadata.ride_affiliate_code = rideAffiliateCode;
+    sessionOpts.metadata.ride_originated = 'true';
+
+    if (rideDiscountCode) {
+      try {
+        const rideCode = db.prepare(
+          'SELECT * FROM ride_discount_codes WHERE UPPER(code) = UPPER(?) AND is_active = 1'
+        ).get(rideDiscountCode);
+        const isExpired = rideCode && rideCode.expires_at && new Date(rideCode.expires_at) < new Date();
+        if (rideCode && !isExpired && !sessionOpts.discounts) {
+          const coupon = await stripe.coupons.create({
+            percent_off: rideCode.discount_percent || 10,
+            duration: 'once',
+            name: 'HumMatch Ride Mode Discount'
+          });
+          sessionOpts.discounts = [{ coupon: coupon.id }];
+          sessionOpts.metadata.ride_discount_code = rideCode.code;
+          if (!sessionOpts.metadata.ride_session_id && rideCode.ride_session_id) {
+            sessionOpts.metadata.ride_session_id = rideCode.ride_session_id;
+          }
+          if (!sessionOpts.metadata.ride_affiliate_code && rideCode.affiliate_code) {
+            sessionOpts.metadata.ride_affiliate_code = rideCode.affiliate_code;
+          }
+        } else {
+          // Still carry the code string for attribution even if unusable.
+          sessionOpts.metadata.ride_discount_code = rideDiscountCode;
+          if (isExpired) sessionOpts.metadata.ride_discount_expired = 'true';
+        }
+      } catch (e) {
+        console.error('[ride-mode] ride discount coupon error:', e.message);
+      }
+    }
+  }
+
   // Pre-fill email if user is logged in
   const token = req.headers['x-hm-token'] || req.query.token;
   if (token) {
@@ -2825,6 +2952,25 @@ function recordRideAffiliateEvent(affiliateCode, userId, eventType) {
   }
 }
 
+// Stage 8: generate a ride-originated 10% discount code scoped to a passenger join.
+// Expires in 7 days. Returns { code, expiresAt } or null on failure.
+function generateRideDiscountCode(sessionId, driverUserId, affiliateCode) {
+  try {
+    const short = (sessionId || '').toString().replace(/[^A-Za-z0-9]/g, '').slice(0, 6).toUpperCase() || 'RIDE00';
+    const rand = Math.random().toString(36).replace(/[^a-z0-9]/g, '').slice(0, 4).toUpperCase() || 'XYZW';
+    const code = 'RIDE-' + short + '-' + rand;
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
+    db.prepare(`
+      INSERT INTO ride_discount_codes (code, ride_session_id, driver_user_id, affiliate_code, discount_percent, expires_at)
+      VALUES (?, ?, ?, ?, 10, ?)
+    `).run(code, sessionId, driverUserId || null, affiliateCode || null, expiresAt);
+    return { code, expiresAt };
+  } catch (e) {
+    console.log('[ride-mode] generateRideDiscountCode failed:', e.message);
+    return null;
+  }
+}
+
 app.get('/ride-mode', (req, res) => {
     res.sendFile(path.join(__dirname, 'ride-mode.html'));
 });
@@ -2932,7 +3078,20 @@ app.post('/api/ride-mode/session/:sessionId/join', (req, res) => {
     recordRideAffiliateEvent(raw.affiliateCode, null, 'ride_session_join');
   }
 
-  return res.json({ ok: true, session });
+  // Stage 8: mint a 10% ride-originated discount code for this passenger.
+  const discount = generateRideDiscountCode(
+    sessionId,
+    raw ? raw.driverUserId : null,
+    raw ? raw.affiliateCode : null
+  );
+
+  return res.json({
+    ok: true,
+    session,
+    discountCode:      discount ? discount.code      : null,
+    discountExpiresAt: discount ? discount.expiresAt : null,
+    discountPercent:   discount ? 10                 : null
+  });
 });
 
 app.post('/api/ride-mode/session/:sessionId/host', (req, res) => {
@@ -3065,4 +3224,90 @@ app.post('/api/ride-mode/session/:sessionId/upgrade-intent', (req, res) => {
   if (hasStripe) payload.checkoutUrl = '/api/hummatch/checkout/monthly';
 
   return res.json(payload);
+});
+
+// Stage 8: Remind Me Later — store the reminder and send an email (SMS deferred).
+app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
+  const { sessionId } = req.params;
+  const { channel, destination, discountCode, discountExpiresAt } = req.body || {};
+
+  const chan = (channel || '').toString().toLowerCase();
+  const dest = (destination || '').toString().trim();
+  if (!dest || (chan !== 'email' && chan !== 'sms')) {
+    return res.status(400).json({ ok: false, error: 'channel (email|sms) and destination required' });
+  }
+
+  const raw = getRawRideSession(sessionId);
+  const driverUserId  = raw ? raw.driverUserId  : null;
+  const affiliateCode = raw ? raw.affiliateCode : null;
+
+  // Insert the reminder record up front so we keep an attribution record even if send fails.
+  let reminderId = null;
+  try {
+    const result = db.prepare(`
+      INSERT INTO ride_reminders
+        (ride_session_id, driver_user_id, affiliate_code, discount_code, discount_expires_at,
+         reminder_channel, reminder_destination)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      sessionId, driverUserId, affiliateCode,
+      discountCode || null, discountExpiresAt || null,
+      chan, dest
+    );
+    reminderId = result.lastInsertRowid;
+  } catch (e) {
+    console.log('[ride-mode] ride_reminders insert failed:', e.message);
+  }
+
+  // Build the personalized checkout link with ride attribution.
+  const params = new URLSearchParams();
+  if (discountCode)   params.set('rideDiscountCode',  discountCode);
+  if (sessionId)      params.set('rideSessionId',     sessionId);
+  if (affiliateCode)  params.set('rideAffiliateCode', affiliateCode);
+  const link = 'https://hummatch.me/api/hummatch/checkout/monthly' + (params.toString() ? '?' + params.toString() : '');
+
+  if (chan === 'sms') {
+    // No SMS provider configured yet. Log and defer.
+    console.log('[ride-mode] SMS reminder deferred for', dest, 'link=', link);
+    return res.json({ ok: true, channel: 'sms', sent: false, deferred: true });
+  }
+
+  // Email path
+  let expiresReadable = '';
+  try {
+    if (discountExpiresAt) {
+      expiresReadable = new Date(discountExpiresAt).toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+    }
+  } catch (_) { expiresReadable = ''; }
+
+  const subject = 'Your HumMatch match is waiting for you';
+  const html = [
+    '<div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:520px;margin:0 auto;padding:24px;color:#1a1a1a;">',
+    '<p style="font-size:1rem;line-height:1.5;">Your vocal range and song matches from Ride Mode are ready to save.</p>',
+    '<p style="font-size:1rem;line-height:1.5;">You have 10% off for 7 days, courtesy of your driver.</p>',
+    '<p style="margin:24px 0;">',
+    '<a href="' + link + '" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;padding:12px 24px;border-radius:10px;font-weight:700;display:inline-block;">Save My HumMatch</a>',
+    '</p>',
+    expiresReadable
+      ? ('<p style="font-size:0.85em;color:#999;">Offer expires ' + expiresReadable + '. First purchase only.</p>')
+      : '<p style="font-size:0.85em;color:#999;">First purchase only.</p>',
+    '</div>'
+  ].join('');
+
+  let sent = false;
+  try {
+    sent = !!(await sendEmail(dest, subject, html));
+  } catch (e) {
+    console.log('[ride-mode] reminder email send failed:', e.message);
+  }
+
+  if (sent && reminderId) {
+    try {
+      db.prepare('UPDATE ride_reminders SET reminder_sent_at = datetime(\'now\') WHERE id = ?').run(reminderId);
+    } catch (_) { /* non-fatal */ }
+  }
+
+  return res.json({ ok: true, channel: 'email', sent });
 });

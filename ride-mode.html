@@ -644,7 +644,7 @@
           <div class="field-grid">
             <div>
               <label class="field-label" for="joinName">First name</label>
-              <input class="field-input" id="joinName" type="text" placeholder="e.g. Jasmine" />
+              <input class="field-input" id="joinName" type="text" placeholder="e.g. Olivia" />
             </div>
             <div>
               <label class="field-label" for="joinPref">Vocal preference</label>
@@ -788,6 +788,26 @@
       <div class="large-results" id="rideResultsGrid">
         <p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">Results will appear here after all riders hum.</p>
       </div>
+
+      <!-- Stage 8: Ride-originated conversion panel -->
+      <div id="rideConversionPanel" style="display:none; margin-top:28px; background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.12)); border:1px solid rgba(168,85,247,0.28); border-radius:16px; padding:28px 24px; text-align:center;">
+        <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px;">Save your vocal range and best song matches</h3>
+        <p id="rideDiscountCopy" style="font-size:0.875rem;color:rgba(255,255,255,0.65);margin-bottom:20px;line-height:1.5;">Get 10% off courtesy of your driver for 7 days</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button onclick="rideConvertNow()" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;font-size:0.9rem;cursor:pointer;">Save My HumMatch</button>
+          <button onclick="showRideReminder()" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:12px 20px;border-radius:10px;font-size:0.875rem;cursor:pointer;">Remind Me Later</button>
+        </div>
+      </div>
+
+      <!-- Stage 8: Remind Me Later sub-panel -->
+      <div id="rideReminderPanel" style="display:none; margin-top:16px; background:rgba(255,255,255,0.04); border:1px solid rgba(124,58,237,0.15); border-radius:12px; padding:20px 24px;">
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-bottom:14px;">Send yourself a reminder with your discount link:</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+          <input id="rideReminderDest" type="text" placeholder="Email or phone number" style="flex:1;min-width:180px;background:rgba(255,255,255,0.07);border:1px solid rgba(124,58,237,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:0.875rem;outline:none;" />
+          <button onclick="submitRideReminder()" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:700;font-size:0.875rem;cursor:pointer;">Send Link</button>
+        </div>
+        <p id="rideReminderStatus" style="font-size:0.8rem;color:rgba(255,255,255,0.45);min-height:18px;"></p>
+      </div>
     </section>
 
 
@@ -807,6 +827,12 @@
   var myParticipantId = null;
   var currentQrImageUrl = null;
   var currentJoinUrl = null;
+
+  // Stage 8: ride-originated discount state, captured on passenger join
+  var rideDiscountCode = null;
+  var rideDiscountExpires = null;
+  var rideDiscountPercent = 10;
+  var rideSessionIdForConversion = null;
 
   // ── Scroll helper ──────────────────────────────────────────────────────────
   function scrollToSetup() {
@@ -1102,6 +1128,15 @@
       if (!data.ok || !data.session) { alert('Could not join session.'); return; }
       if (data.session.newParticipantId) {
         myParticipantId = data.session.newParticipantId;
+      }
+      // Stage 8: capture ride-originated discount code for this rider's conversion flow.
+      // Keep the most recent join's code (driver-demo flow adds riders one at a time; the
+      // last code will be the one a conversion click uses).
+      if (data.discountCode) {
+        rideDiscountCode           = data.discountCode;
+        rideDiscountExpires        = data.discountExpiresAt || null;
+        rideDiscountPercent        = data.discountPercent   || 10;
+        rideSessionIdForConversion = currentRideSessionId;
       }
       // Clear the name field for the next rider
       document.getElementById('joinName').value = '';
@@ -1471,6 +1506,72 @@
     if (top5Section) top5Section.classList.remove('proto-hidden');
     top5Section && top5Section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     refreshQrBox('results', preloadedSession || null);
+
+    // Stage 8: reveal conversion panel alongside results (if a discount was minted at join).
+    if (rideDiscountCode) {
+      showRideConversionPanel(rideDiscountCode, rideDiscountExpires, rideDiscountPercent, currentRideSessionId);
+    }
+  }
+
+  // ── Stage 8: Ride-originated conversion panel ──────────────────────────────
+  function showRideConversionPanel(discountCode, discountExpiresAt, discountPercent, sessionId) {
+    if (discountCode)        rideDiscountCode           = discountCode;
+    if (discountExpiresAt)   rideDiscountExpires        = discountExpiresAt;
+    if (discountPercent)     rideDiscountPercent        = discountPercent;
+    if (sessionId)           rideSessionIdForConversion = sessionId;
+    var panel = document.getElementById('rideConversionPanel');
+    if (panel) panel.style.display = 'block';
+  }
+
+  function rideConvertNow() {
+    var url = '/api/hummatch/checkout/monthly';
+    var params = new URLSearchParams();
+    if (rideDiscountCode)           params.set('rideDiscountCode', rideDiscountCode);
+    if (rideSessionIdForConversion) params.set('rideSessionId',    rideSessionIdForConversion);
+    var qs = params.toString();
+    if (qs) url += '?' + qs;
+    window.location.href = url;
+  }
+
+  function showRideReminder() {
+    var panel = document.getElementById('rideReminderPanel');
+    if (panel) panel.style.display = 'block';
+  }
+
+  async function submitRideReminder() {
+    var destEl = document.getElementById('rideReminderDest');
+    var statusEl = document.getElementById('rideReminderStatus');
+    var dest = (destEl && destEl.value || '').trim();
+    if (!dest) { if (statusEl) statusEl.textContent = 'Please enter an email or phone number.'; return; }
+    var channel = dest.indexOf('@') !== -1 ? 'email' : 'sms';
+    if (!rideSessionIdForConversion) {
+      if (statusEl) statusEl.textContent = 'No active ride session found.';
+      return;
+    }
+    try {
+      var res = await fetch('/api/ride-mode/session/' + rideSessionIdForConversion + '/remind', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          channel: channel,
+          destination: dest,
+          discountCode: rideDiscountCode,
+          discountExpiresAt: rideDiscountExpires
+        })
+      });
+      var data = await res.json();
+      if (statusEl) {
+        if (data.ok && data.sent) {
+          statusEl.textContent = 'Link sent to your email.';
+        } else if (data.ok && data.deferred) {
+          statusEl.textContent = 'SMS coming soon. Save your discount code: ' + (rideDiscountCode || '');
+        } else {
+          statusEl.textContent = 'Could not send. Please try again.';
+        }
+      }
+    } catch (e) {
+      if (statusEl) statusEl.textContent = 'Could not send. Please try again.';
+    }
   }
 
   // ── Reset / end session ────────────────────────────────────────────────────
@@ -1519,6 +1620,20 @@
     // Re-hide Top 5 section until next completed session
     var top5Section = document.getElementById('top5-results');
     if (top5Section) top5Section.classList.add('proto-hidden');
+
+    // Stage 8: hide + reset conversion / reminder panels and ride-discount state
+    var convPanel = document.getElementById('rideConversionPanel');
+    if (convPanel) convPanel.style.display = 'none';
+    var remPanel = document.getElementById('rideReminderPanel');
+    if (remPanel) remPanel.style.display = 'none';
+    var remDest = document.getElementById('rideReminderDest');
+    if (remDest) remDest.value = '';
+    var remStatus = document.getElementById('rideReminderStatus');
+    if (remStatus) remStatus.textContent = '';
+    rideDiscountCode = null;
+    rideDiscountExpires = null;
+    rideDiscountPercent = 10;
+    rideSessionIdForConversion = null;
 
     setRideModeState('setup');
     refreshQrBox('setup', null);
