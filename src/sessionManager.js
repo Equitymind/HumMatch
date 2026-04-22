@@ -296,90 +296,183 @@ function storeHumData(sessionId, participantId, humPayload) {
 
 // ── Session-aware song scoring ────────────────────────────────────────────────
 //
-// Derives a group vocal envelope from all participants with humData, then
-// scores every song in the catalog by how well its range overlaps that envelope.
-// Returns up to `limit` scored results sorted by descending fit score.
+// Stage 6 group-fit model: scores each song by how much of EACH participant's
+// vocal range overlaps the song's range, weighted by rolePreference. This is
+// more honest than union-envelope because a song that perfectly fits one
+// extreme rider but covers none of the others will score low.
 //
-// Scoring formula (all capped 0-100):
-//   overlap  = max(0, min(groupHi, songHi) - max(groupLo, songLo))
-//   envelope = groupHi - groupLo (min 1 to avoid div/0)
-//   rangeFit = overlap / envelope * 100
-//   fitScore = 0.7 * rangeFit + 0.2 * (1 - abs(songSpan - groupSpan) / 24 * 100) + 0.1 * brightness
-//            clamped to [0, 100]
+// Per-participant weight by rolePreference:
+//   'Lead'    -> 1.5  (melody-first: matters most for song fit)
+//   'Either'  -> 1.0
+//   'Harmony' -> 0.7  (flexible, matters less for melody fit)
 //
-// Label assignment (exclusive, by rank):
-//   rank 1  -> 'Best for Everyone'  (highest fit)
-//   rank 2  -> 'Easy Win'           (wide enough for the group)
-//   rank 3  -> 'Harmony Pick'       (moderately challenging)
-//   rank 4  -> 'Strong Duet'        (tighter range songs)
-//   rank 5  -> 'Road Trip Pick'     (crowd classic, brightness-boosted)
+// groupFit = sum(participantCoverage * weight) / sum(weight)
+//   where participantCoverage = overlap(participantRange, songRange) / participantSpan
+//
+// Fallbacks:
+//   0 valid riders -> union-envelope over default range
+//   1 valid rider  -> direct range (same as old behavior)
+//   2+ valid riders -> weighted group model above
 //
 function scoreSessionResults(session, limit) {
   limit = limit || 5;
-  const catalog = getSongCatalog();
-  if (!catalog.length) return [];
+  try {
+    const catalog = getSongCatalog();
+    if (!catalog.length) return { results: [], hasRealData: false, participantCount: 0, hummedCount: 0, groupLo: 0, groupHi: 0 };
 
-  // Collect participants with real humData
-  const withHum = (session.participants || []).filter(function(p) {
-    return p.humData && typeof p.humData.low === 'number' && typeof p.humData.high === 'number';
-  });
+    // Only participants with valid, sensible humData
+    const withHum = (session.participants || []).filter(function(p) {
+      if (!p.humData) return false;
+      const lo = p.humData.low, hi = p.humData.high;
+      return Number.isInteger(lo) && Number.isInteger(hi) && hi > lo;
+    });
 
-  let groupLo, groupHi, hasRealData;
-  if (withHum.length > 0) {
-    // Group envelope: lowest low across all riders, highest high across all riders
-    groupLo = Math.min.apply(null, withHum.map(function(p) { return p.humData.low;  }));
-    groupHi = Math.max.apply(null, withHum.map(function(p) { return p.humData.high; }));
-    hasRealData = true;
-  } else {
-    // No hum data at all: use a comfortable mid-range default so we still return results
-    groupLo = 48;  // C3 approximate
-    groupHi = 69;  // A4 approximate
-    hasRealData = false;
+    const participantCount = session.participants ? session.participants.length : 0;
+    const hummedCount = withHum.length;
+
+    // Determine dominant rolePreference among hummed riders (for label tuning)
+    let dominantRole = 'Either';
+    if (hummedCount > 0) {
+      const counts = { Lead: 0, Harmony: 0, Either: 0 };
+      withHum.forEach(function(p) {
+        const pref = p.rolePreference || 'Either';
+        if (counts[pref] !== undefined) counts[pref]++;
+        else counts.Either++;
+      });
+      dominantRole = Object.keys(counts).reduce(function(a, b) {
+        return counts[a] >= counts[b] ? a : b;
+      });
+    }
+
+    // Figure out scoring mode + groupLo/groupHi for return metadata
+    let mode, groupLo, groupHi, hasRealData;
+    if (hummedCount === 0) {
+      mode = 'default';
+      groupLo = 48; groupHi = 69;
+      hasRealData = false;
+    } else if (hummedCount === 1) {
+      mode = 'single';
+      groupLo = withHum[0].humData.low;
+      groupHi = withHum[0].humData.high;
+      hasRealData = true;
+    } else {
+      mode = 'group';
+      groupLo = Math.min.apply(null, withHum.map(function(p) { return p.humData.low;  }));
+      groupHi = Math.max.apply(null, withHum.map(function(p) { return p.humData.high; }));
+      hasRealData = true;
+    }
+
+    function weightFor(pref) {
+      if (pref === 'Lead') return 1.5;
+      if (pref === 'Harmony') return 0.7;
+      return 1.0;
+    }
+
+    const scored = catalog.map(function(song) {
+      const songLo = typeof song.lo === 'number' ? song.lo : 40;
+      const songHi = typeof song.hi === 'number' ? song.hi : 72;
+
+      let coverage; // 0..1
+      if (mode === 'group') {
+        let weightedSum = 0, weightTotal = 0;
+        withHum.forEach(function(p) {
+          const pLo = p.humData.low, pHi = p.humData.high;
+          const span = Math.max(pHi - pLo, 1);
+          const overlap = Math.max(0, Math.min(pHi, songHi) - Math.max(pLo, songLo));
+          const pCov = overlap / span;
+          const w = weightFor(p.rolePreference);
+          weightedSum += pCov * w;
+          weightTotal += w;
+        });
+        coverage = weightTotal > 0 ? weightedSum / weightTotal : 0;
+      } else {
+        // single / default: coverage = overlap / groupSpan
+        const span = Math.max(groupHi - groupLo, 1);
+        const overlap = Math.max(0, Math.min(groupHi, songHi) - Math.max(groupLo, songLo));
+        coverage = overlap / span;
+      }
+
+      const fitPct = Math.min(100, Math.max(0, Math.round(coverage * 100)));
+
+      return {
+        title:  song.title,
+        artist: song.artist,
+        lo:     songLo,
+        hi:     songHi,
+        fitPct: fitPct
+      };
+    });
+
+    // Sort descending by fitPct (stable)
+    scored.sort(function(a, b) { return b.fitPct - a.fitPct; });
+
+    // Diversity tie-breaking: among songs within 3 pts of each other, prefer
+    // different artists. Deterministic, stable — we walk the sorted list and
+    // when two adjacent entries are within 3 pts and share an artist already
+    // seen in the recent window, we nudge the duplicate down past non-dupes.
+    const top = [];
+    const pool = scored.slice(0, Math.min(scored.length, limit * 6));
+    const seenArtists = {};
+    let i = 0;
+    while (top.length < limit && i < pool.length) {
+      const cand = pool[i];
+      const artistKey = (cand.artist || '').toLowerCase();
+      if (!seenArtists[artistKey]) {
+        top.push(cand);
+        seenArtists[artistKey] = true;
+        pool.splice(i, 1);
+        i = 0;
+      } else {
+        // Look ahead within 3 pts for a different-artist alternative
+        let swapped = false;
+        for (let j = i + 1; j < pool.length; j++) {
+          if (cand.fitPct - pool[j].fitPct > 3) break;
+          const altArtist = (pool[j].artist || '').toLowerCase();
+          if (!seenArtists[altArtist]) {
+            top.push(pool[j]);
+            seenArtists[altArtist] = true;
+            pool.splice(j, 1);
+            swapped = true;
+            break;
+          }
+        }
+        if (!swapped) {
+          // No diverse alternative within tolerance: accept this one
+          top.push(cand);
+          pool.splice(i, 1);
+          i = 0;
+        }
+      }
+    }
+
+    // Assign rank + bucket label
+    top.forEach(function(result, idx) {
+      result.rank = idx + 1;
+      result.label = bucketLabel(result.fitPct, participantCount, dominantRole);
+      // Keep fitScore alias for existing frontend template
+      result.fitScore = result.fitPct;
+    });
+
+    return {
+      results:         top,
+      hasRealData:     hasRealData,
+      participantCount: participantCount,
+      hummedCount:     hummedCount,
+      groupLo:         groupLo,
+      groupHi:         groupHi
+    };
+  } catch (_) {
+    return { results: [], hasRealData: false, participantCount: 0, hummedCount: 0, groupLo: 0, groupHi: 0 };
   }
+}
 
-  const groupSpan = Math.max(groupHi - groupLo, 1);
-
-  const scored = catalog.map(function(song) {
-    const songLo   = song.lo  || 40;
-    const songHi   = song.hi  || 72;
-    const songSpan = Math.max(songHi - songLo, 1);
-    const brightness = song.brightness || 50;
-
-    // Overlap of [groupLo, groupHi] with [songLo, songHi]
-    const overlap    = Math.max(0, Math.min(groupHi, songHi) - Math.max(groupLo, songLo));
-    const rangeFit   = (overlap / groupSpan) * 100;
-
-    // Span compatibility (penalise songs whose range differs greatly from group's)
-    const spanDiff   = Math.abs(songSpan - groupSpan);
-    const spanFit    = Math.max(0, 100 - (spanDiff / 24) * 100);
-
-    const raw = 0.65 * rangeFit + 0.20 * spanFit + 0.15 * brightness;
-    const fitScore = Math.min(100, Math.max(0, Math.round(raw)));
-
-    return { title: song.title, artist: song.artist, fitScore: fitScore, lo: songLo, hi: songHi };
-  });
-
-  // Sort descending by fitScore
-  scored.sort(function(a, b) { return b.fitScore - a.fitScore; });
-
-  // Take top N (limit + buffer to allow deduplication if needed)
-  const top = scored.slice(0, limit);
-
-  // Assign labels by rank
-  var LABELS = ['Best for Everyone', 'Easy Win', 'Harmony Pick', 'Strong Duet', 'Road Trip Pick'];
-  top.forEach(function(result, i) {
-    result.rank   = i + 1;
-    result.label  = LABELS[i] || 'Pick';
-  });
-
-  return {
-    results:         top,
-    hasRealData:     hasRealData,
-    participantCount: session.participants ? session.participants.length : 0,
-    hummedCount:     withHum.length,
-    groupLo:         groupLo,
-    groupHi:         groupHi
-  };
+function bucketLabel(fitPct, participantCount, dominantRole) {
+  if (fitPct >= 85 && participantCount >= 3) return 'Best for Everyone';
+  if (fitPct >= 75) return 'Strong Group Pick';
+  if (fitPct >= 60 && dominantRole === 'Harmony') return 'Harmony Pick';
+  if (fitPct >= 60) return 'Good Fit';
+  if (fitPct >= 40) return 'Singable';
+  return 'Stretch';
 }
 
 // Score results for a session by its ID (uses raw internal session with humData intact).
