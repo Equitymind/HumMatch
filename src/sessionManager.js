@@ -63,6 +63,10 @@ function fullSessionView(session) {
     driverAlias:             session.driverAlias             || null,
     driverSessionOwner:      session.driverSessionOwner      || null,
     captureMode:             session.captureMode             || 'driver_device',
+    // Stage 7: opaque presence signal only — never leak PII
+    driverUserId:            session.driverUserId ? true : null,
+    affiliateCode:           session.affiliateCode           || null,
+    status:                  session.isActive ? 'active' : (session.isComplete ? 'complete' : 'ended'),
     // Hum data summary
     hasHumData:              completedHumCount > 0,
     completedHumCount:       completedHumCount,
@@ -163,7 +167,7 @@ function publicSession(session) {
 
 // ── public API ─────────────────────────────────────────────────────────────────
 
-function createSession(sessionName, expectedRiderCount, vibePreset, driverAlias) {
+function createSession(sessionName, expectedRiderCount, vibePreset, driverAlias, driverUserId) {
   const sessionId = Date.now().toString();
   const driverParticipant = {
     id:             makeParticipantId(),
@@ -178,7 +182,7 @@ function createSession(sessionName, expectedRiderCount, vibePreset, driverAlias)
     name:                    sessionName || 'Ride Mode Session',
     expectedCount:           Number(expectedRiderCount) || 5,
     vibePreset:              vibePreset || 'Easy Wins',
-    createdAt:               new Date(),
+    createdAt:               new Date().toISOString(),
     participants:            [driverParticipant],
     currentParticipantIndex: 0,
     hostParticipantId:       null,
@@ -187,23 +191,40 @@ function createSession(sessionName, expectedRiderCount, vibePreset, driverAlias)
     // Driver identity fields (non-billing, prepared for later affiliate linkage)
     driverAlias:             driverAlias || null,
     driverSessionOwner:      null,
-    captureMode:             'driver_device'
+    captureMode:             'driver_device',
+    // Stage 7: driver-owned session identity + affiliate attribution
+    driverUserId:            driverUserId || null,
+    affiliateCode:           null
   };
   return publicSession(sessions[sessionId]);
 }
 
-function joinSession(sessionId, participantName, rolePreference) {
+// Stage 7: attach an affiliate_code to an existing session (set by server after
+// looking up the driver user's affiliate record). Safe no-op if the session
+// does not exist. Returns the updated public view.
+function setSessionAffiliateCode(sessionId, affiliateCode) {
+  const session = sessions[sessionId];
+  if (!session) return null;
+  session.affiliateCode = affiliateCode || null;
+  return publicSession(session);
+}
+
+function joinSession(sessionId, participantName, rolePreference, attributionMeta) {
   const session = sessions[sessionId];
   if (!session || !session.isActive) return null;
   if (session.participants.length >= 5) return publicSession(session);
 
   const newParticipant = {
-    id:             makeParticipantId(),
-    name:           participantName || 'Guest',
-    rolePreference: rolePreference  || 'Either',
-    joinedAt:       new Date(),
-    status:         'waiting',
-    humData:        null
+    id:                   makeParticipantId(),
+    name:                 participantName || 'Guest',
+    rolePreference:       rolePreference  || 'Either',
+    joinedAt:             new Date().toISOString(),
+    status:               'waiting',
+    humData:              null,
+    // Stage 7: attribution metadata used by later reporting and upgrade paths
+    joinedViaRideMode:    true,
+    conversionEligible:   true,
+    attributionMeta:      attributionMeta || null
   };
   session.participants.push(newParticipant);
   syncStatuses(session);
@@ -482,6 +503,13 @@ function scoreResultsById(sessionId, limit) {
   return scoreSessionResults(session, limit || 5);
 }
 
+// Stage 7: raw internal session accessor for server-side plumbing (affiliate
+// attribution, DB event inserts). Does NOT expose humData via the public API —
+// callers must not return this directly to clients.
+function getRawSession(sessionId) {
+  return sessions[sessionId] || null;
+}
+
 module.exports = {
   createSession,
   joinSession,
@@ -492,5 +520,7 @@ module.exports = {
   getSessionForViewer,
   storeHumData,
   scoreSessionResults,
-  scoreResultsById
+  scoreResultsById,
+  setSessionAffiliateCode,
+  getRawSession
 };

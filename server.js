@@ -660,6 +660,33 @@ db.exec(`CREATE TABLE IF NOT EXISTS squad_name_votes (
 )`);
 console.log('[migration] SquadMatch viral loop tables ready');
 
+// Stage 7: ride_sessions DB event store — durable record of Ride Mode sessions
+// for affiliate/venue reporting. In-memory sessionManager remains the source of
+// truth for live session state; this table only records start/end events.
+try {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS ride_sessions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      session_id TEXT NOT NULL,
+      driver_user_id INTEGER,
+      affiliate_code TEXT,
+      vibe_preset TEXT,
+      expected_rider_count INTEGER,
+      actual_rider_count INTEGER DEFAULT 0,
+      hum_completed_count INTEGER DEFAULT 0,
+      session_status TEXT DEFAULT 'active',
+      created_at TEXT DEFAULT (datetime('now')),
+      completed_at TEXT,
+      FOREIGN KEY(driver_user_id) REFERENCES users(id)
+    );
+    CREATE INDEX IF NOT EXISTS idx_ride_sessions_driver ON ride_sessions(driver_user_id);
+    CREATE INDEX IF NOT EXISTS idx_ride_sessions_affiliate ON ride_sessions(affiliate_code);
+  `);
+  console.log('[migration] ride_sessions table ready');
+} catch (e) {
+  console.log('[migration] ride_sessions table error (non-fatal):', e.message);
+}
+
 /// Backfill: any squad missing an invite_token gets a permanent one generated now
 (function backfillInviteTokens() {
   const missing = db.prepare("SELECT id FROM squad_matches WHERE invite_token IS NULL OR invite_token = ''").all();
@@ -2782,7 +2809,21 @@ app.listen(PORT, () => {
     console.error('  [diag] users table check error:', e.message);
   }
 });
-const { createSession: createRideSession, joinSession: joinRideSession, assignHost: assignRideHost, advanceSession: advanceRideSession, endSession: endRideSession, getSession: getRideSession, getSessionForViewer: getRideSessionForViewer, storeHumData: storeRideHumData, scoreResultsById: scoreRideResultsById } = require('./src/sessionManager');
+const { createSession: createRideSession, joinSession: joinRideSession, assignHost: assignRideHost, advanceSession: advanceRideSession, endSession: endRideSession, getSession: getRideSession, getSessionForViewer: getRideSessionForViewer, storeHumData: storeRideHumData, scoreResultsById: scoreRideResultsById, setSessionAffiliateCode: setRideSessionAffiliateCode, getRawSession: getRawRideSession } = require('./src/sessionManager');
+
+// Stage 7: helper — insert a Ride Mode event into affiliate_conversions.
+// Swallows DB errors so a missing index or constraint never crashes the
+// session endpoints. commission_amount stays 0; these are event records only.
+function recordRideAffiliateEvent(affiliateCode, userId, eventType) {
+  if (!affiliateCode) return;
+  try {
+    db.prepare(
+      'INSERT INTO affiliate_conversions (affiliate_code, user_id, event_type, commission_amount) VALUES (?, ?, ?, 0)'
+    ).run(affiliateCode, userId || null, eventType);
+  } catch (e) {
+    console.log('[ride-mode] affiliate event insert failed:', e.message);
+  }
+}
 
 app.get('/ride-mode', (req, res) => {
     res.sendFile(path.join(__dirname, 'ride-mode.html'));
@@ -2791,13 +2832,54 @@ app.get('/ride-mode', (req, res) => {
 app.post('/api/ride-mode/session', (req, res) => {
   try {
     const { sessionName, expectedRiderCount, vibePreset, driverAlias } = req.body || {};
-    const session = createRideSession(
+
+    // Optional driver auth: if a token is present, link the session to a user.
+    // Missing or invalid token is fine — Ride Mode works for anonymous drivers.
+    const token = req.headers['x-auth-token'] || req.query.token || null;
+    let driverUser = null;
+    if (token) {
+      try { driverUser = stmts.getUserByToken.get(token) || null; } catch (_) { driverUser = null; }
+    }
+    const driverUserId = driverUser ? driverUser.id : null;
+
+    let session = createRideSession(
       sessionName || 'Ride Mode Session',
       Number(expectedRiderCount) || 5,
       vibePreset || 'Easy Wins',
-      driverAlias || null
+      driverAlias || null,
+      driverUserId
     );
-    return res.json({ ok: true, session });
+
+    // If the driver user has an affiliate record, attach the code to the session.
+    let affiliateCode = null;
+    if (driverUser && driverUser.email) {
+      try {
+        const row = db.prepare('SELECT affiliate_code FROM affiliates WHERE email = ?').get(driverUser.email);
+        if (row && row.affiliate_code) {
+          affiliateCode = row.affiliate_code;
+          session = setRideSessionAffiliateCode(session.id, affiliateCode) || session;
+        }
+      } catch (_) { /* non-fatal */ }
+    }
+
+    // DB event store: record the session start.
+    try {
+      db.prepare(
+        `INSERT INTO ride_sessions (session_id, driver_user_id, affiliate_code, vibe_preset, expected_rider_count, session_status)
+         VALUES (?, ?, ?, ?, ?, 'active')`
+      ).run(session.id, driverUserId, affiliateCode, session.vibePreset, session.expectedCount);
+    } catch (e) {
+      console.log('[ride-mode] ride_sessions insert failed:', e.message);
+    }
+
+    // Affiliate event: ride_session_started
+    recordRideAffiliateEvent(affiliateCode, driverUserId, 'ride_session_started');
+
+    // Session-aware join URL + QR image URL — passengers scan from any seat.
+    const joinUrl = `https://hummatch.me/ride-mode?join=${session.id}`;
+    const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(joinUrl)}`;
+
+    return res.json({ ok: true, session, joinUrl, qrImageUrl });
   } catch (error) {
     return res.status(500).json({ ok: false, error: error.message });
   }
@@ -2813,9 +2895,43 @@ app.get('/api/ride-mode/session/:sessionId', (req, res) => {
 });
 
 app.post('/api/ride-mode/session/:sessionId/join', (req, res) => {
+  const { sessionId } = req.params;
   const { participantName, preference } = req.body || {};
-  const session = joinRideSession(req.params.sessionId, participantName || 'Guest', preference || 'Either');
+
+  // Session integrity guard: prevent stale QR joins into ended sessions.
+  const existing = getRideSession(sessionId);
+  if (!existing) return res.status(404).json({ ok: false, error: 'Session not found' });
+  if (existing.status && existing.status !== 'active') {
+    return res.status(410).json({ ok: false, error: 'Session is no longer active' });
+  }
+
+  // Build attribution metadata from the raw session (so driverUserId/affiliateCode
+  // are captured without leaking via the public view).
+  const raw = getRawRideSession(sessionId);
+  const attributionMeta = {
+    sessionId,
+    driverUserId:      raw ? raw.driverUserId   : null,
+    affiliateCode:     raw ? raw.affiliateCode  : null,
+    joinedViaRideMode: true
+  };
+
+  const session = joinRideSession(sessionId, participantName || 'Guest', preference || 'Either', attributionMeta);
   if (!session) return res.status(404).json({ ok: false, error: 'Session not found or inactive' });
+
+  // DB event store: bump rider count.
+  try {
+    db.prepare(
+      `UPDATE ride_sessions SET actual_rider_count = ? WHERE session_id = ?`
+    ).run(Math.max(session.joinedCount - 1, 0), sessionId);
+  } catch (e) {
+    console.log('[ride-mode] ride_sessions update failed:', e.message);
+  }
+
+  // Affiliate event: ride_session_join (only when session is affiliate-owned).
+  if (raw && raw.affiliateCode) {
+    recordRideAffiliateEvent(raw.affiliateCode, null, 'ride_session_join');
+  }
+
   return res.json({ ok: true, session });
 });
 
@@ -2874,8 +2990,27 @@ app.post('/api/ride-mode/session/:sessionId/advance', (req, res) => {
 });
 
 app.post('/api/ride-mode/session/:sessionId/end', (req, res) => {
-  const session = endRideSession(req.params.sessionId);
+  const { sessionId } = req.params;
+  const raw = getRawRideSession(sessionId);
+  const session = endRideSession(sessionId);
   if (!session) return res.status(404).json({ ok: false, error: 'Session not found' });
+
+  // DB event store: mark completed with final counts.
+  try {
+    const hummedCount = raw
+      ? raw.participants.filter(function(p) { return !!p.humData; }).length
+      : 0;
+    db.prepare(
+      `UPDATE ride_sessions
+         SET session_status = 'completed',
+             completed_at = datetime('now'),
+             hum_completed_count = ?
+       WHERE session_id = ?`
+    ).run(hummedCount, sessionId);
+  } catch (e) {
+    console.log('[ride-mode] ride_sessions end update failed:', e.message);
+  }
+
   return res.json({ ok: true, session });
 });
 
@@ -2889,4 +3024,45 @@ app.get('/api/ride-mode/session/:sessionId/results', (req, res) => {
   const scored = scoreRideResultsById(sessionId, 5);
   if (!scored) return res.status(404).json({ ok: false, error: 'Session not found' });
   return res.json({ ok: true, session: sessionView, scored: scored });
+});
+
+// Stage 7: upgrade-intent signal endpoint for ride-originated users. This is a
+// lightweight hint — the actual checkout still goes through the existing
+// /api/hummatch/checkout/:plan handler. We just return the correct upgrade
+// path for a ride-originated caller and log the intent for attribution.
+app.post('/api/ride-mode/session/:sessionId/upgrade-intent', (req, res) => {
+  const { sessionId } = req.params;
+  const { userToken } = req.body || {};
+
+  const sessionView = getRideSession(sessionId);
+  if (!sessionView) return res.status(404).json({ ok: false, error: 'Session not found' });
+  const raw = getRawRideSession(sessionId);
+
+  let userId = null;
+  if (userToken) {
+    try {
+      const u = stmts.getUserByToken.get(userToken);
+      if (u) userId = u.id;
+    } catch (_) { /* ignore */ }
+  }
+
+  const affiliateCode = raw ? raw.affiliateCode : null;
+  const hasStripe = !!(STRIPE_PRICES && STRIPE_PRICES.monthly);
+
+  // Record the intent for later attribution reporting.
+  if (affiliateCode) {
+    recordRideAffiliateEvent(affiliateCode, userId, 'ride_upgrade_intent');
+  }
+
+  const payload = {
+    ok:             true,
+    upgradeUrl:     '/pricing',
+    plan:           'monthly',
+    sessionId,
+    driverOwned:    !!(raw && raw.driverUserId),
+    rideOriginated: true
+  };
+  if (hasStripe) payload.checkoutUrl = '/api/hummatch/checkout/monthly';
+
+  return res.json(payload);
 });

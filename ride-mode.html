@@ -805,6 +805,8 @@
   var currentRideSessionId = null;
   var viewerRole = 'driver';
   var myParticipantId = null;
+  var currentQrImageUrl = null;
+  var currentJoinUrl = null;
 
   // ── Scroll helper ──────────────────────────────────────────────────────────
   function scrollToSetup() {
@@ -846,11 +848,14 @@
       var expected = session ? session.expectedCount : 5;
       badge.className = 'status-badge active-ride';
       badge.textContent = '● Riders joining • ' + sessionName;
+      var qrMedia = currentQrImageUrl
+        ? '<img src="' + currentQrImageUrl + '" alt="Scan to join this ride session" style="width:min(260px,70%);height:auto;border-radius:12px;background:#fff;padding:10px;margin:6px auto 10px;display:block;" />'
+        : '<div class="qr-placeholder"><div class="qr-placeholder-label">Passenger QR</div></div>';
       qrBox.innerHTML = [
         '<div style="font-size:1.5rem;font-weight:900;margin-bottom:10px;">Joining now</div>',
-        '<div class="qr-placeholder"><div class="qr-placeholder-label">Passenger QR</div></div>',
+        qrMedia,
         '<div style="font-size:1rem;font-weight:800;">' + joined + ' of ' + expected + ' joined</div>',
-        '<div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Scan &amp; hum once</div>'
+        '<div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Scan to join</div>'
       ].join('');
       qrCaption.textContent = 'Passengers scan and join in seconds.';
 
@@ -1071,6 +1076,8 @@
       var data = await response.json();
       if (!data.ok || !data.session) { alert('Could not start Ride Mode session.'); return; }
       currentRideSessionId = data.session.id;
+      currentJoinUrl    = data.joinUrl    || null;
+      currentQrImageUrl = data.qrImageUrl || null;
       applySessionToUI(data.session);
       setRideModeState('join');
       refreshQrBox('join', data.session);
@@ -1472,6 +1479,9 @@
       try { await fetch('/api/ride-mode/session/' + currentRideSessionId + '/end', { method: 'POST' }); } catch (_) {}
     }
     currentRideSessionId = null;
+    // Clear Stage 7 session-aware QR state so stale images never show on a new session
+    currentQrImageUrl = null;
+    currentJoinUrl = null;
     // Zero out captured hum notes and driver pick so nothing leaks into the next session
     rideHumNotes = [null, null, null];
     rideHumPhase = 0;
