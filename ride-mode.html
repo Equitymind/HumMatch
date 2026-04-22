@@ -887,6 +887,8 @@
   // ────────────────────────────────────────────────────────────────────────────
 
   var currentRideSessionId = null;
+  var viewerRole = 'driver';
+  var myParticipantId = null;
 
   // ── Scroll helper ──────────────────────────────────────────────────────────
   function scrollToSetup() {
@@ -994,33 +996,69 @@
   function esc(str) {
     return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
+  function escapeHTML(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // Privacy-safe roster for passenger viewers — only shows viewer's own record + aggregate counts.
+  function buildPassengerSummaryHTML(counts, self) {
+    var selfStatusLabel = self && self.status === 'ready' ? 'Ready' : self && self.status === 'current' ? 'Up Next' : 'Waiting';
+    return '<li class="roster-item self-item">' +
+      '<span class="roster-name">' + (self ? escapeHTML(self.name) : 'You') + ' <em>(you)</em></span>' +
+      '<span class="roster-role">' + (self ? escapeHTML(self.rolePreference || '') : '') + '</span>' +
+      '<span class="roster-status">' + selfStatusLabel + '</span>' +
+      '</li>' +
+      '<li class="roster-summary">' +
+      '<span>' + (counts.total || 0) + ' riders total &bull; ' + (counts.ready || 0) + ' ready &bull; ' + (counts.waiting || 0) + ' waiting</span>' +
+      '</li>';
+  }
 
   // ── Full UI refresh from a session object ──────────────────────────────────
   function applySessionToUI(session) {
     if (!session) return;
 
-    // Metrics
+    // Metrics — role-aware (passenger gets aggregate counts; driver/host derive from participants)
+    var joinedCount = viewerRole === 'passenger'
+      ? (session.counts ? session.counts.total : 0)
+      : (session.participants ? session.participants.length : 0);
+    var readyCount = viewerRole === 'passenger'
+      ? (session.counts ? session.counts.ready : 0)
+      : (session.participants ? session.participants.filter(function(p){ return p.status === 'ready'; }).length : 0);
+    var waitingCount = viewerRole === 'passenger'
+      ? (session.counts ? session.counts.waiting : 0)
+      : (session.participants ? session.participants.filter(function(p){ return p.status === 'waiting'; }).length : 0);
+
     var elJoined  = document.getElementById('metricJoined');
     var elReady   = document.getElementById('metricReady');
     var elWaiting = document.getElementById('metricWaiting');
-    if (elJoined)  elJoined.textContent  = String(session.joinedCount || 0);
-    if (elReady)   elReady.textContent   = String(session.readyCount  || 0);
-    if (elWaiting) elWaiting.textContent = String(Math.max((session.joinedCount || 0) - (session.readyCount || 0), 0));
+    if (elJoined)  elJoined.textContent  = String(joinedCount);
+    if (elReady)   elReady.textContent   = String(readyCount);
+    if (elWaiting) elWaiting.textContent = String(waitingCount);
 
-    // Main progress roster
+    // Main progress roster — role-aware
     var mainRoster = document.getElementById('rideRosterList');
-    if (mainRoster) mainRoster.innerHTML = buildRosterHTML(session.participants);
+    if (mainRoster) {
+      mainRoster.innerHTML = viewerRole === 'passenger'
+        ? buildPassengerSummaryHTML(session.counts || {}, session.self)
+        : buildRosterHTML(session.participants || []);
+    }
 
-    // Join-screen mini roster
+    // Join-screen mini roster — role-aware
     var joinRoster = document.getElementById('joinRosterList');
     var joinPreview = document.getElementById('joinRosterPreview');
-    if (joinRoster && session.participants && session.participants.length) {
-      joinRoster.innerHTML = buildRosterHTML(session.participants);
-      if (joinPreview) joinPreview.style.display = '';
+    if (joinRoster) {
+      if (viewerRole === 'passenger') {
+        joinRoster.innerHTML = buildPassengerSummaryHTML(session.counts || {}, session.self);
+        if (joinPreview) joinPreview.style.display = '';
+      } else if (session.participants && session.participants.length) {
+        joinRoster.innerHTML = buildRosterHTML(session.participants);
+        if (joinPreview) joinPreview.style.display = '';
+      }
     }
     var joinHint = document.getElementById('joinRosterHint');
     if (joinHint) {
-      var remaining = Math.max((session.expectedCount || 5) - (session.joinedCount || 0), 0);
+      var remaining = Math.max((session.expectedCount || 5) - joinedCount, 0);
       joinHint.textContent = remaining > 0
         ? remaining + ' rider seat' + (remaining === 1 ? '' : 's') + ' still open'
         : 'Session is full — go to progress';
@@ -1068,14 +1106,22 @@
       if (top5Lead) top5Lead.style.display = '';
     }
 
-    // Results card summary roster
+    // Results card summary roster — role-aware
     var summaryRoster = document.getElementById('resultsSummaryRoster');
-    if (summaryRoster && session.participants) {
-      summaryRoster.innerHTML =
-        '<div class="roster-card" style="margin-top:0;">' +
-        '<div class="roster-title">Session roster — ' + esc(session.name) + '</div>' +
-        '<div class="roster-list">' + buildRosterHTML(session.participants) + '</div>' +
-        '</div>';
+    if (summaryRoster) {
+      if (viewerRole === 'passenger') {
+        summaryRoster.innerHTML =
+          '<div class="roster-card" style="margin-top:0;">' +
+          '<div class="roster-title">Session roster — ' + esc(session.name) + '</div>' +
+          '<div class="roster-list">' + buildPassengerSummaryHTML(session.counts || {}, session.self) + '</div>' +
+          '</div>';
+      } else if (session.participants) {
+        summaryRoster.innerHTML =
+          '<div class="roster-card" style="margin-top:0;">' +
+          '<div class="roster-title">Session roster — ' + esc(session.name) + '</div>' +
+          '<div class="roster-list">' + buildRosterHTML(session.participants) + '</div>' +
+          '</div>';
+      }
     }
   }
 
@@ -1116,6 +1162,9 @@
       });
       var data = await response.json();
       if (!data.ok || !data.session) { alert('Could not join session.'); return; }
+      if (data.session.newParticipantId) {
+        myParticipantId = data.session.newParticipantId;
+      }
       // Clear the name field for the next rider
       document.getElementById('joinName').value = '';
       applySessionToUI(data.session);

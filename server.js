@@ -2782,7 +2782,7 @@ app.listen(PORT, () => {
     console.error('  [diag] users table check error:', e.message);
   }
 });
-const { createSession: createRideSession, joinSession: joinRideSession, advanceSession: advanceRideSession, endSession: endRideSession, getSession: getRideSession } = require('./src/sessionManager');
+const { createSession: createRideSession, joinSession: joinRideSession, assignHost: assignRideHost, advanceSession: advanceRideSession, endSession: endRideSession, getSession: getRideSession, getSessionForViewer: getRideSessionForViewer } = require('./src/sessionManager');
 
 app.get('/ride-mode', (req, res) => {
     res.sendFile(path.join(__dirname, 'ride-mode.html'));
@@ -2803,7 +2803,10 @@ app.post('/api/ride-mode/session', (req, res) => {
 });
 
 app.get('/api/ride-mode/session/:sessionId', (req, res) => {
-  const session = getRideSession(req.params.sessionId);
+  const { sessionId } = req.params;
+  const viewerRole = req.query.viewer || 'driver';
+  const participantId = req.query.participantId || null;
+  const session = getRideSessionForViewer(sessionId, viewerRole, participantId);
   if (!session) return res.status(404).json({ ok: false, error: 'Session not found' });
   return res.json({ ok: true, session });
 });
@@ -2812,6 +2815,16 @@ app.post('/api/ride-mode/session/:sessionId/join', (req, res) => {
   const { participantName, preference } = req.body || {};
   const session = joinRideSession(req.params.sessionId, participantName || 'Guest', preference || 'Either');
   if (!session) return res.status(404).json({ ok: false, error: 'Session not found or inactive' });
+  return res.json({ ok: true, session });
+});
+
+app.post('/api/ride-mode/session/:sessionId/host', (req, res) => {
+  const { sessionId } = req.params;
+  const { participantId } = req.body || {};
+  if (!participantId) return res.status(400).json({ ok: false, error: 'participantId required' });
+  const assigned = assignRideHost(sessionId, participantId);
+  if (!assigned) return res.status(404).json({ ok: false, error: 'Session or participant not found' });
+  const session = getRideSessionForViewer(sessionId, 'host', participantId);
   return res.json({ ok: true, session });
 });
 
