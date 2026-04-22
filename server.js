@@ -2782,7 +2782,7 @@ app.listen(PORT, () => {
     console.error('  [diag] users table check error:', e.message);
   }
 });
-const { createSession: createRideSession, joinSession: joinRideSession, endSession: endRideSession, getSession: getRideSession } = require('./src/sessionManager');
+const { createSession: createRideSession, joinSession: joinRideSession, advanceSession: advanceRideSession, endSession: endRideSession, getSession: getRideSession } = require('./src/sessionManager');
 
 app.get('/ride-mode', (req, res) => {
     res.sendFile(path.join(__dirname, 'ride-mode.html'));
@@ -2812,6 +2812,13 @@ app.post('/api/ride-mode/session/:sessionId/join', (req, res) => {
   const { participantName, preference } = req.body || {};
   const session = joinRideSession(req.params.sessionId, participantName || 'Guest', preference || 'Either');
   if (!session) return res.status(404).json({ ok: false, error: 'Session not found or inactive' });
+  return res.json({ ok: true, session });
+});
+
+// Mark the current participant ready and advance to the next one.
+app.post('/api/ride-mode/session/:sessionId/advance', (req, res) => {
+  const session = advanceRideSession(req.params.sessionId);
+  if (!session) return res.status(404).json({ ok: false, error: 'Session not found or already complete' });
   return res.json({ ok: true, session });
 });
 
