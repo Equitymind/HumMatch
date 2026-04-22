@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>HumMatch Ride Mode — Driver-First In-Car Session</title>
+  <title>HumMatch Ride Mode</title>
   <meta name="description" content="HumMatch Ride Mode. Driver starts the session, passengers scan the QR and hum, HumMatch surfaces the top 5 songs this car can actually sing together. Driver chooses playback." />
   <meta name="theme-color" content="#a855f7" />
   <style>
@@ -540,12 +540,12 @@
         <div class="qr-box" id="rideQrBox">
           <div style="font-size:clamp(1.1rem,2vw,1.5rem);font-weight:900;line-height:1.25;margin-bottom:18px;">What should this car sing next?</div>
           <div class="qr-placeholder">
-            <div class="qr-placeholder-label">QR<br />placeholder</div>
+            <div class="qr-placeholder-label">Passenger QR</div>
           </div>
           <div style="font-size:1rem;font-weight:800;letter-spacing:0.04em;">Scan to join HumMatch</div>
           <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Hum once. See the best songs for this ride.</div>
         </div>
-        <p class="qr-caption" id="rideQrCaption" style="margin-top:14px;">Big QR. Big type. Easy scan from the back seat.</p>
+        <p class="qr-caption" id="rideQrCaption" style="margin-top:14px;">Show this to your passengers to join.</p>
       </div>
 
       <!-- Driver status + controls -->
@@ -592,7 +592,7 @@
     <!-- ── Interactive session flow ─────────────────────────────────────────── -->
     <section class="section">
       <h2>Try the session flow</h2>
-      <p class="section-lead">Step through a Ride Mode session: Setup → Join → Progress → Results. Prototype logic — lightweight and real enough to demo in the car.</p>
+      <p class="section-lead">Step through a Ride Mode session: Setup → Join → Progress → Results.</p>
 
       <div class="flow-toolbar">
         <button class="flow-pill active" data-state-btn="setup"    type="button">1. Setup</button>
@@ -606,7 +606,7 @@
         <!-- ── 1. SETUP ──────────────────────────────────────────────────────── -->
         <div class="proto-card" data-flow-state="setup" id="protoSetupCard">
           <div class="proto-title">Start Ride Session</div>
-          <p class="proto-copy">Driver-first setup. Name the ride, choose the vibe, and get the QR ready.</p>
+          <p class="proto-copy">Name the ride, choose a vibe, and start your session.</p>
           <div class="field-grid">
             <div>
               <label class="field-label" for="rideSessionName">Session name</label>
@@ -644,7 +644,7 @@
         <!-- ── 2. JOIN ───────────────────────────────────────────────────────── -->
         <div class="proto-card proto-hidden" data-flow-state="join" id="protoJoinCard">
           <div class="proto-title">Join Ride Session</div>
-          <p class="proto-copy">Add a passenger to the session. In production, this is the page passengers land on after scanning.</p>
+          <p class="proto-copy">Add passengers to your session before the ride begins.</p>
           <div class="field-grid">
             <div>
               <label class="field-label" for="joinName">First name</label>
@@ -676,7 +676,7 @@
         <!-- ── 3. PROGRESS ──────────────────────────────────────────────────── -->
         <div class="proto-card proto-hidden" data-flow-state="progress" id="protoProgressCard">
           <div class="proto-title">Session Progress</div>
-          <p class="proto-copy">Driver sees who joined, who is current, and who is next. Tap <strong style="color:#e9d5ff;">Mark Ready</strong> to advance through the roster.</p>
+          <p class="proto-copy">See who's joined and who's up next. Tap <strong style="color:#e9d5ff;">Mark Ready</strong> to advance.</p>
 
           <!-- Metrics row -->
           <div class="mini-metrics">
@@ -710,7 +710,7 @@
         <!-- ── 4. RESULTS ────────────────────────────────────────────────────── -->
         <div class="proto-card proto-hidden" data-flow-state="results" id="protoResultsCard">
           <div class="proto-title">Results Ready</div>
-          <p class="proto-copy">All participants are done. The session resolves into the Top 5 results below. Driver picks the song and handoff.</p>
+          <p class="proto-copy">Everyone's in. Your Top 5 results are ready — pick a song and play.</p>
 
           <!-- Session summary -->
           <div id="resultsSummaryRoster" style="margin-bottom:16px;"></div>
@@ -721,16 +721,7 @@
           </div>
         </div>
 
-        <!-- ── Static notes card ─────────────────────────────────────────────── -->
-        <div class="proto-card">
-          <div class="proto-title">Driver display notes</div>
-          <p class="proto-copy">For MVP, the driver phone is the main screen. Passenger sync can come later.</p>
-          <div class="mini-metrics">
-            <div class="mini-metric"><span>Main display</span><strong>Driver</strong></div>
-            <div class="mini-metric"><span>Default results</span><strong>Top 5</strong></div>
-            <div class="mini-metric"><span>Playback owner</span><strong>Driver</strong></div>
-          </div>
-        </div>
+
 
       </div><!-- /proto-grid -->
     </section>
@@ -862,19 +853,7 @@
       </div>
     </section>
 
-    <!-- ── Why driver-first ──────────────────────────────────────────────────── -->
-    <section class="section">
-      <div class="panel">
-        <h2>Why driver-first is the right MVP</h2>
-        <ul>
-          <li>The driver already controls the music — this just makes the choice smarter</li>
-          <li>Large text and top 5 only means everyone in the car can read the results at a glance</li>
-          <li>Simple playback handoff works today without any Spotify or Apple Music API partnership</li>
-          <li>Up to 5 total riders per session, including the driver's saved voice as participant 1</li>
-          <li>Synced passenger view is a natural Stage 3 addition — not a hard dependency for MVP</li>
-        </ul>
-      </div>
-    </section>
+
   </div>
 
   <footer>
@@ -883,7 +862,7 @@
 
   <script>
   // ────────────────────────────────────────────────────────────────────────────
-  //  Ride Mode Stage 2B — session state, roster, advance logic
+  //  Ride Mode — session state, roster, advance logic
   // ────────────────────────────────────────────────────────────────────────────
 
   var currentRideSessionId = null;
@@ -921,11 +900,11 @@
       badge.textContent = '● Session setup';
       qrBox.innerHTML = [
         '<div style="font-size:clamp(1.1rem,2vw,1.5rem);font-weight:900;line-height:1.25;margin-bottom:18px;">What should this car sing next?</div>',
-        '<div class="qr-placeholder"><div class="qr-placeholder-label">QR<br/>placeholder</div></div>',
+        '<div class="qr-placeholder"><div class="qr-placeholder-label">Passenger QR</div></div>',
         '<div style="font-size:1rem;font-weight:800;letter-spacing:0.04em;">Scan to join HumMatch</div>',
         '<div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Hum once. See the best songs for this ride.</div>'
       ].join('');
-      qrCaption.textContent = 'Big QR. Big type. Easy scan from the back seat.';
+      qrCaption.textContent = 'Show this to your passengers to join.';
 
     } else if (state === 'join') {
       var joined = session ? session.joinedCount : 1;
@@ -934,7 +913,7 @@
       badge.textContent = '● Riders joining • ' + sessionName;
       qrBox.innerHTML = [
         '<div style="font-size:1.5rem;font-weight:900;margin-bottom:10px;">Joining now</div>',
-        '<div class="qr-placeholder"><div class="qr-placeholder-label">QR<br/>placeholder</div></div>',
+        '<div class="qr-placeholder"><div class="qr-placeholder-label">Passenger QR</div></div>',
         '<div style="font-size:1rem;font-weight:800;">' + joined + ' of ' + expected + ' joined</div>',
         '<div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Scan &amp; hum once</div>'
       ].join('');
