@@ -548,12 +548,12 @@
       <div class="hero-card driver-board">
         <div class="driver-status">
           <span class="status-badge" id="rideStatusBadge">● No active session</span>
-          <button class="btn btn-danger" id="heroEndSessionBtn">End Session</button>
+          <button class="btn btn-danger" id="heroEndSessionBtn" style="display:none;">End Session</button>
         </div>
         <div>
           <div class="eyebrow">HumMatch Ride Mode</div>
           <h1 class="driver-title">What should this car sing next?</h1>
-          <p class="driver-sub">Start a session. Passengers scan and hum. HumMatch surfaces the top 5 songs this car can actually pull off — lead and harmony assigned. Driver chooses playback.</p>
+          <p class="driver-sub">Start a session. Passengers scan and hum. HumMatch surfaces the top 5 songs this car can actually pull off, lead and harmony assigned. Driver chooses playback.</p>
         </div>
         <div class="cta-row">
           <button class="btn btn-primary" type="button" onclick="scrollToSetup()">Start a Ride Session</button>
@@ -752,7 +752,7 @@
         <!-- ── 4. RESULTS ────────────────────────────────────────────────────── -->
         <div class="proto-card proto-hidden" data-flow-state="results" id="protoResultsCard">
           <div class="proto-title">Results Ready</div>
-          <p class="proto-copy">Everyone's in. Your Top 5 results are ready — pick a song and play.</p>
+          <p class="proto-copy">Everyone's in. Your Top 5 results are ready, pick a song and play.</p>
 
           <!-- Session summary -->
           <div id="resultsSummaryRoster" style="margin-bottom:16px;"></div>
@@ -860,6 +860,9 @@
 
     var sessionName = (session && session.name) ? session.name : 'Ride Mode';
 
+    var heroEndBtn = document.getElementById('heroEndSessionBtn');
+    if (heroEndBtn) heroEndBtn.style.display = (state === 'setup') ? 'none' : '';
+
     if (state === 'setup') {
       badge.className = 'status-badge';
       badge.textContent = '● No active session';
@@ -908,7 +911,7 @@
         '<div style="font-size:1rem;color:rgba(255,255,255,0.7);margin-bottom:6px;">All ' + totalCount + ' riders done</div>',
         '<div style="font-size:0.85rem;color:rgba(255,255,255,0.45);">Scroll down to choose playback</div>'
       ].join('');
-      qrCaption.textContent = 'Driver chooses playback — Spotify, Apple Music, or karaoke.';
+      qrCaption.textContent = 'Driver chooses playback: Spotify, Apple Music, or karaoke.';
     }
   }
 
@@ -1010,7 +1013,7 @@
       var remaining = Math.max((session.expectedCount || 5) - joinedCount, 0);
       joinHint.textContent = remaining > 0
         ? remaining + ' rider seat' + (remaining === 1 ? '' : 's') + ' still open'
-        : 'Session is full — go to progress';
+        : 'Session is full, go to progress';
     }
 
     // Hum turn panel + next-up banner

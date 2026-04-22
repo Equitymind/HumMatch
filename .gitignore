@@ -3,14 +3,45 @@ node_modules/
 *.db
 *.db-wal
 *.db-shm
+
+# Backup files
 *.bak
 *.bak2
 *.bak3
 *.backup
+*.bak-*
 index.html.before-*
+*.before-*
+*.backup-*
+
+# Build/import artifacts
 songs-checkpoint-*.json
-hummatch-analytics-backup.json
 batch-*.json
+songs-to-add*.json
+songs-updated-*.json
+christian-gospel-expansion*.json
+new-songs-batch*.json
+english-batch*.json
+spanish-expansion-batch*.json
+spanish-verified-500.json
+hummatch-new-songs.json
+songs-to-insert.txt
+songs-formatted.txt
+convert-songs.py
+.seo-update
+
+# Analytics backups
+*-analytics-backup*.json
+hummatch-analytics-backup.json
+
+# One-time migration artifacts
+discount-codes-migration.sql
+*.patch
+
+# Legacy song directories
+song-old/
+
+# Editor/tooling
 .vscode/
 .idea/
 *.swp
@@ -22,3 +53,30 @@ Thumbs.db
 .openclaw/
 mcp-server/
 mcp-hummatch/
+
+# Private/internal docs
+AGENTS.md
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+USER.md
+TOOLS.md
+CLOUDFLARE-SETUP.md
+MORNING-BRIEF-*.md
+AFFILIATE-SYSTEM-SPEC.md
+DASHBOARD-SPEC.md
+RIDE-MODE-SPEC.md
+*-SPEC.md
+profile-system-spec.md
+song-curation-plan.md
+HumMatch-Directory-Listings.md
+SQUAD-DELETION-FIX.md
+STRIPE-PRICE-UPDATE.md
+BLOG-VOCAL-TIMBRE-BRIGHTNESS.md
+
+# Patent and investor documents
+HumMatch-Provisional-Patent*
+HumMatch-Investor-Deck*
+HumMatch-Affiliate-Outreach*
+*.pdf
+*.docx

@@ -4,5 +4,7 @@ Allow: /song/
 Allow: /blog/
 Disallow: /api/
 Disallow: /analytics
+Disallow: /dashboard
+Disallow: /affiliate/dashboard
 
 Sitemap: https://hummatch.me/sitemap.xml
