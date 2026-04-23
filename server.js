@@ -9,6 +9,14 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const rateLimit = require('express-rate-limit');
 
+// Prevent silent crashes that would wipe the in-memory session store.
+process.on('uncaughtException', (err) => {
+  console.error('[FATAL] Uncaught exception:', err);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('[FATAL] Unhandled rejection:', reason);
+});
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const BUILD_VERSION = process.env.BUILD_VERSION || '2.0.0';
@@ -3021,8 +3029,9 @@ app.post('/api/ride-mode/session', (req, res) => {
     // Affiliate event: ride_session_started
     recordRideAffiliateEvent(affiliateCode, driverUserId, 'ride_session_started');
 
-    // Session-aware join URL + QR image URL — passengers scan from any seat.
-    const joinUrl = `https://hummatch.me/ride-mode?join=${session.id}`;
+    // Session-aware join URL + QR image URL -- passengers scan from any seat.
+    const rideBaseUrl = (process.env.BASE_URL || 'https://hummatch.me').replace(/\/+$/, '');
+    const joinUrl = `${rideBaseUrl}/ride-mode?join=${session.id}`;
     const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(joinUrl)}`;
 
     return res.json({ ok: true, session, joinUrl, qrImageUrl });

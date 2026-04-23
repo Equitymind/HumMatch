@@ -1007,16 +1007,47 @@
     $('passengerBannerCode').textContent = '------';
 
     // Pull initial session details to render banner copy before the rider joins.
-    fetchPassengerSession().then(function(sess) {
+    fetchPassengerSession().then(function(result) {
+      var sess = result && result.session ? result.session : null;
+      var status = result ? result.status : 'unknown';
+
       if (!sess) {
-        // Session not found -- hide the form entirely and show a clean error
-        $('passengerBannerTitle').textContent = 'Ride session not found';
+        // No session -- distinguish between not-found, network, and other errors.
         $('passengerBannerCode').textContent = '------';
-        $('passengerJoinTitle').textContent = 'This ride has ended or the link has expired.';
         var form = $('passengerJoinForm');
         if (form) form.style.display = 'none';
+
+        if (status === 'network_error') {
+          $('passengerBannerTitle').textContent = 'Connection error';
+          $('passengerJoinTitle').textContent = 'Could not connect to the server. Check your connection and try again.';
+        } else if (status === 'not_found') {
+          $('passengerBannerTitle').textContent = 'Ride session not found';
+          $('passengerJoinTitle').textContent = "This ride session wasn't found. The driver may need to create a new ride.";
+        } else {
+          $('passengerBannerTitle').textContent = 'Ride session not found';
+          $('passengerJoinTitle').textContent = "This ride session wasn't found. The driver may need to create a new ride.";
+        }
         return;
       }
+
+      // Session found -- check lifecycle state.
+      if (!sess.isActive && sess.isComplete) {
+        $('passengerBannerTitle').textContent = 'Ride ended';
+        $('passengerBannerCode').textContent = '------';
+        $('passengerJoinTitle').textContent = 'This ride has ended.';
+        var form2 = $('passengerJoinForm');
+        if (form2) form2.style.display = 'none';
+        return;
+      }
+      if (!sess.isActive) {
+        $('passengerBannerTitle').textContent = 'Session inactive';
+        $('passengerBannerCode').textContent = '------';
+        $('passengerJoinTitle').textContent = 'This session is no longer active.';
+        var form3 = $('passengerJoinForm');
+        if (form3) form3.style.display = 'none';
+        return;
+      }
+
       passengerVibe = sess.vibePreset || 'Ride';
       passengerRideCode = buildRideCode(joinSessionId, passengerVibe);
       passengerDriverAlias = sess.driverAlias || null;
@@ -1035,11 +1066,18 @@
         ? '?viewer=passenger&participantId=' + encodeURIComponent(passengerParticipantId)
         : '?viewer=passenger';
       var res = await fetch('/api/ride-mode/session/' + joinSessionId + q);
+      if (res.status === 404) {
+        return { session: null, status: 'not_found' };
+      }
       var data = await res.json();
-      if (!data.ok || !data.session) return null;
+      if (!data.ok || !data.session) {
+        return { session: null, status: 'not_found' };
+      }
       passengerSession = data.session;
-      return data.session;
-    } catch (_) { return null; }
+      return { session: data.session, status: 'ok' };
+    } catch (_) {
+      return { session: null, status: 'network_error' };
+    }
   }
 
   function showPassengerState(next) {
@@ -1325,7 +1363,8 @@
   }
 
   async function pollPassengerSession() {
-    var sess = await fetchPassengerSession();
+    var result = await fetchPassengerSession();
+    var sess = result && result.session ? result.session : null;
     if (!sess) return;
 
     // Waiting count text

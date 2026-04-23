@@ -4,6 +4,7 @@
 // and session-aware song scoring from the shared songs.json catalog.
 
 const path = require('path');
+const fs = require('fs');
 let _songCatalog = null;
 function getSongCatalog() {
   if (_songCatalog) return _songCatalog;
@@ -16,7 +17,56 @@ function getSongCatalog() {
   return _songCatalog;
 }
 
+// ── Session persistence ───────────────────────────────────────────────────────
+// The in-memory store is wiped on any Node process restart (deploy, crash,
+// OOM, Render restart). A persistent disk alone does not help -- we need to
+// serialize `sessions` to a JSON file on that disk so fresh QR joins survive
+// process restarts.
+const SESSION_FILE = process.env.SESSION_FILE_PATH || path.join(process.cwd(), 'sessions.json');
+const SESSION_MAX_AGE_MS = 24 * 60 * 60 * 1000; // prune anything older than 24h
+
 const sessions = {};
+
+function sessionAgeMs(session) {
+  if (!session) return Infinity;
+  if (typeof session.createdAtMs === 'number') return Date.now() - session.createdAtMs;
+  const ts = typeof session.createdAt === 'number'
+    ? session.createdAt
+    : Date.parse(session.createdAt);
+  if (!ts || isNaN(ts)) return 0;
+  return Date.now() - ts;
+}
+
+function loadSessionsFromDisk() {
+  try {
+    if (!fs.existsSync(SESSION_FILE)) return;
+    const raw = fs.readFileSync(SESSION_FILE, 'utf8');
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return;
+    Object.keys(parsed).forEach(function(id) {
+      const sess = parsed[id];
+      if (!sess) return;
+      if (sessionAgeMs(sess) > SESSION_MAX_AGE_MS) return; // prune stale
+      sessions[id] = sess;
+    });
+    console.log('[sessionManager] loaded ' + Object.keys(sessions).length + ' session(s) from ' + SESSION_FILE);
+  } catch (e) {
+    console.error('[sessionManager] loadSessionsFromDisk failed:', e.message);
+  }
+}
+
+function persistSessions() {
+  try {
+    const tmp = SESSION_FILE + '.tmp';
+    fs.writeFileSync(tmp, JSON.stringify(sessions), 'utf8');
+    fs.renameSync(tmp, SESSION_FILE);
+  } catch (e) {
+    console.error('[sessionManager] persistSessions failed:', e.message);
+  }
+}
+
+loadSessionsFromDisk();
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 
@@ -120,6 +170,7 @@ function passengerSessionView(session, viewerParticipantId) {
     id:           session.id,
     name:         session.name,
     vibePreset:   session.vibePreset,
+    driverAlias:  session.driverAlias || null,
     isActive:     session.isActive,
     isComplete:   session.isComplete,
     // Aggregate counts only — no names
@@ -183,6 +234,7 @@ function createSession(sessionName, expectedRiderCount, vibePreset, driverAlias,
     expectedCount:           Number(expectedRiderCount) || 5,
     vibePreset:              vibePreset || 'Easy Wins',
     createdAt:               new Date().toISOString(),
+    createdAtMs:             Date.now(),
     participants:            [driverParticipant],
     currentParticipantIndex: 0,
     hostParticipantId:       null,
@@ -196,6 +248,7 @@ function createSession(sessionName, expectedRiderCount, vibePreset, driverAlias,
     driverUserId:            driverUserId || null,
     affiliateCode:           null
   };
+  persistSessions();
   return publicSession(sessions[sessionId]);
 }
 
@@ -206,6 +259,7 @@ function setSessionAffiliateCode(sessionId, affiliateCode) {
   const session = sessions[sessionId];
   if (!session) return null;
   session.affiliateCode = affiliateCode || null;
+  persistSessions();
   return publicSession(session);
 }
 
@@ -228,6 +282,7 @@ function joinSession(sessionId, participantName, rolePreference, attributionMeta
   };
   session.participants.push(newParticipant);
   syncStatuses(session);
+  persistSessions();
   // Return the new participant's id alongside the session so the caller can
   // store it as the viewer's own identifier for future passenger views.
   const view = publicSession(session);
@@ -246,6 +301,7 @@ function assignHost(sessionId, participantId) {
     : true;  // null clears the host — always valid
   if (!exists) return null;
   session.hostParticipantId = participantId || null;
+  persistSessions();
   return publicSession(session);
 }
 
@@ -267,6 +323,7 @@ function advanceSession(sessionId) {
     session.participants.forEach(function(p) { p.status = 'ready'; });
   }
 
+  persistSessions();
   return publicSession(session);
 }
 
@@ -278,6 +335,7 @@ function endSession(sessionId) {
   session.participants.forEach(function(p) {
     if (p.status !== 'ready') p.status = 'ready';
   });
+  persistSessions();
   return publicSession(session);
 }
 
@@ -327,6 +385,7 @@ function storeHumData(sessionId, participantId, humPayload) {
     session.participants.forEach(function(p) { p.status = 'ready'; });
   }
 
+  persistSessions();
   return publicSession(session);
 }
 

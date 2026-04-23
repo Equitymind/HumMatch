@@ -4,6 +4,10 @@ node_modules/
 *.db-wal
 *.db-shm
 
+# Ride Mode persistent session store (runtime-only)
+sessions.json
+sessions.json.tmp
+
 # Backup files
 *.bak
 *.bak2
