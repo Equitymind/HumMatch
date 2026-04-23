@@ -36,27 +36,24 @@
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
     }
-    body { padding: 0; }
-
-    /* ── Nav ─────────────────────────────────────────────────────────────── */
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      max-width: 720px; margin: 0 auto; padding: 20px 20px 0;
-    }
-    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-bug {
-      width: 34px; height: 34px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), var(--pink));
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 18px rgba(168,85,247,0.35);
-    }
-    .nav-bug svg { width: 18px; height: 18px; }
-    .nav-wordmark {
-      font-size: 1.05rem; font-weight: 800; letter-spacing: -0.01em;
-      background: linear-gradient(135deg, #fff, #E9D5FF);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    /* ── Nav (shared HumMatch header) ─────────────────────────────────── */
+    .hm-header { position:fixed; top:0; left:0; right:0; z-index:10000; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:rgba(8,6,15,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.1); }
+    .hm-header-logo { text-decoration:none; font-size:1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hm-nav-toggle { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; padding:0; flex-shrink:0; }
+    .hm-nav-toggle span { display:block; width:20px; height:2px; background:rgba(168,85,247,0.9); border-radius:2px; transition:all 0.25s; }
+    .hm-nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hm-nav-toggle.open span:nth-child(2) { opacity:0; }
+    .hm-nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .hm-nav-drawer { position:fixed; top:0; left:0; width:240px; height:100%; background:rgba(8,6,15,0.97); backdrop-filter:blur(16px); border-right:1px solid rgba(168,85,247,0.15); z-index:9999; transform:translateX(-100%); visibility:hidden; transition:transform 0.28s cubic-bezier(.4,0,.2,1), visibility 0.28s; padding:70px 0 24px; }
+    .hm-nav-drawer.open { transform:translateX(0); visibility:visible; }
+    .hm-nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9998; opacity:0; pointer-events:none; transition:opacity 0.28s; }
+    .hm-nav-overlay.open { opacity:1; pointer-events:all; }
+    .hm-nav-logo { padding:0 20px 20px; border-bottom:1px solid rgba(168,85,247,0.12); margin-bottom:8px; }
+    .hm-nav-logo span { font-size:1.1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hm-nav-item { display:block; padding:13px 24px; color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color 0.15s, background 0.15s; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .hm-nav-item:hover { color:#fff; background:rgba(168,85,247,0.1); }
+    .hm-nav-divider { height:1px; background:rgba(168,85,247,0.1); margin:8px 20px; }
+    body { padding-top: 57px; } /* offset for fixed header */
     .nav-chip {
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
       color: var(--text3); text-transform: uppercase;
@@ -405,15 +402,28 @@
 </head>
 <body>
 
-  <!-- Nav (shared) -->
-  <nav>
-    <a href="/" class="nav-brand" aria-label="HumMatch">
-      <span class="nav-bug" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2v4c0 1.1-.9 2-2 2s-2-.9-2-2v-4zm6-5c0-1.1.9-2 2-2s2 .9 2 2v11c0 1.1-.9 2-2 2s-2-.9-2-2V7zm6 3c0-1.1.9-2 2-2s2 .9 2 2v7c0 1.1-.9 2-2 2s-2-.9-2-2v-7z" fill="#fff"/></svg>
-      </span>
-      <span class="nav-wordmark">HumMatch</span>
-    </a>
-    <span class="nav-chip">Ride Mode</span>
+  <!-- Nav (matches HumMatch site nav) -->
+  <header class="hm-header">
+    <a class="hm-header-logo" href="/">HumMatch</a>
+    <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:rgba(255,255,255,0.4);text-transform:uppercase;">Ride Mode</span>
+    <button class="hm-nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
+  <nav class="hm-nav-drawer" id="navDrawer">
+    <div class="hm-nav-logo"><span>HumMatch</span></div>
+    <a class="hm-nav-item" href="/" style="color:#c084fc;font-weight:700;">🎤 Try HumMatch</a>
+    <a class="hm-nav-item" href="/how-it-works">How It Works</a>
+    <a class="hm-nav-item" href="/squadmatch">SquadMatch</a>
+    <a class="hm-nav-item hm-nav-item-active" href="/ride-mode" style="color:#A855F7;">🚗 Ride Mode</a>
+    <div class="hm-nav-divider"></div>
+    <a class="hm-nav-item" href="/affiliate">Affiliate</a>
+    <a class="hm-nav-item" href="/blog">Blog</a>
+    <a class="hm-nav-item" href="/contact">Contact</a>
+    <div class="hm-nav-divider"></div>
+    <a class="hm-nav-item" href="/login?return=/" id="navLoginItem">Log In</a>
+    <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Sign Up</a>
   </nav>
 
   <div class="wrap">
@@ -663,14 +673,22 @@
     </div>
   </div>
 
-  <footer>
-    <div>
-      <a href="/">Home</a>
-      <a href="/how-it-works">How it works</a>
-      <a href="/squadmatch">SquadMatch</a>
-      <a href="/pricing">Pricing</a>
+  <!-- Footer (matches HumMatch site footer) -->
+  <footer style="width:100%;margin-top:32px;padding:20px 0 max(24px, env(safe-area-inset-bottom, 24px));border-top:1px solid rgba(255,255,255,0.06);">
+    <div style="display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;">
+      <a href="/how-it-works" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">How It Works</a>
+      <a href="/pricing" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Pricing</a>
+      <a href="/squadmatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">SquadMatch</a>
+      <a href="/ride-mode" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">Ride Mode</a>
+      <a href="/affiliate" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Affiliate</a>
+      <a href="/songs" style="font-size:0.9rem;color:#a855f7;text-decoration:none;font-weight:600;">🎵 Browse All Songs</a>
+      <a href="/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
+      <a href="/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contact</a>
+      <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
+      <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
+      <a href="/login?return=/" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Log In</a>
     </div>
-    <div style="margin-top:10px;">&copy; HumMatch</div>
+    <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.2);">&copy; 2026 HumMatch</div>
   </footer>
 
 <script>
@@ -1394,6 +1412,30 @@
     }
   };
 
+})();
+
+// Shared nav functions (matches index.html)
+function toggleNav() {
+  var tog = document.getElementById('navToggle');
+  var drw = document.getElementById('navDrawer');
+  var ovl = document.getElementById('navOverlay');
+  tog.classList.toggle('open');
+  drw.classList.toggle('open');
+  ovl.classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navToggle').classList.remove('open');
+  document.getElementById('navDrawer').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+}
+// Swap Log In -> My HQ if already authenticated
+(function(){
+  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
+  if (!t) return;
+  var li = document.getElementById('navLoginItem');
+  if (li) { li.textContent = 'My HQ'; li.href = '/dashboard'; }
+  var fi = document.getElementById('footerLoginItem');
+  if (fi) { fi.textContent = 'My HQ'; fi.href = '/dashboard'; }
 })();
 </script>
 </body>
