@@ -312,6 +312,21 @@ function storeHumData(sessionId, participantId, humPayload) {
     high:        humPayload.high        || null,
     capturedAt:  humPayload.capturedAt  || new Date().toISOString()
   };
+  // Mark participant done
+  participant.status = 'ready';
+
+  // If all expected participants have hummed, mark session complete.
+  // expectedCount is set on creation and does not include the driver.
+  // We check all non-driver participants who have humData.
+  const passengers = session.participants.filter(function(p) { return p.name !== 'Driver'; });
+  const hummedPassengers = passengers.filter(function(p) { return !!p.humData; });
+  const expected = session.expectedCount || (session.participants.length - 1);
+  if (hummedPassengers.length >= expected && expected > 0) {
+    session.isComplete = true;
+    session.isActive = false;
+    session.participants.forEach(function(p) { p.status = 'ready'; });
+  }
+
   return publicSession(session);
 }
 
