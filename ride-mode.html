@@ -759,7 +759,6 @@
 
           <div class="cta-row">
             <button class="btn btn-primary" type="button" onclick="document.getElementById('top5-results').scrollIntoView({behavior:'smooth'})">See Top 5</button>
-            <button class="btn btn-danger"  type="button" onclick="resetRideModeDemo()">End Session</button>
           </div>
         </div>
 
@@ -772,7 +771,7 @@
     <section class="section proto-hidden" id="top5-results">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;">
         <h2 style="margin-bottom:0;">Top 5 Songs for This Car</h2>
-        <button class="btn btn-danger" type="button" onclick="resetRideModeDemo()" style="white-space:nowrap;">End Session</button>
+        <button class="btn btn-danger" id="top5EndSessionBtn" type="button" onclick="resetRideModeDemo()" style="white-space:nowrap;">End Session</button>
       </div>
 
       <!-- Session-complete banner -- shown when all participants are ready -->
@@ -879,7 +878,7 @@
     var sessionName = (session && session.name) ? session.name : 'Ride Mode';
 
     var heroEndBtn = document.getElementById('heroEndSessionBtn');
-    if (heroEndBtn) heroEndBtn.style.display = (state === 'setup') ? 'none' : '';
+    if (heroEndBtn) heroEndBtn.style.display = 'none';
 
     if (state === 'setup') {
       badge.className = 'status-badge';
@@ -1458,7 +1457,8 @@
     if (!grid) return;
 
     if (!scored || !scored.results || scored.results.length === 0) {
-      grid.innerHTML = '<p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">No results available for this session.</p>';
+      // Scoring returned empty -- show a helpful message and retry link
+      grid.innerHTML = '<p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">Calculating results -- if songs don\'t appear, tap <strong style="color:#a855f7;cursor:pointer;" onclick="showRideResults()">reload results</strong>.</p>';
       return;
     }
 
@@ -1514,26 +1514,32 @@
       } catch (_) {}
     }
 
-    // Fetch session-aware scored results
+    // Reveal the UI state first so the results container is visible before we write into it.
+    // This prevents a race where renderRideResults writes to a proto-hidden container and
+    // some browsers skip layout for hidden elements.
+    setRideModeState('results');
+    var top5Section = document.getElementById('top5-results');
+    if (top5Section) top5Section.classList.remove('proto-hidden');
+    refreshQrBox('results', preloadedSession || null);
+
+    // Fetch session-aware scored results AFTER the container is visible
     if (currentRideSessionId) {
       try {
         var rRes = await fetch('/api/ride-mode/session/' + currentRideSessionId + '/results');
         var rData = await rRes.json();
         if (rData.ok && rData.scored) {
           renderRideResults(rData.scored);
+        } else {
+          renderRideResults(null);
         }
-      } catch (_) {
-        // Render with no data gracefully
+      } catch (fetchErr) {
+        console.warn('[Ride Mode] Results fetch failed:', fetchErr);
         renderRideResults(null);
       }
     }
 
-    setRideModeState('results');
-    // Reveal the Top 5 section now that the session is complete
-    var top5Section = document.getElementById('top5-results');
-    if (top5Section) top5Section.classList.remove('proto-hidden');
-    top5Section && top5Section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    refreshQrBox('results', preloadedSession || null);
+    // Scroll after render so cards are in the DOM
+    if (top5Section) top5Section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     // Stage 8: reveal conversion panel alongside results (if a discount was minted at join).
     if (rideDiscountCode) {
