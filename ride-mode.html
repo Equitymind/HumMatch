@@ -544,28 +544,31 @@
 
         <span class="eyebrow">Passenger</span>
         <h2 id="passengerJoinTitle">Join the ride</h2>
-        <p class="muted" style="margin-bottom:20px;">You are joining this car's HumMatch session. We record 3 quick hums to find songs everyone can pull off.</p>
 
-        <div class="field">
-          <label>Your name</label>
-          <input class="input" type="text" id="passengerName" placeholder="e.g. Maya R." autocomplete="given-name" />
+        <div id="passengerJoinForm">
+          <p class="muted" style="margin-bottom:20px;">You are joining this car's HumMatch session. We record 3 quick hums to find songs everyone can pull off.</p>
+
+          <div class="field">
+            <label>Your name</label>
+            <input class="input" type="text" id="passengerName" placeholder="e.g. Maya R." autocomplete="given-name" />
+          </div>
+
+          <div class="field">
+            <label>Your part (optional)</label>
+            <select class="input" id="passengerPart">
+              <option value="Lead">Lead (main part)</option>
+              <option value="Harmony">Harmony (backing parts)</option>
+              <option value="Either" selected>Either / Flexible</option>
+              <option value="Just for fun">Just for fun</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary" type="button" id="passengerJoinBtn" onclick="passengerJoinAndHum()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm-7-4a7 7 0 0 0 14 0h-2a5 5 0 0 1-10 0H5zm6 10v-2.1A7 7 0 0 0 12 18a7 7 0 0 0 1-.1V21h-2z" fill="#fff"/></svg>
+            Join &amp; Hum
+          </button>
+          <p class="muted center" id="passengerJoinError" style="margin-top:10px; color:#F87171; display:none;"></p>
         </div>
-
-        <div class="field">
-          <label>Your part (optional)</label>
-          <select class="input" id="passengerPart">
-            <option value="Lead">Lead (main part)</option>
-            <option value="Harmony">Harmony (backing parts)</option>
-            <option value="Either" selected>Either / Flexible</option>
-            <option value="Just for fun">Just for fun</option>
-          </select>
-        </div>
-
-        <button class="btn btn-primary" type="button" id="passengerJoinBtn" onclick="passengerJoinAndHum()">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm-7-4a7 7 0 0 0 14 0h-2a5 5 0 0 1-10 0H5zm6 10v-2.1A7 7 0 0 0 12 18a7 7 0 0 0 1-.1V21h-2z" fill="#fff"/></svg>
-          Join &amp; Hum
-        </button>
-        <p class="muted center" id="passengerJoinError" style="margin-top:10px; color:#F87171; display:none;"></p>
       </section>
 
       <!-- State: humming -->
@@ -1006,12 +1009,12 @@
     // Pull initial session details to render banner copy before the rider joins.
     fetchPassengerSession().then(function(sess) {
       if (!sess) {
-        // Session not found -- show a clear error and disable the join form
+        // Session not found -- hide the form entirely and show a clean error
         $('passengerBannerTitle').textContent = 'Ride session not found';
         $('passengerBannerCode').textContent = '------';
-        var joinBtn = $('passengerJoinBtn');
-        if (joinBtn) { joinBtn.disabled = true; joinBtn.textContent = 'Session unavailable'; }
         $('passengerJoinTitle').textContent = 'This ride has ended or the link has expired.';
+        var form = $('passengerJoinForm');
+        if (form) form.style.display = 'none';
         return;
       }
       passengerVibe = sess.vibePreset || 'Ride';
