@@ -3133,9 +3133,16 @@ app.post('/api/ride-mode/session/:sessionId/hum', (req, res) => {
   const afterHum = storeRideHumData(sessionId, resolvedParticipantId, humPayload);
   if (!afterHum) return res.status(404).json({ ok: false, error: 'Session or participant not found' });
 
-  // Advance the session (mark current ready, move to next)
+  // If storeHumData completed the session (all passengers hummed), skip advance.
+  // advanceRideSession returns null when isActive is false, which would send a 422.
+  // Instead return the session view directly -- the driver poll will pick up isComplete.
+  if (!afterHum.isActive || afterHum.isComplete) {
+    return res.json({ ok: true, session: afterHum });
+  }
+
+  // Advance the session (mark current ready, move to next participant)
   const afterAdvance = advanceRideSession(sessionId);
-  if (!afterAdvance) return res.status(422).json({ ok: false, error: 'Could not advance session' });
+  if (!afterAdvance) return res.json({ ok: true, session: afterHum }); // soft fallback
 
   return res.json({ ok: true, session: afterAdvance });
 });
