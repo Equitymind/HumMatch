@@ -4,1205 +4,1087 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>HumMatch Ride Mode</title>
-  <meta name="description" content="HumMatch Ride Mode. Driver starts the session, passengers scan the QR and hum, HumMatch surfaces the top 5 songs this car can actually sing together. Driver chooses playback." />
+  <meta name="description" content="HumMatch Ride Mode. The driver creates a ride, passengers scan the QR and hum on their own phones, and HumMatch surfaces the top 5 songs this car can actually pull off." />
   <meta name="theme-color" content="#a855f7" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #08060F;
-      --surface: #12101A;
-      --surface2: #1C1926;
-      --surface3: #211D2E;
+      --bg: #0A0911;
+      --bg2: #0F0C1C;
+      --surface: #151126;
+      --surface2: #1B1633;
+      --border: rgba(255,255,255,0.09);
       --accent: #A855F7;
       --accent2: #7C3AED;
       --pink: #EC4899;
       --green: #22C55E;
+      --green-bright: #4ADE80;
       --gold: #F59E0B;
+      --red: #EF4444;
       --text1: #FFFFFF;
-      --text2: rgba(255,255,255,0.72);
-      --text3: rgba(255,255,255,0.42);
+      --text2: rgba(255,255,255,0.78);
+      --text3: rgba(255,255,255,0.52);
+      --text4: rgba(255,255,255,0.32);
     }
     html, body {
-      background: var(--bg);
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(168,85,247,0.14), transparent 60%),
+                  radial-gradient(900px 700px at 100% 100%, rgba(236,72,153,0.10), transparent 60%),
+                  var(--bg);
       color: var(--text1);
-      font-family: -apple-system, 'SF Pro Display', Arial, sans-serif;
-      line-height: 1.55;
+      font-family: -apple-system, 'SF Pro Display', 'Inter', Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
     }
     body { padding: 0; }
+
+    /* ── Nav ─────────────────────────────────────────────────────────────── */
     nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 20px 20px 0;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 720px; margin: 0 auto; padding: 20px 20px 0;
     }
-    .nav-logo {
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 800;
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-bug {
+      width: 34px; height: 34px; border-radius: 10px;
       background: linear-gradient(135deg, var(--accent), var(--pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 18px rgba(168,85,247,0.35);
+    }
+    .nav-bug svg { width: 18px; height: 18px; }
+    .nav-wordmark {
+      font-size: 1.05rem; font-weight: 800; letter-spacing: -0.01em;
+      background: linear-gradient(135deg, #fff, #E9D5FF);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .nav-links {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      align-items: center;
+    .nav-chip {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
+      color: var(--text3); text-transform: uppercase;
+      padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px;
     }
-    .nav-links a {
-      color: var(--text3);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    .nav-links a.active {
-      color: #fff;
-      font-weight: 700;
-    }
+
+    /* ── Layout ─────────────────────────────────────────────────────────── */
     .wrap {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 32px 20px 80px;
+      max-width: 720px; margin: 0 auto; padding: 28px 20px 80px;
     }
-    .hero {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 26px;
-      align-items: stretch;
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
     }
-    .hero-card, .panel, .song-card, .step-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 28px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.22);
+    .card + .card { margin-top: 18px; }
+
+    /* ── Typography ─────────────────────────────────────────────────────── */
+    h1 {
+      font-size: clamp(2.0rem, 5.2vw, 2.6rem);
+      line-height: 1.08; letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff 30%, #E9D5FF);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .hero-card, .panel { padding: 28px; }
+    h2 { font-size: 1.3rem; line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.01em; }
+    h3 { font-size: 1.05rem; margin-bottom: 4px; }
+    .lead { color: var(--text2); font-size: 1.05rem; margin-bottom: 22px; }
+    .muted { color: var(--text3); font-size: 0.92rem; }
     .eyebrow {
       display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      text-transform: uppercase;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em;
+      color: var(--accent); text-transform: uppercase;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.32);
+      border-radius: 999px; padding: 6px 12px; margin-bottom: 14px;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em;
+      background: rgba(168,85,247,0.14);
+      border: 1px solid rgba(168,85,247,0.38);
+      color: #E9D5FF;
+      padding: 8px 14px; border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .status-pill .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 10px var(--accent);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: 0.35 } }
+
+    /* ── Buttons ─────────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; min-height: 58px;
+      padding: 16px 20px; border-radius: 16px;
+      font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em;
+      cursor: pointer; border: none; transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active { transform: scale(0.985); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--pink) 100%);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(168,85,247,0.38);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 36px rgba(168,85,247,0.48); }
+    .btn-ghost {
+      background: transparent; color: var(--text2);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.32); color: #fff; }
+    .btn-danger {
+      background: linear-gradient(135deg, #DC2626, #EF4444);
+      color: #fff; box-shadow: 0 10px 30px rgba(239,68,68,0.32);
+    }
+    .btn-danger:hover { box-shadow: 0 14px 36px rgba(239,68,68,0.44); }
+    .btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+    .btn + .btn { margin-top: 10px; }
+
+    /* ── Form fields ─────────────────────────────────────────────────────── */
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em;
+      color: var(--text2); margin-bottom: 8px; text-transform: uppercase;
+    }
+    .input, select.input {
+      width: 100%; min-height: 54px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff; font-size: 1.05rem;
+      padding: 14px 16px; border-radius: 14px;
+      font-family: inherit;
+      -webkit-appearance: none; appearance: none;
+    }
+    .input:focus, select.input:focus {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(168,85,247,0.15);
+    }
+    select.input {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'><path fill='%23a855f7' d='M1 1l6 6 6-6'/></svg>");
+      background-repeat: no-repeat; background-position: right 18px center;
+      padding-right: 44px;
+    }
+
+    /* ── Vibe pills ──────────────────────────────────────────────────────── */
+    .vibe-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      margin-bottom: 6px;
+    }
+    .vibe-pill {
+      padding: 14px 12px; text-align: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text2); font-size: 0.95rem; font-weight: 600;
+      border-radius: 14px; cursor: pointer;
+      transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .vibe-pill:hover { border-color: rgba(168,85,247,0.4); color: #fff; }
+    .vibe-pill.selected {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(168,85,247,0.22), rgba(236,72,153,0.18));
+      color: #fff;
+    }
+
+    /* ── Stepper ─────────────────────────────────────────────────────────── */
+    .stepper {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px; padding: 8px; gap: 8px;
+    }
+    .stepper button {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(168,85,247,0.18); border: 1px solid rgba(168,85,247,0.32);
+      color: #fff; font-size: 1.4rem; font-weight: 700;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .stepper button:active { transform: scale(0.94); }
+    .stepper button[disabled] { opacity: 0.35; cursor: not-allowed; }
+    .stepper .count { font-size: 1.6rem; font-weight: 800; min-width: 48px; text-align: center; }
+
+    /* ── QR box ──────────────────────────────────────────────────────────── */
+    .qr-box {
+      background: #fff; border-radius: 20px; padding: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 4px auto 16px;
+      width: 100%; max-width: 320px; aspect-ratio: 1 / 1;
+    }
+    .qr-box img { width: 100%; height: 100%; display: block; border-radius: 10px; }
+    .ride-code {
+      text-align: center; margin-bottom: 8px;
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em;
+      color: #fff;
+    }
+    .ride-code-label {
+      text-align: center; color: var(--text3); font-size: 0.78rem;
+      letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 2px;
+    }
+    .join-hint { text-align: center; color: var(--text3); font-size: 0.95rem; margin-top: 6px; }
+    .join-progress { text-align: center; color: #E9D5FF; font-weight: 700; margin-top: 12px; }
+
+    /* ── Roster ──────────────────────────────────────────────────────────── */
+    .roster { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .roster-row {
+      display: grid; grid-template-columns: 1fr auto auto;
+      align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 14px 16px;
+    }
+    .roster-name { font-weight: 700; font-size: 1rem; }
+    .roster-role { color: var(--text3); font-size: 0.88rem; }
+    .pill {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em;
+      text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .pill-waiting { background: rgba(255,255,255,0.08); color: var(--text3); border: 1px solid rgba(255,255,255,0.12); }
+    .pill-joined  { background: rgba(34,197,94,0.16);  color: #86EFAC; border: 1px solid rgba(34,197,94,0.35); }
+    .pill-humming { background: rgba(168,85,247,0.2);  color: #E9D5FF; border: 1px solid rgba(168,85,247,0.45); animation: pulse 1.4s ease-in-out infinite; }
+    .pill-done    { background: rgba(74,222,128,0.18); color: #BBF7D0; border: 1px solid rgba(74,222,128,0.45); }
+    .pill-ready   { background: rgba(168,85,247,0.14); color: #E9D5FF; border: 1px solid rgba(168,85,247,0.35); }
+
+    /* ── Top 5 list ─────────────────────────────────────────────────────── */
+    .top5 { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+    .top5-row {
+      display: grid; grid-template-columns: 32px 1fr auto;
+      align-items: center; gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 14px 16px;
+    }
+    .top5-rank {
+      font-size: 1.2rem; font-weight: 800; color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+    .top5-title { font-size: 1.02rem; font-weight: 700; line-height: 1.2; }
+    .top5-artist { color: var(--text3); font-size: 0.88rem; margin-top: 2px; }
+    .top5-fit {
+      font-size: 0.95rem; font-weight: 800; color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      padding: 6px 12px; border-radius: 999px;
+    }
+    .top5-heading {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .top5-heading h2 { margin-bottom: 0; }
+
+    /* ── Hum circle ──────────────────────────────────────────────────────── */
+    .hum-area { display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 18px 0 4px; }
+    .hum-stepdots { display: flex; gap: 10px; margin-bottom: 4px; }
+    .hum-stepdots .dot {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.06); color: var(--text3);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.85rem; font-weight: 800;
+    }
+    .hum-stepdots .dot.active {
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      color: #fff; border-color: transparent;
+      box-shadow: 0 6px 18px rgba(168,85,247,0.4);
+    }
+    .hum-stepdots .dot.done { background: rgba(74,222,128,0.2); color: #BBF7D0; border-color: rgba(74,222,128,0.45); }
+    .hum-circle-wrap {
+      position: relative; width: 240px; height: 240px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hum-circle {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 45%, rgba(168,85,247,0.38), rgba(236,72,153,0.16) 55%, transparent 72%);
+      filter: blur(2px);
+    }
+    .hum-circle.pulsing { animation: humPulse 1.8s ease-in-out infinite; }
+    @keyframes humPulse {
+      0%,100% { transform: scale(1); opacity: 0.85 }
+      50%     { transform: scale(1.06); opacity: 1 }
+    }
+    .hum-ring-svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+    .hum-ring-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 4; }
+    .hum-ring-progress { fill: none; stroke: url(#humRingGrad); stroke-width: 4; stroke-linecap: round; transition: none; }
+    .hum-center {
+      position: relative; z-index: 2;
+      width: 160px; height: 160px; border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 14px;
+    }
+    .hum-countdown { font-size: 3.6rem; font-weight: 900; color: #fff; font-variant-numeric: tabular-nums; }
+    .hum-mic-icon { width: 54px; height: 54px; color: #E9D5FF; }
+    .hum-wave {
+      display: flex; align-items: end; gap: 5px; height: 48px;
+    }
+    .hum-wave span {
+      display: inline-block; width: 5px; background: linear-gradient(to top, var(--accent), var(--pink));
+      border-radius: 4px; animation: humWave 900ms ease-in-out infinite;
+    }
+    .hum-wave span:nth-child(1) { height: 30%; animation-delay: 0ms; }
+    .hum-wave span:nth-child(2) { height: 70%; animation-delay: 90ms; }
+    .hum-wave span:nth-child(3) { height: 100%; animation-delay: 180ms; }
+    .hum-wave span:nth-child(4) { height: 60%; animation-delay: 120ms; }
+    .hum-wave span:nth-child(5) { height: 40%; animation-delay: 220ms; }
+    @keyframes humWave {
+      0%,100% { transform: scaleY(0.4) }
+      50%     { transform: scaleY(1) }
+    }
+    .hum-step-label {
+      text-align: center; font-size: 1.2rem; font-weight: 700; color: #fff;
+    }
+    .hum-step-sub {
+      text-align: center; color: var(--text3); font-size: 0.95rem; margin-top: 2px;
+    }
+    .hum-status { text-align: center; font-size: 0.95rem; color: var(--text3); min-height: 22px; }
+
+    /* ── Discount panel ──────────────────────────────────────────────────── */
+    .discount-panel {
+      margin-top: 22px; padding: 22px 20px;
+      background: linear-gradient(135deg, rgba(168,85,247,0.14), rgba(236,72,153,0.14));
+      border: 1px solid rgba(168,85,247,0.32);
+      border-radius: 18px; text-align: center;
+    }
+    .discount-head { font-weight: 800; font-size: 1.08rem; margin-bottom: 4px; }
+    .discount-sub { color: var(--text3); font-size: 0.9rem; margin-bottom: 12px; }
+    .discount-code {
+      display: inline-block; font-family: 'SF Mono', Menlo, Consolas, monospace;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px; padding: 10px 18px; letter-spacing: 0.12em;
+      font-weight: 700; font-size: 1rem; margin-bottom: 14px;
+    }
+
+    /* ── Bridge to SquadMatch ───────────────────────────────────────────── */
+    .squad-bridge {
+      margin-top: 18px; padding: 18px 20px; text-align: center;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(124,58,237,0.4);
+      border-radius: 14px;
+    }
+    .squad-bridge a { color: #E9D5FF; font-weight: 700; text-decoration: none; }
+
+    /* ── Banners ─────────────────────────────────────────────────────────── */
+    .ride-banner {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px; border-radius: 14px;
       background: rgba(168,85,247,0.12);
       border: 1px solid rgba(168,85,247,0.3);
-      border-radius: 999px;
-      padding: 6px 12px;
-      margin-bottom: 16px;
-    }
-    h1 {
-      font-size: clamp(2.4rem, 4vw, 4.3rem);
-      line-height: 1.04;
-      margin-bottom: 16px;
-    }
-    .subhead {
-      font-size: 1.14rem;
-      color: var(--text2);
-      max-width: 720px;
-      margin-bottom: 18px;
-    }
-    .cta-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 22px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 20px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 800;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.95rem;
-    }
-    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--pink)); color: white; }
-    .btn-secondary { border: 1px solid rgba(255,255,255,0.12); color: var(--text1); background: rgba(255,255,255,0.03); }
-    .btn-danger { background: rgba(239,68,68,0.16); color: #fecaca; border: 1px solid rgba(239,68,68,0.3); }
-    .btn-success { background: rgba(34,197,94,0.16); color: #bbf7d0; border: 1px solid rgba(34,197,94,0.3); }
-    .driver-board {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .driver-status {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 8px;
-    }
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: rgba(34,197,94,0.12);
-      border: 1px solid rgba(34,197,94,0.3);
-      color: #bbf7d0;
-      font-size: 0.88rem;
-      font-weight: 700;
-    }
-    .status-badge.active-ride {
-      background: rgba(168,85,247,0.14);
-      border-color: rgba(168,85,247,0.35);
-      color: #e9d5ff;
-    }
-    .status-badge.complete {
-      background: rgba(245,158,11,0.14);
-      border-color: rgba(245,158,11,0.35);
-      color: #fde68a;
-    }
-    .driver-title {
-      font-size: clamp(1.9rem, 3vw, 3rem);
-      line-height: 1.05;
-      margin-bottom: 8px;
-    }
-    .driver-sub {
-      font-size: 1rem;
-      color: var(--text2);
-    }
-    /* ── QR box ─────────────────────────────────────────────────────────────── */
-    .qr-box {
-      width: 100%;
-      border-radius: 28px;
-      background: linear-gradient(135deg, rgba(168,85,247,0.20), rgba(236,72,153,0.20));
-      border: 2px solid rgba(168,85,247,0.45);
-      box-shadow: 0 0 60px rgba(168,85,247,0.12);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--text1);
-      font-weight: 900;
-      text-align: center;
-      padding: 32px 28px;
-      min-height: 380px;
-    }
-    .qr-placeholder {
-      width: 180px;
-      height: 180px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 16px;
-      margin: 0 auto 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .qr-placeholder-label {
-      color: #08060F;
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-align: center;
-      line-height: 1.5;
-    }
-    .qr-caption {
-      color: var(--text2);
-      font-size: 1rem;
-      text-align: center;
-    }
-    /* ── Sections ────────────────────────────────────────────────────────────── */
-    .section { margin-top: 30px; }
-    .section h2 {
-      font-size: 1.9rem;
-      margin-bottom: 14px;
-    }
-    .section-lead {
-      color: var(--text2);
       margin-bottom: 20px;
-      font-size: 1.02rem;
-      max-width: 860px;
     }
-    .step-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-    .step-card {
-      padding: 22px;
-      background: var(--surface2);
-      border-radius: 22px;
-    }
-    .step-number {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
+    .ride-banner .icon {
+      width: 36px; height: 36px; border-radius: 10px;
       background: linear-gradient(135deg, var(--accent), var(--pink));
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      margin-bottom: 12px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .step-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 8px;
-    }
-    .step-card p, .panel p, .panel li {
-      color: var(--text2);
-    }
-    /* ── Song cards ──────────────────────────────────────────────────────────── */
-    .large-results {
-      display: grid;
-      gap: 18px;
-      margin-top: 20px;
-    }
-    .song-card {
-      padding: 24px;
-      background: linear-gradient(135deg, rgba(168,85,247,0.09), rgba(236,72,153,0.06));
-      border-radius: 24px;
-    }
-    .song-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-    .song-rank {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--gold);
-      font-size: 0.9rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .song-title {
-      font-size: clamp(1.6rem, 2.6vw, 2.4rem);
-      line-height: 1.05;
-      margin-bottom: 4px;
-    }
-    .song-artist {
-      font-size: 1.05rem;
-      color: var(--text2);
-    }
-    .fit-chip {
-      padding: 10px 14px;
-      border-radius: 16px;
-      background: rgba(34,197,94,0.12);
-      border: 1px solid rgba(34,197,94,0.3);
-      color: #bbf7d0;
-      font-size: 1rem;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-    .song-meta {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .meta-box {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px;
-      padding: 14px;
-    }
-    .meta-label {
-      display: block;
-      color: var(--text3);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
-    }
-    .meta-value {
-      font-size: 1rem;
-      color: var(--text1);
-      font-weight: 700;
-    }
-    .handoff-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .handoff-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 16px;
-      border-radius: 14px;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.92rem;
-      border: 1px solid rgba(255,255,255,0.09);
-      background: rgba(255,255,255,0.04);
-      color: #fff;
-    }
-    .spotify { border-color: rgba(34,197,94,0.28); color: #bbf7d0; }
-    .apple   { border-color: rgba(255,255,255,0.18); color: #fff; }
-    .youtube { border-color: rgba(239,68,68,0.28); color: #fecaca; }
-    .panel ul { margin-left: 20px; }
-    .panel li { margin-bottom: 8px; }
-    /* ── Flow toolbar ────────────────────────────────────────────────────────── */
-    .flow-toolbar {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-      margin-bottom: 8px;
-    }
-    .flow-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      color: var(--text2);
-      font-size: 0.88rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .flow-pill.active {
-      background: linear-gradient(135deg, rgba(168,85,247,0.22), rgba(236,72,153,0.18));
-      border-color: rgba(168,85,247,0.35);
-      color: #fff;
-    }
-    /* ── Proto grid ──────────────────────────────────────────────────────────── */
-    .proto-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-      margin-top: 18px;
-    }
-    .proto-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
-      padding: 20px;
-    }
-    .proto-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .proto-copy {
-      color: var(--text2);
-      font-size: 0.96rem;
-      margin-bottom: 16px;
-    }
-    .field-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .field-label {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
-    }
-    .field-input, .field-select {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      color: #fff;
-      font: inherit;
-    }
-    .field-input::placeholder { color: rgba(255,255,255,0.35); }
-    /* ── Metrics + roster ────────────────────────────────────────────────────── */
-    .mini-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .mini-metric {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 14px;
-      text-align: center;
-    }
-    .mini-metric span {
-      display: block;
-      color: var(--text3);
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
-    }
-    .mini-metric strong {
-      font-size: 1.2rem;
-      color: #fff;
-    }
-    .roster-card {
-      margin-top: 14px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 16px;
-    }
-    .roster-title {
-      font-size: 0.82rem;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 12px;
-    }
-    .roster-list {
-      display: grid;
-      gap: 10px;
-    }
-    .roster-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: border-color 0.2s;
-    }
-    .roster-item.is-current {
-      border-color: rgba(168,85,247,0.4);
-      background: rgba(168,85,247,0.07);
-    }
-    .roster-name { font-weight: 700; color: #fff; }
-    .roster-role { font-size: 0.86rem; color: var(--text2); margin-top: 2px; }
-    /* Status pill colours */
-    .roster-status {
-      font-size: 0.8rem;
-      font-weight: 800;
-      border-radius: 999px;
-      padding: 6px 11px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .status--ready   { background: rgba(34,197,94,0.14);   border: 1px solid rgba(34,197,94,0.35);   color: #bbf7d0; }
-    .status--current { background: rgba(168,85,247,0.20);  border: 1px solid rgba(168,85,247,0.5);   color: #e9d5ff; }
-    .status--waiting { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.45); }
-    .status--joined  { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.45); }
-    /* ── Session complete banner ─────────────────────────────────────────────── */
-    .complete-banner {
-      background: linear-gradient(135deg, rgba(168,85,247,0.14), rgba(236,72,153,0.10));
-      border: 1px solid rgba(168,85,247,0.35);
-      border-radius: 22px;
-      padding: 28px 24px;
-      text-align: center;
-      margin-bottom: 24px;
-    }
-    .complete-banner h3 {
-      font-size: 1.7rem;
-      margin-bottom: 8px;
-    }
-    .complete-banner p {
-      color: var(--text2);
-      margin-bottom: 18px;
-    }
-    /* ── Misc ────────────────────────────────────────────────────────────────── */
-    .proto-hidden { display: none; }
+    .ride-banner .info { min-width: 0; }
+    .ride-banner .title { font-weight: 700; font-size: 0.98rem; }
+    .ride-banner .sub { color: var(--text3); font-size: 0.82rem; }
+
+    /* ── View roots ─────────────────────────────────────────────────────── */
+    .hidden { display: none !important; }
+
+    /* ── Footer ─────────────────────────────────────────────────────────── */
     footer {
-      text-align: center;
-      padding: 24px 20px 60px;
-      color: var(--text3);
-      font-size: 0.88rem;
+      max-width: 720px; margin: 0 auto; padding: 30px 20px 40px;
+      color: var(--text4); font-size: 0.82rem; text-align: center;
     }
-    footer a { color: var(--text2); text-decoration: none; }
-    @media (max-width: 980px) {
-      .hero, .step-grid, .song-meta, .proto-grid, .field-grid, .mini-metrics { grid-template-columns: 1fr; }
-      .song-top { align-items: flex-start; }
-    }
+    footer a { color: var(--text3); text-decoration: none; margin: 0 10px; }
+
+    /* ── Small helpers ───────────────────────────────────────────────────── */
+    .row-gap { display: flex; gap: 10px; }
+    .row-gap .btn { margin: 0; }
+    .center { text-align: center; }
+    .sp-12 { height: 12px; }
+    .sp-18 { height: 18px; }
+    .sp-24 { height: 24px; }
   </style>
 </head>
 <body>
+
+  <!-- Nav (shared) -->
   <nav>
-    <a class="nav-logo" href="/">HumMatch</a>
-    <div class="nav-links">
-      <a href="/squadmatch">SquadMatch</a>
-      <a href="/ride-mode" class="active">Ride Mode</a>
-      <a href="/blog">Blog</a>
-    </div>
+    <a href="/" class="nav-brand" aria-label="HumMatch">
+      <span class="nav-bug" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2v4c0 1.1-.9 2-2 2s-2-.9-2-2v-4zm6-5c0-1.1.9-2 2-2s2 .9 2 2v11c0 1.1-.9 2-2 2s-2-.9-2-2V7zm6 3c0-1.1.9-2 2-2s2 .9 2 2v7c0 1.1-.9 2-2 2s-2-.9-2-2v-7z" fill="#fff"/></svg>
+      </span>
+      <span class="nav-wordmark">HumMatch</span>
+    </a>
+    <span class="nav-chip">Ride Mode</span>
   </nav>
 
   <div class="wrap">
-    <!-- ── Hero ────────────────────────────────────────────────────────────── -->
-    <section class="hero">
-      <!-- QR panel -- dominant column -->
-      <div class="hero-card qr-card">
-        <div class="qr-box" id="rideQrBox">
-          <div style="font-size:clamp(1rem,2vw,1.3rem);font-weight:900;line-height:1.3;margin-bottom:20px;color:rgba(255,255,255,0.65);">Your session QR appears here once you start a ride.</div>
-          <button class="btn btn-primary" type="button" onclick="scrollToSetup()" style="font-size:1rem;padding:14px 28px;">Start Ride Session</button>
-        </div>
-        <p class="qr-caption" id="rideQrCaption" style="margin-top:14px;">Passengers will scan this QR to join your ride.</p>
-      </div>
 
-      <!-- Driver status + controls -->
-      <div class="hero-card driver-board">
-        <div class="driver-status">
-          <span class="status-badge" id="rideStatusBadge">● No active session</span>
-          <button class="btn btn-danger" id="heroEndSessionBtn" style="display:none;">End Session</button>
-        </div>
-        <div>
-          <div class="eyebrow">HumMatch Ride Mode</div>
-          <h1 class="driver-title">What should this car sing next?</h1>
-          <p class="driver-sub">Start a session. Passengers scan and hum. HumMatch surfaces the top 5 songs this car can actually pull off, lead and harmony assigned. Driver chooses playback.</p>
-        </div>
-        <div class="cta-row">
-          <button class="btn btn-primary" type="button" onclick="scrollToSetup()">Start a Ride Session</button>
-          <a class="btn btn-secondary" href="#protoSetupCard" onclick="scrollToSetup();return false;">How it works</a>
-        </div>
-      </div>
-    </section>
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  DRIVER VIEW                                                         -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <div id="driverView">
 
-    <!-- ── How it works ─────────────────────────────────────────────────────── -->
-    <section class="section">
-      <h2>How it works</h2>
-      <p class="section-lead">Start a session. Passengers scan and hum. Top 5 results in under 90 seconds.</p>
-      <div class="step-grid">
-        <div class="step-card">
-          <div class="step-number">1</div>
-          <h3>Setup</h3>
-          <p>Driver opens Ride Mode, names the session, and shows the large QR code. Passengers scan from any seat.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">2</div>
-          <h3>Join &amp; hum</h3>
-          <p>Each rider scans, enters a name, and hums once. Up to 5 total riders per session. Driver uses saved voice profile.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">3</div>
-          <h3>Driver picks</h3>
-          <p>HumMatch surfaces the top 5. Lead and harmony assigned. Driver chooses the song and opens it in Spotify, Apple Music, or karaoke lyrics.</p>
-        </div>
-      </div>
-    </section>
+      <!-- State: setup -->
+      <section id="driverSetup" class="card">
+        <span class="eyebrow">Driver</span>
+        <h1>What should this car sing next?</h1>
+        <p class="lead">Create a ride. Passengers scan and hum on their own phones. HumMatch finds the top 5 songs this car can actually pull off together.</p>
+        <button class="btn btn-primary" type="button" onclick="goCreateRide()">Create Ride</button>
+        <div class="sp-12"></div>
+        <a href="/how-it-works" class="btn btn-ghost" style="text-decoration:none;">How it works</a>
+      </section>
 
-    <!-- ── Interactive session flow ─────────────────────────────────────────── -->
-    <section class="section">
-      <h2>Try the session flow</h2>
-      <p class="section-lead">Step through a Ride Mode session: Setup → Join → Progress → Results.</p>
+      <!-- State: create_ride -->
+      <section id="driverCreate" class="card hidden">
+        <span class="eyebrow">Step 1 of 2</span>
+        <h2>Create your ride</h2>
+        <p class="muted" style="margin-bottom:20px;">Pick the vibe and how many riders are in the car.</p>
 
-      <div class="flow-toolbar">
-        <button class="flow-pill active" data-state-btn="setup"    type="button">1. Setup</button>
-        <button class="flow-pill"        data-state-btn="join"     type="button">2. Join</button>
-        <button class="flow-pill"        data-state-btn="progress" type="button">3. Progress</button>
-        <button class="flow-pill"        data-state-btn="results"  type="button">4. Results</button>
-      </div>
-
-      <div class="proto-grid">
-
-        <!-- ── 1. SETUP ──────────────────────────────────────────────────────── -->
-        <div class="proto-card" data-flow-state="setup" id="protoSetupCard">
-          <div class="proto-title">Start Ride Session</div>
-          <p class="proto-copy">Name the ride, choose a vibe, and start your session.</p>
-          <div class="field-grid">
-            <div>
-              <label class="field-label" for="rideSessionName">Session name</label>
-              <input class="field-input" id="rideSessionName" type="text" value="Friday Night Drive" />
-            </div>
-            <div>
-              <label class="field-label" for="rideRiderCount">Riders expected</label>
-              <select class="field-select" id="rideRiderCount">
-                <option>2 riders</option>
-                <option>3 riders</option>
-                <option>4 riders</option>
-                <option selected>5 riders</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="rideVibe">Vibe preset</label>
-              <select class="field-select" id="rideVibe">
-                <option>Sing Along</option>
-                <option selected>Easy Wins</option>
-                <option>Duets</option>
-                <option>Harmony Picks</option>
-                <option>Road Trip Classics</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label">Driver voice</label>
-              <div class="field-input" style="color:rgba(255,255,255,0.45);">Use saved voice profile</div>
-            </div>
-          </div>
-          <div class="cta-row">
-            <button class="btn btn-primary" type="button" onclick="createRideSessionFromForm()">Start Session</button>
+        <div class="field">
+          <label>Vibe</label>
+          <div class="vibe-grid" id="vibeGrid">
+            <button type="button" class="vibe-pill selected" data-vibe="Friday Night Drive">Friday Night Drive</button>
+            <button type="button" class="vibe-pill" data-vibe="Girls' Night Out">Girls' Night Out</button>
+            <button type="button" class="vibe-pill" data-vibe="Date Night">Date Night</button>
+            <button type="button" class="vibe-pill" data-vibe="Party Ride">Party Ride</button>
+            <button type="button" class="vibe-pill" data-vibe="Chill Ride">Chill Ride</button>
+            <button type="button" class="vibe-pill" data-vibe="Throwbacks">Throwbacks</button>
+            <button type="button" class="vibe-pill" data-vibe="Duet Mode">Duet Mode</button>
+            <button type="button" class="vibe-pill" data-vibe="Custom">Custom</button>
           </div>
         </div>
 
-        <!-- ── 2. JOIN ───────────────────────────────────────────────────────── -->
-        <div class="proto-card proto-hidden" data-flow-state="join" id="protoJoinCard">
-          <div class="proto-title">Join Ride Session</div>
-          <p class="proto-copy">Add passengers to your session before the ride begins.</p>
-          <div class="field-grid">
-            <div>
-              <label class="field-label" for="joinName">First name</label>
-              <input class="field-input" id="joinName" type="text" placeholder="e.g. Olivia" />
-            </div>
-            <div>
-              <label class="field-label" for="joinPref">Vocal preference</label>
-              <select class="field-select" id="joinPref">
-                <option>Lead</option>
-                <option selected>Harmony</option>
-                <option>Either</option>
-              </select>
-            </div>
+        <div class="field">
+          <label>Rider Count (not including driver)</label>
+          <div class="stepper" role="group" aria-label="Rider count">
+            <button type="button" id="riderCountDown" aria-label="Decrease">&minus;</button>
+            <span class="count" id="riderCount">2</span>
+            <button type="button" id="riderCountUp" aria-label="Increase">+</button>
           </div>
-          <div class="cta-row">
-            <button class="btn btn-primary"   type="button" onclick="joinRideSessionFromForm()">Add Rider</button>
-            <button class="btn btn-secondary" type="button" onclick="setRideModeState('progress')">Go to progress</button>
+          <p class="muted" style="margin-top:8px; font-size:0.82rem;">Minimum 1, maximum 5.</p>
+        </div>
+
+        <button class="btn btn-primary" type="button" id="createRideBtn" onclick="submitCreateRide()">Create Ride</button>
+        <div class="sp-12"></div>
+        <button class="btn btn-ghost" type="button" onclick="showDriverState('setup')">Back</button>
+      </section>
+
+      <!-- State: qr_live -->
+      <section id="driverQr" class="card hidden">
+        <div class="status-pill">
+          <span class="dot"></span>
+          <span id="driverStatusPillText">Riders joining</span>
+        </div>
+        <h2 style="margin-bottom:4px;">Scan to join the ride</h2>
+        <p class="muted" style="margin-bottom:18px;">Passengers scan this QR to hop in and hum.</p>
+
+        <div class="qr-box">
+          <img id="driverQrImage" alt="QR code to join ride" />
+        </div>
+        <div class="ride-code-label">Ride Code</div>
+        <div class="ride-code" id="driverRideCode">------</div>
+        <div class="join-hint">Passengers scan to join.</div>
+        <div class="join-progress" id="driverJoinProgress">0 of 2 joined</div>
+
+        <div class="roster" id="driverRoster"></div>
+      </section>
+
+      <!-- State: humming_live -->
+      <section id="driverHumming" class="card hidden">
+        <div class="status-pill">
+          <span class="dot"></span>
+          <span>Riders humming</span>
+        </div>
+        <h2>Capturing hums</h2>
+        <p class="muted" style="margin-bottom:4px;">Everyone hums on their own phone. Watch the car fill up.</p>
+        <div class="roster" id="driverHummingRoster"></div>
+      </section>
+
+      <!-- State: results_ready -->
+      <section id="driverResults" class="card hidden">
+        <div class="status-pill">
+          <span class="dot"></span>
+          <span>Top 5 ready</span>
+        </div>
+        <div class="top5-heading">
+          <h2>Top 5 songs for this car</h2>
+        </div>
+        <p class="muted" id="driverResultsNotice" style="margin-bottom:14px; display:none;"></p>
+        <div class="top5" id="driverTop5"></div>
+        <div class="sp-24"></div>
+        <button class="btn btn-danger" type="button" onclick="endRide()">End Ride</button>
+      </section>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  PASSENGER VIEW                                                     -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <div id="passengerView" class="hidden">
+
+      <!-- State: session_join -->
+      <section id="passengerJoin" class="card">
+        <div class="ride-banner">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 17h14v-4l-2-5a2 2 0 0 0-1.9-1.4H8.9A2 2 0 0 0 7 8l-2 5v4zm2 3h2v-2H7v2zm8 0h2v-2h-2v2z" fill="#fff"/></svg>
           </div>
-          <!-- Live mini roster (updates as riders join) -->
-          <div id="joinRosterPreview" style="margin-top:14px;display:none;">
-            <div class="roster-card">
-              <div class="roster-title">In this session</div>
-              <div class="roster-list" id="joinRosterList"></div>
-            </div>
-            <p style="font-size:0.78rem;color:var(--text3);margin-top:10px;text-align:center;" id="joinRosterHint"></p>
+          <div class="info">
+            <div class="title" id="passengerBannerTitle">Connected to the ride</div>
+            <div class="sub">Ride Code: <span id="passengerBannerCode">------</span></div>
           </div>
         </div>
 
-        <!-- ── 3. PROGRESS ──────────────────────────────────────────────────── -->
-        <div class="proto-card proto-hidden" data-flow-state="progress" id="protoProgressCard">
-          <div class="proto-title">Session Progress</div>
-          <p class="proto-copy">Each rider hums three notes in turn. The session advances automatically.</p>
+        <span class="eyebrow">Passenger</span>
+        <h2 id="passengerJoinTitle">Join the ride</h2>
+        <p class="muted" style="margin-bottom:20px;">You are joining this car's HumMatch session. We record 3 quick hums to find songs everyone can pull off.</p>
 
-          <!-- Metrics row -->
-          <div class="mini-metrics">
-            <div class="mini-metric"><span>Joined</span><strong id="metricJoined">--</strong></div>
-            <div class="mini-metric"><span>Ready</span><strong id="metricReady">--</strong></div>
-            <div class="mini-metric"><span>Waiting</span><strong id="metricWaiting">--</strong></div>
+        <div class="field">
+          <label>Your name</label>
+          <input class="input" type="text" id="passengerName" placeholder="e.g. Maya R." autocomplete="given-name" />
+        </div>
+
+        <div class="field">
+          <label>Your part (optional)</label>
+          <select class="input" id="passengerPart">
+            <option value="Lead">Lead (main part)</option>
+            <option value="Harmony">Harmony (backing parts)</option>
+            <option value="Either" selected>Either / Flexible</option>
+            <option value="Just for fun">Just for fun</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary" type="button" id="passengerJoinBtn" onclick="passengerJoinAndHum()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm-7-4a7 7 0 0 0 14 0h-2a5 5 0 0 1-10 0H5zm6 10v-2.1A7 7 0 0 0 12 18a7 7 0 0 0 1-.1V21h-2z" fill="#fff"/></svg>
+          Join &amp; Hum
+        </button>
+        <p class="muted center" id="passengerJoinError" style="margin-top:10px; color:#F87171; display:none;"></p>
+      </section>
+
+      <!-- State: humming -->
+      <section id="passengerHumming" class="card hidden">
+        <h2 class="center">Let's capture your voice</h2>
+        <p class="muted center" style="margin-bottom:6px;">We'll record 3 quick hums: low, normal, high.</p>
+
+        <div class="hum-area">
+          <div class="hum-stepdots" id="humDots">
+            <div class="dot" data-step="1">1</div>
+            <div class="dot" data-step="2">2</div>
+            <div class="dot" data-step="3">3</div>
           </div>
 
-          <!-- Live roster -->
-          <div class="roster-card">
-            <div class="roster-title">Session roster</div>
-            <div class="roster-list" id="rideRosterList">
-              <!-- populated by renderRoster() -->
-            </div>
-          </div>
-
-          <!-- Current participant hum turn -->
-          <div id="humTurnPanel" style="display:none;margin-top:16px;padding:20px 18px;border-radius:16px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.28);text-align:center;">
-            <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.09em;text-transform:uppercase;color:rgba(168,85,247,0.7);margin-bottom:6px;">Now humming</div>
-            <div style="font-weight:900;color:#fff;font-size:1.2rem;margin-bottom:2px;" id="nextUpName">--</div>
-            <div style="font-size:0.85rem;color:var(--text2);margin-bottom:16px;" id="nextUpRole">--</div>
-
-            <!-- Hum prompt (shown before capture starts) -->
-            <div id="humPrompt">
-              <div style="font-size:1rem;font-weight:700;color:#e9d5ff;margin-bottom:12px;">Your turn to hum</div>
-              <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:16px;">Low, normal, high. Hold each note for 3 seconds.</div>
-              <button class="btn btn-success" type="button" id="startHumBtn" onclick="startRideHum()">Start Humming</button>
-            </div>
-
-            <!-- Hum capture in progress -->
-            <div id="humCapturing" style="display:none;">
-              <div style="position:relative;width:80px;height:80px;margin:0 auto 12px;">
-                <svg width="80" height="80" style="transform:rotate(-90deg);">
-                  <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(168,85,247,0.15)" stroke-width="6"/>
-                  <circle id="rideHumRing" cx="40" cy="40" r="34" fill="none" stroke="#a855f7" stroke-width="6"
-                    stroke-dasharray="213.6" stroke-dashoffset="213.6"
-                    style="transition:stroke-dashoffset 0.1s linear;"/>
-                </svg>
-                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                  <div style="font-size:1.4rem;font-weight:900;color:#fff;" id="rideHumPhaseNum">1</div>
-                  <div style="font-size:0.6rem;color:rgba(255,255,255,0.5);">of 3</div>
-                </div>
+          <div class="hum-circle-wrap">
+            <div class="hum-circle" id="humCircle"></div>
+            <svg class="hum-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+              <defs>
+                <linearGradient id="humRingGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#A855F7"/>
+                  <stop offset="100%" stop-color="#EC4899"/>
+                </linearGradient>
+              </defs>
+              <circle class="hum-ring-track" cx="50" cy="50" r="46"></circle>
+              <circle class="hum-ring-progress" id="humRing" cx="50" cy="50" r="46"
+                      stroke-dasharray="289.03" stroke-dashoffset="289.03"></circle>
+            </svg>
+            <div class="hum-center" id="humCenter">
+              <div id="humCenterContent">
+                <svg class="hum-mic-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm-7-4a7 7 0 0 0 14 0h-2a5 5 0 0 1-10 0H5zm6 10v-2.1A7 7 0 0 0 12 18a7 7 0 0 0 1-.1V21h-2z"/></svg>
               </div>
-              <div style="font-size:1rem;font-weight:800;color:#e9d5ff;margin-bottom:4px;" id="rideHumPhaseLabel">Hum your lowest note</div>
-              <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-bottom:10px;" id="rideHumPhaseSub">Go as low as you comfortably can</div>
-              <div style="font-size:0.82rem;font-weight:600;min-height:20px;" id="rideHumStatus">Listening...</div>
-            </div>
-
-            <!-- Hum success flash -->
-            <div id="humSuccess" style="display:none;">
-              <div style="font-size:2rem;margin-bottom:8px;">&#10003;</div>
-              <div style="font-size:1.05rem;font-weight:800;color:#22c55e;">3 notes saved.</div>
-              <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:4px;">Moving to next rider...</div>
-            </div>
-
-            <!-- Hum retry prompt -->
-            <div id="humRetry" style="display:none;">
-              <div style="font-size:0.95rem;font-weight:700;color:#f59e0b;margin-bottom:8px;">Didn't catch that. Try again.</div>
-              <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-bottom:12px;">Hum a little louder and hold each note steady.</div>
-              <button class="btn btn-success" type="button" onclick="startRideHum()">Try Again</button>
             </div>
           </div>
 
-          <!-- Next-up indicator (shown when no hum is in progress) -->
-          <div id="nextUpBanner" style="margin-top:14px;padding:14px 16px;border-radius:14px;background:rgba(168,85,247,0.10);border:1px solid rgba(168,85,247,0.25);display:none;">
-            <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:rgba(168,85,247,0.7);margin-bottom:4px;">Current</div>
-            <div style="font-weight:800;color:#fff;font-size:1.05rem;" id="nextUpNameFallback">--</div>
-            <div style="font-size:0.84rem;color:var(--text2);margin-top:2px;" id="nextUpRoleFallback">--</div>
+          <div>
+            <div class="hum-step-label" id="humStepLabel">Hum low</div>
+            <div class="hum-step-sub" id="humStepSub">Sing your lowest comfortable note</div>
           </div>
+          <div class="hum-status" id="humStatus">Tap to start. Recording begins after 3, 2, 1.</div>
 
-          <div class="cta-row">
-            <button class="btn btn-primary" type="button" id="showResultsBtn" onclick="showRideResults()" style="display:none;">See Results</button>
-            <button class="btn btn-secondary" type="button" onclick="setRideModeState('join')">+ Add Rider</button>
-          </div>
+          <button class="btn btn-primary" type="button" id="humStartBtn" onclick="startPassengerHum()">Start humming</button>
+          <button class="btn btn-ghost hidden" type="button" id="humRetryBtn" onclick="startPassengerHum()">Try again</button>
         </div>
+      </section>
 
-        <!-- ── 4. RESULTS ────────────────────────────────────────────────────── -->
-        <div class="proto-card proto-hidden" data-flow-state="results" id="protoResultsCard">
-          <div class="proto-title">Results Ready</div>
-          <p class="proto-copy">Everyone's in. Your Top 5 results are ready, pick a song and play.</p>
-
-          <!-- Session summary -->
-          <div id="resultsSummaryRoster" style="margin-bottom:16px;"></div>
-
-          <div class="cta-row">
-            <button class="btn btn-primary" type="button" onclick="document.getElementById('top5-results').scrollIntoView({behavior:'smooth'})">See Top 5</button>
+      <!-- State: completed_waiting -->
+      <section id="passengerWaiting" class="card hidden center">
+        <div style="margin:10px 0 14px;">
+          <div style="width:72px; height:72px; margin:0 auto; border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--pink)); display:flex; align-items:center; justify-content:center;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" fill="#fff"/></svg>
           </div>
         </div>
-
-
-
-      </div><!-- /proto-grid -->
-    </section>
-
-    <!-- ── Top 5 results (hidden until session completes) ──────────────────── -->
-    <section class="section proto-hidden" id="top5-results">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;">
-        <h2 style="margin-bottom:0;">Top 5 Songs for This Car</h2>
-        <button class="btn btn-danger" id="top5EndSessionBtn" type="button" onclick="resetRideModeDemo()" style="white-space:nowrap;">End Session</button>
-      </div>
-
-      <!-- Session-complete banner -- shown when all participants are ready -->
-      <div class="complete-banner proto-hidden" id="sessionCompleteBanner">
-        <h3>🎤 This car is ready to sing</h3>
-        <p id="sessionCompleteSubtitle">Here are the top 5 songs for this ride.</p>
-        <button class="btn btn-primary" type="button" onclick="document.getElementById('rideResultsGrid').scrollIntoView({behavior:'smooth'})">See the songs</button>
-      </div>
-
-      <p class="section-lead" id="top5Lead">Pick a song and choose where to play it.</p>
-
-      <!-- Results grid: populated dynamically by renderRideResults() -->
-      <div class="large-results" id="rideResultsGrid">
-        <p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">Results will appear here after all riders hum.</p>
-      </div>
-
-      <!-- Stage 8: Ride-originated conversion panel (primary, individual upsell) -->
-      <div id="rideConversionPanel" style="display:none; margin-top:28px; background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.12)); border:1px solid rgba(168,85,247,0.28); border-radius:16px; padding:28px 24px; text-align:center;">
-        <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px;">Keep your vocal range and your best matches</h3>
-        <p id="rideDiscountCopy" style="font-size:0.875rem;color:rgba(255,255,255,0.65);margin-bottom:20px;line-height:1.5;">10% off courtesy of your driver, good for 7 days</p>
-        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-          <button onclick="rideConvertNow()" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;font-size:0.9rem;cursor:pointer;">Save My HumMatch</button>
-          <button onclick="showRideReminder()" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:12px 20px;border-radius:10px;font-size:0.875rem;cursor:pointer;">Remind Me Later</button>
+        <h2>You're in!</h2>
+        <p class="muted" style="margin-top:6px;">Waiting for the rest of the car...</p>
+        <div class="sp-18"></div>
+        <div style="display:flex; gap:6px; justify-content:center;">
+          <span class="dot" style="width:8px; height:8px; border-radius:50%; background:var(--accent); animation:pulse 1.4s ease-in-out infinite;"></span>
+          <span class="dot" style="width:8px; height:8px; border-radius:50%; background:var(--accent); animation:pulse 1.4s ease-in-out 0.2s infinite;"></span>
+          <span class="dot" style="width:8px; height:8px; border-radius:50%; background:var(--accent); animation:pulse 1.4s ease-in-out 0.4s infinite;"></span>
         </div>
-        <p style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:14px;line-height:1.5;">This ride is session only. Saving is per person and won't rebuild the group.</p>
-      </div>
+        <div class="sp-18"></div>
+        <p class="muted" id="passengerWaitingCount" style="font-size:0.88rem;"></p>
+      </section>
 
-      <!-- Stage 8: Remind Me Later sub-panel -->
-      <div id="rideReminderPanel" style="display:none; margin-top:16px; background:rgba(255,255,255,0.04); border:1px solid rgba(124,58,237,0.15); border-radius:12px; padding:20px 24px;">
-        <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-bottom:14px;">Send yourself your 10% driver discount link:</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-          <input id="rideReminderDest" type="text" placeholder="Email or phone number" style="flex:1;min-width:180px;background:rgba(255,255,255,0.07);border:1px solid rgba(124,58,237,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:0.875rem;outline:none;" />
-          <button onclick="submitRideReminder()" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:700;font-size:0.875rem;cursor:pointer;">Send Link</button>
+      <!-- State: results_ready + post_ride_persisted -->
+      <section id="passengerResults" class="card hidden">
+        <div style="text-align:center; margin-bottom:6px; font-size:1.4rem;">🎉</div>
+        <h2 class="center" id="passengerResultsHead">Everyone's in!</h2>
+        <p class="muted center" id="passengerResultsSub" style="margin-bottom:16px;">Top 5 songs are ready.</p>
+
+        <div class="ride-banner" style="margin-bottom:16px;">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 17h14v-4l-2-5a2 2 0 0 0-1.9-1.4H8.9A2 2 0 0 0 7 8l-2 5v4z" fill="#fff"/></svg>
+          </div>
+          <div class="info">
+            <div class="title" id="passengerResultsBanner">Ride complete</div>
+            <div class="sub" id="passengerResultsBannerSub">Completed just now</div>
+          </div>
         </div>
-        <p id="rideReminderStatus" style="font-size:0.8rem;color:rgba(255,255,255,0.45);min-height:18px;"></p>
-      </div>
 
-      <!-- Stage 12: Secondary conversion bridge: Ride Mode -> SquadMatch -->
-      <div id="rideSquadBridge" style="margin-top:22px; background:rgba(255,255,255,0.03); border:1px dashed rgba(124,58,237,0.35); border-radius:14px; padding:22px 22px; text-align:center;">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(168,85,247,0.85);margin-bottom:8px;">Want to keep this group together?</div>
-        <h4 style="font-size:1rem;font-weight:700;color:#fff;margin:0 0 6px;">Ride Mode ends when the ride ends.</h4>
-        <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin:0 0 16px;line-height:1.5;">SquadMatch is the persistent, host-owned version. Save your group, invite them back, and explore a deeper song list together over time.</p>
-        <a href="/squadmatch" style="display:inline-block;background:rgba(168,85,247,0.18);border:1px solid rgba(168,85,247,0.4);color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">Explore SquadMatch →</a>
-      </div>
-    </section>
+        <h3 style="margin-bottom:8px;">Top 5 songs for this ride</h3>
+        <div class="top5" id="passengerTop5"></div>
 
+        <div class="discount-panel" id="passengerDiscountPanel" style="display:none;">
+          <div class="discount-head">10% off courtesy of your driver</div>
+          <div class="discount-sub">Good for 7 days</div>
+          <div class="discount-code" id="passengerDiscountCode">------</div>
+          <button class="btn btn-primary" type="button" onclick="passengerSaveHummatch()">Save My HumMatch</button>
+          <button class="btn btn-ghost" type="button" onclick="togglePassengerReminder()">Remind Me Later</button>
+          <div id="passengerReminder" class="hidden" style="margin-top:14px; text-align:left;">
+            <label class="muted" style="font-size:0.82rem; display:block; margin-bottom:8px;">Send yourself the 10% driver discount link</label>
+            <input class="input" type="text" id="passengerReminderDest" placeholder="Email or phone number" />
+            <div class="sp-12"></div>
+            <button class="btn btn-primary" type="button" onclick="submitPassengerReminder()">Send link</button>
+            <p class="muted" id="passengerReminderStatus" style="margin-top:10px; font-size:0.85rem;"></p>
+          </div>
+        </div>
 
+        <div class="squad-bridge">
+          <div style="font-weight:700; margin-bottom:4px;">Want to keep this group together?</div>
+          <div class="muted" style="margin-bottom:10px;">Ride Mode ends when the ride ends. SquadMatch is the persistent, host-owned version that saves your group so you can come back and go deeper.</div>
+          <a href="/squadmatch">Explore SquadMatch &rarr;</a>
+        </div>
+      </section>
+    </div>
   </div>
 
   <footer>
-    <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px;margin-bottom:10px;">
-      <a href="/" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">Try HumMatch</a>
-      <a href="/how-it-works" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">How It Works</a>
-      <a href="/pricing" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">Pricing</a>
-      <a href="/blog" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">Blog</a>
-      <a href="/contact" style="color:var(--text2);text-decoration:none;font-size:0.85rem;">Contact</a>
-      <a href="/privacy" style="color:var(--text3);text-decoration:none;font-size:0.8rem;">Privacy</a>
-      <a href="/terms" style="color:var(--text3);text-decoration:none;font-size:0.8rem;">Terms</a>
+    <div>
+      <a href="/">Home</a>
+      <a href="/how-it-works">How it works</a>
+      <a href="/squadmatch">SquadMatch</a>
+      <a href="/pricing">Pricing</a>
     </div>
-    <p>&copy; 2026 HumMatch.</p>
+    <div style="margin-top:10px;">&copy; HumMatch</div>
   </footer>
 
-  <script>
-  // ────────────────────────────────────────────────────────────────────────────
-  //  Ride Mode -- session state, roster, advance logic
-  // ────────────────────────────────────────────────────────────────────────────
+<script>
+(function() {
+  'use strict';
 
-  var currentRideSessionId = null;
-  var viewerRole = 'driver';
-  var myParticipantId = null;
-  var currentQrImageUrl = null;
-  var currentJoinUrl = null;
+  // ──────────────────────────────────────────────────────────────────────────
+  // Shared helpers
+  // ──────────────────────────────────────────────────────────────────────────
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function $(id) { return document.getElementById(id); }
+  function show(el)  { if (el) el.classList.remove('hidden'); }
+  function hide(el)  { if (el) el.classList.add('hidden'); }
 
-  // Stage 8: ride-originated discount state, captured on passenger join
-  var rideDiscountCode = null;
-  var rideDiscountExpires = null;
-  var rideDiscountPercent = 10;
-  var rideSessionIdForConversion = null;
-
-  // ── Scroll helper ──────────────────────────────────────────────────────────
-  function scrollToSetup() {
-    document.querySelector('.flow-pill[data-state-btn="setup"]').click();
-    document.getElementById('protoSetupCard').scrollIntoView({ behavior: 'smooth' });
+  // Build a short human-friendly ride code from a session id.
+  // Deterministic per session so driver and passenger see the same value.
+  function buildRideCode(sessionId, vibe) {
+    if (!sessionId) return '------';
+    var base = String(sessionId).slice(-6);
+    var vibeAbbr = (vibe || 'RIDE').replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase() || 'RIDE';
+    var mid = base.slice(0, 3).toUpperCase();
+    var tail = base.slice(-3).toUpperCase();
+    return vibeAbbr + '-' + mid + '-' + tail;
   }
 
-  // ── Flow state: switch the active step card + pill ──────────────────────────
-  function setRideModeState(state) {
-    document.querySelectorAll('[data-flow-state]').forEach(function(el) {
-      el.classList.toggle('proto-hidden', el.getAttribute('data-flow-state') !== state);
-    });
-    document.querySelectorAll('[data-state-btn]').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-state-btn') === state);
-    });
-    refreshQrBox(state, null);
+  // Pluralize
+  function plural(n, s) { return n + ' ' + s + (n === 1 ? '' : 's'); }
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // Route detection: ?join=<sessionId> → passenger, else driver
+  // ──────────────────────────────────────────────────────────────────────────
+  var params = new URLSearchParams(window.location.search);
+  var joinSessionId = params.get('join');
+  var isPassenger = !!joinSessionId;
+
+  if (isPassenger) {
+    show($('passengerView'));
+    hide($('driverView'));
+    bootPassenger();
+  } else {
+    show($('driverView'));
+    hide($('passengerView'));
+    bootDriver();
   }
 
-  // ── QR box renderer -- driven by state + optional live session data ─────────
-  function refreshQrBox(state, session) {
-    var badge    = document.getElementById('rideStatusBadge');
-    var qrBox    = document.getElementById('rideQrBox');
-    var qrCaption = document.getElementById('rideQrCaption');
-    if (!badge || !qrBox || !qrCaption) return;
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  DRIVER FLOW
+  // ═══════════════════════════════════════════════════════════════════════════
 
-    var sessionName = (session && session.name) ? session.name : 'Ride Mode';
+  var driverState = 'setup';      // setup | create_ride | qr_live | humming_live | results_ready | ended
+  var driverSession = null;       // last session payload from server
+  var driverSessionId = null;
+  var driverQrImageUrl = null;
+  var driverJoinUrl = null;
+  var driverRideCode = '------';
+  var driverSelectedVibe = 'Friday Night Drive';
+  var driverRiderCount = 2;
+  var driverPollTimer = null;
+  var driverResultsLoaded = false;
 
-    var heroEndBtn = document.getElementById('heroEndSessionBtn');
-    if (heroEndBtn) heroEndBtn.style.display = 'none';
+  function bootDriver() {
+    // Vibe pill wiring
+    document.querySelectorAll('#vibeGrid .vibe-pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('#vibeGrid .vibe-pill').forEach(function(p) { p.classList.remove('selected'); });
+        pill.classList.add('selected');
+        driverSelectedVibe = pill.getAttribute('data-vibe');
+      });
+    });
 
-    if (state === 'setup') {
-      badge.className = 'status-badge';
-      badge.textContent = '● No active session';
-      qrBox.innerHTML = [
-        '<div style="font-size:clamp(1rem,2vw,1.3rem);font-weight:900;line-height:1.3;margin-bottom:20px;color:rgba(255,255,255,0.65);">Your session QR appears here once you start a ride.</div>',
-        '<button class="btn btn-primary" type="button" onclick="scrollToSetup()" style="font-size:1rem;padding:14px 28px;">Start Ride Session</button>'
-      ].join('');
-      qrCaption.textContent = 'Passengers will scan this QR to join your ride.';
+    // Stepper wiring
+    $('riderCountDown').addEventListener('click', function() {
+      if (driverRiderCount > 1) {
+        driverRiderCount--;
+        $('riderCount').textContent = String(driverRiderCount);
+      }
+    });
+    $('riderCountUp').addEventListener('click', function() {
+      if (driverRiderCount < 5) {
+        driverRiderCount++;
+        $('riderCount').textContent = String(driverRiderCount);
+      }
+    });
 
-    } else if (state === 'join') {
-      var joined = session ? session.joinedCount : 1;
-      var expected = session ? session.expectedCount : 5;
-      badge.className = 'status-badge active-ride';
-      badge.textContent = '● Riders joining • ' + sessionName;
-      var qrMedia = currentQrImageUrl
-        ? '<img src="' + currentQrImageUrl + '" alt="Scan to join this ride session" style="width:min(260px,70%);height:auto;border-radius:12px;background:#fff;padding:10px;margin:6px auto 10px;display:block;" />'
-        : '<div class="qr-placeholder"><div class="qr-placeholder-label">Passenger QR</div></div>';
-      qrBox.innerHTML = [
-        '<div style="font-size:1.5rem;font-weight:900;margin-bottom:10px;">Joining now</div>',
-        qrMedia,
-        '<div style="font-size:1rem;font-weight:800;">' + joined + ' of ' + expected + ' joined</div>',
-        '<div style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:6px;">Scan to join</div>'
-      ].join('');
-      qrCaption.textContent = 'Passengers scan and join in seconds.';
+    showDriverState('setup');
+  }
 
-    } else if (state === 'progress') {
-      var joinedCount = session ? session.joinedCount : 0;
-      var readyCount  = session ? session.readyCount  : 0;
-      var waiting     = joinedCount - readyCount;
-      var currentName = (session && session.currentParticipant) ? session.currentParticipant.name : '--';
-      badge.className = 'status-badge active-ride';
-      badge.textContent = '● In progress • ' + sessionName;
-      qrBox.innerHTML = [
-        '<div style="font-size:2rem;font-weight:900;margin-bottom:10px;">' + joinedCount + ' joined</div>',
-        '<div style="font-size:1.2rem;font-weight:800;margin-bottom:6px;">' + readyCount + ' ready · ' + Math.max(waiting, 0) + ' waiting</div>',
-        '<div style="font-size:0.9rem;color:rgba(255,255,255,0.55);">Now: ' + currentName + '</div>'
-      ].join('');
-      qrCaption.textContent = 'Keep the car aligned while riders finish.';
+  function showDriverState(next) {
+    driverState = next;
+    var map = {
+      setup:         'driverSetup',
+      create_ride:   'driverCreate',
+      qr_live:       'driverQr',
+      humming_live:  'driverHumming',
+      results_ready: 'driverResults',
+      ended:         'driverSetup'
+    };
+    Object.keys(map).forEach(function(k) { hide($(map[k])); });
+    show($(map[next]));
+  }
 
-    } else if (state === 'results') {
-      var totalCount = session ? session.totalCount : 0;
-      badge.className = 'status-badge complete';
-      badge.textContent = '● Results ready • ' + sessionName;
-      qrBox.innerHTML = [
-        '<div style="font-size:1.3rem;font-weight:900;margin-bottom:10px;">🎤 Top 5 ready</div>',
-        '<div style="font-size:1rem;color:rgba(255,255,255,0.7);margin-bottom:6px;">All ' + totalCount + ' riders done</div>',
-        '<div style="font-size:0.85rem;color:rgba(255,255,255,0.45);">Scroll down to choose playback</div>'
-      ].join('');
-      qrCaption.textContent = 'Driver chooses playback: Spotify, Apple Music, or karaoke.';
+  window.goCreateRide = function() { showDriverState('create_ride'); };
+
+  window.submitCreateRide = async function() {
+    var btn = $('createRideBtn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Creating...'; }
+    try {
+      var res = await fetch('/api/ride-mode/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionName: (driverSelectedVibe || 'Ride') + ' Ride',
+          expectedRiderCount: driverRiderCount,
+          vibePreset: driverSelectedVibe
+        })
+      });
+      var data = await res.json();
+      if (!data.ok || !data.session) throw new Error(data.error || 'Could not create ride');
+
+      driverSession = data.session;
+      driverSessionId = data.session.id;
+      driverQrImageUrl = data.qrImageUrl;
+      driverJoinUrl = data.joinUrl;
+      driverRideCode = buildRideCode(driverSessionId, driverSelectedVibe);
+      driverResultsLoaded = false;
+
+      // Populate QR screen
+      $('driverQrImage').src = driverQrImageUrl;
+      $('driverRideCode').textContent = driverRideCode;
+      $('driverStatusPillText').textContent = 'Riders joining -- ' + driverSelectedVibe;
+
+      showDriverState('qr_live');
+      renderDriverRoster(driverSession);
+      startDriverPolling();
+    } catch (e) {
+      alert(e.message || 'Could not create the ride. Please try again.');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = 'Create Ride'; }
+    }
+  };
+
+  function startDriverPolling() {
+    stopDriverPolling();
+    driverPollTimer = setInterval(pollDriverSession, 4000);
+    pollDriverSession();
+  }
+  function stopDriverPolling() {
+    if (driverPollTimer) { clearInterval(driverPollTimer); driverPollTimer = null; }
+  }
+
+  async function pollDriverSession() {
+    if (!driverSessionId) return;
+    try {
+      var res = await fetch('/api/ride-mode/session/' + driverSessionId + '?viewer=driver');
+      var data = await res.json();
+      if (!data.ok || !data.session) return;
+      driverSession = data.session;
+      onDriverSessionUpdate(data.session);
+    } catch (_) { /* soft-fail polling */ }
+  }
+
+  function onDriverSessionUpdate(sess) {
+    // Count non-driver participants who have joined, started hum, or finished hum.
+    var passengers = (sess.participants || []).filter(function(p) { return p.name !== 'Driver'; });
+    var hummedPassengers = passengers.filter(function(p) { return p.hasHumData; }).length;
+    var expected = sess.expectedCount || driverRiderCount || 0;
+
+    // Update join progress
+    $('driverJoinProgress').textContent = passengers.length + ' of ' + expected + ' joined';
+
+    // State transitions
+    if (driverState === 'qr_live' || driverState === 'humming_live') {
+      // Move to humming_live once at least one passenger has joined AND someone is humming,
+      // OR all expected passengers have joined.
+      var anyHumming = passengers.some(function(p) { return p.hasHumData; });
+      var allJoined = passengers.length >= expected && expected > 0;
+      if (anyHumming || allJoined) {
+        if (driverState !== 'humming_live') {
+          showDriverState('humming_live');
+          $('driverStatusPillText').textContent = 'Riders humming -- ' + (sess.vibePreset || driverSelectedVibe);
+        }
+      }
+    }
+
+    // Render rosters for the visible state
+    if (driverState === 'qr_live')          renderDriverRoster(sess, 'driverRoster');
+    else if (driverState === 'humming_live') renderDriverRoster(sess, 'driverHummingRoster');
+
+    // Transition to results when all expected passengers have hummed.
+    if (!driverResultsLoaded
+        && expected > 0
+        && hummedPassengers >= expected
+        && driverState !== 'results_ready') {
+      loadDriverResults();
     }
   }
 
-  // ── Roster renderer ────────────────────────────────────────────────────────
-  // Renders into any container element given a participants array from session data.
-  function buildRosterHTML(participants) {
-    if (!participants || !participants.length) return '<p style="color:var(--text3);font-size:0.88rem;">No participants yet.</p>';
-    return participants.map(function(p) {
-      var statusClass = 'status--' + (p.status || 'waiting');
-      var statusLabel = {
-        ready:   'Done',
-        current: 'Humming 🎤',
-        waiting: 'Waiting',
-        joined:  'Joined'
-      }[p.status] || 'Joined';
-      // Green dot indicates hum data has been captured and stored
-      var humDot = p.hasHumData
-        ? '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;margin-left:5px;vertical-align:middle;"></span>'
-        : '';
-      var isCurrent = p.status === 'current';
-      return [
-        '<div class="roster-item' + (isCurrent ? ' is-current' : '') + '">',
-        '  <div>',
-        '    <div class="roster-name">' + esc(p.name) + (p.name === 'Driver' ? ' 🚗' : '') + humDot + '</div>',
-        '    <div class="roster-role">' + esc(p.rolePreference || p.preference || 'Either') + '</div>',
-        '  </div>',
-        '  <span class="roster-status ' + statusClass + '">' + statusLabel + '</span>',
-        '</div>'
-      ].join('');
+  function renderDriverRoster(sess, targetId) {
+    var target = $(targetId || 'driverRoster');
+    if (!target) return;
+    var participants = sess.participants || [];
+    var expected = sess.expectedCount || driverRiderCount || 0;
+
+    var rows = [];
+    participants.forEach(function(p) {
+      if (p.name === 'Driver') {
+        rows.push({
+          name: 'Driver', role: 'Host', pill: 'Ready', cls: 'pill-ready'
+        });
+      } else {
+        var pill = 'Joined', cls = 'pill-joined';
+        if (p.hasHumData) { pill = 'Done'; cls = 'pill-done'; }
+        else if (p.status === 'current') { pill = 'Humming'; cls = 'pill-humming'; }
+        rows.push({
+          name: p.name, role: p.rolePreference || 'Rider', pill: pill, cls: cls
+        });
+      }
+    });
+
+    // Pad with waiting rows up to the expected passenger count + 1 (driver)
+    var totalSeats = (expected || 0) + 1;
+    while (rows.length < totalSeats) {
+      rows.push({ name: 'Guest', role: '', pill: 'Waiting', cls: 'pill-waiting' });
+    }
+
+    target.innerHTML = rows.map(function(r) {
+      return '<div class="roster-row">' +
+        '<div><div class="roster-name">' + esc(r.name) + '</div>' +
+        (r.role ? '<div class="roster-role">' + esc(r.role) + '</div>' : '') +
+        '</div>' +
+        '<div></div>' +
+        '<span class="pill ' + r.cls + '">' + esc(r.pill) + '</span>' +
+        '</div>';
     }).join('');
   }
 
-  // Safe HTML escape
-  function esc(str) {
-    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-  function escapeHTML(str) {
-    if (!str) return '';
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  // Privacy-safe roster for passenger viewers -- only shows viewer's own record + aggregate counts.
-  function buildPassengerSummaryHTML(counts, self) {
-    var selfStatusLabel = self && self.status === 'ready' ? 'Ready' : self && self.status === 'current' ? 'Up Next' : 'Waiting';
-    return '<li class="roster-item self-item">' +
-      '<span class="roster-name">' + (self ? escapeHTML(self.name) : 'You') + ' <em>(you)</em></span>' +
-      '<span class="roster-role">' + (self ? escapeHTML(self.rolePreference || '') : '') + '</span>' +
-      '<span class="roster-status">' + selfStatusLabel + '</span>' +
-      '</li>' +
-      '<li class="roster-summary">' +
-      '<span>' + (counts.total || 0) + ' riders total &bull; ' + (counts.ready || 0) + ' ready &bull; ' + (counts.waiting || 0) + ' waiting</span>' +
-      '</li>';
-  }
-
-  // ── Full UI refresh from a session object ──────────────────────────────────
-  function applySessionToUI(session) {
-    if (!session) return;
-
-    // Metrics -- role-aware (passenger gets aggregate counts; driver/host derive from participants)
-    var joinedCount = viewerRole === 'passenger'
-      ? (session.counts ? session.counts.total : 0)
-      : (session.participants ? session.participants.length : 0);
-    var readyCount = viewerRole === 'passenger'
-      ? (session.counts ? session.counts.ready : 0)
-      : (session.participants ? session.participants.filter(function(p){ return p.status === 'ready'; }).length : 0);
-    var waitingCount = viewerRole === 'passenger'
-      ? (session.counts ? session.counts.waiting : 0)
-      : (session.participants ? session.participants.filter(function(p){ return p.status === 'waiting'; }).length : 0);
-
-    var elJoined  = document.getElementById('metricJoined');
-    var elReady   = document.getElementById('metricReady');
-    var elWaiting = document.getElementById('metricWaiting');
-    if (elJoined)  elJoined.textContent  = String(joinedCount);
-    if (elReady)   elReady.textContent   = String(readyCount);
-    if (elWaiting) elWaiting.textContent = String(waitingCount);
-
-    // Main progress roster -- role-aware
-    var mainRoster = document.getElementById('rideRosterList');
-    if (mainRoster) {
-      mainRoster.innerHTML = viewerRole === 'passenger'
-        ? buildPassengerSummaryHTML(session.counts || {}, session.self)
-        : buildRosterHTML(session.participants || []);
-    }
-
-    // Join-screen mini roster -- role-aware
-    var joinRoster = document.getElementById('joinRosterList');
-    var joinPreview = document.getElementById('joinRosterPreview');
-    if (joinRoster) {
-      if (viewerRole === 'passenger') {
-        joinRoster.innerHTML = buildPassengerSummaryHTML(session.counts || {}, session.self);
-        if (joinPreview) joinPreview.style.display = '';
-      } else if (session.participants && session.participants.length) {
-        joinRoster.innerHTML = buildRosterHTML(session.participants);
-        if (joinPreview) joinPreview.style.display = '';
-      }
-    }
-    var joinHint = document.getElementById('joinRosterHint');
-    if (joinHint) {
-      var remaining = Math.max((session.expectedCount || 5) - joinedCount, 0);
-      joinHint.textContent = remaining > 0
-        ? remaining + ' rider seat' + (remaining === 1 ? '' : 's') + ' still open'
-        : 'Session is full, go to progress';
-    }
-
-    // Hum turn panel + next-up banner
-    var humPanel   = document.getElementById('humTurnPanel');
-    var nextBanner = document.getElementById('nextUpBanner');
-    var nextName   = document.getElementById('nextUpName');
-    var nextRole   = document.getElementById('nextUpRole');
-    var nextNameFB = document.getElementById('nextUpNameFallback');
-    var nextRoleFB = document.getElementById('nextUpRoleFallback');
-    var current    = session.currentParticipant;
-
-    if (session.isComplete) {
-      // Session done: hide hum panel and next-up banner
-      if (humPanel)   humPanel.style.display   = 'none';
-      if (nextBanner) nextBanner.style.display  = 'none';
-    } else if (current) {
-      // Show focused hum panel for current participant
-      if (humPanel) humPanel.style.display = '';
-      if (nextBanner) nextBanner.style.display = 'none';
-      var fullP = (session.participants || []).find(function(p) { return p.id === current.id; });
-      var roleTxt = fullP ? (fullP.rolePreference || fullP.preference || 'Either') : 'Either';
-      if (nextName) nextName.textContent = current.name || 'Rider';
-      if (nextRole) nextRole.textContent = roleTxt;
-      // Reset hum panel to prompt state (don't interrupt an active capture)
-      if (!rideHumCapturing) {
-        showHumState('prompt');
-      }
-    } else {
-      // No current participant yet
-      if (humPanel)   humPanel.style.display   = 'none';
-      if (nextBanner) nextBanner.style.display  = 'none';
-    }
-
-    // See-results button
-    var showResultsBtn = document.getElementById('showResultsBtn');
-    if (showResultsBtn) {
-      showResultsBtn.style.display = session.isComplete ? '' : 'none';
-    }
-
-    // Session-complete banner in Top 5 section
-    var completeBanner   = document.getElementById('sessionCompleteBanner');
-    var completeSubtitle = document.getElementById('sessionCompleteSubtitle');
-    var top5Lead         = document.getElementById('top5Lead');
-    if (session.isComplete) {
-      if (completeBanner) completeBanner.classList.remove('proto-hidden');
-      if (completeSubtitle) {
-        var riderCount = session.totalCount || (session.participants ? session.participants.length : 0);
-        var humCount   = session.completedHumCount || 0;
-        var humNote    = humCount > 0 ? ' · ' + humCount + ' of ' + riderCount + ' hums captured' : '';
-        completeSubtitle.textContent = esc(session.name) + ' · ' + riderCount + ' riders' + humNote + '.';
-      }
-      if (top5Lead) top5Lead.style.display = 'none';
-    } else {
-      if (completeBanner) completeBanner.classList.add('proto-hidden');
-      if (top5Lead) top5Lead.style.display = '';
-    }
-
-    // Results card summary roster -- role-aware
-    var summaryRoster = document.getElementById('resultsSummaryRoster');
-    if (summaryRoster) {
-      if (viewerRole === 'passenger') {
-        summaryRoster.innerHTML =
-          '<div class="roster-card" style="margin-top:0;">' +
-          '<div class="roster-title">Session roster -- ' + esc(session.name) + '</div>' +
-          '<div class="roster-list">' + buildPassengerSummaryHTML(session.counts || {}, session.self) + '</div>' +
-          '</div>';
-      } else if (session.participants) {
-        summaryRoster.innerHTML =
-          '<div class="roster-card" style="margin-top:0;">' +
-          '<div class="roster-title">Session roster -- ' + esc(session.name) + '</div>' +
-          '<div class="roster-list">' + buildRosterHTML(session.participants) + '</div>' +
-          '</div>';
-      }
-    }
-  }
-
-  // ── API: create session ────────────────────────────────────────────────────
-  async function createRideSessionFromForm() {
-    var sessionName = document.getElementById('rideSessionName').value || 'Ride Mode Session';
-    var expectedRiderCount = parseInt((document.getElementById('rideRiderCount').value || '5').split(' ')[0], 10) || 5;
-    var vibePreset = document.getElementById('rideVibe').value || 'Easy Wins';
-
+  async function loadDriverResults() {
+    if (!driverSessionId) return;
+    driverResultsLoaded = true;
     try {
-      var response = await fetch('/api/ride-mode/session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionName: sessionName, expectedRiderCount: expectedRiderCount, vibePreset: vibePreset, driverAlias: null })
-      });
-      var data = await response.json();
-      if (!data.ok || !data.session) { alert('Could not start Ride Mode session.'); return; }
-      currentRideSessionId = data.session.id;
-      currentJoinUrl    = data.joinUrl    || null;
-      currentQrImageUrl = data.qrImageUrl || null;
-      applySessionToUI(data.session);
-      setRideModeState('join');
-      refreshQrBox('join', data.session);
-    } catch (e) {
-      alert('Network error starting session.');
+      var res = await fetch('/api/ride-mode/session/' + driverSessionId + '/results');
+      var data = await res.json();
+      if (!data.ok || !data.scored) { driverResultsLoaded = false; return; }
+      renderDriverResults(data.scored);
+      showDriverState('results_ready');
+    } catch (_) {
+      driverResultsLoaded = false;
     }
   }
 
-  // ── API: join session ──────────────────────────────────────────────────────
-  async function joinRideSessionFromForm() {
-    if (!currentRideSessionId) { alert('Start a Ride Mode session first.'); return; }
-    var participantName = document.getElementById('joinName').value.trim() || 'Guest';
-    var preference = document.getElementById('joinPref').value || 'Either';
+  function renderDriverResults(scored) {
+    var list = $('driverTop5');
+    if (!list) return;
+    if (!scored || !scored.results || scored.results.length === 0) {
+      list.innerHTML = '<p class="muted">Results are still calculating. Refresh in a moment.</p>';
+      return;
+    }
+    var notice = $('driverResultsNotice');
+    if (scored.hasRealData === false) {
+      notice.style.display = '';
+      notice.textContent = 'No hum data captured. Showing general suggestions.';
+    } else if (scored.hummedCount != null && scored.participantCount != null && scored.hummedCount < scored.participantCount) {
+      notice.style.display = '';
+      notice.textContent = 'Based on ' + scored.hummedCount + ' of ' + scored.participantCount + ' riders who hummed.';
+    }
+    list.innerHTML = scored.results.slice(0, 5).map(function(song, i) {
+      return '<div class="top5-row">' +
+        '<div class="top5-rank">' + (i + 1) + '</div>' +
+        '<div><div class="top5-title">' + esc(song.title) + '</div>' +
+             '<div class="top5-artist">' + esc(song.artist) + '</div></div>' +
+        '<div class="top5-fit">' + Math.round(song.fitScore || 0) + '%</div>' +
+      '</div>';
+    }).join('');
+  }
 
+  window.endRide = async function() {
+    if (!driverSessionId) { showDriverState('setup'); return; }
+    stopDriverPolling();
     try {
-      var response = await fetch('/api/ride-mode/session/' + currentRideSessionId + '/join', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ participantName: participantName, preference: preference })
-      });
-      var data = await response.json();
-      if (!data.ok || !data.session) { alert('Could not join session.'); return; }
-      if (data.session.newParticipantId) {
-        myParticipantId = data.session.newParticipantId;
-      }
-      // Stage 8: capture ride-originated discount code for this rider's conversion flow.
-      // Keep the most recent join's code (driver-demo flow adds riders one at a time; the
-      // last code will be the one a conversion click uses).
-      if (data.discountCode) {
-        rideDiscountCode           = data.discountCode;
-        rideDiscountExpires        = data.discountExpiresAt || null;
-        rideDiscountPercent        = data.discountPercent   || 10;
-        rideSessionIdForConversion = currentRideSessionId;
-      }
-      // Clear the name field for the next rider
-      document.getElementById('joinName').value = '';
-      applySessionToUI(data.session);
-      refreshQrBox('join', data.session);
-      // Stay on join screen so driver can add more riders
-    } catch (e) {
-      alert('Network error joining session.');
-    }
-  }
+      await fetch('/api/ride-mode/session/' + driverSessionId + '/end', { method: 'POST' });
+    } catch (_) {}
+    // Reset state
+    driverSession = null;
+    driverSessionId = null;
+    driverQrImageUrl = null;
+    driverJoinUrl = null;
+    driverResultsLoaded = false;
+    showDriverState('setup');
+  };
 
-  // ── API: advance (mark current ready, move to next) ──────────────────────
   // ═══════════════════════════════════════════════════════════════════════════
-  //  Ride Mode Hum Capture Engine
-  //  Reuses the same audio analysis approach as the main HumMatch hum flow.
-  //  Self-contained: no dependency on index.html globals.
+  //  PASSENGER FLOW
   // ═══════════════════════════════════════════════════════════════════════════
 
-  var rideAudioCtx     = null;
-  var rideAnalyser     = null;
-  var rideStream       = null;
-  var rideHumCapturing = false;
-  var rideHumTimer     = null;
-  var rideHumInterval  = null;
-  var rideHumPhase     = 0;          // 0=low 1=normal 2=high
-  var rideHumNotes     = [null, null, null];
-  var rideRingRaf      = null;
+  var passengerState = 'session_join'; // session_join | joined | humming | completed_waiting | results_ready | post_ride_persisted
+  var passengerSession = null;
+  var passengerParticipantId = null;
+  var passengerDiscountCode = null;
+  var passengerDiscountExpires = null;
+  var passengerDiscountPercent = 10;
+  var passengerPollTimer = null;
+  var passengerDriverAlias = null;
+  var passengerVibe = null;
+  var passengerRideCode = '------';
 
-  var RIDE_PHASES = [
-    { label: 'Hum your lowest note',  sub: 'Go as low as you comfortably can. Hold it steady.' },
-    { label: 'Now your normal voice', sub: 'Hum like you are humming a song to yourself.' },
-    { label: 'Now go high',           sub: 'As high as you comfortably can. Hold it steady.' }
-  ];
-  var RIDE_RING_CIRC = 2 * Math.PI * 34; // matches r=34 in SVG
-
-  // ── UI state switcher ──────────────────────────────────────────────────────
-  function showHumState(state) {
-    var els = { prompt: 'humPrompt', capturing: 'humCapturing', success: 'humSuccess', retry: 'humRetry' };
-    Object.keys(els).forEach(function(k) {
-      var el = document.getElementById(els[k]);
-      if (el) el.style.display = k === state ? '' : 'none';
+  function bootPassenger() {
+    // Pull initial session details to render banner copy before the rider joins.
+    fetchPassengerSession().then(function(sess) {
+      if (!sess) {
+        $('passengerBannerTitle').textContent = 'Ride not found';
+        $('passengerBannerCode').textContent = '------';
+        return;
+      }
+      passengerVibe = sess.vibePreset || 'Ride';
+      passengerRideCode = buildRideCode(joinSessionId, passengerVibe);
+      passengerDriverAlias = sess.driverAlias || null;
+      var bannerTitle = passengerDriverAlias
+        ? ('Connected to ' + passengerDriverAlias + "'s Ride")
+        : 'Connected to the ride';
+      $('passengerBannerTitle').textContent = bannerTitle;
+      $('passengerBannerCode').textContent = passengerRideCode;
+      $('passengerJoinTitle').textContent = 'Join ' + (passengerVibe || 'the Ride');
     });
   }
 
-  // ── Pitch helpers (same algorithm as main HumMatch) ────────────────────────
-  function rideDetectPitch(buf, sampleRate) {
+  async function fetchPassengerSession() {
+    try {
+      var q = passengerParticipantId
+        ? '?viewer=passenger&participantId=' + encodeURIComponent(passengerParticipantId)
+        : '?viewer=passenger';
+      var res = await fetch('/api/ride-mode/session/' + joinSessionId + q);
+      var data = await res.json();
+      if (!data.ok || !data.session) return null;
+      passengerSession = data.session;
+      return data.session;
+    } catch (_) { return null; }
+  }
+
+  function showPassengerState(next) {
+    passengerState = next;
+    var map = {
+      session_join:         'passengerJoin',
+      joined:               'passengerJoin',
+      humming:              'passengerHumming',
+      completed_waiting:    'passengerWaiting',
+      results_ready:        'passengerResults',
+      post_ride_persisted:  'passengerResults'
+    };
+    Object.keys(map).forEach(function(k) { hide($(map[k])); });
+    show($(map[next]));
+  }
+
+  window.passengerJoinAndHum = async function() {
+    var name = ($('passengerName').value || '').trim();
+    var role = $('passengerPart').value || 'Either';
+    var err = $('passengerJoinError');
+    if (!name) {
+      err.style.display = ''; err.textContent = 'Please enter your name.';
+      return;
+    }
+    err.style.display = 'none';
+    var btn = $('passengerJoinBtn');
+    btn.disabled = true;
+
+    try {
+      var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ participantName: name, preference: role })
+      });
+      var data = await res.json();
+      if (!data.ok || !data.session) {
+        throw new Error(data.error || 'Could not join this ride.');
+      }
+
+      // Discover my own participantId. The join endpoint returns the full (driver)
+      // view with newParticipantId attached; fall back to self.id on a passenger view.
+      if (data.session.newParticipantId) {
+        passengerParticipantId = data.session.newParticipantId;
+      } else if (data.session.self && data.session.self.id) {
+        passengerParticipantId = data.session.self.id;
+      }
+      passengerSession = data.session;
+      if (data.discountCode) {
+        passengerDiscountCode = data.discountCode;
+        passengerDiscountExpires = data.discountExpiresAt || null;
+        passengerDiscountPercent = data.discountPercent || 10;
+      }
+      showPassengerState('humming');
+    } catch (e) {
+      err.style.display = ''; err.textContent = e.message || 'Could not join. Try again.';
+    } finally {
+      btn.disabled = false;
+    }
+  };
+
+  // ── Passenger hum capture (reusing the same pitch algorithm) ──────────────
+  var pxAudioCtx = null, pxAnalyser = null, pxStream = null;
+  var pxPhase = 0;            // 0=low, 1=normal, 2=high
+  var pxNotes = [null, null, null];
+  var pxTimer = null, pxInterval = null, pxRingRaf = null;
+  var pxCapturing = false;
+  var PX_RING_CIRC = 2 * Math.PI * 46;  // r=46 in SVG
+  var PX_PHASES = [
+    { label: 'Hum low',    sub: 'Sing your lowest comfortable note',  status: 'Listening...' },
+    { label: 'Hum normal', sub: 'At a comfortable pitch',             status: 'Listening...' },
+    { label: 'Hum high',   sub: 'Your highest comfortable note',      status: 'Listening...' }
+  ];
+
+  function pxDetectPitch(buf, sampleRate) {
     var MIN_LAG = Math.floor(sampleRate / 1400);
     var MAX_LAG = Math.floor(sampleRate / 50);
     var MAX_SAMPLES = Math.min(buf.length, 2048);
@@ -1220,478 +1102,299 @@
     if (bestCorr < 0.1) return 0;
     return sampleRate / best;
   }
+  function pxFreqToMidi(freq) { return Math.round(12 * Math.log2(freq / 440) + 69); }
 
-  function rideFreqToMidi(freq) {
-    return Math.round(12 * Math.log2(freq / 440) + 69);
-  }
-
-  // ── Ring animation ─────────────────────────────────────────────────────────
-  function rideAnimateRing(durationMs, onComplete) {
-    var ring  = document.getElementById('rideHumRing');
+  function pxAnimateRing(durationMs) {
+    var ring = $('humRing');
     if (!ring) return;
-    ring.style.strokeDashoffset = RIDE_RING_CIRC;
+    ring.style.strokeDashoffset = PX_RING_CIRC;
     var start = performance.now();
     function tick(now) {
       var progress = Math.min((now - start) / durationMs, 1);
-      ring.style.strokeDashoffset = String(RIDE_RING_CIRC * (1 - progress));
-      if (progress < 1) {
-        rideRingRaf = requestAnimationFrame(tick);
-      } else {
-        if (onComplete) onComplete();
-      }
+      ring.style.strokeDashoffset = String(PX_RING_CIRC * (1 - progress));
+      if (progress < 1) pxRingRaf = requestAnimationFrame(tick);
     }
-    rideRingRaf = requestAnimationFrame(tick);
+    pxRingRaf = requestAnimationFrame(tick);
+  }
+  function pxCancelRing() {
+    if (pxRingRaf) { cancelAnimationFrame(pxRingRaf); pxRingRaf = null; }
+    var ring = $('humRing');
+    if (ring) ring.style.strokeDashoffset = String(PX_RING_CIRC);
   }
 
-  function rideCancelRing() {
-    if (rideRingRaf) { cancelAnimationFrame(rideRingRaf); rideRingRaf = null; }
-    var ring = document.getElementById('rideHumRing');
-    if (ring) ring.style.strokeDashoffset = String(RIDE_RING_CIRC);
+  function pxUpdateDots() {
+    var dots = document.querySelectorAll('#humDots .dot');
+    dots.forEach(function(d, i) {
+      d.classList.remove('active', 'done');
+      if (i < pxPhase) d.classList.add('done');
+      else if (i === pxPhase) d.classList.add('active');
+    });
   }
 
-  // ── Stop and clean up audio ────────────────────────────────────────────────
-  function stopRideHumCapture() {
-    rideHumCapturing = false;
-    if (rideHumTimer)    { clearTimeout(rideHumTimer);    rideHumTimer    = null; }
-    if (rideHumInterval) { clearInterval(rideHumInterval); rideHumInterval = null; }
-    rideCancelRing();
-    if (rideStream)   { rideStream.getTracks().forEach(function(t) { t.stop(); }); rideStream = null; }
-    if (rideAudioCtx) { try { rideAudioCtx.close(); } catch(_) {} rideAudioCtx = null; }
-    rideAnalyser = null;
+  function pxSetCenter(html) {
+    $('humCenterContent').innerHTML = html;
   }
 
-  // ── Run a single phase ────────────────────────────────────────────────────
-  function rideRunPhase() {
-    if (rideHumCapturing) return;
-    rideHumCapturing = true;
+  function pxStopAudio() {
+    pxCapturing = false;
+    if (pxTimer)    { clearTimeout(pxTimer); pxTimer = null; }
+    if (pxInterval) { clearInterval(pxInterval); pxInterval = null; }
+    pxCancelRing();
+    if (pxStream)   { pxStream.getTracks().forEach(function(t) { t.stop(); }); pxStream = null; }
+    if (pxAudioCtx) { try { pxAudioCtx.close(); } catch(_) {} pxAudioCtx = null; }
+    pxAnalyser = null;
+  }
 
-    var p = RIDE_PHASES[rideHumPhase];
-    var phaseNum  = document.getElementById('rideHumPhaseNum');
-    var phaseLabel = document.getElementById('rideHumPhaseLabel');
-    var phaseSub  = document.getElementById('rideHumPhaseSub');
-    var statusEl  = document.getElementById('rideHumStatus');
-    if (phaseNum)   phaseNum.textContent  = String(rideHumPhase + 1);
-    if (phaseLabel) phaseLabel.textContent = p.label;
-    if (phaseSub)   phaseSub.textContent  = p.sub;
-    if (statusEl)   statusEl.textContent  = 'Listening...';
-    if (statusEl)   statusEl.style.color  = 'rgba(255,255,255,0.6)';
+  window.startPassengerHum = async function() {
+    hide($('humStartBtn'));
+    hide($('humRetryBtn'));
+    pxPhase = 0;
+    pxNotes = [null, null, null];
+    pxUpdateDots();
+
+    try {
+      pxAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (pxAudioCtx.state === 'suspended') { try { await pxAudioCtx.resume(); } catch(_) {} }
+      pxStream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true }
+      });
+      pxAnalyser = pxAudioCtx.createAnalyser();
+      pxAnalyser.fftSize = 4096;
+      var src = pxAudioCtx.createMediaStreamSource(pxStream);
+      src.connect(pxAnalyser);
+    } catch (e) {
+      pxStopAudio();
+      $('humStatus').textContent = 'Mic access needed. Allow it and try again.';
+      show($('humRetryBtn'));
+      return;
+    }
+
+    pxCircleEl().classList.add('pulsing');
+    pxRunPhase();
+  };
+
+  function pxCircleEl() { return $('humCircle'); }
+
+  function pxRunPhase() {
+    var p = PX_PHASES[pxPhase];
+    $('humStepLabel').textContent = p.label;
+    $('humStepSub').textContent   = p.sub;
+    pxUpdateDots();
+
+    // 3-2-1 countdown before the actual recording
+    var counts = [3, 2, 1];
+    var idx = 0;
+    $('humStatus').textContent = 'Get ready...';
+    pxSetCenter('<div class="hum-countdown" id="humCountdownNum">' + counts[0] + '</div>');
+
+    pxTimer = setInterval(function() {
+      idx++;
+      if (idx < counts.length) {
+        var el = $('humCountdownNum');
+        if (el) el.textContent = String(counts[idx]);
+      } else {
+        clearInterval(pxTimer); pxTimer = null;
+        pxStartRecording();
+      }
+    }, 850);
+  }
+
+  function pxStartRecording() {
+    if (pxCapturing) return;
+    pxCapturing = true;
+    $('humStatus').textContent = 'Listening...';
+    pxSetCenter('<div class="hum-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>');
 
     var pitches = [];
-    var buf     = new Float32Array(rideAnalyser.fftSize);
+    var buf = new Float32Array(pxAnalyser.fftSize);
+    pxAnimateRing(3000);
 
-    rideAnimateRing(3000, null);
-
-    rideHumInterval = setInterval(function() {
-      if (!rideAnalyser) return;
-      rideAnalyser.getFloatTimeDomainData(buf);
+    pxInterval = setInterval(function() {
+      if (!pxAnalyser) return;
+      pxAnalyser.getFloatTimeDomainData(buf);
       var rms = 0;
       for (var i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
       rms = Math.sqrt(rms / buf.length);
       if (rms < 0.001) return;
-      var freq = rideDetectPitch(buf, rideAudioCtx.sampleRate);
-      // Stage 11: align with solo hum UX -- if we already have a valid pitch,
-      // show "Good, keep going!" regardless of rms level. Only nag "louder"
-      // when there's audible signal but no detectable pitch.
+      var freq = pxDetectPitch(buf, pxAudioCtx.sampleRate);
       if (freq > 50 && freq < 1400) {
-        pitches.push(rideFreqToMidi(freq));
-        if (statusEl) {
-          statusEl.textContent = 'Good, keep going!';
-          statusEl.style.color = '#22c55e';
-        }
-      } else if (rms > 0.003 && statusEl) {
-        statusEl.textContent = 'Hum a little louder';
-        statusEl.style.color = '#f59e0b';
+        pitches.push(pxFreqToMidi(freq));
+        $('humStatus').textContent = 'Good, keep going!';
+      } else if (rms > 0.003) {
+        $('humStatus').textContent = 'Hum a little louder';
       }
     }, 100);
 
-    rideHumTimer = setTimeout(function() {
-      clearInterval(rideHumInterval); rideHumInterval = null;
-      rideCancelRing();
-      rideHumCapturing = false;
+    pxTimer = setTimeout(function() {
+      if (pxInterval) { clearInterval(pxInterval); pxInterval = null; }
+      pxCancelRing();
+      pxCapturing = false;
 
       if (pitches.length < 3) {
-        // Not enough signal: retry automatically after a pause
-        if (statusEl) { statusEl.textContent = 'Didn\'t catch that, trying again...'; statusEl.style.color = '#f59e0b'; }
-        rideHumTimer = setTimeout(function() { rideRunPhase(); }, 1200);
+        $('humStatus').textContent = 'Didn\'t catch that, trying again...';
+        pxTimer = setTimeout(function() { pxRunPhase(); }, 1000);
         return;
       }
-
-      // Median pitch
       pitches.sort(function(a, b) { return a - b; });
-      rideHumNotes[rideHumPhase] = pitches[Math.floor(pitches.length / 2)];
+      pxNotes[pxPhase] = pitches[Math.floor(pitches.length / 2)];
 
-      if (rideHumPhase < 2) {
-        // Advance to next phase
-        rideHumPhase++;
-        rideHumTimer = setTimeout(function() { rideRunPhase(); }, 500);
+      if (pxPhase < 2) {
+        pxPhase++;
+        pxTimer = setTimeout(function() { pxRunPhase(); }, 600);
       } else {
-        // All 3 phases done: show success and advance session
-        showHumState('success');
-        stopRideHumCapture();
-        rideHumTimer = setTimeout(function() { submitHumAndAdvance(); }, 900);
+        // All 3 captures done.
+        pxSetCenter('<svg width="54" height="54" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" fill="#4ADE80"/></svg>');
+        $('humStatus').textContent = 'Got it! Submitting...';
+        pxStopAudio();
+        pxCircleEl().classList.remove('pulsing');
+        pxTimer = setTimeout(function() { submitPassengerHum(); }, 700);
       }
     }, 3000);
   }
 
-  // ── Public entry point ────────────────────────────────────────────────────
-  async function startRideHum() {
-    if (!currentRideSessionId) return;
-
-    // Reset state
-    rideHumPhase = 0;
-    rideHumNotes = [null, null, null];
-    stopRideHumCapture();
-    showHumState('capturing');
-
+  async function submitPassengerHum() {
     try {
-      rideAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (rideAudioCtx.state === 'suspended') { try { await rideAudioCtx.resume(); } catch(_) {} }
-      rideStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } });
-      rideAnalyser = rideAudioCtx.createAnalyser();
-      // Stage 11: match solo hum analyser resolution for better low-pitch capture
-      rideAnalyser.fftSize = 4096;
-      var src = rideAudioCtx.createMediaStreamSource(rideStream);
-      src.connect(rideAnalyser);
-    } catch(e) {
-      stopRideHumCapture();
-      showHumState('retry');
-      var statusEl = document.getElementById('rideHumStatus');
-      if (statusEl) { statusEl.textContent = 'Mic access needed. Allow it and try again.'; statusEl.style.color = '#f87171'; }
-      return;
-    }
-
-    rideRunPhase();
-  }
-
-  // ── Submit hum data then advance ────────────────────────────────────────────────
-  // Called after all 3 hum phases complete. Posts captured MIDI notes + advance
-  // to /hum endpoint (atomic store+advance). Falls back to /advance if needed.
-  async function submitHumAndAdvance() {
-    if (!currentRideSessionId) return;
-    try {
-      var response = await fetch('/api/ride-mode/session/' + currentRideSessionId + '/hum', {
+      var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/hum', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          low:        rideHumNotes[0],
-          normal:     rideHumNotes[1],
-          high:       rideHumNotes[2],
+          participantId: passengerParticipantId,
+          low:    pxNotes[0],
+          normal: pxNotes[1],
+          high:   pxNotes[2],
           capturedAt: new Date().toISOString()
         })
       });
-      var data = await response.json();
+      var data = await res.json();
       if (data.ok && data.session) {
-        applySessionToUI(data.session);
-        refreshQrBox('progress', data.session);
-        if (data.session.isComplete) {
-          setTimeout(function() { showRideResults(data.session); }, 600);
-        }
-        return;
+        passengerSession = data.session;
       }
-      // /hum failed: fall back to plain advance
-    } catch(_) {}
-    // Fallback path
-    advanceCurrentParticipant();
-  }
-
-  // ── End of Ride Mode Hum Capture Engine ───────────────────────────────────
-
-  async function advanceCurrentParticipant() {
-    if (!currentRideSessionId) return;
-
-    try {
-      var response = await fetch('/api/ride-mode/session/' + currentRideSessionId + '/advance', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      var data = await response.json();
-      if (!data.ok || !data.session) {
-        // Advance failed: show retry prompt
-        showHumState('retry');
-        return;
-      }
-
-      applySessionToUI(data.session);
-      refreshQrBox('progress', data.session);
-
-      if (data.session.isComplete) {
-        // All participants done: transition to results
-        setTimeout(function() { showRideResults(data.session); }, 600);
-      }
+      showPassengerState('completed_waiting');
+      startPassengerPolling();
     } catch (e) {
-      // Network error: show retry prompt
-      showHumState('retry');
+      $('humStatus').textContent = 'Network error. Try again.';
+      show($('humRetryBtn'));
     }
   }
 
-  // ── Show results ───────────────────────────────────────────────────────────
-  // ── Driver pick state ────────────────────────────────────────────────────────
-  var rideDriverPick = null;  // { title, artist } of driver-selected song
-
-  function selectDriverPick(title, artist) {
-    rideDriverPick = { title: title, artist: artist };
-    // Visually highlight the selected card and grey out others
-    var cards = document.querySelectorAll('#rideResultsGrid .song-card');
-    cards.forEach(function(card) {
-      var isSelected = card.dataset.title === title && card.dataset.artist === artist;
-      card.style.outline = isSelected ? '2px solid #a855f7' : '';
-      card.style.opacity = isSelected ? '1' : '0.55';
-    });
-    // Update all "Driver selects" chips to show the pick
-    document.querySelectorAll('.driver-pick-chip').forEach(function(el) {
-      el.textContent = el.closest('.song-card') && el.closest('.song-card').dataset.title === title
-        ? 'Driver Pick'
-        : 'Select this song';
-      el.style.borderColor = el.closest('.song-card') && el.closest('.song-card').dataset.title === title
-        ? 'rgba(168,85,247,0.7)'
-        : 'rgba(245,158,11,0.28)';
-      el.style.color = el.closest('.song-card') && el.closest('.song-card').dataset.title === title
-        ? '#e9d5ff'
-        : '#fde68a';
-    });
+  function startPassengerPolling() {
+    stopPassengerPolling();
+    passengerPollTimer = setInterval(pollPassengerSession, 4000);
+    pollPassengerSession();
+  }
+  function stopPassengerPolling() {
+    if (passengerPollTimer) { clearInterval(passengerPollTimer); passengerPollTimer = null; }
   }
 
-  // ── Dynamic results rendering ────────────────────────────────────────────────
-  function renderRideResults(scored) {
-    var grid = document.getElementById('rideResultsGrid');
-    if (!grid) return;
+  async function pollPassengerSession() {
+    var sess = await fetchPassengerSession();
+    if (!sess) return;
 
-    if (!scored || !scored.results || scored.results.length === 0) {
-      // Scoring returned empty -- show a helpful message and retry link
-      grid.innerHTML = '<p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">Calculating results -- if songs don\'t appear, tap <strong style="color:#a855f7;cursor:pointer;" onclick="showRideResults()">reload results</strong>.</p>';
-      return;
+    // Waiting count text
+    if (sess.counts) {
+      var waiting = Math.max((sess.expectedCount || 0) - sess.counts.ready, 0);
+      $('passengerWaitingCount').textContent = sess.counts.ready + ' of ' + (sess.expectedCount || sess.totalCount) + ' riders ready';
     }
 
-    // Partial data notice
-    var notice = '';
-    if (!scored.hasRealData) {
-      notice = '<p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:16px;">No hum data captured. Showing general suggestions.</p>';
-    } else if (scored.hummedCount < scored.participantCount) {
-      notice = '<p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:16px;">Based on ' + scored.hummedCount + ' of ' + scored.participantCount + ' riders who hummed.</p>';
+    // Transitions
+    if (sess.isComplete || sess.status === 'complete') {
+      await loadPassengerResults(sess);
+      stopPassengerPolling();
+    } else if (!sess.isActive) {
+      // Driver ended the ride before results were available.
+      await loadPassengerResults(sess, true);
+      stopPassengerPolling();
     }
+  }
 
-    // Ride Mode is Top 5 only: decisive, in-the-moment picks for this car.
-    // Deeper exploration lives in SquadMatch.
-    var rideTop5 = scored.results.slice(0, 5);
-    var cards = rideTop5.map(function(song, i) {
-      var titleEnc  = encodeURIComponent(song.title + ' ' + song.artist);
-      var titleEncPlus = (song.title + ' ' + song.artist).replace(/\s+/g, '+').replace(/[^A-Za-z0-9+]/g, '');
-      return [
-        '<article class="song-card" data-title="' + esc(song.title) + '" data-artist="' + esc(song.artist) + '">',
-        '  <div class="song-top">',
-        '    <div>',
-        '      <div class="song-rank">#' + song.rank + ' ' + esc(song.label) + '</div>',
-        '      <h3 class="song-title">' + esc(song.title) + '</h3>',
-        '      <p class="song-artist">' + esc(song.artist) + '</p>',
-        '    </div>',
-        '    <div class="fit-chip">' + song.fitScore + '% fit</div>',
-        '  </div>',
-        '  <div class="handoff-row">',
-        '    <span class="handoff-btn driver-pick-chip" style="cursor:pointer;border-color:rgba(245,158,11,0.28);color:#fde68a;" onclick="selectDriverPick(' + JSON.stringify(song.title) + ',' + JSON.stringify(song.artist) + ')">Select this song</span>',
-        '    <a class="handoff-btn spotify" href="https://open.spotify.com/search/' + titleEnc + '" target="_blank" rel="noopener">Play in Spotify</a>',
-        '    <a class="handoff-btn apple" href="https://music.apple.com/us/search?term=' + titleEnc + '" target="_blank" rel="noopener">Play in Apple Music</a>',
-        '    <a class="handoff-btn youtube" href="https://www.youtube.com/results?search_query=' + titleEncPlus + '+karaoke" target="_blank" rel="noopener">Karaoke Lyrics</a>',
-        '  </div>',
-        '</article>'
-      ].join('');
+  async function loadPassengerResults(sess, rideEnded) {
+    try {
+      var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/results');
+      var data = await res.json();
+      if (!data.ok || !data.scored) return;
+      renderPassengerResults(data.scored, sess, !!rideEnded);
+      showPassengerState(rideEnded ? 'post_ride_persisted' : 'results_ready');
+    } catch (_) { /* soft */ }
+  }
+
+  function renderPassengerResults(scored, sess, rideEnded) {
+    var list = $('passengerTop5');
+    var top = (scored.results || []).slice(0, 5);
+    list.innerHTML = top.map(function(song, i) {
+      return '<div class="top5-row">' +
+        '<div class="top5-rank">' + (i + 1) + '</div>' +
+        '<div><div class="top5-title">' + esc(song.title) + '</div>' +
+             '<div class="top5-artist">' + esc(song.artist) + '</div></div>' +
+        '<div class="top5-fit">' + Math.round(song.fitScore || 0) + '%</div>' +
+      '</div>';
     }).join('');
 
-    grid.innerHTML = notice + cards;
-  }
-
-  async function showRideResults(preloadedSession) {
-    if (!currentRideSessionId && !preloadedSession) {
-      setRideModeState('results');
-      return;
-    }
-    if (preloadedSession) {
-      applySessionToUI(preloadedSession);
+    if (rideEnded) {
+      $('passengerResultsHead').textContent = 'Ride complete';
+      $('passengerResultsSub').textContent  = 'Your HumMatch and 10% rider offer are still here.';
+      $('passengerResultsBanner').textContent = 'Ride complete';
     } else {
-      try {
-        var response = await fetch('/api/ride-mode/session/' + currentRideSessionId);
-        var data = await response.json();
-        if (data.ok && data.session) applySessionToUI(data.session);
-      } catch (_) {}
+      $('passengerResultsHead').textContent = "Everyone's in!";
+      $('passengerResultsSub').textContent  = 'Top 5 songs are ready.';
+      var headline = passengerDriverAlias
+        ? ('Connected to ' + passengerDriverAlias + "'s Ride")
+        : 'Connected to the ride';
+      $('passengerResultsBanner').textContent = headline;
     }
+    var ridersText = (sess && sess.counts)
+      ? (sess.counts.ready + ' of ' + (sess.expectedCount || sess.totalCount) + ' riders  Completed just now')
+      : 'Completed just now';
+    $('passengerResultsBannerSub').textContent = ridersText;
 
-    // Reveal the UI state first so the results container is visible before we write into it.
-    // This prevents a race where renderRideResults writes to a proto-hidden container and
-    // some browsers skip layout for hidden elements.
-    setRideModeState('results');
-    var top5Section = document.getElementById('top5-results');
-    if (top5Section) top5Section.classList.remove('proto-hidden');
-    refreshQrBox('results', preloadedSession || null);
-
-    // Fetch session-aware scored results AFTER the container is visible
-    if (currentRideSessionId) {
-      try {
-        var rRes = await fetch('/api/ride-mode/session/' + currentRideSessionId + '/results');
-        var rData = await rRes.json();
-        if (rData.ok && rData.scored) {
-          renderRideResults(rData.scored);
-        } else {
-          renderRideResults(null);
-        }
-      } catch (fetchErr) {
-        console.warn('[Ride Mode] Results fetch failed:', fetchErr);
-        renderRideResults(null);
-      }
-    }
-
-    // Scroll after render so cards are in the DOM
-    if (top5Section) top5Section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    // Stage 8: reveal conversion panel alongside results (if a discount was minted at join).
-    if (rideDiscountCode) {
-      showRideConversionPanel(rideDiscountCode, rideDiscountExpires, rideDiscountPercent, currentRideSessionId);
+    // Discount panel
+    if (passengerDiscountCode) {
+      $('passengerDiscountCode').textContent = passengerDiscountCode;
+      $('passengerDiscountPanel').style.display = '';
     }
   }
 
-  // ── Stage 8: Ride-originated conversion panel ──────────────────────────────
-  function showRideConversionPanel(discountCode, discountExpiresAt, discountPercent, sessionId) {
-    if (discountCode)        rideDiscountCode           = discountCode;
-    if (discountExpiresAt)   rideDiscountExpires        = discountExpiresAt;
-    if (discountPercent)     rideDiscountPercent        = discountPercent;
-    if (sessionId)           rideSessionIdForConversion = sessionId;
-    var panel = document.getElementById('rideConversionPanel');
-    if (panel) panel.style.display = 'block';
-  }
-
-  function rideConvertNow() {
+  window.passengerSaveHummatch = function() {
     var url = '/api/hummatch/checkout/monthly';
     var params = new URLSearchParams();
-    if (rideDiscountCode)           params.set('rideDiscountCode', rideDiscountCode);
-    if (rideSessionIdForConversion) params.set('rideSessionId',    rideSessionIdForConversion);
+    if (passengerDiscountCode) params.set('rideDiscountCode', passengerDiscountCode);
+    if (joinSessionId)         params.set('rideSessionId',    joinSessionId);
     var qs = params.toString();
     if (qs) url += '?' + qs;
     window.location.href = url;
-  }
+  };
 
-  function showRideReminder() {
-    var panel = document.getElementById('rideReminderPanel');
-    if (panel) panel.style.display = 'block';
-  }
+  window.togglePassengerReminder = function() {
+    var el = $('passengerReminder');
+    if (el.classList.contains('hidden')) show(el); else hide(el);
+  };
 
-  async function submitRideReminder() {
-    var destEl = document.getElementById('rideReminderDest');
-    var statusEl = document.getElementById('rideReminderStatus');
+  window.submitPassengerReminder = async function() {
+    var destEl = $('passengerReminderDest');
+    var statusEl = $('passengerReminderStatus');
     var dest = (destEl && destEl.value || '').trim();
-    if (!dest) { if (statusEl) statusEl.textContent = 'Please enter an email or phone number.'; return; }
+    if (!dest) { statusEl.textContent = 'Enter an email or phone number.'; return; }
     var channel = dest.indexOf('@') !== -1 ? 'email' : 'sms';
-    if (!rideSessionIdForConversion) {
-      if (statusEl) statusEl.textContent = 'No active ride session found.';
-      return;
-    }
     try {
-      var res = await fetch('/api/ride-mode/session/' + rideSessionIdForConversion + '/remind', {
+      var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/remind', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           channel: channel,
           destination: dest,
-          discountCode: rideDiscountCode,
-          discountExpiresAt: rideDiscountExpires
+          discountCode: passengerDiscountCode,
+          discountExpiresAt: passengerDiscountExpires
         })
       });
       var data = await res.json();
-      if (statusEl) {
-        if (data.ok && data.sent) {
-          statusEl.textContent = 'Link sent to your email.';
-        } else if (data.ok && data.deferred) {
-          statusEl.textContent = 'SMS coming soon. Save your discount code: ' + (rideDiscountCode || '');
-        } else {
-          statusEl.textContent = 'Could not send. Please try again.';
-        }
-      }
+      if (data.ok && data.sent) statusEl.textContent = 'Link sent.';
+      else if (data.ok && data.deferred) statusEl.textContent = 'SMS coming soon. Save your code: ' + (passengerDiscountCode || '');
+      else statusEl.textContent = 'Could not send. Try again.';
     } catch (e) {
-      if (statusEl) statusEl.textContent = 'Could not send. Please try again.';
+      statusEl.textContent = 'Could not send. Try again.';
     }
-  }
+  };
 
-  // ── Reset / end session ────────────────────────────────────────────────────
-  async function resetRideModeDemo() {
-    if (currentRideSessionId) {
-      try { await fetch('/api/ride-mode/session/' + currentRideSessionId + '/end', { method: 'POST' }); } catch (_) {}
-    }
-    currentRideSessionId = null;
-    // Clear Stage 7 session-aware QR state so stale images never show on a new session
-    currentQrImageUrl = null;
-    currentJoinUrl = null;
-    // Zero out captured hum notes and driver pick so nothing leaks into the next session
-    rideHumNotes = [null, null, null];
-    rideHumPhase = 0;
-    rideDriverPick = null;
-    // Clear the results grid so stale cards never show
-    var resultsGrid = document.getElementById('rideResultsGrid');
-    if (resultsGrid) resultsGrid.innerHTML = '<p style="color:var(--text3);font-size:0.9rem;padding:20px 0;">Results will appear here after all riders hum.</p>';
-
-    // Clear all live UI state
-    ['metricJoined','metricReady','metricWaiting'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.textContent = '--';
-    });
-    var mainRoster = document.getElementById('rideRosterList');
-    if (mainRoster) mainRoster.innerHTML = '';
-    var joinRoster = document.getElementById('joinRosterList');
-    if (joinRoster) joinRoster.innerHTML = '';
-    var joinPreview = document.getElementById('joinRosterPreview');
-    if (joinPreview) joinPreview.style.display = 'none';
-    var nextBanner = document.getElementById('nextUpBanner');
-    if (nextBanner) nextBanner.style.display = 'none';
-    var summaryRoster = document.getElementById('resultsSummaryRoster');
-    if (summaryRoster) summaryRoster.innerHTML = '';
-    var completeBanner = document.getElementById('sessionCompleteBanner');
-    if (completeBanner) completeBanner.classList.add('proto-hidden');
-    var top5Lead = document.getElementById('top5Lead');
-    if (top5Lead) top5Lead.style.display = '';
-    // Stop any active hum capture and reset the hum panel
-    stopRideHumCapture();
-    var humPanel = document.getElementById('humTurnPanel');
-    if (humPanel) humPanel.style.display = 'none';
-    var showResultsBtn = document.getElementById('showResultsBtn');
-    if (showResultsBtn) showResultsBtn.style.display = 'none';
-
-    // Re-hide Top 5 section until next completed session
-    var top5Section = document.getElementById('top5-results');
-    if (top5Section) top5Section.classList.add('proto-hidden');
-
-    // Stage 8: hide + reset conversion / reminder panels and ride-discount state
-    var convPanel = document.getElementById('rideConversionPanel');
-    if (convPanel) convPanel.style.display = 'none';
-    var remPanel = document.getElementById('rideReminderPanel');
-    if (remPanel) remPanel.style.display = 'none';
-    var remDest = document.getElementById('rideReminderDest');
-    if (remDest) remDest.value = '';
-    var remStatus = document.getElementById('rideReminderStatus');
-    if (remStatus) remStatus.textContent = '';
-    rideDiscountCode = null;
-    rideDiscountExpires = null;
-    rideDiscountPercent = 10;
-    rideSessionIdForConversion = null;
-
-    setRideModeState('setup');
-    refreshQrBox('setup', null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // ── Flow pill click handler ────────────────────────────────────────────────
-  document.querySelectorAll('[data-state-btn]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      setRideModeState(btn.getAttribute('data-state-btn'));
-    });
-  });
-
-  // ── End Session button in hero (wired via class) ───────────────────────────
-  document.querySelectorAll('.btn-danger').forEach(function(btn) {
-    // Only wire buttons that don't already have inline onclick
-    if (!btn.getAttribute('onclick')) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        resetRideModeDemo();
-      });
-    }
-  });
-
-  </script>
+})();
+</script>
 </body>
 </html>
