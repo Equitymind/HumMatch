@@ -470,7 +470,7 @@
             <span class="count" id="riderCount">2</span>
             <button type="button" id="riderCountUp" aria-label="Increase">+</button>
           </div>
-          <p class="muted" style="margin-top:8px; font-size:0.82rem;">Minimum 1, maximum 5.</p>
+          <p class="muted" style="margin-top:8px; font-size:0.82rem;">Minimum 1, maximum 4 (not including driver).</p>
         </div>
 
         <button class="btn btn-primary" type="button" id="createRideBtn" onclick="submitCreateRide()">Create Ride</button>
@@ -771,7 +771,7 @@
       }
     });
     $('riderCountUp').addEventListener('click', function() {
-      if (driverRiderCount < 5) {
+      if (driverRiderCount < 4) {
         driverRiderCount++;
         $('riderCount').textContent = String(driverRiderCount);
       }
