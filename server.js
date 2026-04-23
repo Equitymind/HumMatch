@@ -2850,14 +2850,8 @@ app.get('/how-it-works', (req, res) => {
   res.sendFile(path.join(__dirname, 'how-it-works.html'));
 });
 
-// SPA fallback: serve index.html for unmatched routes
-app.get('*', (req, res) => {
-  // Don't catch API routes or file extensions
-  if (req.path.startsWith('/api/') || path.extname(req.path)) {
-    return res.status(404).json({ error: 'Not found' });
-  }
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+// SPA fallback moved to bottom of file so it does not swallow GET routes
+// registered after app.listen() (e.g. the ride-mode block).
 
 // Auto-seed songs if empty
 // ---------------------------------------------------------------------------
@@ -3326,4 +3320,14 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
   }
 
   return res.json({ ok: true, channel: 'email', sent });
+});
+
+// SPA fallback: serve index.html for unmatched routes. MUST be registered
+// last so it does not shadow routes defined later in the file (notably the
+// ride-mode block, which is declared after app.listen()).
+app.get('*', (req, res) => {
+  if (req.path.startsWith('/api/') || path.extname(req.path)) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
