@@ -21,8 +21,18 @@ function getSongCatalog() {
 // The in-memory store is wiped on any Node process restart (deploy, crash,
 // OOM, Render restart). A persistent disk alone does not help -- we need to
 // serialize `sessions` to a JSON file on that disk so fresh QR joins survive
-// process restarts.
-const SESSION_FILE = process.env.SESSION_FILE_PATH || path.join(process.cwd(), 'sessions.json');
+// process restarts. Prefer the Render disk mount at /data when it exists so
+// the file actually survives deploys; fall back to cwd for local dev.
+function resolveSessionFilePath() {
+  if (process.env.SESSION_FILE_PATH) return process.env.SESSION_FILE_PATH;
+  try {
+    if (fs.existsSync('/data') && fs.statSync('/data').isDirectory()) {
+      return '/data/sessions.json';
+    }
+  } catch (_) { /* fall through */ }
+  return path.join(process.cwd(), 'sessions.json');
+}
+const SESSION_FILE = resolveSessionFilePath();
 const SESSION_MAX_AGE_MS = 24 * 60 * 60 * 1000; // prune anything older than 24h
 
 const sessions = {};
@@ -39,20 +49,29 @@ function sessionAgeMs(session) {
 
 function loadSessionsFromDisk() {
   try {
-    if (!fs.existsSync(SESSION_FILE)) return;
+    if (!fs.existsSync(SESSION_FILE)) {
+      console.log('[sessions] Loaded 0 sessions from disk (no ' + SESSION_FILE + ' yet)');
+      return;
+    }
     const raw = fs.readFileSync(SESSION_FILE, 'utf8');
-    if (!raw) return;
+    if (!raw) {
+      console.log('[sessions] Loaded 0 sessions from disk (empty ' + SESSION_FILE + ')');
+      return;
+    }
     const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed !== 'object') return;
+    if (!parsed || typeof parsed !== 'object') {
+      console.log('[sessions] Loaded 0 sessions from disk (unparseable ' + SESSION_FILE + ')');
+      return;
+    }
     Object.keys(parsed).forEach(function(id) {
       const sess = parsed[id];
       if (!sess) return;
       if (sessionAgeMs(sess) > SESSION_MAX_AGE_MS) return; // prune stale
       sessions[id] = sess;
     });
-    console.log('[sessionManager] loaded ' + Object.keys(sessions).length + ' session(s) from ' + SESSION_FILE);
+    console.log('[sessions] Loaded ' + Object.keys(sessions).length + ' sessions from disk (' + SESSION_FILE + ')');
   } catch (e) {
-    console.error('[sessionManager] loadSessionsFromDisk failed:', e.message);
+    console.error('[sessions] loadSessionsFromDisk failed:', e.message);
   }
 }
 

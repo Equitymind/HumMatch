@@ -726,15 +726,52 @@
 
   // ──────────────────────────────────────────────────────────────────────────
   // Route detection: ?join=<sessionId> → passenger, else driver
+  // Harden the parse -- URLSearchParams handles encoding, and we fall back to
+  // a manual scan of location.search if (for any reason) URLSearchParams gave
+  // us nothing. We also trim whitespace/quotes that some QR apps append.
   // ──────────────────────────────────────────────────────────────────────────
-  var params = new URLSearchParams(window.location.search);
-  var joinSessionId = params.get('join');
-  var isPassenger = !!joinSessionId;
+  function readJoinParam() {
+    try {
+      var qs = window.location.search || '';
+      var sp = new URLSearchParams(qs);
+      var v = sp.get('join');
+      if (v == null || v === '') {
+        // Manual fallback: scan the raw query string ourselves.
+        var raw = qs.replace(/^\?/, '');
+        var parts = raw.split('&');
+        for (var i = 0; i < parts.length; i++) {
+          var eq = parts[i].indexOf('=');
+          var key = eq === -1 ? parts[i] : parts[i].slice(0, eq);
+          if (decodeURIComponent(key) === 'join') {
+            v = eq === -1 ? '' : decodeURIComponent(parts[i].slice(eq + 1));
+            break;
+          }
+        }
+      }
+      if (v == null) return '';
+      return String(v).trim().replace(/^['"]+|['"]+$/g, '');
+    } catch (_) {
+      return '';
+    }
+  }
+
+  var joinSessionId = readJoinParam();
+  var isPassenger = joinSessionId.length > 0;
+  console.log('[ride-mode] route detection: isPassenger=' + isPassenger + ' joinSessionId=' + JSON.stringify(joinSessionId) + ' search=' + JSON.stringify(window.location.search));
 
   if (isPassenger) {
     show($('passengerView'));
     hide($('driverView'));
-    bootPassenger();
+    // Fire the passenger boot unconditionally. No auth/state gate -- the only
+    // signal we need is the ?join= param, which we already have.
+    try {
+      bootPassenger();
+    } catch (err) {
+      console.error('[ride-mode] bootPassenger threw:', err && err.message);
+      // Still try the fetch so the passenger gets a real session lookup even
+      // if some UI hook above failed against an unexpected DOM shape.
+      try { fetchPassengerSession().then(function(){}); } catch (_) {}
+    }
   } else {
     show($('driverView'));
     hide($('passengerView'));
@@ -1002,9 +1039,27 @@
   var passengerRideCode = '------';
 
   function bootPassenger() {
-    // Show loading state while we fetch session details
-    $('passengerBannerTitle').textContent = 'Connecting...';
-    $('passengerBannerCode').textContent = '------';
+    console.log('[ride-mode] bootPassenger start -- joinSessionId=' + JSON.stringify(joinSessionId));
+
+    // Show loading state while we fetch session details. Use safe DOM writes
+    // so a missing element never short-circuits the fetch below.
+    function safeSetText(id, text) {
+      try {
+        var el = $(id);
+        if (el) el.textContent = text;
+      } catch (_) { /* non-fatal */ }
+    }
+    safeSetText('passengerBannerTitle', 'Connecting...');
+    safeSetText('passengerBannerCode', '------');
+
+    // Guard against an empty joinSessionId making it this far. This is belt
+    // and suspenders -- the route check above already filters on truthy.
+    if (!joinSessionId) {
+      console.warn('[ride-mode] bootPassenger called without joinSessionId -- bailing');
+      safeSetText('passengerBannerTitle', 'Ride session not found');
+      safeSetText('passengerJoinTitle', "This ride session wasn't found. The driver may need to create a new ride.");
+      return;
+    }
 
     // Pull initial session details to render banner copy before the rider joins.
     fetchPassengerSession().then(function(result) {
@@ -1065,7 +1120,9 @@
       var q = passengerParticipantId
         ? '?viewer=passenger&participantId=' + encodeURIComponent(passengerParticipantId)
         : '?viewer=passenger';
-      var res = await fetch('/api/ride-mode/session/' + joinSessionId + q);
+      var url = '/api/ride-mode/session/' + encodeURIComponent(joinSessionId) + q;
+      console.log('[ride-mode] fetchPassengerSession ->', url);
+      var res = await fetch(url);
       if (res.status === 404) {
         return { session: null, status: 'not_found' };
       }
@@ -1075,7 +1132,8 @@
       }
       passengerSession = data.session;
       return { session: data.session, status: 'ok' };
-    } catch (_) {
+    } catch (e) {
+      console.error('[ride-mode] fetchPassengerSession network error:', e && e.message);
       return { session: null, status: 'network_error' };
     }
   }
