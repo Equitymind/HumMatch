@@ -594,7 +594,7 @@
                       stroke-dasharray="289.03" stroke-dashoffset="289.03"></circle>
             </svg>
             <div class="hum-center" id="humCenter">
-              <div id="humCenterContent">
+              <div id="humCenterContent" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;">
                 <svg class="hum-mic-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm-7-4a7 7 0 0 0 14 0h-2a5 5 0 0 1-10 0H5zm6 10v-2.1A7 7 0 0 0 12 18a7 7 0 0 0 1-.1V21h-2z"/></svg>
               </div>
             </div>
@@ -999,11 +999,19 @@
   var passengerRideCode = '------';
 
   function bootPassenger() {
+    // Show loading state while we fetch session details
+    $('passengerBannerTitle').textContent = 'Connecting...';
+    $('passengerBannerCode').textContent = '------';
+
     // Pull initial session details to render banner copy before the rider joins.
     fetchPassengerSession().then(function(sess) {
       if (!sess) {
-        $('passengerBannerTitle').textContent = 'Ride not found';
+        // Session not found -- show a clear error and disable the join form
+        $('passengerBannerTitle').textContent = 'Ride session not found';
         $('passengerBannerCode').textContent = '------';
+        var joinBtn = $('passengerJoinBtn');
+        if (joinBtn) { joinBtn.disabled = true; joinBtn.textContent = 'Session unavailable'; }
+        $('passengerJoinTitle').textContent = 'This ride has ended or the link has expired.';
         return;
       }
       passengerVibe = sess.vibePreset || 'Ride';
@@ -1200,10 +1208,18 @@
     pxUpdateDots();
 
     // 3-2-1 countdown before the actual recording
+    // Ring sweeps full circle over 3 seconds, number counts down inside -- matches solo HumMatch flow
     var counts = [3, 2, 1];
     var idx = 0;
     $('humStatus').textContent = 'Get ready...';
-    pxSetCenter('<div class="hum-countdown" id="humCountdownNum">' + counts[0] + '</div>');
+    pxSetCenter(
+      '<div style="display:flex;flex-direction:column;align-items:center;gap:2px;">'
+      + '<div class="hum-countdown" id="humCountdownNum">3</div>'
+      + '<div style="font-size:0.6rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;">seconds</div>'
+      + '</div>'
+    );
+    // Animate the ring sweep over the full 3s countdown window
+    pxAnimateRing(counts.length * 850);
 
     pxTimer = setInterval(function() {
       idx++;
@@ -1212,6 +1228,7 @@
         if (el) el.textContent = String(counts[idx]);
       } else {
         clearInterval(pxTimer); pxTimer = null;
+        pxCancelRing();
         pxStartRecording();
       }
     }, 850);
