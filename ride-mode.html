@@ -654,23 +654,26 @@
 
         <div class="discount-panel" id="passengerDiscountPanel" style="display:none;">
           <div class="discount-head">10% off courtesy of your driver</div>
-          <div class="discount-sub">Good for 7 days</div>
+          <div class="discount-sub" id="passengerDiscountSub">Email yourself this offer and today's ride link. Good for 7 days.</div>
           <div class="discount-code" id="passengerDiscountCode">------</div>
-          <button class="btn btn-primary" type="button" onclick="passengerSaveHummatch()">Save My HumMatch</button>
-          <button class="btn btn-ghost" type="button" onclick="togglePassengerReminder()">Remind Me Later</button>
-          <div id="passengerReminder" class="hidden" style="margin-top:14px; text-align:left;">
-            <label class="muted" style="font-size:0.82rem; display:block; margin-bottom:8px;">Send yourself the 10% driver discount link</label>
-            <input class="input" type="text" id="passengerReminderDest" placeholder="Email or phone number" />
+
+          <div id="passengerEmailCapture" style="text-align:left; margin-top:6px;">
+            <div style="font-weight:800; font-size:1.0rem; text-align:center; margin-bottom:4px;">Want this link later?</div>
+            <div class="muted" style="font-size:0.88rem; text-align:center; margin-bottom:12px;">Send yourself your 10% driver courtesy link and today's ride results.</div>
+            <input class="input" type="email" id="passengerReminderDest" placeholder="Enter your email" autocomplete="email" inputmode="email" />
             <div class="sp-12"></div>
-            <button class="btn btn-primary" type="button" onclick="submitPassengerReminder()">Send link</button>
-            <p class="muted" id="passengerReminderStatus" style="margin-top:10px; font-size:0.85rem;"></p>
+            <button class="btn btn-primary" type="button" onclick="submitPassengerReminder()">Email Me My Link</button>
+            <p class="muted" id="passengerReminderStatus" style="margin-top:10px; font-size:0.85rem; text-align:center;"></p>
+          </div>
+
+          <div id="passengerEmailSent" class="hidden" style="text-align:center; margin-top:6px;">
+            <div style="font-weight:700; font-size:1.0rem; color:#BBF7D0;">Sent. Check your email for your 10% offer and ride link.</div>
+            <div class="muted" style="font-size:0.85rem; margin-top:6px;">You can come back later from your email.</div>
           </div>
         </div>
 
         <div class="squad-bridge">
-          <div style="font-weight:700; margin-bottom:4px;">Want to keep this group together?</div>
-          <div class="muted" style="margin-bottom:10px;">Ride Mode ends when the ride ends. SquadMatch is the persistent, host-owned version that saves your group so you can come back and go deeper.</div>
-          <a href="/squadmatch">Explore SquadMatch &rarr;</a>
+          <div class="muted" style="font-size:0.9rem;">Want to keep this group together? <a href="/squadmatch">Learn about SquadMatch</a></div>
         </div>
       </section>
     </div>
@@ -939,8 +942,12 @@
     var rows = [];
     participants.forEach(function(p) {
       if (p.name === 'Driver') {
+        // Host is not a rider. Only show "Humming" / "Done" if the driver
+        // actually hummed (rare -- Option B). Otherwise "Host" / "Managing".
+        var driverPill = 'Host', driverCls = 'pill-ready';
+        if (p.hasHumData) { driverPill = 'Done'; driverCls = 'pill-done'; }
         rows.push({
-          name: 'Driver', role: 'Host', pill: 'Ready', cls: 'pill-ready'
+          name: 'Driver', role: 'Host', pill: driverPill, cls: driverCls
         });
       } else {
         var pill = 'Joined', cls = 'pill-joined';
@@ -1067,7 +1074,13 @@
       var status = result ? result.status : 'unknown';
 
       if (!sess) {
-        // No session -- distinguish between not-found, network, and other errors.
+        // Session gone on backend. Try persisted post-ride state first -- we do
+        // NOT want to kick a passenger to a dead screen if we still have their
+        // local results + discount.
+        if (loadPersistedPostRide()) return;
+
+        // Session not found and no persisted state -- clean error
+        $('passengerBannerTitle').textContent = 'Ride session not found';
         $('passengerBannerCode').textContent = '------';
         var form = $('passengerJoinForm');
         if (form) form.style.display = 'none';
@@ -1112,6 +1125,10 @@
       $('passengerBannerTitle').textContent = bannerTitle;
       $('passengerBannerCode').textContent = passengerRideCode;
       $('passengerJoinTitle').textContent = 'Join ' + (passengerVibe || 'the Ride');
+
+      // If the session is already complete/inactive and we have persisted state,
+      // go straight to post_ride_persisted (skip join form).
+      if ((sess.isComplete || !sess.isActive) && loadPersistedPostRide()) return;
     });
   }
 
@@ -1420,23 +1437,43 @@
     if (passengerPollTimer) { clearInterval(passengerPollTimer); passengerPollTimer = null; }
   }
 
-  async function pollPassengerSession() {
-    var result = await fetchPassengerSession();
-    var sess = result && result.session ? result.session : null;
-    if (!sess) return;
+  // Non-driver hummer-facing counts. Driver is NOT a hummer in Option B.
+  function passengerHummedCount(sess) {
+    if (!sess) return 0;
+    // Backend counts.ready reflects non-driver riders who hit "ready" after humming.
+    // Prefer that. Fall back to 0.
+    return (sess.counts && typeof sess.counts.ready === 'number') ? sess.counts.ready : 0;
+  }
+  function passengerExpectedCount(sess) {
+    if (!sess) return 0;
+    // expectedCount is set at ride creation -- NOT including driver.
+    return sess.expectedCount || (sess.counts && sess.counts.total) || 0;
+  }
+  function formatRidersCount(sess) {
+    var ready = passengerHummedCount(sess);
+    var exp   = passengerExpectedCount(sess);
+    if (!exp) return ready === 1 ? '1 rider completed' : (ready + ' riders completed');
+    if (ready >= exp && exp > 0) return 'All riders are in';
+    return ready + ' of ' + exp + ' riders completed';
+  }
 
-    // Waiting count text
-    if (sess.counts) {
-      var waiting = Math.max((sess.expectedCount || 0) - sess.counts.ready, 0);
-      $('passengerWaitingCount').textContent = sess.counts.ready + ' of ' + (sess.expectedCount || sess.totalCount) + ' riders ready';
+  async function pollPassengerSession() {
+    var sess = await fetchPassengerSession();
+    if (!sess) {
+      // No live session. If we have persisted post-ride state, surface that.
+      if (loadPersistedPostRide()) stopPassengerPolling();
+      return;
     }
+
+    // Waiting count text: show accurate rider-only count (driver excluded).
+    $('passengerWaitingCount').textContent = formatRidersCount(sess);
 
     // Transitions
     if (sess.isComplete || sess.status === 'complete') {
-      await loadPassengerResults(sess);
+      await loadPassengerResults(sess, false);
       stopPassengerPolling();
     } else if (!sess.isActive) {
-      // Driver ended the ride before results were available.
+      // Driver ended the ride. Try to load results; render as post_ride_persisted.
       await loadPassengerResults(sess, true);
       stopPassengerPolling();
     }
@@ -1446,114 +1483,71 @@
     try {
       var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/results');
       var data = await res.json();
-      if (!data.ok || !data.scored) return;
+      if (!data.ok || !data.scored) {
+        // Backend lost state but we may have local persisted state.
+        if (loadPersistedPostRide()) return;
+        return;
+      }
       renderPassengerResults(data.scored, sess, !!rideEnded);
+      persistPostRide(data.scored, sess);
       showPassengerState(rideEnded ? 'post_ride_persisted' : 'results_ready');
-    } catch (_) { /* soft */ }
-  }
-
-  function renderPassengerResults(scored, sess, rideEnded) {
-    var list = $('passengerTop5');
-    var top = (scored.results || []).slice(0, 5);
-    list.innerHTML = top.map(function(song, i) {
-      return '<div class="top5-row">' +
-        '<div class="top5-rank">' + (i + 1) + '</div>' +
-        '<div><div class="top5-title">' + esc(song.title) + '</div>' +
-             '<div class="top5-artist">' + esc(song.artist) + '</div></div>' +
-        '<div class="top5-fit">' + Math.round(song.fitScore || 0) + '%</div>' +
-      '</div>';
-    }).join('');
-
-    if (rideEnded) {
-      $('passengerResultsHead').textContent = 'Ride complete';
-      $('passengerResultsSub').textContent  = 'Your HumMatch and 10% rider offer are still here.';
-      $('passengerResultsBanner').textContent = 'Ride complete';
-    } else {
-      $('passengerResultsHead').textContent = "Everyone's in!";
-      $('passengerResultsSub').textContent  = 'Top 5 songs are ready.';
-      var headline = passengerDriverAlias
-        ? ('Connected to ' + passengerDriverAlias + "'s Ride")
-        : 'Connected to the ride';
-      $('passengerResultsBanner').textContent = headline;
-    }
-    var ridersText = (sess && sess.counts)
-      ? (sess.counts.ready + ' of ' + (sess.expectedCount || sess.totalCount) + ' riders  Completed just now')
-      : 'Completed just now';
-    $('passengerResultsBannerSub').textContent = ridersText;
-
-    // Discount panel
-    if (passengerDiscountCode) {
-      $('passengerDiscountCode').textContent = passengerDiscountCode;
-      $('passengerDiscountPanel').style.display = '';
+    } catch (_) {
+      loadPersistedPostRide();
     }
   }
 
-  window.passengerSaveHummatch = function() {
-    var url = '/api/hummatch/checkout/monthly';
-    var params = new URLSearchParams();
-    if (passengerDiscountCode) params.set('rideDiscountCode', passengerDiscountCode);
-    if (joinSessionId)         params.set('rideSessionId',    joinSessionId);
-    var qs = params.toString();
-    if (qs) url += '?' + qs;
-    window.location.href = url;
-  };
-
-  window.togglePassengerReminder = function() {
-    var el = $('passengerReminder');
-    if (el.classList.contains('hidden')) show(el); else hide(el);
-  };
-
-  window.submitPassengerReminder = async function() {
-    var destEl = $('passengerReminderDest');
-    var statusEl = $('passengerReminderStatus');
-    var dest = (destEl && destEl.value || '').trim();
-    if (!dest) { statusEl.textContent = 'Enter an email or phone number.'; return; }
-    var channel = dest.indexOf('@') !== -1 ? 'email' : 'sms';
+  // ── Session persistence for post-ride passenger state ─────────────────────
+  function persistKey() {
+    return joinSessionId ? ('hm_ride_postride_' + joinSessionId) : null;
+  }
+  function persistPostRide(scored, sess) {
+    var k = persistKey();
+    if (!k) return;
     try {
-      var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/remind', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          channel: channel,
-          destination: dest,
-          discountCode: passengerDiscountCode,
-          discountExpiresAt: passengerDiscountExpires
-        })
-      });
-      var data = await res.json();
-      if (data.ok && data.sent) statusEl.textContent = 'Link sent.';
-      else if (data.ok && data.deferred) statusEl.textContent = 'SMS coming soon. Save your code: ' + (passengerDiscountCode || '');
-      else statusEl.textContent = 'Could not send. Try again.';
-    } catch (e) {
-      statusEl.textContent = 'Could not send. Try again.';
-    }
-  };
+      var payload = {
+        savedAt:      new Date().toISOString(),
+        sessionId:    joinSessionId,
+        rideCode:     passengerRideCode,
+        sessionName:  (sess && sess.name) || null,
+        driverAlias:  passengerDriverAlias || null,
+        vibePreset:   passengerVibe || null,
+        top:          (scored && scored.results || []).slice(0, 5),
+        counts:       sess ? { ready: passengerHummedCount(sess), expected: passengerExpectedCount(sess) } : null,
+        discountCode:    passengerDiscountCode    || null,
+        discountExpires: passengerDiscountExpires || null,
+        discountPercent: passengerDiscountPercent || 10,
+        emailSubmitted:  !!(payloadEmailSubmitted())
+      };
+      sessionStorage.setItem(k, JSON.stringify(payload));
+    } catch (_) {}
+  }
+  function payloadEmailSubmitted() {
+    var el = $('passengerEmailSent');
+    return el && !el.classList.contains('hidden');
+  }
+  function markEmailSubmittedInPersist() {
+    var k = persistKey();
+    if (!k) return;
+    try {
+      var raw = sessionStorage.getItem(k);
+      if (!raw) return;
+      var obj = JSON.parse(raw);
+      obj.emailSubmitted = true;
+      sessionStorage.setItem(k, JSON.stringify(obj));
+    } catch (_) {}
+  }
+  function loadPersistedPostRide() {
+    var k = persistKey();
+    if (!k) return false;
+    var raw;
+    try { raw = sessionStorage.getItem(k); } catch (_) { raw = null; }
+    if (!raw) return false;
+    var obj;
+    try { obj = JSON.parse(raw); } catch (_) { return false; }
+    if (!obj || !obj.top) return false;
 
-})();
-
-// Shared nav functions (matches index.html)
-function toggleNav() {
-  var tog = document.getElementById('navToggle');
-  var drw = document.getElementById('navDrawer');
-  var ovl = document.getElementById('navOverlay');
-  tog.classList.toggle('open');
-  drw.classList.toggle('open');
-  ovl.classList.toggle('open');
-}
-function closeNav() {
-  document.getElementById('navToggle').classList.remove('open');
-  document.getElementById('navDrawer').classList.remove('open');
-  document.getElementById('navOverlay').classList.remove('open');
-}
-// Swap Log In -> My HQ if already authenticated
-(function(){
-  var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
-  if (!t) return;
-  var li = document.getElementById('navLoginItem');
-  if (li) { li.textContent = 'My HQ'; li.href = '/dashboard'; }
-  var fi = document.getElementById('footerLoginItem');
-  if (fi) { fi.textContent = 'My HQ'; fi.href = '/dashboard'; }
-})();
-</script>
-</body>
-</html>
+    // Rehydrate in-memory state so UI renders correctly.
+    passengerDriverAlias     = obj.driverAlias     || passengerDriverAlias;
+    passengerVibe            = obj.vibePreset      || passengerVibe;
+    passengerRideCode        = obj.rideCode        || passengerRideCode;
+    passengerDiscount

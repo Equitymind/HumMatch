@@ -3269,12 +3269,14 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
     console.log('[ride-mode] ride_reminders insert failed:', e.message);
   }
 
-  // Build the personalized checkout link with ride attribution.
+  // Stage 14: email CTA now routes to /pricing (NOT direct Stripe) so the
+  // passenger sees free/monthly/annual options and their 10% driver courtesy
+  // offer before any checkout decision. Ride attribution params are preserved.
   const params = new URLSearchParams();
   if (discountCode)   params.set('rideDiscountCode',  discountCode);
   if (sessionId)      params.set('rideSessionId',     sessionId);
   if (affiliateCode)  params.set('rideAffiliateCode', affiliateCode);
-  const link = 'https://hummatch.me/api/hummatch/checkout/monthly' + (params.toString() ? '?' + params.toString() : '');
+  const link = 'https://hummatch.me/pricing' + (params.toString() ? '?' + params.toString() : '');
 
   if (chan === 'sms') {
     // No SMS provider configured yet. Log and defer.
@@ -3300,6 +3302,7 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
     '<p style="margin:24px 0;">',
     '<a href="' + link + '" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;padding:12px 24px;border-radius:10px;font-weight:700;display:inline-block;">Save My HumMatch</a>',
     '</p>',
+    '<p style="font-size:0.9em;color:#666;line-height:1.5;">Opens your pricing options with the 10% driver courtesy offer applied.</p>',
     expiresReadable
       ? ('<p style="font-size:0.85em;color:#999;">Offer expires ' + expiresReadable + '. First purchase only.</p>')
       : '<p style="font-size:0.85em;color:#999;">First purchase only.</p>',

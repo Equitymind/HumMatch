@@ -140,16 +140,15 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
 <div id="screen-home" class="screen">
   <div class="home-hero">
     <div class="hero-badge">✦ SQUAD LEADER</div>
-    <h1>Your crew. Your songs.<br/><em>Together, over time.</em></h1>
-    <p>Invite your group once. Everyone hums. Come back anytime to explore a deeper shared song list. SquadMatch is the persistent, host-owned version of HumMatch.</p>
-    <button class="btn btn-primary" onclick="window.location='/pricing'" style="max-width:280px;margin:0 auto">Become a Squad Leader →</button>
-    <div style="margin-top:14px;font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.5;">Share 20% off with up to 5 friends each month. Keep your squad. Sing again.</div>
+    <h1>Keep the group together.<br/><em>Your crew. Your songs.</em></h1>
+    <p>SquadMatch is the persistent, host-owned version of HumMatch. Invite your group once. Everyone hums. Come back anytime to revisit your shared song list and go deeper.</p>
   </div>
   <div class="si" style="padding-top:0">
+    <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.12em;color:#c084fc;text-transform:uppercase;text-align:center;margin-bottom:12px;">How it works</div>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <div><div class="step-title">You hum first</div><div class="step-desc">HumMatch finds your voice range and top songs</div></div>
+        <div><div class="step-title">You hum first</div><div class="step-desc">HumMatch finds your voice range and top songs.</div></div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
@@ -157,14 +156,26 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div><div class="step-title">Keep the squad</div><div class="step-desc">Your shared song list stays saved. Come back, go deeper, sing more.</div></div>
+        <div><div class="step-title">Everyone hums</div><div class="step-desc">Every voice is captured on its own phone -- no passing devices around.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div><div class="step-title">Shared list persists</div><div class="step-desc">Your group's song list stays saved. Come back, go deeper, sing more.</div></div>
       </div>
     </div>
+
+    <div style="margin:24px 0 18px;">
+      <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.12em;color:#c084fc;text-transform:uppercase;text-align:center;margin-bottom:12px;">Why it's valuable</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.18);border-radius:12px;"><strong style="color:#fff;">Persistent results.</strong> <span style="color:rgba(255,255,255,0.65);">Your squad's shared song list doesn't disappear after one session.</span></div>
+        <div style="padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.18);border-radius:12px;"><strong style="color:#fff;">A deeper list.</strong> <span style="color:rgba(255,255,255,0.65);">Go beyond the Top 5 -- see the full catalog ranked for your group.</span></div>
+        <div style="padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.18);border-radius:12px;"><strong style="color:#fff;">Host-owned.</strong> <span style="color:rgba(255,255,255,0.65);">You keep the squad. Invite them back whenever you want to sing again.</span></div>
+        <div style="padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.18);border-radius:12px;"><strong style="color:#fff;">Monthly discounts to share.</strong> <span style="color:rgba(255,255,255,0.65);">Share 20% off with up to 5 friends each month.</span></div>
+      </div>
+    </div>
+
     <button class="btn btn-primary" onclick="window.location='/pricing'">Become a Squad Leader</button>
     <button class="btn-ghost" onclick="window.location='/'">Try solo first →</button>
-    <div style="margin-top:18px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(124,58,237,0.2);border-radius:12px;font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.55;text-align:center;">
-      <strong style="color:#fff;">SquadMatch vs Ride Mode:</strong> SquadMatch is persistent and host-owned. You save the group, invite them back, and go beyond the Top 5. Ride Mode is for one ride only.
-    </div>
   </div>
   <div class="foot-links">
     <a href="/">HumMatch</a><a href="/pricing">Pricing</a><a href="/how-it-works">How It Works</a><a href="/ride-mode">Ride Mode</a>
@@ -1102,17 +1113,4 @@ async function api(url, method='GET', body=null) {
   const opts = {method, headers:{'Content-Type':'application/json'}};
   if (S.token) opts.headers['X-HM-Token'] = S.token;
   if (body) opts.body = JSON.stringify(body);
-  const r = await fetch(url, opts);
-  return r.json();
-}
-
-function toast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg; el.classList.add('show');
-  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2200);
-}
-
-init();
-</script>
-</body>
-</html>
+  const r = 

@@ -222,6 +222,19 @@
   <p>Use HumMatch free to find songs for your voice. Upgrade to Squad Leader to unlock harmonic group song matching powered by your squad's vocal range, timbre, and brightness.</p>
 </div>
 
+<!-- Ride Mode courtesy banner (only visible when coming from a ride email) -->
+<div id="rideDiscountBanner" style="display:none; max-width:720px; margin:8px auto 0; padding:0 24px;">
+  <div style="background:linear-gradient(135deg, rgba(168,85,247,0.14), rgba(236,72,153,0.14)); border:1px solid rgba(168,85,247,0.32); border-radius:14px; padding:16px 18px; display:flex; align-items:center; gap:14px;">
+    <div style="width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg,#A855F7,#EC4899); display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 17h14v-4l-2-5a2 2 0 0 0-1.9-1.4H8.9A2 2 0 0 0 7 8l-2 5v4z" fill="#fff"/></svg>
+    </div>
+    <div style="min-width:0;">
+      <div style="font-weight:800; color:#fff; font-size:0.98rem;">10% off courtesy of your driver</div>
+      <div style="color:rgba(255,255,255,0.7); font-size:0.85rem;">Your Ride Mode offer is applied. <span id="rideOfferExpiry"></span></div>
+    </div>
+  </div>
+</div>
+
 <section class="pricing-section">
   <div class="pricing-grid">
 
@@ -236,7 +249,7 @@
         <li>View shared song results</li>
         <li>Save your setlist</li>
       </ul>
-      <a href="/" class="btn btn-secondary">Get Started Free</a>
+      <a href="/" class="btn btn-secondary">Try HumMatch Free</a>
     </div>
 
     <!-- PREMIUM MONTHLY -->
@@ -253,7 +266,7 @@
         <li>Squad HQ with shared group playlists</li>
         <li>Issue up to 5 exclusive 20% discount codes</li>
       </ul>
-      <a href="/api/hummatch/checkout/monthly" class="btn btn-primary">Start 14-Day Free Trial</a>
+      <a href="/api/hummatch/checkout/monthly" class="btn btn-primary" id="btnMonthly">Choose Monthly</a>
     </div>
 
     <!-- PREMIUM ANNUAL -->
@@ -263,7 +276,7 @@
       <h3 style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Squad Leader Annual</h3>
       <div class="pricing-price">$49<span>.99 / yr</span></div>
       <div class="pricing-sub">Billed annually</div>
-      <div class="pricing-save">Save 48%!</div>
+      <div class="pricing-save">Annual plan -- save 48%</div>
       <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:14px;line-height:1.4;">Export unlimited playlists + create singing squads with harmonic group matching.</div>
       <ul class="pricing-features">
         <li><strong>🎶 Export unlimited playlists</strong></li>
@@ -272,37 +285,61 @@
         <li>Squad HQ with shared group playlists</li>
         <li>Issue up to 5 exclusive 20% discount codes</li>
       </ul>
-      <a href="/api/hummatch/checkout/annual" class="btn btn-primary">Start 14-Day Free Trial - Save 48%!</a>
+      <a href="/api/hummatch/checkout/annual" class="btn btn-primary" id="btnAnnual">Choose Annual -- Save 48%</a>
     </div>
 
   </div>
 </section>
 
 <footer>
-  <p>&copy; 2026 HumMatch &middot; <a href="/">Try HumMatch</a> &middot; <a href="/squadmatch">SquadMatch</a> &middot; <a href="/contact">Contact</a> &middot; <a href="/blog">Blog</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+  <p>&copy; 2026 HumMatch. All rights reserved.</p>
+  <p style="margin-top:8px;"><a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/contact">Contact</a></p>
 </footer>
+
 <script>
-(function(){
-  var t = localStorage.getItem('hm_dash_token');
-  if(t){
-    var nav = document.getElementById('navLoginItem');
-    if(nav){ nav.textContent='My HQ'; }
+  function toggleNav() {
+    var drawer = document.getElementById('navDrawer');
+    var overlay = document.getElementById('navOverlay');
+    if (drawer && overlay) {
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
   }
-})();
+
+  (function(){
+    try {
+      var p = new URLSearchParams(location.search);
+      var code = p.get('rideDiscountCode');
+      var sid  = p.get('rideSessionId');
+      var aff  = p.get('rideAffiliateCode');
+      var exp  = p.get('rideDiscountExpires');
+      if (code || sid || aff) {
+        var banner = document.getElementById('rideDiscountBanner');
+        if (banner) banner.style.display = 'block';
+        if (exp) {
+          var d = new Date(exp);
+          if (!isNaN(d.getTime())) {
+            var el = document.getElementById('rideOfferExpiry');
+            if (el) el.textContent = 'Offer expires ' + d.toLocaleDateString();
+          }
+        }
+        var tail = new URLSearchParams();
+        if (code) tail.set('rideDiscountCode', code);
+        if (sid)  tail.set('rideSessionId', sid);
+        if (aff)  tail.set('rideAffiliateCode', aff);
+        var qs = tail.toString();
+        if (qs) {
+          ['btnMonthly','btnAnnual'].forEach(function(id){
+            var a = document.getElementById(id);
+            if (!a) return;
+            var href = a.getAttribute('href');
+            a.setAttribute('href', href + (href.indexOf('?') > -1 ? '&' : '?') + qs);
+          });
+        }
+      }
+    } catch(_) {}
+  })();
 </script>
-<script>
-function toggleNav() {
-  const drawer = document.getElementById('navDrawer');
-  const overlay = document.getElementById('navOverlay');
-  const isOpen = drawer.classList.contains('open');
-  if (isOpen) {
-    drawer.classList.remove('open');
-    overlay.classList.remove('open');
-  } else {
-    drawer.classList.add('open');
-    overlay.classList.add('open');
-  }
-}
-</script>
+
 </body>
 </html>

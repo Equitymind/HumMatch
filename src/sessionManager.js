@@ -115,8 +115,13 @@ function syncStatuses(session) {
 // Build the full public session shape used by driver and host views.
 function fullSessionView(session) {
   if (!session) return null;
-  const readyCount         = session.participants.filter(function(p) { return p.status === 'ready'; }).length;
-  const completedHumCount  = session.participants.filter(function(p) { return !!p.humData; }).length;
+  // Rider-facing counts exclude the driver/host (non-hummer in Option B).
+  // A driver is counted only if they actually hummed (p.humData present).
+  const riders = session.participants.filter(function(p) {
+    return p.name !== 'Driver' || !!p.humData;
+  });
+  const readyCount         = riders.filter(function(p) { return p.status === 'ready'; }).length;
+  const completedHumCount  = riders.filter(function(p) { return !!p.humData; }).length;
   const currentP = session.participants[session.currentParticipantIndex] || null;
   const nextP    = session.participants[session.currentParticipantIndex + 1] || null;
   return {
@@ -136,12 +141,12 @@ function fullSessionView(session) {
     driverUserId:            session.driverUserId ? true : null,
     affiliateCode:           session.affiliateCode           || null,
     status:                  session.isActive ? 'active' : (session.isComplete ? 'complete' : 'ended'),
-    // Hum data summary
+    // Hum data summary -- rider-only counts; driver/host is not a hummer.
     hasHumData:              completedHumCount > 0,
     completedHumCount:       completedHumCount,
-    joinedCount:             session.participants.length,
+    joinedCount:             riders.length,
     readyCount:              readyCount,
-    totalCount:              session.participants.length,
+    totalCount:              riders.length,
     currentParticipantIndex: session.currentParticipantIndex,
     currentParticipant:      currentP ? { id: currentP.id, name: currentP.name } : null,
     nextParticipant:         nextP    ? { id: nextP.id,    name: nextP.name }    : null,
@@ -166,8 +171,12 @@ function fullSessionView(session) {
 // Never leaks other participants' names or role preferences.
 function passengerSessionView(session, viewerParticipantId) {
   if (!session) return null;
-  const readyCount  = session.participants.filter(function(p) { return p.status === 'ready'; }).length;
-  const totalJoined = session.participants.length;
+  // Rider-only counts -- driver/host is not a hummer in Option B.
+  const riders      = session.participants.filter(function(p) {
+    return p.name !== 'Driver' || !!p.humData;
+  });
+  const readyCount  = riders.filter(function(p) { return p.status === 'ready'; }).length;
+  const totalJoined = riders.length;
   const waiting     = Math.max(totalJoined - readyCount, 0);
 
   // Find the viewer's own participant record (may be undefined for anonymous views).
@@ -410,23 +419,27 @@ function storeHumData(sessionId, participantId, humPayload) {
 
 // ── Session-aware song scoring ────────────────────────────────────────────────
 //
-// Stage 6 group-fit model: scores each song by how much of EACH participant's
-// vocal range overlaps the song's range, weighted by rolePreference. This is
-// more honest than union-envelope because a song that perfectly fits one
-// extreme rider but covers none of the others will score low.
+// Stage 14 engine correction: uses the SAME song-centric fit formula as solo
+// HumMatch (overlap / songSpan). A song is a good match when the rider's
+// range covers most of the song -- not when the song is merely wider than
+// the rider. The old rider-span denominator produced ~100% on any song that
+// fully contained a rider's range, which is why everything was scoring 100%.
 //
 // Per-participant weight by rolePreference:
 //   'Lead'    -> 1.5  (melody-first: matters most for song fit)
 //   'Either'  -> 1.0
 //   'Harmony' -> 0.7  (flexible, matters less for melody fit)
 //
-// groupFit = sum(participantCoverage * weight) / sum(weight)
-//   where participantCoverage = overlap(participantRange, songRange) / participantSpan
+// Participant scoring (same as solo): coverage = overlap(participant, song) / songSpan
+// Group scoring: weighted mean of per-participant coverages.
 //
 // Fallbacks:
-//   0 valid riders -> union-envelope over default range
-//   1 valid rider  -> direct range (same as old behavior)
-//   2+ valid riders -> weighted group model above
+//   0 valid hummers (driver-only or empty) -> honest default range, marked as
+//       hasRealData=false so UI can show "No hum data captured" notice.
+//   1+ valid hummers -> real scoring from actual hum data (NO silent fallback).
+//
+// Driver is never counted as a hummer unless p.humData is present (Option B:
+// driver manages the ride but does not hum from their own phone).
 //
 function scoreSessionResults(session, limit) {
   limit = limit || 5;
@@ -434,14 +447,18 @@ function scoreSessionResults(session, limit) {
     const catalog = getSongCatalog();
     if (!catalog.length) return { results: [], hasRealData: false, participantCount: 0, hummedCount: 0, groupLo: 0, groupHi: 0 };
 
-    // Only participants with valid, sensible humData
+    // Only participants with valid, sensible humData. Driver is excluded here
+    // automatically because driver.humData is null unless they actually hummed.
     const withHum = (session.participants || []).filter(function(p) {
       if (!p.humData) return false;
       const lo = p.humData.low, hi = p.humData.high;
       return Number.isInteger(lo) && Number.isInteger(hi) && hi > lo;
     });
 
-    const participantCount = session.participants ? session.participants.length : 0;
+    // Rider-facing count excludes the driver (host) from total participants --
+    // driver is a non-hummer session owner in Option B.
+    const riders = (session.participants || []).filter(function(p) { return p.name !== 'Driver'; });
+    const participantCount = riders.length;
     const hummedCount = withHum.length;
 
     // Determine dominant rolePreference among hummed riders (for label tuning)
@@ -482,6 +499,15 @@ function scoreSessionResults(session, limit) {
       return 1.0;
     }
 
+    // Shared solo-HumMatch fit: how much of the SONG a given vocal range covers.
+    // overlap / songSpan -> songs with ranges far outside the rider score low,
+    // songs snugly inside the rider score high. Matches solo HumMatch exactly.
+    function coverageFor(rangeLo, rangeHi, songLo, songHi) {
+      const songSpan = Math.max(songHi - songLo, 1);
+      const overlap  = Math.max(0, Math.min(rangeHi, songHi) - Math.max(rangeLo, songLo));
+      return overlap / songSpan;
+    }
+
     const scored = catalog.map(function(song) {
       const songLo = typeof song.lo === 'number' ? song.lo : 40;
       const songHi = typeof song.hi === 'number' ? song.hi : 72;
@@ -490,20 +516,18 @@ function scoreSessionResults(session, limit) {
       if (mode === 'group') {
         let weightedSum = 0, weightTotal = 0;
         withHum.forEach(function(p) {
-          const pLo = p.humData.low, pHi = p.humData.high;
-          const span = Math.max(pHi - pLo, 1);
-          const overlap = Math.max(0, Math.min(pHi, songHi) - Math.max(pLo, songLo));
-          const pCov = overlap / span;
+          const pCov = coverageFor(p.humData.low, p.humData.high, songLo, songHi);
           const w = weightFor(p.rolePreference);
           weightedSum += pCov * w;
           weightTotal += w;
         });
         coverage = weightTotal > 0 ? weightedSum / weightTotal : 0;
+      } else if (mode === 'single') {
+        // Matches solo HumMatch: overlap / songSpan from the one rider's range.
+        coverage = coverageFor(groupLo, groupHi, songLo, songHi);
       } else {
-        // single / default: coverage = overlap / groupSpan
-        const span = Math.max(groupHi - groupLo, 1);
-        const overlap = Math.max(0, Math.min(groupHi, songHi) - Math.max(groupLo, songLo));
-        coverage = overlap / span;
+        // No hum data -- honest default range, flagged hasRealData=false upstream.
+        coverage = coverageFor(groupLo, groupHi, songLo, songHi);
       }
 
       const fitPct = Math.min(100, Math.max(0, Math.round(coverage * 100)));
