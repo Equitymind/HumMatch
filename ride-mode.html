@@ -1458,7 +1458,8 @@
   }
 
   async function pollPassengerSession() {
-    var sess = await fetchPassengerSession();
+    var result = await fetchPassengerSession();
+    var sess = result && result.session ? result.session : null;
     if (!sess) {
       // No live session. If we have persisted post-ride state, surface that.
       if (loadPersistedPostRide()) stopPassengerPolling();
