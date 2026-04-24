@@ -1469,8 +1469,11 @@
     // Waiting count text: show accurate rider-only count (driver excluded).
     $('passengerWaitingCount').textContent = formatRidersCount(sess);
 
-    // Transitions
-    if (sess.isComplete || sess.status === 'complete') {
+    // Transitions -- check isComplete OR all riders ready (counts can lead isComplete
+    // by one poll cycle if status updates faster than isComplete flag).
+    var allReady = sess.expectedCount > 0
+      && sess.counts && sess.counts.ready >= sess.expectedCount;
+    if (sess.isComplete || sess.status === 'complete' || allReady) {
       await loadPassengerResults(sess, false);
       stopPassengerPolling();
     } else if (!sess.isActive) {
