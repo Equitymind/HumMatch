@@ -1551,4 +1551,28 @@
     passengerDriverAlias     = obj.driverAlias     || passengerDriverAlias;
     passengerVibe            = obj.vibePreset      || passengerVibe;
     passengerRideCode        = obj.rideCode        || passengerRideCode;
-    passengerDiscount
+    passengerDiscountCode    = obj.discountCode    || passengerDiscountCode;
+    passengerDiscountExpires = obj.discountExpires || passengerDiscountExpires;
+    passengerDiscountPercent = obj.discountPercent || 10;
+
+    // Render results into the passenger results panel.
+    if (obj.top && obj.top.length) {
+      renderPassengerResults({ results: obj.top }, null, true);
+    }
+
+    // Restore email-submitted state if already done.
+    if (obj.emailSubmitted) {
+      var sentEl = $('passengerEmailSent');
+      var formEl = $('passengerReminderForm');
+      if (sentEl) sentEl.classList.remove('hidden');
+      if (formEl) formEl.classList.add('hidden');
+    }
+
+    showPassengerState('post_ride_persisted');
+    return true;
+  }
+
+})(); // end IIFE
+</script>
+</body>
+</html>
