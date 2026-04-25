@@ -398,6 +398,68 @@
     .sp-12 { height: 12px; }
     .sp-18 { height: 18px; }
     .sp-24 { height: 24px; }
+
+    /* ── Result cards (mirrors primary HumMatch renderSongCard styles) ─── */
+    .your-songs { list-style: none; display: flex; flex-direction: column; gap: 10px; padding: 0; margin: 0; }
+    .song-item { display: flex; flex-direction: column; padding: 12px 14px;
+      background: rgba(255,255,255,0.04); border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.06); cursor: pointer; transition: border-color 0.15s; list-style: none; }
+    .song-item:active { border-color: rgba(168,85,247,0.5); background: rgba(168,85,247,0.07); }
+    .song-item-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .song-title { font-size: 0.92rem; font-weight: 800; line-height: 1.25; flex: 1; color: #fff; }
+    .song-meta { font-size: 0.72rem; color: var(--text3); margin-top: 4px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .song-meta .dot { opacity: 0.4; width: auto; height: auto; background: none; border-radius: 0; box-shadow: none; animation: none; display: inline; }
+    .song-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 8px; flex-wrap: wrap; }
+    .sing-btn { font-size: 0.7rem; background: linear-gradient(135deg,#A855F7,#7C3AED);
+      color: #fff; padding: 6px 14px; border-radius: 50px; font-weight: 700; white-space: nowrap; }
+    /* Tier badges */
+    .tier-badge { display: inline-flex; align-items: center; gap: 4px;
+      border-radius: 50px; padding: 3px 10px; font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 0.04em; white-space: nowrap; }
+    .tier-nail   { background: rgba(16,185,129,0.18); color: #10b981; border: 1px solid rgba(16,185,129,0.35); }
+    .tier-strong { background: rgba(168,85,247,0.18); color: #a78bfa; border: 1px solid rgba(168,85,247,0.35); }
+    .tier-stretch{ background: rgba(251,146,60,0.18); color: #fb923c; border: 1px solid rgba(251,146,60,0.35); }
+    /* Category badges */
+    .cat-badge { display: inline-flex; align-items: center; gap: 3px;
+      border-radius: 50px; padding: 2px 8px; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.02em; white-space: nowrap; margin-top: 6px; align-self: flex-start; }
+    .cat-best   { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+    .cat-top    { background: rgba(250,204,21,0.15); color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
+    .cat-stretch{ background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+    .cat-duet   { background: rgba(168,85,247,0.15); color: #a78bfa; border: 1px solid rgba(168,85,247,0.3); }
+    .cat-trans  { background: rgba(96,165,250,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+
+    /* Auto hum-flow status text + countdown ring + phase success */
+    .auto-phase-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; text-align: center; }
+    .auto-phase-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; line-height: 1.2; text-align: center; }
+    .auto-phase-sub { font-size: 0.92rem; color: var(--text2); line-height: 1.5; max-width: 320px; margin: 0 auto 10px; text-align: center; }
+    .auto-phase-emoji { font-size: 3rem; margin-bottom: 8px; transition: transform 0.3s; text-align: center; }
+    .auto-status { font-size: 0.92rem; color: var(--text2); margin-top: 16px; min-height: 24px; font-weight: 600; text-align: center; }
+    .auto-status.listening { color: var(--accent); }
+    .auto-status.success   { color: var(--green); }
+
+    /* Phase success flash */
+    .phase-success-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 500; pointer-events: none; opacity: 0; transition: opacity 0.2s; background: rgba(8,6,15,0.85); }
+    .phase-success-overlay.show { opacity: 1; }
+    .phase-success-check { font-size: 4rem; margin-bottom: 8px; }
+    .phase-success-text  { font-size: 1.3rem; font-weight: 800; color: #22C55E; }
+
+    /* Stepdots used by hum capture (override from older clone) */
+    .hum-stepdots { display: flex; gap: 10px; margin-bottom: 4px; justify-content: center; }
+    .hum-stepdots .dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.06); color: var(--text3);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.78rem; font-weight: 800;
+      animation: none; box-shadow: none;
+    }
+    .hum-stepdots .dot.active {
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      color: #fff; border-color: transparent;
+      box-shadow: 0 6px 18px rgba(168,85,247,0.4);
+    }
+    .hum-stepdots .dot.done { background: rgba(74,222,128,0.2); color: #BBF7D0; border-color: rgba(74,222,128,0.45); }
   </style>
 </head>
 <body>
@@ -571,46 +633,56 @@
         </div>
       </section>
 
-      <!-- State: humming -->
+      <!-- State: humming -- mirrors primary HumMatch hum capture flow (auto-start, ring countdown, success flash) -->
       <section id="passengerHumming" class="card hidden">
-        <h2 class="center">Let's capture your voice</h2>
-        <p class="muted center" style="margin-bottom:6px;">We'll record 3 quick hums: low, normal, high.</p>
+        <div id="phase-label" class="auto-phase-label">HUM 1 OF 3</div>
+        <h2 id="phase-title" class="center auto-phase-title">Hum your lowest note</h2>
+        <p id="phase-sub" class="muted center auto-phase-sub" style="margin-bottom:6px;">Go as deep as you comfortably can. Hold it steady.</p>
+        <div id="phase-emoji" class="auto-phase-emoji center">⬇️</div>
 
         <div class="hum-area">
           <div class="hum-stepdots" id="humDots">
-            <div class="dot" data-step="1">1</div>
-            <div class="dot" data-step="2">2</div>
-            <div class="dot" data-step="3">3</div>
+            <div class="dot" id="dot-0" data-step="1">1</div>
+            <div class="dot" id="dot-1" data-step="2">2</div>
+            <div class="dot" id="dot-2" data-step="3">3</div>
           </div>
 
-          <div class="hum-circle-wrap">
-            <div class="hum-circle" id="humCircle"></div>
-            <svg class="hum-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+          <div class="countdown-ring-wrap" style="width:120px;height:120px;position:relative;margin:0 auto;">
+            <svg class="countdown-ring-svg" width="120" height="120" viewBox="0 0 120 120" style="transform:rotate(-90deg);">
               <defs>
-                <linearGradient id="humRingGrad" x1="0" y1="0" x2="1" y2="1">
+                <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stop-color="#A855F7"/>
                   <stop offset="100%" stop-color="#EC4899"/>
                 </linearGradient>
               </defs>
-              <circle class="hum-ring-track" cx="50" cy="50" r="46"></circle>
-              <circle class="hum-ring-progress" id="humRing" cx="50" cy="50" r="46"
-                      stroke-dasharray="289.03" stroke-dashoffset="289.03"></circle>
+              <circle class="countdown-ring-bg" cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6"></circle>
+              <circle id="countdown-ring" class="countdown-ring-progress" cx="60" cy="60" r="54"
+                      fill="none" stroke="url(#ring-grad)" stroke-width="6" stroke-linecap="round"
+                      stroke-dasharray="339.292" stroke-dashoffset="0"></circle>
             </svg>
-            <div class="hum-center" id="humCenter">
-              <div id="humCenterContent" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;">
-                <svg class="hum-mic-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm-7-4a7 7 0 0 0 14 0h-2a5 5 0 0 1-10 0H5zm6 10v-2.1A7 7 0 0 0 12 18a7 7 0 0 0 1-.1V21h-2z"/></svg>
-              </div>
+            <div class="countdown-ring-center" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+              <div id="ring-number" class="countdown-ring-number" style="font-size:2.2rem;font-weight:900;color:#fff;line-height:1;">3</div>
+              <div id="ring-label" class="countdown-ring-label" style="font-size:0.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;">seconds</div>
             </div>
           </div>
 
-          <div>
-            <div class="hum-step-label" id="humStepLabel">Hum low</div>
-            <div class="hum-step-sub" id="humStepSub">Sing your lowest comfortable note</div>
-          </div>
-          <div class="hum-status" id="humStatus">Tap to start. Recording begins after 3, 2, 1.</div>
+          <div id="auto-status" class="auto-status">🎤 Listening...</div>
+        </div>
 
-          <button class="btn btn-primary" type="button" id="humStartBtn" onclick="startPassengerHum()">Start humming</button>
-          <button class="btn btn-ghost hidden" type="button" id="humRetryBtn" onclick="startPassengerHum()">Try again</button>
+        <!-- Hidden elements expected by the shared hum capture engine -->
+        <div style="display:none;">
+          <span id="pitch-note"></span>
+          <span id="pitch-hz"></span>
+          <span id="pitch-bar"></span>
+          <span id="low-note"></span>
+          <span id="mid-note"></span>
+          <span id="high-note"></span>
+        </div>
+
+        <!-- Phase success flash overlay (mirrors index.html) -->
+        <div id="phase-success" class="phase-success-overlay">
+          <div class="phase-success-check">✓</div>
+          <div id="phase-success-text" class="phase-success-text">Got it!</div>
         </div>
       </section>
 
@@ -976,6 +1048,157 @@
     }).join('');
   }
 
+  // ═════════════════════════════════════════════════════════════════════════
+  //  Shared result-card renderer -- copied verbatim from index.html
+  //  (renderSongCard, getTier, getEra, getTags, isFamiliar, getSongLink, toSlug)
+  //  with the _renderIdx counter renamed to _rideRenderIdx to avoid collision.
+  // ═════════════════════════════════════════════════════════════════════════
+  var userHigh = 69;          // updated when results load (group hi)
+  var _rideRenderIdx = 0;
+  // Stubs for primary HumMatch hooks not used in Ride Mode (keep verbatim card logic intact).
+  function logHumMatch() {}
+  function togglePlaylistSong() { /* Stage 16: persist to backend */ }
+  function openKaraoke() { /* Stage 16: hand off to song page karaoke */ }
+
+  function toSlug(s) {
+    return String(s || '').toLowerCase()
+      .replace(/[^a-z0-9 -]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+  }
+  function getSongLink(slug) {
+    var isSpanish = window.location.pathname.startsWith('/es/');
+    return isSpanish ? '/es/cancion/' + slug : '/song/' + slug;
+  }
+
+  // Confidence tier (verbatim)
+  function getTier(score) {
+    if (score >= 0.78) return { key: 'nail',   label: '✅ Nail It',    cls: 'tier-nail' };
+    if (score >= 0.60) return { key: 'strong', label: '🎯 Strong Fit', cls: 'tier-strong' };
+    return                     { key: 'stretch',label: '💪 Stretch',   cls: 'tier-stretch' };
+  }
+
+  // Familiar song keywords (verbatim from index.html)
+  var FAMILIAR_WORDS = ['love','night','dream','heart','world','baby','fire','home','run','free','time','life','forever','angel','sky','gold','girl','dancing','shine','feel','hello','don\'t','can\'t','won\'t','isn\'t'];
+  function isFamiliar(title) {
+    var t = String(title || '').toLowerCase();
+    return FAMILIAR_WORDS.some(function(w) { return t.indexOf(w) !== -1; });
+  }
+
+  // Genre / mood / context tagging (verbatim, simplified language matchers)
+  function getTags(s) {
+    var t = String((s.title || '') + ' ' + (s.artist || '')).toLowerCase();
+    var tags = [];
+    if (/elvis|sinatra|cash|dean martin|tony bennett|nat king/i.test(t)) tags.push('classic');
+    if (/beatles|queen|bowie|journey|bon jovi|aerosmith|petty|springsteen|eagles|guns n roses|led zeppelin|u2|the who|rolling stones|fleetwood mac|creedence|metallica|nirvana|pearl jam|foo fighters|green day|weezer|radiohead|oasis|the killers|the cure|linkin park|tool|pantera|van halen/i.test(t)) tags.push('rock');
+    if (/ed sheeran|bruno mars|michael jackson|katy perry|taylor swift|adele|beyonce|lady gaga|ariana grande|justin bieber|dua lipa|charlie puth|shawn mendes|halsey|billie eilish|olivia rodrigo|harry styles|the weeknd|post malone|sam smith|john legend|sia|kelly clarkson|pink|britney spears|coldplay|imagine dragons|maroon 5|onerepublic|jason mraz/i.test(t)) tags.push('pop');
+    if (/cash|stapleton|morgan wallen|luke combs|zach bryan|tyler childers|luke bryan|blake shelton|keith urban|kenny chesney|garth brooks|tim mcgraw|alan jackson|carrie underwood|miranda lambert|kacey musgraves|dolly parton|willie nelson|kenny rogers|hank williams|patsy cline|merle haggard|shania twain|faith hill|george strait|reba mcentire|toby keith|zac brown|jason aldean|eric church|brad paisley/i.test(t)) tags.push('country');
+    if (/beyonce|alicia keys|marvin gaye|sam cooke|otis redding|al green|stevie wonder|aretha franklin|amy winehouse|usher|chris brown|rihanna|frank ocean|john legend|whitney houston|janet jackson|sza|h\.e\.r/i.test(t)) tags.push('rnb');
+    if (/drake|kanye|kendrick lamar|jay.z|eminem|post malone|travis scott|lil wayne|lil baby|future|21 savage|cardi b|nicki minaj|j cole|chance|childish gambino|hip.hop|hip hop|rap/i.test(t)) tags.push('hiphop');
+    if (/shakira|j balvin|bad bunny|marc anthony|luis miguel|jennifer lopez|ricky martin|enrique iglesias|pitbull|maluma|ozuna|daddy yankee|reggaeton|latin|bachata|salsa|camila cabello|gloria estefan|carlos santana/i.test(t)) tags.push('latin');
+    if (/lauren daigle|hillsong|chris tomlin|casting crowns|tauren wells|matthew west|amy grant|skillet|newsboys|mercyme|jeremy camp|elevation|bethel|brandon lake|zach williams|phil wickham/i.test(t)) tags.push('christian');
+    if (/radiohead|arcade fire|the national|fleet foxes|bon iver|sufjan stevens|vampire weekend|the lumineers|mumford|lord huron|father john misty|phoebe bridgers|hozier|tame impala/i.test(t)) tags.push('indie');
+    if (/sinatra|nat king cole|ella fitzgerald|michael bublé|michael buble|billie holiday|louis armstrong|tony bennett|dean martin|diana krall|norah jones|frank sinatra|peggy lee|sarah vaughan|bossa nova/i.test(t)) tags.push('jazz');
+    if (/abba|bee gees|donna summer|earth wind|kool & the gang|chic|gloria gaynor|james brown|jackson 5|disco|funky/i.test(t)) tags.push('disco');
+    if (/party|dance|tonight|celebrate|good time/i.test(t)) tags.push('party');
+    if (isFamiliar(s.title)) tags.push('familiar');
+    if (tags.indexOf('rock') !== -1 || tags.indexOf('classic') !== -1) tags.push('car');
+    if (tags.indexOf('party') !== -1) tags.push('group');
+    return tags;
+  }
+
+  // Era tagging (verbatim)
+  function getEra(s) {
+    var yr = s.year || 0;
+    if (yr >= 2015) return 'recent';
+    if (yr >= 2000) return '2000s';
+    if (yr >= 1990) return '90s';
+    if (yr >= 1980) return '80s';
+    if (yr >= 1970) return '70s';
+    return 'classic';
+  }
+
+  // Convert server-side scored row {title,artist,lo,hi,fitPct,year} into the
+  // shape renderSongCard expects.
+  function enrichForCard(row) {
+    var score = (typeof row.score === 'number') ? row.score
+              : (typeof row.fitScore === 'number') ? (row.fitScore / 100)
+              : (typeof row.fitPct   === 'number') ? (row.fitPct   / 100)
+              : 0;
+    var s = {
+      title:    row.title || '',
+      artist:   row.artist || '',
+      score:    score,
+      lo:       (typeof row.lo === 'number') ? row.lo : 0,
+      hi:       (typeof row.hi === 'number') ? row.hi : 0,
+      year:     row.year || null,
+      lang:     row.lang || row.language || 'en',
+      slug:     row.slug || (toSlug(row.title || '') + '-' + toSlug(row.artist || ''))
+    };
+    s.tier     = getTier(s.score);
+    s.tags     = getTags(s);
+    s.familiar = isFamiliar(s.title);
+    return s;
+  }
+
+  // Render song card (verbatim from index.html line ~154348, with _renderIdx -> _rideRenderIdx)
+  function renderSongCard(s) {
+    var idx = _rideRenderIdx++;
+    logHumMatch(s.title, s.artist, Math.round((s.score || 0) * 100));
+    var tags = s.tags || [];
+    var era  = getEra(s);
+    var tierBadge = '<span class="tier-badge ' + s.tier.cls + '">' + s.tier.label + '</span>';
+    var scorePct = Math.round((s.score || 0) * 100);
+    var songRange = (s.hi || 0) - (s.lo || 0);
+    var hiDiff = Math.abs((s.hi || 0) - userHigh);
+    var isDuet = /duet/i.test(s.title) || songRange >= 20;
+    var isStretchRange = s.tier.key === 'stretch';
+    var catBadge = '';
+    if (scorePct >= 85) { catBadge = '<span class="cat-badge cat-best">🎯 Best Match</span>'; }
+    else if (idx < 3) { catBadge = '<span class="cat-badge cat-top">⭐ Top Pick</span>'; }
+    else if (hiDiff <= 2 && s.hi > userHigh) { catBadge = '<span class="cat-badge cat-stretch">🔥 Stretch</span>'; }
+    else if (isDuet) { catBadge = '<span class="cat-badge cat-duet">🎤 Great Duet</span>'; }
+    else if (isStretchRange) { catBadge = '<span class="cat-badge cat-trans">🔑 Try with Transposition</span>'; }
+    var titleSafe  = String(s.title  || '').replace(/'/g,"\\'");
+    var artistSafe = String(s.artist || '').replace(/'/g,"\\'");
+    var songKey = (s.title + '__' + s.artist).replace(/['"]/g,'');
+    var genreLabel = tags.indexOf('rock')   !== -1 ? 'Rock'
+                  : tags.indexOf('pop')    !== -1 ? 'Pop'
+                  : tags.indexOf('country')!== -1 ? 'Country'
+                  : tags.indexOf('classic')!== -1 ? 'Classic' : '';
+    var pageSlug = toSlug(s.title) + '-' + toSlug(s.artist);
+    var guideLink = '<a href="' + getSongLink(pageSlug) + '" style="color:rgba(168,85,247,0.7);font-size:0.68rem;font-weight:600;text-decoration:none;white-space:nowrap;" title="Vocal range guide for ' + s.title + '">Range Guide →</a>';
+    return '<li class="song-item"' +
+      ' id="song-' + songKey + '"' +
+      ' data-tier="' + s.tier.key + '"' +
+      ' data-tags="' + tags.join(',') + '"' +
+      ' data-era="' + era + '"' +
+      ' data-lang="' + (s.lang || 'en') + '"' +
+      ' data-familiar="' + s.familiar + '">' +
+      '<div class="song-item-top">' +
+        '<span class="song-title" onclick="openKaraoke(\'' + titleSafe + '\',\'' + artistSafe + '\')">' + s.title + '</span>' +
+        tierBadge +
+      '</div>' +
+      '<div class="song-meta">' +
+        '<span>' + s.artist + '</span>' +
+        (genreLabel ? '<span class="dot">·</span><span>' + genreLabel + '</span>' : '') +
+        (s.year     ? '<span class="dot">·</span><span>' + s.year     + '</span>' : '') +
+        (s.score    ? '<span class="dot">·</span><span style="color:#4ade80;font-weight:700;">✓ ' + Math.round(s.score * 100) + '% match</span>' : '') +
+      '</div>' +
+      catBadge +
+      '<div class="song-bottom">' +
+        '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:rgba(255,255,255,0.4);font-size:0.68rem;font-weight:600;user-select:none;">' +
+          '<input type="checkbox" class="hm-song-check" data-title="' + s.title.replace(/"/g,'&quot;') + '" data-artist="' + s.artist.replace(/"/g,'&quot;') + '" onchange="togglePlaylistSong(this.dataset.title,this.dataset.artist,this.checked)" style="accent-color:#A855F7;width:14px;height:14px;cursor:pointer;flex-shrink:0;"/>' +
+          'Add to playlist' +
+        '</label>' +
+        guideLink +
+        '<a href="' + getSongLink(pageSlug) + '" class="sing-btn" style="text-decoration:none;color:inherit;display:inline-block;">▶ Sing It</a>' +
+      '</div>' +
+    '</li>';
+  }
+
+  // Expose stubs to inline onclick attributes (renderSongCard generates these).
+  window.openKaraoke = openKaraoke;
+  window.togglePlaylistSong = togglePlaylistSong;
+
   async function loadDriverResults() {
     if (!driverSessionId) return;
     driverResultsLoaded = true;
@@ -1005,14 +1228,12 @@
       notice.style.display = '';
       notice.textContent = 'Based on ' + scored.hummedCount + ' of ' + scored.participantCount + ' riders who hummed.';
     }
-    list.innerHTML = scored.results.slice(0, 5).map(function(song, i) {
-      return '<div class="top5-row">' +
-        '<div class="top5-rank">' + (i + 1) + '</div>' +
-        '<div><div class="top5-title">' + esc(song.title) + '</div>' +
-             '<div class="top5-artist">' + esc(song.artist) + '</div></div>' +
-        '<div class="top5-fit">' + Math.round(song.fitScore || 0) + '%</div>' +
-      '</div>';
-    }).join('');
+    // Driver high-note for category badge logic. Default to the group hi if known.
+    userHigh = (scored && typeof scored.groupHi === 'number') ? scored.groupHi : 69;
+    _rideRenderIdx = 0;
+    var enriched = scored.results.slice(0, 5).map(enrichForCard);
+    // Render as a `your-songs` UL so the shared CSS applies (matches primary HumMatch).
+    list.outerHTML = '<ul class="your-songs top5" id="driverTop5">' + enriched.map(renderSongCard).join('') + '</ul>';
   }
 
   window.endRide = async function() {
@@ -1206,6 +1427,8 @@
         passengerDiscountPercent = data.discountPercent || 10;
       }
       showPassengerState('humming');
+      // Auto-start the shared HumMatch hum capture flow -- no extra tap.
+      setTimeout(function() { startPassengerHumCapture(); }, 200);
     } catch (e) {
       err.style.display = ''; err.textContent = e.message || 'Could not join. Try again.';
     } finally {
@@ -1213,206 +1436,311 @@
     }
   };
 
-  // ── Passenger hum capture (reusing the same pitch algorithm) ──────────────
-  var pxAudioCtx = null, pxAnalyser = null, pxStream = null;
-  var pxPhase = 0;            // 0=low, 1=normal, 2=high
-  var pxNotes = [null, null, null];
-  var pxTimer = null, pxInterval = null, pxRingRaf = null;
-  var pxCapturing = false;
-  var PX_RING_CIRC = 2 * Math.PI * 46;  // r=46 in SVG
-  var PX_PHASES = [
-    { label: 'Hum low',    sub: 'Sing your lowest comfortable note',  status: 'Listening...' },
-    { label: 'Hum normal', sub: 'At a comfortable pitch',             status: 'Listening...' },
-    { label: 'Hum high',   sub: 'Your highest comfortable note',      status: 'Listening...' }
+  // ──────────────────────────────────────────────────────────────────────────
+  // Passenger hum capture -- copied verbatim from index.html (lines ~153680-153900)
+  // Renamed globals (audioCtx -> audioCtx2 etc) avoided since we're inside an IIFE.
+  // After all 3 phases complete, submits to ride session instead of showResults().
+  // ──────────────────────────────────────────────────────────────────────────
+
+  // ── MIDI helpers (verbatim from index.html) ──
+  var NOTE_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+  function midiToName(midi) {
+    var oct = Math.floor(midi / 12) - 1;
+    return NOTE_NAMES[midi % 12] + oct;
+  }
+  function freqToMidi(hz) {
+    return Math.round(12 * Math.log2(hz / 440) + 69);
+  }
+
+  // ── PITCH DETECTION: autocorrelation (verbatim from index.html) ──
+  function detectPitch(buf, sampleRate) {
+    var SIZE = buf.length;
+    var MAX_SAMPLES = Math.floor(SIZE / 2);
+    var MIN_LAG = Math.floor(sampleRate / 1400);
+    var MAX_LAG = Math.min(MAX_SAMPLES, Math.floor(sampleRate / 50));
+
+    var rmsTotal = 0;
+    for (var i = 0; i < SIZE; i++) rmsTotal += buf[i] * buf[i];
+    rmsTotal = Math.sqrt(rmsTotal / SIZE);
+    if (rmsTotal < 0.001) return -1;
+
+    var best = -1, bestCorr = -1;
+    var prevCorr = 0, rising = false;
+
+    for (var t = MIN_LAG; t < MAX_LAG; t++) {
+      var corr = 0;
+      for (var k = 0; k < MAX_SAMPLES; k++) corr += buf[k] * buf[k + t];
+      corr = corr / (MAX_SAMPLES * rmsTotal * rmsTotal + 0.001);
+
+      if (corr > prevCorr) {
+        rising = true;
+      } else if (rising && corr < prevCorr) {
+        if (prevCorr > bestCorr && prevCorr > 0.45) {
+          bestCorr = prevCorr;
+          best = t - 1;
+        }
+        rising = false;
+      }
+      prevCorr = corr;
+      if (bestCorr > 0.92) break;
+    }
+
+    if (best < MIN_LAG) return -1;
+    var y1 = best > MIN_LAG ? (function(){ var c=0; for(var i=0;i<MAX_SAMPLES;i++) c+=buf[i]*buf[i+best-1]; return c/(MAX_SAMPLES*rmsTotal*rmsTotal+0.001); })() : bestCorr;
+    var y3 = best < MAX_LAG-1 ? (function(){ var c=0; for(var i=0;i<MAX_SAMPLES;i++) c+=buf[i]*buf[i+best+1]; return c/(MAX_SAMPLES*rmsTotal*rmsTotal+0.001); })() : bestCorr;
+    var denom = 2*(2*bestCorr - y1 - y3);
+    var refined = best + (denom !== 0 ? (y1 - y3) / denom : 0);
+    return sampleRate / refined;
+  }
+
+  function spectralCentroid(freqData) {
+    var num = 0, denom = 0;
+    for (var i = 0; i < freqData.length; i++) {
+      var mag = freqData[i] / 255;
+      num += i * mag;
+      denom += mag;
+    }
+    return denom > 0 ? num / denom : 0;
+  }
+
+  // ── Audio + phase state (mirrors index.html names) ──
+  var audioCtx = null, analyser = null, source = null, stream = null;
+  var phase = 0;
+  var capturing = false;
+  var captureTimer = null;
+  var capturedNotes = [null, null, null];
+  var capturedBrightness = [null, null, null];
+
+  var PHASES = [
+    { label:'HUM 1 OF 3', title:'Hum your lowest note',  sub:'Go as deep as you comfortably can. Hold it steady.', emoji:'⬇️' },
+    { label:'HUM 2 OF 3', title:'Now your normal voice',  sub:'Just hum like you\'re humming a song to yourself.', emoji:'🎵' },
+    { label:'HUM 3 OF 3', title:'Now go high',            sub:'As high as you comfortably can. Hold it steady.', emoji:'⬆️' }
   ];
 
-  function pxDetectPitch(buf, sampleRate) {
-    var MIN_LAG = Math.floor(sampleRate / 1400);
-    var MAX_LAG = Math.floor(sampleRate / 50);
-    var MAX_SAMPLES = Math.min(buf.length, 2048);
-    var rmsTotal = 0;
-    for (var i = 0; i < MAX_SAMPLES; i++) rmsTotal += buf[i] * buf[i];
-    rmsTotal = Math.sqrt(rmsTotal / MAX_SAMPLES);
-    if (rmsTotal < 0.001) return 0;
-    var best = MIN_LAG, bestCorr = -1;
-    for (var lag = MIN_LAG; lag <= MAX_LAG; lag++) {
-      var c = 0;
-      for (var j = 0; j < MAX_SAMPLES; j++) c += buf[j] * buf[j + lag];
-      c /= (MAX_SAMPLES * rmsTotal * rmsTotal + 0.001);
-      if (c > bestCorr) { bestCorr = c; best = lag; }
-    }
-    if (bestCorr < 0.1) return 0;
-    return sampleRate / best;
-  }
-  function pxFreqToMidi(freq) { return Math.round(12 * Math.log2(freq / 440) + 69); }
+  // ── Countdown ring animation (verbatim) ──
+  var RING_CIRCUMFERENCE = 2 * Math.PI * 54;
+  var ringAnimFrame = null;
 
-  function pxAnimateRing(durationMs) {
-    var ring = $('humRing');
+  function animateRing(durationMs, onComplete) {
+    var ring = document.getElementById('countdown-ring');
+    var numEl = document.getElementById('ring-number');
+    var labelEl = document.getElementById('ring-label');
     if (!ring) return;
-    ring.style.strokeDashoffset = PX_RING_CIRC;
-    var start = performance.now();
+
+    ring.style.strokeDasharray = RING_CIRCUMFERENCE;
+    ring.style.strokeDashoffset = '0';
+    ring.style.transition = 'none';
+
+    var startTime = performance.now();
+    var lastSecond = Math.ceil(durationMs / 1000);
+    if (numEl) numEl.textContent = lastSecond;
+    if (labelEl) labelEl.textContent = 'seconds';
+
     function tick(now) {
-      var progress = Math.min((now - start) / durationMs, 1);
-      ring.style.strokeDashoffset = String(PX_RING_CIRC * (1 - progress));
-      if (progress < 1) pxRingRaf = requestAnimationFrame(tick);
+      var elapsed = now - startTime;
+      var progress = Math.min(elapsed / durationMs, 1);
+      var offset = progress * RING_CIRCUMFERENCE;
+      ring.style.strokeDashoffset = offset;
+
+      var remaining = Math.ceil((durationMs - elapsed) / 1000);
+      if (remaining !== lastSecond && remaining >= 0) {
+        lastSecond = remaining;
+        if (numEl) numEl.textContent = remaining <= 0 ? '✓' : remaining;
+      }
+
+      if (progress < 1) {
+        ringAnimFrame = requestAnimationFrame(tick);
+      } else {
+        if (numEl) numEl.textContent = '✓';
+        if (labelEl) labelEl.textContent = '';
+        if (onComplete) onComplete();
+      }
     }
-    pxRingRaf = requestAnimationFrame(tick);
-  }
-  function pxCancelRing() {
-    if (pxRingRaf) { cancelAnimationFrame(pxRingRaf); pxRingRaf = null; }
-    var ring = $('humRing');
-    if (ring) ring.style.strokeDashoffset = String(PX_RING_CIRC);
+    ringAnimFrame = requestAnimationFrame(tick);
   }
 
-  function pxUpdateDots() {
-    var dots = document.querySelectorAll('#humDots .dot');
-    dots.forEach(function(d, i) {
-      d.classList.remove('active', 'done');
-      if (i < pxPhase) d.classList.add('done');
-      else if (i === pxPhase) d.classList.add('active');
+  function resetRing() {
+    if (ringAnimFrame) { cancelAnimationFrame(ringAnimFrame); ringAnimFrame = null; }
+    var ring = document.getElementById('countdown-ring');
+    if (ring) { ring.style.strokeDashoffset = '0'; ring.style.transition = 'none'; }
+    var numEl = document.getElementById('ring-number');
+    if (numEl) numEl.textContent = '3';
+  }
+
+  function showPhaseSuccess(text) {
+    return new Promise(function(resolve) {
+      var overlay = document.getElementById('phase-success');
+      var textEl = document.getElementById('phase-success-text');
+      if (textEl) textEl.textContent = text || 'Got it!';
+      if (overlay) overlay.classList.add('show');
+      setTimeout(function() {
+        if (overlay) overlay.classList.remove('show');
+        resolve();
+      }, 900);
     });
   }
 
-  function pxSetCenter(html) {
-    $('humCenterContent').innerHTML = html;
+  function updatePhaseUI() {
+    var p = PHASES[phase];
+    var lblEl = document.getElementById('phase-label');
+    var titleEl = document.getElementById('phase-title');
+    var subEl = document.getElementById('phase-sub');
+    if (lblEl) lblEl.textContent = p.label;
+    if (titleEl) titleEl.textContent = p.title;
+    if (subEl) subEl.textContent = p.sub;
+    var emojiEl = document.getElementById('phase-emoji');
+    if (emojiEl) emojiEl.textContent = p.emoji || '🎵';
+    var statusEl = document.getElementById('auto-status');
+    if (statusEl) { statusEl.textContent = '🎤 Listening...'; statusEl.className = 'auto-status listening'; }
+    resetRing();
+    [0,1,2].forEach(function(i) {
+      var dot = document.getElementById('dot-'+i);
+      if (!dot) return;
+      dot.classList.remove('active','done');
+      if (i < phase) dot.classList.add('done');
+      if (i === phase) dot.classList.add('active');
+    });
   }
 
-  function pxStopAudio() {
-    pxCapturing = false;
-    if (pxTimer)    { clearTimeout(pxTimer); pxTimer = null; }
-    if (pxInterval) { clearInterval(pxInterval); pxInterval = null; }
-    pxCancelRing();
-    if (pxStream)   { pxStream.getTracks().forEach(function(t) { t.stop(); }); pxStream = null; }
-    if (pxAudioCtx) { try { pxAudioCtx.close(); } catch(_) {} pxAudioCtx = null; }
-    pxAnalyser = null;
-  }
+  // No-op tracker so we can drop the verbatim block in unmodified.
+  function hmTrack() {}
 
-  window.startPassengerHum = async function() {
-    hide($('humStartBtn'));
-    hide($('humRetryBtn'));
-    pxPhase = 0;
-    pxNotes = [null, null, null];
-    pxUpdateDots();
+  function runPhaseCapture() {
+    if (capturing) return;
+    hmTrack('hum_start', { phase: phase });
+    capturing = true;
 
-    try {
-      pxAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (pxAudioCtx.state === 'suspended') { try { await pxAudioCtx.resume(); } catch(_) {} }
-      pxStream = await navigator.mediaDevices.getUserMedia({
-        audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true }
-      });
-      pxAnalyser = pxAudioCtx.createAnalyser();
-      pxAnalyser.fftSize = 4096;
-      var src = pxAudioCtx.createMediaStreamSource(pxStream);
-      src.connect(pxAnalyser);
-    } catch (e) {
-      pxStopAudio();
-      $('humStatus').textContent = 'Mic access needed. Allow it and try again.';
-      show($('humRetryBtn'));
-      return;
-    }
-
-    pxCircleEl().classList.add('pulsing');
-    pxRunPhase();
-  };
-
-  function pxCircleEl() { return $('humCircle'); }
-
-  function pxRunPhase() {
-    var p = PX_PHASES[pxPhase];
-    $('humStepLabel').textContent = p.label;
-    $('humStepSub').textContent   = p.sub;
-    pxUpdateDots();
-
-    // 3-2-1 countdown before the actual recording
-    // Ring sweeps full circle over 3 seconds, number counts down inside -- matches solo HumMatch flow
-    var counts = [3, 2, 1];
-    var idx = 0;
-    $('humStatus').textContent = 'Get ready...';
-    pxSetCenter(
-      '<div style="display:flex;flex-direction:column;align-items:center;gap:2px;">'
-      + '<div class="hum-countdown" id="humCountdownNum">3</div>'
-      + '<div style="font-size:0.6rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;">seconds</div>'
-      + '</div>'
-    );
-    // Animate the ring sweep over the full 3s countdown window
-    pxAnimateRing(counts.length * 850);
-
-    pxTimer = setInterval(function() {
-      idx++;
-      if (idx < counts.length) {
-        var el = $('humCountdownNum');
-        if (el) el.textContent = String(counts[idx]);
-      } else {
-        clearInterval(pxTimer); pxTimer = null;
-        pxCancelRing();
-        pxStartRecording();
-      }
-    }, 850);
-  }
-
-  function pxStartRecording() {
-    if (pxCapturing) return;
-    pxCapturing = true;
-    $('humStatus').textContent = 'Listening...';
-    pxSetCenter('<div class="hum-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>');
+    var statusEl = document.getElementById('auto-status');
+    if (statusEl) { statusEl.innerHTML = '<span style="color:#A855F7;">Humming... hold it steady</span>'; statusEl.className = 'auto-status listening'; }
 
     var pitches = [];
-    var buf = new Float32Array(pxAnalyser.fftSize);
-    pxAnimateRing(3000);
+    var brightnesses = [];
+    var buf = new Float32Array(analyser.fftSize);
+    var freqBuf = new Uint8Array(analyser.frequencyBinCount);
 
-    pxInterval = setInterval(function() {
-      if (!pxAnalyser) return;
-      pxAnalyser.getFloatTimeDomainData(buf);
+    animateRing(3000, null);
+
+    var interval = setInterval(function() {
+      analyser.getFloatTimeDomainData(buf);
+      analyser.getByteFrequencyData(freqBuf);
+
       var rms = 0;
       for (var i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
       rms = Math.sqrt(rms / buf.length);
-      if (rms < 0.001) return;
-      var freq = pxDetectPitch(buf, pxAudioCtx.sampleRate);
+      if (rms < 0.001) {
+        if (statusEl) statusEl.innerHTML = '🎤 Listening... hum now!';
+        return;
+      }
+
+      var freq = detectPitch(buf, audioCtx.sampleRate);
       if (freq > 50 && freq < 1400) {
-        pitches.push(pxFreqToMidi(freq));
-        $('humStatus').textContent = 'Good, keep going!';
-      } else if (rms > 0.003) {
-        $('humStatus').textContent = 'Hum a little louder';
+        var midi = freqToMidi(freq);
+        pitches.push(midi);
+        brightnesses.push(spectralCentroid(freqBuf));
+
+        var pn = document.getElementById('pitch-note'); if (pn) pn.textContent = midiToName(midi);
+        var ph = document.getElementById('pitch-hz');   if (ph) ph.textContent = Math.round(freq) + ' Hz';
+        var pb = document.getElementById('pitch-bar');
+        if (pb) {
+          var pct = Math.min(100, Math.max(0, ((midi - 36) / 54) * 100));
+          pb.style.width = pct + '%';
+        }
+
+        if (statusEl) {
+          if (rms > 0.02) { statusEl.innerHTML = '<span style="color:#22C55E;">✓ Good, keep humming!</span>'; }
+          else { statusEl.innerHTML = '<span style="color:#F59E0B;">Hum a bit louder</span>'; }
+        }
+      } else {
+        if (statusEl && rms > 0.001) statusEl.innerHTML = '<span style="color:#F59E0B;">Hum a bit louder</span>';
       }
     }, 100);
 
-    pxTimer = setTimeout(function() {
-      if (pxInterval) { clearInterval(pxInterval); pxInterval = null; }
-      pxCancelRing();
-      pxCapturing = false;
+    captureTimer = setTimeout(async function() {
+      clearInterval(interval);
+      capturing = false;
 
       if (pitches.length < 3) {
-        $('humStatus').textContent = 'Didn\'t catch that, trying again...';
-        pxTimer = setTimeout(function() { pxRunPhase(); }, 1000);
+        if (statusEl) { statusEl.innerHTML = '<span style="color:#F59E0B;">Didn\'t catch that, trying again...</span>'; }
+        resetRing();
+        setTimeout(function() { runPhaseCapture(); }, 1200);
         return;
       }
-      pitches.sort(function(a, b) { return a - b; });
-      pxNotes[pxPhase] = pitches[Math.floor(pitches.length / 2)];
 
-      if (pxPhase < 2) {
-        pxPhase++;
-        pxTimer = setTimeout(function() { pxRunPhase(); }, 600);
+      pitches.sort(function(a, b) { return a - b; });
+      var median = pitches[Math.floor(pitches.length / 2)];
+      capturedNotes[phase] = median;
+
+      var avgBrightness = brightnesses.reduce(function(a, b) { return a + b; }, 0) / brightnesses.length;
+      var normBrightness = Math.min(100, Math.round((avgBrightness / (analyser.frequencyBinCount / 8)) * 100));
+      capturedBrightness[phase] = normBrightness;
+
+      var ids = ['low-note', 'mid-note', 'high-note'];
+      var idEl = document.getElementById(ids[phase]);
+      if (idEl) idEl.textContent = midiToName(median);
+
+      if (phase < 2) {
+        await showPhaseSuccess('Got it! ' + midiToName(median));
+        phase++;
+        updatePhaseUI();
+        setTimeout(function() { runPhaseCapture(); }, 600);
       } else {
-        // All 3 captures done.
-        pxSetCenter('<svg width="54" height="54" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" fill="#4ADE80"/></svg>');
-        $('humStatus').textContent = 'Got it! Submitting...';
-        pxStopAudio();
-        pxCircleEl().classList.remove('pulsing');
-        pxTimer = setTimeout(function() { submitPassengerHum(); }, 700);
+        await showPhaseSuccess('All done!');
+        if (statusEl) { statusEl.innerHTML = '<span style="color:#22C55E;">🔍 Submitting your hum...</span>'; }
+        setTimeout(function() { pxSubmitHum(capturedNotes, capturedBrightness); }, 500);
       }
     }, 3000);
   }
 
-  async function submitPassengerHum() {
+  function pxStopAudio() {
+    capturing = false;
+    if (captureTimer) { clearTimeout(captureTimer); captureTimer = null; }
+    if (ringAnimFrame) { cancelAnimationFrame(ringAnimFrame); ringAnimFrame = null; }
+    if (stream) { try { stream.getTracks().forEach(function(t) { t.stop(); }); } catch(_) {} stream = null; }
+    if (audioCtx) { try { audioCtx.close(); } catch(_) {} audioCtx = null; }
+    analyser = null; source = null;
+  }
+
+  // Auto-start mic + first phase capture (no tap button -- mirrors primary HumMatch)
+  async function startPassengerHumCapture() {
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') {
+        try { await audioCtx.resume(); } catch(e) {}
+      }
+      stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } });
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 4096;
+      source = audioCtx.createMediaStreamSource(stream);
+      source.connect(analyser);
+      if (audioCtx.state === 'suspended') {
+        try { await audioCtx.resume(); } catch(e) {}
+      }
+    } catch (e) {
+      var statusEl = document.getElementById('auto-status');
+      if (statusEl) statusEl.innerHTML = '<span style="color:#F87171;">Mic access required. Reload and allow it to try again.</span>';
+      return;
+    }
+
+    phase = 0;
+    capturedNotes = [null, null, null];
+    capturedBrightness = [null, null, null];
+    capturing = false;
+
+    updatePhaseUI();
+    setTimeout(function() { runPhaseCapture(); }, 800);
+  }
+
+  async function pxSubmitHum(notes, brightness) {
+    pxStopAudio();
     try {
       var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/hum', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           participantId: passengerParticipantId,
-          low:    pxNotes[0],
-          normal: pxNotes[1],
-          high:   pxNotes[2],
+          low:    notes[0],
+          normal: notes[1],
+          high:   notes[2],
           capturedAt: new Date().toISOString()
         })
       });
@@ -1423,8 +1751,8 @@
       showPassengerState('completed_waiting');
       startPassengerPolling();
     } catch (e) {
-      $('humStatus').textContent = 'Network error. Try again.';
-      show($('humRetryBtn'));
+      var statusEl = document.getElementById('auto-status');
+      if (statusEl) statusEl.innerHTML = '<span style="color:#F87171;">Network error. Reload to try again.</span>';
     }
   }
 
@@ -1499,6 +1827,78 @@
       loadPersistedPostRide();
     }
   }
+
+  // ── Passenger results render: reuses renderSongCard from primary HumMatch ──
+  function renderPassengerResults(scored, sess, rideEnded) {
+    var listHost = $('passengerTop5');
+    if (!listHost) return;
+    var results = (scored && scored.results) || [];
+    if (!results.length) {
+      listHost.innerHTML = '<p class="muted">Results are still calculating. Refresh in a moment.</p>';
+      return;
+    }
+    userHigh = (scored && typeof scored.groupHi === 'number') ? scored.groupHi : 69;
+    _rideRenderIdx = 0;
+    var enriched = results.slice(0, 5).map(enrichForCard);
+    // Replace the .top5 div with a `your-songs` UL so shared CSS applies.
+    var ul = '<ul class="your-songs top5" id="passengerTop5">' + enriched.map(renderSongCard).join('') + '</ul>';
+    listHost.outerHTML = ul;
+
+    // Headline / subhead
+    var head = $('passengerResultsHead');
+    var sub  = $('passengerResultsSub');
+    if (rideEnded) {
+      if (head) head.textContent = 'Ride results';
+      if (sub)  sub.textContent  = 'Top 5 songs from this ride.';
+    } else {
+      if (head) head.textContent = "Everyone's in!";
+      if (sub)  sub.textContent  = 'Top 5 songs are ready.';
+    }
+
+    // Driver-courtesy 10% discount panel + email capture (Stage 14A)
+    var panel = $('passengerDiscountPanel');
+    if (panel && passengerDiscountCode) {
+      panel.style.display = '';
+      var codeEl = $('passengerDiscountCode');
+      if (codeEl) codeEl.textContent = passengerDiscountCode;
+      var subEl = $('passengerDiscountSub');
+      if (subEl && passengerDiscountExpires) {
+        try {
+          var d = new Date(passengerDiscountExpires);
+          subEl.textContent = 'Email yourself this offer and today\'s ride link. Good through ' + d.toLocaleDateString() + '.';
+        } catch (_) { /* keep default */ }
+      }
+    }
+  }
+
+  window.submitPassengerReminder = async function() {
+    var input = $('passengerReminderDest');
+    var statusEl = $('passengerReminderStatus');
+    var email = (input && input.value || '').trim();
+    if (!email || email.indexOf('@') === -1) {
+      if (statusEl) { statusEl.textContent = 'Please enter a valid email.'; statusEl.style.color = '#F87171'; }
+      return;
+    }
+    if (statusEl) { statusEl.textContent = 'Sending...'; statusEl.style.color = ''; }
+    try {
+      await fetch('/api/ride-mode/session/' + joinSessionId + '/email-reminder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          participantId: passengerParticipantId,
+          discountCode: passengerDiscountCode || null
+        })
+      }).catch(function() {});
+      var formEl = $('passengerEmailCapture');
+      var sentEl = $('passengerEmailSent');
+      if (formEl) formEl.classList.add('hidden');
+      if (sentEl) sentEl.classList.remove('hidden');
+      markEmailSubmittedInPersist();
+    } catch (_) {
+      if (statusEl) { statusEl.textContent = 'Could not send. Try again.'; statusEl.style.color = '#F87171'; }
+    }
+  };
 
   // ── Session persistence for post-ride passenger state ─────────────────────
   function persistKey() {

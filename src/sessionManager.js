@@ -532,11 +532,26 @@ function scoreSessionResults(session, limit) {
 
       const fitPct = Math.min(100, Math.max(0, Math.round(coverage * 100)));
 
+      // Stage 15: include the full set of fields renderSongCard needs in Ride Mode.
+      // songs.json has: title, artist, lo, hi, brightness, year. language and slug
+      // are not present in this catalog, so we default lang='en' and let the client
+      // derive slug from title+artist via toSlug().
+      const titleStr  = song.title  || '';
+      const artistStr = song.artist || '';
+      const slug = (titleStr + '-' + artistStr)
+        .toLowerCase()
+        .replace(/[^a-z0-9 -]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
       return {
-        title:  song.title,
-        artist: song.artist,
+        title:  titleStr,
+        artist: artistStr,
         lo:     songLo,
         hi:     songHi,
+        year:   song.year || null,
+        lang:   song.language || 'en',
+        slug:   slug,
         fitPct: fitPct
       };
     });
