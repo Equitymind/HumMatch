@@ -1164,8 +1164,9 @@
                   : tags.indexOf('pop')    !== -1 ? 'Pop'
                   : tags.indexOf('country')!== -1 ? 'Country'
                   : tags.indexOf('classic')!== -1 ? 'Classic' : '';
-    var pageSlug = toSlug(s.title) + '-' + toSlug(s.artist);
-    var guideLink = '<a href="' + getSongLink(pageSlug) + '" style="color:rgba(168,85,247,0.7);font-size:0.68rem;font-weight:600;text-decoration:none;white-space:nowrap;" title="Vocal range guide for ' + s.title + '">Range Guide →</a>';
+    // Ride Mode: Sing It goes directly to YouTube lyrics -- no song detail page, no playlist
+    var ytQuery = encodeURIComponent(s.title + ' ' + s.artist + ' lyrics');
+    var ytUrl   = 'https://www.youtube.com/results?search_query=' + ytQuery;
     return '<li class="song-item"' +
       ' id="song-' + songKey + '"' +
       ' data-tier="' + s.tier.key + '"' +
@@ -1174,7 +1175,7 @@
       ' data-lang="' + (s.lang || 'en') + '"' +
       ' data-familiar="' + s.familiar + '">' +
       '<div class="song-item-top">' +
-        '<span class="song-title" onclick="openKaraoke(\'' + titleSafe + '\',\'' + artistSafe + '\')">' + s.title + '</span>' +
+        '<a href="' + ytUrl + '" target="_blank" rel="noopener" class="song-title" style="text-decoration:none;color:inherit;">' + s.title + '</a>' +
         tierBadge +
       '</div>' +
       '<div class="song-meta">' +
@@ -1184,13 +1185,8 @@
         (s.score    ? '<span class="dot">·</span><span style="color:#4ade80;font-weight:700;">✓ ' + Math.round(s.score * 100) + '% match</span>' : '') +
       '</div>' +
       catBadge +
-      '<div class="song-bottom">' +
-        '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:rgba(255,255,255,0.4);font-size:0.68rem;font-weight:600;user-select:none;">' +
-          '<input type="checkbox" class="hm-song-check" data-title="' + s.title.replace(/"/g,'&quot;') + '" data-artist="' + s.artist.replace(/"/g,'&quot;') + '" onchange="togglePlaylistSong(this.dataset.title,this.dataset.artist,this.checked)" style="accent-color:#A855F7;width:14px;height:14px;cursor:pointer;flex-shrink:0;"/>' +
-          'Add to playlist' +
-        '</label>' +
-        guideLink +
-        '<a href="' + getSongLink(pageSlug) + '" class="sing-btn" style="text-decoration:none;color:inherit;display:inline-block;">▶ Sing It</a>' +
+      '<div class="song-bottom" style="justify-content:flex-end;">' +
+        '<a href="' + ytUrl + '" target="_blank" rel="noopener" class="sing-btn" style="text-decoration:none;color:inherit;display:inline-block;">▶ Sing It</a>' +
       '</div>' +
     '</li>';
   }
