@@ -6,6 +6,175 @@
 const path = require('path');
 const fs = require('fs');
 let _songCatalog = null;
+
+const RIDE_MODE_BLOCKLIST = new Set([
+  'taylor swift__beans on toast',
+  'eagles__nate bargatze'
+]);
+
+const NON_SONG_KEYWORDS = [
+  'podcast', 'interview', 'spoken word', 'spoken-word', 'comedy', 'stand-up', 'standup',
+  'parody', 'tribute', 'soundalike', 'backing track', 'karaoke version', 'karaoke backing',
+  'skit', 'documentary', 'lecture', 'audiobook'
+];
+
+const RIDE_MODE_SEED_TITLES = new Set([
+  "Don't Stop Believin'","Mr. Brightside","Sweet Caroline","Bohemian Rhapsody","Since U Been Gone",
+  "I Wanna Dance with Somebody","Livin' on a Prayer","Shallow","Friends in Low Places","Wagon Wheel",
+  "Take Me Home, Country Roads","Party in the U.S.A.","You Belong with Me","Man! I Feel Like a Woman!",
+  "Before He Cheats","Don't Stop Me Now","Dancing Queen","Hey Ya!","Crazy in Love","Yeah!",
+  "Wannabe","No Scrubs","Say My Name","Toxic","Bye Bye Bye","I Want It That Way",
+  "Build Me Up Buttercup","September","Piano Man","American Pie","Wonderwall","Iris",
+  "Complicated","Sk8er Boi","Teenage Dream","Rolling in the Deep","Valerie","Shut Up and Dance",
+  "Flowers","Cruel Summer","Uptown Funk","Shake It Off","Low","Yeah!","Faith","Respect",
+  "Lean on Me","Stand by Me","Margaritaville","Waterfalls","No Scrubs","Truth Hurts",
+  "Good 4 U","Love Story","Shake It Off","Unwritten","Pocketful of Sunshine","Levitating",
+  "Hot in Herre","Get Low","Ignition (Remix)","Super Bass","Hollaback Girl","Fergalicious",
+  "Single Ladies","Bad Romance","Poker Face","Blank Space","Cruel Summer","Dreams",
+  "Go Your Own Way","Africa","Total Eclipse of the Heart","Summer Nights","Greased Lightnin'",
+  "A Whole New World","Islands in the Stream","Need You Now","Jackson","Picture",
+  "Don't Go Breaking My Heart","Is This Love","Dancing on My Own","Love Shack","I Love Rock 'n' Roll",
+  "Sweet Home Alabama","Brown Eyed Girl","Jessie's Girl","Take on Me","Wake Me Up Before You Go-Go",
+  "This Is How We Do It","Return of the Mack","Hey Soul Sister","Raise Your Glass","Cupid Shuffle",
+  "Yeah!","Empire State of Mind","Call Me Maybe","We Found Love","Die With A Smile"
+]);
+
+function normalizeText(value) {
+  return String(value || '').toLowerCase().trim();
+}
+
+function normalizedSongKey(title, artist) {
+  return normalizeText(title).replace(/[^a-z0-9]+/g, ' ').trim() + '__' + normalizeText(artist).replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+function songText(song) {
+  return [song && song.title, song && song.artist, song && song.genre, Array.isArray(song && song.tags) ? song.tags.join(' ') : '']
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+}
+
+function isClearlyNonSong(song) {
+  const text = songText(song);
+  return NON_SONG_KEYWORDS.some(function(term) { return text.indexOf(term) !== -1; });
+}
+
+function hasSuspiciousRideMetadata(song) {
+  const title = normalizeText(song && song.title);
+  const artist = normalizeText(song && song.artist);
+  if (!title || !artist) return true;
+  if (RIDE_MODE_BLOCKLIST.has(normalizedSongKey(title, artist))) return true;
+  if (isClearlyNonSong(song)) return true;
+  if (title === artist) return true;
+  if (title.split(' ').length <= 3 && /taylor swift|drake|beyonce|adele|rihanna|elvis|eminem|shakira|whitney houston|prince|madonna/.test(title) && artist !== title) return true;
+  if (/^the\s+(weeknd|beatles|eagles|chicks)$/.test(title)) return true;
+  return false;
+}
+
+function familiarityScore(song) {
+  const tags = Array.isArray(song && song.tags) ? song.tags.map(normalizeText) : [];
+  const title = normalizeText(song && song.title);
+  const genre = normalizeText(song && song.genre);
+  const popularity = Number(song && (song.popularity != null ? song.popularity : song.humMatchScore || 0)) || 0;
+  let score = Math.min(1, popularity / 40);
+  if (RIDE_MODE_SEED_TITLES.has(song && song.title)) score = Math.max(score, 0.92);
+  if (tags.some(function(tag) { return ['party','karaoke','pop','rock','country','r&b','hiphop','classic','disco','car','group','familiar'].indexOf(tag) !== -1; })) score += 0.08;
+  if (genre && /pop|rock|country|r&b|hip hop|hiphop|dance|disco|soul/.test(genre)) score += 0.06;
+  if (/love|night|dance|home|road|dream|heart|baby|party|summer|girl|tonight/.test(title)) score += 0.04;
+  return Math.max(0, Math.min(1, score));
+}
+
+function karaokeScore(song) {
+  const title = normalizeText(song && song.title);
+  const tags = Array.isArray(song && song.tags) ? song.tags.map(normalizeText) : [];
+  let score = RIDE_MODE_SEED_TITLES.has(song && song.title) ? 1 : familiarityScore(song);
+  if (tags.indexOf('karaoke') !== -1 || tags.indexOf('party') !== -1) score += 0.08;
+  if (/don't stop|shallow|wagon wheel|sweet caroline|country roads|i wanna dance|mr\. brightside|bohemian rhapsody/.test(title)) score += 0.12;
+  return Math.max(0, Math.min(1, score));
+}
+
+function groupSingabilityScore(song) {
+  const title = normalizeText(song && song.title);
+  const tags = Array.isArray(song && song.tags) ? song.tags.map(normalizeText) : [];
+  let score = 0.35;
+  if (RIDE_MODE_SEED_TITLES.has(song && song.title)) score += 0.35;
+  if (tags.some(function(tag) { return ['party','group','car','familiar','disco','pop','country'].indexOf(tag) !== -1; })) score += 0.18;
+  if (/love|night|dance|home|road|dream|party|summer|heart|country|friends|baby/.test(title)) score += 0.1;
+  if (/duet|feat\.|featuring|with /.test(title + ' ' + normalizeText(song && song.artist))) score += 0.08;
+  return Math.max(0, Math.min(1, score));
+}
+
+function vibeBoostForSong(song, vibePreset, participantCount) {
+  const title = normalizeText(song && song.title);
+  const artist = normalizeText(song && song.artist);
+  const tags = Array.isArray(song && song.tags) ? song.tags.map(normalizeText) : [];
+  const genre = normalizeText(song && song.genre);
+  const vibe = normalizeText(vibePreset || '');
+  let boost = 0;
+
+  if (vibe.indexOf('girls') !== -1) {
+    if (/taylor swift|beyonce|lady gaga|dua lipa|rihanna|britney|kelly clarkson|carly rae|natasha bedingfield|shania twain|olivia rodrigo|katy perry|kesha|pink/.test(artist)) boost += 0.14;
+    if (tags.indexOf('pop') !== -1 || tags.indexOf('party') !== -1) boost += 0.08;
+  } else if (vibe.indexOf('party') !== -1 || vibe.indexOf('friday') !== -1) {
+    if (tags.some(function(tag) { return ['party','group','car','disco','pop','rock'].indexOf(tag) !== -1; })) boost += 0.12;
+    if (familiarityScore(song) > 0.75) boost += 0.08;
+  } else if (vibe.indexOf('date') !== -1) {
+    if (/love|stay|kiss|endless|always|perfect|shallow|islands in the stream|need you now/.test(title)) boost += 0.12;
+    if (/duet|feat\.|featuring|with /.test(title + ' ' + artist)) boost += 0.08;
+    if (/ed sheeran|lady a|kenny rogers|dolly parton|john legend|lionel richie|diana ross/.test(artist)) boost += 0.08;
+    if (tags.indexOf('party') !== -1 || tags.indexOf('hiphop') !== -1) boost -= 0.08;
+  }
+
+  if (vibe.indexOf('throwback') !== -1) {
+    const year = Number(song && song.year) || 0;
+    if (year >= 1980 && year <= 2009) boost += 0.14;
+  } else if (vibe.indexOf('chill') !== -1) {
+    const brightness = Number(song && song.brightness) || 60;
+    if (brightness <= 62) boost += 0.1;
+    if (tags.indexOf('indie') !== -1 || tags.indexOf('soul') !== -1 || tags.indexOf('country') !== -1) boost += 0.06;
+  } else if (vibe.indexOf('duet') !== -1) {
+    if (/duet|feat\.|featuring|with /.test(title + ' ' + artist)) boost += 0.16;
+    if (/shallow|islands in the stream|need you now|jackson|picture|don't go breaking my heart|summer nights|a whole new world/.test(title)) boost += 0.14;
+    if (participantCount >= 2) boost += 0.04;
+    if (tags.indexOf('group') !== -1) boost += 0.03;
+  }
+
+  if (participantCount >= 3 && groupSingabilityScore(song) > 0.7) boost += 0.05;
+  if (genre && /comedy|spoken word/.test(genre)) boost -= 0.4;
+  return boost;
+}
+
+function rideModePenalty(song) {
+  const text = songText(song);
+  let penalty = 0;
+  if (hasSuspiciousRideMetadata(song)) penalty += 1;
+  if (/parody|novelty|tribute|soundalike|podcast|interview|comedy|spoken word|karaoke version|backing track/.test(text)) penalty += 0.7;
+  if (familiarityScore(song) < 0.28) penalty += 0.24;
+  return penalty;
+}
+
+function isRideModeEligible(song) {
+  if (!song || hasSuspiciousRideMetadata(song)) return false;
+  if (rideModePenalty(song) >= 1) return false;
+  const familiar = familiarityScore(song);
+  const karaoke = karaokeScore(song);
+  const group = groupSingabilityScore(song);
+  const year = Number(song && song.year) || 0;
+  const title = normalizeText(song && song.title);
+  const artist = normalizeText(song && song.artist);
+  const tags = Array.isArray(song && song.tags) ? song.tags.map(normalizeText) : [];
+  const genre = normalizeText(song && song.genre);
+  if (RIDE_MODE_SEED_TITLES.has(song.title)) return true;
+  if (familiar < 0.72) return false;
+  if (karaoke < 0.72) return false;
+  if (group < 0.62) return false;
+  if (!tags.some(function(tag) { return ['pop','rock','country','r&b','hiphop','disco','party','group','car','classic','familiar'].indexOf(tag) !== -1; }) && !/pop|rock|country|r&b|hip hop|dance|disco|soul/.test(genre)) return false;
+  if (year && year < 1965 && familiar < 0.86) return false;
+  if (title.split(' ').length <= 2 && familiar < 0.82) return false;
+  if (/best kept secret|news for lulu|beans on toast|nate bargatze|david liebe hart|nobigdyl/.test(artist)) return false;
+  return true;
+}
+
 function getSongCatalog() {
   if (_songCatalog) return _songCatalog;
   try {
@@ -445,7 +614,7 @@ function scoreSessionResults(session, limit) {
   limit = limit || 5;
   try {
     const catalog = getSongCatalog();
-    if (!catalog.length) return { results: [], hasRealData: false, participantCount: 0, hummedCount: 0, groupLo: 0, groupHi: 0 };
+    if (!catalog.length) return { results: [], hasRealData: false, participantCount: 0, hummedCount: 0, groupLo: 0, groupHi: 0, vibePreset: session && session.vibePreset || null, rideModeEligibleCount: 0 };
 
     // Only participants with valid, sensible humData. Driver is excluded here
     // automatically because driver.humData is null unless they actually hummed.
@@ -508,7 +677,10 @@ function scoreSessionResults(session, limit) {
       return overlap / songSpan;
     }
 
-    const scored = catalog.map(function(song) {
+    const ridePool = catalog.filter(isRideModeEligible);
+    const candidateCatalog = ridePool.length ? ridePool : catalog.filter(function(song) { return !hasSuspiciousRideMetadata(song); });
+
+    const scored = candidateCatalog.map(function(song) {
       const songLo = typeof song.lo === 'number' ? song.lo : 40;
       const songHi = typeof song.hi === 'number' ? song.hi : 72;
 
@@ -530,7 +702,15 @@ function scoreSessionResults(session, limit) {
         coverage = coverageFor(groupLo, groupHi, songLo, songHi);
       }
 
-      const fitPct = Math.min(100, Math.max(0, Math.round(coverage * 100)));
+      const vocalFit = Math.max(0, Math.min(1, coverage));
+      const familiar = familiarityScore(song);
+      const karaoke = karaokeScore(song);
+      const group = groupSingabilityScore(song);
+      const vibeBoost = vibeBoostForSong(song, session && session.vibePreset, participantCount);
+      const duetBoost = participantCount >= 2 && /duet|feat\.|featuring|with /.test(normalizeText(song.title) + ' ' + normalizeText(song.artist)) ? 0.06 : 0;
+      const penalty = rideModePenalty(song);
+      const composite = (vocalFit * 0.60) + (Math.max(familiar, karaoke) * 0.22) + (group * 0.12) + vibeBoost + duetBoost - penalty;
+      const fitPct = Math.min(100, Math.max(0, Math.round(composite * 100)));
 
       // Stage 15: include the full set of fields renderSongCard needs in Ride Mode.
       // songs.json has: title, artist, lo, hi, brightness, year. language and slug
@@ -552,7 +732,15 @@ function scoreSessionResults(session, limit) {
         year:   song.year || null,
         lang:   song.language || 'en',
         slug:   slug,
-        fitPct: fitPct
+        fitPct: fitPct,
+        vocalFitPct: Math.round(vocalFit * 100),
+        familiarityPct: Math.round(familiar * 100),
+        karaokePct: Math.round(karaoke * 100),
+        singabilityPct: Math.round(group * 100),
+        vibeBoostPct: Math.round(Math.max(0, vibeBoost + duetBoost) * 100),
+        rideModeEligible: true,
+        genre: song.genre || null,
+        tags: Array.isArray(song.tags) ? song.tags : []
       };
     });
 
@@ -564,15 +752,18 @@ function scoreSessionResults(session, limit) {
     // when two adjacent entries are within 3 pts and share an artist already
     // seen in the recent window, we nudge the duplicate down past non-dupes.
     const top = [];
-    const pool = scored.slice(0, Math.min(scored.length, limit * 6));
+    const pool = scored.slice(0, Math.min(scored.length, limit * 10));
     const seenArtists = {};
+    const seenSongs = {};
     let i = 0;
     while (top.length < limit && i < pool.length) {
       const cand = pool[i];
       const artistKey = (cand.artist || '').toLowerCase();
-      if (!seenArtists[artistKey]) {
+      const songKey = normalizedSongKey(cand.title, cand.artist);
+      if (!seenSongs[songKey] && !seenArtists[artistKey]) {
         top.push(cand);
         seenArtists[artistKey] = true;
+        seenSongs[songKey] = true;
         pool.splice(i, 1);
         i = 0;
       } else {
@@ -581,9 +772,11 @@ function scoreSessionResults(session, limit) {
         for (let j = i + 1; j < pool.length; j++) {
           if (cand.fitPct - pool[j].fitPct > 3) break;
           const altArtist = (pool[j].artist || '').toLowerCase();
-          if (!seenArtists[altArtist]) {
+          const altSongKey = normalizedSongKey(pool[j].title, pool[j].artist);
+          if (!seenArtists[altArtist] && !seenSongs[altSongKey]) {
             top.push(pool[j]);
             seenArtists[altArtist] = true;
+            seenSongs[altSongKey] = true;
             pool.splice(j, 1);
             swapped = true;
             break;
@@ -591,7 +784,11 @@ function scoreSessionResults(session, limit) {
         }
         if (!swapped) {
           // No diverse alternative within tolerance: accept this one
-          top.push(cand);
+          if (!seenSongs[songKey]) {
+            top.push(cand);
+            seenSongs[songKey] = true;
+            seenArtists[artistKey] = true;
+          }
           pool.splice(i, 1);
           i = 0;
         }
@@ -607,15 +804,17 @@ function scoreSessionResults(session, limit) {
     });
 
     return {
-      results:         top,
-      hasRealData:     hasRealData,
+      results:          top,
+      hasRealData:      hasRealData,
       participantCount: participantCount,
-      hummedCount:     hummedCount,
-      groupLo:         groupLo,
-      groupHi:         groupHi
+      hummedCount:      hummedCount,
+      groupLo:          groupLo,
+      groupHi:          groupHi,
+      vibePreset:       session && session.vibePreset || null,
+      rideModeEligibleCount: ridePool.length
     };
   } catch (_) {
-    return { results: [], hasRealData: false, participantCount: 0, hummedCount: 0, groupLo: 0, groupHi: 0 };
+    return { results: [], hasRealData: false, participantCount: 0, hummedCount: 0, groupLo: 0, groupHi: 0, vibePreset: session && session.vibePreset || null, rideModeEligibleCount: 0 };
   }
 }
 

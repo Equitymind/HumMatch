@@ -139,6 +139,7 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
 <!-- HOME -->
 <div id="screen-home" class="screen">
   <div class="home-hero">
+    <div id="ride-offer-banner" style="display:none;max-width:360px;margin:0 auto 14px;padding:10px 14px;border-radius:12px;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.26);font-size:0.84rem;color:#ddd6fe;">Your 10% Ride Mode offer is saved.</div>
     <div class="hero-badge">✦ SQUAD LEADER</div>
     <h1>Keep the group together.<br/><em>Your crew. Your songs.</em></h1>
     <p>SquadMatch is the persistent, host-owned version of HumMatch. Invite your group once. Everyone hums. Come back anytime to revisit your shared song list and go deeper.</p>
@@ -174,13 +175,38 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
       </div>
     </div>
 
-    <button class="btn btn-primary" onclick="window.location='/pricing'">Become a Squad Leader</button>
+    <button class="btn btn-primary" id="become-squad-leader-btn" onclick="goToPricingWithContext()">Become a Squad Leader</button>
     <button class="btn-ghost" onclick="window.location='/'">Try solo first →</button>
   </div>
   <div class="foot-links">
     <a href="/">HumMatch</a><a href="/pricing">Pricing</a><a href="/how-it-works">How It Works</a><a href="/ride-mode">Ride Mode</a>
   </div>
 </div>
+<script>
+(function(){
+  function getRideParams() {
+    var params = new URLSearchParams(window.location.search || '');
+    return {
+      rideDiscountCode: params.get('rideDiscountCode') || '',
+      rideSessionId: params.get('rideSessionId') || '',
+      rideAffiliateCode: params.get('rideAffiliateCode') || ''
+    };
+  }
+  var ride = getRideParams();
+  if (ride.rideDiscountCode || ride.rideSessionId || ride.rideAffiliateCode) {
+    var banner = document.getElementById('ride-offer-banner');
+    if (banner) banner.style.display = 'block';
+  }
+  window.goToPricingWithContext = function() {
+    var ride = getRideParams();
+    var params = new URLSearchParams();
+    if (ride.rideDiscountCode) params.set('rideDiscountCode', ride.rideDiscountCode);
+    if (ride.rideSessionId) params.set('rideSessionId', ride.rideSessionId);
+    if (ride.rideAffiliateCode) params.set('rideAffiliateCode', ride.rideAffiliateCode);
+    window.location = '/pricing' + (params.toString() ? '?' + params.toString() : '');
+  };
+})();
+</script>
 
 <!-- SCREEN 2: CREATE -->
 <div id="screen-create" class="screen">
@@ -240,7 +266,7 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
     <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:16px;">
       Save your squad, invite friends back, and unlock deeper group song matches.
     </div>
-    <button onclick="window.location.href='/pricing'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:8px;">Become a Squad Leader</button>
+    <button onclick="goToPricingWithContext()" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:8px;">Become a Squad Leader</button>
     <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="width:100%;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--muted);font-size:0.85rem;cursor:pointer;">Maybe later</button>
   </div>
 </div>

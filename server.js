@@ -36,6 +36,7 @@ const ZEPTO_PASS = process.env.ZEPTOMAIL_PASS || '';
 const EMAIL_USER = process.env.HUMMATCH_EMAIL_USER || '';
 const EMAIL_PASS = process.env.HUMMATCH_EMAIL_PASS || '';
 const EMAIL_FROM = process.env.HUMMATCH_EMAIL_FROM || 'joe@hummatch.me';
+const { scoreResultsById: scoreRideResultsForEmail } = require('./src/sessionManager');
 
 const emailTransporter = ZEPTO_PASS
   ? nodemailer.createTransport({
@@ -3270,18 +3271,16 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
     console.log('[ride-mode] ride_reminders insert failed:', e.message);
   }
 
-  // Stage 14: email CTA now routes to /pricing (NOT direct Stripe) so the
-  // passenger sees free/monthly/annual options and their 10% driver courtesy
-  // offer before any checkout decision. Ride attribution params are preserved.
   const params = new URLSearchParams();
   if (discountCode)   params.set('rideDiscountCode',  discountCode);
   if (sessionId)      params.set('rideSessionId',     sessionId);
   if (affiliateCode)  params.set('rideAffiliateCode', affiliateCode);
-  const link = 'https://hummatch.me/pricing' + (params.toString() ? '?' + params.toString() : '');
+  const learnMoreLink = 'https://hummatch.me/squadmatch' + (params.toString() ? '?' + params.toString() : '');
+  const pricingLink = 'https://hummatch.me/pricing' + (params.toString() ? '?' + params.toString() : '');
 
   if (chan === 'sms') {
     // No SMS provider configured yet. Log and defer.
-    console.log('[ride-mode] SMS reminder deferred for', dest, 'link=', link);
+    console.log('[ride-mode] SMS reminder deferred for', dest, 'link=', learnMoreLink);
     return res.json({ ok: true, channel: 'sms', sent: false, deferred: true });
   }
 
@@ -3295,24 +3294,42 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
     }
   } catch (_) { expiresReadable = ''; }
 
-  const subject = 'Your HumMatch match is waiting for you';
+  const scored = scoreRideResultsForEmail(sessionId, 5);
+  const results = scored && Array.isArray(scored.results) ? scored.results.slice(0, 5) : [];
+  const listHtml = results.length
+    ? ('<div style="margin:20px 0 18px;">' + results.map(function(song, idx) {
+        var pct = typeof song.fitPct === 'number' ? (' — ' + song.fitPct + '%') : '';
+        return '<div style="padding:10px 12px;border:1px solid #ece7f6;border-radius:10px;margin-bottom:8px;background:#faf7ff;">'
+          + '<div style="font-weight:700;color:#1a1a1a;">' + (idx + 1) + '. ' + (song.title || 'Unknown song') + '</div>'
+          + '<div style="font-size:0.92rem;color:#5b5670;">' + (song.artist || 'Unknown artist') + pct + '</div>'
+          + '</div>';
+      }).join('') + '</div>')
+    : '<p style="font-size:0.95rem;line-height:1.5;color:#444;">Your results are waiting on HumMatch.</p>';
+
+  const subject = 'Your HumMatch ride results are ready';
   const html = [
-    '<div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:520px;margin:0 auto;padding:24px;color:#1a1a1a;">',
-    '<p style="font-size:1rem;line-height:1.5;">Your vocal range and song matches from Ride Mode are ready to save.</p>',
-    '<p style="font-size:1rem;line-height:1.5;">You have 10% off for 7 days, courtesy of your driver.</p>',
-    '<p style="margin:24px 0;">',
-    '<a href="' + link + '" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;padding:12px 24px;border-radius:10px;font-weight:700;display:inline-block;">Claim My 10% Offer</a>',
+    '<div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#1a1a1a;">',
+    '<h1 style="font-size:1.4rem;line-height:1.2;margin:0 0 14px;">Your Ride Mode song matches are ready.</h1>',
+    '<p style="font-size:1rem;line-height:1.6;margin:0 0 14px;">Here are your Top 5 songs from Ride Mode.</p>',
+    listHtml,
+    discountCode
+      ? ('<div style="margin:20px 0;padding:16px 18px;border-radius:12px;background:#f5f3ff;border:1px solid #ddd6fe;">'
+          + '<div style="font-size:0.85rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#7c3aed;margin-bottom:6px;">Driver courtesy offer</div>'
+          + '<div style="font-size:1rem;line-height:1.5;color:#1a1a1a;">Your 10% driver courtesy code: <strong>' + discountCode + '</strong></div>'
+          + (expiresReadable ? '<div style="font-size:0.9rem;color:#5b5670;margin-top:4px;">Good for 7 days — through ' + expiresReadable + '.</div>' : '<div style="font-size:0.9rem;color:#5b5670;margin-top:4px;">Good for 7 days.</div>')
+          + '</div>')
+      : '',
+    '<p style="margin:24px 0 14px;">',
+    '<a href="' + learnMoreLink + '" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;padding:12px 24px;border-radius:10px;font-weight:700;display:inline-block;">See what SquadMatch unlocks</a>',
     '</p>',
-    '<p style="font-size:0.9em;color:#666;line-height:1.5;">Opens your pricing options with the 10% driver courtesy offer applied.</p>',
-    expiresReadable
-      ? ('<p style="font-size:0.85em;color:#999;">Offer expires ' + expiresReadable + '. First purchase only.</p>')
-      : '<p style="font-size:0.85em;color:#999;">First purchase only.</p>',
+    '<p style="font-size:0.92rem;color:#555;line-height:1.5;margin:0 0 10px;">Want to use your Ride Mode offer now? <a href="' + pricingLink + '" style="color:#7c3aed;">Use your 10% code on HumMatch</a>.</p>',
+    '<p style="font-size:0.9rem;color:#666;line-height:1.5;margin:14px 0 0;">Or open this link: <a href="' + learnMoreLink + '" style="color:#7c3aed;word-break:break-all;">' + learnMoreLink + '</a></p>',
     '</div>'
   ].join('');
 
   let sent = false;
   try {
-    console.log('[ride-mode] sending reminder email to', dest.slice(0,3) + '***', 'link=', link);
+    console.log('[ride-mode] sending reminder email to', dest.slice(0,3) + '***', 'link=', learnMoreLink);
     sent = !!(await sendEmail(dest, subject, html));
     console.log('[ride-mode] reminder email result: sent=', sent);
   } catch (e) {
