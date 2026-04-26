@@ -18,6 +18,7 @@ process.on('unhandledRejection', (reason) => {
 });
 
 const app = express();
+const CANONICAL_HOST = 'hummatch.me';
 const PORT = process.env.PORT || 3000;
 const BUILD_VERSION = process.env.BUILD_VERSION || '2.0.0';
 const ADMIN_KEY = process.env.ADMIN_API_KEY || (() => {
@@ -2663,6 +2664,20 @@ app.get('/api/hummatch/shared-playlist/:token', (req, res) => {
 // ---------------------------------------------------------------------------
 // Static files & SPA routing
 // ---------------------------------------------------------------------------
+// Canonical host + protocol normalization
+app.use((req, res, next) => {
+  const host = (req.get('host') || '').toLowerCase();
+  const proto = (req.get('x-forwarded-proto') || req.protocol || 'http').split(',')[0].trim().toLowerCase();
+  let path = req.originalUrl || req.url || '/';
+  if (path === '/es/') {
+    return res.redirect(301, 'https://' + CANONICAL_HOST + '/es');
+  }
+  if (host && (proto !== 'https' || host === 'www.hummatch.me')) {
+    return res.redirect(301, 'https://' + CANONICAL_HOST + path);
+  }
+  next();
+});
+
 // Serve HTML with no-cache headers (always fresh)
 app.use((req, res, next) => {
   if (req.path.endsWith('.html') || req.path === '/' || !req.path.includes('.')) {
