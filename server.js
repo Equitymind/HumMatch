@@ -2669,9 +2669,6 @@ app.use((req, res, next) => {
   const host = (req.get('host') || '').toLowerCase();
   const proto = (req.get('x-forwarded-proto') || req.protocol || 'http').split(',')[0].trim().toLowerCase();
   let path = req.originalUrl || req.url || '/';
-  if (path === '/es/') {
-    return res.redirect(301, 'https://' + CANONICAL_HOST + '/es');
-  }
   if (host && (proto !== 'https' || host === 'www.hummatch.me')) {
     return res.redirect(301, 'https://' + CANONICAL_HOST + path);
   }
