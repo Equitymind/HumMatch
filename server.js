@@ -3275,12 +3275,11 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
   if (discountCode)   params.set('rideDiscountCode',  discountCode);
   if (sessionId)      params.set('rideSessionId',     sessionId);
   if (affiliateCode)  params.set('rideAffiliateCode', affiliateCode);
-  const learnMoreLink = 'https://hummatch.me/squadmatch' + (params.toString() ? '?' + params.toString() : '');
   const pricingLink = 'https://hummatch.me/pricing' + (params.toString() ? '?' + params.toString() : '');
 
   if (chan === 'sms') {
     // No SMS provider configured yet. Log and defer.
-    console.log('[ride-mode] SMS reminder deferred for', dest, 'link=', learnMoreLink);
+    console.log('[ride-mode] SMS reminder deferred for', dest, 'link=', pricingLink);
     return res.json({ ok: true, channel: 'sms', sent: false, deferred: true });
   }
 
@@ -3319,17 +3318,16 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
           + (expiresReadable ? '<div style="font-size:0.9rem;color:#5b5670;margin-top:4px;">Good for 7 days — through ' + expiresReadable + '.</div>' : '<div style="font-size:0.9rem;color:#5b5670;margin-top:4px;">Good for 7 days.</div>')
           + '</div>')
       : '',
-    '<p style="margin:24px 0 14px;">',
-    '<a href="' + learnMoreLink + '" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;padding:12px 24px;border-radius:10px;font-weight:700;display:inline-block;">See what SquadMatch unlocks</a>',
+    '<p style="margin:24px 0 10px;">',
+    '<a href="' + pricingLink + '" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;padding:12px 24px;border-radius:10px;font-weight:700;display:inline-block;">See what SquadMatch unlocks</a>',
     '</p>',
-    '<p style="font-size:0.92rem;color:#555;line-height:1.5;margin:0 0 10px;">Want to use your Ride Mode offer now? <a href="' + pricingLink + '" style="color:#7c3aed;">Use your 10% code on HumMatch</a>.</p>',
-    '<p style="font-size:0.9rem;color:#666;line-height:1.5;margin:14px 0 0;">Or open this link: <a href="' + learnMoreLink + '" style="color:#7c3aed;word-break:break-all;">' + learnMoreLink + '</a></p>',
+    '<p style="font-size:0.92rem;color:#555;line-height:1.5;margin:0;">Your 10% Ride Mode offer will be applied on HumMatch.</p>',
     '</div>'
   ].join('');
 
   let sent = false;
   try {
-    console.log('[ride-mode] sending reminder email to', dest.slice(0,3) + '***', 'link=', learnMoreLink);
+    console.log('[ride-mode] sending reminder email to', dest.slice(0,3) + '***', 'link=', pricingLink);
     sent = !!(await sendEmail(dest, subject, html));
     console.log('[ride-mode] reminder email result: sent=', sent);
   } catch (e) {
