@@ -267,6 +267,21 @@
     "humMatchScore": 40
   },
   {
+    "title": "Shakira!",
+    "artist": "1nonly",
+    "lo": 48,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2020,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
     "title": "Alicia Keys",
     "artist": "1oneam",
     "lo": 44,
@@ -898,6 +913,693 @@
     "hi": 68,
     "brightness": 52,
     "year": 2018
+  },
+  {
+    "title": "200 Copas (8-Bit Karol G Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Actin’ Up (8-Bit Miranda Lambert Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Amazing Grace (8-Bit Carrie Underwood Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Bible Verses (8-Bit Blake Shelton Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Bichota (8-Bit Karol G Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Bluebird (8-Bit Miranda Lambert Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2019,
+    "tags": [
+      "pop",
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Body Language (8-Bit Blake Shelton & The Swon Brothers Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Brown Eyes Baby (8-Bit Keith Urban Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Buenos Aires (8-Bit Luis Fonsi Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Come Back as a Country Boy (8-Bit Blake Shelton Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Country On (8-Bit Luke Bryan Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2022,
+    "tags": [
+      "country",
+      "pop",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Crazy Angels (8-Bit Carrie Underwood Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Dark Bars (8-Bit Miranda Lambert Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2020,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Denim & Rhinestones (8-Bit Carrie Underwood Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Down to One (8-Bit Luke Bryan Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2020,
+    "tags": [
+      "pop",
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Drink a Little Whiskey Down (8-Bit Luke Bryan Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "El Barco (8-Bit Karol G Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 46,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Floatin’ This Creek (8-Bit Luke Bryan Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Give Her That (8-Bit Carrie Underwood Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "God’s Country (8-Bit Blake Shelton Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2019,
+    "tags": [
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Nightfalls (8-Bit Keith Urban Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Ocean (8-Bit Karol G Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "OKI DOKI (8-Bit Karol G Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "One Too (8-Bit Keith Urban & Pink Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2020,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Polaroid (8-Bit Keith Urban Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2020,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Provenza (8-Bit Karol G Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Que Locura (8-Bit J Balvin Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Rojo (8-Bit J Balvin Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 46,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2020,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "S91 (8-Bit Karol G Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "She Get Me High (8-Bit Luke Bryan Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Southern and Slow (8-Bit Luke Bryan Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Strange (8-Bit Miranda Lambert Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "8-bit",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Stretchy Pants (8-Bit Carrie Underwood Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "8-bit",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Suerte (8-Bit J Balvin Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Superman (8-Bit Keith Urban Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2020,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Take Me Out (8-Bit Carrie Underwood Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Tequila Does (8-Bit Miranda Lambert Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "The Girl Can’t Help It (8-Bit Blake Shelton Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Toretto (8-Bit J Balvin Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Up (8-Bit Luke Bryan Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "8-bit",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "Waves (8-Bit Luke Bryan Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "8-bit",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "We Can Reach the Stars (8-Bit Blake Shelton Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "country",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
+    "title": "We Were (8-Bit Keith Urban Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2019,
+    "tags": [
+      "pop",
+      "rock",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "What She Wants Tonight (8-Bit Luke Bryan Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2019,
+    "tags": [
+      "pop",
+      "country",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Wild Hearts (8-Bit Keith Urban Emulation)",
+    "artist": "8-Bit Arcade",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Respect Aretha Franklin Atlantic",
@@ -1881,6 +2583,21 @@
     ],
     "popularity": 0,
     "humMatchScore": 51
+  },
+  {
+    "title": "Whitney Houston",
+    "artist": "Adam Joseph",
+    "lo": 48,
+    "hi": 72,
+    "brightness": 65,
+    "year": 2024,
+    "tags": [
+      "pop",
+      "rnb",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Chasing Pavements",
@@ -3796,6 +4513,21 @@
     ],
     "popularity": 0,
     "humMatchScore": 43
+  },
+  {
+    "title": "Shakira",
+    "artist": "Afganistan Yeye's",
+    "lo": 42,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2007,
+    "tags": [
+      "pop",
+      "latin",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
   },
   {
     "title": "Der Kommissar",
@@ -6321,6 +7053,20 @@
     ],
     "popularity": 38,
     "humMatchScore": 38
+  },
+  {
+    "title": "Green Day",
+    "artist": "Amp",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2005,
+    "tags": [
+      "rock",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
   },
   {
     "title": "Dua Lipa",
@@ -9932,6 +10678,36 @@
     "humMatchScore": 40
   },
   {
+    "title": "Shakira",
+    "artist": "Asian Cafe",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2007,
+    "tags": [
+      "pop",
+      "latin",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
+  },
+  {
+    "title": "Whitney Houston",
+    "artist": "At Large Auteur",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "rnb",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
     "title": "Dua Lipa",
     "artist": "Atka",
     "lo": 42,
@@ -10156,6 +10932,20 @@
     "hi": 78,
     "brightness": 55,
     "year": 2016
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "Austin Kyle",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2008,
+    "tags": [
+      "pop",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
   },
   {
     "title": "Eagles",
@@ -13665,6 +14455,21 @@
     "humMatchScore": 38
   },
   {
+    "title": "Taylor Swift",
+    "artist": "Beans on Toast",
+    "lo": 44,
+    "hi": 60,
+    "brightness": 55,
+    "year": 2017,
+    "tags": [
+      "folk",
+      "indie",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Something There",
     "artist": "Beauty and the Beast Cast",
     "lo": 44,
@@ -14353,6 +15158,21 @@
     ],
     "popularity": 38,
     "humMatchScore": 38
+  },
+  {
+    "title": "Fleetwood Mac",
+    "artist": "Ben Rogers’ Instrumental Asylum",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 50,
+    "year": 2006,
+    "tags": [
+      "instrumental",
+      "rock",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
   },
   {
     "title": "I Found You",
@@ -22672,6 +23492,20 @@
     "year": 1990
   },
   {
+    "title": "Taylor Swift",
+    "artist": "Cal Scruby",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2019,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Yo Te Esperaré",
     "artist": "Cali & El Dandee",
     "lo": 54,
@@ -25013,6 +25847,21 @@
     ],
     "popularity": 0,
     "humMatchScore": 68
+  },
+  {
+    "title": "Whitney Houston",
+    "artist": "Casino",
+    "lo": 44,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2015,
+    "tags": [
+      "pop",
+      "rnb",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "The Weeknd",
@@ -33105,6 +33954,21 @@
     "humMatchScore": 16
   },
   {
+    "title": "Taylor Swift",
+    "artist": "Dave East",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2025,
+    "tags": [
+      "rap",
+      "rnb",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
     "title": "Ants Marching",
     "artist": "Dave Matthews Band",
     "lo": 43,
@@ -33427,6 +34291,20 @@
     ],
     "popularity": 20,
     "humMatchScore": 20
+  },
+  {
+    "title": "Whitney Houston",
+    "artist": "David Liebe Hart",
+    "lo": 48,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2012,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "Eagles",
@@ -36267,6 +37145,21 @@
     "humMatchScore": 38
   },
   {
+    "title": "Mariah Carey (skit)",
+    "artist": "DJ Clue",
+    "lo": 48,
+    "hi": 64,
+    "brightness": 55,
+    "year": 1998,
+    "tags": [
+      "pop",
+      "rnb",
+      "90s"
+    ],
+    "popularity": 30,
+    "humMatchScore": 30
+  },
+  {
     "title": "Alicia Keys Intro",
     "artist": "DJ Clue?",
     "lo": 48,
@@ -36279,6 +37172,20 @@
     ],
     "popularity": 34,
     "humMatchScore": 34
+  },
+  {
+    "title": "Mariah Carey (skit)",
+    "artist": "DJ Clue?",
+    "lo": 43,
+    "hi": 61,
+    "brightness": 55,
+    "year": 1998,
+    "tags": [
+      "rnb",
+      "90s"
+    ],
+    "popularity": 30,
+    "humMatchScore": 30
   },
   {
     "title": "Summertime",
@@ -36372,6 +37279,21 @@
     "humMatchScore": 40
   },
   {
+    "title": "Shakira",
+    "artist": "DJ REAL",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2016,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Turn Down for What",
     "artist": "DJ Snake & Lil Jon",
     "lo": 43,
@@ -36458,6 +37380,21 @@
     "tags": [
       "latin",
       "hiphop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Shakira",
+    "artist": "DJ Suketu",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2010,
+    "tags": [
+      "pop",
+      "latin",
       "2010s"
     ],
     "popularity": 38,
@@ -37713,6 +38650,21 @@
     "humMatchScore": 14
   },
   {
+    "title": "Whitney Houston",
+    "artist": "Doobie",
+    "lo": 40,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2017,
+    "tags": [
+      "pop",
+      "rnb",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "As Time Goes By",
     "artist": "Dooley Wilson",
     "lo": 40,
@@ -38244,6 +39196,21 @@
     "year": 1981
   },
   {
+    "title": "Shakira",
+    "artist": "Driver",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2014,
+    "tags": [
+      "pop",
+      "rock",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Be the One",
     "artist": "Dua Lipa",
     "lo": 57,
@@ -38549,6 +39516,20 @@
     ],
     "popularity": 38,
     "humMatchScore": 38
+  },
+  {
+    "title": "Whitney Houston",
+    "artist": "Dugan",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2022,
+    "tags": [
+      "pop",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Across the Track Blues",
@@ -41064,6 +42045,20 @@
     "humMatchScore": 40
   },
   {
+    "title": "Taylor Swift",
+    "artist": "Elfran",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
     "title": "Leaning on the Everlasting Arms",
     "artist": "Elisha Hoffman",
     "lo": 43,
@@ -43214,6 +44209,20 @@
     "year": 2021
   },
   {
+    "title": "Taylor Swift",
+    "artist": "Enjoy Music Club",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2015,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Amor",
     "artist": "Enrique Iglesias",
     "lo": 45,
@@ -45128,6 +46137,20 @@
     ],
     "popularity": 34,
     "humMatchScore": 34
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "Felix Krull",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2016,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "Big Girls Don\"t Cry",
@@ -51351,6 +52374,21 @@
     "humMatchScore": 40
   },
   {
+    "title": "Green Day",
+    "artist": "GLORY JACKPOT SYSTEM",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2008,
+    "tags": [
+      "pop",
+      "rock",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
+  },
+  {
     "title": "Order My Steps",
     "artist": "GMWA Women of Worship",
     "lo": 48,
@@ -51390,6 +52428,21 @@
     "tags": [
       "pop",
       "country",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
+  },
+  {
+    "title": "Shakira",
+    "artist": "Gnarls Oakley",
+    "lo": 42,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2007,
+    "tags": [
+      "pop",
+      "latin",
       "2000s"
     ],
     "popularity": 34,
@@ -52654,6 +53707,21 @@
     ],
     "popularity": 0,
     "humMatchScore": 59
+  },
+  {
+    "title": "Fleetwood Mac",
+    "artist": "Gregor Hilden",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2014,
+    "tags": [
+      "pop",
+      "rock",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "Knife",
@@ -54591,6 +55659,20 @@
     "humMatchScore": 38
   },
   {
+    "title": "Whitney Houston",
+    "artist": "Hamish and Andy",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2010,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Cold Cold Heart",
     "artist": "Hank Williams",
     "lo": 40,
@@ -55303,6 +56385,21 @@
     "humMatchScore": 30
   },
   {
+    "title": "green day",
+    "artist": "Hase",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
     "title": "Ohio Is for Lovers",
     "artist": "Hawthorne Heights",
     "lo": 50,
@@ -55333,6 +56430,20 @@
     ],
     "popularity": 34,
     "humMatchScore": 34
+  },
+  {
+    "title": "To Those Who Journey Persistently Everyday (Karaoke version)",
+    "artist": "Haykuyashiki Rei",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": null,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "All I Wanna Do Is Make Love to You",
@@ -56974,6 +58085,20 @@
     "humMatchScore": 28
   },
   {
+    "title": "B Team (Ed Sheeran Parody)",
+    "artist": "Hype Duo",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2017,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Aguanile",
     "artist": "Héctor Lavoe",
     "lo": 54,
@@ -57226,6 +58351,21 @@
     ],
     "popularity": 30,
     "humMatchScore": 30
+  },
+  {
+    "title": "Shakira",
+    "artist": "I.C.Y",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2024,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Check Yo Self",
@@ -59081,6 +60221,20 @@
     "humMatchScore": 40
   },
   {
+    "title": "Life is a Journey (Karaoke Version)",
+    "artist": "J-Mi & Midi-D",
+    "lo": 40,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2010,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Apparently",
     "artist": "J. Cole",
     "lo": 42,
@@ -60578,6 +61732,20 @@
     "hi": 74,
     "brightness": 58,
     "year": 2008
+  },
+  {
+    "title": "Whitney Houston",
+    "artist": "Jasper Sawyer",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2016,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "Sombras",
@@ -65119,6 +66287,21 @@
     "humMatchScore": 40
   },
   {
+    "title": "Whitney Houston",
+    "artist": "Jonathan Tadeu",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2015,
+    "tags": [
+      "pop",
+      "rnb",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "A Case of You",
     "artist": "Joni Mitchell",
     "lo": 42,
@@ -65534,6 +66717,20 @@
     ],
     "popularity": 14,
     "humMatchScore": 14
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "Josh Cheek",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": null,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "You Raise Me Up",
@@ -72756,6 +73953,20 @@
     "year": 2003
   },
   {
+    "title": "Whitney Houston",
+    "artist": "Kye Alfred Hillig",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2016,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Firestone",
     "artist": "Kygo",
     "lo": 44,
@@ -72840,6 +74051,21 @@
     ],
     "popularity": 0,
     "humMatchScore": 40
+  },
+  {
+    "title": "Shakira",
+    "artist": "L'autentika",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": null,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "El Lirio y el Muro",
@@ -75374,6 +76600,21 @@
     "hi": 70,
     "brightness": 50,
     "year": 2005
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "Lil B",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "rap",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Get Low",
@@ -78692,6 +79933,21 @@
     "humMatchScore": 38
   },
   {
+    "title": "GREEN DAY",
+    "artist": "Lucy Bedroque",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
     "title": "Stand Up",
     "artist": "Ludacris",
     "lo": 40,
@@ -80090,6 +81346,21 @@
     "tags": [
       "latin",
       "hiphop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Green Day",
+    "artist": "Lutz Krajenski",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2018,
+    "tags": [
+      "pop",
+      "rock",
       "2010s"
     ],
     "popularity": 38,
@@ -81911,6 +83182,21 @@
     "hi": 72,
     "brightness": 48,
     "year": 1968
+  },
+  {
+    "title": "Fleetwood Mac",
+    "artist": "Man Like Me",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2013,
+    "tags": [
+      "pop",
+      "rock",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "The Impossible Dream",
@@ -85416,6 +86702,21 @@
     "year": 1991
   },
   {
+    "title": "Shakira",
+    "artist": "Master Salim",
+    "lo": 42,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2010,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Legends - Def Leppard",
     "artist": "Mastermix",
     "lo": 40,
@@ -85565,6 +86866,21 @@
     ],
     "popularity": 14,
     "humMatchScore": 14
+  },
+  {
+    "title": "Whitney Houston",
+    "artist": "Maxo Kream",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2013,
+    "tags": [
+      "rap",
+      "rnb",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "...Til the Cops Come Knockin'",
@@ -88574,6 +89890,21 @@
     "humMatchScore": 24
   },
   {
+    "title": "Fleetwood Mac",
+    "artist": "Michael Mills",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": null,
+    "tags": [
+      "pop",
+      "rock",
+      "80s"
+    ],
+    "popularity": 28,
+    "humMatchScore": 28
+  },
+  {
     "title": "Maniac",
     "artist": "Michael Sembello",
     "lo": 44,
@@ -88700,6 +90031,21 @@
     ],
     "popularity": 0,
     "humMatchScore": 40
+  },
+  {
+    "title": "Shakira",
+    "artist": "Middle Sky Boom",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2019,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "Burn Out",
@@ -90299,6 +91645,49 @@
     "humMatchScore": 30
   },
   {
+    "title": "Taylor Swift",
+    "artist": "Moon Man",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2016,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "Moon Moon Moon",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2017,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Fleetwood Mac",
+    "artist": "Morgan Jay",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
     "title": "7 Summers",
     "artist": "Morgan Wallen",
     "lo": 45,
@@ -90512,6 +91901,21 @@
     ],
     "popularity": 24,
     "humMatchScore": 24
+  },
+  {
+    "title": "Green Day",
+    "artist": "Mo’ Horizons",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2008,
+    "tags": [
+      "pop",
+      "rock",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
   },
   {
     "title": "Green-Tinted Sixties Mind",
@@ -92723,6 +94127,20 @@
     ],
     "popularity": 34,
     "humMatchScore": 34
+  },
+  {
+    "title": "Eagles",
+    "artist": "Nate Bargatze",
+    "lo": 44,
+    "hi": 60,
+    "brightness": 50,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Criminal",
@@ -95114,6 +96532,21 @@
     "year": 2019
   },
   {
+    "title": "Shakira",
+    "artist": "Nobigdyl",
+    "lo": 48,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2017,
+    "tags": [
+      "pop",
+      "rnb",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Come Away with Me",
     "artist": "Norah Jones",
     "lo": 48,
@@ -95359,6 +96792,20 @@
     ],
     "popularity": 30,
     "humMatchScore": 30
+  },
+  {
+    "title": "Fleetwood Mac",
+    "artist": "Octopus",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2018,
+    "tags": [
+      "rock",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "A Moment Apart",
@@ -98219,6 +99666,21 @@
     ],
     "popularity": 38,
     "humMatchScore": 38
+  },
+  {
+    "title": "Karaoke",
+    "artist": "Pablo Francisco",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2003,
+    "tags": [
+      "comedy",
+      "pop",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
   },
   {
     "title": "Karaoke Queen",
@@ -103516,6 +104978,21 @@
     "humMatchScore": 38
   },
   {
+    "title": "Shakira",
+    "artist": "Quinton",
+    "lo": 42,
+    "hi": 67,
+    "brightness": 55,
+    "year": 1989,
+    "tags": [
+      "pop",
+      "latin",
+      "80s"
+    ],
+    "popularity": 28,
+    "humMatchScore": 28
+  },
+  {
     "title": "Bump N' Grind",
     "artist": "R. Kelly",
     "lo": 40,
@@ -104847,6 +106324,21 @@
     ],
     "popularity": 0,
     "humMatchScore": 40
+  },
+  {
+    "title": "Green Day",
+    "artist": "Rawska",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 65,
+    "year": 2018,
+    "tags": [
+      "pop",
+      "rock",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "Busted",
@@ -106442,6 +107934,20 @@
     "brightness": 73,
     "year": 1981,
     "language": "en"
+  },
+  {
+    "title": "Whitney Houston",
+    "artist": "Rick Shapiro",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2002,
+    "tags": [
+      "pop",
+      "90s"
+    ],
+    "popularity": 30,
+    "humMatchScore": 30
   },
   {
     "title": "Don't Talk to Strangers",
@@ -113167,6 +114673,21 @@
     "humMatchScore": 34
   },
   {
+    "title": "Shakira",
+    "artist": "Shalmali Kholgade",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2015,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Any Man of Mine",
     "artist": "Shania Twain",
     "lo": 57,
@@ -114941,6 +116462,20 @@
     "humMatchScore": 14
   },
   {
+    "title": "Karaoke (Karaoke Version)",
+    "artist": "Smallpools",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2015,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "All Star",
     "artist": "Smash Mouth",
     "lo": 42,
@@ -115427,6 +116962,21 @@
     ],
     "popularity": 38,
     "humMatchScore": 38
+  },
+  {
+    "title": "Whitney Houston",
+    "artist": "SND & RTN",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "rnb",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Gin and Juice",
@@ -116416,6 +117966,21 @@
     "humMatchScore": 34
   },
   {
+    "title": "Taylor Swift",
+    "artist": "Speedy Ortiz",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2012,
+    "tags": [
+      "rock",
+      "indie",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Wannabe",
     "artist": "Spice Girls",
     "lo": 50,
@@ -116549,6 +118114,21 @@
     ],
     "popularity": 34,
     "humMatchScore": 34
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "Stacked Like Pancakes",
+    "lo": 43,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2024,
+    "tags": [
+      "pop",
+      "rock",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Fade",
@@ -117704,6 +119284,34 @@
     "humMatchScore": 38
   },
   {
+    "title": "Fleetwood Mac",
+    "artist": "Stu Hamm",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 1995,
+    "tags": [
+      "rock",
+      "90s"
+    ],
+    "popularity": 30,
+    "humMatchScore": 30
+  },
+  {
+    "title": "Fleetwood Mac",
+    "artist": "Stuart Hamm",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 1995,
+    "tags": [
+      "rock",
+      "90s"
+    ],
+    "popularity": 30,
+    "humMatchScore": 30
+  },
+  {
     "title": "How Deep the Father's Love for Us",
     "artist": "Stuart Townend",
     "lo": 50,
@@ -118820,6 +120428,22 @@
     "humMatchScore": 34
   },
   {
+    "title": "Voodoo Queen (karaoke version)",
+    "artist": "Systems in Blue",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2011,
+    "tags": [
+      "pop",
+      "80s",
+      "90s",
+      "2010s"
+    ],
+    "popularity": 28,
+    "humMatchScore": 28
+  },
+  {
     "title": "Blind",
     "artist": "SZA",
     "lo": 50,
@@ -119391,6 +121015,21 @@
     ],
     "popularity": 28,
     "humMatchScore": 28
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "Talk, Tired Thanatoid",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2015,
+    "tags": [
+      "pop",
+      "rock",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "And She Was",
@@ -123073,6 +124712,21 @@
     "humMatchScore": 30
   },
   {
+    "title": "Whitney Houston",
+    "artist": "The Big Homie",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 65,
+    "year": 2021,
+    "tags": [
+      "pop",
+      "rnb",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
     "title": "Boom Boom Pow",
     "artist": "The Black Eyed Peas",
     "lo": 45,
@@ -124981,6 +126635,21 @@
     ],
     "popularity": 24,
     "humMatchScore": 24
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "The Ill-Fitting Garibaldis",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2010,
+    "tags": [
+      "pop",
+      "rock",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   },
   {
     "title": "Amen",
@@ -133777,6 +135446,21 @@
     "humMatchScore": 34
   },
   {
+    "title": "Taylor Swift",
+    "artist": "Trinidad James",
+    "lo": 48,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2017,
+    "tags": [
+      "pop",
+      "rnb",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Bésame Mucho",
     "artist": "Trio Los Panchos",
     "lo": 48,
@@ -134163,6 +135847,21 @@
     "humMatchScore": 38
   },
   {
+    "title": "Green Day",
+    "artist": "Ty Fyffe",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2010,
+    "tags": [
+      "pop",
+      "rock",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "I'll Be Alright",
     "artist": "Tye Tribbett",
     "lo": 46,
@@ -134238,6 +135937,20 @@
     ],
     "popularity": 38,
     "humMatchScore": 38
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "Tyler Dean",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": 2009,
+    "tags": [
+      "pop",
+      "2000s"
+    ],
+    "popularity": 34,
+    "humMatchScore": 34
   },
   {
     "title": "A Boy Is a Gun*",
@@ -134951,6 +136664,21 @@
     "humMatchScore": 40
   },
   {
+    "title": "Shakira",
+    "artist": "Valovuosi",
+    "lo": 48,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2016,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "A-Punk",
     "artist": "Vampire Weekend",
     "lo": 44,
@@ -135513,6 +137241,20 @@
     "tags": [
       "folk",
       "indie",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
+    "title": "Shakira",
+    "artist": "Vanderbuyst",
+    "lo": 45,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2014,
+    "tags": [
+      "rock",
       "2010s"
     ],
     "popularity": 38,
@@ -136141,6 +137883,20 @@
     ],
     "popularity": 38,
     "humMatchScore": 38
+  },
+  {
+    "title": "Taylor Swift",
+    "artist": "Walker Hayes",
+    "lo": 44,
+    "hi": 67,
+    "brightness": 55,
+    "year": 2023,
+    "tags": [
+      "pop",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Foo Fighters 'Everlong'",
@@ -138967,6 +140723,21 @@
     "humMatchScore": 38
   },
   {
+    "title": "Shakira",
+    "artist": "Xamã",
+    "lo": 46,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2017,
+    "tags": [
+      "pop",
+      "latin",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "Coldplay",
     "artist": "Xerxes",
     "lo": 44,
@@ -139335,6 +141106,21 @@
     "humMatchScore": 38
   },
   {
+    "title": "Shakira",
+    "artist": "YK Osiris",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2019,
+    "tags": [
+      "rnb",
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
+  },
+  {
     "title": "La Bebe",
     "artist": "Yng Lvcas",
     "lo": 44,
@@ -139485,6 +141271,20 @@
     "humMatchScore": 38
   },
   {
+    "title": "Taylor Swift",
+    "artist": "Young Nova",
+    "lo": 44,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2025,
+    "tags": [
+      "pop",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
+  },
+  {
     "title": "Karaoke Queen",
     "artist": "Younger Younger 28’s",
     "lo": 43,
@@ -139512,6 +141312,21 @@
     ],
     "popularity": 38,
     "humMatchScore": 38
+  },
+  {
+    "title": "Shakira",
+    "artist": "Yung Poor Alo",
+    "lo": 42,
+    "hi": 68,
+    "brightness": 55,
+    "year": 2024,
+    "tags": [
+      "pop",
+      "latin",
+      "2020s"
+    ],
+    "popularity": 0,
+    "humMatchScore": 40
   },
   {
     "title": "Coldplay",
@@ -140059,5 +141874,19 @@
       "latin",
       "party"
     ]
+  },
+  {
+    "title": "A Long-awaited Spacetime Journey! - Carbuncle Version (Karaoke)",
+    "artist": "安倍栄基",
+    "lo": 40,
+    "hi": 64,
+    "brightness": 55,
+    "year": null,
+    "tags": [
+      "pop",
+      "2010s"
+    ],
+    "popularity": 38,
+    "humMatchScore": 38
   }
 ]

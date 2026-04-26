@@ -1,0 +1,1388 @@
+{
+  "deletedCount": 124,
+  "keptCount": 10215,
+  "deletedExamples": [
+    {
+      "title": "Shakira!",
+      "artist": "1nonly",
+      "lo": 48,
+      "hi": 68,
+      "brightness": 55,
+      "year": 2020,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "200 Copas (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 72,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Actin’ Up (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Amazing Grace (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Bible Verses (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Bichota (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 72,
+      "brightness": 65,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Bluebird (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2019,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Body Language (8-Bit Blake Shelton & The Swon Brothers Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Brown Eyes Baby (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Buenos Aires (8-Bit Luis Fonsi Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Come Back as a Country Boy (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Country On (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2022,
+      "tags": [
+        "country",
+        "pop",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Crazy Angels (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 65,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Dark Bars (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2020,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Denim & Rhinestones (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Down to One (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2020,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Drink a Little Whiskey Down (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "El Barco (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 46,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Floatin’ This Creek (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Give Her That (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 43,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "God’s Country (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2019,
+      "tags": [
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Nightfalls (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Ocean (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "OKI DOKI (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "One Too (8-Bit Keith Urban & Pink Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2020,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Polaroid (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2020,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Provenza (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Que Locura (8-Bit J Balvin Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Rojo (8-Bit J Balvin Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 46,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2020,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "S91 (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "She Get Me High (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Southern and Slow (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Strange (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "8-bit",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Stretchy Pants (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "8-bit",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Suerte (8-Bit J Balvin Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Superman (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2020,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Take Me Out (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Tequila Does (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "The Girl Can’t Help It (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Toretto (8-Bit J Balvin Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 46,
+      "hi": 68,
+      "brightness": 55,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Up (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "8-bit",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Waves (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "8-bit",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "We Can Reach the Stars (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "We Were (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2019,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "What She Wants Tonight (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2019,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Wild Hearts (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2021,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "emulation/novelty variant"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Adam Joseph",
+      "lo": 48,
+      "hi": 72,
+      "brightness": 65,
+      "year": 2024,
+      "tags": [
+        "pop",
+        "rnb",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Afganistan Yeye's",
+      "lo": 42,
+      "hi": 68,
+      "brightness": 55,
+      "year": 2007,
+      "tags": [
+        "pop",
+        "latin",
+        "2000s"
+      ],
+      "popularity": 34,
+      "humMatchScore": 34,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Green Day",
+      "artist": "Amp",
+      "lo": 43,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2005,
+      "tags": [
+        "rock",
+        "2000s"
+      ],
+      "popularity": 34,
+      "humMatchScore": 34,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Asian Cafe",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2007,
+      "tags": [
+        "pop",
+        "latin",
+        "2000s"
+      ],
+      "popularity": 34,
+      "humMatchScore": 34,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "At Large Auteur",
+      "lo": 43,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "rnb",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Austin Kyle",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2008,
+      "tags": [
+        "pop",
+        "2000s"
+      ],
+      "popularity": 34,
+      "humMatchScore": 34,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Beans on Toast",
+      "lo": 44,
+      "hi": 60,
+      "brightness": 55,
+      "year": 2017,
+      "tags": [
+        "folk",
+        "indie",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Ben Rogers’ Instrumental Asylum",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 50,
+      "year": 2006,
+      "tags": [
+        "instrumental",
+        "rock",
+        "2000s"
+      ],
+      "popularity": 34,
+      "humMatchScore": 34,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Cal Scruby",
+      "lo": 44,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2019,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Casino",
+      "lo": 44,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2015,
+      "tags": [
+        "pop",
+        "rnb",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Dave East",
+      "lo": 44,
+      "hi": 68,
+      "brightness": 55,
+      "year": 2025,
+      "tags": [
+        "rap",
+        "rnb",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "David Liebe Hart",
+      "lo": 48,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2012,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Mariah Carey (skit)",
+      "artist": "DJ Clue",
+      "lo": 48,
+      "hi": 64,
+      "brightness": 55,
+      "year": 1998,
+      "tags": [
+        "pop",
+        "rnb",
+        "90s"
+      ],
+      "popularity": 30,
+      "humMatchScore": 30,
+      "_deleteReason": "skit record"
+    },
+    {
+      "title": "Mariah Carey (skit)",
+      "artist": "DJ Clue?",
+      "lo": 43,
+      "hi": 61,
+      "brightness": 55,
+      "year": 1998,
+      "tags": [
+        "rnb",
+        "90s"
+      ],
+      "popularity": 30,
+      "humMatchScore": 30,
+      "_deleteReason": "skit record"
+    },
+    {
+      "title": "Shakira",
+      "artist": "DJ REAL",
+      "lo": 42,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2016,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "DJ Suketu",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2010,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Doobie",
+      "lo": 40,
+      "hi": 67,
+      "brightness": 65,
+      "year": 2017,
+      "tags": [
+        "pop",
+        "rnb",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Driver",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2014,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Dugan",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2022,
+      "tags": [
+        "pop",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Elfran",
+      "lo": 44,
+      "hi": 68,
+      "brightness": 55,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Enjoy Music Club",
+      "lo": 43,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2015,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Felix Krull",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2016,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Green Day",
+      "artist": "GLORY JACKPOT SYSTEM",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2008,
+      "tags": [
+        "pop",
+        "rock",
+        "2000s"
+      ],
+      "popularity": 34,
+      "humMatchScore": 34,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Gnarls Oakley",
+      "lo": 42,
+      "hi": 68,
+      "brightness": 55,
+      "year": 2007,
+      "tags": [
+        "pop",
+        "latin",
+        "2000s"
+      ],
+      "popularity": 34,
+      "humMatchScore": 34,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Gregor Hilden",
+      "lo": 43,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2014,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Hamish and Andy",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2010,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "green day",
+      "artist": "Hase",
+      "lo": 40,
+      "hi": 64,
+      "brightness": 55,
+      "year": 2023,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "To Those Who Journey Persistently Everyday (Karaoke version)",
+      "artist": "Haykuyashiki Rei",
+      "lo": 43,
+      "hi": 67,
+      "brightness": 55,
+      "year": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "karaoke-version record"
+    },
+    {
+      "title": "B Team (Ed Sheeran Parody)",
+      "artist": "Hype Duo",
+      "lo": 44,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2017,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "parody record"
+    },
+    {
+      "title": "Shakira",
+      "artist": "I.C.Y",
+      "lo": 42,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2024,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "popularity": 0,
+      "humMatchScore": 40,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Life is a Journey (Karaoke Version)",
+      "artist": "J-Mi & Midi-D",
+      "lo": 40,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2010,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "karaoke-version record"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Jasper Sawyer",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2016,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Jonathan Tadeu",
+      "lo": 48,
+      "hi": 67,
+      "brightness": 55,
+      "year": 2015,
+      "tags": [
+        "pop",
+        "rnb",
+        "2010s"
+      ],
+      "popularity": 38,
+      "humMatchScore": 38,
+      "_deleteReason": "artist-name-as-title suspicious metadata"
+    }
+  ],
+  "removedPages": [
+    "song/shakira-1nonly.html",
+    "song/200-copas-8-bit-karol-g-emulation-8-bit-arcade.html",
+    "song/actin-up-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+    "song/amazing-grace-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+    "song/bible-verses-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+    "song/bichota-8-bit-karol-g-emulation-8-bit-arcade.html",
+    "song/bluebird-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+    "song/brown-eyes-baby-8-bit-keith-urban-emulation-8-bit-arcade.html",
+    "song/buenos-aires-8-bit-luis-fonsi-emulation-8-bit-arcade.html",
+    "song/come-back-as-a-country-boy-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+    "song/country-on-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+    "song/crazy-angels-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+    "song/dark-bars-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+    "song/down-to-one-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+    "song/drink-a-little-whiskey-down-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+    "song/el-barco-8-bit-karol-g-emulation-8-bit-arcade.html",
+    "song/floatin-this-creek-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+    "song/give-her-that-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+    "song/god-s-country-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+    "song/nightfalls-8-bit-keith-urban-emulation-8-bit-arcade.html",
+    "song/ocean-8-bit-karol-g-emulation-8-bit-arcade.html",
+    "song/oki-doki-8-bit-karol-g-emulation-8-bit-arcade.html",
+    "song/polaroid-8-bit-keith-urban-emulation-8-bit-arcade.html",
+    "song/provenza-8-bit-karol-g-emulation-8-bit-arcade.html",
+    "song/que-locura-8-bit-j-balvin-emulation-8-bit-arcade.html",
+    "song/rojo-8-bit-j-balvin-emulation-8-bit-arcade.html",
+    "song/s91-8-bit-karol-g-emulation-8-bit-arcade.html",
+    "song/she-get-me-high-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+    "song/southern-and-slow-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+    "song/strange-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+    "song/stretchy-pants-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+    "song/suerte-8-bit-j-balvin-emulation-8-bit-arcade.html",
+    "song/superman-8-bit-keith-urban-emulation-8-bit-arcade.html",
+    "song/take-me-out-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+    "song/taylor-swift-8-bit-arcade.html",
+    "song/tequila-does-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+    "song/the-girl-can-t-help-it-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+    "song/toretto-8-bit-j-balvin-emulation-8-bit-arcade.html",
+    "song/up-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+    "song/waves-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+    "song/we-can-reach-the-stars-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+    "song/we-were-8-bit-keith-urban-emulation-8-bit-arcade.html",
+    "song/what-she-wants-tonight-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+    "song/wild-hearts-8-bit-keith-urban-emulation-8-bit-arcade.html",
+    "song/whitney-houston-adam-joseph.html",
+    "song/green-day-amp.html",
+    "song/shakira-asian-cafe.html",
+    "song/whitney-houston-at-large-auteur.html",
+    "song/taylor-swift-austin-kyle.html",
+    "song/taylor-swift-beans-on-toast.html",
+    "song/fleetwood-mac-ben-rogers-instrumental-asylum.html",
+    "song/taylor-swift-cal-scruby.html",
+    "song/whitney-houston-casino.html",
+    "song/taylor-swift-dave-east.html",
+    "song/whitney-houston-david-liebe-hart.html",
+    "song/mariah-carey-skit-dj-clue.html",
+    "song/shakira-dj-real.html",
+    "song/shakira-dj-suketu.html",
+    "song/whitney-houston-doobie.html",
+    "song/shakira-driver.html",
+    "song/whitney-houston-dugan.html",
+    "song/taylor-swift-elfran.html",
+    "song/taylor-swift-enjoy-music-club.html",
+    "song/taylor-swift-felix-krull.html",
+    "song/green-day-glory-jackpot-system.html",
+    "song/shakira-gnarls-oakley.html",
+    "song/fleetwood-mac-gregor-hilden.html",
+    "song/whitney-houston-hamish-and-andy.html",
+    "song/green-day-hase.html",
+    "song/to-those-who-journey-persistently-everyday-karaoke-version-haykuyashiki-rei.html",
+    "song/b-team-ed-sheeran-parody-hype-duo.html",
+    "song/shakira-i-c-y.html",
+    "song/whitney-houston-jasper-sawyer.html",
+    "song/whitney-houston-jonathan-tadeu.html",
+    "song/taylor-swift-josh-cheek.html",
+    "song/whitney-houston-kye-alfred-hillig.html",
+    "song/taylor-swift-lil-b.html",
+    "song/green-day-lucy-bedroque.html",
+    "song/green-day-lutz-krajenski.html",
+    "song/fleetwood-mac-man-like-me.html",
+    "song/shakira-master-salim.html",
+    "song/whitney-houston-maxo-kream.html",
+    "song/fleetwood-mac-michael-mills.html",
+    "song/shakira-middle-sky-boom.html",
+    "song/taylor-swift-moon-man.html",
+    "song/taylor-swift-moon-moon-moon.html",
+    "song/fleetwood-mac-morgan-jay.html",
+    "song/green-day-mo-horizons.html",
+    "song/eagles-nate-bargatze.html",
+    "song/shakira-nobigdyl.html",
+    "song/fleetwood-mac-octopus.html",
+    "song/karaoke-pablo-francisco.html",
+    "song/shakira-quinton.html",
+    "song/green-day-rawska.html",
+    "song/whitney-houston-rick-shapiro.html",
+    "song/shakira-shalmali-kholgade.html",
+    "song/karaoke-karaoke-version-smallpools.html",
+    "song/taylor-swift-speedy-ortiz.html",
+    "song/taylor-swift-stacked-like-pancakes.html",
+    "song/fleetwood-mac-stu-hamm.html",
+    "song/fleetwood-mac-stuart-hamm.html",
+    "song/voodoo-queen-karaoke-version-systems-in-blue.html",
+    "song/taylor-swift-talk-tired-thanatoid.html",
+    "song/whitney-houston-the-big-homie.html",
+    "song/taylor-swift-the-ill-fitting-garibaldis.html",
+    "song/taylor-swift-trinidad-james.html",
+    "song/green-day-ty-fyffe.html",
+    "song/taylor-swift-tyler-dean.html",
+    "song/shakira-valovuosi.html",
+    "song/shakira-vanderbuyst.html",
+    "song/taylor-swift-walker-hayes.html",
+    "song/shakira-xam.html",
+    "song/shakira-yk-osiris.html",
+    "song/taylor-swift-young-nova.html",
+    "song/shakira-yung-poor-alo.html",
+    "song/a-long-awaited-spacetime-journey-carbuncle-version-karaoke-.html"
+  ],
+  "backup": "songs.backup.stage17b-predelete.json"
+}

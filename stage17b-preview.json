@@ -1,0 +1,1470 @@
+{
+  "totals": {
+    "deleteNow": 5,
+    "globallyIneligible": 51,
+    "socialRestrict": 68
+  },
+  "deleteNow": [
+    {
+      "title": "Mariah Carey (skit)",
+      "artist": "DJ Clue",
+      "year": 1998,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "90s"
+      ],
+      "reason": "skit record"
+    },
+    {
+      "title": "Mariah Carey (skit)",
+      "artist": "DJ Clue?",
+      "year": 1998,
+      "genre": null,
+      "tags": [
+        "rnb",
+        "90s"
+      ],
+      "reason": "skit record"
+    },
+    {
+      "title": "B Team (Ed Sheeran Parody)",
+      "artist": "Hype Duo",
+      "year": 2017,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "parody record"
+    },
+    {
+      "title": "Eagles",
+      "artist": "Nate Bargatze",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2020s"
+      ],
+      "reason": "confirmed non-song comedian record"
+    },
+    {
+      "title": "Karaoke",
+      "artist": "Pablo Francisco",
+      "year": 2003,
+      "genre": null,
+      "tags": [
+        "comedy",
+        "pop",
+        "2000s"
+      ],
+      "reason": "comedian record"
+    }
+  ],
+  "globallyIneligible": [
+    {
+      "title": "200 Copas (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Actin’ Up (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Amazing Grace (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Bible Verses (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Bichota (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Bluebird (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2019,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Body Language (8-Bit Blake Shelton & The Swon Brothers Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Brown Eyes Baby (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Buenos Aires (8-Bit Luis Fonsi Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Come Back as a Country Boy (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Country On (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "country",
+        "pop",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Crazy Angels (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Dark Bars (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2020,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Denim & Rhinestones (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Down to One (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2020,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Drink a Little Whiskey Down (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "El Barco (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Floatin’ This Creek (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Give Her That (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "God’s Country (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2019,
+      "genre": null,
+      "tags": [
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Nightfalls (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Ocean (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "OKI DOKI (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "One Too (8-Bit Keith Urban & Pink Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2020,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Polaroid (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2020,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Provenza (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Que Locura (8-Bit J Balvin Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Rojo (8-Bit J Balvin Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2020,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "S91 (8-Bit Karol G Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "She Get Me High (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Southern and Slow (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Strange (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "8-bit",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Stretchy Pants (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "8-bit",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Suerte (8-Bit J Balvin Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Superman (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2020,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Take Me Out (8-Bit Carrie Underwood Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "8-Bit Arcade",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Tequila Does (8-Bit Miranda Lambert Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "The Girl Can’t Help It (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Toretto (8-Bit J Balvin Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Up (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "8-bit",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Waves (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "8-bit",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "We Can Reach the Stars (8-Bit Blake Shelton Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "We Were (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2019,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "What She Wants Tonight (8-Bit Luke Bryan Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2019,
+      "genre": null,
+      "tags": [
+        "pop",
+        "country",
+        "2010s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "Wild Hearts (8-Bit Keith Urban Emulation)",
+      "artist": "8-Bit Arcade",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "emulation/novelty variant"
+    },
+    {
+      "title": "To Those Who Journey Persistently Everyday (Karaoke version)",
+      "artist": "Haykuyashiki Rei",
+      "year": null,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "karaoke-version record"
+    },
+    {
+      "title": "Life is a Journey (Karaoke Version)",
+      "artist": "J-Mi & Midi-D",
+      "year": 2010,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "karaoke-version record"
+    },
+    {
+      "title": "Karaoke (Karaoke Version)",
+      "artist": "Smallpools",
+      "year": 2015,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "karaoke-version record"
+    },
+    {
+      "title": "Voodoo Queen (karaoke version)",
+      "artist": "Systems in Blue",
+      "year": 2011,
+      "genre": null,
+      "tags": [
+        "pop",
+        "80s",
+        "90s",
+        "2010s"
+      ],
+      "reason": "karaoke-version record"
+    },
+    {
+      "title": "A Long-awaited Spacetime Journey! - Carbuncle Version (Karaoke)",
+      "artist": "安倍栄基",
+      "year": null,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "karaoke-version record"
+    }
+  ],
+  "socialRestrict": [
+    {
+      "title": "Shakira!",
+      "artist": "1nonly",
+      "year": 2020,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Adam Joseph",
+      "year": 2024,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Afganistan Yeye's",
+      "year": 2007,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2000s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Green Day",
+      "artist": "Amp",
+      "year": 2005,
+      "genre": null,
+      "tags": [
+        "rock",
+        "2000s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Asian Cafe",
+      "year": 2007,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2000s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "At Large Auteur",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Austin Kyle",
+      "year": 2008,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2000s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Beans on Toast",
+      "year": 2017,
+      "genre": null,
+      "tags": [
+        "folk",
+        "indie",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Ben Rogers’ Instrumental Asylum",
+      "year": 2006,
+      "genre": null,
+      "tags": [
+        "instrumental",
+        "rock",
+        "2000s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Cal Scruby",
+      "year": 2019,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Casino",
+      "year": 2015,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Dave East",
+      "year": 2025,
+      "genre": null,
+      "tags": [
+        "rap",
+        "rnb",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "David Liebe Hart",
+      "year": 2012,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "DJ REAL",
+      "year": 2016,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "DJ Suketu",
+      "year": 2010,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Doobie",
+      "year": 2017,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Driver",
+      "year": 2014,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Dugan",
+      "year": 2022,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Elfran",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Enjoy Music Club",
+      "year": 2015,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Felix Krull",
+      "year": 2016,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Green Day",
+      "artist": "GLORY JACKPOT SYSTEM",
+      "year": 2008,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2000s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Gnarls Oakley",
+      "year": 2007,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2000s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Gregor Hilden",
+      "year": 2014,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Hamish and Andy",
+      "year": 2010,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "green day",
+      "artist": "Hase",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "I.C.Y",
+      "year": 2024,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Jasper Sawyer",
+      "year": 2016,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Jonathan Tadeu",
+      "year": 2015,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Josh Cheek",
+      "year": null,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Kye Alfred Hillig",
+      "year": 2016,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "L'autentika",
+      "year": null,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Lil B",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rap",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "GREEN DAY",
+      "artist": "Lucy Bedroque",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Green Day",
+      "artist": "Lutz Krajenski",
+      "year": 2018,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Man Like Me",
+      "year": 2013,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Master Salim",
+      "year": 2010,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Maxo Kream",
+      "year": 2013,
+      "genre": null,
+      "tags": [
+        "rap",
+        "rnb",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Michael Mills",
+      "year": null,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "80s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Middle Sky Boom",
+      "year": 2019,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Moon Man",
+      "year": 2016,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Moon Moon Moon",
+      "year": 2017,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Morgan Jay",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Green Day",
+      "artist": "Mo’ Horizons",
+      "year": 2008,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2000s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Nobigdyl",
+      "year": 2017,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Octopus",
+      "year": 2018,
+      "genre": null,
+      "tags": [
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Quinton",
+      "year": 1989,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "80s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Green Day",
+      "artist": "Rawska",
+      "year": 2018,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "Rick Shapiro",
+      "year": 2002,
+      "genre": null,
+      "tags": [
+        "pop",
+        "90s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Shalmali Kholgade",
+      "year": 2015,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "SND & RTN",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Speedy Ortiz",
+      "year": 2012,
+      "genre": null,
+      "tags": [
+        "rock",
+        "indie",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Stacked Like Pancakes",
+      "year": 2024,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Stu Hamm",
+      "year": 1995,
+      "genre": null,
+      "tags": [
+        "rock",
+        "90s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Fleetwood Mac",
+      "artist": "Stuart Hamm",
+      "year": 1995,
+      "genre": null,
+      "tags": [
+        "rock",
+        "90s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Talk, Tired Thanatoid",
+      "year": 2015,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Whitney Houston",
+      "artist": "The Big Homie",
+      "year": 2021,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "The Ill-Fitting Garibaldis",
+      "year": 2010,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Trinidad James",
+      "year": 2017,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rnb",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Green Day",
+      "artist": "Ty Fyffe",
+      "year": 2010,
+      "genre": null,
+      "tags": [
+        "pop",
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Tyler Dean",
+      "year": 2009,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2000s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Valovuosi",
+      "year": 2016,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Vanderbuyst",
+      "year": 2014,
+      "genre": null,
+      "tags": [
+        "rock",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Walker Hayes",
+      "year": 2023,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Xamã",
+      "year": 2017,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "YK Osiris",
+      "year": 2019,
+      "genre": null,
+      "tags": [
+        "rnb",
+        "pop",
+        "2010s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Taylor Swift",
+      "artist": "Young Nova",
+      "year": 2025,
+      "genre": null,
+      "tags": [
+        "pop",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    },
+    {
+      "title": "Shakira",
+      "artist": "Yung Poor Alo",
+      "year": 2024,
+      "genre": null,
+      "tags": [
+        "pop",
+        "latin",
+        "2020s"
+      ],
+      "reason": "artist-name-as-title suspicious metadata"
+    }
+  ]
+}
