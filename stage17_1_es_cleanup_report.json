@@ -1,0 +1,475 @@
+{
+  "removedCount": 117,
+  "removed": [
+    {
+      "file": "es/cancion/bichota-8-bit-karol-g-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/whitney-houston-david-liebe-hart.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/fleetwood-mac-stu-hamm.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/fleetwood-mac-michael-mills.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-enjoy-music-club.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/waves-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/we-can-reach-the-stars-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-dj-real.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-young-nova.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-josh-cheek.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/buenos-aires-8-bit-luis-fonsi-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/b-team-ed-sheeran-parody-hype-duo.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/up-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/whitney-houston-jasper-sawyer.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/strange-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/taylor-swift-moon-moon-moon.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/whitney-houston-adam-joseph.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/shakira-shalmali-kholgade.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/whitney-houston-casino.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-dave-east.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/tequila-does-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/down-to-one-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-master-salim.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/fleetwood-mac-gregor-hilden.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/oki-doki-8-bit-karol-g-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/taylor-swift-talk-tired-thanatoid.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/green-day-lutz-krajenski.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-elfran.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/whitney-houston-hamish-and-andy.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/come-back-as-a-country-boy-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/fleetwood-mac-octopus.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/el-barco-8-bit-karol-g-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-xama.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/whitney-houston-jonathan-tadeu.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-walker-hayes.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/the-girl-can-t-help-it-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-yk-osiris.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/shakira-middle-sky-boom.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/shakira-l-autentika.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/shakira-afganistan-yeye-s.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/bluebird-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/whitney-houston-doobie.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-lil-b.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/shakira-nobigdyl.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/200-copas-8-bit-karol-g-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/southern-and-slow-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/whitney-houston-snd-rtn.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/denim-rhinestones-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/whitney-houston-the-big-homie.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/whitney-houston-at-large-auteur.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/fleetwood-mac-morgan-jay.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/shakira-dj-suketu.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-tyler-dean.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/shakira-valovuosi.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/s91-8-bit-karol-g-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/green-day-hase.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/whitney-houston-maxo-kream.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/polaroid-8-bit-keith-urban-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-driver.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/floatin-this-creek-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/bible-verses-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/fleetwood-mac-man-like-me.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/crazy-angels-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/one-too-8-bit-keith-urban-pink-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/green-day-amp.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/whitney-houston-kye-alfred-hillig.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/shakira-quinton.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/whitney-houston-rick-shapiro.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/dark-bars-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/green-day-rawska.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/amazing-grace-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/taylor-swift-cal-scruby.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-stacked-like-pancakes.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/green-day-mo-horizons.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/wild-hearts-8-bit-keith-urban-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/drink-a-little-whiskey-down-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-vanderbuyst.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/nightfalls-8-bit-keith-urban-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/actin-up-8-bit-miranda-lambert-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/fleetwood-mac-ben-rogers-instrumental-asylum.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-austin-kyle.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/she-get-me-high-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/taylor-swift-felix-krull.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/body-language-8-bit-blake-shelton-the-swon-brothers-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/fleetwood-mac-stuart-hamm.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/give-her-that-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/suerte-8-bit-j-balvin-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/stretchy-pants-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/green-day-ty-fyffe.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-the-ill-fitting-garibaldis.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/rojo-8-bit-j-balvin-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/taylor-swift-moon-man.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-trinidad-james.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/green-day-lucy-bedroque.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-speedy-ortiz.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/shakira-i-c-y.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/god-s-country-8-bit-blake-shelton-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/whitney-houston-dugan.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/provenza-8-bit-karol-g-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/ocean-8-bit-karol-g-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-asian-cafe.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/taylor-swift-beans-on-toast.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/we-were-8-bit-keith-urban-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-gnarls-oakley.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/mariah-carey-skit-dj-clue.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/prince-ali-robin-williams.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/toretto-8-bit-j-balvin-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/brown-eyes-baby-8-bit-keith-urban-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/take-me-out-8-bit-carrie-underwood-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/que-locura-8-bit-j-balvin-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-yung-poor-alo.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/green-day-glory-jackpot-system.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/superman-8-bit-keith-urban-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/country-on-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    },
+    {
+      "file": "es/cancion/shakira-1nonly.html",
+      "reason": "artist-title suspicious mirror"
+    },
+    {
+      "file": "es/cancion/what-she-wants-tonight-8-bit-luke-bryan-emulation-8-bit-arcade.html",
+      "reason": "junk/non-canonical variant"
+    }
+  ],
+  "keptCount": 9183,
+  "note": "Spanish-native music pages preserved; only Spanish junk/non-song/suspicious mirrors removed."
+}
