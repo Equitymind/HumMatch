@@ -2775,8 +2775,16 @@ app.get('/dashboard', (_req, res) => {
 app.get('/pricing', (_req, res) => {
   res.sendFile(path.join(__dirname, 'pricing.html'));
 });
+app.get('/es/precios', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'pricing-es.html'));
+});
 app.get('/hummatch/pricing', (_req, res) => {
   res.sendFile(path.join(__dirname, 'pricing.html'));
+});
+
+// How it works pages
+app.get('/es/how-it-works', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'how-it-works-es.html'));
 });
 
 // SquadMatch landing page
