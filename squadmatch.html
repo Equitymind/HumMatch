@@ -232,16 +232,15 @@ canvas#share-canvas{width:100%;border-radius:14px;display:block}
   </div>
 </div>
 
-<!-- UPGRADE MODAL (shown when free user tries to add more than 1 invite) -->
-<div id="upgrade-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
+<!-- SQUAD LEADER MODAL (shown only when free user explicitly tries to add more than 1 invite) -->
+<div id="upgrade-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;padding:20px;">
   <div style="background:var(--bg);border:1px solid rgba(124,58,237,0.2);border-radius:16px;padding:28px 24px;max-width:320px;text-align:center;">
     <div style="font-size:1.8rem;margin-bottom:12px;">🎵</div>
-    <div style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;">Unlock Full Squads</div>
-    <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:10px;">
-      Upgrade to Squad Leader to invite up to 4 friends, save your squad, and unlock a deeper shared song list you can return to anytime.
+    <div style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;">Become a Squad Leader</div>
+    <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:16px;">
+      Save your squad, invite friends back, and unlock deeper group song matches.
     </div>
-    <div style="font-size:0.78rem;color:rgba(168,85,247,0.85);line-height:1.5;margin-bottom:16px;">Share 20% off with up to 5 friends each month.</div>
-    <button onclick="window.location.href='/pricing'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:8px;">Upgrade to Premium</button>
+    <button onclick="window.location.href='/pricing'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:8px;">Become a Squad Leader</button>
     <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="width:100%;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--muted);font-size:0.85rem;cursor:pointer;">Maybe later</button>
   </div>
 </div>
