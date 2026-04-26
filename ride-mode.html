@@ -640,33 +640,42 @@
         <p id="phase-sub" class="muted center auto-phase-sub" style="margin-bottom:6px;">Go as deep as you comfortably can. Hold it steady.</p>
         <div id="phase-emoji" class="auto-phase-emoji center">⬇️</div>
 
-        <div class="hum-area">
-          <div class="hum-stepdots" id="humDots">
-            <div class="dot" id="dot-0" data-step="1">1</div>
-            <div class="dot" id="dot-1" data-step="2">2</div>
-            <div class="dot" id="dot-2" data-step="3">3</div>
-          </div>
+        <div id="pxMicGate" style="text-align:center; padding: 16px 0 8px;">
+          <button id="pxStartHumBtn" class="btn btn-primary" style="min-width:180px; font-size:1rem;" onclick="pxUserGestureStartMic()">
+            Start Humming
+          </button>
+          <p class="muted" style="margin-top:10px; font-size:0.85rem;" id="pxMicGateHint">Tap to allow microphone access and begin.</p>
+        </div>
 
-          <div class="countdown-ring-wrap" style="width:120px;height:120px;position:relative;margin:0 auto;">
-            <svg class="countdown-ring-svg" width="120" height="120" viewBox="0 0 120 120" style="transform:rotate(-90deg);">
-              <defs>
-                <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#A855F7"/>
-                  <stop offset="100%" stop-color="#EC4899"/>
-                </linearGradient>
-              </defs>
-              <circle class="countdown-ring-bg" cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6"></circle>
-              <circle id="countdown-ring" class="countdown-ring-progress" cx="60" cy="60" r="54"
-                      fill="none" stroke="url(#ring-grad)" stroke-width="6" stroke-linecap="round"
-                      stroke-dasharray="339.292" stroke-dashoffset="0"></circle>
-            </svg>
-            <div class="countdown-ring-center" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-              <div id="ring-number" class="countdown-ring-number" style="font-size:2.2rem;font-weight:900;color:#fff;line-height:1;">3</div>
-              <div id="ring-label" class="countdown-ring-label" style="font-size:0.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;">seconds</div>
+        <div id="pxHumRingArea" class="hidden">
+          <div class="hum-area">
+            <div class="hum-stepdots" id="humDots">
+              <div class="dot" id="dot-0" data-step="1">1</div>
+              <div class="dot" id="dot-1" data-step="2">2</div>
+              <div class="dot" id="dot-2" data-step="3">3</div>
             </div>
-          </div>
 
-          <div id="auto-status" class="auto-status">🎤 Listening...</div>
+            <div class="countdown-ring-wrap" style="width:120px;height:120px;position:relative;margin:0 auto;">
+              <svg class="countdown-ring-svg" width="120" height="120" viewBox="0 0 120 120" style="transform:rotate(-90deg);">
+                <defs>
+                  <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#A855F7"/>
+                    <stop offset="100%" stop-color="#EC4899"/>
+                  </linearGradient>
+                </defs>
+                <circle class="countdown-ring-bg" cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6"></circle>
+                <circle id="countdown-ring" class="countdown-ring-progress" cx="60" cy="60" r="54"
+                        fill="none" stroke="url(#ring-grad)" stroke-width="6" stroke-linecap="round"
+                        stroke-dasharray="339.292" stroke-dashoffset="0"></circle>
+              </svg>
+              <div class="countdown-ring-center" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                <div id="ring-number" class="countdown-ring-number" style="font-size:2.2rem;font-weight:900;color:#fff;line-height:1;">3</div>
+                <div id="ring-label" class="countdown-ring-label" style="font-size:0.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;">seconds</div>
+              </div>
+            </div>
+
+            <div id="auto-status" class="auto-status">Tap Start Humming to allow microphone access.</div>
+          </div>
         </div>
 
         <!-- Hidden elements expected by the shared hum capture engine -->
@@ -1423,8 +1432,8 @@
         passengerDiscountPercent = data.discountPercent || 10;
       }
       showPassengerState('humming');
-      // Auto-start the shared HumMatch hum capture flow -- no extra tap.
-      setTimeout(function() { startPassengerHumCapture(); }, 200);
+      // Do NOT auto-call startPassengerHumCapture -- user must tap "Start Humming" (iOS gesture requirement)
+      // The gate button in the humming section will call pxUserGestureStartMic() on tap.
     } catch (e) {
       err.style.display = ''; err.textContent = e.message || 'Could not join. Try again.';
     } finally {
@@ -1696,14 +1705,46 @@
     analyser = null; source = null;
   }
 
-  // Auto-start mic + first phase capture (no tap button -- mirrors primary HumMatch)
+  // iOS Safari requires a direct tap to authorize mic. The gate button calls this synchronously.
+  window.pxUserGestureStartMic = function() {
+    // Must be called directly from a tap handler -- iOS Safari user gesture requirement.
+    console.log('[pxMic] pxUserGestureStartMic called');
+    var gateEl  = document.getElementById('pxMicGate');
+    var ringEl  = document.getElementById('pxHumRingArea');
+    var statusEl = document.getElementById('auto-status');
+
+    if (gateEl) gateEl.classList.add('hidden');
+    if (ringEl) ringEl.classList.remove('hidden');
+    if (statusEl) statusEl.innerHTML = '🎤 Connecting to microphone...';
+
+    // Create AudioContext synchronously inside the gesture so iOS allows mic access.
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      console.log('[pxMic] AudioContext created, state:', audioCtx.state);
+    } catch (e) {
+      console.error('[pxMic] AudioContext failed:', e.name, e.message);
+      if (statusEl) statusEl.innerHTML = '<span style="color:#F87171;">Audio not supported in this browser.</span>';
+      return;
+    }
+
+    // Now call the async startPassengerHumCapture which will getUserMedia.
+    startPassengerHumCapture();
+  };
+
   async function startPassengerHumCapture() {
     try {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
       if (audioCtx.state === 'suspended') {
         try { await audioCtx.resume(); } catch(e) {}
       }
+      console.log('[pxMic] AudioContext ready, state:', audioCtx.state);
+      console.log('[pxMic] calling getUserMedia...');
       stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } });
+      console.log('[pxMic] getUserMedia resolved, starting capture');
       analyser = audioCtx.createAnalyser();
       analyser.fftSize = 4096;
       source = audioCtx.createMediaStreamSource(stream);
@@ -1711,9 +1752,20 @@
       if (audioCtx.state === 'suspended') {
         try { await audioCtx.resume(); } catch(e) {}
       }
+      var statusElOk = document.getElementById('auto-status');
+      if (statusElOk) statusElOk.innerHTML = '🎤 Listening...';
     } catch (e) {
+      console.error('[pxMic] mic init failed:', e.name, e.message);
       var statusEl = document.getElementById('auto-status');
-      if (statusEl) statusEl.innerHTML = '<span style="color:#F87171;">Mic access required. Reload and allow it to try again.</span>';
+      var gateEl   = document.getElementById('pxMicGate');
+      var ringEl   = document.getElementById('pxHumRingArea');
+      var hintEl   = document.getElementById('pxMicGateHint');
+      if (statusEl) statusEl.innerHTML = '';
+      if (ringEl)   ringEl.classList.add('hidden');
+      if (gateEl)   gateEl.classList.remove('hidden');
+      if (hintEl)   hintEl.textContent = 'Microphone access is needed to capture your hum. Tap to try again.';
+      var btn = document.getElementById('pxStartHumBtn');
+      if (btn) btn.textContent = 'Try Again';
       return;
     }
 
