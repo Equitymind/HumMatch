@@ -3243,6 +3243,7 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
 
   const chan = (channel || '').toString().toLowerCase();
   const dest = (destination || '').toString().trim();
+  console.log('[ride-mode] reminder request', { sessionId, chan, dest: dest ? (dest.slice(0,3) + '***') : '' });
   if (!dest || (chan !== 'email' && chan !== 'sms')) {
     return res.status(400).json({ ok: false, error: 'channel (email|sms) and destination required' });
   }
@@ -3300,7 +3301,7 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
     '<p style="font-size:1rem;line-height:1.5;">Your vocal range and song matches from Ride Mode are ready to save.</p>',
     '<p style="font-size:1rem;line-height:1.5;">You have 10% off for 7 days, courtesy of your driver.</p>',
     '<p style="margin:24px 0;">',
-    '<a href="' + link + '" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;padding:12px 24px;border-radius:10px;font-weight:700;display:inline-block;">Save My HumMatch</a>',
+    '<a href="' + link + '" style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;text-decoration:none;padding:12px 24px;border-radius:10px;font-weight:700;display:inline-block;">Claim My 10% Offer</a>',
     '</p>',
     '<p style="font-size:0.9em;color:#666;line-height:1.5;">Opens your pricing options with the 10% driver courtesy offer applied.</p>',
     expiresReadable
@@ -3311,7 +3312,9 @@ app.post('/api/ride-mode/session/:sessionId/remind', async (req, res) => {
 
   let sent = false;
   try {
+    console.log('[ride-mode] sending reminder email to', dest.slice(0,3) + '***', 'link=', link);
     sent = !!(await sendEmail(dest, subject, html));
+    console.log('[ride-mode] reminder email result: sent=', sent);
   } catch (e) {
     console.log('[ride-mode] reminder email send failed:', e.message);
   }

@@ -1877,22 +1877,29 @@
     }
     if (statusEl) { statusEl.textContent = 'Sending...'; statusEl.style.color = ''; }
     try {
-      await fetch('/api/ride-mode/session/' + joinSessionId + '/email-reminder', {
+      var resp = await fetch('/api/ride-mode/session/' + joinSessionId + '/remind', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: email,
-          participantId: passengerParticipantId,
-          discountCode: passengerDiscountCode || null
+          channel: 'email',
+          destination: email,
+          discountCode: passengerDiscountCode || null,
+          discountExpiresAt: passengerDiscountExpires || null
         })
-      }).catch(function() {});
-      var formEl = $('passengerEmailCapture');
-      var sentEl = $('passengerEmailSent');
-      if (formEl) formEl.classList.add('hidden');
-      if (sentEl) sentEl.classList.remove('hidden');
-      markEmailSubmittedInPersist();
+      });
+      var data = null;
+      try { data = await resp.json(); } catch (_) { data = null; }
+      if (data && data.ok === true && data.sent === true) {
+        var formEl = $('passengerEmailCapture');
+        var sentEl = $('passengerEmailSent');
+        if (formEl) formEl.classList.add('hidden');
+        if (sentEl) sentEl.classList.remove('hidden');
+        markEmailSubmittedInPersist();
+      } else {
+        if (statusEl) { statusEl.textContent = 'Email could not be sent. Please try again.'; statusEl.style.color = '#F87171'; }
+      }
     } catch (_) {
-      if (statusEl) { statusEl.textContent = 'Could not send. Try again.'; statusEl.style.color = '#F87171'; }
+      if (statusEl) { statusEl.textContent = 'Email could not be sent. Please try again.'; statusEl.style.color = '#F87171'; }
     }
   };
 
