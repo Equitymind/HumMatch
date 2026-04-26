@@ -2866,6 +2866,14 @@ app.get('/how-it-works', (req, res) => {
 // SPA fallback moved to bottom of file so it does not swallow GET routes
 // registered after app.listen() (e.g. the ride-mode block).
 
+
+app.get('/es/ride-mode', (req, res) => {
+  res.sendFile(path.join(__dirname, 'es', 'ride-mode.html'));
+});
+app.get('/es/ride-mode.html', (_req, res) => {
+  res.redirect(301, '/es/ride-mode');
+});
+
 // Auto-seed songs if empty
 // ---------------------------------------------------------------------------
 function autoSeedSongs() {

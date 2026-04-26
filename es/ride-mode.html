@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>HumMatch Ride Mode Español</title>
+  <meta name="description" content="HumMatch Ride Mode en español. El conductor crea un viaje, los pasajeros escanean el código QR y tararean desde sus propios teléfonos, y HumMatch muestra las 5 mejores canciones que este auto realmente puede cantar." />
+  <meta name="theme-color" content="#a855f7" />
+  <link rel="canonical" href="https://hummatch.me/es/ride-mode" />
+  <link rel="alternate" hreflang="en" href="https://hummatch.me/ride-mode" />
+  <link rel="alternate" hreflang="es" href="https://hummatch.me/es/ride-mode" />
+  <link rel="alternate" hreflang="x-default" href="https://hummatch.me/ride-mode" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A0911;
+      --bg2: #0F0C1C;
+      --surface: #151126;
+      --surface2: #1B1633;
+      --border: rgba(255,255,255,0.09);
+      --accent: #A855F7;
+      --accent2: #7C3AED;
+      --pink: #EC4899;
+      --green: #22C55E;
+      --green-bright: #4ADE80;
+      --gold: #F59E0B;
+      --red: #EF4444;
+      --text1: #FFFFFF;
+      --text2: rgba(255,255,255,0.78);
+      --text3: rgba(255,255,255,0.52);
+      --text4: rgba(255,255,255,0.32);
+    }
+    html, body {
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(168,85,247,0.14), transparent 60%),
+                  radial-gradient(900px 700px at 100% 100%, rgba(236,72,153,0.10), transparent 60%),
+                  var(--bg);
+      color: var(--text1);
+      font-family: -apple-system, 'SF Pro Display', 'Inter', Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    /* ── Nav (shared HumMatch header) ─────────────────────────────────── */
+    .hm-header { position:fixed; top:0; left:0; right:0; z-index:10000; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:rgba(8,6,15,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid rgba(168,85,247,0.1); }
+    .hm-header-logo { text-decoration:none; font-size:1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hm-nav-toggle { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; padding:0; flex-shrink:0; }
+    .hm-nav-toggle span { display:block; width:20px; height:2px; background:rgba(168,85,247,0.9); border-radius:2px; transition:all 0.25s; }
+    .hm-nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hm-nav-toggle.open span:nth-child(2) { opacity:0; }
+    .hm-nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .hm-nav-drawer { position:fixed; top:0; left:0; width:240px; height:100%; background:rgba(8,6,15,0.97); backdrop-filter:blur(16px); border-right:1px solid rgba(168,85,247,0.15); z-index:9999; transform:translateX(-100%); visibility:hidden; transition:transform 0.28s cubic-bezier(.4,0,.2,1), visibility 0.28s; padding:70px 0 24px; }
+    .hm-nav-drawer.open { transform:translateX(0); visibility:visible; }
+    .hm-nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9998; opacity:0; pointer-events:none; transition:opacity 0.28s; }
+    .hm-nav-overlay.open { opacity:1; pointer-events:all; }
+    .hm-nav-logo { padding:0 20px 20px; border-bottom:1px solid rgba(168,85,247,0.12); margin-bottom:8px; }
+    .hm-nav-logo span { font-size:1.1rem; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hm-nav-item { display:block; padding:13px 24px; color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color 0.15s, background 0.15s; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .hm-nav-item:hover { color:#fff; background:rgba(168,85,247,0.1); }
+    .hm-nav-divider { height:1px; background:rgba(168,85,247,0.1); margin:8px 20px; }
+    body { padding-top: 57px; } /* offset for fixed header */
+    .nav-chip {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
+      color: var(--text3); text-transform: uppercase;
+      padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────────────────── */
+    .wrap {
+      max-width: 720px; margin: 0 auto; padding: 28px 20px 80px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+    .card + .card { margin-top: 18px; }
+
+    /* ── Typography ─────────────────────────────────────────────────────── */
+    h1 {
+      font-size: clamp(2.0rem, 5.2vw, 2.6rem);
+      line-height: 1.08; letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff 30%, #E9D5FF);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    h2 { font-size: 1.3rem; line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.01em; }
+    h3 { font-size: 1.05rem; margin-bottom: 4px; }
+    .lead { color: var(--text2); font-size: 1.05rem; margin-bottom: 22px; }
+    .muted { color: var(--text3); font-size: 0.92rem; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em;
+      color: var(--accent); text-transform: uppercase;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.32);
+      border-radius: 999px; padding: 6px 12px; margin-bottom: 14px;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em;
+      background: rgba(168,85,247,0.14);
+      border: 1px solid rgba(168,85,247,0.38);
+      color: #E9D5FF;
+      padding: 8px 14px; border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .status-pill .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 10px var(--accent);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: 0.35 } }
+
+    /* ── Buttons ─────────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; min-height: 58px;
+      padding: 16px 20px; border-radius: 16px;
+      font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em;
+      cursor: pointer; border: none; transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active { transform: scale(0.985); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--pink) 100%);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(168,85,247,0.38);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 36px rgba(168,85,247,0.48); }
+    .btn-ghost {
+      background: transparent; color: var(--text2);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.32); color: #fff; }
+    .btn-danger {
+      background: linear-gradient(135deg, #DC2626, #EF4444);
+      color: #fff; box-shadow: 0 10px 30px rgba(239,68,68,0.32);
+    }
+    .btn-danger:hover { box-shadow: 0 14px 36px rgba(239,68,68,0.44); }
+    .btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+    .btn + .btn { margin-top: 10px; }
+
+    /* ── Form fields ─────────────────────────────────────────────────────── */
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em;
+      color: var(--text2); margin-bottom: 8px; text-transform: uppercase;
+    }
+    .input, select.input {
+      width: 100%; min-height: 54px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff; font-size: 1.05rem;
+      padding: 14px 16px; border-radius: 14px;
+      font-family: inherit;
+      -webkit-appearance: none; appearance: none;
+    }
+    .input:focus, select.input:focus {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(168,85,247,0.15);
+    }
+    select.input {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'><path fill='%23a855f7' d='M1 1l6 6 6-6'/></svg>");
+      background-repeat: no-repeat; background-position: right 18px center;
+      padding-right: 44px;
+    }
+
+    /* ── Vibe pills ──────────────────────────────────────────────────────── */
+    .vibe-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      margin-bottom: 6px;
+    }
+    .vibe-pill {
+      padding: 14px 12px; text-align: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text2); font-size: 0.95rem; font-weight: 600;
+      border-radius: 14px; cursor: pointer;
+      transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .vibe-pill:hover { border-color: rgba(168,85,247,0.4); color: #fff; }
+    .vibe-pill.selected {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(168,85,247,0.22), rgba(236,72,153,0.18));
+      color: #fff;
+    }
+
+    /* ── Stepper ─────────────────────────────────────────────────────────── */
+    .stepper {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px; padding: 8px; gap: 8px;
+    }
+    .stepper button {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(168,85,247,0.18); border: 1px solid rgba(168,85,247,0.32);
+      color: #fff; font-size: 1.4rem; font-weight: 700;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .stepper button:active { transform: scale(0.94); }
+    .stepper button[disabled] { opacity: 0.35; cursor: not-allowed; }
+    .stepper .count { font-size: 1.6rem; font-weight: 800; min-width: 48px; text-align: center; }
+
+    /* ── QR box ──────────────────────────────────────────────────────────── */
+    .qr-box {
+      background: #fff; border-radius: 20px; padding: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 4px auto 16px;
+      width: 100%; max-width: 320px; aspect-ratio: 1 / 1;
+    }
+    .qr-box img { width: 100%; height: 100%; display: block; border-radius: 10px; }
+    .ride-code {
+      text-align: center; margin-bottom: 8px;
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em;
+      color: #fff;
+    }
+    .ride-code-label {
+      text-align: center; color: var(--text3); font-size: 0.78rem;
+      letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 2px;
+    }
+    .join-hint { text-align: center; color: var(--text3); font-size: 0.95rem; margin-top: 6px; }
+    .join-progress { text-align: center; color: #E9D5FF; font-weight: 700; margin-top: 12px; }
+
+    /* ── Roster ──────────────────────────────────────────────────────────── */
+    .roster { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .roster-row {
+      display: grid; grid-template-columns: 1fr auto auto;
+      align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 14px 16px;
+    }
+    .roster-name { font-weight: 700; font-size: 1rem; }
+    .roster-role { color: var(--text3); font-size: 0.88rem; }
+    .pill {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em;
+      text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .pill-waiting { background: rgba(255,255,255,0.08); color: var(--text3); border: 1px solid rgba(255,255,255,0.12); }
+    .pill-joined  { background: rgba(34,197,94,0.16);  color: #86EFAC; border: 1px solid rgba(34,197,94,0.35); }
+    .pill-humming { background: rgba(168,85,247,0.2);  color: #E9D5FF; border: 1px solid rgba(168,85,247,0.45); animation: pulse 1.4s ease-in-out infinite; }
+    .pill-done    { background: rgba(74,222,128,0.18); color: #BBF7D0; border: 1px solid rgba(74,222,128,0.45); }
+    .pill-ready   { background: rgba(168,85,247,0.14); color: #E9D5FF; border: 1px solid rgba(168,85,247,0.35); }
+
+    /* ── Top 5 list ─────────────────────────────────────────────────────── */
+    .top5 { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+    .top5-row {
+      display: grid; grid-template-columns: 32px 1fr auto;
+      align-items: center; gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 14px 16px;
+    }
+    .top5-rank {
+      font-size: 1.2rem; font-weight: 800; color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+    .top5-title { font-size: 1.02rem; font-weight: 700; line-height: 1.2; }
+    .top5-artist { color: var(--text3); font-size: 0.88rem; margin-top: 2px; }
+    .top5-fit {
+      font-size: 0.95rem; font-weight: 800; color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      padding: 6px 12px; border-radius: 999px;
+    }
+    .top5-heading {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .top5-heading h2 { margin-bottom: 0; }
+
+    /* ── Hum circle ──────────────────────────────────────────────────────── */
+    .hum-area { display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 18px 0 4px; }
+    .hum-stepdots { display: flex; gap: 10px; margin-bottom: 4px; }
+    .hum-stepdots .dot {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.06); color: var(--text3);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.85rem; font-weight: 800;
+    }
+    .hum-stepdots .dot.active {
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      color: #fff; border-color: transparent;
+      box-shadow: 0 6px 18px rgba(168,85,247,0.4);
+    }
+    .hum-stepdots .dot.done { background: rgba(74,222,128,0.2); color: #BBF7D0; border-color: rgba(74,222,128,0.45); }
+    .hum-circle-wrap {
+      position: relative; width: 240px; height: 240px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hum-circle {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 45%, rgba(168,85,247,0.38), rgba(236,72,153,0.16) 55%, transparent 72%);
+      filter: blur(2px);
+    }
+    .hum-circle.pulsing { animation: humPulse 1.8s ease-in-out infinite; }
+    @keyframes humPulse {
+      0%,100% { transform: scale(1); opacity: 0.85 }
+      50%     { transform: scale(1.06); opacity: 1 }
+    }
+    .hum-ring-svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+    .hum-ring-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 4; }
+    .hum-ring-progress { fill: none; stroke: url(#humRingGrad); stroke-width: 4; stroke-linecap: round; transition: none; }
+    .hum-center {
+      position: relative; z-index: 2;
+      width: 160px; height: 160px; border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 14px;
+    }
+    .hum-countdown { font-size: 3.6rem; font-weight: 900; color: #fff; font-variant-numeric: tabular-nums; }
+    .hum-mic-icon { width: 54px; height: 54px; color: #E9D5FF; }
+    .hum-wave {
+      display: flex; align-items: end; gap: 5px; height: 48px;
+    }
+    .hum-wave span {
+      display: inline-block; width: 5px; background: linear-gradient(to top, var(--accent), var(--pink));
+      border-radius: 4px; animation: humWave 900ms ease-in-out infinite;
+    }
+    .hum-wave span:nth-child(1) { height: 30%; animation-delay: 0ms; }
+    .hum-wave span:nth-child(2) { height: 70%; animation-delay: 90ms; }
+    .hum-wave span:nth-child(3) { height: 100%; animation-delay: 180ms; }
+    .hum-wave span:nth-child(4) { height: 60%; animation-delay: 120ms; }
+    .hum-wave span:nth-child(5) { height: 40%; animation-delay: 220ms; }
+    @keyframes humWave {
+      0%,100% { transform: scaleY(0.4) }
+      50%     { transform: scaleY(1) }
+    }
+    .hum-step-label {
+      text-align: center; font-size: 1.2rem; font-weight: 700; color: #fff;
+    }
+    .hum-step-sub {
+      text-align: center; color: var(--text3); font-size: 0.95rem; margin-top: 2px;
+    }
+    .hum-status { text-align: center; font-size: 0.95rem; color: var(--text3); min-height: 22px; }
+
+    /* ── Discount panel ──────────────────────────────────────────────────── */
+    .discount-panel {
+      margin-top: 22px; padding: 22px 20px;
+      background: linear-gradient(135deg, rgba(168,85,247,0.14), rgba(236,72,153,0.14));
+      border: 1px solid rgba(168,85,247,0.32);
+      border-radius: 18px; text-align: center;
+    }
+    .discount-head { font-weight: 800; font-size: 1.08rem; margin-bottom: 4px; }
+    .discount-sub { color: var(--text3); font-size: 0.9rem; margin-bottom: 12px; }
+    .discount-code {
+      display: inline-block; font-family: 'SF Mono', Menlo, Consolas, monospace;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px; padding: 10px 18px; letter-spacing: 0.12em;
+      font-weight: 700; font-size: 1rem; margin-bottom: 14px;
+    }
+
+    /* ── Bridge to SquadMatch ───────────────────────────────────────────── */
+    .squad-bridge {
+      margin-top: 18px; padding: 18px 20px; text-align: center;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(124,58,237,0.4);
+      border-radius: 14px;
+    }
+    .squad-bridge a { color: #E9D5FF; font-weight: 700; text-decoration: none; }
+
+    /* ── Banners ─────────────────────────────────────────────────────────── */
+    .ride-banner {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px; border-radius: 14px;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      margin-bottom: 20px;
+    }
+    .ride-banner .icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .ride-banner .info { min-width: 0; }
+    .ride-banner .title { font-weight: 700; font-size: 0.98rem; }
+    .ride-banner .sub { color: var(--text3); font-size: 0.82rem; }
+
+    /* ── View roots ─────────────────────────────────────────────────────── */
+    .hidden { display: none !important; }
+
+    /* ── Footer ─────────────────────────────────────────────────────────── */
+    footer {
+      max-width: 720px; margin: 0 auto; padding: 30px 20px 40px;
+      color: var(--text4); font-size: 0.82rem; text-align: center;
+    }
+    footer a { color: var(--text3); text-decoration: none; margin: 0 10px; }
+
+    /* ── Small helpers ───────────────────────────────────────────────────── */
+    .row-gap { display: flex; gap: 10px; }
+    .row-gap .btn { margin: 0; }
+    .center { text-align: center; }
+    .sp-12 { height: 12px; }
+    .sp-18 { height: 18px; }
+    .sp-24 { height: 24px; }
+
+    /* ── Result cards (mirrors primary HumMatch renderSongCard styles) ─── */
+    .your-songs { list-style: none; display: flex; flex-direction: column; gap: 10px; padding: 0; margin: 0; }
+    .song-item { display: flex; flex-direction: column; padding: 12px 14px;
+      background: rgba(255,255,255,0.04); border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.06); cursor: pointer; transition: border-color 0.15s; list-style: none; }
+    .song-item:active { border-color: rgba(168,85,247,0.5); background: rgba(168,85,247,0.07); }
+    .song-item-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .song-title { font-size: 0.92rem; font-weight: 800; line-height: 1.25; flex: 1; color: #fff; }
+    .song-meta { font-size: 0.72rem; color: var(--text3); margin-top: 4px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .song-meta .dot { opacity: 0.4; width: auto; height: auto; background: none; border-radius: 0; box-shadow: none; animation: none; display: inline; }
+    .song-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 8px; flex-wrap: wrap; }
+    .sing-btn { font-size: 0.7rem; background: linear-gradient(135deg,#A855F7,#7C3AED);
+      color: #fff; padding: 6px 14px; border-radius: 50px; font-weight: 700; white-space: nowrap; }
+    /* Tier badges */
+    .tier-badge { display: inline-flex; align-items: center; gap: 4px;
+      border-radius: 50px; padding: 3px 10px; font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 0.04em; white-space: nowrap; }
+    .tier-nail   { background: rgba(16,185,129,0.18); color: #10b981; border: 1px solid rgba(16,185,129,0.35); }
+    .tier-strong { background: rgba(168,85,247,0.18); color: #a78bfa; border: 1px solid rgba(168,85,247,0.35); }
+    .tier-stretch{ background: rgba(251,146,60,0.18); color: #fb923c; border: 1px solid rgba(251,146,60,0.35); }
+    /* Category badges */
+    .cat-badge { display: inline-flex; align-items: center; gap: 3px;
+      border-radius: 50px; padding: 2px 8px; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.02em; white-space: nowrap; margin-top: 6px; align-self: flex-start; }
+    .cat-best   { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+    .cat-top    { background: rgba(250,204,21,0.15); color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
+    .cat-stretch{ background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+    .cat-duet   { background: rgba(168,85,247,0.15); color: #a78bfa; border: 1px solid rgba(168,85,247,0.3); }
+    .cat-trans  { background: rgba(96,165,250,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+
+    /* Auto hum-flow status text + countdown ring + phase success */
+    .auto-phase-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; text-align: center; }
+    .auto-phase-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; line-height: 1.2; text-align: center; }
+    .auto-phase-sub { font-size: 0.92rem; color: var(--text2); line-height: 1.5; max-width: 320px; margin: 0 auto 10px; text-align: center; }
+    .auto-phase-emoji { font-size: 3rem; margin-bottom: 8px; transition: transform 0.3s; text-align: center; }
+    .auto-status { font-size: 0.92rem; color: var(--text2); margin-top: 16px; min-height: 24px; font-weight: 600; text-align: center; }
+    .auto-status.listening { color: var(--accent); }
+    .auto-status.success   { color: var(--green); }
+
+    /* Phase success flash */
+    .phase-success-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 500; pointer-events: none; opacity: 0; transition: opacity 0.2s; background: rgba(8,6,15,0.85); }
+    .phase-success-overlay.show { opacity: 1; }
+    .phase-success-check { font-size: 4rem; margin-bottom: 8px; }
+    .phase-success-text  { font-size: 1.3rem; font-weight: 800; color: #22C55E; }
+
+    /* Stepdots used by hum capture (override from older clone) */
+    .hum-stepdots { display: flex; gap: 10px; margin-bottom: 4px; justify-content: center; }
+    .hum-stepdots .dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.06); color: var(--text3);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.78rem; font-weight: 800;
+      animation: none; box-shadow: none;
+    }
+    .hum-stepdots .dot.active {
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      color: #fff; border-color: transparent;
+      box-shadow: 0 6px 18px rgba(168,85,247,0.4);
+    }
+    .hum-stepdots .dot.done { background: rgba(74,222,128,0.2); color: #BBF7D0; border-color: rgba(74,222,128,0.45); }
+  </style>
+</head>
+<body>
+
+  <!-- Nav (matches HumMatch site nav) -->
+  <header class="hm-header">
+    <a class="hm-header-logo" href="/">HumMatch</a>
+    <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:rgba(255,255,255,0.4);text-transform:uppercase;">Ride Mode</span>
+    <button class="hm-nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
+  <nav class="hm-nav-drawer" id="navDrawer">
+    <div class="hm-nav-logo"><span>HumMatch</span></div>
+    <a class="hm-nav-item" href="/" style="color:#c084fc;font-weight:700;">🎤 Try HumMatch</a>
+    <a class="hm-nav-item" href="/how-it-works">How It Works</a>
+    <a class="hm-nav-item" href="/es">Inicio en español</a>
+    <a class="hm-nav-item hm-nav-item-active" href="/ride-mode" style="color:#A855F7;">🚗 Ride Mode</a>
+    <div class="hm-nav-divider"></div>
+    <a class="hm-nav-item" href="/affiliate">Affiliate</a>
+    <a class="hm-nav-item" href="/blog">Blog</a>
+    <a class="hm-nav-item" href="/contact">Contact</a>
+    <div class="hm-nav-divider"></div>
+    <a class="hm-nav-item" href="/login?return=/" id="navLoginItem">Log In</a>
+    <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Sign Up</a>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  DRIVER VIEW                                                         -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <div id="driverView">
+
+      <!-- State: setup -->
+      <section id="driverSetup" class="card">
+        <span class="eyebrow">Driver</span>
+        <h1>What should this car sing next?</h1>
+        <p class="lead">Create a ride. Passengers scan and hum on their own phones. HumMatch finds the top 5 songs this car can actually pull off together.</p>
+        <button class="btn btn-primary" type="button" onclick="goCreateRide()">Create Ride</button>
+        <div class="sp-12"></div>
+        <a href="/how-it-works" class="btn btn-ghost" style="text-decoration:none;">How it works</a>
+      </section>
+
+      <!-- State: create_ride -->
+      <section id="driverCreate" class="card hidden">
+        <span class="eyebrow">Step 1 of 2</span>
+        <h2>Create your ride</h2>
+        <p class="muted" style="margin-bottom:20px;">Pick the vibe and how many riders are in the car.</p>
+
+        <div class="field">
+          <label>Vibe</label>
+          <div class="vibe-grid" id="vibeGrid">
+            <button type="button" class="vibe-pill selected" data-vibe="Friday Night Drive">Friday Night Drive</button>
+            <button type="button" class="vibe-pill" data-vibe="Girls' Night Out">Girls' Night Out</button>
+            <button type="button" class="vibe-pill" data-vibe="Date Night">Date Night</button>
+            <button type="button" class="vibe-pill" data-vibe="Party Ride">Party Ride</button>
+            <button type="button" class="vibe-pill" data-vibe="Chill Ride">Chill Ride</button>
+            <button type="button" class="vibe-pill" data-vibe="Throwbacks">Throwbacks</button>
+            <button type="button" class="vibe-pill" data-vibe="Duet Mode">Duet Mode</button>
+            <button type="button" class="vibe-pill" data-vibe="Custom">Custom</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Rider Count (not including driver)</label>
+          <div class="stepper" role="group" aria-label="Rider count">
+            <button type="button" id="riderCountDown" aria-label="Decrease">&minus;</button>
+            <span class="count" id="riderCount">2</span>
+            <button type="button" id="riderCountUp" aria-label="Increase">+</button>
+          </div>
+          <p class="muted" style="margin-top:8px; font-size:0.82rem;">Minimum 1, maximum 4 (not including driver).</p>
+        </div>
+
+        <button class="btn btn-primary" type="button" id="createRideBtn" onclick="submitCreateRide()">Create Ride</button>
+        <div class="sp-12"></div>
+        <button class="btn btn-ghost" type="button" onclick="showDriverState('setup')">Back</button>
+      </section>
+
+      <!-- State: qr_live -->
+      <section id="driverQr" class="card hidden">
+        <div class="status-pill">
+          <span class="dot"></span>
+          <span id="driverStatusPillText">Riders joining</span>
+        </div>
+        <h2 style="margin-bottom:4px;">Scan to join the ride</h2>
+        <p class="muted" style="margin-bottom:18px;">Passengers scan this QR to hop in and hum.</p>
+
+        <div class="qr-box">
+          <img id="driverQrImage" alt="QR code to join ride" />
+        </div>
+        <div class="ride-code-label">Ride Code</div>
+        <div class="ride-code" id="driverRideCode">------</div>
+        <div class="join-hint">Passengers scan to join.</div>
+        <div class="join-progress" id="driverJoinProgress">0 of 2 joined</div>
+
+        <div class="roster" id="driverRoster"></div>
+      </section>
+
+      <!-- State: humming_live -->
+      <section id="driverHumming" class="card hidden">
+        <div class="status-pill">
+          <span class="dot"></span>
+          <span>Riders humming</span>
+        </div>
+        <h2>Capturing hums</h2>
+        <p class="muted" style="margin-bottom:4px;">Everyone hums on their own phone. Watch the car fill up.</p>
+        <div class="roster" id="driverHummingRoster"></div>
+      </section>
+
+      <!-- State: results_ready -->
+      <section id="driverResults" class="card hidden">
+        <div class="status-pill">
+          <span class="dot"></span>
+          <span>Top 5 ready</span>
+        </div>
+        <div class="top5-heading">
+          <h2>Top 5 songs for this car</h2>
+        </div>
+        <p class="muted" id="driverResultsNotice" style="margin-bottom:14px; display:none;"></p>
+        <div class="top5" id="driverTop5"></div>
+        <div class="sp-24"></div>
+        <button class="btn btn-danger" type="button" onclick="endRide()">End Ride</button>
+      </section>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  PASSENGER VIEW                                                     -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <div id="passengerView" class="hidden">
+
+      <!-- State: session_join -->
+      <section id="passengerJoin" class="card">
+        <div class="ride-banner">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 17h14v-4l-2-5a2 2 0 0 0-1.9-1.4H8.9A2 2 0 0 0 7 8l-2 5v4zm2 3h2v-2H7v2zm8 0h2v-2h-2v2z" fill="#fff"/></svg>
+          </div>
+          <div class="info">
+            <div class="title" id="passengerBannerTitle">Connected to the ride</div>
+            <div class="sub">Ride Code: <span id="passengerBannerCode">------</span></div>
+          </div>
+        </div>
+
+        <span class="eyebrow">Passenger</span>
+        <h2 id="passengerJoinTitle">Join the ride</h2>
+
+        <div id="passengerJoinForm">
+          <p class="muted" style="margin-bottom:20px;">You are joining this car's HumMatch session. We record 3 quick hums to find songs everyone can pull off.</p>
+
+          <div class="field">
+            <label>Your name</label>
+            <input class="input" type="text" id="passengerName" placeholder="e.g. Maya R." autocomplete="given-name" />
+          </div>
+
+          <div class="field">
+            <label>Your part (optional)</label>
+            <select class="input" id="passengerPart">
+              <option value="Lead">Lead (main part)</option>
+              <option value="Harmony">Harmony (backing parts)</option>
+              <option value="Either" selected>Either / Flexible</option>
+              <option value="Just for fun">Just for fun</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary" type="button" id="passengerJoinBtn" onclick="passengerJoinAndHum()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm-7-4a7 7 0 0 0 14 0h-2a5 5 0 0 1-10 0H5zm6 10v-2.1A7 7 0 0 0 12 18a7 7 0 0 0 1-.1V21h-2z" fill="#fff"/></svg>
+            Join &amp; Hum
+          </button>
+          <p class="muted center" id="passengerJoinError" style="margin-top:10px; color:#F87171; display:none;"></p>
+        </div>
+      </section>
+
+      <!-- State: humming -- mirrors primary HumMatch hum capture flow (auto-start, ring countdown, success flash) -->
+      <section id="passengerHumming" class="card hidden">
+        <div id="phase-label" class="auto-phase-label">HUM 1 OF 3</div>
+        <h2 id="phase-title" class="center auto-phase-title">Hum your lowest note</h2>
+        <p id="phase-sub" class="muted center auto-phase-sub" style="margin-bottom:6px;">Go as deep as you comfortably can. Hold it steady.</p>
+        <div id="phase-emoji" class="auto-phase-emoji center">⬇️</div>
+
+        <div id="pxMicGate" style="text-align:center; padding: 16px 0 8px;">
+          <button id="pxStartHumBtn" class="btn btn-primary" style="min-width:180px; font-size:1rem;" onclick="pxUserGestureStartMic()">
+            Start Humming
+          </button>
+          <p class="muted" style="margin-top:10px; font-size:0.85rem;" id="pxMicGateHint">Tap to allow microphone access and begin.</p>
+        </div>
+
+        <div id="pxHumRingArea" class="hidden">
+          <div class="hum-area">
+            <div class="hum-stepdots" id="humDots">
+              <div class="dot" id="dot-0" data-step="1">1</div>
+              <div class="dot" id="dot-1" data-step="2">2</div>
+              <div class="dot" id="dot-2" data-step="3">3</div>
+            </div>
+
+            <div class="countdown-ring-wrap" style="width:120px;height:120px;position:relative;margin:0 auto;">
+              <svg class="countdown-ring-svg" width="120" height="120" viewBox="0 0 120 120" style="transform:rotate(-90deg);">
+                <defs>
+                  <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#A855F7"/>
+                    <stop offset="100%" stop-color="#EC4899"/>
+                  </linearGradient>
+                </defs>
+                <circle class="countdown-ring-bg" cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6"></circle>
+                <circle id="countdown-ring" class="countdown-ring-progress" cx="60" cy="60" r="54"
+                        fill="none" stroke="url(#ring-grad)" stroke-width="6" stroke-linecap="round"
+                        stroke-dasharray="339.292" stroke-dashoffset="0"></circle>
+              </svg>
+              <div class="countdown-ring-center" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                <div id="ring-number" class="countdown-ring-number" style="font-size:2.2rem;font-weight:900;color:#fff;line-height:1;">3</div>
+                <div id="ring-label" class="countdown-ring-label" style="font-size:0.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;">seconds</div>
+              </div>
+            </div>
+
+            <div id="auto-status" class="auto-status">Tap Start Humming to allow microphone access.</div>
+          </div>
+        </div>
+
+        <!-- Hidden elements expected by the shared hum capture engine -->
+        <div style="display:none;">
+          <span id="pitch-note"></span>
+          <span id="pitch-hz"></span>
+          <span id="pitch-bar"></span>
+          <span id="low-note"></span>
+          <span id="mid-note"></span>
+          <span id="high-note"></span>
+        </div>
+
+        <!-- Phase success flash overlay (mirrors index.html) -->
+        <div id="phase-success" class="phase-success-overlay">
+          <div class="phase-success-check">✓</div>
+          <div id="phase-success-text" class="phase-success-text">Got it!</div>
+        </div>
+      </section>
+
+      <!-- State: completed_waiting -->
+      <section id="passengerWaiting" class="card hidden center">
+        <div style="margin:10px 0 14px;">
+          <div style="width:72px; height:72px; margin:0 auto; border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--pink)); display:flex; align-items:center; justify-content:center;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" fill="#fff"/></svg>
+          </div>
+        </div>
+        <h2>You're in!</h2>
+        <p class="muted" style="margin-top:6px;">Waiting for the rest of the car...</p>
+        <div class="sp-18"></div>
+        <div style="display:flex; gap:6px; justify-content:center;">
+          <span class="dot" style="width:8px; height:8px; border-radius:50%; background:var(--accent); animation:pulse 1.4s ease-in-out infinite;"></span>
+          <span class="dot" style="width:8px; height:8px; border-radius:50%; background:var(--accent); animation:pulse 1.4s ease-in-out 0.2s infinite;"></span>
+          <span class="dot" style="width:8px; height:8px; border-radius:50%; background:var(--accent); animation:pulse 1.4s ease-in-out 0.4s infinite;"></span>
+        </div>
+        <div class="sp-18"></div>
+        <p class="muted" id="passengerWaitingCount" style="font-size:0.88rem;"></p>
+      </section>
+
+      <!-- State: results_ready + post_ride_persisted -->
+      <section id="passengerResults" class="card hidden">
+        <div style="text-align:center; margin-bottom:6px; font-size:1.4rem;">🎉</div>
+        <h2 class="center" id="passengerResultsHead">Everyone's in!</h2>
+        <p class="muted center" id="passengerResultsSub" style="margin-bottom:16px;">Top 5 songs are ready.</p>
+
+        <div class="ride-banner" style="margin-bottom:16px;">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 17h14v-4l-2-5a2 2 0 0 0-1.9-1.4H8.9A2 2 0 0 0 7 8l-2 5v4z" fill="#fff"/></svg>
+          </div>
+          <div class="info">
+            <div class="title" id="passengerResultsBanner">Ride complete</div>
+            <div class="sub" id="passengerResultsBannerSub">Completed just now</div>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:8px;">Top 5 songs for this ride</h3>
+        <div class="top5" id="passengerTop5"></div>
+
+        <div class="discount-panel" id="passengerDiscountPanel" style="display:none;">
+          <div class="discount-head">10% off courtesy of your driver</div>
+          <div class="discount-sub" id="passengerDiscountSub">Email yourself this offer and today's ride link. Good for 7 days.</div>
+          <div class="discount-code" id="passengerDiscountCode">------</div>
+
+          <div id="passengerEmailCapture" style="text-align:left; margin-top:6px;">
+            <div style="font-weight:800; font-size:1.0rem; text-align:center; margin-bottom:4px;">Want this link later?</div>
+            <div class="muted" style="font-size:0.88rem; text-align:center; margin-bottom:12px;">Send yourself your 10% driver courtesy link and today's ride results.</div>
+            <input class="input" type="email" id="passengerReminderDest" placeholder="Enter your email" autocomplete="email" inputmode="email" />
+            <div class="sp-12"></div>
+            <button class="btn btn-primary" type="button" onclick="submitPassengerReminder()">Email Me My Link</button>
+            <p class="muted" id="passengerReminderStatus" style="margin-top:10px; font-size:0.85rem; text-align:center;"></p>
+          </div>
+
+          <div id="passengerEmailSent" class="hidden" style="text-align:center; margin-top:6px;">
+            <div style="font-weight:700; font-size:1.0rem; color:#BBF7D0;">Sent. Check your email for your 10% offer and ride link.</div>
+            <div class="muted" style="font-size:0.85rem; margin-top:6px;">You can come back later from your email.</div>
+          </div>
+        </div>
+
+        <div class="squad-bridge">
+          <div class="muted" style="font-size:0.9rem;">Want to keep this group together? <a href="/how-it-works">Learn about HumMatch</a></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer (matches HumMatch site footer) -->
+  <footer style="width:100%;margin-top:32px;padding:20px 0 max(24px, env(safe-area-inset-bottom, 24px));border-top:1px solid rgba(255,255,255,0.06);">
+    <div style="display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;">
+      <a href="/how-it-works" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">How It Works</a>
+      <a href="/pricing" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Pricing</a>
+      <a href="/es" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">Español</a>
+      <a href="/ride-mode" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">Ride Mode</a>
+      <a href="/affiliate" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Affiliate</a>
+      <a href="/songs" style="font-size:0.9rem;color:#a855f7;text-decoration:none;font-weight:600;">🎵 Browse All Songs</a>
+      <a href="/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
+      <a href="/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contact</a>
+      <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
+      <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
+      <a href="/login?return=/" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Log In</a>
+    </div>
+    <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.2);">&copy; 2026 HumMatch</div>
+  </footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // Shared helpers
+  // ──────────────────────────────────────────────────────────────────────────
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function $(id) { return document.getElementById(id); }
+  function show(el)  { if (el) el.classList.remove('hidden'); }
+  function hide(el)  { if (el) el.classList.add('hidden'); }
+
+  // Build a short human-friendly ride code from a session id.
+  // Deterministic per session so driver and passenger see the same value.
+  function buildRideCode(sessionId, vibe) {
+    if (!sessionId) return '------';
+    var base = String(sessionId).slice(-6);
+    var vibeAbbr = (vibe || 'RIDE').replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase() || 'RIDE';
+    var mid = base.slice(0, 3).toUpperCase();
+    var tail = base.slice(-3).toUpperCase();
+    return vibeAbbr + '-' + mid + '-' + tail;
+  }
+
+  // Pluralize
+  function plural(n, s) { return n + ' ' + s + (n === 1 ? '' : 's'); }
+
+  // ──────────────────────────────────────────────────────────────────────────
+  const RIDE_LOCALE = 'es';
+  const LOCALE_COPY = {
+    createRide: 'Crear viaje',
+    createThisRide: 'Crear este viaje',
+    joinRide: 'Unirme al viaje',
+    joinAndHum: 'Unirme y tararear',
+    endRide: 'Terminar viaje',
+    ridersJoining: 'Pasajeros uniéndose',
+    ridersHumming: 'Pasajeros tarareando',
+    top5Ready: 'Top 5 listo',
+    top5ForCar: 'Las 5 mejores canciones para este auto',
+    top5ForRide: 'Las 5 mejores canciones para este viaje',
+    wantThisLinkLater: '¿Quieres este enlace para después?',
+    emailMyLink: 'Envíame el enlace por email',
+    emailSent: 'Enviado. Revisa tu email para ver tu oferta del 10% y el enlace del viaje.',
+    fit: 'Ajuste',
+    singIt: 'Cantarla',
+    rideComplete: 'Viaje completo',
+    yourResultsStillHere: 'Tus resultados y tu oferta del 10% siguen aquí',
+    everyonesIn: '¡Todos están dentro!',
+    waitingForRest: 'Esperando al resto del auto',
+    humLowest: 'Tararea tu nota más baja',
+    humNormal: 'Tararea tu nota normal',
+    humHighest: 'Tararea tu nota más alta',
+    youreIn: 'Ya estás dentro',
+    top5ReadyPassenger: 'Tus 5 mejores canciones están listas',
+    discountCourtesy: '10% de descuento cortesía de tu conductor'
+  };
+
+  // Route detection: ?join=<sessionId> → passenger, else driver
+  // Harden the parse -- URLSearchParams handles encoding, and we fall back to
+  // a manual scan of location.search if (for any reason) URLSearchParams gave
+  // us nothing. We also trim whitespace/quotes that some QR apps append.
+  // ──────────────────────────────────────────────────────────────────────────
+  function readJoinParam() {
+    try {
+      var qs = window.location.search || '';
+      var sp = new URLSearchParams(qs);
+      var v = sp.get('join');
+      if (v == null || v === '') {
+        // Manual fallback: scan the raw query string ourselves.
+        var raw = qs.replace(/^\?/, '');
+        var parts = raw.split('&');
+        for (var i = 0; i < parts.length; i++) {
+          var eq = parts[i].indexOf('=');
+          var key = eq === -1 ? parts[i] : parts[i].slice(0, eq);
+          if (decodeURIComponent(key) === 'join') {
+            v = eq === -1 ? '' : decodeURIComponent(parts[i].slice(eq + 1));
+            break;
+          }
+        }
+      }
+      if (v == null) return '';
+      return String(v).trim().replace(/^['"]+|['"]+$/g, '');
+    } catch (_) {
+      return '';
+    }
+  }
+
+  var joinSessionId = readJoinParam();
+  var isPassenger = joinSessionId.length > 0;
+  console.log('[ride-mode] route detection: isPassenger=' + isPassenger + ' joinSessionId=' + JSON.stringify(joinSessionId) + ' search=' + JSON.stringify(window.location.search));
+
+  if (isPassenger) {
+    show($('passengerView'));
+    hide($('driverView'));
+    // Fire the passenger boot unconditionally. No auth/state gate -- the only
+    // signal we need is the ?join= param, which we already have.
+    try {
+      bootPassenger();
+    } catch (err) {
+      console.error('[ride-mode] bootPassenger threw:', err && err.message);
+      // Still try the fetch so the passenger gets a real session lookup even
+      // if some UI hook above failed against an unexpected DOM shape.
+      try { fetchPassengerSession().then(function(){}); } catch (_) {}
+    }
+  } else {
+    show($('driverView'));
+    hide($('passengerView'));
+    bootDriver();
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  DRIVER FLOW
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  var driverState = 'setup';      // setup | create_ride | qr_live | humming_live | results_ready | ended
+  var driverSession = null;       // last session payload from server
+  var driverSessionId = null;
+  var driverQrImageUrl = null;
+  var driverJoinUrl = null;
+  var driverRideCode = '------';
+  var driverSelectedVibe = 'Friday Night Drive';
+  var driverRiderCount = 2;
+  var driverPollTimer = null;
+  var driverResultsLoaded = false;
+
+  function bootDriver() {
+    // Vibe pill wiring
+    document.querySelectorAll('#vibeGrid .vibe-pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('#vibeGrid .vibe-pill').forEach(function(p) { p.classList.remove('selected'); });
+        pill.classList.add('selected');
+        driverSelectedVibe = pill.getAttribute('data-vibe');
+      });
+    });
+
+    // Stepper wiring
+    $('riderCountDown').addEventListener('click', function() {
+      if (driverRiderCount > 1) {
+        driverRiderCount--;
+        $('riderCount').textContent = String(driverRiderCount);
+      }
+    });
+    $('riderCountUp').addEventListener('click', function() {
+      if (driverRiderCount < 4) {
+        driverRiderCount++;
+        $('riderCount').textContent = String(driverRiderCount);
+      }
+    });
+
+    showDriverState('setup');
+  }
+
+  function showDriverState(next) {
+    driverState = next;
+    var map = {
+      setup:         'driverSetup',
+      create_ride:   'driverCreate',
+      qr_live:       'driverQr',
+      humming_live:  'driverHumming',
+      results_ready: 'driverResults',
+      ended:         'driverSetup'
+    };
+    Object.keys(map).forEach(function(k) { hide($(map[k])); });
+    show($(map[next]));
+  }
+
+  window.goCreateRide = function() { showDriverState('create_ride'); };
+
+  window.submitCreateRide = async function() {
+    var btn = $('createRideBtn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Creating...'; }
+    try {
+      var res = await fetch('/api/ride-mode/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionName: (driverSelectedVibe || 'Ride') + ' Ride',
+          expectedRiderCount: driverRiderCount,
+          vibePreset: driverSelectedVibe
+        })
+      });
+      var data = await res.json();
+      if (!data.ok || !data.session) throw new Error(data.error || 'Could not create ride');
+
+      driverSession = data.session;
+      driverSessionId = data.session.id;
+      driverQrImageUrl = data.qrImageUrl;
+      driverJoinUrl = data.joinUrl;
+      driverRideCode = buildRideCode(driverSessionId, driverSelectedVibe);
+      driverResultsLoaded = false;
+
+      // Populate QR screen
+      $('driverQrImage').src = driverQrImageUrl;
+      $('driverRideCode').textContent = driverRideCode;
+      $('driverStatusPillText').textContent = 'Riders joining -- ' + driverSelectedVibe;
+
+      showDriverState('qr_live');
+      renderDriverRoster(driverSession);
+      startDriverPolling();
+    } catch (e) {
+      alert(e.message || 'Could not create the ride. Please try again.');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = 'Create Ride'; }
+    }
+  };
+
+  function startDriverPolling() {
+    stopDriverPolling();
+    driverPollTimer = setInterval(pollDriverSession, 4000);
+    pollDriverSession();
+  }
+  function stopDriverPolling() {
+    if (driverPollTimer) { clearInterval(driverPollTimer); driverPollTimer = null; }
+  }
+
+  async function pollDriverSession() {
+    if (!driverSessionId) return;
+    try {
+      var res = await fetch('/api/ride-mode/session/' + driverSessionId + '?viewer=driver');
+      var data = await res.json();
+      if (!data.ok || !data.session) return;
+      driverSession = data.session;
+      onDriverSessionUpdate(data.session);
+    } catch (_) { /* soft-fail polling */ }
+  }
+
+  function onDriverSessionUpdate(sess) {
+    // Count non-driver participants who have joined, started hum, or finished hum.
+    var passengers = (sess.participants || []).filter(function(p) { return p.name !== 'Driver'; });
+    var hummedPassengers = passengers.filter(function(p) { return p.hasHumData; }).length;
+    var expected = sess.expectedCount || driverRiderCount || 0;
+
+    // Update join progress
+    $('driverJoinProgress').textContent = passengers.length + ' of ' + expected + ' joined';
+
+    // State transitions
+    if (driverState === 'qr_live' || driverState === 'humming_live') {
+      // Move to humming_live once at least one passenger has joined AND someone is humming,
+      // OR all expected passengers have joined.
+      var anyHumming = passengers.some(function(p) { return p.hasHumData; });
+      var allJoined = passengers.length >= expected && expected > 0;
+      if (anyHumming || allJoined) {
+        if (driverState !== 'humming_live') {
+          showDriverState('humming_live');
+          $('driverStatusPillText').textContent = 'Riders humming -- ' + (sess.vibePreset || driverSelectedVibe);
+        }
+      }
+    }
+
+    // Render rosters for the visible state
+    if (driverState === 'qr_live')          renderDriverRoster(sess, 'driverRoster');
+    else if (driverState === 'humming_live') renderDriverRoster(sess, 'driverHummingRoster');
+
+    // Transition to results when all expected passengers have hummed.
+    if (!driverResultsLoaded
+        && expected > 0
+        && hummedPassengers >= expected
+        && driverState !== 'results_ready') {
+      loadDriverResults();
+    }
+  }
+
+  function renderDriverRoster(sess, targetId) {
+    var target = $(targetId || 'driverRoster');
+    if (!target) return;
+    var participants = sess.participants || [];
+    var expected = sess.expectedCount || driverRiderCount || 0;
+
+    var rows = [];
+    participants.forEach(function(p) {
+      if (p.name === 'Driver') {
+        // Host is not a rider. Only show "Humming" / "Done" if the driver
+        // actually hummed (rare -- Option B). Otherwise "Host" / "Managing".
+        var driverPill = 'Host', driverCls = 'pill-ready';
+        if (p.hasHumData) { driverPill = 'Done'; driverCls = 'pill-done'; }
+        rows.push({
+          name: 'Driver', role: 'Host', pill: driverPill, cls: driverCls
+        });
+      } else {
+        var pill = 'Joined', cls = 'pill-joined';
+        if (p.hasHumData) { pill = 'Done'; cls = 'pill-done'; }
+        else if (p.status === 'current') { pill = 'Humming'; cls = 'pill-humming'; }
+        rows.push({
+          name: p.name, role: p.rolePreference || 'Rider', pill: pill, cls: cls
+        });
+      }
+    });
+
+    // Pad with waiting rows up to the expected passenger count + 1 (driver)
+    var totalSeats = (expected || 0) + 1;
+    while (rows.length < totalSeats) {
+      rows.push({ name: 'Guest', role: '', pill: 'Waiting', cls: 'pill-waiting' });
+    }
+
+    target.innerHTML = rows.map(function(r) {
+      return '<div class="roster-row">' +
+        '<div><div class="roster-name">' + esc(r.name) + '</div>' +
+        (r.role ? '<div class="roster-role">' + esc(r.role) + '</div>' : '') +
+        '</div>' +
+        '<div></div>' +
+        '<span class="pill ' + r.cls + '">' + esc(r.pill) + '</span>' +
+        '</div>';
+    }).join('');
+  }
+
+  // ═════════════════════════════════════════════════════════════════════════
+  //  Shared result-card renderer -- copied verbatim from index.html
+  //  (renderSongCard, getTier, getEra, getTags, isFamiliar, getSongLink, toSlug)
+  //  with the _renderIdx counter renamed to _rideRenderIdx to avoid collision.
+  // ═════════════════════════════════════════════════════════════════════════
+  var userHigh = 69;          // updated when results load (group hi)
+  var _rideRenderIdx = 0;
+  // Stubs for primary HumMatch hooks not used in Ride Mode (keep verbatim card logic intact).
+  function logHumMatch() {}
+  function togglePlaylistSong() { /* Stage 16: persist to backend */ }
+  function openKaraoke() { /* Stage 16: hand off to song page karaoke */ }
+
+  function toSlug(s) {
+    return String(s || '').toLowerCase()
+      .replace(/[^a-z0-9 -]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+  }
+  function getSongLink(slug) {
+    var isSpanish = window.location.pathname.startsWith('/es/');
+    return isSpanish ? '/es/cancion/' + slug : '/song/' + slug;
+  }
+
+  // Confidence tier (verbatim)
+  function getTier(score) {
+    if (score >= 0.78) return { key: 'nail',   label: '✅ Nail It',    cls: 'tier-nail' };
+    if (score >= 0.60) return { key: 'strong', label: '🎯 Strong Fit', cls: 'tier-strong' };
+    return                     { key: 'stretch',label: '💪 Stretch',   cls: 'tier-stretch' };
+  }
+
+  // Familiar song keywords (verbatim from index.html)
+  var FAMILIAR_WORDS = ['love','night','dream','heart','world','baby','fire','home','run','free','time','life','forever','angel','sky','gold','girl','dancing','shine','feel','hello','don\'t','can\'t','won\'t','isn\'t'];
+  function isFamiliar(title) {
+    var t = String(title || '').toLowerCase();
+    return FAMILIAR_WORDS.some(function(w) { return t.indexOf(w) !== -1; });
+  }
+
+  // Genre / mood / context tagging (verbatim, simplified language matchers)
+  function getTags(s) {
+    var t = String((s.title || '') + ' ' + (s.artist || '')).toLowerCase();
+    var tags = [];
+    if (/elvis|sinatra|cash|dean martin|tony bennett|nat king/i.test(t)) tags.push('classic');
+    if (/beatles|queen|bowie|journey|bon jovi|aerosmith|petty|springsteen|eagles|guns n roses|led zeppelin|u2|the who|rolling stones|fleetwood mac|creedence|metallica|nirvana|pearl jam|foo fighters|green day|weezer|radiohead|oasis|the killers|the cure|linkin park|tool|pantera|van halen/i.test(t)) tags.push('rock');
+    if (/ed sheeran|bruno mars|michael jackson|katy perry|taylor swift|adele|beyonce|lady gaga|ariana grande|justin bieber|dua lipa|charlie puth|shawn mendes|halsey|billie eilish|olivia rodrigo|harry styles|the weeknd|post malone|sam smith|john legend|sia|kelly clarkson|pink|britney spears|coldplay|imagine dragons|maroon 5|onerepublic|jason mraz/i.test(t)) tags.push('pop');
+    if (/cash|stapleton|morgan wallen|luke combs|zach bryan|tyler childers|luke bryan|blake shelton|keith urban|kenny chesney|garth brooks|tim mcgraw|alan jackson|carrie underwood|miranda lambert|kacey musgraves|dolly parton|willie nelson|kenny rogers|hank williams|patsy cline|merle haggard|shania twain|faith hill|george strait|reba mcentire|toby keith|zac brown|jason aldean|eric church|brad paisley/i.test(t)) tags.push('country');
+    if (/beyonce|alicia keys|marvin gaye|sam cooke|otis redding|al green|stevie wonder|aretha franklin|amy winehouse|usher|chris brown|rihanna|frank ocean|john legend|whitney houston|janet jackson|sza|h\.e\.r/i.test(t)) tags.push('rnb');
+    if (/drake|kanye|kendrick lamar|jay.z|eminem|post malone|travis scott|lil wayne|lil baby|future|21 savage|cardi b|nicki minaj|j cole|chance|childish gambino|hip.hop|hip hop|rap/i.test(t)) tags.push('hiphop');
+    if (/shakira|j balvin|bad bunny|marc anthony|luis miguel|jennifer lopez|ricky martin|enrique iglesias|pitbull|maluma|ozuna|daddy yankee|reggaeton|latin|bachata|salsa|camila cabello|gloria estefan|carlos santana/i.test(t)) tags.push('latin');
+    if (/lauren daigle|hillsong|chris tomlin|casting crowns|tauren wells|matthew west|amy grant|skillet|newsboys|mercyme|jeremy camp|elevation|bethel|brandon lake|zach williams|phil wickham/i.test(t)) tags.push('christian');
+    if (/radiohead|arcade fire|the national|fleet foxes|bon iver|sufjan stevens|vampire weekend|the lumineers|mumford|lord huron|father john misty|phoebe bridgers|hozier|tame impala/i.test(t)) tags.push('indie');
+    if (/sinatra|nat king cole|ella fitzgerald|michael bublé|michael buble|billie holiday|louis armstrong|tony bennett|dean martin|diana krall|norah jones|frank sinatra|peggy lee|sarah vaughan|bossa nova/i.test(t)) tags.push('jazz');
+    if (/abba|bee gees|donna summer|earth wind|kool & the gang|chic|gloria gaynor|james brown|jackson 5|disco|funky/i.test(t)) tags.push('disco');
+    if (/party|dance|tonight|celebrate|good time/i.test(t)) tags.push('party');
+    if (isFamiliar(s.title)) tags.push('familiar');
+    if (tags.indexOf('rock') !== -1 || tags.indexOf('classic') !== -1) tags.push('car');
+    if (tags.indexOf('party') !== -1) tags.push('group');
+    return tags;
+  }
+
+  // Era tagging (verbatim)
+  function getEra(s) {
+    var yr = s.year || 0;
+    if (yr >= 2015) return 'recent';
+    if (yr >= 2000) return '2000s';
+    if (yr >= 1990) return '90s';
+    if (yr >= 1980) return '80s';
+    if (yr >= 1970) return '70s';
+    return 'classic';
+  }
+
+  // Convert server-side scored row {title,artist,lo,hi,fitPct,year} into the
+  // shape renderSongCard expects.
+  function enrichForCard(row) {
+    var score = (typeof row.score === 'number') ? row.score
+              : (typeof row.fitScore === 'number') ? (row.fitScore / 100)
+              : (typeof row.fitPct   === 'number') ? (row.fitPct   / 100)
+              : 0;
+    var s = {
+      title:    row.title || '',
+      artist:   row.artist || '',
+      score:    score,
+      lo:       (typeof row.lo === 'number') ? row.lo : 0,
+      hi:       (typeof row.hi === 'number') ? row.hi : 0,
+      year:     row.year || null,
+      lang:     row.lang || row.language || 'en',
+      slug:     row.slug || (toSlug(row.title || '') + '-' + toSlug(row.artist || ''))
+    };
+    s.tier     = getTier(s.score);
+    s.tags     = getTags(s);
+    s.familiar = isFamiliar(s.title);
+    return s;
+  }
+
+  // Render song card (verbatim from index.html line ~154348, with _renderIdx -> _rideRenderIdx)
+  function renderSongCard(s) {
+    var idx = _rideRenderIdx++;
+    logHumMatch(s.title, s.artist, Math.round((s.score || 0) * 100));
+    var tags = s.tags || [];
+    var era  = getEra(s);
+    var tierBadge = '<span class="tier-badge ' + s.tier.cls + '">' + s.tier.label + '</span>';
+    var scorePct = Math.round((s.score || 0) * 100);
+    var songRange = (s.hi || 0) - (s.lo || 0);
+    var hiDiff = Math.abs((s.hi || 0) - userHigh);
+    var isDuet = /duet/i.test(s.title) || songRange >= 20;
+    var isStretchRange = s.tier.key === 'stretch';
+    var catBadge = '';
+    if (scorePct >= 85) { catBadge = '<span class="cat-badge cat-best">🎯 Best Match</span>'; }
+    else if (idx < 3) { catBadge = '<span class="cat-badge cat-top">⭐ Top Pick</span>'; }
+    else if (hiDiff <= 2 && s.hi > userHigh) { catBadge = '<span class="cat-badge cat-stretch">🔥 Stretch</span>'; }
+    else if (isDuet) { catBadge = '<span class="cat-badge cat-duet">🎤 Great Duet</span>'; }
+    else if (isStretchRange) { catBadge = '<span class="cat-badge cat-trans">🔑 Try with Transposition</span>'; }
+    var titleSafe  = String(s.title  || '').replace(/'/g,"\\'");
+    var artistSafe = String(s.artist || '').replace(/'/g,"\\'");
+    var songKey = (s.title + '__' + s.artist).replace(/['"]/g,'');
+    var genreLabel = tags.indexOf('rock')   !== -1 ? 'Rock'
+                  : tags.indexOf('pop')    !== -1 ? 'Pop'
+                  : tags.indexOf('country')!== -1 ? 'Country'
+                  : tags.indexOf('classic')!== -1 ? 'Classic' : '';
+    // Ride Mode: Sing It goes directly to YouTube lyrics -- no song detail page, no playlist
+    var ytQuery = encodeURIComponent(s.title + ' ' + s.artist + ' ' + (RIDE_LOCALE === 'es' ? 'letra' : 'lyrics'));
+    var ytUrl   = 'https://www.youtube.com/results?search_query=' + ytQuery;
+    return '<li class="song-item"' +
+      ' id="song-' + songKey + '"' +
+      ' data-tier="' + s.tier.key + '"' +
+      ' data-tags="' + tags.join(',') + '"' +
+      ' data-era="' + era + '"' +
+      ' data-lang="' + (s.lang || 'en') + '"' +
+      ' data-familiar="' + s.familiar + '">' +
+      '<div class="song-item-top">' +
+        '<a href="' + ytUrl + '" target="_blank" rel="noopener" class="song-title" style="text-decoration:none;color:inherit;">' + s.title + '</a>' +
+        tierBadge +
+      '</div>' +
+      '<div class="song-meta">' +
+        '<span>' + s.artist + '</span>' +
+        (genreLabel ? '<span class="dot">·</span><span>' + genreLabel + '</span>' : '') +
+        (s.year     ? '<span class="dot">·</span><span>' + s.year     + '</span>' : '') +
+        (s.score    ? '<span class="dot">·</span><span style="color:#4ade80;font-weight:700;">✓ ' + Math.round(s.score * 100) + '% match</span>' : '') +
+      '</div>' +
+      catBadge +
+      '<div class="song-bottom" style="justify-content:flex-end;">' +
+        '<a href="' + ytUrl + '" target="_blank" rel="noopener" class="sing-btn" style="text-decoration:none;color:inherit;display:inline-block;">▶ Sing It</a>' +
+      '</div>' +
+    '</li>';
+  }
+
+  // Expose stubs to inline onclick attributes (renderSongCard generates these).
+  window.openKaraoke = openKaraoke;
+  window.togglePlaylistSong = togglePlaylistSong;
+
+  async function loadDriverResults() {
+    if (!driverSessionId) return;
+    driverResultsLoaded = true;
+    try {
+      var res = await fetch('/api/ride-mode/session/' + driverSessionId + '/results');
+      var data = await res.json();
+      if (!data.ok || !data.scored) { driverResultsLoaded = false; return; }
+      renderDriverResults(data.scored);
+      showDriverState('results_ready');
+    } catch (_) {
+      driverResultsLoaded = false;
+    }
+  }
+
+  function renderDriverResults(scored) {
+    var list = $('driverTop5');
+    if (!list) return;
+    if (!scored || !scored.results || scored.results.length === 0) {
+      list.innerHTML = '<p class="muted">Results are still calculating. Refresh in a moment.</p>';
+      return;
+    }
+    var notice = $('driverResultsNotice');
+    if (scored.hasRealData === false) {
+      notice.style.display = '';
+      notice.textContent = 'No hum data captured. Showing general suggestions.';
+    } else if (scored.hummedCount != null && scored.participantCount != null && scored.hummedCount < scored.participantCount) {
+      notice.style.display = '';
+      notice.textContent = 'Based on ' + scored.hummedCount + ' of ' + scored.participantCount + ' riders who hummed.';
+    }
+    // Driver high-note for category badge logic. Default to the group hi if known.
+    userHigh = (scored && typeof scored.groupHi === 'number') ? scored.groupHi : 69;
+    _rideRenderIdx = 0;
+    var enriched = scored.results.slice(0, 5).map(enrichForCard);
+    // Render as a `your-songs` UL so the shared CSS applies (matches primary HumMatch).
+    list.outerHTML = '<ul class="your-songs top5" id="driverTop5">' + enriched.map(renderSongCard).join('') + '</ul>';
+  }
+
+  window.endRide = async function() {
+    if (!driverSessionId) { showDriverState('setup'); return; }
+    stopDriverPolling();
+    try {
+      await fetch('/api/ride-mode/session/' + driverSessionId + '/end', { method: 'POST' });
+    } catch (_) {}
+    // Reset state
+    driverSession = null;
+    driverSessionId = null;
+    driverQrImageUrl = null;
+    driverJoinUrl = null;
+    driverResultsLoaded = false;
+    showDriverState('setup');
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  PASSENGER FLOW
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  var passengerState = 'session_join'; // session_join | joined | humming | completed_waiting | results_ready | post_ride_persisted
+  var passengerSession = null;
+  var passengerParticipantId = null;
+  var passengerDiscountCode = null;
+  var passengerDiscountExpires = null;
+  var passengerDiscountPercent = 10;
+  var passengerPollTimer = null;
+  var passengerDriverAlias = null;
+  var passengerVibe = null;
+  var passengerRideCode = '------';
+
+  function bootPassenger() {
+    console.log('[ride-mode] bootPassenger start -- joinSessionId=' + JSON.stringify(joinSessionId));
+
+    // Show loading state while we fetch session details. Use safe DOM writes
+    // so a missing element never short-circuits the fetch below.
+    function safeSetText(id, text) {
+      try {
+        var el = $(id);
+        if (el) el.textContent = text;
+      } catch (_) { /* non-fatal */ }
+    }
+    safeSetText('passengerBannerTitle', 'Connecting...');
+    safeSetText('passengerBannerCode', '------');
+
+    // Guard against an empty joinSessionId making it this far. This is belt
+    // and suspenders -- the route check above already filters on truthy.
+    if (!joinSessionId) {
+      console.warn('[ride-mode] bootPassenger called without joinSessionId -- bailing');
+      safeSetText('passengerBannerTitle', 'Ride session not found');
+      safeSetText('passengerJoinTitle', "This ride session wasn't found. The driver may need to create a new ride.");
+      return;
+    }
+
+    // Pull initial session details to render banner copy before the rider joins.
+    fetchPassengerSession().then(function(result) {
+      var sess = result && result.session ? result.session : null;
+      var status = result ? result.status : 'unknown';
+
+      if (!sess) {
+        // Session gone on backend. Try persisted post-ride state first -- we do
+        // NOT want to kick a passenger to a dead screen if we still have their
+        // local results + discount.
+        if (loadPersistedPostRide()) return;
+
+        // Session not found and no persisted state -- clean error
+        $('passengerBannerTitle').textContent = 'Ride session not found';
+        $('passengerBannerCode').textContent = '------';
+        var form = $('passengerJoinForm');
+        if (form) form.style.display = 'none';
+
+        if (status === 'network_error') {
+          $('passengerBannerTitle').textContent = 'Connection error';
+          $('passengerJoinTitle').textContent = 'Could not connect to the server. Check your connection and try again.';
+        } else if (status === 'not_found') {
+          $('passengerBannerTitle').textContent = 'Ride session not found';
+          $('passengerJoinTitle').textContent = "This ride session wasn't found. The driver may need to create a new ride.";
+        } else {
+          $('passengerBannerTitle').textContent = 'Ride session not found';
+          $('passengerJoinTitle').textContent = "This ride session wasn't found. The driver may need to create a new ride.";
+        }
+        return;
+      }
+
+      // Session found -- check lifecycle state.
+      if (!sess.isActive && sess.isComplete) {
+        $('passengerBannerTitle').textContent = 'Ride ended';
+        $('passengerBannerCode').textContent = '------';
+        $('passengerJoinTitle').textContent = 'This ride has ended.';
+        var form2 = $('passengerJoinForm');
+        if (form2) form2.style.display = 'none';
+        return;
+      }
+      if (!sess.isActive) {
+        $('passengerBannerTitle').textContent = 'Session inactive';
+        $('passengerBannerCode').textContent = '------';
+        $('passengerJoinTitle').textContent = 'This session is no longer active.';
+        var form3 = $('passengerJoinForm');
+        if (form3) form3.style.display = 'none';
+        return;
+      }
+
+      passengerVibe = sess.vibePreset || 'Ride';
+      passengerRideCode = buildRideCode(joinSessionId, passengerVibe);
+      passengerDriverAlias = sess.driverAlias || null;
+      var bannerTitle = passengerDriverAlias
+        ? ('Connected to ' + passengerDriverAlias + "'s Ride")
+        : 'Connected to the ride';
+      $('passengerBannerTitle').textContent = bannerTitle;
+      $('passengerBannerCode').textContent = passengerRideCode;
+      $('passengerJoinTitle').textContent = 'Join ' + (passengerVibe || 'the Ride');
+
+      // If the session is already complete/inactive and we have persisted state,
+      // go straight to post_ride_persisted (skip join form).
+      if ((sess.isComplete || !sess.isActive) && loadPersistedPostRide()) return;
+    });
+  }
+
+  async function fetchPassengerSession() {
+    try {
+      var q = passengerParticipantId
+        ? '?viewer=passenger&participantId=' + encodeURIComponent(passengerParticipantId)
+        : '?viewer=passenger';
+      var url = '/api/ride-mode/session/' + encodeURIComponent(joinSessionId) + q;
+      console.log('[ride-mode] fetchPassengerSession ->', url);
+      var res = await fetch(url);
+      if (res.status === 404) {
+        return { session: null, status: 'not_found' };
+      }
+      var data = await res.json();
+      if (!data.ok || !data.session) {
+        return { session: null, status: 'not_found' };
+      }
+      passengerSession = data.session;
+      return { session: data.session, status: 'ok' };
+    } catch (e) {
+      console.error('[ride-mode] fetchPassengerSession network error:', e && e.message);
+      return { session: null, status: 'network_error' };
+    }
+  }
+
+  function showPassengerState(next) {
+    passengerState = next;
+    var map = {
+      session_join:         'passengerJoin',
+      joined:               'passengerJoin',
+      humming:              'passengerHumming',
+      completed_waiting:    'passengerWaiting',
+      results_ready:        'passengerResults',
+      post_ride_persisted:  'passengerResults'
+    };
+    Object.keys(map).forEach(function(k) { hide($(map[k])); });
+    show($(map[next]));
+  }
+
+  window.passengerJoinAndHum = async function() {
+    var name = ($('passengerName').value || '').trim();
+    var role = $('passengerPart').value || 'Either';
+    var err = $('passengerJoinError');
+    if (!name) {
+      err.style.display = ''; err.textContent = 'Please enter your name.';
+      return;
+    }
+    err.style.display = 'none';
+    var btn = $('passengerJoinBtn');
+    btn.disabled = true;
+
+    try {
+      var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ participantName: name, preference: role })
+      });
+      var data = await res.json();
+      if (!data.ok || !data.session) {
+        throw new Error(data.error || 'Could not join this ride.');
+      }
+
+      // Discover my own participantId. The join endpoint returns the full (driver)
+      // view with newParticipantId attached; fall back to self.id on a passenger view.
+      if (data.session.newParticipantId) {
+        passengerParticipantId = data.session.newParticipantId;
+      } else if (data.session.self && data.session.self.id) {
+        passengerParticipantId = data.session.self.id;
+      }
+      passengerSession = data.session;
+      if (data.discountCode) {
+        passengerDiscountCode = data.discountCode;
+        passengerDiscountExpires = data.discountExpiresAt || null;
+        passengerDiscountPercent = data.discountPercent || 10;
+      }
+      showPassengerState('humming');
+      // Do NOT auto-call startPassengerHumCapture -- user must tap "Start Humming" (iOS gesture requirement)
+      // The gate button in the humming section will call pxUserGestureStartMic() on tap.
+    } catch (e) {
+      err.style.display = ''; err.textContent = e.message || 'Could not join. Try again.';
+    } finally {
+      btn.disabled = false;
+    }
+  };
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // Passenger hum capture -- copied verbatim from index.html (lines ~153680-153900)
+  // Renamed globals (audioCtx -> audioCtx2 etc) avoided since we're inside an IIFE.
+  // After all 3 phases complete, submits to ride session instead of showResults().
+  // ──────────────────────────────────────────────────────────────────────────
+
+  // ── MIDI helpers (verbatim from index.html) ──
+  var NOTE_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+  function midiToName(midi) {
+    var oct = Math.floor(midi / 12) - 1;
+    return NOTE_NAMES[midi % 12] + oct;
+  }
+  function freqToMidi(hz) {
+    return Math.round(12 * Math.log2(hz / 440) + 69);
+  }
+
+  // ── PITCH DETECTION: autocorrelation (verbatim from index.html) ──
+  function detectPitch(buf, sampleRate) {
+    var SIZE = buf.length;
+    var MAX_SAMPLES = Math.floor(SIZE / 2);
+    var MIN_LAG = Math.floor(sampleRate / 1400);
+    var MAX_LAG = Math.min(MAX_SAMPLES, Math.floor(sampleRate / 50));
+
+    var rmsTotal = 0;
+    for (var i = 0; i < SIZE; i++) rmsTotal += buf[i] * buf[i];
+    rmsTotal = Math.sqrt(rmsTotal / SIZE);
+    if (rmsTotal < 0.001) return -1;
+
+    var best = -1, bestCorr = -1;
+    var prevCorr = 0, rising = false;
+
+    for (var t = MIN_LAG; t < MAX_LAG; t++) {
+      var corr = 0;
+      for (var k = 0; k < MAX_SAMPLES; k++) corr += buf[k] * buf[k + t];
+      corr = corr / (MAX_SAMPLES * rmsTotal * rmsTotal + 0.001);
+
+      if (corr > prevCorr) {
+        rising = true;
+      } else if (rising && corr < prevCorr) {
+        if (prevCorr > bestCorr && prevCorr > 0.45) {
+          bestCorr = prevCorr;
+          best = t - 1;
+        }
+        rising = false;
+      }
+      prevCorr = corr;
+      if (bestCorr > 0.92) break;
+    }
+
+    if (best < MIN_LAG) return -1;
+    var y1 = best > MIN_LAG ? (function(){ var c=0; for(var i=0;i<MAX_SAMPLES;i++) c+=buf[i]*buf[i+best-1]; return c/(MAX_SAMPLES*rmsTotal*rmsTotal+0.001); })() : bestCorr;
+    var y3 = best < MAX_LAG-1 ? (function(){ var c=0; for(var i=0;i<MAX_SAMPLES;i++) c+=buf[i]*buf[i+best+1]; return c/(MAX_SAMPLES*rmsTotal*rmsTotal+0.001); })() : bestCorr;
+    var denom = 2*(2*bestCorr - y1 - y3);
+    var refined = best + (denom !== 0 ? (y1 - y3) / denom : 0);
+    return sampleRate / refined;
+  }
+
+  function spectralCentroid(freqData) {
+    var num = 0, denom = 0;
+    for (var i = 0; i < freqData.length; i++) {
+      var mag = freqData[i] / 255;
+      num += i * mag;
+      denom += mag;
+    }
+    return denom > 0 ? num / denom : 0;
+  }
+
+  // ── Audio + phase state (mirrors index.html names) ──
+  var audioCtx = null, analyser = null, source = null, stream = null;
+  var phase = 0;
+  var capturing = false;
+  var captureTimer = null;
+  var capturedNotes = [null, null, null];
+  var capturedBrightness = [null, null, null];
+
+  var PHASES = [
+    { label:'HUM 1 OF 3', title:'Hum your lowest note',  sub:'Go as deep as you comfortably can. Hold it steady.', emoji:'⬇️' },
+    { label:'HUM 2 OF 3', title:'Now your normal voice',  sub:'Just hum like you\'re humming a song to yourself.', emoji:'🎵' },
+    { label:'HUM 3 OF 3', title:'Now go high',            sub:'As high as you comfortably can. Hold it steady.', emoji:'⬆️' }
+  ];
+
+  // ── Countdown ring animation (verbatim) ──
+  var RING_CIRCUMFERENCE = 2 * Math.PI * 54;
+  var ringAnimFrame = null;
+
+  function animateRing(durationMs, onComplete) {
+    var ring = document.getElementById('countdown-ring');
+    var numEl = document.getElementById('ring-number');
+    var labelEl = document.getElementById('ring-label');
+    if (!ring) return;
+
+    ring.style.strokeDasharray = RING_CIRCUMFERENCE;
+    ring.style.strokeDashoffset = '0';
+    ring.style.transition = 'none';
+
+    var startTime = performance.now();
+    var lastSecond = Math.ceil(durationMs / 1000);
+    if (numEl) numEl.textContent = lastSecond;
+    if (labelEl) labelEl.textContent = 'seconds';
+
+    function tick(now) {
+      var elapsed = now - startTime;
+      var progress = Math.min(elapsed / durationMs, 1);
+      var offset = progress * RING_CIRCUMFERENCE;
+      ring.style.strokeDashoffset = offset;
+
+      var remaining = Math.ceil((durationMs - elapsed) / 1000);
+      if (remaining !== lastSecond && remaining >= 0) {
+        lastSecond = remaining;
+        if (numEl) numEl.textContent = remaining <= 0 ? '✓' : remaining;
+      }
+
+      if (progress < 1) {
+        ringAnimFrame = requestAnimationFrame(tick);
+      } else {
+        if (numEl) numEl.textContent = '✓';
+        if (labelEl) labelEl.textContent = '';
+        if (onComplete) onComplete();
+      }
+    }
+    ringAnimFrame = requestAnimationFrame(tick);
+  }
+
+  function resetRing() {
+    if (ringAnimFrame) { cancelAnimationFrame(ringAnimFrame); ringAnimFrame = null; }
+    var ring = document.getElementById('countdown-ring');
+    if (ring) { ring.style.strokeDashoffset = '0'; ring.style.transition = 'none'; }
+    var numEl = document.getElementById('ring-number');
+    if (numEl) numEl.textContent = '3';
+  }
+
+  function showPhaseSuccess(text) {
+    return new Promise(function(resolve) {
+      var overlay = document.getElementById('phase-success');
+      var textEl = document.getElementById('phase-success-text');
+      if (textEl) textEl.textContent = text || 'Got it!';
+      if (overlay) overlay.classList.add('show');
+      setTimeout(function() {
+        if (overlay) overlay.classList.remove('show');
+        resolve();
+      }, 900);
+    });
+  }
+
+  function updatePhaseUI() {
+    var p = PHASES[phase];
+    var lblEl = document.getElementById('phase-label');
+    var titleEl = document.getElementById('phase-title');
+    var subEl = document.getElementById('phase-sub');
+    if (lblEl) lblEl.textContent = p.label;
+    if (titleEl) titleEl.textContent = p.title;
+    if (subEl) subEl.textContent = p.sub;
+    var emojiEl = document.getElementById('phase-emoji');
+    if (emojiEl) emojiEl.textContent = p.emoji || '🎵';
+    var statusEl = document.getElementById('auto-status');
+    if (statusEl) { statusEl.textContent = '🎤 Listening...'; statusEl.className = 'auto-status listening'; }
+    resetRing();
+    [0,1,2].forEach(function(i) {
+      var dot = document.getElementById('dot-'+i);
+      if (!dot) return;
+      dot.classList.remove('active','done');
+      if (i < phase) dot.classList.add('done');
+      if (i === phase) dot.classList.add('active');
+    });
+  }
+
+  // No-op tracker so we can drop the verbatim block in unmodified.
+  function hmTrack() {}
+
+  function runPhaseCapture() {
+    if (capturing) return;
+    hmTrack('hum_start', { phase: phase });
+    capturing = true;
+
+    var statusEl = document.getElementById('auto-status');
+    if (statusEl) { statusEl.innerHTML = '<span style="color:#A855F7;">Humming... hold it steady</span>'; statusEl.className = 'auto-status listening'; }
+
+    var pitches = [];
+    var brightnesses = [];
+    var buf = new Float32Array(analyser.fftSize);
+    var freqBuf = new Uint8Array(analyser.frequencyBinCount);
+
+    animateRing(3000, null);
+
+    var interval = setInterval(function() {
+      analyser.getFloatTimeDomainData(buf);
+      analyser.getByteFrequencyData(freqBuf);
+
+      var rms = 0;
+      for (var i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
+      rms = Math.sqrt(rms / buf.length);
+      if (rms < 0.001) {
+        if (statusEl) statusEl.innerHTML = '🎤 Listening... hum now!';
+        return;
+      }
+
+      var freq = detectPitch(buf, audioCtx.sampleRate);
+      if (freq > 50 && freq < 1400) {
+        var midi = freqToMidi(freq);
+        pitches.push(midi);
+        brightnesses.push(spectralCentroid(freqBuf));
+
+        var pn = document.getElementById('pitch-note'); if (pn) pn.textContent = midiToName(midi);
+        var ph = document.getElementById('pitch-hz');   if (ph) ph.textContent = Math.round(freq) + ' Hz';
+        var pb = document.getElementById('pitch-bar');
+        if (pb) {
+          var pct = Math.min(100, Math.max(0, ((midi - 36) / 54) * 100));
+          pb.style.width = pct + '%';
+        }
+
+        if (statusEl) {
+          if (rms > 0.02) { statusEl.innerHTML = '<span style="color:#22C55E;">✓ Good, keep humming!</span>'; }
+          else { statusEl.innerHTML = '<span style="color:#F59E0B;">Hum a bit louder</span>'; }
+        }
+      } else {
+        if (statusEl && rms > 0.001) statusEl.innerHTML = '<span style="color:#F59E0B;">Hum a bit louder</span>';
+      }
+    }, 100);
+
+    captureTimer = setTimeout(async function() {
+      clearInterval(interval);
+      capturing = false;
+
+      if (pitches.length < 3) {
+        if (statusEl) { statusEl.innerHTML = '<span style="color:#F59E0B;">Didn\'t catch that, trying again...</span>'; }
+        resetRing();
+        setTimeout(function() { runPhaseCapture(); }, 1200);
+        return;
+      }
+
+      pitches.sort(function(a, b) { return a - b; });
+      var median = pitches[Math.floor(pitches.length / 2)];
+      capturedNotes[phase] = median;
+
+      var avgBrightness = brightnesses.reduce(function(a, b) { return a + b; }, 0) / brightnesses.length;
+      var normBrightness = Math.min(100, Math.round((avgBrightness / (analyser.frequencyBinCount / 8)) * 100));
+      capturedBrightness[phase] = normBrightness;
+
+      var ids = ['low-note', 'mid-note', 'high-note'];
+      var idEl = document.getElementById(ids[phase]);
+      if (idEl) idEl.textContent = midiToName(median);
+
+      if (phase < 2) {
+        await showPhaseSuccess('Got it! ' + midiToName(median));
+        phase++;
+        updatePhaseUI();
+        setTimeout(function() { runPhaseCapture(); }, 600);
+      } else {
+        await showPhaseSuccess('All done!');
+        if (statusEl) { statusEl.innerHTML = '<span style="color:#22C55E;">🔍 Submitting your hum...</span>'; }
+        setTimeout(function() { pxSubmitHum(capturedNotes, capturedBrightness); }, 500);
+      }
+    }, 3000);
+  }
+
+  function pxStopAudio() {
+    capturing = false;
+    if (captureTimer) { clearTimeout(captureTimer); captureTimer = null; }
+    if (ringAnimFrame) { cancelAnimationFrame(ringAnimFrame); ringAnimFrame = null; }
+    if (stream) { try { stream.getTracks().forEach(function(t) { t.stop(); }); } catch(_) {} stream = null; }
+    if (audioCtx) { try { audioCtx.close(); } catch(_) {} audioCtx = null; }
+    analyser = null; source = null;
+  }
+
+  // iOS Safari requires a direct tap to authorize mic. The gate button calls this synchronously.
+  window.pxUserGestureStartMic = function() {
+    // Must be called directly from a tap handler -- iOS Safari user gesture requirement.
+    console.log('[pxMic] pxUserGestureStartMic called');
+    var gateEl  = document.getElementById('pxMicGate');
+    var ringEl  = document.getElementById('pxHumRingArea');
+    var statusEl = document.getElementById('auto-status');
+
+    if (gateEl) gateEl.classList.add('hidden');
+    if (ringEl) ringEl.classList.remove('hidden');
+    if (statusEl) statusEl.innerHTML = '🎤 Connecting to microphone...';
+
+    // Create AudioContext synchronously inside the gesture so iOS allows mic access.
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      console.log('[pxMic] AudioContext created, state:', audioCtx.state);
+    } catch (e) {
+      console.error('[pxMic] AudioContext failed:', e.name, e.message);
+      if (statusEl) statusEl.innerHTML = '<span style="color:#F87171;">Audio not supported in this browser.</span>';
+      return;
+    }
+
+    // Now call the async startPassengerHumCapture which will getUserMedia.
+    startPassengerHumCapture();
+  };
+
+  async function startPassengerHumCapture() {
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        try { await audioCtx.resume(); } catch(e) {}
+      }
+      console.log('[pxMic] AudioContext ready, state:', audioCtx.state);
+      console.log('[pxMic] calling getUserMedia...');
+      stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } });
+      console.log('[pxMic] getUserMedia resolved, starting capture');
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 4096;
+      source = audioCtx.createMediaStreamSource(stream);
+      source.connect(analyser);
+      if (audioCtx.state === 'suspended') {
+        try { await audioCtx.resume(); } catch(e) {}
+      }
+      var statusElOk = document.getElementById('auto-status');
+      if (statusElOk) statusElOk.innerHTML = '🎤 Listening...';
+    } catch (e) {
+      console.error('[pxMic] mic init failed:', e.name, e.message);
+      var statusEl = document.getElementById('auto-status');
+      var gateEl   = document.getElementById('pxMicGate');
+      var ringEl   = document.getElementById('pxHumRingArea');
+      var hintEl   = document.getElementById('pxMicGateHint');
+      if (statusEl) statusEl.innerHTML = '';
+      if (ringEl)   ringEl.classList.add('hidden');
+      if (gateEl)   gateEl.classList.remove('hidden');
+      if (hintEl)   hintEl.textContent = 'Microphone access is needed to capture your hum. Tap to try again.';
+      var btn = document.getElementById('pxStartHumBtn');
+      if (btn) btn.textContent = 'Try Again';
+      return;
+    }
+
+    phase = 0;
+    capturedNotes = [null, null, null];
+    capturedBrightness = [null, null, null];
+    capturing = false;
+
+    updatePhaseUI();
+    setTimeout(function() { runPhaseCapture(); }, 800);
+  }
+
+  async function pxSubmitHum(notes, brightness) {
+    pxStopAudio();
+    try {
+      var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/hum', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          participantId: passengerParticipantId,
+          low:    notes[0],
+          normal: notes[1],
+          high:   notes[2],
+          capturedAt: new Date().toISOString()
+        })
+      });
+      var data = await res.json();
+      if (data.ok && data.session) {
+        passengerSession = data.session;
+      }
+      showPassengerState('completed_waiting');
+      startPassengerPolling();
+    } catch (e) {
+      var statusEl = document.getElementById('auto-status');
+      if (statusEl) statusEl.innerHTML = '<span style="color:#F87171;">Network error. Reload to try again.</span>';
+    }
+  }
+
+  function startPassengerPolling() {
+    stopPassengerPolling();
+    passengerPollTimer = setInterval(pollPassengerSession, 4000);
+    pollPassengerSession();
+  }
+  function stopPassengerPolling() {
+    if (passengerPollTimer) { clearInterval(passengerPollTimer); passengerPollTimer = null; }
+  }
+
+  // Non-driver hummer-facing counts. Driver is NOT a hummer in Option B.
+  function passengerHummedCount(sess) {
+    if (!sess) return 0;
+    // Backend counts.ready reflects non-driver riders who hit "ready" after humming.
+    // Prefer that. Fall back to 0.
+    return (sess.counts && typeof sess.counts.ready === 'number') ? sess.counts.ready : 0;
+  }
+  function passengerExpectedCount(sess) {
+    if (!sess) return 0;
+    // expectedCount is set at ride creation -- NOT including driver.
+    return sess.expectedCount || (sess.counts && sess.counts.total) || 0;
+  }
+  function formatRidersCount(sess) {
+    var ready = passengerHummedCount(sess);
+    var exp   = passengerExpectedCount(sess);
+    if (!exp) return ready === 1 ? '1 rider completed' : (ready + ' riders completed');
+    if (ready >= exp && exp > 0) return 'All riders are in';
+    return ready + ' of ' + exp + ' riders completed';
+  }
+
+  async function pollPassengerSession() {
+    var result = await fetchPassengerSession();
+    var sess = result && result.session ? result.session : null;
+    if (!sess) {
+      // No live session. If we have persisted post-ride state, surface that.
+      if (loadPersistedPostRide()) stopPassengerPolling();
+      return;
+    }
+
+    // Waiting count text: show accurate rider-only count (driver excluded).
+    $('passengerWaitingCount').textContent = formatRidersCount(sess);
+
+    // Transitions -- check isComplete OR all riders ready (counts can lead isComplete
+    // by one poll cycle if status updates faster than isComplete flag).
+    var allReady = sess.expectedCount > 0
+      && sess.counts && sess.counts.ready >= sess.expectedCount;
+    if (sess.isComplete || sess.status === 'complete' || allReady) {
+      await loadPassengerResults(sess, false);
+      stopPassengerPolling();
+    } else if (!sess.isActive) {
+      // Driver ended the ride. Try to load results; render as post_ride_persisted.
+      await loadPassengerResults(sess, true);
+      stopPassengerPolling();
+    }
+  }
+
+  async function loadPassengerResults(sess, rideEnded) {
+    try {
+      var res = await fetch('/api/ride-mode/session/' + joinSessionId + '/results');
+      var data = await res.json();
+      if (!data.ok || !data.scored) {
+        // Backend lost state but we may have local persisted state.
+        if (loadPersistedPostRide()) return;
+        return;
+      }
+      renderPassengerResults(data.scored, sess, !!rideEnded);
+      persistPostRide(data.scored, sess);
+      showPassengerState(rideEnded ? 'post_ride_persisted' : 'results_ready');
+    } catch (_) {
+      loadPersistedPostRide();
+    }
+  }
+
+  // ── Passenger results render: reuses renderSongCard from primary HumMatch ──
+  function renderPassengerResults(scored, sess, rideEnded) {
+    var listHost = $('passengerTop5');
+    if (!listHost) return;
+    var results = (scored && scored.results) || [];
+    if (!results.length) {
+      listHost.innerHTML = '<p class="muted">Results are still calculating. Refresh in a moment.</p>';
+      return;
+    }
+    userHigh = (scored && typeof scored.groupHi === 'number') ? scored.groupHi : 69;
+    _rideRenderIdx = 0;
+    var enriched = results.slice(0, 5).map(enrichForCard);
+    // Replace the .top5 div with a `your-songs` UL so shared CSS applies.
+    var ul = '<ul class="your-songs top5" id="passengerTop5">' + enriched.map(renderSongCard).join('') + '</ul>';
+    listHost.outerHTML = ul;
+
+    // Headline / subhead
+    var head = $('passengerResultsHead');
+    var sub  = $('passengerResultsSub');
+    if (rideEnded) {
+      if (head) head.textContent = 'Ride results';
+      if (sub)  sub.textContent  = 'Top 5 songs from this ride.';
+    } else {
+      if (head) head.textContent = "Everyone's in!";
+      if (sub)  sub.textContent  = 'Top 5 songs are ready.';
+    }
+
+    // Driver-courtesy 10% discount panel + email capture (Stage 14A)
+    var panel = $('passengerDiscountPanel');
+    if (panel && passengerDiscountCode) {
+      panel.style.display = '';
+      var codeEl = $('passengerDiscountCode');
+      if (codeEl) codeEl.textContent = passengerDiscountCode;
+      var subEl = $('passengerDiscountSub');
+      if (subEl && passengerDiscountExpires) {
+        try {
+          var d = new Date(passengerDiscountExpires);
+          subEl.textContent = 'Email yourself this offer and today\'s ride link. Good through ' + d.toLocaleDateString() + '.';
+        } catch (_) { /* keep default */ }
+      }
+    }
+  }
+
+  window.submitPassengerReminder = async function() {
+    var input = $('passengerReminderDest');
+    var statusEl = $('passengerReminderStatus');
+    var email = (input && input.value || '').trim();
+    if (!email || email.indexOf('@') === -1) {
+      if (statusEl) { statusEl.textContent = 'Please enter a valid email.'; statusEl.style.color = '#F87171'; }
+      return;
+    }
+    if (statusEl) { statusEl.textContent = 'Sending...'; statusEl.style.color = ''; }
+    try {
+      var resp = await fetch('/api/ride-mode/session/' + joinSessionId + '/remind', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          channel: 'email',
+          destination: email,
+          discountCode: passengerDiscountCode || null,
+          discountExpiresAt: passengerDiscountExpires || null
+        })
+      });
+      var data = null;
+      try { data = await resp.json(); } catch (_) { data = null; }
+      if (data && data.ok === true && data.sent === true) {
+        var formEl = $('passengerEmailCapture');
+        var sentEl = $('passengerEmailSent');
+        if (formEl) formEl.classList.add('hidden');
+        if (sentEl) sentEl.classList.remove('hidden');
+        markEmailSubmittedInPersist();
+      } else {
+        if (statusEl) { statusEl.textContent = 'Email could not be sent. Please try again.'; statusEl.style.color = '#F87171'; }
+      }
+    } catch (_) {
+      if (statusEl) { statusEl.textContent = 'Email could not be sent. Please try again.'; statusEl.style.color = '#F87171'; }
+    }
+  };
+
+  // ── Session persistence for post-ride passenger state ─────────────────────
+  function persistKey() {
+    return joinSessionId ? ('hm_ride_postride_' + joinSessionId) : null;
+  }
+  function persistPostRide(scored, sess) {
+    var k = persistKey();
+    if (!k) return;
+    try {
+      var payload = {
+        savedAt:      new Date().toISOString(),
+        sessionId:    joinSessionId,
+        rideCode:     passengerRideCode,
+        sessionName:  (sess && sess.name) || null,
+        driverAlias:  passengerDriverAlias || null,
+        vibePreset:   passengerVibe || null,
+        top:          (scored && scored.results || []).slice(0, 5),
+        counts:       sess ? { ready: passengerHummedCount(sess), expected: passengerExpectedCount(sess) } : null,
+        discountCode:    passengerDiscountCode    || null,
+        discountExpires: passengerDiscountExpires || null,
+        discountPercent: passengerDiscountPercent || 10,
+        emailSubmitted:  !!(payloadEmailSubmitted())
+      };
+      sessionStorage.setItem(k, JSON.stringify(payload));
+    } catch (_) {}
+  }
+  function payloadEmailSubmitted() {
+    var el = $('passengerEmailSent');
+    return el && !el.classList.contains('hidden');
+  }
+  function markEmailSubmittedInPersist() {
+    var k = persistKey();
+    if (!k) return;
+    try {
+      var raw = sessionStorage.getItem(k);
+      if (!raw) return;
+      var obj = JSON.parse(raw);
+      obj.emailSubmitted = true;
+      sessionStorage.setItem(k, JSON.stringify(obj));
+    } catch (_) {}
+  }
+  function loadPersistedPostRide() {
+    var k = persistKey();
+    if (!k) return false;
+    var raw;
+    try { raw = sessionStorage.getItem(k); } catch (_) { raw = null; }
+    if (!raw) return false;
+    var obj;
+    try { obj = JSON.parse(raw); } catch (_) { return false; }
+    if (!obj || !obj.top) return false;
+
+    // Rehydrate in-memory state so UI renders correctly.
+    passengerDriverAlias     = obj.driverAlias     || passengerDriverAlias;
+    passengerVibe            = obj.vibePreset      || passengerVibe;
+    passengerRideCode        = obj.rideCode        || passengerRideCode;
+    passengerDiscountCode    = obj.discountCode    || passengerDiscountCode;
+    passengerDiscountExpires = obj.discountExpires || passengerDiscountExpires;
+    passengerDiscountPercent = obj.discountPercent || 10;
+
+    // Render results into the passenger results panel.
+    if (obj.top && obj.top.length) {
+      renderPassengerResults({ results: obj.top }, null, true);
+    }
+
+    // Restore email-submitted state if already done.
+    if (obj.emailSubmitted) {
+      var sentEl = $('passengerEmailSent');
+      var formEl = $('passengerEmailCapture');
+      if (sentEl) sentEl.classList.remove('hidden');
+      if (formEl) formEl.classList.add('hidden');
+    }
+
+    showPassengerState('post_ride_persisted');
+    return true;
+  }
+
+})(); // end IIFE
+</script>
+
+<script>
+(function(){
+  function setText(sel, txt){ var el=document.querySelector(sel); if(el) el.textContent=txt; }
+  function setAll(){
+    setText('h1','¿Qué debería cantar este auto ahora?');
+    document.querySelectorAll('.btn').forEach(function(btn){
+      var t=(btn.textContent||'').trim();
+      if(t==='Create this ride') btn.textContent='Crear este viaje';
+      if(t==='Create Ride') btn.textContent='Crear viaje';
+      if(t==='Join Ride') btn.textContent='Unirme al viaje';
+      if(t==='Join & Hum') btn.textContent='Unirme y tararear';
+      if(t==='End Ride') btn.textContent='Terminar viaje';
+      if(t==='Email Me My Link') btn.textContent='Envíame el enlace por email';
+    });
+    document.body.innerHTML = document.body.innerHTML
+      .replaceAll('Top 5 ready','Top 5 listo')
+      .replaceAll('Top 5 songs for this car','Las 5 mejores canciones para este auto')
+      .replaceAll('Top 5 songs for this ride','Las 5 mejores canciones para este viaje')
+      .replaceAll('Want this link later?','¿Quieres este enlace para después?')
+      .replaceAll('Top 5 songs are ready.','Tus 5 mejores canciones están listas.')
+      .replaceAll('Top 5 songs from this ride.','Top 5 canciones de este viaje.')
+      .replaceAll('Riders joining','Pasajeros uniéndose')
+      .replaceAll('Riders humming','Pasajeros tarareando')
+      .replaceAll('Ride complete','Viaje completo')
+      .replaceAll('Your results and 10% offer are still here','Tus resultados y tu oferta del 10% siguen aquí')
+      .replaceAll('10% off courtesy of your driver','10% de descuento cortesía de tu conductor')
+      .replaceAll('▶ Sing It','▶ Cantarla')
+      .replaceAll('Fit','Ajuste')
+      .replaceAll('Hum your lowest note','Tararea tu nota más baja')
+      .replaceAll('Hum your normal note','Tararea tu nota normal')
+      .replaceAll('Hum your highest note','Tararea tu nota más alta')
+      .replaceAll('You\'re in','Ya estás dentro')
+      .replaceAll('Waiting for the rest of the car','Esperando al resto del auto')
+      .replaceAll('Everyone\'s in!','¡Todos están dentro!')
+      .replaceAll('Learn about HumMatch','Conoce HumMatch');
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', setAll); else setAll();
+})();
+</script>
+
+</body>
+</html>
