@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>HumMatch Ride Mode Español</title>
-  <meta name="description" content="HumMatch Ride Mode en español. El conductor crea un viaje, los pasajeros escanean el código QR y tararean desde sus propios teléfonos, y HumMatch muestra las 5 mejores canciones que este auto realmente puede cantar." />
+  <title>HumMatch Modo carro</title>
+  <meta name="description" content="HumMatch Modo carro en español. El conductor crea un carro, los pasajeros escanean el código QR y tararean desde sus propios teléfonos, y HumMatch muestra las 5 mejores canciones que este carro realmente puede cantar." />
   <meta name="theme-color" content="#a855f7" />
   <link rel="canonical" href="https://hummatch.me/es/ride-mode" />
   <link rel="alternate" hreflang="en" href="https://hummatch.me/ride-mode" />
@@ -488,8 +488,8 @@
     <a class="hm-nav-item" href="/es/blog">Blog</a>
     <a class="hm-nav-item" href="/es/contact">Contacto</a>
     <div class="hm-nav-divider"></div>
-    <a class="hm-nav-item" href="/login?return=/" id="navLoginItem">Log In</a>
-    <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Sign Up</a>
+    <a class="hm-nav-item" href="/login?return=/" id="navLoginItem">Iniciar sesión</a>
+    <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Crear cuenta</a>
   </nav>
 
   <div class="wrap">
@@ -775,9 +775,9 @@
       <a href="/songs" style="font-size:0.9rem;color:#a855f7;text-decoration:none;font-weight:600;">🎵 Explorar canciones</a>
       <a href="/es/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
       <a href="/es/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contacto</a>
-      <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
-      <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
-      <a href="/login?return=/" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Log In</a>
+      <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacidad</a>
+      <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Términos</a>
+      <a href="/login?return=/" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Iniciar sesión</a>
     </div>
     <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.2);">&copy; 2026 HumMatch</div>
   </footer>
@@ -1380,7 +1380,7 @@
       passengerDriverAlias = sess.driverAlias || null;
       var bannerTitle = passengerDriverAlias
         ? ('Connected to ' + passengerDriverAlias + "'s Ride")
-        : 'Connected to the ride';
+        : 'Conectado al carro';
       $('passengerBannerTitle').textContent = bannerTitle;
       $('passengerBannerCode').textContent = passengerRideCode;
       $('passengerJoinTitle').textContent = 'Join ' + (passengerVibe || 'the Ride');
@@ -1433,7 +1433,7 @@
     var role = $('passengerPart').value || 'Either';
     var err = $('passengerJoinError');
     if (!name) {
-      err.style.display = ''; err.textContent = 'Please enter your name.';
+      err.style.display = ''; err.textContent = 'Por favor ingresa tu nombre.';
       return;
     }
     err.style.display = 'none';
