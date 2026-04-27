@@ -471,7 +471,7 @@
   <!-- Nav (matches HumMatch site nav) -->
   <header class="hm-header">
     <a class="hm-header-logo" href="/">HumMatch</a>
-    <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:rgba(255,255,255,0.4);text-transform:uppercase;">Ride Mode</span>
+    <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:rgba(255,255,255,0.4);text-transform:uppercase;">Modo carro</span>
     <button class="hm-nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
@@ -479,14 +479,14 @@
   <div class="hm-nav-overlay" id="navOverlay" onclick="closeNav()"></div>
   <nav class="hm-nav-drawer" id="navDrawer">
     <div class="hm-nav-logo"><span>HumMatch</span></div>
-    <a class="hm-nav-item" href="/" style="color:#c084fc;font-weight:700;">🎤 Try HumMatch</a>
-    <a class="hm-nav-item" href="/how-it-works">How It Works</a>
+    <a class="hm-nav-item" href="/es" style="color:#c084fc;font-weight:700;">🎤 Probar HumMatch</a>
+    <a class="hm-nav-item" href="/es/how-it-works">Cómo funciona</a>
     <a class="hm-nav-item" href="/es">Inicio en español</a>
-    <a class="hm-nav-item hm-nav-item-active" href="/ride-mode" style="color:#A855F7;">🚗 Ride Mode</a>
+    <a class="hm-nav-item hm-nav-item-active" href="/es/ride-mode" style="color:#A855F7;">🚗 Modo carro</a>
     <div class="hm-nav-divider"></div>
-    <a class="hm-nav-item" href="/affiliate">Affiliate</a>
-    <a class="hm-nav-item" href="/blog">Blog</a>
-    <a class="hm-nav-item" href="/contact">Contact</a>
+    <a class="hm-nav-item" href="/es/affiliate">Afiliados</a>
+    <a class="hm-nav-item" href="/es/blog">Blog</a>
+    <a class="hm-nav-item" href="/es/contact">Contacto</a>
     <div class="hm-nav-divider"></div>
     <a class="hm-nav-item" href="/login?return=/" id="navLoginItem">Log In</a>
     <a class="hm-nav-item" href="/login?signup=1" id="navSignupItem" style="background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">Sign Up</a>
@@ -501,19 +501,19 @@
 
       <!-- State: setup -->
       <section id="driverSetup" class="card">
-        <span class="eyebrow">Driver</span>
-        <h1>What should this car sing next?</h1>
-        <p class="lead">Create a ride. Passengers scan and hum on their own phones. HumMatch finds the top 5 songs this car can actually pull off together.</p>
-        <button class="btn btn-primary" type="button" onclick="goCreateRide()">Create Ride</button>
+        <span class="eyebrow">Conductor</span>
+        <h1>¿Qué debería cantar este carro ahora?</h1>
+        <p class="lead">Crea un carro. Los pasajeros escanean y tararean desde sus propios teléfonos. HumMatch encuentra las 5 mejores canciones que este carro realmente puede cantar junto.</p>
+        <button class="btn btn-primary" type="button" onclick="goCreateRide()">Crear carro</button>
         <div class="sp-12"></div>
-        <a href="/how-it-works" class="btn btn-ghost" style="text-decoration:none;">How it works</a>
+        <a href="/es/how-it-works" class="btn btn-ghost" style="text-decoration:none;">Cómo funciona</a>
       </section>
 
       <!-- State: create_ride -->
       <section id="driverCreate" class="card hidden">
-        <span class="eyebrow">Step 1 of 2</span>
-        <h2>Create your ride</h2>
-        <p class="muted" style="margin-bottom:20px;">Pick the vibe and how many riders are in the car.</p>
+        <span class="eyebrow">Paso 1 de 2</span>
+        <h2>Crea tu carro</h2>
+        <p class="muted" style="margin-bottom:20px;">Elige el mood y cuántas personas van en el carro.</p>
 
         <div class="field">
           <label>Vibe</label>
@@ -539,9 +539,9 @@
           <p class="muted" style="margin-top:8px; font-size:0.82rem;">Minimum 1, maximum 4 (not including driver).</p>
         </div>
 
-        <button class="btn btn-primary" type="button" id="createRideBtn" onclick="submitCreateRide()">Create Ride</button>
+        <button class="btn btn-primary" type="button" id="createRideBtn" onclick="submitCreateRide()">Crear carro</button>
         <div class="sp-12"></div>
-        <button class="btn btn-ghost" type="button" onclick="showDriverState('setup')">Back</button>
+        <button class="btn btn-ghost" type="button" onclick="showDriverState('setup')">Atrás</button>
       </section>
 
       <!-- State: qr_live -->
@@ -550,8 +550,8 @@
           <span class="dot"></span>
           <span id="driverStatusPillText">Riders joining</span>
         </div>
-        <h2 style="margin-bottom:4px;">Scan to join the ride</h2>
-        <p class="muted" style="margin-bottom:18px;">Passengers scan this QR to hop in and hum.</p>
+        <h2 style="margin-bottom:4px;">Escanea para unirte al carro</h2>
+        <p class="muted" style="margin-bottom:18px;">Los pasajeros escanean este QR para entrar y tararear.</p>
 
         <div class="qr-box">
           <img id="driverQrImage" alt="QR code to join ride" />
@@ -758,7 +758,7 @@
         </div>
 
         <div class="squad-bridge">
-          <div class="muted" style="font-size:0.9rem;">Want to keep this group together? <a href="/how-it-works">Learn about HumMatch</a></div>
+          <div class="muted" style="font-size:0.9rem;">¿Quieres mantener a este grupo junto? <a href="/es/how-it-works">Conoce cómo funciona HumMatch</a></div>
         </div>
       </section>
     </div>
@@ -767,14 +767,14 @@
   <!-- Footer (matches HumMatch site footer) -->
   <footer style="width:100%;margin-top:32px;padding:20px 0 max(24px, env(safe-area-inset-bottom, 24px));border-top:1px solid rgba(255,255,255,0.06);">
     <div style="display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;">
-      <a href="/how-it-works" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">How It Works</a>
-      <a href="/pricing" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Pricing</a>
+      <a href="/es/how-it-works" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Cómo funciona</a>
+      <a href="/es/precios" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Precios</a>
       <a href="/es" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">Español</a>
-      <a href="/ride-mode" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">Ride Mode</a>
-      <a href="/affiliate" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Affiliate</a>
-      <a href="/songs" style="font-size:0.9rem;color:#a855f7;text-decoration:none;font-weight:600;">🎵 Browse All Songs</a>
-      <a href="/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
-      <a href="/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contact</a>
+      <a href="/es/ride-mode" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">Modo carro</a>
+      <a href="/es/affiliate" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Afiliados</a>
+      <a href="/songs" style="font-size:0.9rem;color:#a855f7;text-decoration:none;font-weight:600;">🎵 Explorar canciones</a>
+      <a href="/es/blog" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Blog</a>
+      <a href="/es/contact" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Contacto</a>
       <a href="/privacy" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
       <a href="/terms" style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
       <a href="/login?return=/" id="footerLoginItem" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Log In</a>
