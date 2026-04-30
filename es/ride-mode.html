@@ -2067,42 +2067,46 @@
 </script>
 
 <script>
+// Spanish locale patch -- uses targeted textContent only.
+// NEVER reassign document.body.innerHTML -- it destroys event listeners.
 (function(){
-  function setText(sel, txt){ var el=document.querySelector(sel); if(el) el.textContent=txt; }
-  function setAll(){
-    setText('h1','¿Qué debería cantar este auto ahora?');
-    document.querySelectorAll('.btn').forEach(function(btn){
+  function q(sel){ return document.querySelector(sel); }
+  function qAll(sel){ return document.querySelectorAll(sel); }
+  function set(sel, txt){ var el=q(sel); if(el) el.textContent=txt; }
+
+  function applyLocale(){
+    // Buttons -- match by current text, replace textContent only
+    qAll('button, .btn').forEach(function(btn){
       var t=(btn.textContent||'').trim();
-      if(t==='Create this ride') btn.textContent='Crear este viaje';
-      if(t==='Create Ride') btn.textContent='Crear viaje';
-      if(t==='Join Ride') btn.textContent='Unirme al viaje';
-      if(t==='Join & Hum') btn.textContent='Unirme y tararear';
-      if(t==='End Ride') btn.textContent='Terminar viaje';
-      if(t==='Email Me My Link') btn.textContent='Envíame el enlace por email';
+      if(t==='Create Ride'     || t==='Create this ride') btn.textContent='Crear carro';
+      if(t==='Join Ride')                                 btn.textContent='Unirme al viaje';
+      if(t==='Join & Hum')                                btn.textContent='Unirme y tararear';
+      if(t==='End Ride')                                  btn.textContent='Terminar viaje';
+      if(t==='Email Me My Link')                          btn.textContent='Envíame el enlace';
+      if(t==='Start Humming')                             btn.textContent='Comenzar a tararear';
     });
-    document.body.innerHTML = document.body.innerHTML
-      .replaceAll('Top 5 ready','Top 5 listo')
-      .replaceAll('Top 5 songs for this car','Las 5 mejores canciones para este auto')
-      .replaceAll('Top 5 songs for this ride','Las 5 mejores canciones para este viaje')
-      .replaceAll('Want this link later?','¿Quieres este enlace para después?')
-      .replaceAll('Top 5 songs are ready.','Tus 5 mejores canciones están listas.')
-      .replaceAll('Top 5 songs from this ride.','Top 5 canciones de este viaje.')
-      .replaceAll('Riders joining','Pasajeros uniéndose')
-      .replaceAll('Riders humming','Pasajeros tarareando')
-      .replaceAll('Ride complete','Viaje completo')
-      .replaceAll('Your results and 10% offer are still here','Tus resultados y tu oferta del 10% siguen aquí')
-      .replaceAll('10% off courtesy of your driver','10% de descuento cortesía de tu conductor')
-      .replaceAll('▶ Sing It','▶ Cantarla')
-      .replaceAll('Fit','Ajuste')
-      .replaceAll('Hum your lowest note','Tararea tu nota más baja')
-      .replaceAll('Hum your normal note','Tararea tu nota normal')
-      .replaceAll('Hum your highest note','Tararea tu nota más alta')
-      .replaceAll('You\'re in','Ya estás dentro')
-      .replaceAll('Waiting for the rest of the car','Esperando al resto del auto')
-      .replaceAll('Everyone\'s in!','¡Todos están dentro!')
-      .replaceAll('Learn about HumMatch','Conoce HumMatch');
+
+    // Static headings/labels that are still in English in the HTML
+    set('#passengerWaiting h2',            '¡Ya estás dentro!');
+    set('#passengerWaiting p.muted',       'Esperando al resto del auto...');
+    set('#pxMicGateHint',                  'Toca para permitir el micrófono y comenzar.');
+    set('#auto-status',                    'Toca "Comenzar a tararear" para permitir el micrófono.');
+
+    // Driver live screen labels
+    set('#driverLiveVibeLabel',            'Ambiente:');
+
+    // Discount / email capture
+    set('#passengerDiscountTitle',         '10% de descuento cortesía de tu conductor');
+    set('#passengerDiscountSub',           'Envíate esta oferta y el enlace del viaje. Válida 7 dias.');
+    set('#passengerEmailSentMsg',          'Enviado. Revisa tu email para tu oferta del 10%.');
+    set('#passengerRemindCapture label[for=passengerEmailInput]', '¿Quieres este enlace para después?');
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', setAll); else setAll();
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', applyLocale);
+  } else {
+    applyLocale();
+  }
 })();
 </script>
 
