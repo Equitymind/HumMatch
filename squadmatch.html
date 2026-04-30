@@ -1138,7 +1138,7 @@ async function api(url, method='GET', body=null) {
   const opts = {method, headers:{'Content-Type':'application/json'}};
   if (S.token) opts.headers['X-HM-Token'] = S.token;
   if (body) opts.body = JSON.stringify(body);
-  const r =   const r = await fetch(url, opts);
+  const r = await fetch(url, opts);
   return r.ok ? r.json() : Promise.reject(new Error(await r.text()));
 }
 

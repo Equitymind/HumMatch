@@ -2791,6 +2791,9 @@ app.get('/es/how-it-works', (_req, res) => {
 app.get('/squadmatch', (_req, res) => {
   res.sendFile(path.join(__dirname, 'squadmatch.html'));
 });
+app.get('/es/squadmatch', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'squadmatch.html'));
+});
 
 // GroupMatch landing page
 app.get('/groupmatch', (_req, res) => {
