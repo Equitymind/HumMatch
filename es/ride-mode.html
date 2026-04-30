@@ -483,6 +483,8 @@
     <a class="hm-nav-item" href="/es/how-it-works">Cómo funciona</a>
     <a class="hm-nav-item" href="/es">Inicio en español</a>
     <a class="hm-nav-item hm-nav-item-active" href="/es/ride-mode" style="color:#A855F7;">🚗 Modo carro</a>
+    <a class="hm-nav-item" href="/es/precios">Precios</a>
+    <a class="hm-nav-item" href="/squadmatch">SquadMatch</a>
     <div class="hm-nav-divider"></div>
     <a class="hm-nav-item" href="/es/affiliate">Afiliados</a>
     <a class="hm-nav-item" href="/es/blog">Blog</a>
@@ -842,6 +844,41 @@
     discountCourtesy: '10% de descuento cortesía de tu conductor'
   };
 
+  // Spanish display strings for runtime-generated UI copy (badges, roster, counts).
+  // data-vibe attributes keep English keys for the server payload; vibeNames maps
+  // those English keys to their Spanish display names for badge text.
+  const L = {
+    ridersJoining:   'Pasajeros uniéndose',
+    ridersHumming:   'Pasajeros tarareando',
+    rideInProgress:  'Viaje en curso',
+    rideComplete:    'Viaje completado',
+    ofJoined:        'de',
+    joinedSuffix:    'se unieron',
+    driver:          'Conductor',
+    host:            'Anfitrión',
+    managing:        'Administrando',
+    rider:           'Pasajero',
+    guest:           'Invitado',
+    waiting:         'Esperando',
+    joined:          'Se unió',
+    humming:         'Tarareando',
+    done:            'Listo',
+    vibeNames: {
+      'Friday Night Drive': 'Viernes de carretera',
+      "Girls' Night Out":   'Noche de chicas',
+      "Girl's Night Out":   'Noche de chicas',
+      'Date Night':         'Noche de cita',
+      'Party Ride':         'Carro de fiesta',
+      'Chill Ride':         'Carro relax',
+      'Throwbacks':         'Clásicos',
+      'Duet Mode':          'Modo dueto',
+      'Custom':             'Personalizado',
+      'Morning Commute':    'Rumbo al trabajo',
+      'Road Trip':          'Viaje por carretera'
+    }
+  };
+  function vibeDisplay(v) { return (v && L.vibeNames[v]) || v || ''; }
+
   // Route detection: ?join=<sessionId> → passenger, else driver
   // Harden the parse -- URLSearchParams handles encoding, and we fall back to
   // a manual scan of location.search if (for any reason) URLSearchParams gave
@@ -979,7 +1016,7 @@
       // Populate QR screen
       $('driverQrImage').src = driverQrImageUrl;
       $('driverRideCode').textContent = driverRideCode;
-      $('driverStatusPillText').textContent = 'Riders joining -- ' + driverSelectedVibe;
+      $('driverStatusPillText').textContent = L.ridersJoining + ' -- ' + vibeDisplay(driverSelectedVibe);
 
       showDriverState('qr_live');
       renderDriverRoster(driverSession);
@@ -1018,7 +1055,7 @@
     var expected = sess.expectedCount || driverRiderCount || 0;
 
     // Update join progress
-    $('driverJoinProgress').textContent = passengers.length + ' of ' + expected + ' joined';
+    $('driverJoinProgress').textContent = passengers.length + ' ' + L.ofJoined + ' ' + expected + ' ' + L.joinedSuffix;
 
     // State transitions
     if (driverState === 'qr_live' || driverState === 'humming_live') {
@@ -1029,7 +1066,7 @@
       if (anyHumming || allJoined) {
         if (driverState !== 'humming_live') {
           showDriverState('humming_live');
-          $('driverStatusPillText').textContent = 'Riders humming -- ' + (sess.vibePreset || driverSelectedVibe);
+          $('driverStatusPillText').textContent = L.ridersHumming + ' -- ' + vibeDisplay(sess.vibePreset || driverSelectedVibe);
         }
       }
     }
@@ -1058,17 +1095,17 @@
       if (p.name === 'Driver') {
         // Host is not a rider. Only show "Humming" / "Done" if the driver
         // actually hummed (rare -- Option B). Otherwise "Host" / "Managing".
-        var driverPill = 'Host', driverCls = 'pill-ready';
-        if (p.hasHumData) { driverPill = 'Done'; driverCls = 'pill-done'; }
+        var driverPill = L.host, driverCls = 'pill-ready';
+        if (p.hasHumData) { driverPill = L.done; driverCls = 'pill-done'; }
         rows.push({
-          name: 'Driver', role: 'Host', pill: driverPill, cls: driverCls
+          name: L.driver, role: L.host, pill: driverPill, cls: driverCls
         });
       } else {
-        var pill = 'Joined', cls = 'pill-joined';
-        if (p.hasHumData) { pill = 'Done'; cls = 'pill-done'; }
-        else if (p.status === 'current') { pill = 'Humming'; cls = 'pill-humming'; }
+        var pill = L.joined, cls = 'pill-joined';
+        if (p.hasHumData) { pill = L.done; cls = 'pill-done'; }
+        else if (p.status === 'current') { pill = L.humming; cls = 'pill-humming'; }
         rows.push({
-          name: p.name, role: p.rolePreference || 'Rider', pill: pill, cls: cls
+          name: p.name, role: p.rolePreference || L.rider, pill: pill, cls: cls
         });
       }
     });
@@ -1076,7 +1113,7 @@
     // Pad with waiting rows up to the expected passenger count + 1 (driver)
     var totalSeats = (expected || 0) + 1;
     while (rows.length < totalSeats) {
-      rows.push({ name: 'Guest', role: '', pill: 'Waiting', cls: 'pill-waiting' });
+      rows.push({ name: L.guest, role: '', pill: L.waiting, cls: 'pill-waiting' });
     }
 
     target.innerHTML = rows.map(function(r) {
