@@ -2791,7 +2791,8 @@ app.get('/es/how-it-works', (_req, res) => {
 app.get('/squadmatch', (_req, res) => {
   res.sendFile(path.join(__dirname, 'squadmatch.html'));
 });
-app.get('/es/squadmatch', (_req, res) => {
+app.get('/es/squadmatch', (_req, res) => { res.redirect(301, '/es/grupomatch'); });
+app.get('/es/grupomatch', (_req, res) => {
   res.sendFile(path.join(__dirname, 'squadmatch.html'));
 });
 

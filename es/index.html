@@ -427,7 +427,7 @@
   <a class="hm-nav-item" href="/es/how-it-works">Cómo funciona</a>
   <a class="hm-nav-item" href="/es/ride-mode">Modo carro</a>
   <a class="hm-nav-item" href="/es/precios">Precios</a>
-  <a class="hm-nav-item" href="/squadmatch">SquadMatch</a>
+  <a class="hm-nav-item" href="/es/grupomatch">GrupoMatch</a>
   <a class="hm-nav-item" href="/">🌎 English</a>
   <div class="hm-nav-divider"></div>
   <a class="hm-nav-item" href="/es/affiliate">Afiliados</a>
@@ -503,8 +503,8 @@
         <li style="font-size:0.76rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:4px;padding-left:18px;position:relative;"><span style="position:absolute;left:0;">•</span> Guarda playlists compartidas en HQ</li>
         <li style="font-size:0.76rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:10px;padding-left:18px;position:relative;"><span style="position:absolute;left:0;">•</span> Desbloquea la coincidencia armónica de canciones grupales</li>
       </ul>
-      <div style="font-size:0.73rem;color:rgba(255,255,255,0.5);margin-bottom:14px;font-style:italic;">Solo los Squad Leaders pueden emitir códigos de descuento del 20%.</div>
-      <button onclick="window.location.href='/es/precios?v=2'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Conviértete en Squad Leader</button>
+      <div style="font-size:0.73rem;color:rgba(255,255,255,0.5);margin-bottom:14px;font-style:italic;">Solo los Líderes de Grupo pueden emitir códigos de descuento del 20%.</div>
+      <button onclick="window.location.href='/es/precios?v=2'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:10px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Conviértete en Líder de Grupo</button>
     </div>
   </div>
 
@@ -513,7 +513,7 @@
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:18px 18px;">
       <div style="font-size:0.68rem;color:rgba(255,255,255,0.32);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">MIS SQUADS</div>
       <div id="my-squads-list"></div>
-      <a href="/squadmatch" style="display:block;margin-top:10px;text-align:center;font-size:0.78rem;color:rgba(168,85,247,0.8);font-weight:600;">+ Nuevo SquadMatch</a>
+      <a href="/es/grupomatch" style="display:block;margin-top:10px;text-align:center;font-size:0.78rem;color:rgba(168,85,247,0.8);font-weight:600;">+ Nuevo GrupoMatch</a>
     </div>
   </div>
 
@@ -522,7 +522,7 @@
     <div style="display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;">
       <a href="/es/how-it-works" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Cómo funciona</a>
       <a href="/es/precios" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Precios</a>
-      <a href="/squadmatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">SquadMatch</a>
+      <a href="/es/grupomatch" style="font-size:0.75rem;text-decoration:none;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;">GrupoMatch</a>
       <a href="/es/ride-mode" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Modo carro</a>
       <a href="/" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">English</a>
       <a href="/es/affiliate" style="font-size:0.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Afiliados</a>
@@ -692,7 +692,7 @@
         </div>
       </div>
       <button onclick="startSquadMatch()" style="width:100%;padding:14px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:14px;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:12px;">
-        🎤 Probar SquadMatch
+        🎤 Probar GrupoMatch
       </button>
       <button id="share-btn-loggedin" onclick="shareHumMatch()" style="width:100%;padding:14px;background:transparent;border:1px solid rgba(168,85,247,0.35);border-radius:14px;color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:12px;">
         🎤 Compartir Mi HumMatch
@@ -702,7 +702,7 @@
     <!-- PREMIUM SOFT-SELL (shows for logged-out + free users) -->
     <div id="premium-soft-sell" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid rgba(168,85,247,0.15);">
       <div style="background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(236,72,153,0.06));border:1px solid rgba(168,85,247,0.25);border-radius:14px;padding:18px;">
-        <div style="font-size:0.95rem;font-weight:800;color:#fff;margin-bottom:8px;">✨ Desbloquea más con Squad Leader</div>
+        <div style="font-size:0.95rem;font-weight:800;color:#fff;margin-bottom:8px;">✨ Desbloquea más con GrupoMatch</div>
         <div style="font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.55;margin-bottom:14px;">
           Lidera tu squad, desbloquea coincidencias armónicas de canciones y administra todo desde HumCoincidencia HQ.
         </div>
@@ -720,7 +720,7 @@
             <span style="position:absolute;left:0;">•</span> Emite hasta 5 códigos exclusivos de descuento del 20%
           </li>
         </ul>
-        <button onclick="window.location.href='/es/precios?v=2'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Conviértete en Squad Leader - $7.99/mes</button>
+        <button onclick="window.location.href='/es/precios?v=2'" style="width:100%;padding:12px;background:linear-gradient(135deg,#A855F7,#EC4899);border:none;border-radius:12px;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">Conviértete en Líder de Grupo - $7.99/mes</button>
       </div>
     </div>
 
@@ -2682,11 +2682,11 @@ async function startTest() {
       modal.style.cssText = 'position:fixed;inset:0;z-index:3000;background:rgba(8,6,15,0.96);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;';
       const isLoggedIn = !!localStorage.getItem('hm_token');
       const limitSubtext = isLoggedIn
-        ? 'Desbloquea Squad Leader para tarareos y exportaciones ilimitadas.'
-        : 'Crea una cuenta gratis para rastrear tu uso en todos tus dispositivos, o desbloquea Squad Leader.';
+        ? 'Desbloquea Líder de Grupo para tarareos y exportaciones ilimitadas.'
+        : 'Crea una cuenta gratis para rastrear tu uso en todos tus dispositivos, o desbloquea Líder de Grupo.';
       modal.innerHTML = `
         <div style="font-size:2.5rem;margin-bottom:16px;">🎤</div>
-        <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">Tarareos gratis disponibles cuando te invite un Squad Leader</h2>
+        <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">Tarareos gratis disponibles cuando te invite un Líder de Grupo</h2>
         <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:28px;max-width:300px;">${limitSubtext}</p>
 
         <div style="width:100%;max-width:300px;margin-bottom:8px;">
@@ -3361,9 +3361,9 @@ function showResults() {
         // Hide squad prompt, show "submitted" message then redirect
         const prompt = document.getElementById('squad-prompt-module');
         if (prompt) {
-          prompt.innerHTML = '<div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);border-radius:14px;padding:18px 20px;text-align:center"><div style="color:#4ade80;font-weight:700;font-size:0.92rem;margin-bottom:6px">✓ ¡Resultados enviados a tu squad!</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-bottom:12px">Redirigiendo a tu SquadMatch...</div><a href="/squadmatch?squad=' + _sqId + '" style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border-radius:10px;text-decoration:none;">Ver Progreso del Squad</a></div>';
+          prompt.innerHTML = '<div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);border-radius:14px;padding:18px 20px;text-align:center"><div style="color:#4ade80;font-weight:700;font-size:0.92rem;margin-bottom:6px">✓ ¡Resultados enviados a tu grupo!</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-bottom:12px">Redirigiendo a tu GrupoMatch...</div><a href="/es/grupomatch?squad=' + _sqId + '" style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:0.82rem;font-weight:700;border-radius:10px;text-decoration:none;">Ver Progreso del Grupo</a></div>';
         }
-        setTimeout(() => { window.location = '/squadmatch?squad=' + _sqId; }, 2000);
+        setTimeout(() => { window.location = '/es/grupomatch?squad=' + _sqId; }, 2000);
       }).catch(() => {});
     }
   })();
@@ -3930,8 +3930,8 @@ function exportSongList(mode) {
     if (exportCount >= 20) {
       const isLoggedIn = !!localStorage.getItem('hm_token');
       showToast(isLoggedIn
-        ? 'Límite de exportaciones alcanzado. Desbloquea Squad Leader para exportaciones ilimitadas. ✨'
-        : 'Límite de exportaciones alcanzado. Crea una cuenta gratis o desbloquea Squad Leader. ✨');
+        ? 'Límite de exportaciones alcanzado. Desbloquea Líder de Grupo para exportaciones ilimitadas. ✨'
+        : 'Límite de exportaciones alcanzado. Crea una cuenta gratis o desbloquea Líder de Grupo. ✨');
       return;
     }
     localStorage.setItem('hm_export_count', exportCount + 1);
@@ -4495,10 +4495,10 @@ function startSquadMatch() {
   var t = localStorage.getItem('hm_dash_token') || localStorage.getItem('hm_token');
   if (!t) {
     localStorage.setItem('hm_squad_pending_create', '1');
-    window.location = '/squadmatch?create=1';
+    window.location = '/es/grupomatch?create=1';
     return;
   }
-  window.location = '/squadmatch?create=1';
+  window.location = '/es/grupomatch?create=1';
 }
 
 function dismissSquadPrompt() {
@@ -4535,7 +4535,7 @@ function dismissSquadPrompt() {
         return '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)">' +
           '<div><div style="font-size:0.84rem;font-weight:700;color:#e2e0f0">' + (sq.squad_name || 'Mi Squad') + '</div>' +
           '<div style="font-size:0.72rem;color:rgba(255,255,255,0.38);margin-top:2px">' + members.length + ' member' + (members.length!==1?'s':'') + '</div></div>' +
-          '<a href="/squadmatch?squad=' + sq.id + '" style="font-size:0.75rem;font-weight:700;color:' + statusColor + ';text-decoration:none;padding:5px 10px;background:rgba(255,255,255,0.04);border-radius:8px">' + statusText + '</a>' +
+          '<a href="/es/grupomatch?squad=' + sq.id + '" style="font-size:0.75rem;font-weight:700;color:' + statusColor + ';text-decoration:none;padding:5px 10px;background:rgba(255,255,255,0.04);border-radius:8px">' + statusText + '</a>' +
           '</div>';
       }).join('');
       list.innerHTML = html;
@@ -4726,7 +4726,7 @@ function dismissSquadPrompt() {
     const email = localStorage.getItem(EMAIL_KEY);
     const isPremium = localStorage.getItem('hm_premium') === 'true';
     if (!email) return;
-    showToast(`${email} · ${isPremium ? 'Squad Leader' : 'Gratis'}`);
+    showToast(`${email} · ${isPremium ? 'Líder de Grupo' : 'Gratis'}`);
   };
 
   // ── Load user data on page load ──
